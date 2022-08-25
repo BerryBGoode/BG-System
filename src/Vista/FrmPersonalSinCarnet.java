@@ -14,6 +14,7 @@ import Controles_Personalizados.ScrollBar.ScrollBarCustom;
 import Controles_Personalizados.Tables.Table;
 import static Vista.PanelCarnets.validarImagen;
 import com.sun.awt.AWTUtilities;
+import com.sun.prism.j2d.J2DPipeline;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GraphicsConfiguration;
@@ -24,9 +25,11 @@ import java.awt.Toolkit;
 import java.awt.geom.RoundRectangle2D;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.YearMonth;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -37,19 +40,25 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FrmPersonalSinCarnet extends javax.swing.JFrame {
 
-    DefaultTableModel model;
+    private DefaultTableModel model;
     private final UWPButton BtnCarnet = new UWPButton();
-    ControllerCarnets objController = new ControllerCarnets();
+    private ControllerCarnets objController = new ControllerCarnets();
     private int ID;
     public Font font = new Font("Roboto Black", Font.PLAIN, 18);
-    ImageIcon modifIcon = new ImageIcon(getClass().getResource("/Recursos_Proyecto/IDcarnet.png"));
+    private ImageIcon modifIcon = new ImageIcon(getClass().getResource("/Recursos_Proyecto/IDcarnet.png"));
+    private String nombres;
+    private String apellidos;
+    private String imprimirid;
+    private String Carnet;
+    private String capnom;
+    private String capapelli;
 
     /**
      * Creates new form FrmAgg_Carnets
      */
     public FrmPersonalSinCarnet() {
         initComponents();
-        String[] Titulos = {"Nombre", "Apellido", "Tipo Personal", "Documento", "Carné"};
+        String[] Titulos = {"idPersonal", "Nombre", "Apellido", "Tipo Personal", "Documento", "Carné"};
         model = new DefaultTableModel(null, Titulos);
         TbPersonalSC.setModel(model);
         TbPersonalSC.setDefaultRenderer(Object.class, new RenderTable());
@@ -69,6 +78,38 @@ public class FrmPersonalSinCarnet extends javax.swing.JFrame {
     public Image Logo() {
         Image retvalue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
         return retvalue;
+    }
+
+    void carnet() {
+        try {
+            String id = String.valueOf(ID);
+            if (id.length() > 0 && id.length() < 2) {
+                imprimirid = String.valueOf("000" + id);
+            } else if (id.length() == 2 && id.length() < 3) {
+                imprimirid = String.valueOf("00" + id);
+            } else if (id.length() == 3 && id.length() < 4) {
+                imprimirid = String.valueOf("0" + id);
+            } else if (id.length() == 4 && id.length() < 5) {
+                imprimirid = String.valueOf(id);
+            }
+            int year = YearMonth.now().getYear();
+            char firstl = capapelli.charAt(0);
+            char firstn = capnom.charAt(0);
+            nombres = String.valueOf(firstn);
+            apellidos = String.valueOf(firstl);
+            String carnetlocal = nombres + apellidos;
+            String carnetlocal2 = year + imprimirid;
+            String numerocarnet = carnetlocal + carnetlocal2;
+            Carnet = numerocarnet;
+            objController.setCarnet(Carnet);
+            objController.setIdPersonal(ID);
+            if (objController.IngresarCarnet()==true) {
+                JOptionPane.showMessageDialog(null,"Proceso completado","Carnet Agregado",JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception e) {
+            System.out.println("Error interno" + e.toString());
+        }
+        cargarTabla();
     }
 
     /**
@@ -199,7 +240,7 @@ public class FrmPersonalSinCarnet extends javax.swing.JFrame {
         try {
             ResultSet rs = objController.SinCarnetController();
             while (rs.next()) {
-                Object[] Valores = {rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("tipo_personal"), rs.getString("documento"), BtnCarnet};
+                Object[] Valores = {rs.getInt("idPersonal"), rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("tipo_personal"), rs.getString("documento"), BtnCarnet};
                 model.addRow(Valores);
             }
         } catch (SQLException e) {
@@ -218,7 +259,9 @@ public class FrmPersonalSinCarnet extends javax.swing.JFrame {
         BtnCarnet.setName("BtnCarnet");
         if (evt.getClickCount() == 1) {
             JTable rcp = (JTable) evt.getSource();
-            
+            ID = (int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0);
+            capnom=rcp.getModel().getValueAt(rcp.getSelectedRow(), 1).toString();
+            capapelli=rcp.getModel().getValueAt(rcp.getSelectedRow(), 2).toString();
         }
         if (row < TbPersonalSC.getRowCount() || row >= 0 || column < TbPersonalSC.getColumnCount() || column >= 0) {
             Object vals = TbPersonalSC.getValueAt(row, column);
@@ -226,6 +269,7 @@ public class FrmPersonalSinCarnet extends javax.swing.JFrame {
                 ((UWPButton) vals).doClick(); // aqui esta
                 UWPButton btns = (UWPButton) vals;
                 if (btns.getName().equals("BtnCarnet")) {
+                    carnet();
                 }
             }
         }
