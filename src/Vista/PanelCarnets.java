@@ -44,6 +44,7 @@ public class PanelCarnets extends javax.swing.JPanel {
     private int ID;
     private File file;
     private static String Carnet;
+    private int frmstate;
     public Font font = new Font("Roboto Black", Font.PLAIN, 18);
     ImageIcon modifIcon = new ImageIcon(getClass().getResource("/Recursos_Proyecto/Barcode.png"));
 
@@ -142,6 +143,16 @@ public class PanelCarnets extends javax.swing.JPanel {
         PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
         PanelFondo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         PanelFondo.setPreferredSize(new java.awt.Dimension(1270, 620));
+        PanelFondo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                PanelFondoMouseMoved(evt);
+            }
+        });
+        PanelFondo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PanelFondoMouseClicked(evt);
+            }
+        });
         PanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblCarnets.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
@@ -229,6 +240,11 @@ public class PanelCarnets extends javax.swing.JPanel {
         TbCarnets.setName(""); // NOI18N
         TbCarnets.setSelectionBackground(new java.awt.Color(58, 50, 75));
         TbCarnets.setShowVerticalLines(false);
+        TbCarnets.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                TbCarnetsMouseMoved(evt);
+            }
+        });
         TbCarnets.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TbCarnetsMouseClicked(evt);
@@ -266,9 +282,15 @@ public class PanelCarnets extends javax.swing.JPanel {
             add.toFront();
         } else {
             add.setVisible(true);
+            frmstate=1;
         }
     }//GEN-LAST:event_btnAgregarMouseClicked
-
+    final void refresh(){
+        if (frmstate==1&&!(add.isActive())) {
+            cargarTabla();
+            frmstate=0;
+        }
+    }
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -303,6 +325,21 @@ public class PanelCarnets extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_TbCarnetsMouseClicked
+
+    private void PanelFondoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseClicked
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_PanelFondoMouseClicked
+
+    private void TbCarnetsMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbCarnetsMouseMoved
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_TbCarnetsMouseMoved
+
+    private void PanelFondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseMoved
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_PanelFondoMouseMoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

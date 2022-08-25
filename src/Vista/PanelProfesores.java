@@ -37,6 +37,7 @@ public class PanelProfesores extends javax.swing.JPanel {
     String respuesta;
     String carnet;
     Controlador.ControllerBuscador objC = new ControllerBuscador();
+    private int frmstate;
 
     /**
      * Creates new form PanelProfesores
@@ -62,6 +63,12 @@ public class PanelProfesores extends javax.swing.JPanel {
         TbProfesoresWhite.removeColumn(TbProfesoresWhite.getColumnModel().getColumn(7));
         TbProfesoresWhite.removeColumn(TbProfesoresWhite.getColumnModel().getColumn(6));
 
+    }
+        final void refresh(){
+        if (frmstate==1&&!(add.isActive())) {
+            cargarTablaProf();
+            frmstate=0;
+        }
     }
 
     private void cargarTablaProf() {
@@ -107,6 +114,11 @@ public class PanelProfesores extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
+        PanelFondo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                PanelFondoMouseMoved(evt);
+            }
+        });
         PanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblPersonal.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
@@ -196,6 +208,11 @@ public class PanelProfesores extends javax.swing.JPanel {
         TbProfesoresWhite.setName(""); // NOI18N
         TbProfesoresWhite.setSelectionBackground(new java.awt.Color(58, 50, 75));
         TbProfesoresWhite.setShowVerticalLines(false);
+        TbProfesoresWhite.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                TbProfesoresWhiteMouseMoved(evt);
+            }
+        });
         TbProfesoresWhite.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TbProfesoresWhiteMouseClicked(evt);
@@ -219,6 +236,7 @@ public class PanelProfesores extends javax.swing.JPanel {
         } else {
             add.toFront();
         }
+        frmstate=1;
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void TbProfesoresWhiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbProfesoresWhiteMouseClicked
@@ -250,6 +268,7 @@ public class PanelProfesores extends javax.swing.JPanel {
                 if (btns.getName().equals("btnActualizar")) {
                     FrmAgg_Personal frmAgg_Personal = new FrmAgg_Personal(ValidacionesSistema.Parametros_Personal.getIdPersonal());
                     frmAgg_Personal.show();
+                    frmstate=1;
 
                     //Actualizar Contacto metodo
                 }
@@ -272,6 +291,16 @@ public class PanelProfesores extends javax.swing.JPanel {
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
         CargarResultados();
     }//GEN-LAST:event_btnFiltrarActionPerformed
+
+    private void PanelFondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseMoved
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_PanelFondoMouseMoved
+
+    private void TbProfesoresWhiteMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbProfesoresWhiteMouseMoved
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_TbProfesoresWhiteMouseMoved
 
     final void CargarResultados() {
         while (ModelProf.getRowCount() > 0) {

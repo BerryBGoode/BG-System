@@ -57,5 +57,19 @@ public class ModelCarnets {
             return  null;
         }
     }
+    public boolean IngresandoCarnet(int idpersonal, String carnet){
+        try {
+            con=ModelConexion.getConnection();
+            String query="UPDATE tbPersonal SET Carnet=? WHERE idPersonal=?";
+            ps=con.prepareStatement(query);
+            ps.setString(1, carnet);
+            ps.setInt(2, idpersonal);
+            ps.execute();
+            return true;
+        } catch (Exception e) {
+            System.out.println("Error al registrar Carné"+e.toString());
+            return false;
+        }
+    }
 
 }

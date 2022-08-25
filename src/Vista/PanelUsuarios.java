@@ -35,27 +35,37 @@ public class PanelUsuarios extends javax.swing.JPanel {
     private Font font = new Font("Roboto Black", Font.PLAIN, 18);
     ImageIcon Modificar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar.png"));
     ImageIcon Eliminar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/eliminar.png"));
+    FrmAgg_Usuarios agg = new FrmAgg_Usuarios();
+    private int frmstate = 1;
     byte[] imagen;
 
     public PanelUsuarios() {
-            initComponents();
-            String[] TitulosTabla = {"ID", "idPersonal", "Nombres", "Apellidos", "Usuario", "idTipoUsuario", "Tipo de usuario", "idEstadoUsuario", "Estado del usuario", "Imagen", "Modificar", "Eliminar"};
-            modelo = new DefaultTableModel(null, TitulosTabla) {
-                @Override
-                public boolean isCellEditable(int row, int column) { // aqui esta
-                    return false;
-                }
-            };
-            tbUsuarios.setModel(modelo);
-            tbUsuarios.setDefaultRenderer(Object.class, new RenderTable());
-            CargarTabla();
-            tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(0));
-            tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(0));
-            tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(3));
-            tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(4));
-            tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(5));
+        initComponents();
+        String[] TitulosTabla = {"ID", "idPersonal", "Nombres", "Apellidos", "Usuario", "idTipoUsuario", "Tipo de usuario", "idEstadoUsuario", "Estado del usuario", "Imagen", "Modificar", "Eliminar"};
+        modelo = new DefaultTableModel(null, TitulosTabla) {
+            @Override
+            public boolean isCellEditable(int row, int column) { // aqui esta
+                return false;
+            }
+        };
+        tbUsuarios.setModel(modelo);
+        tbUsuarios.setDefaultRenderer(Object.class, new RenderTable());
+        CargarTabla();
+        tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(0));
+        tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(0));
+        tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(3));
+        tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(4));
+        tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(5));
 
-    } 
+    }
+
+    final void refresh() {
+        if (frmstate == 1 && !(agg.isActive())) {
+            CargarTabla();
+            frmstate = 0;
+        }
+    }
+
     public void CargarTabla() {
         ControllerUsuarios obj = new ControllerUsuarios();
         while (modelo.getRowCount() > 0) {
@@ -99,6 +109,11 @@ public class PanelUsuarios extends javax.swing.JPanel {
         PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
         PanelFondo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         PanelFondo.setPreferredSize(new java.awt.Dimension(1270, 620));
+        PanelFondo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                PanelFondoMouseMoved(evt);
+            }
+        });
         PanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblUsuarios.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
@@ -174,6 +189,11 @@ public class PanelUsuarios extends javax.swing.JPanel {
         tbUsuarios.setName(""); // NOI18N
         tbUsuarios.setSelectionBackground(new java.awt.Color(58, 50, 75));
         tbUsuarios.setShowVerticalLines(false);
+        tbUsuarios.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                tbUsuariosMouseMoved(evt);
+            }
+        });
         tbUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbUsuariosMouseClicked(evt);
@@ -210,13 +230,13 @@ public class PanelUsuarios extends javax.swing.JPanel {
         // TODO add your handling code here:
         ValidacionesSistema.Parametros_Usuario.setTitulo("Agregar usuario");
         ValidacionesSistema.Parametros_Usuario.setBoton("Agregar");
-        FrmAgg_Usuarios agg = new FrmAgg_Usuarios();
         if (agg.isVisible()) {
             agg.toFront();
 
         } else {
             agg.setVisible(true);
         }
+        frmstate = 1;
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void tbUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuariosMouseClicked
@@ -253,6 +273,7 @@ public class PanelUsuarios extends javax.swing.JPanel {
                     } else {
                         ac.setVisible(true);
                     }
+                    frmstate = 1;
                 }
                 if (btns.getName().equals("btnEliminar")) {
                     int confirmar = 0;
@@ -272,6 +293,16 @@ public class PanelUsuarios extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_tbUsuariosMouseClicked
+
+    private void PanelFondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseMoved
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_PanelFondoMouseMoved
+
+    private void tbUsuariosMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuariosMouseMoved
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_tbUsuariosMouseMoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

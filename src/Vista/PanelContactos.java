@@ -35,6 +35,7 @@ public class PanelContactos extends javax.swing.JPanel {
     int tipo_contacto = 0;
     int idpersonal = 0;
     int panelcontactos = 0;
+    private int prueba;
     int frmestate = 0;
 
     FrmAgg_Contacto frmAgg_Contacto;

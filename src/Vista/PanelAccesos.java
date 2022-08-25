@@ -32,6 +32,7 @@ public class PanelAccesos extends javax.swing.JPanel {
     UWPButton btndelete = new UWPButton();
     ImageIcon modifIcon = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar.png"));
     ImageIcon deleteIcon = new ImageIcon(getClass().getResource("/Recursos_Proyecto/eliminar.png"));
+    private int frmstate;
 
     public Font font = new Font("Roboto Black", Font.PLAIN, 18);
 
@@ -57,6 +58,12 @@ public class PanelAccesos extends javax.swing.JPanel {
         btndelete.setIcon(deleteIcon);
 
     }
+        final void refresh(){
+        if (frmstate==1&&!(add.isActive())) {
+            loadTable();
+            frmstate=0;
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -78,6 +85,11 @@ public class PanelAccesos extends javax.swing.JPanel {
         PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
         PanelFondo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         PanelFondo.setPreferredSize(new java.awt.Dimension(1270, 620));
+        PanelFondo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                PanelFondoMouseMoved(evt);
+            }
+        });
         PanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblAccesos.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
@@ -159,6 +171,11 @@ public class PanelAccesos extends javax.swing.JPanel {
         TbAccesosWhite4.setName(""); // NOI18N
         TbAccesosWhite4.setSelectionBackground(new java.awt.Color(58, 50, 75));
         TbAccesosWhite4.setShowVerticalLines(false);
+        TbAccesosWhite4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                TbAccesosWhite4MouseMoved(evt);
+            }
+        });
         TbAccesosWhite4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TbAccesosWhite4MouseClicked(evt);
@@ -204,7 +221,7 @@ public class PanelAccesos extends javax.swing.JPanel {
         } else {
             add.setAction(1);
             add.setVisible(true);
-
+            frmstate=1;
         }
     }//GEN-LAST:event_btnAgregarMouseClicked
 
@@ -257,6 +274,7 @@ public class PanelAccesos extends javax.swing.JPanel {
                             add.setNofitication("");
                             System.out.println(notification+"ds");
                             add.setVisible(true);
+                            frmstate=1;
                         }else{
                              add.setNofitication(tb.getModel().getValueAt(tb.getSelectedRow(), 7).toString());
                         }
@@ -279,6 +297,16 @@ public class PanelAccesos extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_TbAccesosWhite4MouseClicked
+
+    private void PanelFondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseMoved
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_PanelFondoMouseMoved
+
+    private void TbAccesosWhite4MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbAccesosWhite4MouseMoved
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_TbAccesosWhite4MouseMoved
 
     void loadTable() {
         ResultSet rs;

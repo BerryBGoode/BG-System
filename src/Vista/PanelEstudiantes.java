@@ -32,6 +32,7 @@ public class PanelEstudiantes extends javax.swing.JPanel {
     //(private Font font = new Font("Roboto Black", Font.PLAIN, 18);
     private ImageIcon modificar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar.png"));
     private ImageIcon eliminar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/eliminar.png"));
+    private int frmstate;
 
     /**
      * Creates new form PanelPersonal
@@ -58,6 +59,13 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         TbAlumnos.removeColumn(TbAlumnos.getColumnModel().getColumn(8));
         TbAlumnos.removeColumn(TbAlumnos.getColumnModel().getColumn(7));
         TbAlumnos.removeColumn(TbAlumnos.getColumnModel().getColumn(6));
+    }
+
+    final void refresh() {
+        if (frmstate == 1 && !(add.isActive())) {
+            cargarTabla();
+            frmstate = 0;
+        }
     }
 
     private void cargarTabla() {
@@ -100,6 +108,11 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
+        PanelFondo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                PanelFondoMouseMoved(evt);
+            }
+        });
         PanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblPersonal.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
@@ -176,6 +189,11 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         TbAlumnos.setName(""); // NOI18N
         TbAlumnos.setSelectionBackground(new java.awt.Color(58, 50, 75));
         TbAlumnos.setShowVerticalLines(false);
+        TbAlumnos.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                TbAlumnosMouseMoved(evt);
+            }
+        });
         TbAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TbAlumnosMouseClicked(evt);
@@ -237,6 +255,7 @@ public class PanelEstudiantes extends javax.swing.JPanel {
                         System.out.println(ValidacionesSistema.Parametros_Personal.getCarnet());
                         FrmAgg_Personal frmAgg_Personal = new FrmAgg_Personal(ValidacionesSistema.Parametros_Personal.getIdPersonal());
                         frmAgg_Personal.show();
+                        frmstate = 1;
                     }
 
                     //Actualizar Contacto metodo
@@ -269,6 +288,16 @@ public class PanelEstudiantes extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_TbAlumnosMouseClicked
+
+    private void PanelFondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseMoved
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_PanelFondoMouseMoved
+
+    private void TbAlumnosMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbAlumnosMouseMoved
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_TbAlumnosMouseMoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

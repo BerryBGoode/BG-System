@@ -13,9 +13,19 @@ import java.sql.ResultSet;
  * @author danlo
  */
 public class ControllerCarnets {
-    ModelCarnets ObjModel=new ModelCarnets();
-    
-     private int idPersonal;
+
+    ModelCarnets ObjModel = new ModelCarnets();
+
+    private int idPersonal;
+    private String carnet;
+
+    public String getCarnet() {
+        return carnet;
+    }
+
+    public void setCarnet(String carnet) {
+        this.carnet = carnet;
+    }
 
     public int getIdPersonal() {
         return idPersonal;
@@ -25,13 +35,18 @@ public class ControllerCarnets {
         this.idPersonal = idPersonal;
     }
 
-    public ResultSet cargarTablaController(){
+    public ResultSet cargarTablaController() {
         return ObjModel.cargarTablaConCarnet();
     }
-    public ResultSet SinCarnetController(){
+
+    public ResultSet SinCarnetController() {
         return ObjModel.cargarTablaSinCarnet();
     }
-    public ResultSet generarBarraController(){
-        return  ObjModel.generabarra(getIdPersonal());
+
+    public ResultSet generarBarraController() {
+        return ObjModel.generabarra(getIdPersonal());
+    }
+    public boolean IngresarCarnet(){
+        return ObjModel.IngresandoCarnet(getIdPersonal(), getCarnet());
     }
 }
