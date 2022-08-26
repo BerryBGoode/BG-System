@@ -71,6 +71,7 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
 
             int respuestaPE = BuscarTipoUsuarioSeleccionado(ValidacionesSistema.Parametros_Usuario.getIdPersonal());
             cmbPersonal.setSelectedIndex(respuestaPE + 1);
+            
 
             if (ValidacionesSistema.Parametros_Usuario.getImagen() != null) {
                 try {
@@ -93,6 +94,7 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
 
     public FrmAgg_Usuarios() {
         initComponents();
+        txtID.setVisible(false);
         this.setLocationRelativeTo(null);
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
         AWTUtilities.setWindowShape(this, forma);
@@ -112,7 +114,7 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Campos vacios");
         } else {
             String contraseña = ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra(txtUsuario.getText() + 123);
-            ControllerUsuarios obja = new ControllerUsuarios(personal, txtUsuario.getText(), contraseña, ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra("1111"), tipoUsu, estadoUsu, imagen, 5);
+            ControllerUsuarios obja = new ControllerUsuarios(personal, txtUsuario.getText(), contraseña, ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra("2353"), tipoUsu, estadoUsu, imagen, 5);
             boolean respuesta = obja.NuevoUsuario_C();
             if (respuesta == true) {
                 ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "Usuario agregado", 1);
@@ -232,7 +234,7 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         panelRound1.add(lblFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 220, 235));
 
         cmbEstado.setBackground(new java.awt.Color(58, 50, 75));
-        cmbEstado.setForeground(new java.awt.Color(42, 36, 56));
+        cmbEstado.setForeground(new java.awt.Color(253, 255, 254));
         cmbEstado.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
         cmbEstado.setLabeText("Estado - Usuario");
         cmbEstado.setLineColor(new java.awt.Color(253, 255, 254));
@@ -250,6 +252,11 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         uWPButton1.setForeground(new java.awt.Color(58, 50, 75));
         uWPButton1.setText("Examinar");
         uWPButton1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        uWPButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uWPButton1ActionPerformed(evt);
+            }
+        });
         panelRound1.add(uWPButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 350, 220, 50));
 
         jLabel1.setBackground(new java.awt.Color(51, 255, 51));
@@ -363,6 +370,10 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         Actualizar();
         this.dispose();
     }//GEN-LAST:event_BtnConfirmarActionPerformed
+
+    private void uWPButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_uWPButton1ActionPerformed
 
     /**
      * @param args the command line arguments
