@@ -272,8 +272,9 @@ public class PanelUsuarios extends javax.swing.JPanel {
 
                     } else {
                         ac.setVisible(true);
+                        frmstate = 1;
                     }
-                    frmstate = 1;
+                   
                 }
                 if (btns.getName().equals("btnEliminar")) {
                     int confirmar = 0;
