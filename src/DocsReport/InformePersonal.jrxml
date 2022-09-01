@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="InformePersonal" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1102b18c-73d7-47c6-adc5-abbb5c2d4c03">
+	<property name="ireport.zoom" value="1.3310000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT a.idPersonal,a.nombre_p,a.apellido_p,b.genero,a.documento,a.Carnet,c.tipo_personal FROM tbPersonal a,tbGeneros b,tbTipoPersonal c WHere b.idGenero=a.idGenero And a.idTipoPersonal=c.idTipoPersonal AND c.tipo_personal!='Alumnos']]>
+	</queryString>
+	<field name="idPersonal" class="java.lang.Integer"/>
+	<field name="nombre_p" class="java.lang.String"/>
+	<field name="apellido_p" class="java.lang.String"/>
+	<field name="genero" class="java.lang.String"/>
+	<field name="documento" class="java.lang.String"/>
+	<field name="Carnet" class="java.lang.String"/>
+	<field name="tipo_personal" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="134" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="85" height="71" uuid="f4d5b07e-1941-43ac-aadb-687ef33a8243"/>
+				<imageExpression><![CDATA["C:\\Users\\hp\\Documents\\Proyectos\\Proyectos Escolares\\Expo 2022\\BG-System\\src\\Recursos_Proyecto\\LogoB&GLogin.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="85" y="71" width="382" height="63" uuid="7a527042-5137-4c8a-b8c2-66e0f2805d59"/>
+				<textElement>
+					<font fontName="Dialog" size="46" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Personal General]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement x="84" y="0" width="382" height="23" uuid="8159d5d7-1098-43eb-8de5-72e893bed89d"/>
+				<textElement>
+					<font fontName="Dialog" size="16" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Informe de todo el personal registrado en el sistema.]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="5" width="20" height="20" uuid="48dd3b74-e626-44a8-9c44-ad6017ce3382"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N°]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="46" y="5" width="75" height="20" uuid="3d53bc94-6a62-4bab-9103-a3ae18038b0b"/>
+				<textElement>
+					<font fontName="Dialog" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombres ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="161" y="5" width="55" height="20" uuid="56b7304b-8b88-4e38-89ae-4ba6ee7af476"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Genero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="383" y="5" width="83" height="20" uuid="28d9a9cd-0c6f-43a8-99ac-e01e02e30e63"/>
+				<textElement>
+					<font fontName="Dialog" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Documento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="486" y="5" width="51" height="20" uuid="f932f9da-9abf-4efa-96c0-8f78484d8870"/>
+				<textElement>
+					<font fontName="Dialog" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Carné]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="245" y="5" width="100" height="20" uuid="ef5f0eb5-3feb-4f47-81bd-67dc37ef8050"/>
+				<textElement>
+					<font fontName="Dialog" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Personal]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="0" width="20" height="20" uuid="146da574-b7b4-4f21-8c26-d9f7b3b42e3d"/>
+				<textFieldExpression><![CDATA[$F{idPersonal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="46" y="0" width="101" height="20" uuid="b6a91cf4-e3f1-4aa6-aa9d-1bdd7b6b498b"/>
+				<textFieldExpression><![CDATA[$F{nombre_p}+" "+$F{apellido_p}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="161" y="0" width="55" height="20" uuid="b2569336-4ee9-4359-9e0b-17d07d6663aa"/>
+				<textFieldExpression><![CDATA[$F{genero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="383" y="0" width="83" height="20" uuid="f6363569-ad38-4aec-937b-a3755f490d2e"/>
+				<textFieldExpression><![CDATA[$F{documento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="486" y="0" width="51" height="20" uuid="98850ee8-c947-4256-9ae6-98d87f925fc1"/>
+				<textFieldExpression><![CDATA[$F{Carnet}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="245" y="0" width="119" height="20" uuid="1d892860-9023-4a86-ab74-7c332257c490"/>
+				<textFieldExpression><![CDATA[$F{tipo_personal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<image>
+				<reportElement x="492" y="24" width="80" height="30" uuid="0a08e053-f2ab-4c5a-aad4-3c477be9bebd"/>
+				<imageExpression><![CDATA["C:\\Users\\hp\\Documents\\Proyectos\\Proyectos Escolares\\Expo 2022\\BG-System\\src\\Recursos_Proyecto\\TextoLogin.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

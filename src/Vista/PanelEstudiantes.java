@@ -5,17 +5,27 @@
  */
 package Vista;
 
+import Controlador.ControllerConexion;
 import Controlador.ControllerPersonal;
 import Controles_Personalizados.Botones.UWPButton;
 import Controles_Personalizados.RenderTable;
 import Controles_Personalizados.Tables.Table;
 import java.awt.Color;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -25,14 +35,17 @@ public class PanelEstudiantes extends javax.swing.JPanel {
 
     private FrmAgg_Personal add = new FrmAgg_Personal();
     private ControllerPersonal objControllerP = new ControllerPersonal();
-    private DefaultTableModel ModelAlumnos;
+    private final DefaultTableModel ModelAlumnos;
     private final UWPButton btnActualizar = new UWPButton();
     private final UWPButton btnEliminar = new UWPButton();
+    private final UWPButton btnReporteP = new UWPButton();
     //Codigo para colocar la letra que se utilza en el proyecto
     //(private Font font = new Font("Roboto Black", Font.PLAIN, 18);
     private ImageIcon modificar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar.png"));
     private ImageIcon eliminar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/eliminar.png"));
+    private ImageIcon reporteimg = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report 1.png"));
     private int frmstate;
+    private int ID;
 
     /**
      * Creates new form PanelPersonal
@@ -40,7 +53,7 @@ public class PanelEstudiantes extends javax.swing.JPanel {
     public PanelEstudiantes() {
         initComponents();
         //Titulos de los campos que se cargan en la tabla
-        String[] TitulosAlumnos = {"IDPersonal", "Nombres", "Apellidos", " Nacimiento", "Documento", "Carné", "Tipo Personal", "Direccion", "Correo", "IDTD", "IDTP", "IDG", "Genero", "Tipo Documento", "Modificar", "Eliminar"};
+        String[] TitulosAlumnos = {"IDPersonal", "Nombres", "Apellidos", " Nacimiento", "Documento", "Carné", "Tipo Personal", "Direccion", "Correo", "IDTD", "IDTP", "IDG", "Genero", "Tipo Documento", "Modificar", "Eliminar", "Registro"};
         ModelAlumnos = new DefaultTableModel(null, TitulosAlumnos) {
             //Codigo para no porder modificar texto en la tabla
             @Override
@@ -59,6 +72,7 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         TbAlumnos.removeColumn(TbAlumnos.getColumnModel().getColumn(8));
         TbAlumnos.removeColumn(TbAlumnos.getColumnModel().getColumn(7));
         TbAlumnos.removeColumn(TbAlumnos.getColumnModel().getColumn(6));
+        TbAlumnos.removeColumn(TbAlumnos.getColumnModel().getColumn(5));
     }
 
     final void refresh() {
@@ -77,9 +91,11 @@ public class PanelEstudiantes extends javax.swing.JPanel {
             while (rs.next()) {
                 btnEliminar.setIcon(eliminar);
                 btnActualizar.setIcon(modificar);
+                btnReporteP.setIcon(reporteimg);
+                btnReporteP.setBackground(new Color(231, 234, 239));
                 btnActualizar.setBackground(new Color(231, 234, 239));
                 btnEliminar.setBackground(new Color(231, 234, 239));
-                Object[] Campos = {rs.getInt("idPersonal"), rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("fecha_nacimiento"), rs.getString("documento"), rs.getString("Carnet"), rs.getString("tipo_personal"), rs.getString("direccion"), rs.getString("correo"), rs.getInt("idTipoDocumento"), rs.getInt("idTipoPersonal"), rs.getInt("idGenero"), rs.getString("genero"), rs.getString("tipo_documento"), btnActualizar, btnEliminar};
+                Object[] Campos = {rs.getInt("idPersonal"), rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("fecha_nacimiento"), rs.getString("documento"), rs.getString("Carnet"), rs.getString("tipo_personal"), rs.getString("direccion"), rs.getString("correo"), rs.getInt("idTipoDocumento"), rs.getInt("idTipoPersonal"), rs.getInt("idGenero"), rs.getString("genero"), rs.getString("tipo_documento"), btnActualizar, btnEliminar, btnReporteP};
                 ModelAlumnos.addRow(Campos);
             }
         } catch (SQLException e) {
@@ -100,6 +116,7 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         PanelFondo = new Controles_Personalizados.Paneles.PanelRound();
         lblPersonal = new javax.swing.JLabel();
         btnAgregar = new Controles_Personalizados.Botones.UWPButton();
+        BtnReporte = new Controles_Personalizados.Botones.UWPButton();
         btnFiltrar = new Controles_Personalizados.Botones.UWPButton();
         PanelTabla = new javax.swing.JScrollPane();
         TbAlumnos = new Controles_Personalizados.Tables.Table();
@@ -132,6 +149,18 @@ public class PanelEstudiantes extends javax.swing.JPanel {
             }
         });
         PanelFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 150, 40));
+
+        BtnReporte.setBackground(new java.awt.Color(58, 50, 75));
+        BtnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
+        BtnReporte.setText("Informe");
+        BtnReporte.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        BtnReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnReporteActionPerformed(evt);
+            }
+        });
+        PanelFondo.add(BtnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 150, 40));
+        BtnReporte.getAccessibleContext().setAccessibleDescription("");
 
         btnFiltrar.setBackground(new java.awt.Color(58, 50, 75));
         btnFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Filtrar Blanco.png"))); // NOI18N
@@ -226,8 +255,10 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         int row = evt.getY() / TbAlumnos.getRowHeight();
         btnActualizar.setName("btnActualizar");
         btnEliminar.setName("btnEliminar");
+        btnReporteP.setName("btnReport");
         if (evt.getClickCount() == 1) {
             JTable rcp = (JTable) evt.getSource();
+            ID = (int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0);
             ValidacionesSistema.Parametros_Personal.setIdPersonal((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0));
             ValidacionesSistema.Parametros_Personal.setnombre_personal(rcp.getModel().getValueAt(rcp.getSelectedRow(), 1).toString());
             ValidacionesSistema.Parametros_Personal.setApellido_personal(rcp.getModel().getValueAt(rcp.getSelectedRow(), 2).toString());
@@ -259,6 +290,10 @@ public class PanelEstudiantes extends javax.swing.JPanel {
                     }
 
                     //Actualizar Contacto metodo
+                }
+                if (btns.getName().equals("btnReport")) {
+                    imprimironly1();
+
                 }
                 if (btns.getName().equals("btnEliminar")) {
                     int confirmar = JOptionPane.YES_NO_OPTION;
@@ -299,8 +334,43 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         refresh();
     }//GEN-LAST:event_TbAlumnosMouseMoved
 
+    private void BtnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReporteActionPerformed
+        // TODO add your handling code here:
+        imprimir();
+    }//GEN-LAST:event_BtnReporteActionPerformed
+    void imprimironly1() {
+        Connection con = ControllerConexion.getConnectionModel();
+        try {
+            String dir = "src/DocsReport/EstudianteReporte.jasper";
+            JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(dir);
+            Map param=new HashMap<>();
+            param.put("idPersonal", ID);
+            System.out.println(ID);
+            JasperPrint jp = JasperFillManager.fillReport(jr, param, con);
+            JasperViewer jv = new JasperViewer(jp, false);
+            jv.setVisible(true);
+            System.out.println("si, se imprime");
+        } catch (JRException e) {
+            System.out.println("Error" + e.toString());
+        }
+    }
+
+    void imprimir() {
+        Connection con = ControllerConexion.getConnectionModel();
+        try {
+            String dir = "src/DocsReport/InformeEstudiantes.jasper";
+            JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(dir);
+            JasperPrint jp = JasperFillManager.fillReport(jr, null, con);
+            JasperViewer jv = new JasperViewer(jp, false);
+            jv.setVisible(true);
+            System.out.println("si, se imprime");
+        } catch (JRException e) {
+            System.out.println("Error" + e.toString());
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private Controles_Personalizados.Botones.UWPButton BtnReporte;
     private Controles_Personalizados.Paneles.PanelRound PanelFondo;
     private javax.swing.JScrollPane PanelTabla;
     private Controles_Personalizados.ScrollBar.ScrollBarCustom ScrollTabla;
