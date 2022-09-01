@@ -103,8 +103,8 @@ public class FrmPersonalSinCarnet extends javax.swing.JFrame {
             Carnet = numerocarnet;
             objController.setCarnet(Carnet);
             objController.setIdPersonal(ID);
-            if (objController.IngresarCarnet()==true) {
-                JOptionPane.showMessageDialog(null,"Proceso completado","Carnet Agregado",JOptionPane.INFORMATION_MESSAGE);
+            if (objController.IngresarCarnet() == true) {
+                JOptionPane.showMessageDialog(null, "Proceso completado", "Carnet Agregado", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (Exception e) {
             System.out.println("Error interno" + e.toString());
@@ -260,8 +260,8 @@ public class FrmPersonalSinCarnet extends javax.swing.JFrame {
         if (evt.getClickCount() == 1) {
             JTable rcp = (JTable) evt.getSource();
             ID = (int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0);
-            capnom=rcp.getModel().getValueAt(rcp.getSelectedRow(), 1).toString();
-            capapelli=rcp.getModel().getValueAt(rcp.getSelectedRow(), 2).toString();
+            capnom = rcp.getModel().getValueAt(rcp.getSelectedRow(), 1).toString();
+            capapelli = rcp.getModel().getValueAt(rcp.getSelectedRow(), 2).toString();
         }
         if (row < TbPersonalSC.getRowCount() || row >= 0 || column < TbPersonalSC.getColumnCount() || column >= 0) {
             Object vals = TbPersonalSC.getValueAt(row, column);
@@ -269,7 +269,12 @@ public class FrmPersonalSinCarnet extends javax.swing.JFrame {
                 ((UWPButton) vals).doClick(); // aqui esta
                 UWPButton btns = (UWPButton) vals;
                 if (btns.getName().equals("BtnCarnet")) {
-                    carnet();
+                    int confirmacion = JOptionPane.YES_NO_OPTION;
+                    int a = JOptionPane.showConfirmDialog(null, "¿Desea generar el Carné de: " + capnom + capapelli, "Generar Carné", confirmacion, JOptionPane.QUESTION_MESSAGE);
+                    if (a == 0) {
+                        carnet();
+                    }
+
                 }
             }
         }

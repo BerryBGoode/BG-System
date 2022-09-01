@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EstudianteReporte" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="791e777f-8229-439e-b65c-17359648da93">
-	<property name="ireport.zoom" value="2.143588810000002"/>
+	<property name="ireport.zoom" value="1.4641000000000013"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="223"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="Nombre" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -133,7 +133,12 @@
 		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="54" splitType="Stretch">
+			<image>
+				<reportElement x="492" y="24" width="80" height="30" uuid="d2968980-50a5-4a9c-beb6-0f19d0ae1ab4"/>
+				<imageExpression><![CDATA["C:\\Users\\hp\\Documents\\Proyectos\\Proyectos Escolares\\Expo 2022\\BG-System\\src\\Recursos_Proyecto\\TextoLogin.png"]]></imageExpression>
+			</image>
+		</band>
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>
