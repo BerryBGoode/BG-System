@@ -78,7 +78,7 @@ public class PanelCarnets extends javax.swing.JPanel {
                 model.addRow(Valores);
             }
         } catch (SQLException e) {
-            System.out.println("Error al cargar, Error de vista" + e.toString());
+            System.out.println("Error al cargar, Error de vista lfdksjfsl" + e.toString());
         }
     }
 
