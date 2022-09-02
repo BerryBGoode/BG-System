@@ -5,20 +5,26 @@
  */
 package Vista;
 
+import Controlador.ControllerConexion;
 import Controlador.ControllerUsuarios;
 import Controles_Personalizados.Botones.UWPButton;
 import Controles_Personalizados.RenderTable;
-import Controles_Personalizados.Tables.Renderer;
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.Connection;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
-import sun.reflect.generics.tree.CharSignature;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -38,9 +44,10 @@ public class PanelUsuarios extends javax.swing.JPanel {
     FrmAgg_Usuarios agg = new FrmAgg_Usuarios();
     private int frmstate = 1;
     byte[] imagen;
-
+    
     public PanelUsuarios() {
-        initComponents();
+        initComponents();  
+        btnReporteP.setEnabled(false);
         String[] TitulosTabla = {"ID", "idPersonal", "Nombres", "Apellidos", "Usuario", "idTipoUsuario", "Tipo de usuario", "idEstadoUsuario", "Estado del usuario", "Imagen", "Modificar", "Eliminar"};
         modelo = new DefaultTableModel(null, TitulosTabla) {
             @Override
@@ -103,6 +110,8 @@ public class PanelUsuarios extends javax.swing.JPanel {
         PanelTabla = new javax.swing.JScrollPane();
         tbUsuarios = new Controles_Personalizados.Tables.Table();
         ScrollTabla = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
+        btnReporte = new Controles_Personalizados.Botones.UWPButton();
+        btnReporteP = new Controles_Personalizados.Botones.UWPButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -127,7 +136,7 @@ public class PanelUsuarios extends javax.swing.JPanel {
         btnFiltrar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         btnFiltrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        PanelFondo.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 150, 40));
+        PanelFondo.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 150, 40));
 
         btnAgregar.setBackground(new java.awt.Color(58, 50, 75));
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Agregar Blanco.png"))); // NOI18N
@@ -207,6 +216,32 @@ public class PanelUsuarios extends javax.swing.JPanel {
         ScrollTabla.setForeground(new java.awt.Color(58, 50, 75));
         PanelFondo.add(ScrollTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(1238, 177, 10, 40));
 
+        btnReporte.setBackground(new java.awt.Color(58, 50, 75));
+        btnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Filtrar Blanco.png"))); // NOI18N
+        btnReporte.setText("Reporte");
+        btnReporte.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        btnReporte.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnReporte.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporteActionPerformed(evt);
+            }
+        });
+        PanelFondo.add(btnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 150, 40));
+
+        btnReporteP.setBackground(new java.awt.Color(58, 50, 75));
+        btnReporteP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Filtrar Blanco.png"))); // NOI18N
+        btnReporteP.setText("Reporte especifico");
+        btnReporteP.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        btnReporteP.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnReporteP.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnReporteP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportePActionPerformed(evt);
+            }
+        });
+        PanelFondo.add(btnReporteP, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 80, 220, 40));
+
         add(PanelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -241,16 +276,18 @@ public class PanelUsuarios extends javax.swing.JPanel {
 
     private void tbUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuariosMouseClicked
         // TODO add your handling code here:
+        btnReporteP.setEnabled(true);
         JTable tb = (JTable) evt.getSource();
         String nombre = null;
         int column = tbUsuarios.getColumnModel().getColumnIndexAtX(evt.getX());
         int row = evt.getY() / tbUsuarios.getRowHeight();
         btnActualizar.setName("btnActualizar");
         btnEliminar.setName("btnEliminar");
+        JTable rcp = (JTable) evt.getSource();
         if (evt.getClickCount() == 1) {
-            JTable rcp = (JTable) evt.getSource();
             ValidacionesSistema.Parametros_Usuario.setID((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0));
             ValidacionesSistema.Parametros_Usuario.setIdPersonal((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 1));
+            System.out.println(ValidacionesSistema.Parametros_Usuario.getIdPersonal());
             ValidacionesSistema.Parametros_Usuario.setNombre_usuario(rcp.getModel().getValueAt(rcp.getSelectedRow(), 4).toString());
             ValidacionesSistema.Parametros_Usuario.setIdTipoUsuario((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 5));
             ValidacionesSistema.Parametros_Usuario.setIdEstadoUsuario((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 7));
@@ -277,7 +314,7 @@ public class PanelUsuarios extends javax.swing.JPanel {
                 }
                 if (btns.getName().equals("btnEliminar")) {
                     int confirmar = 0;
-                    nombre = ValidacionesSistema.Parametros_Usuario.getNombre_usuario();
+                    nombre = rcp.getModel().getValueAt(rcp.getSelectedRow(), 2).toString() + " " + rcp.getModel().getValueAt(rcp.getSelectedRow(), 3).toString();
                     confirmar = JOptionPane.showConfirmDialog(this, "¿Desea eliminar el usuario de: " + nombre + "?", "Proceso de Eliminar", confirmar);
                     if (confirmar == 0) {
                         ControllerUsuarios obje = new ControllerUsuarios(ValidacionesSistema.Parametros_Usuario.getID());
@@ -304,6 +341,50 @@ public class PanelUsuarios extends javax.swing.JPanel {
         refresh();
     }//GEN-LAST:event_tbUsuariosMouseMoved
 
+    private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
+        // TODO add your handling code here:
+        try{
+            Connection con = ControllerConexion.getConnectionModel();
+            JasperReport reporte = null;
+
+            String dir = "src\\DocsReport\\UsuariosReport.jasper";
+            Map parametros = new HashMap();
+            parametros.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
+            parametros.put("TextoFooter", "src\\Recursos_Proyecto\\TextoLogin.png");
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(dir);
+  
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, parametros, con);
+            
+            JasperViewer view = new JasperViewer(jprint, false);
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            view.setVisible(true);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
+        
+    }//GEN-LAST:event_btnReporteActionPerformed
+
+    private void btnReportePActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportePActionPerformed
+        // TODO add your handling code here:
+        try{
+            Connection con = ControllerConexion.getConnectionModel();
+            JasperReport reporte = null;
+
+            String dir = "src\\DocsReport\\UsuarioPReport.jasper";
+            Map parametros = new HashMap();
+            parametros.put("idUsuario", ValidacionesSistema.Parametros_Usuario.getID());
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(dir);
+
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, parametros, con);
+            
+            JasperViewer view = new JasperViewer(jprint, false);
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            view.setVisible(true);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
+    }//GEN-LAST:event_btnReportePActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Controles_Personalizados.Paneles.PanelRound PanelFondo;
@@ -311,6 +392,8 @@ public class PanelUsuarios extends javax.swing.JPanel {
     private Controles_Personalizados.ScrollBar.ScrollBarCustom ScrollTabla;
     private Controles_Personalizados.Botones.UWPButton btnAgregar;
     private Controles_Personalizados.Botones.UWPButton btnFiltrar;
+    private Controles_Personalizados.Botones.UWPButton btnReporte;
+    private Controles_Personalizados.Botones.UWPButton btnReporteP;
     private javax.swing.JLabel lblUsuarios;
     private Controles_Personalizados.Tables.Table tbUsuarios;
     // End of variables declaration//GEN-END:variables

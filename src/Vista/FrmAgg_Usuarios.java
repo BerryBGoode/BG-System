@@ -66,10 +66,10 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
             int respuestaTU = BuscarTipoUsuarioSeleccionado(ValidacionesSistema.Parametros_Usuario.getIdTipoUsuario());
             cmbTipo.setSelectedIndex(respuestaTU + 1);
 
-            int respuestaEU = BuscarTipoUsuarioSeleccionado(ValidacionesSistema.Parametros_Usuario.getIdEstadoUsuario());
+            int respuestaEU = BuscarEstadoUsuarioSeleccionado(ValidacionesSistema.Parametros_Usuario.getIdEstadoUsuario());
             cmbEstado.setSelectedIndex(respuestaEU + 1);
 
-            int respuestaPE = BuscarTipoUsuarioSeleccionado(ValidacionesSistema.Parametros_Usuario.getIdPersonal());
+            int respuestaPE = BuscarPersonalSeleccionado(ValidacionesSistema.Parametros_Usuario.getIdPersonal());
             cmbPersonal.setSelectedIndex(respuestaPE + 1);
 
             if (ValidacionesSistema.Parametros_Usuario.getImagen() != null) {
@@ -155,7 +155,7 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         lblFoto = new javax.swing.JLabel();
         cmbEstado = new Controles_Personalizados.ComboBox.combobox();
         jLabel3 = new javax.swing.JLabel();
-        uWPButton1 = new Controles_Personalizados.Botones.UWPButton();
+        btnExaminar = new Controles_Personalizados.Botones.UWPButton();
         jLabel1 = new javax.swing.JLabel();
         cmbTipo = new Controles_Personalizados.ComboBox.combobox();
         txtID = new javax.swing.JTextField();
@@ -163,7 +163,6 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1099, 578));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -246,11 +245,24 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/imagenlogin2.png"))); // NOI18N
         panelRound1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 90, 330, 350));
 
+<<<<<<< Updated upstream
         uWPButton1.setBackground(new java.awt.Color(254, 254, 254));
         uWPButton1.setForeground(new java.awt.Color(58, 50, 75));
         uWPButton1.setText("Examinar");
         uWPButton1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         panelRound1.add(uWPButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 350, 220, 50));
+=======
+        btnExaminar.setBackground(new java.awt.Color(254, 254, 254));
+        btnExaminar.setForeground(new java.awt.Color(58, 50, 75));
+        btnExaminar.setText("Examinar");
+        btnExaminar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnExaminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExaminarActionPerformed(evt);
+            }
+        });
+        panelRound1.add(btnExaminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 350, 220, 50));
+>>>>>>> Stashed changes
 
         jLabel1.setBackground(new java.awt.Color(51, 255, 51));
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -364,6 +376,14 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_BtnConfirmarActionPerformed
 
+<<<<<<< Updated upstream
+=======
+    private void btnExaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExaminarActionPerformed
+        // TODO add your handling code here:
+        MostrarImagen();
+    }//GEN-LAST:event_btnExaminarActionPerformed
+
+>>>>>>> Stashed changes
     /**
      * @param args the command line arguments
      */
@@ -506,7 +526,7 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         return retorno;
     }
 
-    final int BuscarEstadpUsuarioSeleccionado(int id) {
+    final int BuscarEstadoUsuarioSeleccionado(int id) {
         int size = myArrayListEU.size();
         int retorno = -1;
         for (int i = 0; i < size; i++) {
@@ -534,6 +554,7 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
     private Controles_Personalizados.Botones.ButtonGradient BtnConfirmar;
     private javax.swing.JLabel btnCerrar;
     private Controles_Personalizados.Botones.ButtonGradient btnContinuar;
+    private Controles_Personalizados.Botones.UWPButton btnExaminar;
     private javax.swing.JLabel btnMinimizar;
     private Controles_Personalizados.ComboBox.combobox cmbEstado;
     private Controles_Personalizados.ComboBox.combobox cmbPersonal;
@@ -544,6 +565,5 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
     private Controles_Personalizados.Paneles.PanelRound panelRound1;
     private javax.swing.JTextField txtID;
     private Controles_Personalizados.textfields.TextField txtUsuario;
-    private Controles_Personalizados.Botones.UWPButton uWPButton1;
     // End of variables declaration//GEN-END:variables
 }
