@@ -1,0 +1,6 @@
+sa
+localhost
+1433
+postgre/SQL
+Este es un archivo de configuración para la conexión, porfavor no borrar
+This a file of configuration of connection on database, please don't delete this file

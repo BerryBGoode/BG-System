@@ -5,9 +5,16 @@
  */
 package Vista;
 
+import Controlador.ControllerContactos;
 import Controlador.ControllerVehiculos;
+import Controles_Personalizados.Botones.UWPButton;
+import Controles_Personalizados.RenderTable;
+import java.awt.Color;
 
 import java.sql.ResultSet;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,7 +29,43 @@ public class PanelVehiculos extends javax.swing.JPanel {
     public PanelVehiculos() {
         initComponents();
         
+        String[] header = {"ID","Personal","Carnet","Placa","Color","Id personal","Modificar","Eliminar"};
+        model = new DefaultTableModel(null, header){
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
         CargarTablaVehiculos();
+        TbVehiculos.removeColumn(TbVehiculos.getColumnModel().getColumn(5));
+        TbVehiculos.setDefaultRenderer(Object.class, new RenderTable());
+    }
+    
+    UWPButton btnModificar = new UWPButton();
+    UWPButton btnEliminar = new UWPButton();
+    ImageIcon modificar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar.png"));
+    ImageIcon eliminar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/eliminar.png"));
+    
+    final void CargarTablaVehiculos() {
+        
+        TbVehiculos.setModel(model);
+        
+        while(model.getRowCount() > 0) {
+            model.removeRow(0);
+        }
+        try {
+            rs = ControllerVehiculos.CargarTabla();
+            while(rs.next()) {
+                btnModificar.setIcon(modificar);
+                btnEliminar.setIcon(eliminar);
+                btnModificar.setBackground(new Color(231, 234, 239));
+                btnEliminar.setBackground(new Color(231, 234, 239));
+                Object[] oValues = {rs.getInt("idVehiculo"), rs.getString("Personal"), rs.getString("Carnet"), rs.getString("placa"), rs.getString("color"), rs.getInt("idPersonal"), btnModificar, btnEliminar};
+                model.addRow(oValues);
+            }
+        } catch(Exception e){
+        }
+        
     }
 
     /**
@@ -125,6 +168,11 @@ public class PanelVehiculos extends javax.swing.JPanel {
         TbVehiculos.setName(""); // NOI18N
         TbVehiculos.setSelectionBackground(new java.awt.Color(58, 50, 75));
         TbVehiculos.setShowVerticalLines(false);
+        TbVehiculos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TbVehiculosMouseClicked(evt);
+            }
+        });
         PanelTabla.setViewportView(TbVehiculos);
 
         PanelFondo.add(PanelTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 1230, 480));
@@ -174,23 +222,51 @@ public class PanelVehiculos extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    final void CargarTablaVehiculos() {
-        
-        TbVehiculos.setModel(model);
-        
-        while(model.getRowCount() > 0) {
-            model.removeRow(0);
+    private void TbVehiculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbVehiculosMouseClicked
+        int column = TbVehiculos.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / TbVehiculos.getRowHeight();
+        btnModificar.setName("btnActualizar");
+        btnEliminar.setName("btnEliminar");
+        if (evt.getClickCount() == 1) {
+            JTable rcp = (JTable) evt.getSource();
+            ValidacionesSistema.Parametros_Vehiculos.setIdvehiculo((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0));
+            ValidacionesSistema.Parametros_Vehiculos.setPersonal(rcp.getModel().getValueAt(rcp.getSelectedRow(), 1).toString());
+            ValidacionesSistema.Parametros_Vehiculos.setCarnet(rcp.getModel().getValueAt(rcp.getSelectedRow(), 2).toString());
+            ValidacionesSistema.Parametros_Vehiculos.setPlaca(rcp.getModel().getValueAt(rcp.getSelectedRow(), 3).toString());
+            ValidacionesSistema.Parametros_Vehiculos.setColor(rcp.getModel().getValueAt(rcp.getSelectedRow(), 4).toString());
+            ValidacionesSistema.Parametros_Vehiculos.setIdPersonal((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 5));
         }
-        try {
-            rs = ControllerVehiculos.CargarTablaVehiculos_Controller();
-            while(rs.next()) {
-                Object[] oValues = {rs.getInt("idVehiculo"), rs.getInt("idPersonal"), rs.getString("placa"), rs.getString("color")};
-                model.addRow(oValues);
+        if (row < TbVehiculos.getRowCount() || row >= 0 || column < TbVehiculos.getColumnCount() || column >= 0) {
+            Object vals = TbVehiculos.getValueAt(row, column);
+            if (vals instanceof UWPButton) {
+                ((UWPButton) vals).doClick(); // aqui esta
+                UWPButton btns = (UWPButton) vals;
+                if (btns.getName().equals("btnActualizar")) {
+                    frmVehiculos = new FrmAgg_Vehiculos(ValidacionesSistema.Parametros_Vehiculos.getIdvehiculo());
+                    frmVehiculos.setVisible(true);
+                    //this.setEnabled(false);
+                    CargarTablaVehiculos();
+
+                    //Actualizar Contacto metodo
+                }else{
+                    frmVehiculos.setVisible(true);
+                }
+                if (btns.getName().equals("btnEliminar")) {
+                    int confirmar = JOptionPane.YES_NO_OPTION;
+                    int a = JOptionPane.showConfirmDialog(this, "¿Desea eliminar el vehiculo con placa: " + ValidacionesSistema.Parametros_Vehiculos.getPlaca()+ "?", "Proceso de Eliminar", confirmar);
+                    if (a == 0) {
+                        ControllerVehiculos.idvehiculo = ValidacionesSistema.Parametros_Vehiculos.getIdvehiculo();
+                        if (ControllerContactos.EliminarContactos_Controller() == true) {
+                            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso de eliminacion", "Registro del vehiculo eliminado con exito", 1);
+                            CargarTablaVehiculos();
+                        }
+                    }
+                    // Eliminar Contacto metodo
+
+                }
             }
-        } catch(Exception e){
         }
-        
-    }
+    }//GEN-LAST:event_TbVehiculosMouseClicked
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
