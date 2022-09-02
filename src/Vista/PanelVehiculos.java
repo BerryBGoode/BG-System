@@ -29,7 +29,7 @@ public class PanelVehiculos extends javax.swing.JPanel {
     public PanelVehiculos() {
         initComponents();
         
-        String[] header = {"ID","Personal","Carnet","Placa","Color","Id personal","Modificar","Eliminar"};
+        String[] header = {"ID","Personal","Carnet","Placa","Color","Id personal","Modificar","Eliminar","Registro"};
         model = new DefaultTableModel(null, header){
             @Override
             public boolean isCellEditable(int row, int column){
@@ -43,8 +43,10 @@ public class PanelVehiculos extends javax.swing.JPanel {
     
     UWPButton btnModificar = new UWPButton();
     UWPButton btnEliminar = new UWPButton();
+    UWPButton btnreporte = new UWPButton();
     ImageIcon modificar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar.png"));
     ImageIcon eliminar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/eliminar.png"));
+    ImageIcon reporte = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report 1.png"));
     
     final void CargarTablaVehiculos() {
         
@@ -58,9 +60,11 @@ public class PanelVehiculos extends javax.swing.JPanel {
             while(rs.next()) {
                 btnModificar.setIcon(modificar);
                 btnEliminar.setIcon(eliminar);
+                btnReporte.setIcon(reporte);
                 btnModificar.setBackground(new Color(231, 234, 239));
                 btnEliminar.setBackground(new Color(231, 234, 239));
-                Object[] oValues = {rs.getInt("idVehiculo"), rs.getString("Personal"), rs.getString("Carnet"), rs.getString("placa"), rs.getString("color"), rs.getInt("idPersonal"), btnModificar, btnEliminar};
+                btnReporte.setBackground(new Color(231, 234, 239));
+                Object[] oValues = {rs.getInt("idVehiculo"), rs.getString("Personal"), rs.getString("Carnet"), rs.getString("placa"), rs.getString("color"), rs.getInt("idPersonal"), btnModificar, btnEliminar, btnReporte};
                 model.addRow(oValues);
             }
         } catch(Exception e){
@@ -84,6 +88,7 @@ public class PanelVehiculos extends javax.swing.JPanel {
         PanelTabla = new javax.swing.JScrollPane();
         TbVehiculos = new Controles_Personalizados.Tables.Table();
         ScrollTabla = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
+        btnReporte = new Controles_Personalizados.Botones.UWPButton();
 
         PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
         PanelFondo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -181,6 +186,12 @@ public class PanelVehiculos extends javax.swing.JPanel {
         ScrollTabla.setForeground(new java.awt.Color(58, 50, 75));
         PanelFondo.add(ScrollTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(1238, 177, 10, 40));
 
+        btnReporte.setBackground(new java.awt.Color(58, 50, 75));
+        btnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
+        btnReporte.setText("Informe");
+        btnReporte.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        PanelFondo.add(btnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 140, 40));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -211,10 +222,10 @@ public class PanelVehiculos extends javax.swing.JPanel {
     ResultSet rs;
     
     private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
-        if (frmVehiculos.isVisible()) {
-            frmVehiculos.toFront();
+        if (add.isVisible()) {
+            add.toFront();
         }else{
-            frmVehiculos.setVisible(true);
+            add.setVisible(true);
         }
     }//GEN-LAST:event_btnAgregarMouseClicked
 
@@ -245,18 +256,15 @@ public class PanelVehiculos extends javax.swing.JPanel {
                     frmVehiculos = new FrmAgg_Vehiculos(ValidacionesSistema.Parametros_Vehiculos.getIdvehiculo());
                     frmVehiculos.setVisible(true);
                     //this.setEnabled(false);
-                    CargarTablaVehiculos();
-
+                    CargarTablaVehiculos();   
                     //Actualizar Contacto metodo
-                }else{
-                    frmVehiculos.setVisible(true);
                 }
                 if (btns.getName().equals("btnEliminar")) {
                     int confirmar = JOptionPane.YES_NO_OPTION;
                     int a = JOptionPane.showConfirmDialog(this, "¿Desea eliminar el vehiculo con placa: " + ValidacionesSistema.Parametros_Vehiculos.getPlaca()+ "?", "Proceso de Eliminar", confirmar);
                     if (a == 0) {
                         ControllerVehiculos.idvehiculo = ValidacionesSistema.Parametros_Vehiculos.getIdvehiculo();
-                        if (ControllerContactos.EliminarContactos_Controller() == true) {
+                        if (ControllerVehiculos.EliminarVehiculo_Controller() == true) {
                             ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso de eliminacion", "Registro del vehiculo eliminado con exito", 1);
                             CargarTablaVehiculos();
                         }
@@ -276,6 +284,7 @@ public class PanelVehiculos extends javax.swing.JPanel {
     private Controles_Personalizados.Tables.Table TbVehiculos;
     private Controles_Personalizados.Botones.UWPButton btnAgregar;
     private Controles_Personalizados.Botones.UWPButton btnFiltrar;
+    private Controles_Personalizados.Botones.UWPButton btnReporte;
     private javax.swing.JLabel lblVehiculos;
     // End of variables declaration//GEN-END:variables
 }
