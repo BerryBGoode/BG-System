@@ -5,17 +5,27 @@
  */
 package Vista;
 
+import Controlador.ControllerConexion;
 import Controlador.ControllerContactos;
 import Controlador.ControllerVehiculos;
 import Controles_Personalizados.Botones.UWPButton;
 import Controles_Personalizados.RenderTable;
 import java.awt.Color;
+import java.sql.Connection;
 
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -41,9 +51,10 @@ public class PanelVehiculos extends javax.swing.JPanel {
         TbVehiculos.setDefaultRenderer(Object.class, new RenderTable());
     }
     
+    int idvehiculo;
     UWPButton btnModificar = new UWPButton();
     UWPButton btnEliminar = new UWPButton();
-    UWPButton btnreporte = new UWPButton();
+    UWPButton btnReporte = new UWPButton();
     ImageIcon modificar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar.png"));
     ImageIcon eliminar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/eliminar.png"));
     ImageIcon reporte = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report 1.png"));
@@ -88,7 +99,7 @@ public class PanelVehiculos extends javax.swing.JPanel {
         PanelTabla = new javax.swing.JScrollPane();
         TbVehiculos = new Controles_Personalizados.Tables.Table();
         ScrollTabla = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
-        btnReporte = new Controles_Personalizados.Botones.UWPButton();
+        btnInforme = new Controles_Personalizados.Botones.UWPButton();
 
         PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
         PanelFondo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -186,11 +197,16 @@ public class PanelVehiculos extends javax.swing.JPanel {
         ScrollTabla.setForeground(new java.awt.Color(58, 50, 75));
         PanelFondo.add(ScrollTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(1238, 177, 10, 40));
 
-        btnReporte.setBackground(new java.awt.Color(58, 50, 75));
-        btnReporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
-        btnReporte.setText("Informe");
-        btnReporte.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        PanelFondo.add(btnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 140, 40));
+        btnInforme.setBackground(new java.awt.Color(58, 50, 75));
+        btnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
+        btnInforme.setText("Informe");
+        btnInforme.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnInforme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInformeActionPerformed(evt);
+            }
+        });
+        PanelFondo.add(btnInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 140, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -238,8 +254,10 @@ public class PanelVehiculos extends javax.swing.JPanel {
         int row = evt.getY() / TbVehiculos.getRowHeight();
         btnModificar.setName("btnActualizar");
         btnEliminar.setName("btnEliminar");
+        btnReporte.setName("btnReporte");
         if (evt.getClickCount() == 1) {
             JTable rcp = (JTable) evt.getSource();
+            idvehiculo = (int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0);
             ValidacionesSistema.Parametros_Vehiculos.setIdvehiculo((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0));
             ValidacionesSistema.Parametros_Vehiculos.setPersonal(rcp.getModel().getValueAt(rcp.getSelectedRow(), 1).toString());
             ValidacionesSistema.Parametros_Vehiculos.setCarnet(rcp.getModel().getValueAt(rcp.getSelectedRow(), 2).toString());
@@ -259,6 +277,9 @@ public class PanelVehiculos extends javax.swing.JPanel {
                     CargarTablaVehiculos();   
                     //Actualizar Contacto metodo
                 }
+                if (btns.getName().equals("btnReporte")) {
+                    Imprimir1();
+                }
                 if (btns.getName().equals("btnEliminar")) {
                     int confirmar = JOptionPane.YES_NO_OPTION;
                     int a = JOptionPane.showConfirmDialog(this, "¿Desea eliminar el vehiculo con placa: " + ValidacionesSistema.Parametros_Vehiculos.getPlaca()+ "?", "Proceso de Eliminar", confirmar);
@@ -275,7 +296,41 @@ public class PanelVehiculos extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_TbVehiculosMouseClicked
+
+    private void btnInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformeActionPerformed
+        ImprimirReporte();
+    }//GEN-LAST:event_btnInformeActionPerformed
     
+    void ImprimirReporte() {
+        Connection con = ControllerConexion.getConnectionModel();
+        try {
+            String path = "src/DocsReport/VehiculosReporte.jasper";
+            JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(path);
+            JasperPrint jp = JasperFillManager.fillReport(jr, null, con);
+            JasperViewer jv = new JasperViewer(jp, false);
+            jv.setVisible(true);
+            System.out.println("si, se imprime");
+        } catch (JRException e) {
+            System.out.println("Error" + e.toString());
+        }
+    }
+    
+    void Imprimir1() {
+        Connection con = ControllerConexion.getConnectionModel();
+        try {
+            String path = "src/DocsReport/InformeVehiculos.jasper";
+            JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(path);
+            Map param = new HashMap<>();
+            param.put("idVehiculo", idvehiculo);
+            System.out.println(idvehiculo);
+            JasperPrint jp = JasperFillManager.fillReport(jr, param, con);
+            JasperViewer jv = new JasperViewer(jp, false);
+            jv.setVisible(true);
+            System.out.println("si, se imprime");
+        } catch (JRException e) {
+            System.out.println("Error" + e.toString());
+        }
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Controles_Personalizados.Paneles.PanelRound PanelFondo;
@@ -284,7 +339,7 @@ public class PanelVehiculos extends javax.swing.JPanel {
     private Controles_Personalizados.Tables.Table TbVehiculos;
     private Controles_Personalizados.Botones.UWPButton btnAgregar;
     private Controles_Personalizados.Botones.UWPButton btnFiltrar;
-    private Controles_Personalizados.Botones.UWPButton btnReporte;
+    private Controles_Personalizados.Botones.UWPButton btnInforme;
     private javax.swing.JLabel lblVehiculos;
     // End of variables declaration//GEN-END:variables
 }
