@@ -3,6 +3,12 @@
 	<property name="ireport.zoom" value="1.3310000000000006"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="Logo1" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Foot" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT a.idPersonal,a.nombre_p,a.apellido_p,b.genero,a.documento,a.Carnet,c.tipo_personal FROM tbPersonal a,tbGeneros b,tbTipoPersonal c WHere b.idGenero=a.idGenero And a.idTipoPersonal=c.idTipoPersonal AND c.tipo_personal!='Alumnos']]>
 	</queryString>
@@ -18,10 +24,6 @@
 	</background>
 	<title>
 		<band height="134" splitType="Stretch">
-			<image>
-				<reportElement x="0" y="0" width="85" height="71" uuid="f4d5b07e-1941-43ac-aadb-687ef33a8243"/>
-				<imageExpression><![CDATA["C:\\Users\\hp\\Documents\\Proyectos\\Proyectos Escolares\\Expo 2022\\BG-System\\src\\Recursos_Proyecto\\LogoB&GLogin.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="85" y="71" width="382" height="63" uuid="7a527042-5137-4c8a-b8c2-66e0f2805d59"/>
 				<textElement>
@@ -29,6 +31,10 @@
 				</textElement>
 				<text><![CDATA[Personal General]]></text>
 			</staticText>
+			<image>
+				<reportElement x="-1" y="0" width="85" height="71" uuid="f0ae15f2-70c1-499d-aae7-d021d64c26e8"/>
+				<imageExpression><![CDATA[$P{Logo1}.toString()]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -123,7 +129,7 @@
 		<band height="54" splitType="Stretch">
 			<image>
 				<reportElement x="492" y="24" width="80" height="30" uuid="0a08e053-f2ab-4c5a-aad4-3c477be9bebd"/>
-				<imageExpression><![CDATA["C:\\Users\\hp\\Documents\\Proyectos\\Proyectos Escolares\\Expo 2022\\BG-System\\src\\Recursos_Proyecto\\TextoLogin.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{Foot}.toString()]]></imageExpression>
 			</image>
 		</band>
 	</pageFooter>

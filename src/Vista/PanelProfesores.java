@@ -117,6 +117,8 @@ public class PanelProfesores extends javax.swing.JPanel {
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(dir);
             Map param = new HashMap<>();
             param.put("idP", ID);
+            param.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
+            param.put("Foot", "src\\Recursos_Proyecto\\TextoLogin.png");
             System.out.println(ID);
             JasperPrint jp = JasperFillManager.fillReport(jr, param, con);
             JasperViewer jv = new JasperViewer(jp, false);
@@ -132,10 +134,13 @@ public class PanelProfesores extends javax.swing.JPanel {
         try {
             String dir = "src/DocsReport/InformePersonal.jasper";
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(dir);
-            JasperPrint jp = JasperFillManager.fillReport(jr, null, con);
+            Map param = new HashMap<>();
+            param.put("Logo1", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
+            param.put("Foot", "src\\Recursos_Proyecto\\TextoLogin.png");
+            System.out.println(param);
+            JasperPrint jp = JasperFillManager.fillReport(jr, param, con);
             JasperViewer jv = new JasperViewer(jp, false);
             jv.setVisible(true);
-            System.out.println("si, se imprime");
         } catch (JRException e) {
             System.out.println("Error" + e.toString());
         }

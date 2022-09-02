@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="InformeEstudiantes" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="77e7d2c9-80ce-4a3c-9ab8-674aec6440e3">
-	<property name="ireport.zoom" value="2.5937424601000023"/>
-	<property name="ireport.x" value="164"/>
-	<property name="ireport.y" value="55"/>
+	<property name="ireport.zoom" value="1.610510000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="130"/>
+	<parameter name="Logo1" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Texto" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT a.idPersonal,a.nombre_p,a.apellido_p,b.genero,a.documento,a.Carnet,a.correo FROM tbPersonal a,tbGeneros b WHere idTipoPersonal=4 AND b.idGenero=a.idGenero]]>
 	</queryString>
@@ -27,7 +33,7 @@
 			</staticText>
 			<image>
 				<reportElement x="0" y="0" width="85" height="71" uuid="f8b5239b-4171-4515-9a4d-25502dae9a81"/>
-				<imageExpression><![CDATA["C:\\Users\\hp\\Documents\\Proyectos\\Proyectos Escolares\\Expo 2022\\BG-System\\src\\Recursos_Proyecto\\LogoB&GLogin.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{Logo1}]]></imageExpression>
 			</image>
 		</band>
 	</title>
@@ -120,7 +126,12 @@
 		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="54" splitType="Stretch">
+			<image>
+				<reportElement x="492" y="24" width="80" height="30" uuid="4615f513-f378-4a94-b8ff-6d84551e10d8"/>
+				<imageExpression><![CDATA[$P{Texto}]]></imageExpression>
+			</image>
+		</band>
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>
