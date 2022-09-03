@@ -6,6 +6,12 @@
 	<parameter name="idP" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="Logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Foot" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT a.idPersonal,a.nombre_p,a.apellido_p,b.genero,a.documento,a.Carnet,c.tipo_personal,a.correo FROM tbPersonal a,tbGeneros b,tbTipoPersonal c WHere b.idGenero=a.idGenero And a.idTipoPersonal=c.idTipoPersonal AND c.tipo_personal!='Alumnos' And idPersonal=$P{idP}]]>
 	</queryString>
@@ -24,7 +30,7 @@
 		<band height="143" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="85" height="71" uuid="bce5822b-d685-424b-b3f0-6baf8eecb0e9"/>
-				<imageExpression><![CDATA["C:\\Users\\hp\\Documents\\Proyectos\\Proyectos Escolares\\Expo 2022\\BG-System\\src\\Recursos_Proyecto\\LogoB&GLogin.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{Logo}.toString()]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="184" y="71" width="206" height="69" uuid="8dc2059e-4324-4865-aca8-b80e1cef4803"/>
@@ -100,7 +106,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="29" splitType="Stretch">
 			<textField>
 				<reportElement x="1" y="0" width="84" height="20" uuid="70d9d7a2-b806-4056-9095-fb72aa648d0e"/>
 				<textFieldExpression><![CDATA[$F{idPersonal}]]></textFieldExpression>
@@ -133,8 +139,8 @@
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<image>
-				<reportElement x="492" y="24" width="80" height="30" uuid="aa0feb02-b6f8-4126-97fc-ffede388fd9d"/>
-				<imageExpression><![CDATA["C:\\Users\\hp\\Documents\\Proyectos\\Proyectos Escolares\\Expo 2022\\BG-System\\src\\Recursos_Proyecto\\TextoLogin.png"]]></imageExpression>
+				<reportElement x="492" y="24" width="80" height="30" uuid="62a314ac-2506-49dc-81cf-2029fe6ed951"/>
+				<imageExpression><![CDATA[$P{Foot}.toString()]]></imageExpression>
 			</image>
 		</band>
 	</pageFooter>
