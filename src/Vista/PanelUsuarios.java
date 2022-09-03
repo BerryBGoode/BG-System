@@ -5,20 +5,29 @@
  */
 package Vista;
 
+import Controlador.ControllerConexion;
 import Controlador.ControllerUsuarios;
 import Controles_Personalizados.Botones.UWPButton;
 import Controles_Personalizados.RenderTable;
 import Controles_Personalizados.Tables.Renderer;
 import java.awt.Color;
 import java.awt.Font;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
-import sun.reflect.generics.tree.CharSignature;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -32,16 +41,18 @@ public class PanelUsuarios extends javax.swing.JPanel {
     DefaultTableModel modelo;
     private final UWPButton btnActualizar = new UWPButton();
     private final UWPButton btnEliminar = new UWPButton();
+    private final UWPButton btnReporte = new UWPButton();
     private Font font = new Font("Roboto Black", Font.PLAIN, 18);
     ImageIcon Modificar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar.png"));
     ImageIcon Eliminar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/eliminar.png"));
+    ImageIcon reporte = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report 1.png"));
     FrmAgg_Usuarios agg = new FrmAgg_Usuarios();
     private int frmstate = 1;
     byte[] imagen;
 
     public PanelUsuarios() {
         initComponents();
-        String[] TitulosTabla = {"ID", "idPersonal", "Nombres", "Apellidos", "Usuario", "idTipoUsuario", "Tipo de usuario", "idEstadoUsuario", "Estado del usuario", "Imagen", "Modificar", "Eliminar"};
+        String[] TitulosTabla = {"ID", "idPersonal", "Nombres", "Apellidos", "Usuario", "idTipoUsuario", "Tipo de usuario", "idEstadoUsuario", "Estado del usuario", "Imagen", "Modificar", "Eliminar", "Registro"};
         modelo = new DefaultTableModel(null, TitulosTabla) {
             @Override
             public boolean isCellEditable(int row, int column) { // aqui esta
@@ -76,9 +87,11 @@ public class PanelUsuarios extends javax.swing.JPanel {
             while (rs.next()) {
                 btnActualizar.setIcon(Modificar);
                 btnEliminar.setIcon(Eliminar);
+                btnReporte.setIcon(reporte);
                 btnActualizar.setBackground(new Color(231, 234, 239));
+                btnReporte.setBackground(new Color(231, 234, 239));
                 btnEliminar.setBackground(new Color(231, 234, 239));
-                Object[] oValores = {rs.getInt("idUsuario"), rs.getInt("idPersonal"), rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("nombre_usuario"), rs.getInt("idTipoUsuario"), rs.getString("tipo_usuario"), rs.getInt("idEstadoUsuario"), rs.getString("estado_usuario"), rs.getBytes("imagen"), btnActualizar, btnEliminar};
+                Object[] oValores = {rs.getInt("idUsuario"), rs.getInt("idPersonal"), rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("nombre_usuario"), rs.getInt("idTipoUsuario"), rs.getString("tipo_usuario"), rs.getInt("idEstadoUsuario"), rs.getString("estado_usuario"), rs.getBytes("imagen"), btnActualizar, btnEliminar, btnReporte};
 
                 modelo.addRow(oValores);
             }
@@ -99,6 +112,7 @@ public class PanelUsuarios extends javax.swing.JPanel {
         PanelFondo = new Controles_Personalizados.Paneles.PanelRound();
         lblUsuarios = new javax.swing.JLabel();
         btnFiltrar = new Controles_Personalizados.Botones.UWPButton();
+        BtnInforme = new Controles_Personalizados.Botones.UWPButton();
         btnAgregar = new Controles_Personalizados.Botones.UWPButton();
         PanelTabla = new javax.swing.JScrollPane();
         tbUsuarios = new Controles_Personalizados.Tables.Table();
@@ -128,6 +142,17 @@ public class PanelUsuarios extends javax.swing.JPanel {
         btnFiltrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         PanelFondo.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 150, 40));
+
+        BtnInforme.setBackground(new java.awt.Color(58, 50, 75));
+        BtnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
+        BtnInforme.setText("Informe");
+        BtnInforme.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        BtnInforme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnInformeActionPerformed(evt);
+            }
+        });
+        PanelFondo.add(BtnInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 150, 40));
 
         btnAgregar.setBackground(new java.awt.Color(58, 50, 75));
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Agregar Blanco.png"))); // NOI18N
@@ -226,6 +251,27 @@ public class PanelUsuarios extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, e.toString());
         }
     }
+
+    void ReportePar() {
+        try {
+            Connection con = ControllerConexion.getConnectionModel();
+            JasperReport reporte = null;
+
+            String dir = "src\\DocsReport\\UsuarioPReport.jasper";
+            Map parametros = new HashMap();
+            parametros.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
+            parametros.put("idUsuario", ValidacionesSistema.Parametros_Usuario.getID());
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(dir);
+
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, parametros, con);
+
+            JasperViewer view = new JasperViewer(jprint, false);
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            view.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
+    }
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
         ValidacionesSistema.Parametros_Usuario.setTitulo("Agregar usuario");
@@ -247,6 +293,7 @@ public class PanelUsuarios extends javax.swing.JPanel {
         int row = evt.getY() / tbUsuarios.getRowHeight();
         btnActualizar.setName("btnActualizar");
         btnEliminar.setName("btnEliminar");
+        btnReporte.setName("btnReporte");
         if (evt.getClickCount() == 1) {
             JTable rcp = (JTable) evt.getSource();
             ValidacionesSistema.Parametros_Usuario.setID((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0));
@@ -274,7 +321,7 @@ public class PanelUsuarios extends javax.swing.JPanel {
                         ac.setVisible(true);
                         frmstate = 1;
                     }
-                   
+
                 }
                 if (btns.getName().equals("btnEliminar")) {
                     int confirmar = 0;
@@ -291,6 +338,9 @@ public class PanelUsuarios extends javax.swing.JPanel {
                         }
                     }
                 }
+                if (btns.getName().equals("btnReporte")) {
+                    ReportePar();
+                }
             }
         }
     }//GEN-LAST:event_tbUsuariosMouseClicked
@@ -305,8 +355,31 @@ public class PanelUsuarios extends javax.swing.JPanel {
         refresh();
     }//GEN-LAST:event_tbUsuariosMouseMoved
 
+    private void BtnInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInformeActionPerformed
+        // TODO add your handling code here:
+        try {
+            Connection con = ControllerConexion.getConnectionModel();
+            JasperReport reporte = null;
+            String dir = "src\\DocsReport\\UsuariosReport.jasper";
+            Map param = new HashMap<>();
+            param.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
+            param.put("TextoFooter", "src\\Recursos_Proyecto\\TextoLogin.png");
+
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(dir);
+
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, param, con);
+
+            JasperViewer view = new JasperViewer(jprint, false);
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            view.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
+    }//GEN-LAST:event_BtnInformeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private Controles_Personalizados.Botones.UWPButton BtnInforme;
     private Controles_Personalizados.Paneles.PanelRound PanelFondo;
     private javax.swing.JScrollPane PanelTabla;
     private Controles_Personalizados.ScrollBar.ScrollBarCustom ScrollTabla;

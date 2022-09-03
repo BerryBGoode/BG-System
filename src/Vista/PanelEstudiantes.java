@@ -347,7 +347,7 @@ public class PanelEstudiantes extends javax.swing.JPanel {
             param.put("idPersonal", ID);
             param.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
             param.put("Nombre", "src\\Recursos_Proyecto\\TextoLogin.png");
-            System.out.println(ID);
+            System.out.println(param);
             JasperPrint jp = JasperFillManager.fillReport(jr, param, con);
             JasperViewer jv = new JasperViewer(jp, false);
             jv.setVisible(true);

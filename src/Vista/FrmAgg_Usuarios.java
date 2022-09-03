@@ -59,7 +59,7 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         btnContinuar.setText(ValidacionesSistema.Parametros_Usuario.getBoton());
         txtID.setVisible(false);
 
-        if (this.getTitle() == "Actualizar usuario") {
+        if ("Actualizar usuario".equals(this.getTitle())) {
             txtID.setText(String.valueOf(ValidacionesSistema.Parametros_Usuario.getID()));
             txtUsuario.setText(ValidacionesSistema.Parametros_Usuario.getNombre_usuario());
 
@@ -373,6 +373,7 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
 
     private void uWPButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton1ActionPerformed
         // TODO add your handling code here:
+        MostrarImagen();
     }//GEN-LAST:event_uWPButton1ActionPerformed
 
     /**
@@ -473,7 +474,7 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         }
     }
 
-    void CargarCmbs() {
+    final void CargarCmbs() {
         CargarTipoUsuarios();
         CargarEstadoUsuarios();
         CargarPersonal();
