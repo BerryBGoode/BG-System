@@ -18,16 +18,45 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FrmAgg_Vehiculos extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmAgg_Vehiculos
-     */
-    public FrmAgg_Vehiculos() {
+    int idvehiculo;
+    int idpersonal;
+    
+    public FrmAgg_Vehiculos(int pidvehiculo) {
         initComponents();
+        idvehiculo = pidvehiculo;
         this.setLocationRelativeTo(null);
         Shape forma= new RoundRectangle2D.Double(0,0, this.getBounds() .width, this.getBounds() .height,40,40);
         AWTUtilities. setWindowShape(this, forma);
         setIconImage(Logo());
+        
+        txtIDPersonal.setText(String.valueOf(ValidacionesSistema.Parametros_Vehiculos.getIdPersonal()));
+        txtID.setVisible(false);
+        txtIDPersonal.setVisible(false);
+        
+        txtID.setText(String.valueOf(ValidacionesSistema.Parametros_Vehiculos.getIdvehiculo()));
+        txtIDPersonal.setText(String.valueOf(ValidacionesSistema.Parametros_Vehiculos.getIdPersonal()));
+        idpersonal = ValidacionesSistema.Parametros_Vehiculos.getIdPersonal();
+        System.out.println(idpersonal);
+        System.out.println(ValidacionesSistema.Parametros_Vehiculos.getIdPersonal());
+        txtPlaca.setText(ValidacionesSistema.Parametros_Vehiculos.getPlaca());
+        txtColor.setText(ValidacionesSistema.Parametros_Vehiculos.getColor());
+        
+        btnConfirmar.setVisible(false);
+        btnConfirmar_C.setVisible(true);
     }
+
+    FrmAgg_Vehiculos() {
+        initComponents();
+        
+        btnConfirmar.setVisible(true);
+        btnConfirmar_C.setVisible(false);
+        
+        txtIDPersonal.setText(String.valueOf(ValidacionesSistema.Parametros_Vehiculos.getIdPersonal()));
+        
+        txtID.setVisible(false);
+        txtIDPersonal.setVisible(false);
+    }
+    
 public Image Logo(){
     Image retvalue=Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
     return retvalue;
@@ -45,10 +74,12 @@ public Image Logo(){
         txtPlaca = new Controles_Personalizados.textfields.TextField();
         txtColor = new Controles_Personalizados.textfields.TextField();
         jLabel1 = new javax.swing.JLabel();
-        btnContinuar = new Controles_Personalizados.Botones.ButtonGradient();
+        btnConfirmar = new Controles_Personalizados.Botones.ButtonGradient();
         btnCerrar = new javax.swing.JLabel();
         btnMinimizar = new javax.swing.JLabel();
-        cmbPersonal = new Controles_Personalizados.ComboBox.combobox();
+        btnConfirmar_C = new Controles_Personalizados.Botones.ButtonGradient();
+        txtID = new javax.swing.JTextField();
+        txtIDPersonal = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFocusable(false);
@@ -84,18 +115,23 @@ public Image Logo(){
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Car.png"))); // NOI18N
         panelRound1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, -1, 390));
 
-        btnContinuar.setBackground(new java.awt.Color(42, 36, 56));
-        btnContinuar.setForeground(new java.awt.Color(58, 50, 75));
-        btnContinuar.setText("Continuar");
-        btnContinuar.setColor1(new java.awt.Color(253, 255, 254));
-        btnContinuar.setColor2(new java.awt.Color(253, 255, 254));
-        btnContinuar.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
-        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContinuarActionPerformed(evt);
+        btnConfirmar.setBackground(new java.awt.Color(42, 36, 56));
+        btnConfirmar.setForeground(new java.awt.Color(58, 50, 75));
+        btnConfirmar.setText("Continuar");
+        btnConfirmar.setColor1(new java.awt.Color(253, 255, 254));
+        btnConfirmar.setColor2(new java.awt.Color(253, 255, 254));
+        btnConfirmar.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        btnConfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnConfirmarMouseClicked(evt);
             }
         });
-        panelRound1.add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 480, 150, -1));
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
+        panelRound1.add(btnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 480, 150, -1));
 
         btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/CerrarLogin.png"))); // NOI18N
         btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -115,12 +151,29 @@ public Image Logo(){
         });
         panelRound1.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 10, -1, -1));
 
-        cmbPersonal.setBackground(new java.awt.Color(58, 50, 75));
-        cmbPersonal.setForeground(new java.awt.Color(42, 36, 56));
-        cmbPersonal.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        cmbPersonal.setLabeText("ID - Personal");
-        cmbPersonal.setLineColor(new java.awt.Color(253, 255, 254));
-        panelRound1.add(cmbPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 310, 80));
+        btnConfirmar_C.setBackground(new java.awt.Color(42, 36, 56));
+        btnConfirmar_C.setForeground(new java.awt.Color(58, 50, 75));
+        btnConfirmar_C.setText("Continuar");
+        btnConfirmar_C.setColor1(new java.awt.Color(253, 255, 254));
+        btnConfirmar_C.setColor2(new java.awt.Color(253, 255, 254));
+        btnConfirmar_C.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        btnConfirmar_C.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnConfirmar_CMouseClicked(evt);
+            }
+        });
+        btnConfirmar_C.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmar_CActionPerformed(evt);
+            }
+        });
+        panelRound1.add(btnConfirmar_C, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 480, 150, -1));
+
+        txtID.setText("id");
+        panelRound1.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 30, -1, -1));
+
+        txtIDPersonal.setText("idp");
+        panelRound1.add(txtIDPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, -1, -1));
 
         getContentPane().add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 580));
 
@@ -129,11 +182,10 @@ public Image Logo(){
 
     ControllerVehiculos objVehiculos = new ControllerVehiculos();
     
-    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        // TODO add your handling code here:
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        GuardarVehiculo();
         this.dispose();
-        PanelOpcionesPersonal.showinter =0;
-    }//GEN-LAST:event_btnContinuarActionPerformed
+    }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMousePressed
         this.dispose();
@@ -145,45 +197,45 @@ public Image Logo(){
         this.setExtendedState(JFrame.ICONIFIED);
     }//GEN-LAST:event_btnMinimizarMouseClicked
 
+    private void btnConfirmar_CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmar_CActionPerformed
+        ActualizarVehiculo();
+        this.dispose();
+    }//GEN-LAST:event_btnConfirmar_CActionPerformed
+
+    private void btnConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarMouseClicked
+        GuardarVehiculo();
+    }//GEN-LAST:event_btnConfirmarMouseClicked
+
+    private void btnConfirmar_CMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmar_CMouseClicked
+        ActualizarVehiculo();
+    }//GEN-LAST:event_btnConfirmar_CMouseClicked
+
     void GuardarVehiculo() {
         if (txtPlaca.getText().trim().isEmpty() || txtColor.getText().trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Existen campos vacíos, favor llenar todos los campos", "Campos vacíos", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Existen campos vacios, favor llenarlos todos", "Campos vacios", JOptionPane.WARNING_MESSAGE);
         } else {
-            objVehiculos = new ControllerVehiculos(cmbPersonal.getSelectedIndex(), txtPlaca.getText(), txtColor.getText());
-            //ControllerVehiculos.idpersonal = cmbPersonal.getSelectedItem();
-            int respuesta = objVehiculos.RegistrarVehiculo_Controller();
-            if (respuesta == 1) {
-                JOptionPane.showMessageDialog(null, "Vehiculo registrado con exito", "Proceso de insersion", JOptionPane.INFORMATION_MESSAGE);
+            ControllerVehiculos.idPersonal = Integer.parseInt(txtIDPersonal.getText());
+            ControllerVehiculos.placa = txtPlaca.getText();
+            ControllerVehiculos.color = txtColor.getText();
+            if(ControllerVehiculos.RegistrarVehiculo_Controller() == true){
+                JOptionPane.showMessageDialog(this, "Vehiculo registrado con exito", "Proceso de registro", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JOptionPane.showMessageDialog(null, "No fue registrado el vehiculo", "Proceso de insersion", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Vehiculo no fue registrado", "Proceso de registro", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
     
     void ActualizarVehiculo() {
-        //ControllerVehiculos.idvehiculo = Integer.parseInt(lblIDvehiculo.getText());
-        //objVehiculos = new ControllerVehiculos(lblID.getText(), cmbPersonal.getSelectedIndex(), txtPlaca.getText(), txtColor.getText());
-        boolean respuesta = objVehiculos.ActualizarVehiculo_Controller();
-        if (respuesta == true) {
-            JOptionPane.showMessageDialog(null, "Se ha actualizado el registro", "Proceso de actualizacion", JOptionPane.INFORMATION_MESSAGE);
+        ControllerVehiculos.idvehiculo = idvehiculo;
+        ControllerVehiculos.placa = txtPlaca.getText();
+        ControllerVehiculos.color = txtColor.getText();
+        ControllerVehiculos.idPersonal = idpersonal;
+        System.out.println(idpersonal);
+        if (ControllerVehiculos.ActualizarVehiculo_Controller() == true) {
+            JOptionPane.showMessageDialog(this, "Vehiculo actualizado con exito", "Proceso de actualizacion", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "No se actualizo el registro", "Proceso de actualizacion", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Vehiculo no fue actualizado", "Proceso de actualizacion", JOptionPane.ERROR_MESSAGE);
         }
-    }
-    
-    void EliminarVehiculo() {
-        int confirmacion = JOptionPane.YES_NO_OPTION;
-        JOptionPane.showConfirmDialog(this, "¿Estas seguro que quieres eliminar el registro?", "Confirmacion de eliminacion", confirmacion);
-        if(confirmacion == JOptionPane.YES_OPTION) {
-            //ControllerVehiculos.idvehiculo = Integer.parseInt(lblIDvehiculo.getText());
-            boolean respuesta = objVehiculos.EliminarVehiculo_Controller();
-            if(respuesta == true) {
-                JOptionPane.showMessageDialog(null, "Registro eliminado con exito", "Proceso de eliminacion", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(null, "Registro no fue eliminado", "Proceso de eliminacion", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        
     }
     
     /**
@@ -223,12 +275,14 @@ public Image Logo(){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnCerrar;
-    private Controles_Personalizados.Botones.ButtonGradient btnContinuar;
+    private Controles_Personalizados.Botones.ButtonGradient btnConfirmar;
+    private Controles_Personalizados.Botones.ButtonGradient btnConfirmar_C;
     private javax.swing.JLabel btnMinimizar;
-    private Controles_Personalizados.ComboBox.combobox cmbPersonal;
     private javax.swing.JLabel jLabel1;
     private Controles_Personalizados.Paneles.PanelRound panelRound1;
     private Controles_Personalizados.textfields.TextField txtColor;
+    private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtIDPersonal;
     private Controles_Personalizados.textfields.TextField txtPlaca;
     // End of variables declaration//GEN-END:variables
 }
