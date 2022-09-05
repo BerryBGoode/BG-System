@@ -15,6 +15,7 @@ import java.awt.Font;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ImageIcon;
@@ -158,6 +159,7 @@ public class PanelProfesores extends javax.swing.JPanel {
         PanelFondo = new Controles_Personalizados.Paneles.PanelRound();
         lblPersonal = new javax.swing.JLabel();
         btnAgregar = new Controles_Personalizados.Botones.UWPButton();
+        DtPrueba = new com.toedter.calendar.JDateChooser();
         btnFiltrar = new Controles_Personalizados.Botones.UWPButton();
         txtBuscar = new Controles_Personalizados.textfields.TextField();
         BtnInforme = new Controles_Personalizados.Botones.UWPButton();
@@ -192,6 +194,7 @@ public class PanelProfesores extends javax.swing.JPanel {
             }
         });
         PanelFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 150, 40));
+        PanelFondo.add(DtPrueba, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 50, -1, -1));
 
         btnFiltrar.setBackground(new java.awt.Color(58, 50, 75));
         btnFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Filtrar Blanco.png"))); // NOI18N
@@ -408,6 +411,7 @@ public class PanelProfesores extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Controles_Personalizados.Botones.UWPButton BtnInforme;
+    private com.toedter.calendar.JDateChooser DtPrueba;
     private Controles_Personalizados.Paneles.PanelRound PanelFondo;
     private javax.swing.JScrollPane PanelTabla;
     private Controles_Personalizados.ScrollBar.ScrollBarCustom ScrollTabla;
