@@ -45,36 +45,39 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
     private int personal;
     byte[] imagen;
     ImageIcon fotoicon;
-
+    FrmRecuAdmin ra = new FrmRecuAdmin();
+    
     /**
      * Creates new form FrmAgg_Usuarios
      */
     public FrmAgg_Usuarios(String titulo) {
         initComponents();
         CargarCmbs();
-        btnContinuar.setVisible(false);
+        
+        this.setTitle(titulo);
+        cbRecu.setVisible(false);
         txtID.setVisible(false);
         BtnConfirmar.setVisible(true);
-        this.setTitle(ValidacionesSistema.Parametros_Usuario.getTitulo());
-        btnContinuar.setText(ValidacionesSistema.Parametros_Usuario.getBoton());
         txtID.setVisible(false);
 
         if ("Actualizar usuario".equals(this.getTitle())) {
+            cbRecu.setVisible(true);
             txtID.setText(String.valueOf(ValidacionesSistema.Parametros_Usuario.getID()));
             txtUsuario.setText(ValidacionesSistema.Parametros_Usuario.getNombre_usuario());
 
             int respuestaTU = BuscarTipoUsuarioSeleccionado(ValidacionesSistema.Parametros_Usuario.getIdTipoUsuario());
             cmbTipo.setSelectedIndex(respuestaTU + 1);
 
-            int respuestaEU = BuscarTipoUsuarioSeleccionado(ValidacionesSistema.Parametros_Usuario.getIdEstadoUsuario());
+            int respuestaEU = BuscarEstadoUsuarioSeleccionado(ValidacionesSistema.Parametros_Usuario.getIdEstadoUsuario());
             cmbEstado.setSelectedIndex(respuestaEU + 1);
 
-            int respuestaPE = BuscarTipoUsuarioSeleccionado(ValidacionesSistema.Parametros_Usuario.getIdPersonal());
+            int respuestaPE = BuscarPersonalSeleccionado(ValidacionesSistema.Parametros_Usuario.getIdPersonal());
             cmbPersonal.setSelectedIndex(respuestaPE + 1);
             
 
             if (ValidacionesSistema.Parametros_Usuario.getImagen() != null) {
                 try {
+                    imagen = ValidacionesSistema.Parametros_Usuario.getImagen();
                     BufferedImage image = null;
                     InputStream input = new ByteArrayInputStream(ValidacionesSistema.Parametros_Usuario.getImagen());
                     image = ImageIO.read(input);
@@ -94,16 +97,20 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
 
     public FrmAgg_Usuarios() {
         initComponents();
+        CargarCmbs();
+        
+        cbRecu.setVisible(false);
         txtID.setVisible(false);
+        BtnConfirmar.setVisible(true);
+        txtID.setVisible(false);
+        
         this.setLocationRelativeTo(null);
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
         AWTUtilities.setWindowShape(this, forma);
         setIconImage(Logo());
-        BtnConfirmar.setVisible(false);
-        btnContinuar.setVisible(true);
-        CargarCmbs();
     }
-
+    
+    
     public Image Logo() {
         Image retvalue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
         return retvalue;
@@ -131,7 +138,6 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
             ControllerUsuarios obja = new ControllerUsuarios(Integer.parseInt(txtID.getText()), personal, txtUsuario.getText(), tipoUsu, estadoUsu, imagen);
             boolean respuesta = obja.ActualizarUsuario_C();
             if (respuesta == true) {
-                JOptionPane.showMessageDialog(null, "El registor de " + txtUsuario.getText() + "Ha sido actualizado", "Usuario Actualizado", JOptionPane.INFORMATION_MESSAGE);
                 ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "Usuario actualizado", 1);
             } else {
                 ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso fallido", "Usuario no pudo ser actualizado", 2);
@@ -153,15 +159,15 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         btnCerrar = new javax.swing.JLabel();
         txtUsuario = new Controles_Personalizados.textfields.TextField();
         cmbPersonal = new Controles_Personalizados.ComboBox.combobox();
-        btnContinuar = new Controles_Personalizados.Botones.ButtonGradient();
         lblFoto = new javax.swing.JLabel();
         cmbEstado = new Controles_Personalizados.ComboBox.combobox();
         jLabel3 = new javax.swing.JLabel();
-        uWPButton1 = new Controles_Personalizados.Botones.UWPButton();
+        btnExaminar = new Controles_Personalizados.Botones.UWPButton();
         jLabel1 = new javax.swing.JLabel();
         cmbTipo = new Controles_Personalizados.ComboBox.combobox();
         txtID = new javax.swing.JTextField();
         BtnConfirmar = new Controles_Personalizados.Botones.ButtonGradient();
+        cbRecu = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -203,7 +209,7 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         txtUsuario.setLineColor(new java.awt.Color(253, 255, 254));
         txtUsuario.setSelectedTextColor(new java.awt.Color(58, 50, 75));
         txtUsuario.setSelectionColor(new java.awt.Color(253, 255, 254));
-        panelRound1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 340, 70));
+        panelRound1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 340, 70));
 
         cmbPersonal.setBackground(new java.awt.Color(58, 50, 75));
         cmbPersonal.setForeground(new java.awt.Color(255, 255, 255));
@@ -215,23 +221,10 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
                 cmbPersonalItemStateChanged(evt);
             }
         });
-        panelRound1.add(cmbPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 340, 80));
-
-        btnContinuar.setBackground(new java.awt.Color(253, 255, 254));
-        btnContinuar.setForeground(new java.awt.Color(58, 50, 75));
-        btnContinuar.setText("Continuar");
-        btnContinuar.setColor1(new java.awt.Color(253, 255, 254));
-        btnContinuar.setColor2(new java.awt.Color(253, 255, 254));
-        btnContinuar.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
-        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContinuarActionPerformed(evt);
-            }
-        });
-        panelRound1.add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 500, 150, -1));
+        panelRound1.add(cmbPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 340, 80));
 
         lblFoto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 254, 254), 3));
-        panelRound1.add(lblFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, 220, 235));
+        panelRound1.add(lblFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 220, 235));
 
         cmbEstado.setBackground(new java.awt.Color(58, 50, 75));
         cmbEstado.setForeground(new java.awt.Color(253, 255, 254));
@@ -243,27 +236,27 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
                 cmbEstadoItemStateChanged(evt);
             }
         });
-        panelRound1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 340, 80));
+        panelRound1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 340, 80));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/imagenlogin2.png"))); // NOI18N
         panelRound1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 90, 330, 350));
 
-        uWPButton1.setBackground(new java.awt.Color(254, 254, 254));
-        uWPButton1.setForeground(new java.awt.Color(58, 50, 75));
-        uWPButton1.setText("Examinar");
-        uWPButton1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        uWPButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnExaminar.setBackground(new java.awt.Color(254, 254, 254));
+        btnExaminar.setForeground(new java.awt.Color(58, 50, 75));
+        btnExaminar.setText("Examinar");
+        btnExaminar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnExaminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                uWPButton1ActionPerformed(evt);
+                btnExaminarActionPerformed(evt);
             }
         });
-        panelRound1.add(uWPButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 350, 220, 50));
+        panelRound1.add(btnExaminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 410, 220, 50));
 
         jLabel1.setBackground(new java.awt.Color(51, 255, 51));
         jLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
         jLabel1.setText("Foto (Opcional)");
-        panelRound1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, -1, -1));
+        panelRound1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, -1, -1));
 
         cmbTipo.setBackground(new java.awt.Color(58, 50, 75));
         cmbTipo.setForeground(new java.awt.Color(255, 255, 255));
@@ -275,12 +268,17 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
                 cmbTipoItemStateChanged(evt);
             }
         });
-        panelRound1.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 340, 80));
-        panelRound1.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 480, -1, -1));
+        cmbTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTipoActionPerformed(evt);
+            }
+        });
+        panelRound1.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 340, 80));
+        panelRound1.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 520, -1, -1));
 
         BtnConfirmar.setBackground(new java.awt.Color(253, 255, 254));
         BtnConfirmar.setForeground(new java.awt.Color(58, 50, 75));
-        BtnConfirmar.setText("Confirmar");
+        BtnConfirmar.setText("Continuar");
         BtnConfirmar.setColor1(new java.awt.Color(253, 255, 254));
         BtnConfirmar.setColor2(new java.awt.Color(253, 255, 254));
         BtnConfirmar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -291,17 +289,16 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         });
         panelRound1.add(BtnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 500, 150, 44));
 
-        getContentPane().add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 570));
+        cbRecu.setBackground(new java.awt.Color(58, 50, 75));
+        cbRecu.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        cbRecu.setForeground(new java.awt.Color(253, 255, 255));
+        cbRecu.setText("Recuperar contraseña");
+        panelRound1.add(cbRecu, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 510, -1, -1));
+
+        getContentPane().add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 580));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        // TODO add your handling code here:
-        Ingresar();
-        this.dispose();
-        PanelOpcionesPersonal.showinter = 0;
-    }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMousePressed
         this.dispose();
@@ -368,13 +365,24 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
         // TODO add your handling code here:
         Actualizar();
+        if(cbRecu.isSelected()){
+            if(ra.isVisible()){
+                ra.toFront();
+            }else{
+                ra.setVisible(true);
+            }
+        }
         this.dispose();
     }//GEN-LAST:event_BtnConfirmarActionPerformed
 
-    private void uWPButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uWPButton1ActionPerformed
+    private void btnExaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExaminarActionPerformed
         // TODO add your handling code here:
         MostrarImagen();
-    }//GEN-LAST:event_uWPButton1ActionPerformed
+    }//GEN-LAST:event_btnExaminarActionPerformed
+
+    private void cmbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbTipoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -518,7 +526,7 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         return retorno;
     }
 
-    final int BuscarEstadpUsuarioSeleccionado(int id) {
+    final int BuscarEstadoUsuarioSeleccionado(int id) {
         int size = myArrayListEU.size();
         int retorno = -1;
         for (int i = 0; i < size; i++) {
@@ -544,9 +552,12 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Controles_Personalizados.Botones.ButtonGradient BtnConfirmar;
+    private javax.swing.JCheckBox CbGenerarCarnet;
+    private javax.swing.JCheckBox CbGenerarCarnet1;
     private javax.swing.JLabel btnCerrar;
-    private Controles_Personalizados.Botones.ButtonGradient btnContinuar;
+    private Controles_Personalizados.Botones.UWPButton btnExaminar;
     private javax.swing.JLabel btnMinimizar;
+    private javax.swing.JCheckBox cbRecu;
     private Controles_Personalizados.ComboBox.combobox cmbEstado;
     private Controles_Personalizados.ComboBox.combobox cmbPersonal;
     private Controles_Personalizados.ComboBox.combobox cmbTipo;
@@ -556,6 +567,5 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
     private Controles_Personalizados.Paneles.PanelRound panelRound1;
     private javax.swing.JTextField txtID;
     private Controles_Personalizados.textfields.TextField txtUsuario;
-    private Controles_Personalizados.Botones.UWPButton uWPButton1;
     // End of variables declaration//GEN-END:variables
 }

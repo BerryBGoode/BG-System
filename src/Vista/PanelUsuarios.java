@@ -71,10 +71,10 @@ public class PanelUsuarios extends javax.swing.JPanel {
     }
 
     final void refresh() {
-        if (frmstate == 1 && !(agg.isActive())) {
+        /*if (frmstate == 1 && !(agg.isActive())) {
             CargarTabla();
             frmstate = 0;
-        }
+        }*/
     }
 
     public void CargarTabla() {
@@ -274,17 +274,16 @@ public class PanelUsuarios extends javax.swing.JPanel {
     }
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        ValidacionesSistema.Parametros_Usuario.setTitulo("Agregar usuario");
-        ValidacionesSistema.Parametros_Usuario.setBoton("Agregar");
         if (agg.isVisible()) {
             agg.toFront();
 
         } else {
+            agg.setTitle("Agregar usuario");
             agg.setVisible(true);
         }
         frmstate = 1;
     }//GEN-LAST:event_btnAgregarActionPerformed
-
+    
     private void tbUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuariosMouseClicked
         // TODO add your handling code here:
         JTable tb = (JTable) evt.getSource();
@@ -311,12 +310,9 @@ public class PanelUsuarios extends javax.swing.JPanel {
                 ((UWPButton) vals).doClick(); // aqui esta
                 UWPButton btns = (UWPButton) vals;
                 if (btns.getName().equals("btnActualizar")) {
-                    ValidacionesSistema.Parametros_Usuario.setTitulo("Actualizar usuario");
-                    ValidacionesSistema.Parametros_Usuario.setBoton("Actualizar");
-                    FrmAgg_Usuarios ac = new FrmAgg_Usuarios(ValidacionesSistema.Parametros_Usuario.getTitulo());
+                    FrmAgg_Usuarios ac = new FrmAgg_Usuarios("Actualizar usuario");
                     if (ac.isVisible()) {
                         ac.toFront();
-
                     } else {
                         ac.setVisible(true);
                         frmstate = 1;
