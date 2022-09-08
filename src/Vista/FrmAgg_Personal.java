@@ -5,7 +5,6 @@
  */
 package Vista;
 
-import Controles_Personalizados.Calendario.DateChooser;
 import com.sun.awt.AWTUtilities;
 import java.awt.Image;
 import java.awt.Shape;
@@ -242,7 +241,8 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
         } else if (anios < 18) {
             JOptionPane.showMessageDialog(null, "No, se permiten registros menores a 18 años de edad", "Menor de edad", JOptionPane.WARNING_MESSAGE);
         } else {
-            String nacimiento = String.valueOf(c.get(Calendar.YEAR) + "/" + c.get(Calendar.MONTH) + "/" + c.get(Calendar.DAY_OF_MONTH));
+            int mes=c.get(Calendar.MONTH)+1;
+            String nacimiento = String.valueOf(c.get(Calendar.YEAR) + "/" + mes+ "/" + c.get(Calendar.DAY_OF_MONTH));
             objControllerP.nombre = txtNombres.getText();
             objControllerP.apellido = txtApellidos.getText();
             objControllerP.fechanac = nacimiento;
@@ -277,7 +277,7 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
         int mes = hoy.get(Calendar.MONTH) - c.get(Calendar.MONTH);
         int dia = hoy.get(Calendar.DAY_OF_MONTH) - c.get(Calendar.DAY_OF_MONTH);
         if (mes < 0 || mes == 0 && dia < 0) {
-            Anio = Anio - 1;
+            Anio = Anio -1;
         }
         return Anio;
     }
@@ -320,7 +320,8 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
         } else if (anios < 11) {
             JOptionPane.showMessageDialog(null, "La edad del estudiante, debe coincidir con las edades permitidas por el MINED", "Verficar Edad", JOptionPane.WARNING_MESSAGE);
         } else {
-            String nacimiento = String.valueOf(c.get(Calendar.YEAR) + "/" + c.get(Calendar.MONTH) + "/" + c.get(Calendar.DAY_OF_MONTH));
+            int mes=c.get(Calendar.MONTH)+1;
+            String nacimiento = String.valueOf(c.get(Calendar.YEAR) + "/" +mes + "/" + c.get(Calendar.DAY_OF_MONTH));
             objControllerP.nombre = txtNombres.getText();
             objControllerP.apellido = txtApellidos.getText();
             objControllerP.fechanac = nacimiento;
@@ -356,7 +357,6 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
             objControllerP.correo = txtCorreo.getText();
             objControllerP.documento = txtDocumento.getText();
             objControllerP.direccion = TxtDireccion.getText();
-            //objControllerP.fechanac = DtFechaPersonal.getFechaSeleccionada();
             objControllerP.idgenero = genero;
             objControllerP.idtipoDoc = tipodocu;
             setIdEmpresa();

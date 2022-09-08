@@ -317,7 +317,8 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
             } else if (anios < 18) {
                 JOptionPane.showMessageDialog(null, "La persona que se esta ingresando debe ser mayor de edad", "Menor de edad", JOptionPane.WARNING_MESSAGE);
             } else {
-                String nacimiento = String.valueOf(c.get(Calendar.YEAR) + "/" + c.get(Calendar.MONTH) + "/" + c.get(Calendar.DAY_OF_MONTH));
+                int mes=c.get(Calendar.MONTH)+1;
+                String nacimiento = String.valueOf(c.get(Calendar.YEAR) + "/" + mes + "/" + c.get(Calendar.DAY_OF_MONTH));
                 getIDEnterprise();
                 controllerp.nombre = txtNombre.getText();
                 controllerp.apellido = txtApellido.getText();
@@ -340,7 +341,7 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
                     DtFechaNac.setEnabled(false);
                     CmbTipoDocumento.setEnabled(false);
                     btnContinuar.setVisible(false);
-                    BtnGuardar.setEnabled(true);
+                    BtnGuardar.setVisible(true);
                     TxtUsuario.setEnabled(true);
                 }
             }
