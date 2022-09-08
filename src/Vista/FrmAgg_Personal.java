@@ -58,58 +58,63 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
 
     /**
      * Creates new form FrmAgg_Personal
+     * @param idpersonal
      */
-    public FrmAgg_Personal(int idpersonal) throws ParseException {
-        initComponents();
-        idpersonales = idpersonal;
-        this.setLocationRelativeTo(null);
-        Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
-        AWTUtilities.setWindowShape(this, forma);
-        btnContinuar.setVisible(false);
-        BtnConfirmar.setVisible(true);
-        CbGenerarCarnet.setVisible(false);
-        setIconImage(Logo());
-        cargarGenero();
-        CargarTipoDoc();
-        switch (identpanel) {
-            case 1:
-                CmbTipoPersonal.setVisible(false);
-                txtNombres.setEditable(false);
-                txtNombres.setText(ValidacionesSistema.Parametros_Personal.getnombre_personal());
-                txtApellidos.setText(ValidacionesSistema.Parametros_Personal.getApellido_personal());
-                txtCorreo.setText(ValidacionesSistema.Parametros_Personal.getCorreo());
-                TxtDireccion.setText(ValidacionesSistema.Parametros_Personal.getDireccion());
-                txtDocumento.setText(ValidacionesSistema.Parametros_Personal.getDocumento());
-                SimpleDateFormat formatofercha = new SimpleDateFormat("yyyy-MM-dd");
-                String getfecha = ValidacionesSistema.Parametros_Personal.getFecha_nacimiento();
-                System.out.println(getfecha);
-                ufecha = formatofercha.parse(getfecha);
-                System.out.println(ufecha);
-                DtFechaPersonal.setDate(ufecha);
-                DtFechaPersonal.setEnabled(false);
-                CmbTipoDoc.setSelectedItem(ValidacionesSistema.Parametros_Personal.getTipoDocumento());
-                CmbGenero.setSelectedItem(ValidacionesSistema.Parametros_Personal.getGenero());
-                break;
-            case 2:
-                CmbTipoPersonal.setVisible(true);
-                CargarTipoPersonal();
-                txtNombres.setEditable(false);
-                CmbGenero.setSelectedItem(ValidacionesSistema.Parametros_Personal.getGenero());
-                CmbTipoDoc.setSelectedItem(ValidacionesSistema.Parametros_Personal.getTipoDocumento());
-                CmbTipoPersonal.setSelectedItem(ValidacionesSistema.Parametros_Personal.getTipoPersonal());
-                txtNombres.setText(ValidacionesSistema.Parametros_Personal.getnombre_personal());
-                txtApellidos.setText(ValidacionesSistema.Parametros_Personal.getApellido_personal());
-                txtCorreo.setText(ValidacionesSistema.Parametros_Personal.getCorreo());
-                txtDocumento.setText(ValidacionesSistema.Parametros_Personal.getDocumento());
-                SimpleDateFormat formatofercha2 = new SimpleDateFormat("yyyy-MM-dd");
-                String getfecha2 = ValidacionesSistema.Parametros_Personal.getFecha_nacimiento();
-                System.out.println(getfecha2);
-                ufecha = formatofercha2.parse(getfecha2);
-                System.out.println(ufecha);
-                DtFechaPersonal.setDate(ufecha);
-                DtFechaPersonal.setEnabled(false);
-                TxtDireccion.setText(ValidacionesSistema.Parametros_Personal.getDireccion());
-                break;
+    public FrmAgg_Personal(int idpersonal) {
+        try {
+            initComponents();
+            idpersonales = idpersonal;
+            this.setLocationRelativeTo(null);
+            Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
+            AWTUtilities.setWindowShape(this, forma);
+            btnContinuar.setVisible(false);
+            BtnConfirmar.setVisible(true);
+            CbGenerarCarnet.setVisible(false);
+            setIconImage(Logo());
+            cargarGenero();
+            CargarTipoDoc();
+            switch (identpanel) {
+                case 1:
+                    CmbTipoPersonal.setVisible(false);
+                    txtNombres.setEditable(false);
+                    txtNombres.setText(ValidacionesSistema.Parametros_Personal.getnombre_personal());
+                    txtApellidos.setText(ValidacionesSistema.Parametros_Personal.getApellido_personal());
+                    txtCorreo.setText(ValidacionesSistema.Parametros_Personal.getCorreo());
+                    TxtDireccion.setText(ValidacionesSistema.Parametros_Personal.getDireccion());
+                    txtDocumento.setText(ValidacionesSistema.Parametros_Personal.getDocumento());
+                    SimpleDateFormat formatofercha = new SimpleDateFormat("yyyy-MM-dd");
+                    String getfecha = ValidacionesSistema.Parametros_Personal.getFecha_nacimiento();
+                    System.out.println(getfecha);
+                    ufecha = formatofercha.parse(getfecha);
+                    System.out.println(ufecha);
+                    DtFechaPersonal.setDate(ufecha);
+                    DtFechaPersonal.setEnabled(false);
+                    CmbTipoDoc.setSelectedItem(ValidacionesSistema.Parametros_Personal.getTipoDocumento());
+                    CmbGenero.setSelectedItem(ValidacionesSistema.Parametros_Personal.getGenero());
+                    break;
+                case 2:
+                    CmbTipoPersonal.setVisible(true);
+                    CargarTipoPersonal();
+                    txtNombres.setEditable(false);
+                    CmbGenero.setSelectedItem(ValidacionesSistema.Parametros_Personal.getGenero());
+                    CmbTipoDoc.setSelectedItem(ValidacionesSistema.Parametros_Personal.getTipoDocumento());
+                    CmbTipoPersonal.setSelectedItem(ValidacionesSistema.Parametros_Personal.getTipoPersonal());
+                    txtNombres.setText(ValidacionesSistema.Parametros_Personal.getnombre_personal());
+                    txtApellidos.setText(ValidacionesSistema.Parametros_Personal.getApellido_personal());
+                    txtCorreo.setText(ValidacionesSistema.Parametros_Personal.getCorreo());
+                    txtDocumento.setText(ValidacionesSistema.Parametros_Personal.getDocumento());
+                    SimpleDateFormat formatofercha2 = new SimpleDateFormat("yyyy-MM-dd");
+                    String getfecha2 = ValidacionesSistema.Parametros_Personal.getFecha_nacimiento();
+                    System.out.println(getfecha2);
+                    ufecha = formatofercha2.parse(getfecha2);
+                    System.out.println(ufecha);
+                    DtFechaPersonal.setDate(ufecha);
+                    DtFechaPersonal.setEnabled(false);
+                    TxtDireccion.setText(ValidacionesSistema.Parametros_Personal.getDireccion());
+                    break;
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(FrmAgg_Personal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
