@@ -280,7 +280,7 @@ public class FrmConfigConection extends javax.swing.JFrame {
         }
     }
 
-    void readFile() {
+    public void readFile() {
         String cont;
         try {
             FileReader readerfile = new FileReader(filename);

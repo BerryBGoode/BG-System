@@ -7,12 +7,10 @@ package Vista;
 
 import Controlador.ControllerP_U_Personal;
 import Controlador.ControllerP_U_Usuarios;
-import Controles_Personalizados.Calendario.SelectedDate;
 import ValidacionesSistema.ValidacionesBeep_Go;
 import com.sun.awt.AWTUtilities;
-import com.toedter.calendar.JDateChooser;
-import com.toedter.calendar.JTextFieldDateEditor;
-import java.awt.Color;
+import java.awt.AWTException;
+import java.awt.HeadlessException;
 
 import java.awt.Image;
 import java.awt.Shape;
@@ -25,11 +23,12 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,7 +43,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import necesario.RSFileChooser;
-import sun.util.calendar.JulianCalendar;
 
 /**
  *
@@ -57,15 +55,20 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
     private int tipod = 0;
     private int tipo_mensaje = 0;
     private int genero = 0;
-    Calendar c;
+    private Calendar c;
     private List myArrayList;
     private String fecha;
     private SimpleDateFormat formatos;
     private List ListGenero;
     ControllerP_U_Personal controllerp = new ControllerP_U_Personal();
     ControllerP_U_Usuarios controlleru = new ControllerP_U_Usuarios();
-    byte[] fotou;
-    ImageIcon fotoicon;
+    private byte[] fotou;
+    private String imprimirid;
+    private String Carnet;
+    private String nombres;
+    private String apellidos;
+    private int idpersonal;
+    private ImageIcon fotoicon;
 
     /**
      * Creates new form PrimerUsoPersonal
@@ -82,13 +85,13 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
     }
     //Metodo para cargar el logo en la barra de tareas
 
-    public Image Logo() {
+    private Image Logo() {
         Image retvalue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
         return retvalue;
     }
 //Metodo para bloquear los botonoes de la creacopm del primer usuario
 
-    void PrimerUso() {
+    private void PrimerUso() {
         //Validamos si se generaron registros en la tabla de personal y no en usuario
         if (controllerp.checkcontrollerPersonal() == true && controlleru.checkControllerUsuario() == false) {
             txtApellido.setEnabled(false);
@@ -96,12 +99,11 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
             txtDocumento.setEnabled(false);
             txtDirecion.setEnabled(false);
             txtNombre.setEnabled(false);
-            DtFechanac.setEnabled(false);
             CmbGenero.setEnabled(false);
             CmbTipoDocumento.setEnabled(false);
             BtnExaminar.setEnabled(true);
             TxtUsuario.setEnabled(true);
-            DtFechanac.setVisible(false);
+            DtFechaNac.setEnabled(false);
             btnContinuar.setVisible(false);
             BtnGuardar.setVisible(true);
         } //Si no hay registros de personal los controles para generar un registro de usuario se bloquean
@@ -117,11 +119,26 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
             BtnGuardar.setVisible(false);
             BtnExaminar.setEnabled(false);
             TxtUsuario.setEnabled(false);
+            DtFechaNac.setEnabled(true);
 //            JDateChooser  = new JDateChooser ();
 //            DtFechanac.set
 //            JTextFieldDateEditor editor = (JTextFieldDateEditor) fecha.getDateEditor();
 //            editor.setEditable(false);
         }
+    }
+
+    private int capfecha() {
+        Date date = DtFechaNac.getDate();
+        c = new GregorianCalendar();
+        c.setTime(date);
+        Calendar hoy = Calendar.getInstance();
+        int Anio = hoy.get(Calendar.YEAR) - c.get(Calendar.YEAR);
+        int Mes = hoy.get(Calendar.MONTH) - c.get(Calendar.MONTH);
+        int dia = hoy.get(Calendar.DAY_OF_MONTH) - c.get(Calendar.DAY_OF_MONTH);
+        if (Mes < 0 || Mes == 0 && dia < 0) {
+            Anio = Anio - 1;
+        }
+        return Anio;
     }
 
     void ExaminarImagen() {
@@ -137,7 +154,7 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
                 InputStream input = new FileInputStream(ruta);
                 input.read(fotou);
                 controllerp.setLogo(fotou);
-            } catch (Exception e) {
+            } catch (IOException e) {
                 controllerp.setLogo(fotou);
             }
             try {
@@ -147,7 +164,7 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
                 image = ImageIO.read(input);
                 fotoicon = new ImageIcon(image.getScaledInstance(220, 250, 0));
                 LblFoto.setIcon(fotoicon);
-            } catch (Exception e) {
+            } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, e.toString());
             }
         }
@@ -169,33 +186,90 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
                 String mensaje = "Error del sistema";
                 trayIcon.displayMessage("Error Critico", mensaje, TrayIcon.MessageType.ERROR);
             }
-        } catch (Exception e) {
+        } catch (AWTException e) {
             System.out.println(e.toString());
         }
     }
 
     void IngresarUsuario() {
-        GetIdPersonal();
-        controlleru.setUsuario(TxtUsuario.getText());
-        String clave = TxtUsuario.getText() + "123";
-        controlleru.setClave(ValidacionesBeep_Go.EncriptarContra(clave));
-        int min = 1000;
-        int max = 9999;
-        Random random = new Random();
-        int valornum = random.nextInt(max + min) + min;
-        String valor = String.valueOf(valornum);
-        String encriptarPIN = ValidacionesBeep_Go.EncriptarContra(valor);
-        controlleru.setPIN(encriptarPIN);
-        controlleru.setFoto(fotou);
-        if (controlleru.IngresarPUsuarioController() == true) {
-            JOptionPane.showMessageDialog(null, "Su usuario ha sido ingresado correctamente", "Proceso Completado", JOptionPane.INFORMATION_MESSAGE);
-            FrmLogin iniciarSesion = new FrmLogin();
-            iniciarSesion.setVisible(true);
-            this.dispose();
-            tipo_mensaje = 1;
-            notificacionTaskBar();
-            JOptionPane.showMessageDialog(null, "Su contraseña es su usario +123, ingrese de esa forma sus \n credenciales para luego poder ingresar la contraseña que desee", "Contraseña", JOptionPane.INFORMATION_MESSAGE);
-            JOptionPane.showMessageDialog(null, "Su PIN de seguridad es el siguiente :" + valornum, "PIN de seguridad", JOptionPane.INFORMATION_MESSAGE);
+        if (TxtUsuario.getText().trim().isEmpty() && LblFoto.getIcon() == null) {
+            JOptionPane.showMessageDialog(null, "No se puede continuar con el proceso debido a que \n la informacion necesaria esta incompleta", "Error usuario", JOptionPane.WARNING_MESSAGE);
+        } else {
+            GetIdPersonal();
+            controlleru.setUsuario(TxtUsuario.getText());
+            String clave = TxtUsuario.getText() + "123";
+            controlleru.setClave(ValidacionesBeep_Go.EncriptarContra(clave));
+            int min = 1000;
+            int max = 9999;
+            Random random = new Random();
+            int valornum = random.nextInt(max + min) + min;
+            String valor = String.valueOf(valornum);
+            String encriptarPIN = ValidacionesBeep_Go.EncriptarContra(valor);
+            controlleru.setPIN(encriptarPIN);
+            controlleru.setFoto(fotou);
+            if (controlleru.IngresarPUsuarioController() == true) {
+                JOptionPane.showMessageDialog(null, "Su usuario ha sido ingresado correctamente", "Proceso Completado", JOptionPane.INFORMATION_MESSAGE);
+                FrmLogin iniciarSesion = new FrmLogin();
+                iniciarSesion.setVisible(true);
+                this.dispose();
+                tipo_mensaje = 1;
+                notificacionTaskBar();
+                JOptionPane.showMessageDialog(null, "Su contraseña es su usario +123, ingrese de esa forma sus \n credenciales para luego poder ingresar la contraseña que desee", "Contraseña", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Su PIN de seguridad es el siguiente :" + valornum, "PIN de seguridad", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+
+    }
+
+    void carnet() {
+        try {
+            GetInfo();
+            System.out.println("Generando carnet: " + idpersonal);
+            String id = String.valueOf(idpersonal);
+            if (id.length() > 0 && id.length() < 2) {
+                imprimirid = String.valueOf("000" + id);
+            } else if (id.length() == 2 && id.length() < 3) {
+                imprimirid = String.valueOf("00" + id);
+            } else if (id.length() == 3 && id.length() < 4) {
+                imprimirid = String.valueOf("0" + id);
+            } else if (id.length() == 4 && id.length() < 5) {
+                imprimirid = String.valueOf(id);
+            }
+            int year = YearMonth.now().getYear();
+            String apellido = txtApellido.getText();
+            char firstl = apellido.charAt(0);
+            String nombre = txtNombre.getText();
+            char firstn = nombre.charAt(0);
+            nombres = String.valueOf(firstn);
+            apellidos = String.valueOf(firstl);
+            String carnetlocal = nombres + apellidos;
+            String carnetlocal2 = year + imprimirid;
+            String numerocarnet = carnetlocal + carnetlocal2;
+            Carnet = numerocarnet;
+            controllerp.Carnet = Carnet;
+            controllerp.idpersonal = idpersonal;
+            System.out.println(idpersonal);
+            if (controllerp.IngresarCarnet() == false) {
+                System.out.println("Su Carnet es: " + Carnet + " Se ingreso");
+
+            }
+        } catch (Exception e) {
+            System.out.println("Error interno" + e.toString());
+        }
+    }
+
+    void GetInfo() {
+        try {
+            ResultSet rs = controlleru.ObtenerIdPersonal();
+            if (rs.next()) {
+                idpersonal = rs.getInt("idPersonal");
+            }
+
+        } catch (SQLException exception) {
+            JOptionPane.showMessageDialog(null, "Error al obtener los datos de la empresa", "Error", JOptionPane.WARNING_MESSAGE);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al obtener los datos de la empresa", "Error", JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -203,7 +277,8 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
         try {
             ResultSet rs = controlleru.ObtenerIdPersonal();
             if (rs.next()) {
-                controlleru.idPersonal = rs.getInt("idPersonal");
+                idpersonal = rs.getInt("idPersonal");
+                controlleru.idPersonal = idpersonal;
             }
 
         } catch (SQLException exception) {
@@ -232,13 +307,17 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
     }
 
     void InsercionPPersonal() {
+        int anios = capfecha();
         if (controllerp.checkcontrollerPersonal() == false && controlleru.checkControllerUsuario() == false) {
             if (CmbTipoDocumento.getSelectedItem() == "" || CmbGenero.getSelectedItem() == "") {
                 JOptionPane.showMessageDialog(null, "Escoja una opcion");
             } else if (txtNombre.getText().trim().isEmpty() || txtApellido.getText().trim().isEmpty() || txtCorreo.getText().trim().isEmpty() || txtDirecion.getText().trim().isEmpty() || txtDocumento.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "No se permiten campos vacios");
 
+            } else if (anios < 18) {
+                JOptionPane.showMessageDialog(null, "La persona que se esta ingresando debe ser mayor de edad", "Menor de edad", JOptionPane.WARNING_MESSAGE);
             } else {
+                String nacimiento = String.valueOf(c.get(Calendar.YEAR) + "/" + c.get(Calendar.MONTH) + "/" + c.get(Calendar.DAY_OF_MONTH));
                 getIDEnterprise();
                 controllerp.nombre = txtNombre.getText();
                 controllerp.apellido = txtApellido.getText();
@@ -247,9 +326,10 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
                 controllerp.dui = txtDocumento.getText();
                 controllerp.idtipoDocumento = tipod;
                 controllerp.idgenero = genero;
-                controllerp.fechanac = DtFechanac.getFechaSeleccionada();
+                controllerp.fechanac = nacimiento;
                 if (controllerp.IngresarPPersonalController() == true) {
                     JOptionPane.showMessageDialog(null, "Su registro ha sido ingresado correctamente", "Proceso Completado", JOptionPane.INFORMATION_MESSAGE);
+                    carnet();
                     BtnExaminar.setEnabled(true);
                     txtApellido.setEnabled(false);
                     txtCorreo.setEnabled(false);
@@ -257,6 +337,7 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
                     txtNombre.setEnabled(false);
                     CmbGenero.setEnabled(false);
                     txtDirecion.setEnabled(false);
+                    DtFechaNac.setEnabled(false);
                     CmbTipoDocumento.setEnabled(false);
                     btnContinuar.setVisible(false);
                     BtnGuardar.setEnabled(true);
@@ -267,7 +348,7 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
         }
     }
 
-    void cargarlista() {
+    private void cargarlista() {
         CargarTipoDocumento();
         CargarGeneroPersonal();
     }
@@ -305,7 +386,7 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "No existen datos sobre los tipos de documentos", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (Exception e) {
+        } catch (HeadlessException | SQLException e) {
             JOptionPane.showMessageDialog(null, "No se lograron cargar los datos", "Error al cargar", JOptionPane.WARNING_MESSAGE);
         }
     }
@@ -333,9 +414,9 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
         BtnExaminar = new Controles_Personalizados.Botones.UWPButton();
         TxtUsuario = new Controles_Personalizados.textfields.TextField();
         CmbTipoDocumento = new Controles_Personalizados.ComboBox.combobox();
-        DtFechanac = new rojerusan.RSDateChooser();
         LblFecha = new javax.swing.JLabel();
         BtnGuardar = new Controles_Personalizados.Botones.ButtonGradient();
+        DtFechaNac = new com.toedter.calendar.JDateChooser();
         btnMinimizar = new javax.swing.JLabel();
         btnCerrar = new javax.swing.JLabel();
         Imagen = new javax.swing.JLabel();
@@ -425,7 +506,7 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
         txtDirecion.setLabelText("Direccion");
         txtDirecion.setLineColor(new java.awt.Color(42, 36, 56));
         txtDirecion.setSelectionColor(new java.awt.Color(58, 50, 75));
-        Logo.add(txtDirecion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 360, 310, 70));
+        Logo.add(txtDirecion, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 310, 70));
 
         CmbGenero.setBackground(new java.awt.Color(254, 254, 254));
         CmbGenero.setForeground(new java.awt.Color(42, 36, 56));
@@ -482,12 +563,6 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
         });
         Logo.add(CmbTipoDocumento, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 560, 310, 80));
 
-        DtFechanac.setColorBackground(new java.awt.Color(42, 36, 56));
-        DtFechanac.setColorButtonHover(new java.awt.Color(42, 36, 56));
-        DtFechanac.setColorDiaActual(new java.awt.Color(42, 36, 56));
-        DtFechanac.setFuente(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        Logo.add(DtFechanac, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 310, 50));
-
         LblFecha.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         LblFecha.setForeground(new java.awt.Color(153, 153, 153));
         LblFecha.setText("Fecha Nacimiento");
@@ -505,6 +580,9 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
             }
         });
         Logo.add(BtnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 780, 150, 44));
+
+        DtFechaNac.setBackground(new java.awt.Color(42, 36, 56));
+        Logo.add(DtFechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 490, 310, 50));
 
         PanelFondo.add(Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 850));
 
@@ -587,6 +665,7 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         // TODO add your handling code here:
         InsercionPPersonal();
+
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void BtnExaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExaminarActionPerformed
@@ -633,6 +712,7 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new FrmP_U_Personal().setVisible(true);
             }
@@ -644,7 +724,7 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
     private Controles_Personalizados.Botones.ButtonGradient BtnGuardar;
     private Controles_Personalizados.ComboBox.combobox CmbGenero;
     private Controles_Personalizados.ComboBox.combobox CmbTipoDocumento;
-    private rojerusan.RSDateChooser DtFechanac;
+    private com.toedter.calendar.JDateChooser DtFechaNac;
     private javax.swing.JLabel Imagen;
     private javax.swing.JLabel LblFecha;
     private javax.swing.JLabel LblFoto;

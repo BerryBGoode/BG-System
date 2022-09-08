@@ -15,8 +15,12 @@ import java.awt.Font;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -333,8 +337,13 @@ public class PanelProfesores extends javax.swing.JPanel {
                 ((UWPButton) vals).doClick(); // aqui esta
                 UWPButton btns = (UWPButton) vals;
                 if (btns.getName().equals("btnActualizar")) {
-                    FrmAgg_Personal frmAgg_Personal = new FrmAgg_Personal(ValidacionesSistema.Parametros_Personal.getIdPersonal());
-                    frmAgg_Personal.show();
+                    FrmAgg_Personal frmAgg_Personal = null;
+                    try {
+                        frmAgg_Personal = new FrmAgg_Personal(ValidacionesSistema.Parametros_Personal.getIdPersonal());
+                    } catch (ParseException ex) {
+                        Logger.getLogger(PanelProfesores.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    frmAgg_Personal.setVisible(true);
                     frmstate = 1;
 
                     //Actualizar Contacto metodo

@@ -27,13 +27,11 @@ public class FrmLogin extends javax.swing.JFrame {
      */
     public FrmLogin() {
         initComponents();
-         this.setLocationRelativeTo(null); 
-         Shape forma= new RoundRectangle2D.Double(0,0, this.getBounds() .width, this.getBounds() .height,40,40);
-         AWTUtilities. setWindowShape(this, forma);
-         this.setIconImage(Logo());               
         this.setLocationRelativeTo(null);
+        Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
+        AWTUtilities.setWindowShape(this, forma);
+        this.setIconImage(Logo());
         this.setTitle("Login");
-
         this.setIconImage(Logo());
 
     }
@@ -195,37 +193,34 @@ public class FrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     void Login() {
-        
-        if (txtUsuario.getText().equals("") || txtContra.getText().equals("")) 
-        {
+
+        if (txtUsuario.getText().equals("") || txtContra.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Existen campos vacios", "Error de procesamiento", JOptionPane.WARNING_MESSAGE);
-        } 
-        else 
-        {
+        } else {
             ControllerLogin objc = new ControllerLogin();
             String contra = ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra(String.valueOf(txtContra.getPassword()));
 
             objc.setUsuario(txtUsuario.getText());
             objc.setContraseña(contra);
-            
+
             //Valida que exista un usuario
             int respuesta0 = objc.validarUsuarioController();
 
             if (respuesta0 == 1) {
                 //Valida estado del usuario
                 int respuesta1 = objc.ValidarUsuarioActivoController();
-                
+
                 if (respuesta1 == 1) {
                     //Valida informacion del 
                     int respuesta2 = objc.validarLoginC();
-                        
+
                     ControllerLogin cLogin = new ControllerLogin();
                     ResultSet rs;
-                    
+
                     if (respuesta2 == 1) {
                         //Restablece los intentos a 5
                         objc.setIntentos(5);
-                        objc.IntentosController();                    
+                        objc.IntentosController();
                         CargarDatos();
                         if (txtContra.getText().equals(txtUsuario.getText() + "123")) {
                             FrmRestablecimiento frm = new FrmRestablecimiento(nombre);
@@ -266,7 +261,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        Login();   
+        Login();
     }//GEN-LAST:event_btnLoginActionPerformed
 
     void CargarDatos() {

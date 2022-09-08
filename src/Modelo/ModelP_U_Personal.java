@@ -8,7 +8,6 @@ package Modelo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Date;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -21,6 +20,21 @@ public class ModelP_U_Personal {
     PreparedStatement ps;
     Connection con;
 
+    public boolean CarnetPersonal(int id, String Carne) {
+        try {
+            con = ModelConexion.getConnection();
+            String query = "UPDATE tbPersonal SET Carnet=? WHERE idPersonal=?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, Carne);
+            ps.setInt(2, id);
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        }
+    }
+
     public ResultSet cargarTipD() {
         try {
             con = ModelConexion.getConnection();
@@ -28,7 +42,7 @@ public class ModelP_U_Personal {
             ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             return rs;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al cargar la lista " + e.toString());
             return null;
         }
@@ -53,7 +67,7 @@ public class ModelP_U_Personal {
             ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             return rs;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al cargar la lista" + e.toString());
             return null;
         }
@@ -92,7 +106,7 @@ public class ModelP_U_Personal {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al realizar el proceso" + e.toString(), "Proceso incompleto", JOptionPane.ERROR_MESSAGE);
             return false;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println(ex.toString());
             return false;
         }
