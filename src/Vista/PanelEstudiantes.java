@@ -14,6 +14,7 @@ import java.awt.Color;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ImageIcon;
@@ -251,20 +252,20 @@ public class PanelEstudiantes extends javax.swing.JPanel {
     private void TbAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbAlumnosMouseClicked
         // TODO add your handling code here:
         Table tb = (Table) evt.getSource();
+        JTable rcp = (JTable) evt.getSource();
         int column = TbAlumnos.getColumnModel().getColumnIndexAtX(evt.getX());
         int row = evt.getY() / TbAlumnos.getRowHeight();
         btnActualizar.setName("btnActualizar");
         btnEliminar.setName("btnEliminar");
         btnReporteP.setName("btnReport");
         if (evt.getClickCount() == 1) {
-            JTable rcp = (JTable) evt.getSource();
             ID = (int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0);
             ValidacionesSistema.Parametros_Personal.setIdPersonal((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0));
             ValidacionesSistema.Parametros_Personal.setnombre_personal(rcp.getModel().getValueAt(rcp.getSelectedRow(), 1).toString());
             ValidacionesSistema.Parametros_Personal.setApellido_personal(rcp.getModel().getValueAt(rcp.getSelectedRow(), 2).toString());
             ValidacionesSistema.Parametros_Personal.setFecha_nacimiento(rcp.getModel().getValueAt(rcp.getSelectedRow(), 3).toString());
             ValidacionesSistema.Parametros_Personal.setDocumento(rcp.getModel().getValueAt(rcp.getSelectedRow(), 4).toString());
-            ValidacionesSistema.Parametros_Personal.setCarnet(rcp.getModel().getValueAt(rcp.getSelectedRow(), 5).toString());
+            //ValidacionesSistema.Parametros_Personal.setCarnet(rcp.getModel().getValueAt(rcp.getSelectedRow(), 5).toString());
             ValidacionesSistema.Parametros_Personal.setCorreo(rcp.getModel().getValueAt(rcp.getSelectedRow(), 8).toString());
             ValidacionesSistema.Parametros_Personal.setDireccion(rcp.getModel().getValueAt(rcp.getSelectedRow(), 7).toString());
             ValidacionesSistema.Parametros_Personal.setIdTipoPersonal((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 10));
@@ -280,7 +281,7 @@ public class PanelEstudiantes extends javax.swing.JPanel {
                 ((UWPButton) vals).doClick(); // aqui esta
                 UWPButton btns = (UWPButton) vals;
                 if (btns.getName().equals("btnActualizar")) {
-                    if (ValidacionesSistema.Parametros_Personal.getCarnet().equals("")) {
+                    if (rcp.getModel().getValueAt(rcp.getSelectedRow(), 5)==null) {
                         JOptionPane.showMessageDialog(null, "Ocurrieron problemas, al intentar cargar la informacion debido que este registro no tiene carné", "Error de carné", JOptionPane.WARNING_MESSAGE);
                     } else {
                         System.out.println(ValidacionesSistema.Parametros_Personal.getCarnet());
@@ -343,7 +344,7 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         try {
             String dir = "src/DocsReport/EstudianteReporte.jasper";
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(dir);
-            Map param=new HashMap<>();
+            Map param = new HashMap<>();
             param.put("idPersonal", ID);
             param.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
             param.put("Nombre", "src\\Recursos_Proyecto\\TextoLogin.png");

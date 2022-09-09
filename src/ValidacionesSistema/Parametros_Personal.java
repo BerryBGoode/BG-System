@@ -5,6 +5,8 @@
  */
 package ValidacionesSistema;
 
+import java.util.Date;
+
 /**
  *
  * @author hp

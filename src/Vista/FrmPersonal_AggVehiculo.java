@@ -5,12 +5,20 @@
  */
 package Vista;
 
+import Controlador.ControllerVehiculos;
+import Controles_Personalizados.Botones.UWPButton;
+import Controles_Personalizados.RenderTable;
 import com.sun.awt.AWTUtilities;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Shape;
 import java.awt.Toolkit;
 import java.awt.geom.RoundRectangle2D;
+import java.sql.ResultSet;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,20 +26,55 @@ import javax.swing.JFrame;
  */
 public class FrmPersonal_AggVehiculo extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmPersonal_AggVehiculo
-     */
+    DefaultTableModel model;
+    ResultSet rs;
+    
     public FrmPersonal_AggVehiculo() {
         initComponents();
         setLocationRelativeTo(null);
         Shape forma= new RoundRectangle2D.Double(0,0, this.getBounds() .width, this.getBounds() .height,40,40);
         AWTUtilities. setWindowShape(this, forma);
         setIconImage(Logo());
+        
+        String[] header = {"ID","Personal","Documento","Tipo documento","Tipo personal","Carnet","Agregar"};
+        model = new DefaultTableModel(null, header){
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        };
+        tbVehiculos_Personal.setDefaultRenderer(Object.class, new RenderTable());
+        
+        CargarTablaVehiculos();
     }
 public Image Logo(){
     Image retvalue=Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
     return retvalue;
 }
+
+    UWPButton btnAgregar = new UWPButton();
+    ImageIcon agregar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/Agregar.png"));
+    
+    final void CargarTablaVehiculos() {
+        
+        tbVehiculos_Personal.setModel(model);
+        
+        while(model.getRowCount() > 0) {
+            model.removeRow(0);
+        }
+        try {
+            rs = ControllerVehiculos.CargarTabla_Personal();
+            while(rs.next()) {
+                btnAgregar.setIcon(agregar);
+                btnAgregar.setBackground(new Color(231, 234, 239));
+                Object[] oValues = {rs.getInt("idPersonal"), rs.getString("Personal"), rs.getString("documento"), rs.getString("tipo_documento"), rs.getString("tipo_personal"), rs.getString("Carnet"), btnAgregar};
+                model.addRow(oValues);
+            }
+        } catch(Exception e){
+        }
+        
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,7 +89,7 @@ public Image Logo(){
         btnCerrar = new javax.swing.JLabel();
         lblVehiculos = new javax.swing.JLabel();
         PanelTabla = new javax.swing.JScrollPane();
-        TbUsuariosWhite4 = new Controles_Personalizados.Tables.Table();
+        tbVehiculos_Personal = new Controles_Personalizados.Tables.Table();
         ScrollTabla = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -84,8 +127,8 @@ public Image Logo(){
         PanelTabla.setVerticalScrollBar(ScrollTabla);
         PanelTabla.setWheelScrollingEnabled(false);
 
-        TbUsuariosWhite4.setBackground(new java.awt.Color(231, 234, 239));
-        TbUsuariosWhite4.setModel(new javax.swing.table.DefaultTableModel(
+        tbVehiculos_Personal.setBackground(new java.awt.Color(231, 234, 239));
+        tbVehiculos_Personal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -122,12 +165,17 @@ public Image Logo(){
                 return canEdit [columnIndex];
             }
         });
-        TbUsuariosWhite4.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        TbUsuariosWhite4.setGridColor(new java.awt.Color(58, 50, 75));
-        TbUsuariosWhite4.setName(""); // NOI18N
-        TbUsuariosWhite4.setSelectionBackground(new java.awt.Color(58, 50, 75));
-        TbUsuariosWhite4.setShowVerticalLines(false);
-        PanelTabla.setViewportView(TbUsuariosWhite4);
+        tbVehiculos_Personal.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        tbVehiculos_Personal.setGridColor(new java.awt.Color(58, 50, 75));
+        tbVehiculos_Personal.setName(""); // NOI18N
+        tbVehiculos_Personal.setSelectionBackground(new java.awt.Color(58, 50, 75));
+        tbVehiculos_Personal.setShowVerticalLines(false);
+        tbVehiculos_Personal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbVehiculos_PersonalMouseClicked(evt);
+            }
+        });
+        PanelTabla.setViewportView(tbVehiculos_Personal);
 
         panelRound1.add(PanelTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 1020, 460));
 
@@ -152,6 +200,29 @@ public Image Logo(){
         this.setExtendedState(JFrame.ICONIFIED);
         
     }//GEN-LAST:event_btnMinimizarMouseClicked
+
+    private void tbVehiculos_PersonalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbVehiculos_PersonalMouseClicked
+        int column = tbVehiculos_Personal.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / tbVehiculos_Personal.getRowHeight();
+        btnAgregar.setName("btnAgregar");
+        if (evt.getClickCount() == 1) {
+            JTable rcp = (JTable) evt.getSource();
+            ValidacionesSistema.Parametros_Vehiculos.setIdPersonal((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0));
+        }
+        if (row < tbVehiculos_Personal.getRowCount() || row >= 0 || column < tbVehiculos_Personal.getColumnCount() || column >= 0) {
+            Object vals = tbVehiculos_Personal.getValueAt(row, column);
+            if (vals instanceof UWPButton) {
+                ((UWPButton) vals).doClick(); // aqui esta
+                UWPButton btns = (UWPButton) vals;
+                if (btns.getName().equals("btnAgregar")) {
+                    FrmAgg_Vehiculos vehiculos = new FrmAgg_Vehiculos();
+                    vehiculos.setVisible(true);
+
+                    //Actualizar Contacto metodo
+                }
+            }
+        }
+    }//GEN-LAST:event_tbVehiculos_PersonalMouseClicked
 
     /**
      * @param args the command line arguments
@@ -191,10 +262,10 @@ public Image Logo(){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane PanelTabla;
     private Controles_Personalizados.ScrollBar.ScrollBarCustom ScrollTabla;
-    private Controles_Personalizados.Tables.Table TbUsuariosWhite4;
     private javax.swing.JLabel btnCerrar;
     private javax.swing.JLabel btnMinimizar;
     private javax.swing.JLabel lblVehiculos;
     private Controles_Personalizados.Paneles.PanelRound panelRound1;
+    private Controles_Personalizados.Tables.Table tbVehiculos_Personal;
     // End of variables declaration//GEN-END:variables
 }
