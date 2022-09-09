@@ -10,7 +10,11 @@ import java.awt.Image;
 import java.awt.Shape;
 import java.awt.Toolkit;
 import java.awt.geom.RoundRectangle2D;
+import java.io.ByteArrayOutputStream;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import net.glxn.qrgen.QRCode;
+import net.glxn.qrgen.image.ImageType;
 
 /**
  *
@@ -32,6 +36,16 @@ public Image Logo(){
     Image retvalue=Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
     return retvalue;
 }
+public void generarQR(){
+    try {
+        ByteArrayOutputStream out = QRCode.from(txtCorreo.getText()).to(ImageType.PNG).stream();
+        ImageIcon imagenqr = new ImageIcon(out.toByteArray());
+        LblQr.setIcon(imagenqr);
+    } catch (Exception e) {
+        System.out.println(e.toString());
+    }
+
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,7 +62,7 @@ public Image Logo(){
         txtCorreo = new Controles_Personalizados.textfields.TextField();
         btnGenerar = new Controles_Personalizados.Botones.ButtonGradient();
         ContenedorCodigoQR = new Controles_Personalizados.Paneles.PanelRound();
-        PanelCodigoQR = new Controles_Personalizados.Paneles.PanelRound();
+        LblQr = new rojerusan.RSLabelImage();
         ImagenRecuQR = new javax.swing.JLabel();
         btnMinimizar = new javax.swing.JLabel();
         btnCerrar = new javax.swing.JLabel();
@@ -87,7 +101,7 @@ public Image Logo(){
         txtCorreo.setForeground(new java.awt.Color(42, 36, 56));
         txtCorreo.setCaretColor(new java.awt.Color(42, 36, 56));
         txtCorreo.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        txtCorreo.setLabelText("Correo electronico");
+        txtCorreo.setLabelText("Usuario");
         txtCorreo.setLineColor(new java.awt.Color(42, 36, 56));
         txtCorreo.setSelectionColor(new java.awt.Color(58, 50, 75));
         PanelContenedorCampos.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, 310, 70));
@@ -111,14 +125,7 @@ public Image Logo(){
         ContenedorCodigoQR.setRoundTopLeft(40);
         ContenedorCodigoQR.setRoundTopRight(40);
         ContenedorCodigoQR.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        PanelCodigoQR.setBackground(new java.awt.Color(42, 36, 56));
-        PanelCodigoQR.setRoundBottomLeft(40);
-        PanelCodigoQR.setRoundBottomRight(40);
-        PanelCodigoQR.setRoundTopLeft(40);
-        PanelCodigoQR.setRoundTopRight(40);
-        PanelCodigoQR.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        ContenedorCodigoQR.add(PanelCodigoQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 220, 210));
+        ContenedorCodigoQR.add(LblQr, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 220, 210));
 
         PanelContenedorCampos.add(ContenedorCodigoQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 490, -1, -1));
 
@@ -157,9 +164,10 @@ public Image Logo(){
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         // TODO add your handling code here:
-        FrmRestablecimiento fr = new FrmRestablecimiento();
-        fr.setVisible(true);
-        this.dispose();
+        generarQR();
+//        FrmRestablecimiento fr = new FrmRestablecimiento();
+//        fr.setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void btnCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMousePressed
@@ -210,7 +218,7 @@ public Image Logo(){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Controles_Personalizados.Paneles.PanelRound ContenedorCodigoQR;
     private javax.swing.JLabel ImagenRecuQR;
-    private Controles_Personalizados.Paneles.PanelRound PanelCodigoQR;
+    private rojerusan.RSLabelImage LblQr;
     private Controles_Personalizados.Paneles.PanelRound PanelContenedor;
     private Controles_Personalizados.Paneles.PanelRound PanelContenedorCampos;
     private javax.swing.JLabel btnCerrar;
