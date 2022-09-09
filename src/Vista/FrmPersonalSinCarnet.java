@@ -270,7 +270,7 @@ public class FrmPersonalSinCarnet extends javax.swing.JFrame {
                 UWPButton btns = (UWPButton) vals;
                 if (btns.getName().equals("BtnCarnet")) {
                     int confirmacion = JOptionPane.YES_NO_OPTION;
-                    int a = JOptionPane.showConfirmDialog(null, "¿Desea generar el Carné de: " + capnom + capapelli, "Generar Carné", confirmacion, JOptionPane.QUESTION_MESSAGE);
+                    int a = JOptionPane.showConfirmDialog(null, "¿Desea generar el Carné de: " + capnom +" "+ capapelli+"?", "Generar Carné", confirmacion, JOptionPane.QUESTION_MESSAGE);
                     if (a == 0) {
                         carnet();
                     }

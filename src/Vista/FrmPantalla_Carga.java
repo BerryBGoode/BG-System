@@ -73,12 +73,13 @@ public class FrmPantalla_Carga extends javax.swing.JFrame {
                                 FrmLogin iniciar = new FrmLogin();
                                 iniciar.setVisible(true);
                             } else if (VistapEmpresa.checkEnterprise() == true && PrimerPersonal.checkcontrollerPersonal() == false) {
-                                FrmP_U_Personal cargarpersonal = new FrmP_U_Personal();
-                                cargarpersonal.setVisible(true);
+
+                                Bienvenida welcome = new Bienvenida();
+                                welcome.setVisible(true);
 
                             } else if (PrimerPersonal.checkcontrollerPersonal() == true && primerUsuarios.checkControllerUsuario() == false && VistapEmpresa.checkEnterprise() == true) {
-                                FrmP_U_Personal cargarpersonal = new FrmP_U_Personal();
-                                cargarpersonal.setVisible(true);
+                                Bienvenida welcome = new Bienvenida();
+                                welcome.setVisible(true);
                             }
                         } /*else if(primerPersonal==true){
                             FrmP_U_Usuario pu=new FrmP_U_Usuario();

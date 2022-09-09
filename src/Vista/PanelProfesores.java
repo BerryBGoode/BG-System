@@ -338,11 +338,7 @@ public class PanelProfesores extends javax.swing.JPanel {
                 UWPButton btns = (UWPButton) vals;
                 if (btns.getName().equals("btnActualizar")) {
                     FrmAgg_Personal frmAgg_Personal = null;
-                    try {
-                        frmAgg_Personal = new FrmAgg_Personal(ValidacionesSistema.Parametros_Personal.getIdPersonal());
-                    } catch (ParseException ex) {
-                        Logger.getLogger(PanelProfesores.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    frmAgg_Personal = new FrmAgg_Personal(ValidacionesSistema.Parametros_Personal.getIdPersonal());
                     frmAgg_Personal.setVisible(true);
                     frmstate = 1;
 
