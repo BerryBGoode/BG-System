@@ -11,6 +11,7 @@ import java.awt.Toolkit;
 import java.awt.TrayIcon;
 import java.awt.TrayIcon.MessageType;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
@@ -84,6 +85,12 @@ public class ValidacionesBeep_Go {
         String base64 = EBase64(sha2);
         String f = MD5(base64);
         return f;
+    }
+    
+        public static String DBase64(String p){
+        byte[] decoded = Base64.getDecoder().decode(p.getBytes());
+        String base64 = new String(decoded, StandardCharsets.UTF_8);
+        return base64;
     }
     
     public static void SoloLetrasYNumeros(java.awt.event.KeyEvent evt){

@@ -116,6 +116,11 @@ public class FrmP_U_Empresa extends javax.swing.JFrame {
         txtNombreEmpresa.setLabelText("Nombre - Empresa");
         txtNombreEmpresa.setLineColor(new java.awt.Color(42, 36, 56));
         txtNombreEmpresa.setSelectionColor(new java.awt.Color(58, 50, 75));
+        txtNombreEmpresa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreEmpresaKeyTyped(evt);
+            }
+        });
         PanelContenedorCampos.add(txtNombreEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 310, 70));
 
         txtDireccionEmpresa.setBackground(new java.awt.Color(254, 254, 254));
@@ -125,6 +130,11 @@ public class FrmP_U_Empresa extends javax.swing.JFrame {
         txtDireccionEmpresa.setLabelText("Direccion - Empresa");
         txtDireccionEmpresa.setLineColor(new java.awt.Color(42, 36, 56));
         txtDireccionEmpresa.setSelectionColor(new java.awt.Color(58, 50, 75));
+        txtDireccionEmpresa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDireccionEmpresaKeyTyped(evt);
+            }
+        });
         PanelContenedorCampos.add(txtDireccionEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 310, 70));
 
         txtCNR.setBackground(new java.awt.Color(254, 254, 254));
@@ -134,6 +144,11 @@ public class FrmP_U_Empresa extends javax.swing.JFrame {
         txtCNR.setLabelText("CNR - Empresa");
         txtCNR.setLineColor(new java.awt.Color(42, 36, 56));
         txtCNR.setSelectionColor(new java.awt.Color(58, 50, 75));
+        txtCNR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCNRKeyTyped(evt);
+            }
+        });
         PanelContenedorCampos.add(txtCNR, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 310, 70));
 
         txtRepresentanteLegal.setBackground(new java.awt.Color(254, 254, 254));
@@ -143,6 +158,11 @@ public class FrmP_U_Empresa extends javax.swing.JFrame {
         txtRepresentanteLegal.setLabelText("Representante Legal");
         txtRepresentanteLegal.setLineColor(new java.awt.Color(42, 36, 56));
         txtRepresentanteLegal.setSelectionColor(new java.awt.Color(58, 50, 75));
+        txtRepresentanteLegal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtRepresentanteLegalKeyTyped(evt);
+            }
+        });
         PanelContenedorCampos.add(txtRepresentanteLegal, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 430, 310, 70));
 
         txtNIT.setBackground(new java.awt.Color(254, 254, 254));
@@ -152,6 +172,11 @@ public class FrmP_U_Empresa extends javax.swing.JFrame {
         txtNIT.setLabelText("NIT - Representante Legal");
         txtNIT.setLineColor(new java.awt.Color(42, 36, 56));
         txtNIT.setSelectionColor(new java.awt.Color(58, 50, 75));
+        txtNIT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNITKeyTyped(evt);
+            }
+        });
         PanelContenedorCampos.add(txtNIT, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, 310, 70));
 
         btnExaminar.setText("Examinar");
@@ -203,7 +228,7 @@ public class FrmP_U_Empresa extends javax.swing.JFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         // TODO add your handling code here:
-        if (txtNombreEmpresa.getText().trim().isEmpty() || txtRepresentanteLegal.getText().trim().isEmpty() || txtDireccionEmpresa.getText().trim().isEmpty() || txtNIT.getText().trim().isEmpty() || txtCNR.getText().trim().isEmpty()) {
+        if (txtCNR.getText().length() < 8 || txtNIT.getText().length() < 17 || txtNombreEmpresa.getText().trim().isEmpty() || txtRepresentanteLegal.getText().trim().isEmpty() || txtDireccionEmpresa.getText().trim().isEmpty() || txtNIT.getText().trim().isEmpty() || txtCNR.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Existen campos vacios", "Campos vacios", JOptionPane.OK_OPTION);
         } else {
             IngresarDatos();
@@ -257,6 +282,84 @@ public class FrmP_U_Empresa extends javax.swing.JFrame {
         // TODO add your handling code here:
         cargarImagen();
     }//GEN-LAST:event_btnExaminarActionPerformed
+
+    private void txtNombreEmpresaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreEmpresaKeyTyped
+        // TODO add your handling code here:
+        char key = evt.getKeyChar();
+        if(txtNombreEmpresa.getText().length() >= 30){
+            evt.consume();
+        }else if(txtNombreEmpresa.getText().length() == 0 && Character.isWhitespace(key)){
+            evt.consume();
+        }else if(txtNombreEmpresa.getText().length() > 0){
+            String text = txtNombreEmpresa.getText();
+            String ultimo = text.substring(text.length() - 1);
+            if(ultimo != null && ultimo.equals(" ") && Character.isWhitespace(key)){
+                evt.consume();
+            }   
+        }
+    }//GEN-LAST:event_txtNombreEmpresaKeyTyped
+
+    private void txtDireccionEmpresaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionEmpresaKeyTyped
+        // TODO add your handling code here:
+        char key = evt.getKeyChar();
+        if(txtDireccionEmpresa.getText().length() >= 200){
+            evt.consume();
+        }else if(txtDireccionEmpresa.getText().length() == 0 && Character.isWhitespace(key)){
+            evt.consume();
+        }else if(txtDireccionEmpresa.getText().length() > 0){
+            String text = txtDireccionEmpresa.getText();
+            String ultimo = text.substring(text.length() - 1);
+            if(ultimo != null && ultimo.equals(" ") && Character.isWhitespace(key)){
+               evt.consume();
+            }   
+        }
+    }//GEN-LAST:event_txtDireccionEmpresaKeyTyped
+
+    private void txtCNRKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCNRKeyTyped
+        // TODO add your handling code here:
+        if(txtCNR.getText().length() >= 11){
+            evt.consume();
+        }else{
+            ValidacionesSistema.ValidacionesBeep_Go.SoloNumeros(evt);
+        }
+    }//GEN-LAST:event_txtCNRKeyTyped
+
+    private void txtRepresentanteLegalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRepresentanteLegalKeyTyped
+        // TODO add your handling code here:
+        char key = evt.getKeyChar();
+        ValidacionesSistema.ValidacionesBeep_Go.SoloLetras(evt);
+        if(txtRepresentanteLegal.getText().length() >= 75){
+            evt.consume();
+        }else if(txtRepresentanteLegal.getText().length() == 0 && Character.isWhitespace(key)){
+            evt.consume();
+        }else if(txtRepresentanteLegal.getText().length() == 0 && ! Character.isUpperCase(key)){
+            evt.consume();
+        }else if(txtRepresentanteLegal.getText().length() > 0){
+            String text = txtRepresentanteLegal.getText();
+            String ultimo = text.substring(text.length() - 1);
+            if(ultimo != null && ultimo.equals(" ") && (Character.isWhitespace(key) || !Character.isUpperCase(key))){
+               evt.consume();
+            }else if(ultimo != null && Character.isUpperCase(ultimo.charAt(0)) && !Character.isLowerCase(key) && !Character.isWhitespace(key)){
+                evt.consume();
+            }else if(ultimo != null && Character.isLowerCase(ultimo.charAt(0)) && !Character.isLowerCase(key) && !Character.isWhitespace(key)){
+                evt.consume();
+            }
+        }
+    }//GEN-LAST:event_txtRepresentanteLegalKeyTyped
+
+    private void txtNITKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNITKeyTyped
+        // TODO add your handling code here:
+        char key = evt.getKeyChar();
+        if(txtNIT.getText().length() >= 17){
+            evt.consume();
+        }else if(txtNIT.getText().length() != 4 && txtNIT.getText().length() != 11 && txtNIT.getText().length() != 15 && key == '-'){
+            evt.consume();
+        }else if((txtNIT.getText().length() == 4 || txtNIT.getText().length() == 11 || txtNIT.getText().length() == 15) && key != '-'){
+           evt.consume();
+        }else if(! Character.isDigit(key) && key != '-' ){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNITKeyTyped
     void IngresarDatos() {
         VistapEmpresa.nombre_empresa = txtNombreEmpresa.getText();
         VistapEmpresa.direccion = txtDireccionEmpresa.getText();
