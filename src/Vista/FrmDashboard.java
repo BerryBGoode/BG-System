@@ -125,10 +125,15 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
             lblSunset.setVisible(false);
             lblNight.setVisible(true);
         }
-        if (Integer.valueOf(hora) >= 0 && Integer.valueOf(hora) <= 5 && ampm.equals("am")) {
+        if (Integer.valueOf(hora) >= 0 && Integer.valueOf(hora) <= 4 && ampm.equals("am")) {
             lblSun.setVisible(false);
             lblSunset.setVisible(false);
             lblNight.setVisible(true);
+        }
+        if (Integer.valueOf(hora) == 5 && ampm.equals("am")) {
+            lblSun.setVisible(false);
+            lblSunset.setVisible(true);
+            lblNight.setVisible(false);
         }
         if (Integer.valueOf(hora) >= 6 && Integer.valueOf(hora) <= 11 && ampm.equals("am")) {
             lblSun.setVisible(true);
