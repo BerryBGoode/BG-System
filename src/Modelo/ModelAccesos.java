@@ -74,4 +74,37 @@ public class ModelAccesos {
             return false;
         }
     }
+    public static ResultSet LookingForId_Personal(String carne){
+        ResultSet rs;
+        Connection con;
+        PreparedStatement ps;
+        try {
+            con=ModelConexion.getConnection();
+            String query="SELECT * FROM tbPersonal WHere Carnet=?";
+            ps=con.prepareStatement(query);
+            ps.setString(1, carne);
+            rs=ps.executeQuery();
+            return rs;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return null;
+        }
+                
+    }
+        public static boolean insertAccessBarCode(int ID, int typeaccess, String date, String hour, String justif) {
+        try {
+            con = ModelConexion.getConnection();
+            sql = con.prepareStatement("INSERT INTO tbAccesos VALUES (?,?,?,?,?)");
+            sql.setInt(1, ID);
+            sql.setString(2, date);
+            sql.setString(3, hour);
+            sql.setInt(4, typeaccess);
+            sql.setString(5, justif);
+            sql.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error " + e.toString());
+            return false;
+        }
+    }
 }

@@ -16,6 +16,7 @@ public class ControllerAccesos {
      private static int ID;
     private static int typeAccess;
     private static String date;
+    private static String Carnet;
     private static String hour;
     private static String justification;
     private static int staff;
@@ -67,6 +68,15 @@ public class ControllerAccesos {
     public static void setStaff(int staff) {
         ControllerAccesos.staff = staff;
     }
+
+    public static String getCarnet() {
+        return Carnet;
+    }
+
+    public static void setCarnet(String Carnet) {
+        ControllerAccesos.Carnet = Carnet;
+    }
+    
             
     public static ResultSet getdata(String tablename){
         return ModelAccesos.getdata(tablename);
@@ -82,5 +92,8 @@ public class ControllerAccesos {
     
     public static boolean deleteAccess(){
         return ModelAccesos.deleteAccess(getID());
+    }
+    public static ResultSet LookiingForPersonal(){
+        return ModelAccesos.LookingForId_Personal(Carnet);
     }
 }
