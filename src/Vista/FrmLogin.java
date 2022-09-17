@@ -32,7 +32,6 @@ public class FrmLogin extends javax.swing.JFrame {
         AWTUtilities.setWindowShape(this, forma);
         this.setIconImage(Logo());
         this.setTitle("Login");
-        this.setIconImage(Logo());
 
     }
 
