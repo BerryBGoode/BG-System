@@ -18,12 +18,16 @@ import java.awt.geom.RoundRectangle2D;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.PointerInfo;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
 
 import javax.swing.JOptionPane;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 /**
  *
@@ -71,6 +75,8 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
 
         h1 = new Thread(this);
         h1.start();
+        
+        GetDayString();
     }
 
     public FrmDashboard() {
@@ -144,6 +150,17 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
             lblSunset.setVisible(false);
             lblNight.setVisible(false);
         }
+    }
+    
+        final void GetDayString() {
+        DayOfWeek dia = LocalDate.now().getDayOfWeek();
+        String day = dia.getDisplayName(TextStyle.FULL, new Locale("es", "ES"));
+        
+        String firstletter = day.substring(0, 1);
+        String capital = firstletter.toUpperCase();
+        String restletters = day.substring(1, day.length());
+        day = capital + restletters;
+        lblDia.setText(day);
     }
 
     /**
