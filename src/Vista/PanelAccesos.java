@@ -47,6 +47,7 @@ public class PanelAccesos extends javax.swing.JPanel {
      */
     public PanelAccesos() {
         initComponents();
+        //TxtCodigoBarra.setEditable(false);
         String[] header = {"IDAcceso", "IDPersonal", "Carnet", "Fecha", "IDTipoAcceso", "Hora", "Acceso", "Notificación", "Modificar", "Eliminar"};
         tb = new DefaultTableModel(null, header);
         loadTable();
@@ -67,6 +68,9 @@ public class PanelAccesos extends javax.swing.JPanel {
 
     final void refresh() {
         if (frmstate == 1 && !(add.isActive())) {
+            loadTable();
+            frmstate = 0;
+        } else if (frmstate == 0 && !(add.isActive())) {
             loadTable();
             frmstate = 0;
         }
@@ -336,7 +340,7 @@ public class PanelAccesos extends javax.swing.JPanel {
 
     private void PanelFondoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseClicked
         // TODO add your handling code here:
-        loadTable();
+        refresh();
     }//GEN-LAST:event_PanelFondoMouseClicked
 
     void insertbyCode128() {
@@ -352,21 +356,25 @@ public class PanelAccesos extends javax.swing.JPanel {
         ControllerAccesos.setHour(hour);
         ControllerAccesos.setID(idPersonal);
         ControllerAccesos.setTypeAccess(1);
-        if (ControllerAccesos.insertAccess()) {
+        if (ControllerAccesos.insertAccess() == true) {
             JOptionPane.showMessageDialog(null, "Su insercion se ha realizado");
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "No se realizo la insercion");
         }
     }
 
     void LookingForPersonal() {
-        ControllerAccesos.setCarnet(CapCarnet);
-        ResultSet rs = ControllerAccesos.LookiingForPersonal();
         try {
+            ControllerAccesos.setCarnet(CapCarnet);
+            ResultSet rs = ControllerAccesos.LookiingForPersonal();
             if (rs.next()) {
                 idPersonal = rs.getInt("idPersonal");
                 System.out.println("Si se encontro, Su id es: " + idPersonal);
                 insertbyCode128();
+                TxtCodigoBarra.setText("");
+            } else {
+                JOptionPane.showMessageDialog(null, "El codigo del Carné no esta registrado en el sistema", "Codigo no encontrado", JOptionPane.ERROR_MESSAGE);
+                TxtCodigoBarra.setText("");
             }
         } catch (SQLException ex) {
             Logger.getLogger(PanelAccesos.class.getName()).log(Level.SEVERE, null, ex);
