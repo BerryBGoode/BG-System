@@ -5,14 +5,18 @@
  */
 package Vista;
 
+import Controlador.ControllerQR;
 import com.sun.awt.AWTUtilities;
 import java.awt.Image;
 import java.awt.Shape;
 import java.awt.Toolkit;
 import java.awt.geom.RoundRectangle2D;
 import java.io.ByteArrayOutputStream;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import net.glxn.qrgen.QRCode;
 import net.glxn.qrgen.image.ImageType;
 
@@ -22,30 +26,57 @@ import net.glxn.qrgen.image.ImageType;
  */
 public class RecuQR extends javax.swing.JFrame {
 
+    private String usuario;
+    private String Carne;
+    ControllerQR objControllerQR = new ControllerQR();
+
     /**
      * Creates new form RecuperacionQR
      */
     public RecuQR() {
         initComponents();
-        this.setLocationRelativeTo(null); 
-         Shape forma= new RoundRectangle2D.Double(0,0, this.getBounds() .width, this.getBounds() .height,40,40);
-         AWTUtilities. setWindowShape(this, forma);
-         setIconImage(Logo());
-    }
-public Image Logo(){
-    Image retvalue=Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
-    return retvalue;
-}
-public void generarQR(){
-    try {
-        ByteArrayOutputStream out = QRCode.from(txtCorreo.getText()).to(ImageType.PNG).stream();
-        ImageIcon imagenqr = new ImageIcon(out.toByteArray());
-        LblQr.setIcon(imagenqr);
-    } catch (Exception e) {
-        System.out.println(e.toString());
+        this.setLocationRelativeTo(null);
+        Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
+        AWTUtilities.setWindowShape(this, forma);
+        setIconImage(Logo());
     }
 
-}
+    public Image Logo() {
+        Image retvalue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
+        return retvalue;
+    }
+
+    void CapCarnet() {
+        objControllerQR.setUsuario(txtCorreo.getText());
+        ResultSet rs = objControllerQR.RecuperarContraQR();
+        try {
+            if (rs.next()) {
+                usuario = rs.getString("nombre_usuario");
+                Carne = rs.getString("Carnet");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+    }
+
+    public void generarQR() {
+        ImageIcon FondoQR = new ImageIcon(getClass().getResource("/Recursos_Proyecto/Rectangle 1.png"));
+        LblQr.setIcon(FondoQR);
+        CapCarnet();
+        if (!usuario.equals(txtCorreo.getText())) {
+            JOptionPane.showMessageDialog(null, "Verificar, el usuario, no se encontro ningun usuario con ese nombre", "Usuario Inexistente", JOptionPane.WARNING_MESSAGE);
+        } else {
+            try {
+                ByteArrayOutputStream out = QRCode.from(Carne).to(ImageType.PNG).stream();
+                ImageIcon imagenqr = new ImageIcon(out.toByteArray());
+                LblQr.setIcon(imagenqr);
+            } catch (Exception e) {
+                System.out.println(e.toString());
+            }
+        }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -125,6 +156,8 @@ public void generarQR(){
         ContenedorCodigoQR.setRoundTopLeft(40);
         ContenedorCodigoQR.setRoundTopRight(40);
         ContenedorCodigoQR.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        LblQr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Rectangle 1.png"))); // NOI18N
         ContenedorCodigoQR.add(LblQr, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 220, 210));
 
         PanelContenedorCampos.add(ContenedorCodigoQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 490, -1, -1));
@@ -164,6 +197,7 @@ public void generarQR(){
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         // TODO add your handling code here:
+        //CapCarnet();
         generarQR();
 //        FrmRestablecimiento fr = new FrmRestablecimiento();
 //        fr.setVisible(true);
