@@ -15,8 +15,12 @@ import java.awt.Font;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -117,6 +121,8 @@ public class PanelProfesores extends javax.swing.JPanel {
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(dir);
             Map param = new HashMap<>();
             param.put("idP", ID);
+            param.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
+            param.put("Foot", "src\\Recursos_Proyecto\\TextoLogin.png");
             System.out.println(ID);
             JasperPrint jp = JasperFillManager.fillReport(jr, param, con);
             JasperViewer jv = new JasperViewer(jp, false);
@@ -132,10 +138,13 @@ public class PanelProfesores extends javax.swing.JPanel {
         try {
             String dir = "src/DocsReport/InformePersonal.jasper";
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(dir);
-            JasperPrint jp = JasperFillManager.fillReport(jr, null, con);
+            Map param = new HashMap<>();
+            param.put("Logo1", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
+            param.put("Foot", "src\\Recursos_Proyecto\\TextoLogin.png");
+            System.out.println(param);
+            JasperPrint jp = JasperFillManager.fillReport(jr, param, con);
             JasperViewer jv = new JasperViewer(jp, false);
             jv.setVisible(true);
-            System.out.println("si, se imprime");
         } catch (JRException e) {
             System.out.println("Error" + e.toString());
         }
@@ -328,8 +337,9 @@ public class PanelProfesores extends javax.swing.JPanel {
                 ((UWPButton) vals).doClick(); // aqui esta
                 UWPButton btns = (UWPButton) vals;
                 if (btns.getName().equals("btnActualizar")) {
-                    FrmAgg_Personal frmAgg_Personal = new FrmAgg_Personal(ValidacionesSistema.Parametros_Personal.getIdPersonal());
-                    frmAgg_Personal.show();
+                    FrmAgg_Personal frmAgg_Personal = null;
+                    frmAgg_Personal = new FrmAgg_Personal(ValidacionesSistema.Parametros_Personal.getIdPersonal());
+                    frmAgg_Personal.setVisible(true);
                     frmstate = 1;
 
                     //Actualizar Contacto metodo

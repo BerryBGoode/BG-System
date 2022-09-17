@@ -65,10 +65,10 @@ public class ControllerPersonal {
         return objModelP.capturaridpersonal(nombre);
     }
     public boolean ActualizarEstudiantesController(){
-        return objModelP.ActualizarAlumno(idpersonal, nombre, apellido, fechanac, correo, direccion, documento, idtipoDoc, idgenero, idempresa);
+        return objModelP.ActualizarAlumno(idpersonal, nombre, apellido, correo, direccion, documento, idtipoDoc, idgenero, idempresa);
     }
     public boolean ActualizarPersonalControiller(){
-        return objModelP.ActualizarPersonal(idpersonal, nombre, apellido, fechanac, correo, direccion, documento, idtipoDoc, idgenero, idempresa, idTipoPersonal);
+        return objModelP.ActualizarPersonal(idpersonal, nombre, apellido, correo, direccion, documento, idtipoDoc, idgenero, idempresa, idTipoPersonal);
     }
     public boolean EliminarRegistroController(){
         return objModelP.EliminarRegistro(idpersonal);

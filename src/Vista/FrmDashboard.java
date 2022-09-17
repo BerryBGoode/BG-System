@@ -42,7 +42,6 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         setIconImage(Logo());
 
         Niveles(tipo);
-
         lblNombre.setText(nombre);
         lblTipo.setText(tipo);
 

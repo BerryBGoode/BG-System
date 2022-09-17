@@ -32,6 +32,7 @@ public class ControllerP_U_Personal {
     public int idtipoDocumento;
     public int idgenero;
     public byte[] foto;
+    public String Carnet;
 
     public int getIdpersonal() {
         return idpersonal;
@@ -114,17 +115,29 @@ public class ControllerP_U_Personal {
     public byte[] getLogo() {
         return foto;
     }
-
+    
     public void setLogo(byte[] foto) {
         this.foto = foto;
     }
+    
     public Boolean checkcontrollerPersonal(){
     return useControllerP.checkPersonal();
+    }
+
+    public String getCarnet() {
+        return Carnet;
+    }
+
+    public void setCarnet(String Carnet) {
+        this.Carnet = Carnet;
     }
     public boolean IngresarPPersonalController(){
         return useControllerP.IngresarPPersonal(empresa,nombre, apellido, fechanac, correo, direccion, dui, idgenero, idtipoDocumento);
     }
     public ResultSet ObteneridEmpresa(){
         return useControllerP.getEnterprise();
+    }
+    public boolean IngresarCarnet(){
+        return useControllerP.CarnetPersonal(idpersonal, Carnet);
     }
 }

@@ -5,6 +5,10 @@
  */
 package Vista;
 
+import Controlador.ControllerConexion;
+import Controlador.ControllerP_U_Empresa;
+import Controlador.ControllerP_U_Personal;
+import Controlador.ControllerP_U_Usuarios;
 import com.sun.awt.AWTUtilities;
 import java.awt.Image;
 import java.awt.Shape;
@@ -23,15 +27,35 @@ public class Bienvenida extends javax.swing.JFrame {
      */
     public Bienvenida() {
         initComponents();
-        this.setLocationRelativeTo(null); 
-         Shape forma= new RoundRectangle2D.Double(0,0, this.getBounds() .width, this.getBounds() .height,40,40);
-         AWTUtilities. setWindowShape(this, forma);
-         setIconImage(Logo());
+        this.setLocationRelativeTo(null);
+        Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
+        AWTUtilities.setWindowShape(this, forma);
+        setIconImage(Logo());
     }
-public Image Logo(){
-    Image retvalue=Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
-    return retvalue;
-}
+
+    public Image Logo() {
+        Image retvalue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
+        return retvalue;
+    }
+
+    private void primerus() {
+        ControllerP_U_Empresa VistapEmpresa = new ControllerP_U_Empresa();
+        ControllerP_U_Personal PrimerPersonal = new ControllerP_U_Personal();
+        ControllerP_U_Usuarios primerUsuarios = new ControllerP_U_Usuarios();
+        if (ControllerConexion.getConnectionModel()!=null&&VistapEmpresa.checkEnterprise()==false) {
+            FrmP_U_Empresa cargarempresa=new FrmP_U_Empresa();
+            cargarempresa.setVisible(true);
+        }
+        else if (VistapEmpresa.checkEnterprise() == true && PrimerPersonal.checkcontrollerPersonal() == false) {
+            FrmP_U_Personal cargarpersonal = new FrmP_U_Personal();
+            cargarpersonal.setVisible(true);
+
+        } else if (PrimerPersonal.checkcontrollerPersonal() == true && primerUsuarios.checkControllerUsuario() == false && VistapEmpresa.checkEnterprise() == true) {
+            FrmP_U_Personal cargarpersonal = new FrmP_U_Personal();
+            cargarpersonal.setVisible(true);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -109,8 +133,7 @@ public Image Logo(){
 
     private void BtnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNextActionPerformed
         // TODO add your handling code here:
-        FrmP_U_Empresa pu = new FrmP_U_Empresa();
-        pu.setVisible(true);
+        primerus();
         this.dispose();
     }//GEN-LAST:event_BtnNextActionPerformed
 
@@ -137,16 +160,24 @@ public Image Logo(){
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Bienvenida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Bienvenida.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Bienvenida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Bienvenida.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Bienvenida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Bienvenida.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Bienvenida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Bienvenida.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -154,6 +185,7 @@ public Image Logo(){
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Bienvenida().setVisible(true);
+
             }
         });
     }

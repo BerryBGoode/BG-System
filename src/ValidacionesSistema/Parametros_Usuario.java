@@ -10,8 +10,6 @@ package ValidacionesSistema;
  * @author hp
  */
 public class Parametros_Usuario {
-       private static String titulo;
-    private static String boton;
     
     private static int ID;
     private static int idPersonal;
@@ -19,23 +17,7 @@ public class Parametros_Usuario {
     private static int idTipoUsuario;
     private static int idEstadoUsuario;
     private static byte[] imagen;
-
-    public static String getTitulo() {
-        return titulo;
-    }
-
-    public static void setTitulo(String titulo) {
-        Parametros_Usuario.titulo = titulo;
-    }
-
-    public static String getBoton() {
-        return boton;
-    }
-
-    public static void setBoton(String boton) {
-        Parametros_Usuario.boton = boton;
-    }
-
+    
     public static int getID() {
         return ID;
     }
