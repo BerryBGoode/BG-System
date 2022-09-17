@@ -113,6 +113,37 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         }
         minutos = cal.get(Calendar.MINUTE) > 9 ? "" + cal.get(Calendar.MINUTE) : "0" + cal.get(Calendar.MINUTE);
         segundos = cal.get(Calendar.SECOND) > 9 ? "" + cal.get(Calendar.SECOND) : "0" + cal.get(Calendar.SECOND);
+        
+        if (Integer.valueOf(hora) >= 2 && Integer.valueOf(hora) <= 6 && ampm.equals("pm")) {
+            lblSun.setVisible(false);
+            lblSunset.setVisible(true);
+            lblNight.setVisible(false);
+        }
+        if (Integer.valueOf(hora) >= 7 && Integer.valueOf(hora) <= 11 && ampm.equals("pm")) {
+            lblSun.setVisible(false);
+            lblSunset.setVisible(false);
+            lblNight.setVisible(true);
+        }
+        if (Integer.valueOf(hora) >= 0 && Integer.valueOf(hora) <= 4 && ampm.equals("am")) {
+            lblSun.setVisible(false);
+            lblSunset.setVisible(false);
+            lblNight.setVisible(true);
+        }
+        if (Integer.valueOf(hora) == 5 && ampm.equals("am")) {
+            lblSun.setVisible(false);
+            lblSunset.setVisible(true);
+            lblNight.setVisible(false);
+        }
+        if (Integer.valueOf(hora) >= 6 && Integer.valueOf(hora) <= 11 && ampm.equals("am")) {
+            lblSun.setVisible(true);
+            lblSunset.setVisible(false);
+            lblNight.setVisible(false);
+        }
+        if (Integer.valueOf(hora) >= 0 && Integer.valueOf(hora) <= 1 && ampm.equals("pm")) {
+            lblSun.setVisible(true);
+            lblSunset.setVisible(false);
+            lblNight.setVisible(false);
+        }
     }
 
     /**
@@ -190,6 +221,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
                 formWindowActivated(evt);
             }
         });
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
         panelFondo.setBackground(new java.awt.Color(42, 36, 56));
         panelFondo.setPreferredSize(new java.awt.Dimension(1366, 768));

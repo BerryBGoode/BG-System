@@ -79,24 +79,27 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="Controles_Personalizados.Botones.UWPButton" name="btnFiltrar">
+        <Component class="Controles_Personalizados.Botones.UWPButton" name="btnInforme">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="4b" green="32" red="3a" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Recursos_Proyecto/Filtrar Blanco.png"/>
+              <Image iconType="3" name="/Recursos_Proyecto/bxs-file-doc-white.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value=" Filtrar"/>
+            <Property name="text" type="java.lang.String" value="Informe"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto" size="18" style="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="10"/>
             <Property name="horizontalTextPosition" type="int" value="4"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInformeActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="190" y="80" width="150" height="40"/>
+              <AbsoluteConstraints x="360" y="80" width="120" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -195,6 +198,27 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="1238" y="177" width="10" height="40"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="Controles_Personalizados.Botones.UWPButton" name="btnFiltrar1">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="4b" green="32" red="3a" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Recursos_Proyecto/Filtrar Blanco.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value=" Filtrar"/>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Roboto" size="18" style="0"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="10"/>
+            <Property name="horizontalTextPosition" type="int" value="4"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+              <AbsoluteConstraints x="190" y="80" width="150" height="40"/>
             </Constraint>
           </Constraints>
         </Component>
