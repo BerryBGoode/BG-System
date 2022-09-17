@@ -274,7 +274,7 @@ public class FrmLogin extends javax.swing.JFrame {
                 tipo = rs.getString("tipo_usuario");
             }
         } catch (Exception e) {
-
+            JOptionPane.showMessageDialog(this, e.toString());
         }
     }
 

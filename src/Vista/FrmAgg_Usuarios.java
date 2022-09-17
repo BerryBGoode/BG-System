@@ -46,6 +46,10 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
     byte[] imagen;
     ImageIcon fotoicon;
     FrmRecuAdmin ra = new FrmRecuAdmin();
+    String carnet;
+    int idActivo;
+    int idAlumno;
+    ControllerUsuarios objc = new ControllerUsuarios();
     
     /**
      * Creates new form FrmAgg_Usuarios
@@ -59,7 +63,7 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         txtID.setVisible(false);
         BtnConfirmar.setVisible(true);
         txtID.setVisible(false);
-
+        cbAuto.setVisible(false);
         if ("Actualizar usuario".equals(this.getTitle())) {
             cbRecu.setVisible(true);
             txtID.setText(String.valueOf(ValidacionesSistema.Parametros_Usuario.getID()));
@@ -168,6 +172,7 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         txtID = new javax.swing.JTextField();
         BtnConfirmar = new Controles_Personalizados.Botones.ButtonGradient();
         cbRecu = new javax.swing.JCheckBox();
+        cbAuto = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -263,16 +268,6 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         cmbTipo.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
         cmbTipo.setLabeText("Tipo - Usuario");
         cmbTipo.setLineColor(new java.awt.Color(253, 255, 254));
-        cmbTipo.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmbTipoItemStateChanged(evt);
-            }
-        });
-        cmbTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbTipoActionPerformed(evt);
-            }
-        });
         panelRound1.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 340, 80));
         panelRound1.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 520, -1, -1));
 
@@ -287,13 +282,24 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
                 BtnConfirmarActionPerformed(evt);
             }
         });
-        panelRound1.add(BtnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 500, 150, 44));
+        panelRound1.add(BtnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 510, 150, 44));
 
         cbRecu.setBackground(new java.awt.Color(58, 50, 75));
         cbRecu.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         cbRecu.setForeground(new java.awt.Color(253, 255, 255));
         cbRecu.setText("Recuperar contraseña");
-        panelRound1.add(cbRecu, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 510, -1, -1));
+        panelRound1.add(cbRecu, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 520, -1, -1));
+
+        cbAuto.setBackground(new java.awt.Color(58, 50, 75));
+        cbAuto.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        cbAuto.setForeground(new java.awt.Color(253, 255, 255));
+        cbAuto.setText("Usuario automatico");
+        cbAuto.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbAutoItemStateChanged(evt);
+            }
+        });
+        panelRound1.add(cbAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 520, -1, -1));
 
         getContentPane().add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 580));
 
@@ -310,7 +316,56 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         this.setExtendedState(JFrame.ICONIFIED);
     }//GEN-LAST:event_btnMinimizarMouseClicked
 
-
+    void CargarIDActivo(){
+        ResultSet rs;
+        rs = objc.BuscarIDActivo_C();
+        try {
+            if (rs.next()) {
+                idActivo = rs.getInt("idEstadoUsuario");
+            }
+            int respuesta = BuscarEstadoUsuarioSeleccionado(idActivo);
+            cmbEstado.setSelectedIndex(respuesta + 1);
+        } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,e.toString());
+        }
+    }
+    
+    void CargarIDAlumno(){
+        ResultSet rs;
+        rs = objc.BuscarIDEstudiante_C();
+        try {
+            if (rs.next()) {
+                idAlumno = rs.getInt("idTipoUsuario");
+            }
+            int respuesta = BuscarTipoUsuarioSeleccionado(idAlumno);
+            cmbTipo.setSelectedIndex(respuesta + 1);
+        } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,e.toString());
+        }
+    }
+    
+    void CargarCarnet(){
+        ResultSet rs;
+        if(personal != 0){
+            objc.setIDPersonal(personal);
+            rs = objc.BuscarCarnet_C();
+            try {
+                if (rs.next()) {
+                    carnet = rs.getString("Carnet");
+                }
+                txtUsuario.setText(carnet);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,e.toString());
+            }
+        }
+    }
+    
+    void CargarDatos(){
+        CargarCarnet();
+        CargarIDActivo();
+        CargarIDAlumno();
+    }
+    
     private void cmbPersonalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbPersonalItemStateChanged
         // TODO add your handling code here:
         if (evt.getStateChange() == ItemEvent.SELECTED) {
@@ -325,6 +380,10 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
                     }
                 }
             }
+        }
+        
+        if(cbAuto.isSelected() && cmbPersonal.getSelectedIndex() != 0){
+            CargarDatos();
         }
     }//GEN-LAST:event_cmbPersonalItemStateChanged
 
@@ -345,23 +404,6 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmbEstadoItemStateChanged
 
-    private void cmbTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoItemStateChanged
-        // TODO add your handling code here:
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
-            int pos = cmbTipo.getSelectedIndex();
-            if (pos == 0) {
-                tipoUsu = 0;
-            } else {
-                int dim = myArrayListTU.size();
-                for (int i = 0; i < dim; i++) {
-                    if (i == pos - 1) {
-                        tipoUsu = (int) myArrayListTU.get(i);
-                    }
-                }
-            }
-        }
-    }//GEN-LAST:event_cmbTipoItemStateChanged
-
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
         // TODO add your handling code here:
         Actualizar();
@@ -380,9 +422,15 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         MostrarImagen();
     }//GEN-LAST:event_btnExaminarActionPerformed
 
-    private void cmbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoActionPerformed
+    private void cbAutoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbAutoItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmbTipoActionPerformed
+        if(! cbAuto.isSelected()){
+            txtUsuario.setText("");
+            cmbEstado.setSelectedIndex(0);
+            cmbTipo.setSelectedIndex(0);
+            cmbPersonal.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_cbAutoItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -552,11 +600,10 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Controles_Personalizados.Botones.ButtonGradient BtnConfirmar;
-    private javax.swing.JCheckBox CbGenerarCarnet;
-    private javax.swing.JCheckBox CbGenerarCarnet1;
     private javax.swing.JLabel btnCerrar;
     private Controles_Personalizados.Botones.UWPButton btnExaminar;
     private javax.swing.JLabel btnMinimizar;
+    private javax.swing.JCheckBox cbAuto;
     private javax.swing.JCheckBox cbRecu;
     private Controles_Personalizados.ComboBox.combobox cmbEstado;
     private Controles_Personalizados.ComboBox.combobox cmbPersonal;

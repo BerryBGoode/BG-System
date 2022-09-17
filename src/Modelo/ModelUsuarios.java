@@ -130,4 +130,41 @@ public class ModelUsuarios {
                 return null;
             }
         }
+        
+        public ResultSet BuscaCarnet(int ID, Connection con){
+            try{
+                String query = "SELECT Carnet FROM tbPersonal WHERE idPersonal = ?";
+                ps = con.prepareStatement(query);
+                ps.setInt(1, ID);
+                ResultSet rs = ps.executeQuery();
+                return rs;
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e.toString());
+                return null;
+            }
+        }
+        
+        public ResultSet BuscarIDActivo(Connection con){
+            try{
+                String query = "SELECT idEstadoUsuario FROM tbEstadoUsuario WHERE estado_usuario = 'Activo'";
+                ps = con.prepareStatement(query);
+                ResultSet rs = ps.executeQuery();
+                return rs;
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e.toString());
+                return null;
+            }
+        }
+        
+        public ResultSet BuscarIDEstudiante(Connection con){
+            try{
+                String query = "SELECT a.Carnet FROM tbPersonal a, tbTipoPersonal b WHERE a.idPersonal =  ? AND b.tipo_personal = 'Alumnos' AND a.idTipoPersonal = b.idTipoPersonal";
+                ps = con.prepareStatement(query);
+                ResultSet rs = ps.executeQuery();
+                return rs;
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e.toString());
+                return null;
+            }
+        }
 }

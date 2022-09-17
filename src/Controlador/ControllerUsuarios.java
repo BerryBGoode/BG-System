@@ -167,4 +167,16 @@ public class ControllerUsuarios {
     public ResultSet BuscarImagen_C(){
         return mdlusu.BuscarImagen(ID, con);
     }
+    
+    public ResultSet BuscarCarnet_C(){
+        return mdlusu.BuscaCarnet(IDPersonal, con);
+    }
+    
+    public ResultSet BuscarIDActivo_C(){
+        return mdlusu.BuscarIDActivo(con);
+    }
+    
+    public ResultSet BuscarIDEstudiante_C(){
+        return mdlusu.BuscarIDEstudiante(con);
+    }
 }
