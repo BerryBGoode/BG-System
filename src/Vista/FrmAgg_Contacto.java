@@ -58,7 +58,7 @@ public class FrmAgg_Contacto extends javax.swing.JFrame {
         cmbtipoc.setSelectedItem(ValidacionesSistema.Parametros_Contactos.getTipocontacto());
         System.out.println(cmbtipoc.getSelectedItem());
         txtID.setVisible(false);
-        txtIDPersonal.setVisible(true);
+        txtIDPersonal.setVisible(false);
         txtID.setEditable(false);
         txtIDPersonal.setEditable(false);
     }

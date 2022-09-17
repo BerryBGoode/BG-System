@@ -55,4 +55,40 @@ public class ModelRecuperacionContra {
             return false;
         }
     }
+    
+    //Por intervención de administrador
+    
+    public static ResultSet CargarTipoDocumento(Connection con){
+        PreparedStatement ps;
+        try{
+            ps = con.prepareStatement("SELECT * FROM tbTipoDocumento");
+            ResultSet rs = ps.executeQuery();
+            return rs;
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null,"Error al cargar los tipos de documento" + e.toString(),"Error", JOptionPane.WARNING_MESSAGE);
+            return null;
+        }
+    }
+    
+    public static int ValidarDocumento(String usuario, String documento, int idTipoDoc, Connection con){
+        int i = 0;
+        PreparedStatement ps;
+
+        try {
+            ps = con.prepareStatement("SELECT * FROM tbUsuarios a, tbPersonal b WHERE nombre_usuario = ? AND documento = ? AND idTipoDocumento = ?");
+            ps.setString(1, usuario);
+            ps.setString(2, documento);
+            ps.setInt(3, idTipoDoc);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                i = 1;
+            } else {
+                i = 0;
+            }
+            return i;
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Credenciales invalidas" + e.toString(), "ERROR CRITICO", JOptionPane.WARNING_MESSAGE);
+            return 0;
+        }
+    }
 }

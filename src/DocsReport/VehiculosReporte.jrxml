@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="af047b68-b3a9-4ac5-9e21-3ff8c3b7325d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM vwVehiculos]]>
+	</queryString>
+	<field name="idPersonal" class="java.lang.Integer"/>
+	<field name="idVehiculo" class="java.lang.Integer"/>
+	<field name="Carnet" class="java.lang.String"/>
+	<field name="nombre_p" class="java.lang.String"/>
+	<field name="apellido_p" class="java.lang.String"/>
+	<field name="placa" class="java.lang.String"/>
+	<field name="color" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="85" height="71" uuid="c017e352-69a7-4c82-9653-96fb3e9f2a34"/>
+				<imageExpression><![CDATA["C:\\Users\\50377\\Documents\\GITHUB\\BG-System\\src\\Recursos_Proyecto\\LogoB&GLogin.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="200" y="17" width="192" height="54" uuid="a447f5d9-f9d7-46cd-b724-30c500da7f88"/>
+				<textElement>
+					<font fontName="Arial" size="40"/>
+				</textElement>
+				<text><![CDATA[Vehiculos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="11" y="18" width="26" height="24" uuid="b83955e3-05cd-4e45-bcb8-d84d69602fcc"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="48" y="18" width="141" height="24" uuid="5de1cccb-1442-407d-a30b-6f4b5772300d"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Personal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="18" width="66" height="24" uuid="41e65d9a-322f-4ace-bf0c-f8f8cc96039d"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Carnet]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="284" y="18" width="70" height="24" uuid="d99cbcd9-8f14-4bf4-96b0-64c99936db96"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Placa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="374" y="18" width="71" height="24" uuid="387b76f7-58d8-49df-bbf9-e07e65d06654"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Color]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="464" y="18" width="108" height="24" uuid="4146e456-df39-44f1-ac84-6b93b00b11f8"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID Personal]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="44" splitType="Stretch">
+			<textField>
+				<reportElement x="11" y="13" width="26" height="27" forecolor="#333333" uuid="2bdbc559-81d9-4fb7-b4b0-9fd960bc2937"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idVehiculo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="48" y="13" width="141" height="27" forecolor="#333333" uuid="adec1c68-7cb4-48ab-94ee-b94400c8d7ed"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_p} + "" + $F{apellido_p}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="13" width="66" height="27" forecolor="#333333" uuid="9a7832ca-db5e-41f4-ac5f-d3ae61694cb1"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Carnet}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="284" y="13" width="70" height="27" forecolor="#333333" uuid="a6324758-7a36-4234-bcc0-3b6dd8858cab"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{placa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="374" y="13" width="71" height="27" forecolor="#333333" uuid="85754f44-ebfc-4eff-b892-8a6b8b8339ff"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{color}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="464" y="13" width="98" height="27" forecolor="#333333" uuid="4f34721d-7590-47b2-a3c1-1786966668ba"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idPersonal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="96" splitType="Stretch">
+			<image>
+				<reportElement x="464" y="14" width="85" height="71" uuid="436a83c3-82a2-46b0-8f4e-23946d1f2dff"/>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

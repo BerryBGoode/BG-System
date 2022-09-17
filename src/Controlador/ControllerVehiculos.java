@@ -11,87 +11,78 @@ import Modelo.ModelVehiculos;
  */
 public class ControllerVehiculos {
     
-    private int idvehiculo;
-    private int idpersonal;
-    private String placa;
-    private String color;
+    public static int idvehiculo;
+    public static String personal;
+    public static String Carnet;
+    public static String placa;
+    public static String color;
+    public static int idPersonal;
 
-    public int getIdpersonal() {
-        return idpersonal;
+    public static int getIdvehiculo() {
+        return idvehiculo;
     }
 
-    public void setIdpersonal(int idpersonal) {
-        this.idpersonal = idpersonal;
+    public static void setIdvehiculo(int idvehiculo) {
+        ControllerVehiculos.idvehiculo = idvehiculo;
     }
 
-    public String getPlaca() {
+    public static String getPersonal() {
+        return personal;
+    }
+
+    public static void setPersonal(String personal) {
+        ControllerVehiculos.personal = personal;
+    }
+
+    public static String getCarnet() {
+        return Carnet;
+    }
+
+    public static void setCarnet(String Carnet) {
+        ControllerVehiculos.Carnet = Carnet;
+    }
+
+    public static String getPlaca() {
         return placa;
     }
 
-    public void setPlaca(String placa) {
-        this.placa = placa;
+    public static void setPlaca(String placa) {
+        ControllerVehiculos.placa = placa;
     }
 
-    public String getColor() {
+    public static String getColor() {
         return color;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public static void setColor(String color) {
+        ControllerVehiculos.color = color;
     }
 
-    public ControllerVehiculos(int idpersonal, String placa, String color) {
-        this.idpersonal = idpersonal;
-        this.placa = placa;
-        this.color = color;
+    public static int getIdPersonal() {
+        return idPersonal;
     }
 
-    /**
-     * 
-     * @return 
-     */
-    
-    public ControllerVehiculos(int idvehiculo, int idpersonal, String placa, String color) {
-        this.idvehiculo = idvehiculo;
-        this.idpersonal = idpersonal;
-        this.placa = placa;
-        this.color = color;
-    }
-    
-    /**
-     * 
-     * @return 
-     */
-
-    public ControllerVehiculos(int idvehiculo) {
-        this.idvehiculo = idvehiculo;
-    }
-    
-    /**
-     * 
-     * @return 
-     */
-
-    public ControllerVehiculos() {
+    public static void setIdPersonal(int idPersonal) {
+        ControllerVehiculos.idPersonal = idPersonal;
     }
 
-    public static ResultSet CargarTablaVehiculos_Controller() {
+    public static ResultSet CargarTabla() {
         return ModelVehiculos.CargarTabla();
     }
     
-    public static ResultSet CargarCMBPersonal_Controller() {
-        return ModelVehiculos.CargarCMBPersonal();
+    public static ResultSet CargarTabla_Personal() {
+        return ModelVehiculos.CargarTabla_Personal();
     }
     
-    public int RegistrarVehiculo_Controller() {
-        return ModelVehiculos.RegistrarVehiculo(idpersonal, placa, color);
+    public static boolean RegistrarVehiculo_Controller() {
+        return ModelVehiculos.RegistrarVehiculo(idPersonal, placa, color);
     }
     
-    public boolean ActualizarVehiculo_Controller() {
-        return ModelVehiculos.ActualizarVehiculo(idvehiculo, idpersonal, placa, color);
+    public static boolean ActualizarVehiculo_Controller() {
+        return ModelVehiculos.ActualizarVehiculo(idvehiculo, idPersonal, placa, color);
     }
     
-    public boolean EliminarVehiculo_Controller() {
+    public static boolean EliminarVehiculo_Controller() {
         return ModelVehiculos.EliminarVehiculo(idvehiculo);
     }
 }
