@@ -29,6 +29,30 @@ public class ModelAccesos {
         }
     }
 
+    public static ResultSet getdataEntry(String tablename) {
+        try {
+            con = ModelConexion.getConnection();
+            sql = con.prepareStatement("SELECT * FROM " + tablename + " WHERE idTipoAcceso=1");
+            rs = sql.executeQuery();
+            return rs;
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.toString());
+            return null;
+        }
+    }
+
+    public static ResultSet getdataExit(String tablename) {
+        try {
+            con = ModelConexion.getConnection();
+            sql = con.prepareStatement("SELECT * FROM " + tablename + " WHERE idTipoAcceso=2");
+            rs = sql.executeQuery();
+            return rs;
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.toString());
+            return null;
+        }
+    }
+
     //Method for insert access of staff
     public static boolean insertAccess(int ID, int typeaccess, String date, String hour, String justif) {
         try {
@@ -74,24 +98,26 @@ public class ModelAccesos {
             return false;
         }
     }
-    public static ResultSet LookingForId_Personal(String carne){
+
+    public static ResultSet LookingForId_Personal(String carne) {
         ResultSet rs;
         Connection con;
         PreparedStatement ps;
         try {
-            con=ModelConexion.getConnection();
-            String query="SELECT * FROM tbPersonal WHere Carnet=?";
-            ps=con.prepareStatement(query);
+            con = ModelConexion.getConnection();
+            String query = "SELECT * FROM tbPersonal WHere Carnet=?";
+            ps = con.prepareStatement(query);
             ps.setString(1, carne);
-            rs=ps.executeQuery();
+            rs = ps.executeQuery();
             return rs;
         } catch (SQLException e) {
             System.out.println(e.toString());
             return null;
         }
-                
+
     }
-        public static boolean insertAccessBarCode(int ID, int typeaccess, String date, String hour, String justif) {
+
+    public static boolean insertAccessBarCode(int ID, int typeaccess, String date, String hour, String justif) {
         try {
             con = ModelConexion.getConnection();
             sql = con.prepareStatement("INSERT INTO tbAccesos VALUES (?,?,?,?,?)");

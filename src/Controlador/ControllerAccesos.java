@@ -7,20 +7,21 @@ package Controlador;
 
 import java.sql.ResultSet;
 import Modelo.ModelAccesos;
+
 /**
  *
  * @author danlo
  */
 public class ControllerAccesos {
-   
-     private static int ID;
+
+    private static int ID;
     private static int typeAccess;
     private static String date;
     private static String Carnet;
     private static String hour;
     private static String justification;
     private static int staff;
-    
+
     public static int getID() {
         return ID;
     }
@@ -76,24 +77,32 @@ public class ControllerAccesos {
     public static void setCarnet(String Carnet) {
         ControllerAccesos.Carnet = Carnet;
     }
-    
-            
-    public static ResultSet getdata(String tablename){
+
+    public static ResultSet getdata(String tablename) {
         return ModelAccesos.getdata(tablename);
     }
-    
-    public static boolean insertAccess(){
-        return ModelAccesos.insertAccess(getID(), getTypeAccess(),getDate(), getHour(), getJustification());
+
+    public static ResultSet getdataEntry(String tablename) {
+        return ModelAccesos.getdataEntry(tablename);
     }
-    
-    public static boolean updateAccess(){
+
+    public static ResultSet getdataExit(String tablename) {
+        return ModelAccesos.getdataExit(tablename);
+    }
+
+    public static boolean insertAccess() {
+        return ModelAccesos.insertAccess(getID(), getTypeAccess(), getDate(), getHour(), getJustification());
+    }
+
+    public static boolean updateAccess() {
         return ModelAccesos.updateAccess(getStaff(), getTypeAccess(), justification, getID());
     }
-    
-    public static boolean deleteAccess(){
+
+    public static boolean deleteAccess() {
         return ModelAccesos.deleteAccess(getID());
     }
-    public static ResultSet LookiingForPersonal(){
+
+    public static ResultSet LookiingForPersonal() {
         return ModelAccesos.LookingForId_Personal(Carnet);
     }
 }

@@ -10,6 +10,7 @@ import java.awt.Image;
 import java.awt.Shape;
 import java.awt.Toolkit;
 import java.awt.geom.RoundRectangle2D;
+import javax.swing.JFrame;
 
 /**
  *
@@ -47,8 +48,11 @@ public class FrmOpcionAcceso extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1100, 580));
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1099, 576));
 
@@ -60,9 +64,19 @@ public class FrmOpcionAcceso extends javax.swing.JFrame {
         panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-door-open 1.png"))); // NOI18N
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
         panelRound1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, 220, 210));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Exit.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
         panelRound1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 170, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 48)); // NOI18N
@@ -75,10 +89,50 @@ public class FrmOpcionAcceso extends javax.swing.JFrame {
         jLabel4.setText("SALIDA");
         panelRound1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 380, 220, -1));
 
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/CerrarLogin.png"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
+        panelRound1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 10, -1, -1));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Maximizar.png"))); // NOI18N
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
+        panelRound1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 11, -1, -1));
+
         getContentPane().add(panelRound1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        FrmBarcode_Entry barcode_Entry = new FrmBarcode_Entry();
+        barcode_Entry.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        // TODO add your handling code here:
+        this.setExtendedState(JFrame.ICONIFIED);
+    }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        FrmBarcode_Exit frmBarcode_Exit=new FrmBarcode_Exit();
+        frmBarcode_Exit.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -120,6 +174,8 @@ public class FrmOpcionAcceso extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private Controles_Personalizados.Paneles.PanelRound panelRound1;
     // End of variables declaration//GEN-END:variables
 }
