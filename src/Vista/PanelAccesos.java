@@ -15,6 +15,7 @@ import Controles_Personalizados.RenderTable;
 import Controles_Personalizados.Tables.Table;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
@@ -32,42 +33,59 @@ public class PanelAccesos extends javax.swing.JPanel {
     DefaultTableModel tb;
     ControllerAccesos controller = new ControllerAccesos();
     FrmAgg_Acceso add = new FrmAgg_Acceso();
-    UWPButton btnupdate = new UWPButton();
-    UWPButton btndelete = new UWPButton();
+    FrmOpcionAcceso addop = new FrmOpcionAcceso();
+    UWPButton btnupdate;
+    UWPButton btndelete;
     ImageIcon modifIcon = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar.png"));
     ImageIcon deleteIcon = new ImageIcon(getClass().getResource("/Recursos_Proyecto/eliminar.png"));
     private String CapCarnet;
     private int idPersonal;
     private int frmstate;
+    private String tipouser;
 
     public Font font = new Font("Roboto Black", Font.PLAIN, 18);
 
     /**
      * Creates new form PanelAccesos
      */
-    public PanelAccesos() {
+    public PanelAccesos(String tipousuario) {
         initComponents();
+        tipouser = tipousuario;
         //TxtCodigoBarra.setEditable(false);
-        String[] header = {"IDAcceso", "IDPersonal", "Carnet", "Fecha", "IDTipoAcceso", "Hora", "Acceso", "Notificación", "Modificar", "Eliminar"};
-        tb = new DefaultTableModel(null, header);
-        loadTable();
-        TbAccesosWhite4.setDefaultRenderer(Object.class, new RenderTable());
-        TbAccesosWhite4.setModel(tb);
-        TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(0));
-        TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(0));
-        TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(2));
-        btnupdate.setName("btnModificar");
-        btnupdate.setBackground(new Color(231, 234, 239));
-        btnupdate.setIcon(modifIcon);
+        if (tipouser.equals("Seguridad")) {
+            System.out.println(tipouser);
+            String[] header = {"IDAcceso", "IDPersonal", "Carnet", "Fecha", "IDTipoAcceso", "Hora", "Acceso", "Notificación"};
+            tb = new DefaultTableModel(null, header);
+            loadTableToSegurity();
+            TbAccesosWhite4.setDefaultRenderer(Object.class, new RenderTable());
+            TbAccesosWhite4.setModel(tb);
+            TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(0));
+            TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(0));
+            TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(2));
+        } else {
+            btnupdate = new UWPButton();
+            btndelete = new UWPButton();
+            String[] header = {"IDAcceso", "IDPersonal", "Carnet", "Fecha", "IDTipoAcceso", "Hora", "Acceso", "Notificación", "Modificar", "Eliminar"};
+            tb = new DefaultTableModel(null, header);
+            loadTable();
+            TbAccesosWhite4.setDefaultRenderer(Object.class, new RenderTable());
+            TbAccesosWhite4.setModel(tb);
+            TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(0));
+            TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(0));
+            TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(2));
+            btnupdate.setName("btnModificar");
+            btnupdate.setBackground(new Color(231, 234, 239));
+            btnupdate.setIcon(modifIcon);
 
-        btndelete.setName("btnEliminar");
-        btndelete.setBackground(new Color(231, 234, 239));
-        btndelete.setIcon(deleteIcon);
+            btndelete.setName("btnEliminar");
+            btndelete.setBackground(new Color(231, 234, 239));
+            btndelete.setIcon(deleteIcon);
+        }
 
     }
 
     final void refresh() {
-        if (frmstate == 1 && !(add.isActive())) {
+        if (frmstate == 1 || frmstate == 2 && !(add.isActive())) {
             loadTable();
             frmstate = 0;
         } else if (frmstate == 0 && !(add.isActive())) {
@@ -88,7 +106,6 @@ public class PanelAccesos extends javax.swing.JPanel {
         PanelFondo = new Controles_Personalizados.Paneles.PanelRound();
         lblAccesos = new javax.swing.JLabel();
         btnFiltrar = new Controles_Personalizados.Botones.UWPButton();
-        TxtCodigoBarra = new javax.swing.JTextField();
         btnAgregar = new Controles_Personalizados.Botones.UWPButton();
         PanelTabla = new javax.swing.JScrollPane();
         TbAccesosWhite4 = new Controles_Personalizados.Tables.Table();
@@ -121,14 +138,6 @@ public class PanelAccesos extends javax.swing.JPanel {
         btnFiltrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         PanelFondo.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 150, 40));
-
-        TxtCodigoBarra.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        TxtCodigoBarra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TxtCodigoBarraActionPerformed(evt);
-            }
-        });
-        PanelFondo.add(TxtCodigoBarra, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 24, 290, 70));
 
         btnAgregar.setBackground(new java.awt.Color(58, 50, 75));
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Agregar Blanco.png"))); // NOI18N
@@ -241,13 +250,23 @@ public class PanelAccesos extends javax.swing.JPanel {
 
 
     private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
-        if (add.isVisible()) {
-            add.toFront();
+        if (tipouser.equals("Seguridad")) {
+            if (addop.isVisible()) {
+                addop.toFront();
+            } else {
+                addop.setVisible(true);
+                frmstate = 2;
+            }
         } else {
-            add.setAction(1);
-            add.setVisible(true);
-            frmstate = 1;
+            if (add.isVisible()) {
+                add.toFront();
+            } else {
+                add.setAction(1);
+                add.setVisible(true);
+                frmstate = 1;
+            }
         }
+
     }//GEN-LAST:event_btnAgregarMouseClicked
 
     private void TbAccesosWhite4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbAccesosWhite4MouseEntered
@@ -317,8 +336,8 @@ public class PanelAccesos extends javax.swing.JPanel {
                     }
                 }
             }
-        } catch (Exception e) {
-
+        } catch (HeadlessException | NumberFormatException e) {
+            System.out.println(e.toString());
         }
     }//GEN-LAST:event_TbAccesosWhite4MouseClicked
 
@@ -332,55 +351,10 @@ public class PanelAccesos extends javax.swing.JPanel {
         refresh();
     }//GEN-LAST:event_TbAccesosWhite4MouseMoved
 
-    private void TxtCodigoBarraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtCodigoBarraActionPerformed
-        // TODO add your handling code here:
-        CapCarnet = TxtCodigoBarra.getText();
-        LookingForPersonal();
-    }//GEN-LAST:event_TxtCodigoBarraActionPerformed
-
     private void PanelFondoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseClicked
         // TODO add your handling code here:
         refresh();
     }//GEN-LAST:event_PanelFondoMouseClicked
-
-    void insertbyCode128() {
-        Date today = new Date();
-        today.getTime();
-
-        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat formatHour = new SimpleDateFormat("hh:mm:ss");
-        String date = formatDate.format(today);
-        String hour = formatHour.format(today);
-
-        ControllerAccesos.setDate(date);
-        ControllerAccesos.setHour(hour);
-        ControllerAccesos.setID(idPersonal);
-        ControllerAccesos.setTypeAccess(1);
-        if (ControllerAccesos.insertAccess() == true) {
-            JOptionPane.showMessageDialog(null, "Su insercion se ha realizado");
-        } else {
-            JOptionPane.showMessageDialog(null, "No se realizo la insercion");
-        }
-    }
-
-    void LookingForPersonal() {
-        try {
-            ControllerAccesos.setCarnet(CapCarnet);
-            ResultSet rs = ControllerAccesos.LookiingForPersonal();
-            if (rs.next()) {
-                idPersonal = rs.getInt("idPersonal");
-                System.out.println("Si se encontro, Su id es: " + idPersonal);
-                insertbyCode128();
-                TxtCodigoBarra.setText("");
-            } else {
-                JOptionPane.showMessageDialog(null, "El codigo del Carné no esta registrado en el sistema", "Codigo no encontrado", JOptionPane.ERROR_MESSAGE);
-                TxtCodigoBarra.setText("");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(PanelAccesos.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("No se encontro");
-        }
-    }
 
     void loadTable() {
         ResultSet rs;
@@ -398,13 +372,28 @@ public class PanelAccesos extends javax.swing.JPanel {
         }
     }
 
+    void loadTableToSegurity() {
+        ResultSet rs;
+        try {
+            while (tb.getRowCount() > 0) {
+                tb.removeRow(0);
+            }
+            rs = ControllerAccesos.getdata("vwAccesos");
+            while (rs.next()) {
+                Object[] data = {rs.getInt("idAcceso"), rs.getInt("idPersonal"), rs.getString("Carnet"), rs.getDate("fecha"), rs.getInt("idTipoAcceso"), rs.getTime("hora"), rs.getString("tipo_acceso"), rs.getString("notificacion")};
+                tb.addRow(data);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error:" + e.toString());
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Controles_Personalizados.Paneles.PanelRound PanelFondo;
     private javax.swing.JScrollPane PanelTabla;
     private Controles_Personalizados.ScrollBar.ScrollBarCustom ScrollTabla;
     private Controles_Personalizados.Tables.Table TbAccesosWhite4;
-    private javax.swing.JTextField TxtCodigoBarra;
     private Controles_Personalizados.Botones.UWPButton btnAgregar;
     private Controles_Personalizados.Botones.UWPButton btnFiltrar;
     private javax.swing.JLabel lblAccesos;

@@ -30,12 +30,14 @@ import java.util.GregorianCalendar;
  * @author danlo and ferna
  */
 public class FrmDashboard extends javax.swing.JFrame implements Runnable {
+    private String tipousuario;
 
     /**
      * Creates new form Dashboard
      */
     public FrmDashboard(String nombre, String tipo) {
         initComponents();
+        tipousuario=tipo;
         this.setLocationRelativeTo(null);
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
         AWTUtilities.setWindowShape(this, forma);
@@ -221,7 +223,6 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
                 formWindowActivated(evt);
             }
         });
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
         panelFondo.setBackground(new java.awt.Color(42, 36, 56));
         panelFondo.setPreferredSize(new java.awt.Dimension(1366, 768));
@@ -935,7 +936,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionLogout.setVisible(false);
         panelSeleccionAjustes.setVisible(false);
 
-        PanelAccesos pl = new PanelAccesos();
+        PanelAccesos pl = new PanelAccesos(tipousuario);
         pl.setSize(1270, 620);
         pl.setLocation(0, 0);
 
