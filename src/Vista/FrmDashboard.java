@@ -154,7 +154,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     
         final void GetDayString() {
         DayOfWeek dia = LocalDate.now().getDayOfWeek();
-        String day = dia.getDisplayName(TextStyle.FULL, new Locale("es", "ES"));
+        String day = dia.getDisplayName(TextStyle.FULL, new Locale("en", "US"));
         
         String firstletter = day.substring(0, 1);
         String capital = firstletter.toUpperCase();
