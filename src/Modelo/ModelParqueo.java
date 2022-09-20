@@ -195,6 +195,5 @@ public class ModelParqueo {
             System.out.println("Error: "+e.toString());
             return null;
         }
-    }
-    
+    }    
 }
