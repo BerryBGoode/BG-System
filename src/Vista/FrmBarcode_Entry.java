@@ -127,6 +127,7 @@ public class FrmBarcode_Entry extends javax.swing.JFrame {
         TxtValidateBarcode = new Controles_Personalizados.textfields.TextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1100, 580));
@@ -156,7 +157,7 @@ public class FrmBarcode_Entry extends javax.swing.JFrame {
         TbEntryAccess.setSelectionBackground(new java.awt.Color(58, 50, 75));
         jScrollPane1.setViewportView(TbEntryAccess);
 
-        panelRound1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 970, 430));
+        panelRound1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 990, 320));
 
         TxtValidateBarcode.setBackground(new java.awt.Color(58, 50, 75));
         TxtValidateBarcode.setForeground(new java.awt.Color(254, 254, 254));
@@ -176,7 +177,7 @@ public class FrmBarcode_Entry extends javax.swing.JFrame {
                 TxtValidateBarcodeActionPerformed(evt);
             }
         });
-        panelRound1.add(TxtValidateBarcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 610, 70));
+        panelRound1.add(TxtValidateBarcode, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 610, 70));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/CerrarLogin.png"))); // NOI18N
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -193,6 +194,11 @@ public class FrmBarcode_Entry extends javax.swing.JFrame {
             }
         });
         panelRound1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 11, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 50)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(253, 255, 254));
+        jLabel3.setText("Entrada");
+        panelRound1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
 
         getContentPane().add(panelRound1, java.awt.BorderLayout.CENTER);
 
@@ -260,6 +266,7 @@ public class FrmBarcode_Entry extends javax.swing.JFrame {
     private Controles_Personalizados.textfields.TextField TxtValidateBarcode;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private Controles_Personalizados.Paneles.PanelRound panelRound1;
     // End of variables declaration//GEN-END:variables
