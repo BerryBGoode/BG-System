@@ -126,6 +126,7 @@ public class FrmBarcode_Exit extends javax.swing.JFrame {
         TbBarcode_Exit = new Controles_Personalizados.Tables.Table();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1100, 580));
@@ -148,7 +149,7 @@ public class FrmBarcode_Exit extends javax.swing.JFrame {
                 TxtValidarCarnetActionPerformed(evt);
             }
         });
-        panelRound1.add(TxtValidarCarnet, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 610, 70));
+        panelRound1.add(TxtValidarCarnet, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 610, 70));
 
         TbBarcode_Exit.setBackground(new java.awt.Color(231, 234, 239));
         TbBarcode_Exit.setModel(new javax.swing.table.DefaultTableModel(
@@ -164,9 +165,11 @@ public class FrmBarcode_Exit extends javax.swing.JFrame {
         ));
         TbBarcode_Exit.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         TbBarcode_Exit.setGridColor(new java.awt.Color(58, 50, 75));
+        TbBarcode_Exit.setSelectionBackground(new java.awt.Color(58, 50, 75));
+        TbBarcode_Exit.setSelectionForeground(new java.awt.Color(253, 255, 254));
         jScrollPane1.setViewportView(TbBarcode_Exit);
 
-        panelRound1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 990, 380));
+        panelRound1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 990, 320));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/CerrarLogin.png"))); // NOI18N
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -183,6 +186,11 @@ public class FrmBarcode_Exit extends javax.swing.JFrame {
             }
         });
         panelRound1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 11, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 0, 50)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(253, 255, 254));
+        jLabel3.setText("Salida");
+        panelRound1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
         getContentPane().add(panelRound1, java.awt.BorderLayout.CENTER);
 
@@ -246,6 +254,7 @@ public class FrmBarcode_Exit extends javax.swing.JFrame {
     private Controles_Personalizados.textfields.TextField TxtValidarCarnet;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private Controles_Personalizados.Paneles.PanelRound panelRound1;
     // End of variables declaration//GEN-END:variables

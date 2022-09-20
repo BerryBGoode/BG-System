@@ -83,7 +83,9 @@ public class PanelAccesos extends javax.swing.JPanel {
         }
 
     }
-
+    /**
+     * This function is to refresh the Jtable in the systemAn
+     */
     final void refresh() {
         if (frmstate == 1 || frmstate == 2 && !(add.isActive())) {
             loadTable();
