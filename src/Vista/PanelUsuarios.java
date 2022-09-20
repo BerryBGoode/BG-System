@@ -95,52 +95,46 @@ public class PanelUsuarios extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         PanelFondo = new Controles_Personalizados.Paneles.PanelRound();
-        lblUsuarios = new javax.swing.JLabel();
-        btnFiltrar = new Controles_Personalizados.Botones.UWPButton();
-        btnAgregar = new Controles_Personalizados.Botones.UWPButton();
+        jPanel1 = new javax.swing.JPanel();
+        ScrollTabla = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
+        jPanel2 = new javax.swing.JPanel();
         PanelTabla = new javax.swing.JScrollPane();
         tbUsuarios = new Controles_Personalizados.Tables.Table();
-        ScrollTabla = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        btnFiltrar = new Controles_Personalizados.Botones.UWPButton();
+        btnAgregar = new Controles_Personalizados.Botones.UWPButton();
+        lblUsuarios = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setBackground(new java.awt.Color(42, 36, 56));
+        setLayout(new java.awt.BorderLayout());
 
         PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
         PanelFondo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         PanelFondo.setPreferredSize(new java.awt.Dimension(1270, 620));
+        PanelFondo.setRoundBottomLeft(20);
+        PanelFondo.setRoundBottomRight(20);
         PanelFondo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 PanelFondoMouseMoved(evt);
             }
         });
-        PanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelFondo.setLayout(new java.awt.GridBagLayout());
 
-        lblUsuarios.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
-        lblUsuarios.setForeground(new java.awt.Color(58, 50, 75));
-        lblUsuarios.setText("Usuarios");
-        PanelFondo.add(lblUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jPanel1.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
-        btnFiltrar.setBackground(new java.awt.Color(58, 50, 75));
-        btnFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Filtrar Blanco.png"))); // NOI18N
-        btnFiltrar.setText(" Filtrar");
-        btnFiltrar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        btnFiltrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        PanelFondo.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 150, 40));
+        ScrollTabla.setBackground(new java.awt.Color(58, 50, 75));
+        ScrollTabla.setForeground(new java.awt.Color(58, 50, 75));
+        jPanel1.add(ScrollTabla, java.awt.BorderLayout.PAGE_START);
 
-        btnAgregar.setBackground(new java.awt.Color(58, 50, 75));
-        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Agregar Blanco.png"))); // NOI18N
-        btnAgregar.setText(" Agregar");
-        btnAgregar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        btnAgregar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        btnAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
-        PanelFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 150, 40));
+        jPanel2.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel2.setLayout(new java.awt.BorderLayout());
 
         PanelTabla.setHorizontalScrollBar(null);
         PanelTabla.setVerticalScrollBar(ScrollTabla);
@@ -201,13 +195,59 @@ public class PanelUsuarios extends javax.swing.JPanel {
         });
         PanelTabla.setViewportView(tbUsuarios);
 
-        PanelFondo.add(PanelTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 1230, 480));
+        jPanel2.add(PanelTabla, java.awt.BorderLayout.CENTER);
 
-        ScrollTabla.setBackground(new java.awt.Color(58, 50, 75));
-        ScrollTabla.setForeground(new java.awt.Color(58, 50, 75));
-        PanelFondo.add(ScrollTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(1238, 177, 10, 40));
+        jPanel6.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel2.add(jPanel6, java.awt.BorderLayout.NORTH);
 
-        add(PanelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
+
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        jPanel4.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnFiltrar.setBackground(new java.awt.Color(58, 50, 75));
+        btnFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Filtrar Blanco.png"))); // NOI18N
+        btnFiltrar.setText(" Filtrar");
+        btnFiltrar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        btnFiltrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        jPanel4.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 150, 40));
+
+        btnAgregar.setBackground(new java.awt.Color(58, 50, 75));
+        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Agregar Blanco.png"))); // NOI18N
+        btnAgregar.setText(" Agregar");
+        btnAgregar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        btnAgregar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 150, 40));
+
+        lblUsuarios.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
+        lblUsuarios.setForeground(new java.awt.Color(58, 50, 75));
+        lblUsuarios.setText("Usuarios");
+        jPanel4.add(lblUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jPanel3.add(jPanel4, java.awt.BorderLayout.WEST);
+
+        jPanel5.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel3.add(jPanel5, java.awt.BorderLayout.CENTER);
+
+        jPanel1.add(jPanel3, java.awt.BorderLayout.PAGE_START);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 10, 10);
+        PanelFondo.add(jPanel1, gridBagConstraints);
+
+        add(PanelFondo, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     /* btnModificar.setIcon(Modificar);
@@ -312,6 +352,12 @@ public class PanelUsuarios extends javax.swing.JPanel {
     private Controles_Personalizados.ScrollBar.ScrollBarCustom ScrollTabla;
     private Controles_Personalizados.Botones.UWPButton btnAgregar;
     private Controles_Personalizados.Botones.UWPButton btnFiltrar;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel lblUsuarios;
     private Controles_Personalizados.Tables.Table tbUsuarios;
     // End of variables declaration//GEN-END:variables

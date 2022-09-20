@@ -111,7 +111,8 @@ public class PanelProfesores extends javax.swing.JPanel {
         TbProfesoresWhite = new Controles_Personalizados.Tables.Table();
         ScrollTabla = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setBackground(new java.awt.Color(42, 36, 56));
+        setLayout(new java.awt.BorderLayout());
 
         PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
         PanelFondo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -226,7 +227,7 @@ public class PanelProfesores extends javax.swing.JPanel {
         ScrollTabla.setForeground(new java.awt.Color(58, 50, 75));
         PanelFondo.add(ScrollTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(1238, 177, 10, 40));
 
-        add(PanelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1270, 620));
+        add(PanelFondo, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
