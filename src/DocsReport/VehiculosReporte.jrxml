@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="af047b68-b3a9-4ac5-9e21-3ff8c3b7325d">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="36"/>
+	<property name="ireport.y" value="0"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT * FROM vwVehiculos]]>
 	</queryString>
@@ -20,7 +20,7 @@
 		<band height="79" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="85" height="71" uuid="c017e352-69a7-4c82-9653-96fb3e9f2a34"/>
-				<imageExpression><![CDATA["C:\\Users\\Estudiante_PC6\\Documents\\GITHUB\\BG-System\\src\\Recursos_Proyecto\\LogoB&GLogin.png"]]></imageExpression>
+				<imageExpression><![CDATA["C:\\Users\\50377\\Documents\\GITHUB\\BG-System\\src\\Recursos_Proyecto\\LogoB&GLogin.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="200" y="17" width="192" height="54" uuid="a447f5d9-f9d7-46cd-b724-30c500da7f88"/>
@@ -130,7 +130,11 @@
 		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="96" splitType="Stretch">
+			<image>
+				<reportElement x="464" y="14" width="85" height="71" uuid="436a83c3-82a2-46b0-8f4e-23946d1f2dff"/>
+			</image>
+		</band>
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>

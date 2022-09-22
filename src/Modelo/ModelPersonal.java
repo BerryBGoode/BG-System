@@ -131,7 +131,7 @@ public class ModelPersonal {
 
             ResultSet rs = ps.executeQuery();
             return rs;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.toString());
             return null;
         }
@@ -145,7 +145,7 @@ public class ModelPersonal {
 
             ResultSet rs = ps.executeQuery();
             return rs;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.toString());
             return null;
         }
