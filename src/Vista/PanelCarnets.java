@@ -78,7 +78,7 @@ public class PanelCarnets extends javax.swing.JPanel {
                 model.addRow(Valores);
             }
         } catch (SQLException e) {
-            System.out.println("Error al cargar, Error de vista" + e.toString());
+            System.out.println("Error al cargar, Error de vista lfdksjfsl" + e.toString());
         }
     }
 
@@ -138,7 +138,8 @@ public class PanelCarnets extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         table1 = new Controles_Personalizados.Tables.Table();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setBackground(new java.awt.Color(42, 36, 56));
+        setLayout(new java.awt.BorderLayout());
 
         PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
         PanelFondo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -272,7 +273,7 @@ public class PanelCarnets extends javax.swing.JPanel {
 
         PanelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, -1, -1));
 
-        add(PanelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        add(PanelFondo, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     FrmPersonalSinCarnet add = new FrmPersonalSinCarnet();
