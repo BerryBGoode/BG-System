@@ -18,12 +18,16 @@ import java.awt.geom.RoundRectangle2D;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.PointerInfo;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
 
 import javax.swing.JOptionPane;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 import javax.swing.JFrame;
 
 /**
@@ -76,6 +80,8 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
 
         h1 = new Thread(this);
         h1.start();
+        
+        GetDayString();
     }
 
     public FrmDashboard() {
@@ -149,6 +155,17 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
             lblSunset.setVisible(false);
             lblNight.setVisible(false);
         }
+    }
+    
+        final void GetDayString() {
+        DayOfWeek dia = LocalDate.now().getDayOfWeek();
+        String day = dia.getDisplayName(TextStyle.FULL, new Locale("en", "US"));
+        
+        String firstletter = day.substring(0, 1);
+        String capital = firstletter.toUpperCase();
+        String restletters = day.substring(1, day.length());
+        day = capital + restletters;
+        lblDia.setText(day);
     }
 
     /**
@@ -287,19 +304,19 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         lblHora.setText("7:00 am");
         PanelFecha.add(lblHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
-        lblDia.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        lblDia.setFont(new java.awt.Font("Roboto Black", 1, 14)); // NOI18N
         lblDia.setForeground(new java.awt.Color(42, 36, 56));
         lblDia.setText("THU");
         PanelFecha.add(lblDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         lblSun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-sun.png"))); // NOI18N
-        PanelFecha.add(lblSun, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, -2, -1, 60));
+        PanelFecha.add(lblSun, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 5, -1, 40));
 
         lblNight.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Night.png"))); // NOI18N
-        PanelFecha.add(lblNight, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, -2, -1, 60));
+        PanelFecha.add(lblNight, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 5, -1, 40));
 
         lblSunset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/sunset.png"))); // NOI18N
-        PanelFecha.add(lblSunset, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, -2, -1, 60));
+        PanelFecha.add(lblSunset, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 5, -1, 40));
 
         pnlNorthForm.add(PanelFecha);
 

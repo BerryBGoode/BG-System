@@ -170,7 +170,7 @@
                         <Component class="javax.swing.JLabel" name="lblDia">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Roboto Black" size="18" style="0"/>
+                              <Font name="Roboto Black" size="14" style="1"/>
                             </Property>
                             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                               <Color blue="38" green="24" red="2a" type="rgb"/>
@@ -191,7 +191,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="100" y="-2" width="-1" height="60"/>
+                              <AbsoluteConstraints x="110" y="5" width="-1" height="40"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -203,7 +203,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="100" y="-2" width="-1" height="60"/>
+                              <AbsoluteConstraints x="110" y="5" width="-1" height="40"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -215,7 +215,7 @@
                           </Properties>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="100" y="-2" width="-1" height="60"/>
+                              <AbsoluteConstraints x="110" y="5" width="-1" height="40"/>
                             </Constraint>
                           </Constraints>
                         </Component>
