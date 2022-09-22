@@ -7,11 +7,15 @@ package Vista;
 
 import Controlador.ControllerLogin;
 import com.sun.awt.AWTUtilities;
+import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.Shape;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.geom.RoundRectangle2D;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.ResultSet;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -27,6 +31,7 @@ public class FrmLogin extends javax.swing.JFrame {
      */
     public FrmLogin() {
         initComponents();
+        this.setTitle("Login");
         txtContra.setEchoChar('•');
          this.setLocationRelativeTo(null); 
          Shape forma= new RoundRectangle2D.Double(0,0, this.getBounds() .width, this.getBounds() .height,40,40);
@@ -40,6 +45,10 @@ public class FrmLogin extends javax.swing.JFrame {
     public static String tipo;
     private int intentos;
 
+    /**
+     * Metodo para colocar la imagen del logo en la barra de tareas
+     * @return 
+     */
     public Image Logo() {
         Image retvalue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
         return retvalue;
@@ -97,11 +106,6 @@ public class FrmLogin extends javax.swing.JFrame {
         txtUsuario.setLabelText("Usuario");
         txtUsuario.setLineColor(new java.awt.Color(42, 36, 56));
         txtUsuario.setSelectionColor(new java.awt.Color(58, 50, 75));
-        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsuarioActionPerformed(evt);
-            }
-        });
         txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtUsuarioKeyPressed(evt);
@@ -118,6 +122,11 @@ public class FrmLogin extends javax.swing.JFrame {
         btnConocerMas.setColor1(new java.awt.Color(239, 239, 239));
         btnConocerMas.setColor2(new java.awt.Color(239, 239, 239));
         btnConocerMas.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
+        btnConocerMas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConocerMasActionPerformed(evt);
+            }
+        });
         PanelContenedorCampos.add(btnConocerMas, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 710, 170, -1));
 
         btnLogin.setBackground(new java.awt.Color(254, 254, 254));
@@ -190,6 +199,9 @@ public class FrmLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /** 
+     * Metodo para acceder al sistema (valida el usuario, la contraseña, y los intentos)
+     */
     void Login() {
 
         if (txtUsuario.getText().equals("") || txtContra.getText().equals("")) {
@@ -257,11 +269,18 @@ public class FrmLogin extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo para activar el inicio de sesión
+     * @param evt 
+     */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
         Login();
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    /**
+     * Metodo para cargar los datos del usuario (su nombre de usuario y tipo de usuario)
+     */
     void CargarDatos() {
         ControllerLogin objc = new ControllerLogin();
         ResultSet rs;
@@ -278,6 +297,10 @@ public class FrmLogin extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo para acceder al form de recuperar contraseña
+     * @param evt 
+     */
     private void lblOlvideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOlvideMouseClicked
         // TODO add your handling code here:
         MenuRecu rec = new MenuRecu();
@@ -285,22 +308,41 @@ public class FrmLogin extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_lblOlvideMouseClicked
 
+    /**
+     * Metodo para cerrar la aplicación
+     * @param evt 
+     */
     private void btnCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMousePressed
         System.exit(0);
     }//GEN-LAST:event_btnCerrarMousePressed
 
+    /**
+     * Metodo para minimizar la aplicación
+     * @param evt 
+     */
     private void btnMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseClicked
         // TODO add your handling code here:
         this.setExtendedState(JFrame.ICONIFIED);
     }//GEN-LAST:event_btnMinimizarMouseClicked
 
+    /**
+     * Validaciones para el txtUsuario
+     * @param evt 
+     */
     private void txtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtUsuario.getText().equals("") && ! txtContra.getText().equals("")) {
             Login();
+        }else if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
         }
     }//GEN-LAST:event_txtUsuarioKeyPressed
 
+    /**
+     * Validaciones para el txtUsuario
+     * @param evt 
+     */
     private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
         // TODO add your handling code here:
         char car = evt.getKeyChar();
@@ -318,25 +360,46 @@ public class FrmLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtUsuarioKeyTyped
 
-    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsuarioActionPerformed
-
+    /**
+     * Validaciones para el txtContra
+     * @param evt 
+     */
     private void txtContraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtUsuario.getText().equals("") && ! txtContra.getText().equals("")) {
             Login();
+        }else if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
         }
     }//GEN-LAST:event_txtContraKeyPressed
 
+    /**
+     * Validaciones para el txtContra
+     * @param evt 
+     */
     private void txtContraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraKeyTyped
         // TODO add your handling code here:
-        if (txtContra.getText().length() >= 20) {
+        if (txtContra.getText().length() >= 30) {
             evt.consume();
         } else {
             ValidacionesSistema.ValidacionesBeep_Go.SinEspacios(evt);
         }
     }//GEN-LAST:event_txtContraKeyTyped
+
+    /**
+     * Metodo para abrir el google sites con más información del sistema
+     * @param evt 
+     */
+    private void btnConocerMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConocerMasActionPerformed
+        try {
+            Desktop.getDesktop().browse(new URI("https://sites.google.com/ricaldone.edu.sv/beep-go/"));
+        } catch (URISyntaxException ex) {
+            JOptionPane.showMessageDialog(this, ex);
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(this, e);
+        }
+    }//GEN-LAST:event_btnConocerMasActionPerformed
 
     /**
      * @param args the command line arguments

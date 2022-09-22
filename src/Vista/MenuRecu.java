@@ -23,6 +23,7 @@ public class MenuRecu extends javax.swing.JFrame {
      */
     public MenuRecu() {
         initComponents();
+        this.setTitle("Recuperar contraseña");
         this.setLocationRelativeTo(null); 
          Shape forma= new RoundRectangle2D.Double(0,0, this.getBounds() .width, this.getBounds() .height,40,40);
          AWTUtilities. setWindowShape(this, forma);

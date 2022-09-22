@@ -11,6 +11,7 @@ import com.sun.awt.AWTUtilities;
 import java.awt.Image;
 import java.awt.Shape;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.awt.geom.RoundRectangle2D;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,6 +46,8 @@ public class RecuCorreo extends javax.swing.JFrame {
 
     public RecuCorreo() {
         initComponents();
+        this.setTitle("Recuperar contraseña - Email");
+        txtPIN.setEchoChar('•');
         this.setLocationRelativeTo(null);
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
         AWTUtilities.setWindowShape(this, forma);
@@ -70,9 +73,9 @@ public class RecuCorreo extends javax.swing.JFrame {
         textoRest = new javax.swing.JLabel();
         btnGoBack = new javax.swing.JLabel();
         txtCorreo = new Controles_Personalizados.textfields.TextField();
-        txtPIN = new Controles_Personalizados.textfields.TextField();
         btnRestablecer = new Controles_Personalizados.Botones.ButtonGradient();
         btnPIN = new Controles_Personalizados.Botones.ButtonGradient();
+        txtPIN = new Controles_Personalizados.textfields.PasswordField();
         ImagenRecuCorreo = new javax.swing.JLabel();
         btnMinimizar = new javax.swing.JLabel();
         btnCerrar = new javax.swing.JLabel();
@@ -114,17 +117,15 @@ public class RecuCorreo extends javax.swing.JFrame {
         txtCorreo.setLabelText("Correo electronico");
         txtCorreo.setLineColor(new java.awt.Color(42, 36, 56));
         txtCorreo.setSelectionColor(new java.awt.Color(58, 50, 75));
+        txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCorreoKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCorreoKeyTyped(evt);
+            }
+        });
         PanelCampos.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 310, 70));
-
-        txtPIN.setBackground(new java.awt.Color(254, 254, 254));
-        txtPIN.setForeground(new java.awt.Color(42, 36, 56));
-        txtPIN.setToolTipText("");
-        txtPIN.setCaretColor(new java.awt.Color(42, 36, 56));
-        txtPIN.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        txtPIN.setLabelText("PIN recibido");
-        txtPIN.setLineColor(new java.awt.Color(42, 36, 56));
-        txtPIN.setSelectionColor(new java.awt.Color(58, 50, 75));
-        PanelCampos.add(txtPIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 450, 310, 70));
 
         btnRestablecer.setText("Restablecer");
         btnRestablecer.setToolTipText("");
@@ -149,6 +150,26 @@ public class RecuCorreo extends javax.swing.JFrame {
             }
         });
         PanelCampos.add(btnPIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 560, 300, -1));
+
+        txtPIN.setBackground(new java.awt.Color(254, 254, 254));
+        txtPIN.setForeground(new java.awt.Color(42, 36, 56));
+        txtPIN.setCaretColor(new java.awt.Color(42, 36, 56));
+        txtPIN.setFocusAccelerator('\u2022');
+        txtPIN.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
+        txtPIN.setLabelText("PIN recibido");
+        txtPIN.setLineColor(new java.awt.Color(42, 36, 56));
+        txtPIN.setPreferredSize(new java.awt.Dimension(6, 54));
+        txtPIN.setSelectionColor(new java.awt.Color(58, 50, 75));
+        txtPIN.setShowAndHide(true);
+        txtPIN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPINKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPINKeyTyped(evt);
+            }
+        });
+        PanelCampos.add(txtPIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 450, 310, 70));
 
         PanelImg.add(PanelCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -212,99 +233,102 @@ public class RecuCorreo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGoBackMouseClicked
 
     final void Proceso_Enviado() {
-        ControllerCorreo cc = new ControllerCorreo();
-        CapturarID();
-        CapturarCorreo();
-        if (validarcorreo.equals(txtCorreo.getText())) {
-            try {
-
+        if(txtCorreo.getText().contains(".") && txtCorreo.getText().contains("@")){
+            ControllerCorreo cc = new ControllerCorreo();
+            CapturarID();
+            CapturarCorreo();
+            if (validarcorreo != null) {
                 try {
-                    ResultSet res = cc.Recuperar();
-                    while (res.next()) {
-                        ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Procesando Solicitud", "Espere un momento", 1);
+                    try {
+                        ResultSet res = cc.Recuperar();
+                        while (res.next()) {
+                            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Procesando Solicitud", "Espere un momento", 1);
+                        }
+                    } catch (SQLException e) {
+                        ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Error al enviar correo", "Ha ocurrido un error al momento de enviar el correo electronico, vuelva a intentarlo", 1);
                     }
-                } catch (SQLException e) {
-                    ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Error al enviar correo", "Ha ocurrido un error al momento de enviar el correo electronico, vuelva a intentarlo", 1);
+
+                    Properties p = new Properties();
+                    p.setProperty("mail.smtp.host", "smtp.gmail.com");
+                    p.setProperty("mail.smtp.starttls.enable", "true");
+                    p.setProperty("mail.smtp.port", "587");
+                    p.setProperty("mail.smtp.auth", "true");
+
+                    Session ses = Session.getDefaultInstance(p);
+
+                    Random random = new Random();
+                    pin = random.nextInt(9999 + 1000) + 1000;
+
+                    String correoRemitente = "soportebeepgo@gmail.com";
+                    String contraRemitente = "dxebkxolinjdimjw";
+                    String correoRes = txtCorreo.getText();
+                    String asunto = "Restablecimiento de contraseña";
+                    String mensaje = "<table style=\"max-width: 600px; padding: 10px; margin:0 auto; border-collapse: collapse;\">\n"
+                            + "  <tr>\n"
+                            + "    <td style=\"background-color: #FAFAFA; text-align: left; padding: 0\">\n"
+                            + "      \n"
+                            + "        <center><img width=\"20%\" style=\"display:block; margin: 1.5% 3%\" src=\"https://i.postimg.cc/ncGVM3Bm/Logo-B-GLogin.png\"></center>        \n"
+                            + "      </a>\n"
+                            + "    </td>\n"
+                            + "  </tr>\n"
+                            + "\n"
+                            + "  <tr>\n"
+                            + "    <td style=\"padding: 0; background-color: #5C5470;\">      \n"
+                            + "      <center><img style=\"padding: 0; display: block\" src=\"https://i.postimg.cc/Wb9NMXbJ/Envelope-cuate.png\" width=\"300px\"></center>\n"
+                            + "    </td>\n"
+                            + "  </tr>\n"
+                            + "  \n"
+                            + "  <tr>\n"
+                            + "    <td style=\"background-color: #FAFAFA\">\n"
+                            + "      <div style=\"color: #B3B3B3; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif\">\n"
+                            + "        <h2 style=\"color: #352F44; margin: 0 0 7px\">PIN " + " de Restablecimiento</h2>\n"
+                            + "        <p style=\"margin: 2px; font-size: 15px; font-weight: bold\">        \n"
+                            + "          Hola usuario, el equipo de Beep&Go recibio una solicitud de restablecimiento de credenciales por correo, a continuacion te brindamos un pin aleatorio para que puedas completar el proceso de restablecimiento de forma correcta.\n"
+                            + "          <br>\n"
+                            + "          <br>\n"
+                            + "          Tu pin de restablecimiento es: \n"
+                            + "          <br>\n"
+                            + "          <br>\n"
+                            + "          <div style=\"width: 100%; text-align: center\">\n"
+                            + "          <a style=\"text-decoration: none; border-radius: 5px; padding: 11px 23px; color: white; background-color: #352F44\" > " + pin + " </a>\n"
+                            + "        </div>\n"
+                            + "          <br>\n"
+                            + "          <br>\n"
+                            + "        <br>\n"
+                            + "        <p style=\"color: #b3b3b3; font-size: 12px; text-align: center;margin: 30px 0 0\">Beep&Go System ®</p>\n"
+                            + "      </div>\n"
+                            + "    </td>\n"
+                            + "  </tr>\n"
+                            + "</table>";
+
+                    MimeMessage message = new MimeMessage(ses);
+                    message.setFrom(new InternetAddress(correoRemitente));
+                    message.addRecipient(Message.RecipientType.TO, new InternetAddress(correoRes));
+                    message.setSubject(asunto);
+                    message.setText(mensaje, "ISO-8859-1", "html");
+
+                    Transport t = ses.getTransport("smtp");
+                    t.connect(correoRemitente, contraRemitente);
+                    t.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
+                    t.close();
+
+                    ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Correo enviado", "El correo con el pin de restablecimiento ha sido enviado con exito", 1);
+                    txtCorreo.setEditable(false);
+                    btnPIN.setText("Reenviar PIN");
+                } catch (MessagingException e) {
+                    JOptionPane.showMessageDialog(null, "Error al enviar correo");
+                    System.out.println(e.toString());
                 }
-
-                Properties p = new Properties();
-                p.setProperty("mail.smtp.host", "smtp.gmail.com");
-                p.setProperty("mail.smtp.starttls.enable", "true");
-                p.setProperty("mail.smtp.port", "587");
-                p.setProperty("mail.smtp.auth", "true");
-
-                Session ses = Session.getDefaultInstance(p);
-
-                Random random = new Random();
-                pin = random.nextInt(9999 + 1000) + 1000;
-
-                String correoRemitente = "soportebeepgo@gmail.com";
-                String contraRemitente = "dxebkxolinjdimjw";
-                String correoRes = txtCorreo.getText();
-                String asunto = "Restablecimiento de contraseña";
-                String mensaje = "<table style=\"max-width: 600px; padding: 10px; margin:0 auto; border-collapse: collapse;\">\n"
-                        + "  <tr>\n"
-                        + "    <td style=\"background-color: #FAFAFA; text-align: left; padding: 0\">\n"
-                        + "      \n"
-                        + "        <center><img width=\"20%\" style=\"display:block; margin: 1.5% 3%\" src=\"https://i.postimg.cc/ncGVM3Bm/Logo-B-GLogin.png\"></center>        \n"
-                        + "      </a>\n"
-                        + "    </td>\n"
-                        + "  </tr>\n"
-                        + "\n"
-                        + "  <tr>\n"
-                        + "    <td style=\"padding: 0; background-color: #5C5470;\">      \n"
-                        + "      <center><img style=\"padding: 0; display: block\" src=\"https://i.postimg.cc/Wb9NMXbJ/Envelope-cuate.png\" width=\"300px\"></center>\n"
-                        + "    </td>\n"
-                        + "  </tr>\n"
-                        + "  \n"
-                        + "  <tr>\n"
-                        + "    <td style=\"background-color: #FAFAFA\">\n"
-                        + "      <div style=\"color: #B3B3B3; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif\">\n"
-                        + "        <h2 style=\"color: #352F44; margin: 0 0 7px\">PIN " + " de Restablecimiento</h2>\n"
-                        + "        <p style=\"margin: 2px; font-size: 15px; font-weight: bold\">        \n"
-                        + "          Hola usuario, el equipo de Beep&Go recibio una solicitud de restablecimiento de credenciales por correo, a continuacion te brindamos un pin aleatorio para que puedas completar el proceso de restablecimiento de forma correcta.\n"
-                        + "          <br>\n"
-                        + "          <br>\n"
-                        + "          Tu pin de restablecimiento es: \n"
-                        + "          <br>\n"
-                        + "          <br>\n"
-                        + "          <div style=\"width: 100%; text-align: center\">\n"
-                        + "          <a style=\"text-decoration: none; border-radius: 5px; padding: 11px 23px; color: white; background-color: #352F44\" > " + pin + " </a>\n"
-                        + "        </div>\n"
-                        + "          <br>\n"
-                        + "          <br>\n"
-                        + "        <br>\n"
-                        + "        <p style=\"color: #b3b3b3; font-size: 12px; text-align: center;margin: 30px 0 0\">Beep&Go System ®</p>\n"
-                        + "      </div>\n"
-                        + "    </td>\n"
-                        + "  </tr>\n"
-                        + "</table>";
-
-                MimeMessage message = new MimeMessage(ses);
-                message.setFrom(new InternetAddress(correoRemitente));
-                message.addRecipient(Message.RecipientType.TO, new InternetAddress(correoRes));
-                message.setSubject(asunto);
-                message.setText(mensaje, "ISO-8859-1", "html");
-
-                Transport t = ses.getTransport("smtp");
-                t.connect(correoRemitente, contraRemitente);
-                t.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
-                t.close();
-
-                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Correo enviado", "El correo con el pin de restablecimiento ha sido enviado con exito", 1);
-            btnPIN.setText("Reenviar PIN");
-            } catch (MessagingException e) {
-                JOptionPane.showMessageDialog(null, "Error al enviar correo");
-                System.out.println(e.toString());
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "El correo no pertenece a ningun usuario, verifica el correo ingresado", "Verficar correo", JOptionPane.WARNING_MESSAGE);
-        }
+            } else {
+                JOptionPane.showMessageDialog(null, "El correo no pertenece a ningun usuario, verifica el correo ingresado", "Verificar correo", JOptionPane.WARNING_MESSAGE);
+            }  
+        }else{
+            JOptionPane.showMessageDialog(null, "El correo no tiene el formato correcto", "Verficar formato", JOptionPane.WARNING_MESSAGE);
+        }      
     }
 
 
     private void btnPINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPINActionPerformed
-
         Proceso_Enviado();
 //        FrmRestablecimiento fr = new FrmRestablecimiento();
 //        fr.setVisible(true);
@@ -320,8 +344,7 @@ public class RecuCorreo extends javax.swing.JFrame {
         this.setExtendedState(JFrame.ICONIFIED);
     }//GEN-LAST:event_btnMinimizarMouseClicked
 
-    private void btnRestablecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerActionPerformed
-
+    void Restablecer(){
         int PinIn = Integer.parseInt(txtPIN.getText());
 
         if (PinIn == pin) {
@@ -342,7 +365,7 @@ public class RecuCorreo extends javax.swing.JFrame {
                     objC.setClave(ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra(clave));
                     if (objC.Actualizar() == true) {
 
-                        ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Actualizacion Exitosa", "Su clave ha sido actualizada a la clave por defecto." + clave, 1);
+                        ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Actualizacion Exitosa", "Su clave ha sido actualizada a la clave por defecto.", 1);
                         FrmLogin volver=new FrmLogin();
                         volver.setVisible(true);
                         this.dispose();
@@ -354,9 +377,52 @@ public class RecuCorreo extends javax.swing.JFrame {
                 ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Error al capturar datos", "Verifique el Resultset en el evento del boton.", 2);
             }
         } else {
-            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("No es", "Pin incorrecto", 2);
+            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Error", "Pin incorrecto", 2);
         }
+    }
+    
+    private void btnRestablecerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestablecerActionPerformed
+        Restablecer();
     }//GEN-LAST:event_btnRestablecerActionPerformed
+
+    private void txtCorreoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            Proceso_Enviado();
+        }else if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCorreoKeyPressed
+
+    private void txtPINKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPINKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode()==KeyEvent.VK_ENTER){
+            Restablecer();
+        }else if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPINKeyPressed
+
+    private void txtPINKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPINKeyTyped
+        // TODO add your handling code here:
+        if(txtPIN.getText().length() >= 5){
+            evt.consume();
+        }else{
+            ValidacionesSistema.ValidacionesBeep_Go.SinEspacios(evt);
+            ValidacionesSistema.ValidacionesBeep_Go.SoloNumeros(evt);
+        }
+    }//GEN-LAST:event_txtPINKeyTyped
+
+    private void txtCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyTyped
+        // TODO add your handling code here:
+        if(txtCorreo.getText().length() >= 60){
+            evt.consume();
+        }else{
+            ValidacionesSistema.ValidacionesBeep_Go.SinEspacios(evt);
+        }
+    }//GEN-LAST:event_txtCorreoKeyTyped
 
     /**
      * @param args the command line arguments
@@ -405,6 +471,6 @@ public class RecuCorreo extends javax.swing.JFrame {
     private Controles_Personalizados.Botones.ButtonGradient btnRestablecer;
     private javax.swing.JLabel textoRest;
     private Controles_Personalizados.textfields.TextField txtCorreo;
-    private Controles_Personalizados.textfields.TextField txtPIN;
+    private Controles_Personalizados.textfields.PasswordField txtPIN;
     // End of variables declaration//GEN-END:variables
 }

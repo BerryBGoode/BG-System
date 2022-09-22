@@ -9,20 +9,23 @@ import Controlador.ControllerConexion;
 import Controlador.ControllerUsuarios;
 import Controles_Personalizados.Botones.UWPButton;
 import Controles_Personalizados.RenderTable;
-import Controles_Personalizados.Tables.Renderer;
 import java.awt.Color;
 import java.awt.Font;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -52,7 +55,7 @@ public class PanelUsuarios extends javax.swing.JPanel {
 
     public PanelUsuarios() {
         initComponents();
-        String[] TitulosTabla = {"ID", "idPersonal", "Nombres", "Apellidos", "Usuario", "idTipoUsuario", "Tipo de usuario", "idEstadoUsuario", "Estado del usuario", "Imagen", "Modificar", "Eliminar", "Registro"};
+        String[] TitulosTabla = {"ID", "idPersonal", "Nombres", "Apellidos", "Usuario", "idTipoUsuario", "Tipo de usuario", "idEstadoUsuario", "Estado", "Imagen", "Modificar", "Eliminar", "Registro"};
         modelo = new DefaultTableModel(null, TitulosTabla) {
             @Override
             public boolean isCellEditable(int row, int column) { // aqui esta
@@ -67,14 +70,13 @@ public class PanelUsuarios extends javax.swing.JPanel {
         tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(3));
         tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(4));
         tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(5));
-
     }
 
     final void refresh() {
-        /*if (frmstate == 1 && !(agg.isActive())) {
+        if (frmstate == 1 && !(agg.isActive())) {
             CargarTabla();
             frmstate = 0;
-        }*/
+        }
     }
 
     public void CargarTabla() {
@@ -261,6 +263,10 @@ public class PanelUsuarios extends javax.swing.JPanel {
             Map parametros = new HashMap();
             parametros.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
             parametros.put("idUsuario", ValidacionesSistema.Parametros_Usuario.getID());
+            if(ValidacionesSistema.Parametros_Usuario.getImagen() != null){
+                InputStream input = new ByteArrayInputStream(ValidacionesSistema.Parametros_Usuario.getImagen());
+                parametros.put("imagenusu", input);
+            }
             reporte = (JasperReport) JRLoader.loadObjectFromFile(dir);
 
             JasperPrint jprint = JasperFillManager.fillReport(reporte, parametros, con);

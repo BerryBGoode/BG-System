@@ -32,7 +32,7 @@ import necesario.RSFileChooser;
 
 /**
  *
- * @author danlo
+ * @author Rober
  */
 public class FrmAgg_Usuarios extends javax.swing.JFrame {
 
@@ -53,6 +53,10 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
     
     /**
      * Creates new form FrmAgg_Usuarios
+     */
+    /**
+     * 
+     * @param titulo 
      */
     public FrmAgg_Usuarios(String titulo) {
         initComponents();
@@ -99,6 +103,9 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         setIconImage(Logo());
     }
 
+    /**
+     * Constructor
+     */
     public FrmAgg_Usuarios() {
         initComponents();
         CargarCmbs();
@@ -114,12 +121,18 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         setIconImage(Logo());
     }
     
-    
+    /**
+     * Metodo para colocar el logo en la barra de tareas
+     * @return 
+     */
     public Image Logo() {
         Image retvalue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
         return retvalue;
     }
 
+    /**
+     * Metodo para ingresar un usuario
+     */
     void Ingresar() {
         if (txtUsuario.getText().equals(" ") || cmbPersonal.getSelectedIndex() == 0 || cmbTipo.getSelectedIndex() == 0 || cmbEstado.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(this, "Campos vacios");
@@ -129,12 +142,16 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
             boolean respuesta = obja.NuevoUsuario_C();
             if (respuesta == true) {
                 ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "Usuario agregado", 1);
+                this.dispose();
             } else {
                 ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso fallido", "Usuario no pudo ser agregado", 2);
             }
         }
     }
 
+    /**
+     * Metodo para actualizar un usuario
+     */
     void Actualizar() {
         if (txtUsuario.getText().equals(" ") || cmbPersonal.getSelectedIndex() == 0 || cmbTipo.getSelectedIndex() == 0 || cmbEstado.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(this, "Campos vacios");
@@ -143,6 +160,7 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
             boolean respuesta = obja.ActualizarUsuario_C();
             if (respuesta == true) {
                 ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "Usuario actualizado", 1);
+                this.dispose();
             } else {
                 ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso fallido", "Usuario no pudo ser actualizado", 2);
             }
@@ -214,6 +232,14 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         txtUsuario.setLineColor(new java.awt.Color(253, 255, 254));
         txtUsuario.setSelectedTextColor(new java.awt.Color(58, 50, 75));
         txtUsuario.setSelectionColor(new java.awt.Color(253, 255, 254));
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyTyped(evt);
+            }
+        });
         panelRound1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 340, 70));
 
         cmbPersonal.setBackground(new java.awt.Color(58, 50, 75));
@@ -268,6 +294,11 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         cmbTipo.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
         cmbTipo.setLabeText("Tipo - Usuario");
         cmbTipo.setLineColor(new java.awt.Color(253, 255, 254));
+        cmbTipo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbTipoItemStateChanged(evt);
+            }
+        });
         panelRound1.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 340, 80));
         panelRound1.add(txtID, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 520, -1, -1));
 
@@ -282,7 +313,7 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
                 BtnConfirmarActionPerformed(evt);
             }
         });
-        panelRound1.add(BtnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 510, 150, 44));
+        panelRound1.add(BtnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 510, 150, 44));
 
         cbRecu.setBackground(new java.awt.Color(58, 50, 75));
         cbRecu.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -306,16 +337,31 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metodo para cerrar la aplicación
+     * @param evt 
+     */
     private void btnCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMousePressed
+        txtUsuario.setText("");
+        cmbTipo.setSelectedIndex(0);
+        cmbEstado.setSelectedIndex(0);
+        cmbPersonal.setSelectedIndex(0);
         this.dispose();
         PanelOpcionesPersonal.showinter = 0;
     }//GEN-LAST:event_btnCerrarMousePressed
 
+    /**
+     * Metodo para minimizar la aplicación
+     * @param evt 
+     */
     private void btnMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseClicked
         // TODO add your handling code here:
         this.setExtendedState(JFrame.ICONIFIED);
     }//GEN-LAST:event_btnMinimizarMouseClicked
 
+    /**
+     * Metodo para buscar el IDActivo en la tabla de los estados de los usuarios
+     */
     void CargarIDActivo(){
         ResultSet rs;
         rs = objc.BuscarIDActivo_C();
@@ -323,13 +369,18 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
             if (rs.next()) {
                 idActivo = rs.getInt("idEstadoUsuario");
             }
-            int respuesta = BuscarEstadoUsuarioSeleccionado(idActivo);
-            cmbEstado.setSelectedIndex(respuesta + 1);
         } catch (Exception e) {
                 JOptionPane.showMessageDialog(this,e.toString());
         }
+        if(carnet != null){
+            int respuesta = BuscarEstadoUsuarioSeleccionado(idActivo);
+            cmbEstado.setSelectedIndex(respuesta + 1);
+        }
     }
     
+    /**
+     * Metodo para cargar el ID con el tipo de usuario de "Estudiante"
+     */
     void CargarIDAlumno(){
         ResultSet rs;
         rs = objc.BuscarIDEstudiante_C();
@@ -337,15 +388,21 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
             if (rs.next()) {
                 idAlumno = rs.getInt("idTipoUsuario");
             }
-            int respuesta = BuscarTipoUsuarioSeleccionado(idAlumno);
-            cmbTipo.setSelectedIndex(respuesta + 1);
         } catch (Exception e) {
                 JOptionPane.showMessageDialog(this,e.toString());
         }
+        if(carnet != null){
+            int respuesta = BuscarTipoUsuarioSeleccionado(idAlumno);
+            cmbTipo.setSelectedIndex(respuesta + 1);
+        }
     }
     
+    /**
+     * Metodo para cargar el carnet de un personal seleccionado
+     */
     void CargarCarnet(){
         ResultSet rs;
+        carnet = null;
         if(personal != 0){
             objc.setIDPersonal(personal);
             rs = objc.BuscarCarnet_C();
@@ -353,19 +410,28 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
                 if (rs.next()) {
                     carnet = rs.getString("Carnet");
                 }
-                txtUsuario.setText(carnet);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this,e.toString());
             }
         }
+        if(carnet != null){
+            txtUsuario.setText(carnet);
+        }
     }
     
+    /**
+     * Metodo para cargar los datos del usuario que se generara automaticamente
+     */
     void CargarDatos(){
         CargarCarnet();
-        CargarIDActivo();
         CargarIDAlumno();
+        CargarIDActivo();
     }
     
+    /**
+     * Metodo para guardar el ID del registro seleccioando en el cmbPersonal
+     * @param evt 
+     */
     private void cmbPersonalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbPersonalItemStateChanged
         // TODO add your handling code here:
         if (evt.getStateChange() == ItemEvent.SELECTED) {
@@ -387,6 +453,10 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmbPersonalItemStateChanged
 
+    /**
+     * Metodo para guardar el ID del registro seleccioando en el cmbEstado
+     * @param evt 
+     */
     private void cmbEstadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbEstadoItemStateChanged
         // TODO add your handling code here:
         if (evt.getStateChange() == ItemEvent.SELECTED) {
@@ -404,24 +474,40 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cmbEstadoItemStateChanged
 
+    /**
+     * Metodo para activar el proceso de actualizar o agregar
+     * @param evt 
+     */
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
         // TODO add your handling code here:
-        Actualizar();
-        if(cbRecu.isSelected()){
-            if(ra.isVisible()){
-                ra.toFront();
-            }else{
-                ra.setVisible(true);
+        if(this.getTitle().equals("Actualizar usuario")){
+            Actualizar();
+            if(cbRecu.isSelected()){
+                if(ra.isVisible()){
+                    ra.toFront();
+                }else{
+                    ra.setVisible(true);
+                }
             }
         }
-        this.dispose();
+        else{
+            Ingresar();
+        }
     }//GEN-LAST:event_BtnConfirmarActionPerformed
 
+    /**
+     * Metodo para activar el proceso de mostrar la imagen
+     * @param evt 
+     */
     private void btnExaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExaminarActionPerformed
         // TODO add your handling code here:
         MostrarImagen();
     }//GEN-LAST:event_btnExaminarActionPerformed
 
+    /**
+     * Metodo para limpiar campos dependiendo si el usuario se creara automaticamente o no
+     * @param evt 
+     */
     private void cbAutoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbAutoItemStateChanged
         // TODO add your handling code here:
         if(! cbAuto.isSelected()){
@@ -431,6 +517,60 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
             cmbPersonal.setSelectedIndex(0);
         }
     }//GEN-LAST:event_cbAutoItemStateChanged
+
+    /**
+     * Metodo para guardar el ID del registro seleccioando en el cmbTipo
+     * @param evt 
+     */
+    private void cmbTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoItemStateChanged
+        // TODO add your handling code here:
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            int pos = cmbTipo.getSelectedIndex();
+            if (pos == 0) {
+                tipoUsu = 0;
+            } else {
+                int dim = myArrayListTU.size();
+                for (int i = 0; i < dim; i++) {
+                    if (i == pos - 1) {
+                        tipoUsu = (int) myArrayListTU.get(i);
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_cmbTipoItemStateChanged
+
+    /**
+     * Validaciones para el txtUsuario
+     * @param evt 
+     */
+    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
+        // TODO add your handling code here:
+        char car = evt.getKeyChar();
+        if (txtUsuario.getText().length() >= 15) {
+            evt.consume();
+        } else {
+            if (txtUsuario.getText().equals("") && car == 95) {
+                evt.consume();
+            } else if (txtUsuario.getText().contains("_") && car == 95) {
+                evt.consume();
+            } else {
+                ValidacionesSistema.ValidacionesBeep_Go.SinEspacios(evt);
+                ValidacionesSistema.ValidacionesBeep_Go.SoloLetrasNumerosGuionBajo(evt);
+            }
+        }
+    }//GEN-LAST:event_txtUsuarioKeyTyped
+
+    /**
+     * Validaciones para el txtUsuario
+     * @param evt 
+     */
+    private void txtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyPressed
+        // TODO add your handling code here:
+        if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtUsuarioKeyPressed
 
     /**
      * @param args the command line arguments
@@ -467,6 +607,9 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         });
     }
 
+    /**
+     * Metodo para llenar el combobox de tipo de usuario
+     */
     final void CargarTipoUsuarios() {
         ControllerUsuarios objc = new ControllerUsuarios();
         myArrayListTU = new ArrayList();
@@ -488,6 +631,9 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo para cargar el combobox de estado de usuario
+     */
     final void CargarEstadoUsuarios() {
         ControllerUsuarios objc = new ControllerUsuarios();
         myArrayListEU = new ArrayList();
@@ -509,6 +655,9 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo para cargar el combobox de personal
+     */
     final void CargarPersonal() {
         ControllerUsuarios objc = new ControllerUsuarios();
         myArrayListPE = new ArrayList();
@@ -530,12 +679,18 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo para cargar todos los combobox
+     */
     final void CargarCmbs() {
         CargarTipoUsuarios();
         CargarEstadoUsuarios();
         CargarPersonal();
     }
 
+    /**
+     * Metodo para mostrar la imagen seleccionada en un label
+     */
     void MostrarImagen() {
         RSFileChooser jcargarfoto = new RSFileChooser();
         FileNameExtensionFilter extension = new FileNameExtensionFilter("JPG", "PNG", "JPG");
@@ -562,6 +717,11 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo para buscar el tipo de usuario a seleccionar en el combobox
+     * @param id
+     * @return 
+     */
     final int BuscarTipoUsuarioSeleccionado(int id) {
         int size = myArrayListTU.size();
         int retorno = -1;
@@ -574,6 +734,11 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         return retorno;
     }
 
+    /**
+     * Metodo para buscar el estado de usuario a seleccionar en el combobox
+     * @param id
+     * @return 
+     */
     final int BuscarEstadoUsuarioSeleccionado(int id) {
         int size = myArrayListEU.size();
         int retorno = -1;
@@ -586,6 +751,11 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         return retorno;
     }
 
+    /**
+     * Metodo para buscar el personal a seleccionar en el combobox
+     * @param id
+     * @return 
+     */
     final int BuscarPersonalSeleccionado(int id) {
         int size = myArrayListPE.size();
         int retorno = -1;

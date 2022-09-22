@@ -37,12 +37,17 @@ public class FrmConfigConection extends javax.swing.JFrame {
      */
     public FrmConfigConection() {
         initComponents();
+        txtcontra.setEchoChar('•');
         setLocationRelativeTo(null);
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
         AWTUtilities.setWindowShape(this, forma);
         setIconImage(Logo());                
     }
 
+    /**
+     * Metodo para colocar el logo en la barra de tareas
+     * @return 
+     */
     public Image Logo() {
         Image retvalue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
         return retvalue;
@@ -90,6 +95,14 @@ public class FrmConfigConection extends javax.swing.JFrame {
         txtIP.setLabelText("Dirección  IP");
         txtIP.setLineColor(new java.awt.Color(42, 36, 56));
         txtIP.setSelectionColor(new java.awt.Color(58, 50, 75));
+        txtIP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtIPKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIPKeyTyped(evt);
+            }
+        });
         panelRound2.add(txtIP, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 450, 70));
 
         txtUsuario.setBackground(new java.awt.Color(254, 254, 254));
@@ -99,6 +112,14 @@ public class FrmConfigConection extends javax.swing.JFrame {
         txtUsuario.setLabelText("Usuario - Conexión");
         txtUsuario.setLineColor(new java.awt.Color(42, 36, 56));
         txtUsuario.setSelectionColor(new java.awt.Color(58, 50, 75));
+        txtUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUsuarioKeyTyped(evt);
+            }
+        });
         panelRound2.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, 450, 70));
 
         txtHost.setBackground(new java.awt.Color(254, 254, 254));
@@ -108,6 +129,14 @@ public class FrmConfigConection extends javax.swing.JFrame {
         txtHost.setLabelText("Puerto - Host");
         txtHost.setLineColor(new java.awt.Color(42, 36, 56));
         txtHost.setSelectionColor(new java.awt.Color(58, 50, 75));
+        txtHost.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtHostKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtHostKeyTyped(evt);
+            }
+        });
         panelRound2.add(txtHost, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 450, 70));
 
         btnSave.setBackground(new java.awt.Color(254, 254, 254));
@@ -130,9 +159,12 @@ public class FrmConfigConection extends javax.swing.JFrame {
         txtcontra.setLineColor(new java.awt.Color(42, 36, 56));
         txtcontra.setSelectionColor(new java.awt.Color(58, 50, 75));
         txtcontra.setShowAndHide(true);
-        txtcontra.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcontraActionPerformed(evt);
+        txtcontra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtcontraKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcontraKeyTyped(evt);
             }
         });
         panelRound2.add(txtcontra, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 450, 70));
@@ -165,24 +197,151 @@ public class FrmConfigConection extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metodo para cerrar la aplicación
+     * @param evt 
+     */
     private void btnCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMousePressed
         System.exit(0);
     }//GEN-LAST:event_btnCerrarMousePressed
 
-
+    /**
+     * Metodo para activar el metodo de guardar la configuración
+     * @param evt 
+     */
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         saveConfig();
         this.dispose();
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    /**
+     * Metodo para minimizar la aplicación
+     * @param evt 
+     */
     private void btnMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseClicked
         // TODO add your handling code here:
         this.setExtendedState(JFrame.ICONIFIED);
     }//GEN-LAST:event_btnMinimizarMouseClicked
 
-    private void txtcontraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontraActionPerformed
+    /**
+     * Validaciones para el txtUsuario
+     * @param evt 
+     */
+    private void txtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtcontraActionPerformed
+        if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtUsuarioKeyPressed
+
+    /**
+     * Validaciones para el txtIP
+     * @param evt 
+     */
+    private void txtIPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIPKeyPressed
+        // TODO add your handling code here:
+        if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtIPKeyPressed
+
+    /**
+     * Validaciones para el txtHost
+     * @param evt 
+     */
+    private void txtHostKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHostKeyPressed
+        // TODO add your handling code here:
+        if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtHostKeyPressed
+
+    /**
+     * Validaciones para el txtcontra
+     * @param evt 
+     */
+    private void txtcontraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcontraKeyTyped
+        // TODO add your handling code here:
+        char key = evt.getKeyChar();
+        if(txtcontra.getText().length() >= 40){
+            evt.consume();
+        }else{
+            ValidacionesSistema.ValidacionesBeep_Go.SinEspacios(evt);
+        }
+    }//GEN-LAST:event_txtcontraKeyTyped
+
+    /**
+     * Validaciones para el txtContra
+     * @param evt 
+     */
+    private void txtHostKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHostKeyTyped
+        // TODO add your handling code here:
+        if(txtHost.getText().length() >= 8){
+            evt.consume();
+        }else{
+            ValidacionesSistema.ValidacionesBeep_Go.SoloNumeros(evt);
+            ValidacionesSistema.ValidacionesBeep_Go.SinEspacios(evt);
+        }
+    }//GEN-LAST:event_txtHostKeyTyped
+
+    /**
+     * Validaciones para el txtUsuario
+     * @param evt 
+     */
+    private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
+        // TODO add your handling code here:
+        char key = evt.getKeyChar();
+        if(txtUsuario.getText().length() >= 30){
+            evt.consume();
+        }else if(txtUsuario.getText().length() == 0 && Character.isWhitespace(key)){
+            evt.consume();
+        }else if(txtUsuario.getText().length() > 0){
+            String text = txtUsuario.getText();
+            String ultimo = text.substring(text.length() - 1);
+            if(ultimo != null && ultimo.equals(" ") && Character.isWhitespace(key)){
+                evt.consume();
+            }   
+        }
+    }//GEN-LAST:event_txtUsuarioKeyTyped
+
+    /**
+     * Validaciones para el txtIP
+     * @param evt 
+     */
+    private void txtIPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIPKeyTyped
+        // TODO add your handling code here:
+        char key = evt.getKeyChar();
+        if(txtIP.getText().length() >= 30){
+            evt.consume();
+        }else if(txtIP.getText().length() == 0 && Character.isWhitespace(key)){
+            evt.consume();
+        }else if(txtIP.getText().length() > 0){
+            String text = txtIP.getText();
+            String ultimo = text.substring(text.length() - 1);
+            if(ultimo != null && ultimo.equals(" ") && Character.isWhitespace(key)){
+                evt.consume();
+            }   
+        }
+    }//GEN-LAST:event_txtIPKeyTyped
+
+    /**
+     * Validaciones para el txtcontra
+     * @param evt 
+     */
+    private void txtcontraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcontraKeyPressed
+        // TODO add your handling code here:
+        if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtcontraKeyPressed
+    
+    /**
+     * Metodo para guardar la configuración en un archivo
+     */
     void saveConfig() {
         getDataConfig();
         if (ControllerConfig.getUsername() == "" && ControllerConfig.getHost() == ""
@@ -236,6 +395,9 @@ public class FrmConfigConection extends javax.swing.JFrame {
 
     }
 
+    /**
+     * Metodo para enviar los datos al controlador
+     */
     void getDataConfig() {
         ControllerConfig.setIp(txtIP.getText());
         ControllerConfig.setHost(txtHost.getText());
@@ -243,7 +405,11 @@ public class FrmConfigConection extends javax.swing.JFrame {
         ControllerConfig.setPassword(txtcontra.getText());
     }
 
-    boolean checkFile() {//verifica si existe un archivo y retorna true si existe
+    /**
+     * Metodo para verificar si existe un archivo y retorna true si existe
+     * @return 
+     */
+    boolean checkFile() {
         file = new File(filename);
         if (file.exists()) {
             return true;
@@ -252,6 +418,9 @@ public class FrmConfigConection extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo para crear un archivo
+     */
     void createFile() {
         file = new File(filename);
         try {
@@ -261,6 +430,9 @@ public class FrmConfigConection extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo para escribir el archivo
+     */
     void writeFile() {
         file = new File(filename);
         try {
@@ -280,6 +452,9 @@ public class FrmConfigConection extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo para leer el archivo
+     */
     public void readFile() {
         String cont;
         try {
@@ -298,6 +473,9 @@ public class FrmConfigConection extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo para ocultar el archivo
+     */
     void hiddenFile() {
         try {
             Path repo = Paths.get(filename);
@@ -311,6 +489,9 @@ public class FrmConfigConection extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Metodo para borrar el archivo
+     */
     void deleteFile() {
         file = new File(filename);
         if (file.delete()) {
@@ -401,12 +582,19 @@ public class FrmConfigConection extends javax.swing.JFrame {
         });
 
     }
-
+    
+    /**
+     * 
+     * @return 
+     */
     @Override
     public boolean isFocused() {
         return super.isFocused(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * 
+     */
     @Override
     public void addNotify() {
         super.addNotify(); //To change body of generated methods, choose Tools | Templates.

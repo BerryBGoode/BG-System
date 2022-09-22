@@ -26,10 +26,12 @@ public class RecuPIN extends javax.swing.JFrame {
      */
     public RecuPIN() {
         initComponents();
-         this.setLocationRelativeTo(null); 
-         Shape forma= new RoundRectangle2D.Double(0,0, this.getBounds() .width, this.getBounds() .height,40,40);
-         AWTUtilities. setWindowShape(this, forma);
-         setIconImage(Logo());
+        this.setTitle("Recuperar contraseña - PIN");
+        txtPIN.setEchoChar('•');
+        this.setLocationRelativeTo(null); 
+        Shape forma= new RoundRectangle2D.Double(0,0, this.getBounds() .width, this.getBounds() .height,40,40);
+        AWTUtilities. setWindowShape(this, forma);
+        setIconImage(Logo());
     }
 public Image Logo(){
     Image retvalue=Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
@@ -117,6 +119,7 @@ public Image Logo(){
         txtPIN.setBackground(new java.awt.Color(254, 254, 254));
         txtPIN.setForeground(new java.awt.Color(42, 36, 56));
         txtPIN.setCaretColor(new java.awt.Color(42, 36, 56));
+        txtPIN.setFocusAccelerator('\u2022');
         txtPIN.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
         txtPIN.setLabelText("PIN ");
         txtPIN.setLineColor(new java.awt.Color(42, 36, 56));
@@ -200,8 +203,11 @@ public Image Logo(){
 
     private void txtPINKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPINKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if (evt.getKeyCode()==KeyEvent.VK_ENTER && ! txtPIN.getText().equals("") && ! txtUsuario.getText().equals("")){
             RecuperarContra();
+        }else if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
         }
     }//GEN-LAST:event_txtPINKeyPressed
 
@@ -217,8 +223,11 @@ public Image Logo(){
 
     private void txtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyPressed
         // TODO add your handling code here:
-         if (evt.getKeyCode()==KeyEvent.VK_ENTER){
+         if (evt.getKeyCode()==KeyEvent.VK_ENTER && ! txtPIN.getText().equals("") && ! txtUsuario.getText().equals("")){
             RecuperarContra();
+        }else if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
         }
     }//GEN-LAST:event_txtUsuarioKeyPressed
 

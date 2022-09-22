@@ -13,13 +13,19 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author danlo
+ * @author Ander
  */
 public class ModelP_U_Personal {
 
     PreparedStatement ps;
     Connection con;
 
+    /**
+     * Metodo para ingresar el carnet en algún registro de un personal (IDPersonal)
+     * @param id
+     * @param Carne
+     * @return 
+     */
     public boolean CarnetPersonal(int id, String Carne) {
         try {
             con = ModelConexion.getConnection();
@@ -35,6 +41,10 @@ public class ModelP_U_Personal {
         }
     }
 
+    /**
+     * Metodo para obtener los registros ingresados en la tabla tbTipoDocumento
+     * @return 
+     */
     public ResultSet cargarTipD() {
         try {
             con = ModelConexion.getConnection();
@@ -48,6 +58,10 @@ public class ModelP_U_Personal {
         }
     }
 
+    /**
+     * Metodo para comprobar si existe un registro en la tabla tbPersonal
+     * @return 
+     */
     public boolean checkPersonal() {
 
         try {
@@ -60,6 +74,10 @@ public class ModelP_U_Personal {
         }
     }
 
+    /**
+     * Metodo para obtener los registros ingresados en la tabla tbGeneros
+     * @return 
+     */
     public ResultSet cargarGeneroP() {
         try {
             con = ModelConexion.getConnection();
@@ -73,6 +91,10 @@ public class ModelP_U_Personal {
         }
     }
 
+    /**
+     * Metodo para obtener el IDEmpresa (se usa cuando el primer uso se cierra a medio proceso)
+     * @return 
+     */
     public ResultSet getEnterprise() {
         try {
             con = ModelConexion.getConnection();
@@ -85,6 +107,19 @@ public class ModelP_U_Personal {
         }
     }
 
+    /**
+     * Metodo para ingresar un personal
+     * @param idempresa
+     * @param nombrep
+     * @param apellidop
+     * @param fecha
+     * @param Correo
+     * @param direccion
+     * @param DUI
+     * @param genero
+     * @param idtipod
+     * @return 
+     */
     public boolean IngresarPPersonal(int idempresa, String nombrep, String apellidop, String fecha, String Correo, String direccion, String DUI, int genero, int idtipod) {
         try {
             int idtipopersonal = 2;
@@ -111,4 +146,23 @@ public class ModelP_U_Personal {
             return false;
         }
     }
+    
+    /**
+     * Metodo para recuperar el tipo de documento por medio de su ID
+     * @param ID
+     * @return 
+     */
+        public ResultSet TipoDocumento(int ID){
+            try{
+                con = ModelConexion.getConnection();
+                String query = "SELECT tipo_documento FROM tbTipoDocumento WHERE idTipoDocumento = ?";
+                ps = con.prepareStatement(query);
+                ps.setInt(1, ID);
+                ResultSet rs = ps.executeQuery();
+                return rs;
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e.toString());
+                return null;
+            }
+        }
 }

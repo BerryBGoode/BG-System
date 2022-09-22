@@ -27,17 +27,25 @@ public class Bienvenida extends javax.swing.JFrame {
      */
     public Bienvenida() {
         initComponents();
+        this.setTitle("Bienvenida");
         this.setLocationRelativeTo(null);
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
         AWTUtilities.setWindowShape(this, forma);
         setIconImage(Logo());
     }
 
+    /**
+     * Metodo para cargar el logo en al barra de tareas
+     * @return 
+     */
     public Image Logo() {
         Image retvalue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
         return retvalue;
     }
 
+    /**
+     * Metodo para comprobar si el proceso del primer uso se ha realizado correctamente
+     */
     private void primerus() {
         ControllerP_U_Empresa VistapEmpresa = new ControllerP_U_Empresa();
         ControllerP_U_Personal PrimerPersonal = new ControllerP_U_Personal();
@@ -131,16 +139,28 @@ public class Bienvenida extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metodo para abrir el siguiente formulario
+     * @param evt 
+     */
     private void BtnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNextActionPerformed
         // TODO add your handling code here:
         primerus();
         this.dispose();
     }//GEN-LAST:event_BtnNextActionPerformed
 
+    /**
+     * Metodo para cerrar la aplicación
+     * @param evt 
+     */
     private void btnCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMousePressed
         System.exit(0);
     }//GEN-LAST:event_btnCerrarMousePressed
 
+    /**
+     * Metodo para minimizar la aplicación
+     * @param evt 
+     */
     private void btnMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseClicked
         // TODO add your handling code here:
         this.setExtendedState(JFrame.ICONIFIED);

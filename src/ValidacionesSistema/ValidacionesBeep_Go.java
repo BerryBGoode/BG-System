@@ -5,16 +5,21 @@
  */
 package ValidacionesSistema;
 
+import java.awt.Event;
 import java.awt.Image;
 import java.awt.SystemTray;
 import java.awt.Toolkit;
 import java.awt.TrayIcon;
 import java.awt.TrayIcon.MessageType;
+import java.awt.event.KeyEvent;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 
 /**
  *
@@ -24,18 +29,34 @@ public class ValidacionesBeep_Go {
     
     public static int Modo;
 
+    /**
+     * Constructor
+     */
     public ValidacionesBeep_Go() {
     }
 
+    /**
+     * Metodo para obtener el modo en que se encuentra la aplicación (modo oscuro o claro)
+     * @return 
+     */
     public static int getModo() {
         return Modo;
     }
 
+    /**
+     * Metodo para establecer el modo
+     * @param Modo 
+     */
     public static void setModo(int Modo) {
         ValidacionesBeep_Go.Modo = Modo;
     }
     
-        public static String SHA1(String p){
+    /**
+     * Metodo para encriptar en SHA1
+     * @param p
+     * @return 
+     */
+    public static String SHA1(String p){
         String sha1 = null;       
         try{
             MessageDigest digest = MessageDigest.getInstance("SHA-1");
@@ -48,6 +69,11 @@ public class ValidacionesBeep_Go {
         return sha1;
     }
     
+    /**
+     * Metodo para encriptar en SHA256
+     * @param p
+     * @return 
+     */
     public static String SHA256(String p){
         String sha256 = null;       
         try{
@@ -61,6 +87,11 @@ public class ValidacionesBeep_Go {
         return sha256;
     }
     
+    /**
+     * Metodo para encriptar en MD5
+     * @param p
+     * @return 
+     */
     public static String MD5(String p){  
         try{
             MessageDigest md = MessageDigest.getInstance("MD5");
@@ -73,12 +104,22 @@ public class ValidacionesBeep_Go {
         }
     }
     
+    /**
+     * Metodo para codificar en base64
+     * @param p
+     * @return 
+     */
     public static String EBase64(String p){
         String base64;
         base64 = Base64.getEncoder().encodeToString(p.getBytes());
         return base64;
     }   
     
+    /**
+     * Metodo para encriptar la contraseña (pasando por SHA1, SHA256, base64, y MD5)
+     * @param p
+     * @return 
+     */
     public static String EncriptarContra(String p){
         String sha1 = SHA1(p);
         String sha2 = SHA256(sha1);
@@ -87,12 +128,21 @@ public class ValidacionesBeep_Go {
         return f;
     }
     
-        public static String DBase64(String p){
+    /**
+     * Metodo para decodificar una cadena en base64
+     * @param p
+     * @return 
+     */
+    public static String DBase64(String p){
         byte[] decoded = Base64.getDecoder().decode(p.getBytes());
         String base64 = new String(decoded, StandardCharsets.UTF_8);
         return base64;
     }
     
+    /**
+     * Metodo para validar que un jtextfield solo acepte letras y números
+     * @param evt 
+     */
     public static void SoloLetrasYNumeros(java.awt.event.KeyEvent evt){
         char car = evt.getKeyChar();
         if(Character.isLetter(car) || Character.isDigit(car)){
@@ -102,6 +152,10 @@ public class ValidacionesBeep_Go {
         }
     }
     
+    /**
+     * Metodo para validar que un jtextfield solo acepte letras, números, y el caracter '_'
+     * @param evt 
+     */
     public static void SoloLetrasNumerosGuionBajo(java.awt.event.KeyEvent evt){
         char car = evt.getKeyChar();
         if(Character.isLetter(car) || Character.isDigit(car) || car == 95){
@@ -110,6 +164,11 @@ public class ValidacionesBeep_Go {
             evt.consume();
         }
     }
+    
+    /**
+     * Metodo para validar que un jtextfield solo acepte letras
+     * @param evt 
+     */
     public static void SoloLetras(java.awt.event.KeyEvent evt){
         char car=evt.getKeyChar();
         if (Character.isLetter(car) || Character.isWhitespace(car)) {
@@ -118,6 +177,11 @@ public class ValidacionesBeep_Go {
             evt.consume();
         }
     }
+    
+    /**
+     * Metodo para validar que un jtextfield solo acepte números
+     * @param evt 
+     */
     public static void SoloNumeros(java.awt.event.KeyEvent evt){
         char car = evt.getKeyChar();
         if(Character.isDigit(car)){
@@ -127,6 +191,10 @@ public class ValidacionesBeep_Go {
         }
     }
     
+    /**
+     * Metodo para validar que un jtextfield no acepte la tecla espacio
+     * @param evt 
+     */
     public static void SinEspacios(java.awt.event.KeyEvent evt){
         char key = evt.getKeyChar();
 
@@ -135,6 +203,13 @@ public class ValidacionesBeep_Go {
             evt.consume();
         }
     }
+    
+    /**
+     * Metodo para desplegar una notificación
+     * @param encabezado
+     * @param mensaje
+     * @param tipo_mensaje 
+     */
     public static void Notificacion(String encabezado, String mensaje, int tipo_mensaje){
         try{
             SystemTray tray = SystemTray.getSystemTray();

@@ -12,11 +12,16 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author danlo
+ * @author Rober
  */
 public class ModelUsuarios {
         PreparedStatement ps;
     
+        /**
+         * Metodo para obtener los registros de la tabla tbTipoUsuario
+         * @param con
+         * @return 
+         */
         public ResultSet CargarTipoUsuarios(Connection con){
             try{
                 String query = "SELECT * FROM tbTipoUsuario";
@@ -28,7 +33,12 @@ public class ModelUsuarios {
                 return null;
             }
         }
-        
+       
+        /**
+         * Metodo para obtener los registros de la tabla tbEstadoUsuario
+         * @param con
+         * @return 
+         */
         public ResultSet CargarEstadoUsuarios(Connection con){
             try{
                 String query = "SELECT * FROM tbEstadoUsuario";
@@ -41,6 +51,11 @@ public class ModelUsuarios {
             }
         }
         
+        /**
+         * Metodo para obtener los registros de la tabla tbPersonal (en este caso, nombres y apellidos)
+         * @param con
+         * @return 
+         */
         public ResultSet CargarPersonal(Connection con){
             try{
                 String query = "SELECT idPersonal, CONCAT(nombre_p, ' ', apellido_p) as nombre_completo FROM tbPersonal";
@@ -52,6 +67,12 @@ public class ModelUsuarios {
                 return null;
             }
         }
+        
+        /**
+         * Metodo para obtener los registros en la tabla tbUsuarios
+         * @param con
+         * @return 
+         */
         public ResultSet CargarUsuarios(Connection con){
             try{
                 String query = "SELECT * FROM vwUsuarios";
@@ -64,6 +85,19 @@ public class ModelUsuarios {
             }
         }
         
+        /**
+         * Metodo para ingresar un usuario
+         * @param idPersonal
+         * @param nombre_usuario
+         * @param contraseña
+         * @param PIN
+         * @param idTipoUsuario
+         * @param idEstadoUsuario
+         * @param imagen
+         * @param intentos
+         * @param con
+         * @return 
+         */
         public boolean AgregarUsuario(int idPersonal, String nombre_usuario, String contraseña, String PIN, int idTipoUsuario, int idEstadoUsuario, byte[] imagen, int intentos, Connection con){
             try{
                 String query = "INSERT INTO tbUsuarios VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -87,6 +121,18 @@ public class ModelUsuarios {
                 return false;
             }
         }
+        
+        /**
+         * Metodo para actualizar un usuario
+         * @param idPersonal
+         * @param nombre_usuario
+         * @param idTipoUsuario
+         * @param idEstadoUsuario
+         * @param imagen
+         * @param ID
+         * @param con
+         * @return 
+         */
          public boolean ActualizarUsuario(int idPersonal, String nombre_usuario, int idTipoUsuario, int idEstadoUsuario, byte[] imagen, int ID, Connection con){
             try{
                 String query = "UPDATE tbUsuarios SET idPersonal = ?, nombre_usuario = ?, idTipoUsuario = ?, idEstadoUsuario = ?, imagen = ? WHERE idUsuario = ?";
@@ -105,6 +151,12 @@ public class ModelUsuarios {
             }
         }
         
+         /**
+          * Metodo para eliminar un usuario
+          * @param ID
+          * @param con
+          * @return 
+          */
         public boolean EliminarUsuario(int ID, Connection con){
             try{
                 String query = "DELETE FROM tbUsuarios WHERE idUsuario = ?";
@@ -118,6 +170,12 @@ public class ModelUsuarios {
             }
         }
         
+        /**
+         * Metodo para obtener los bytes de la imagen del usuario
+         * @param ID
+         * @param con
+         * @return 
+         */
         public ResultSet BuscarImagen(int ID, Connection con){
             try{
                 String query = "SELECT imagen FROM tbUsuarios WHERE idUsuario = ?";
@@ -131,9 +189,15 @@ public class ModelUsuarios {
             }
         }
         
+        /**
+         * Metodo para obtener el carnet del personal al que pertenece el usuario seleccionado (debe ser un usuario de estudiante)
+         * @param ID
+         * @param con
+         * @return 
+         */
         public ResultSet BuscaCarnet(int ID, Connection con){
             try{
-                String query = "SELECT Carnet FROM tbPersonal WHERE idPersonal = ?";
+                String query = "SELECT a.Carnet FROM tbPersonal a, tbTipoPersonal b WHERE a.idPersonal =  ? AND b.tipo_personal = 'Alumnos' AND a.idTipoPersonal = b.idTipoPersonal";
                 ps = con.prepareStatement(query);
                 ps.setInt(1, ID);
                 ResultSet rs = ps.executeQuery();
@@ -144,6 +208,11 @@ public class ModelUsuarios {
             }
         }
         
+        /**
+         * Metodo para obtener el ID del estado "Activo"
+         * @param con
+         * @return 
+         */
         public ResultSet BuscarIDActivo(Connection con){
             try{
                 String query = "SELECT idEstadoUsuario FROM tbEstadoUsuario WHERE estado_usuario = 'Activo'";
@@ -156,9 +225,14 @@ public class ModelUsuarios {
             }
         }
         
+        /**
+         * Metodo para obtener el ID del tipo de usuario: "Alumno"
+         * @param con
+         * @return 
+         */
         public ResultSet BuscarIDEstudiante(Connection con){
             try{
-                String query = "SELECT a.Carnet FROM tbPersonal a, tbTipoPersonal b WHERE a.idPersonal =  ? AND b.tipo_personal = 'Alumnos' AND a.idTipoPersonal = b.idTipoPersonal";
+                String query = "SELECT idTipoUsuario FROM tbTipoUsuario WHERE tipo_usuario = 'Alumno'";
                 ps = con.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
                 return rs;

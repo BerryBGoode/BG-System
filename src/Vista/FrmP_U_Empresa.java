@@ -30,7 +30,7 @@ import necesario.RSFileChooser;
 
 /**
  *
- * @author danlo
+ * @author Ander
  */
 public class FrmP_U_Empresa extends javax.swing.JFrame {
 
@@ -44,12 +44,17 @@ public class FrmP_U_Empresa extends javax.swing.JFrame {
      */
     public FrmP_U_Empresa() {
         initComponents();
+        this.setTitle("Creación de empresa");
         this.setLocationRelativeTo(null);
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
         AWTUtilities.setWindowShape(this, forma);
         setIconImage(Logo());
     }
 
+    /**
+     * Metodo para colocar el logo en la barra de tareas
+     * @return 
+     */
     public Image Logo() {
         Image retvalue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
         return retvalue;
@@ -117,6 +122,9 @@ public class FrmP_U_Empresa extends javax.swing.JFrame {
         txtNombreEmpresa.setLineColor(new java.awt.Color(42, 36, 56));
         txtNombreEmpresa.setSelectionColor(new java.awt.Color(58, 50, 75));
         txtNombreEmpresa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreEmpresaKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreEmpresaKeyTyped(evt);
             }
@@ -131,6 +139,9 @@ public class FrmP_U_Empresa extends javax.swing.JFrame {
         txtDireccionEmpresa.setLineColor(new java.awt.Color(42, 36, 56));
         txtDireccionEmpresa.setSelectionColor(new java.awt.Color(58, 50, 75));
         txtDireccionEmpresa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDireccionEmpresaKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtDireccionEmpresaKeyTyped(evt);
             }
@@ -145,6 +156,9 @@ public class FrmP_U_Empresa extends javax.swing.JFrame {
         txtCNR.setLineColor(new java.awt.Color(42, 36, 56));
         txtCNR.setSelectionColor(new java.awt.Color(58, 50, 75));
         txtCNR.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCNRKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCNRKeyTyped(evt);
             }
@@ -159,6 +173,9 @@ public class FrmP_U_Empresa extends javax.swing.JFrame {
         txtRepresentanteLegal.setLineColor(new java.awt.Color(42, 36, 56));
         txtRepresentanteLegal.setSelectionColor(new java.awt.Color(58, 50, 75));
         txtRepresentanteLegal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtRepresentanteLegalKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtRepresentanteLegalKeyTyped(evt);
             }
@@ -173,6 +190,9 @@ public class FrmP_U_Empresa extends javax.swing.JFrame {
         txtNIT.setLineColor(new java.awt.Color(42, 36, 56));
         txtNIT.setSelectionColor(new java.awt.Color(58, 50, 75));
         txtNIT.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNITKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNITKeyTyped(evt);
             }
@@ -226,6 +246,10 @@ public class FrmP_U_Empresa extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Metodo para validar y activar la inserción de datos 
+     * @param evt 
+     */
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         // TODO add your handling code here:
         if (txtCNR.getText().length() < 8 || txtNIT.getText().length() < 17 || txtNombreEmpresa.getText().trim().isEmpty() || txtRepresentanteLegal.getText().trim().isEmpty() || txtDireccionEmpresa.getText().trim().isEmpty() || txtNIT.getText().trim().isEmpty() || txtCNR.getText().trim().isEmpty()) {
@@ -239,15 +263,27 @@ public class FrmP_U_Empresa extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnContinuarActionPerformed
 
+    /**
+     * Metodo para cerrar la aplicación
+     * @param evt 
+     */
     private void btnCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMousePressed
         System.exit(0);
     }//GEN-LAST:event_btnCerrarMousePressed
 
+    /**
+     * Metodo para minimizar la aplicación
+     * @param evt 
+     */
     private void btnMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseClicked
         // TODO add your handling code here:
         this.setExtendedState(JFrame.ICONIFIED);
         //Que guapos somos
     }//GEN-LAST:event_btnMinimizarMouseClicked
+    
+    /**
+     * Metodo para cargar la imagen seleccioanda en un label
+     */
     void cargarImagen() {
         RSFileChooser jcargar = new RSFileChooser();
         FileNameExtensionFilter fil = new FileNameExtensionFilter("JPG", "PNG", "JPG");
@@ -278,11 +314,20 @@ public class FrmP_U_Empresa extends javax.swing.JFrame {
             }
         }
     }
+    
+    /**
+     * Metodo para activar el metodo de cargar la imagen
+     * @param evt 
+     */
     private void btnExaminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExaminarActionPerformed
         // TODO add your handling code here:
         cargarImagen();
     }//GEN-LAST:event_btnExaminarActionPerformed
 
+    /**
+     * Validaciones para el txtNombreEmpresa
+     * @param evt 
+     */
     private void txtNombreEmpresaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreEmpresaKeyTyped
         // TODO add your handling code here:
         char key = evt.getKeyChar();
@@ -299,6 +344,10 @@ public class FrmP_U_Empresa extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtNombreEmpresaKeyTyped
 
+    /**
+     * Validaciones para el txtDireccionEmpresa
+     * @param evt 
+     */
     private void txtDireccionEmpresaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionEmpresaKeyTyped
         // TODO add your handling code here:
         char key = evt.getKeyChar();
@@ -315,6 +364,10 @@ public class FrmP_U_Empresa extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtDireccionEmpresaKeyTyped
 
+    /**
+     * Validaciones para el txtCNR
+     * @param evt 
+     */
     private void txtCNRKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCNRKeyTyped
         // TODO add your handling code here:
         if(txtCNR.getText().length() >= 11){
@@ -324,6 +377,10 @@ public class FrmP_U_Empresa extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtCNRKeyTyped
 
+    /**
+     * Validaciones para el txtRepresentanteLegal
+     * @param evt 
+     */
     private void txtRepresentanteLegalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRepresentanteLegalKeyTyped
         // TODO add your handling code here:
         char key = evt.getKeyChar();
@@ -347,6 +404,10 @@ public class FrmP_U_Empresa extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtRepresentanteLegalKeyTyped
 
+    /**
+     * Validaciones para el txtNIT
+     * @param evt 
+     */
     private void txtNITKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNITKeyTyped
         // TODO add your handling code here:
         char key = evt.getKeyChar();
@@ -360,6 +421,70 @@ public class FrmP_U_Empresa extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtNITKeyTyped
+
+    /**
+     * Validaciones para el txtNombreEmpresa
+     * @param evt 
+     */
+    private void txtNombreEmpresaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreEmpresaKeyPressed
+        // TODO add your handling code here:
+        if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreEmpresaKeyPressed
+
+    /**
+     * Validaciones para el txtDireccionEmpresa
+     * @param evt 
+     */
+    private void txtDireccionEmpresaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDireccionEmpresaKeyPressed
+        // TODO add your handling code here:
+        if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDireccionEmpresaKeyPressed
+
+    /**
+     * Validaciones para el txtCNR
+     * @param evt 
+     */
+    private void txtCNRKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCNRKeyPressed
+        // TODO add your handling code here:
+        if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCNRKeyPressed
+
+    /**
+     * Validaciones para el txtRepresentanteLegal
+     * @param evt 
+     */
+    private void txtRepresentanteLegalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRepresentanteLegalKeyPressed
+        // TODO add your handling code here:
+        if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtRepresentanteLegalKeyPressed
+
+    /**
+     * Validaciones para el txtNIT
+     * @param evt 
+     */
+    private void txtNITKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNITKeyPressed
+        // TODO add your handling code here:
+        if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNITKeyPressed
+    
+    /**
+     * Metodo para ingresar datos
+     */
     void IngresarDatos() {
         VistapEmpresa.nombre_empresa = txtNombreEmpresa.getText();
         VistapEmpresa.direccion = txtDireccionEmpresa.getText();

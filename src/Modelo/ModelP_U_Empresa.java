@@ -21,6 +21,10 @@ public class ModelP_U_Empresa {
     PreparedStatement ps;    
     Connection con;
 
+    /**
+     * Metodo para comprobar si hay una empresa ingresada en la base de datos
+     * @return 
+     */
     public boolean checkEnterprise(){
     
         try {
@@ -32,7 +36,19 @@ public class ModelP_U_Empresa {
             return false;
         }
     }
+    
     //Crear parametro tipo byte
+    
+    /**
+     * Metodo para ingresar una empresa
+     * @param nombre
+     * @param representante_Legal
+     * @param direccion
+     * @param NIT
+     * @param CNR
+     * @param logo
+     * @return 
+     */
     public boolean IngresarPEmpresa(String nombre, String representante_Legal, String direccion, String NIT, String CNR, byte[] logo) {
         
         try {

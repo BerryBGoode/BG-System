@@ -10,6 +10,7 @@ import com.sun.awt.AWTUtilities;
 import java.awt.Image;
 import java.awt.Shape;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.awt.geom.RoundRectangle2D;
 import java.util.Objects;
 import javax.swing.JFrame;
@@ -41,6 +42,9 @@ public class FrmRestablecimiento extends javax.swing.JFrame {
      */
     public FrmRestablecimiento(String usuario) {
         initComponents();
+        this.setTitle("Restablecimiento de contraseña");
+        TxtPass.setEchoChar('•');
+        TxtConfir.setEchoChar('•');
         this.setLocationRelativeTo(null);
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
         AWTUtilities.setWindowShape(this, forma);
@@ -142,6 +146,14 @@ public class FrmRestablecimiento extends javax.swing.JFrame {
         TxtPass.setLabelText("Contraseña");
         TxtPass.setLineColor(new java.awt.Color(187, 187, 187));
         TxtPass.setShowAndHide(true);
+        TxtPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxtPassKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtPassKeyTyped(evt);
+            }
+        });
         panelRound1.add(TxtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 330, 420, 70));
 
         TxtConfir.setBackground(new java.awt.Color(42, 36, 56));
@@ -149,6 +161,14 @@ public class FrmRestablecimiento extends javax.swing.JFrame {
         TxtConfir.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         TxtConfir.setLabelText("Confirmar Contraseña");
         TxtConfir.setLineColor(new java.awt.Color(187, 187, 187));
+        TxtConfir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxtConfirKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtConfirKeyTyped(evt);
+            }
+        });
         panelRound1.add(TxtConfir, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 440, 420, 70));
 
         getContentPane().add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -160,21 +180,25 @@ public class FrmRestablecimiento extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnCerrarMousePressed
     void CambiarClave() {
-        if (Objects.equals(TxtPass.getText(), TxtConfir.getText())) {
-            ControllerP_U_Usuarios cc = new ControllerP_U_Usuarios();
-            cc.setUsuario(user);
-            cc.setClave(ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra(TxtConfir.getText()));
-            if (cc.CambiandoClave() == true) {
-                JOptionPane.showMessageDialog(null, "Su contraseña ha sido agregada");
-                FrmLogin iniciar = new FrmLogin();
-                iniciar.setVisible(true);
-                this.dispose();
+        if(! TxtPass.getText().equals("") || ! TxtConfir.getText().equals("")){
+            if (Objects.equals(TxtPass.getText(), TxtConfir.getText())) {
+                ControllerP_U_Usuarios cc = new ControllerP_U_Usuarios();
+                cc.setUsuario(user);
+                cc.setClave(ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra(TxtConfir.getText()));
+                if (cc.CambiandoClave() == true) {
+                    JOptionPane.showMessageDialog(null, "Su contraseña ha sido agregada");
+                    FrmLogin iniciar = new FrmLogin();
+                    iniciar.setVisible(true);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "ERROR AL REALIZAR EL PROCESO");
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "ERROR AL REALIZAR EL PROCESO");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Las claves ingresadas deden de ser las mismas", "Contraseña incorrecta", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Las claves ingresadas deden de ser las mismas", "Contraseña incorrecta", JOptionPane.WARNING_MESSAGE);
 
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Campos vacios", "Existen campos vacios", JOptionPane.WARNING_MESSAGE);
         }
     }
     private void btnGoBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGoBackMouseClicked
@@ -193,6 +217,44 @@ public class FrmRestablecimiento extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.setExtendedState(JFrame.ICONIFIED);
     }//GEN-LAST:event_btnMinimizarMouseClicked
+
+    private void TxtPassKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtPassKeyTyped
+        // TODO add your handling code here:
+        if (TxtPass.getText().length() >= 30) {
+            evt.consume();
+        } else {
+            ValidacionesSistema.ValidacionesBeep_Go.SinEspacios(evt);
+        }
+    }//GEN-LAST:event_TxtPassKeyTyped
+
+    private void TxtConfirKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtConfirKeyTyped
+        // TODO add your handling code here:
+        if (TxtConfir.getText().length() >= 30) {
+            evt.consume();
+        } else {
+            ValidacionesSistema.ValidacionesBeep_Go.SinEspacios(evt);
+        }
+    }//GEN-LAST:event_TxtConfirKeyTyped
+
+    private void TxtPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtPassKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && TxtPass.getText().equals("") && ! TxtConfir.getText().equals("")) {
+            CambiarClave();
+        }else if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtPassKeyPressed
+
+    private void TxtConfirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtConfirKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && ! TxtPass.getText().equals("") && ! TxtConfir.getText().equals("")) {
+            CambiarClave();
+        }else if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtConfirKeyPressed
 
     /**
      * @param args the command line arguments
