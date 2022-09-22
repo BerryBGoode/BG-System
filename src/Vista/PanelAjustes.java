@@ -87,12 +87,16 @@ public class PanelAjustes extends javax.swing.JPanel {
         panelRound1 = new Controles_Personalizados.Paneles.PanelRound();
         panelRound2 = new Controles_Personalizados.Paneles.PanelRound();
 
+        setBackground(new java.awt.Color(42, 36, 56));
+        setLayout(new java.awt.BorderLayout());
+
         panelRound3.setBackground(new java.awt.Color(58, 50, 75));
         panelRound3.setRoundBottomLeft(30);
         panelRound3.setRoundBottomRight(30);
         panelRound3.setRoundTopLeft(30);
         panelRound3.setRoundTopRight(30);
         panelRound3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(panelRound3, java.awt.BorderLayout.CENTER);
 
         PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
         PanelFondo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -271,32 +275,7 @@ public class PanelAjustes extends javax.swing.JPanel {
 
         PanelFondo.add(PanelContenedorTemas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 750, 230));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(888, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(PanelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(402, Short.MAX_VALUE)
-                .addComponent(panelRound3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(PanelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        add(PanelFondo, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
     public static int exitdash = 0;

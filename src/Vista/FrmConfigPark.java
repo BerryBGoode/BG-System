@@ -43,7 +43,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
     private String park;
     private int chkProcess; //esta variable funciona para verificar si el proceso de actualizar o agregar
     //al dar click a actualizar el valor será 2 al agregar será 1 y antes será 0
-    
+
     public int getStation() {
         return station;
     }
@@ -550,6 +550,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
     private void btnPark9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark9MouseClicked
         if (station == 9 || station == 0) {
             modifPanelPark(panelPark9, "PARQUEO 9", 9);
+
         }
     }//GEN-LAST:event_btnPark9MouseClicked
 
@@ -572,8 +573,8 @@ public class FrmConfigPark extends javax.swing.JFrame {
         //verficar cual es el estacionamiento utilizado
         checkStationUpdate();
         if (getPark() == null) {
-            
-        }else{
+
+        } else {
             CmbParqueos.setSelectedItem(getPark());
         }
     }//GEN-LAST:event_formWindowActivated
@@ -695,12 +696,14 @@ public class FrmConfigPark extends javax.swing.JFrame {
     private void btnPark8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark8MouseClicked
         if (station == 8 || station == 0) {
             modifPanelPark(panelPark8, "PARQUEO 8", 8);
+
         }
     }//GEN-LAST:event_btnPark8MouseClicked
 
     private void btnPark7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark7MouseClicked
         if (station == 7 || station == 0) {
             modifPanelPark(panelPark7, "PARQUEO 7", 7);
+
         }
     }//GEN-LAST:event_btnPark7MouseClicked
 
@@ -771,15 +774,32 @@ public class FrmConfigPark extends javax.swing.JFrame {
     private void btnPark19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark19MouseClicked
         if (station == 19 || station == 0) {
             modifPanelPark(panelPark19, "PARQUEO 19", 19);
+
         }
     }//GEN-LAST:event_btnPark19MouseClicked
 
     private void btnPark20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark20MouseClicked
         if (station == 20 || station == 0) {
             modifPanelPark(panelPark20, "PARQUEO 20", 20);
+
         }
     }//GEN-LAST:event_btnPark20MouseClicked
 // </editor-fold>  
+
+    //este método sirve para recuperar el IDEstacionamiento y enviarlo a un attr al siguiente FRM
+    void sendIDStation(int station, int idpark) {
+        try {
+            rs = controllerpark.getSingleIDStation(station, idpark);
+            if (rs.next()) {
+                int id = rs.getInt("idEstacionamiento");
+                FrmSetPark.setIDStation(id);
+
+            }
+        } catch (Exception e) {
+            System.out.println("Vista: " + e.toString());
+        }
+
+    }
 
     //este método requiere de un pnl contenedor del boton para acceder a añadir un registro de estacionamiento
     //el pnl para emodificarle el color, el nombre del parqueo para mostrar en el form siguente
@@ -797,6 +817,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
             //entonces para asignarlo necestiaba instanciar la clase (donde se ejecuta el constructor)
             //y imprimia 0/ o no iniciaba los componentes, porque cuando el ID fuera mayor a 0 iba a hacer eso
             Frmpark = new FrmSetPark(String.valueOf(IDPark), station);
+            sendIDStation(station, IDPark);
 
             if (Frmpark.isVisible()) {
                 Frmpark.setVisible(false);
@@ -875,19 +896,6 @@ public class FrmConfigPark extends javax.swing.JFrame {
             System.out.println("Error:" + e.toString());
         }
     }//GEN-LAST:event_CmbParqueosItemStateOnChanged
-
-    void loadIDStation() {
-        rs = controllerpark.getIDStation();
-        try {
-            if (rs.next()) {
-                while (rs.next()) {
-
-                }
-            }
-        } catch (SQLException e) {
-            System.out.println("Error: " + e.toString());
-        }
-    }
 
     void loadLocationPark() {
 

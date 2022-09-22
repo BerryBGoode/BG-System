@@ -21,17 +21,17 @@ public class PanelDashboard extends javax.swing.JPanel {
         mod();
     }
     public void mode(){
-        switch(ValidacionesSistema.ValidacionesBeep_Go.getModo()){
+       switch(ValidacionesSistema.ValidacionesBeep_Go.getModo()){
             case 1: 
-                PanelFondo.setBackground(new Color(47,49,54));
+                
                 PanelGrafica1.setBackground(new Color(32,34,37));
                 PanelGrafica2.setBackground(new Color(32,34,37));
                 PanelGrafica3.setBackground(new Color(32,34,37));
                 lblNoti.setForeground(Color.WHITE);
-                PanelNotificaciones.setBackground(new Color(32,34,37)); 
+                panelRound.setBackground(new Color(32,34,37)); 
                 break;
             case 2:
-                PanelFondo.setBackground(new Color(231,234,239));
+                
                 PanelGrafica1.setBackground(new Color(253,255,254));
                 PanelGrafica2.setBackground(new Color(253,255,254));
                 PanelGrafica3.setBackground(new Color(253,255,254));
@@ -44,14 +44,14 @@ public class PanelDashboard extends javax.swing.JPanel {
 
     public void mod(){
         if (ValidacionesSistema.ValidacionesBeep_Go.getModo() == 1) {
-            PanelFondo.setBackground(new Color(47,49,54));
+            
             PanelGrafica1.setBackground(new Color(32,34,37));
             PanelGrafica2.setBackground(new Color(32,34,37));
             PanelGrafica3.setBackground(new Color(32,34,37));
             lblNoti.setForeground(Color.WHITE);
             PanelNotificaciones.setBackground(new Color(32,34,37)); 
         }else if(ValidacionesSistema.ValidacionesBeep_Go.getModo() == 2){
-            PanelFondo.setBackground(new Color(231,234,239));
+            
             PanelGrafica1.setBackground(new Color(253,255,254));
             PanelGrafica2.setBackground(new Color(253,255,254));
             PanelGrafica3.setBackground(new Color(253,255,254));
@@ -67,162 +67,181 @@ public class PanelDashboard extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        PanelFondo = new Controles_Personalizados.Paneles.PanelRound();
-        pnlCenter = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
-        jPanel13 = new javax.swing.JPanel();
-        PanelGrafica1 = new Controles_Personalizados.Paneles.PanelRound();
-        jPanel14 = new javax.swing.JPanel();
-        PanelGrafica2 = new Controles_Personalizados.Paneles.PanelRound();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel7 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        jPanel9 = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        PanelGrafica3 = new Controles_Personalizados.Paneles.PanelRound();
-        jPanel11 = new javax.swing.JPanel();
-        pnlEast = new javax.swing.JPanel();
-        jPanel16 = new javax.swing.JPanel();
+        panelRound2 = new Controles_Personalizados.Paneles.PanelRound();
+        panelRound6 = new Controles_Personalizados.Paneles.PanelRound();
+        pnlWestNotifi = new javax.swing.JPanel();
+        pnlNorthNotifi = new javax.swing.JPanel();
+        panelRound = new Controles_Personalizados.Paneles.PanelRound();
         PanelNotificaciones = new Controles_Personalizados.Paneles.PanelRound();
         lblNoti = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jPanel15 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        pnlNorthNotifi1 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel10 = new javax.swing.JPanel();
+        panelRound3 = new Controles_Personalizados.Paneles.PanelRound();
+        PanelGrafica2 = new Controles_Personalizados.Paneles.PanelRound();
+        PanelGrafica1 = new Controles_Personalizados.Paneles.PanelRound();
+        jPanel11 = new javax.swing.JPanel();
+        jPanel9 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        panelRound1 = new Controles_Personalizados.Paneles.PanelRound();
+        PanelGrafica3 = new Controles_Personalizados.Paneles.PanelRound();
 
-        setBackground(new java.awt.Color(231, 234, 239));
+        setBackground(new java.awt.Color(42, 36, 56));
         setLayout(new java.awt.BorderLayout());
 
-        PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
-        PanelFondo.setLayout(new java.awt.BorderLayout());
+        panelRound2.setBackground(new java.awt.Color(42, 36, 56));
+        panelRound2.setRoundBottomLeft(30);
+        panelRound2.setRoundBottomRight(30);
+        panelRound2.setLayout(new java.awt.BorderLayout());
 
-        pnlCenter.setBackground(new java.awt.Color(231, 234, 239));
-        pnlCenter.setLayout(new java.awt.BorderLayout());
+        panelRound6.setPreferredSize(new java.awt.Dimension(250, 100));
+        panelRound6.setRoundBottomRight(30);
+        panelRound6.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        pnlWestNotifi.setBackground(new java.awt.Color(231, 234, 239));
+        panelRound6.add(pnlWestNotifi, java.awt.BorderLayout.WEST);
 
-        jPanel5.setBackground(new java.awt.Color(231, 234, 239));
-        jPanel5.setLayout(new java.awt.BorderLayout());
+        pnlNorthNotifi.setBackground(new java.awt.Color(231, 234, 239));
+        panelRound6.add(pnlNorthNotifi, java.awt.BorderLayout.NORTH);
 
-        jPanel12.setBackground(new java.awt.Color(231, 234, 239));
-        jPanel5.add(jPanel12, java.awt.BorderLayout.CENTER);
-
-        jPanel13.setBackground(new java.awt.Color(231, 234, 239));
-        jPanel13.setPreferredSize(new java.awt.Dimension(650, 100));
-        jPanel13.setLayout(new java.awt.BorderLayout());
-
-        PanelGrafica1.setBackground(new java.awt.Color(253, 255, 254));
-        PanelGrafica1.setPreferredSize(new java.awt.Dimension(562, 293));
-        PanelGrafica1.setRoundBottomLeft(20);
-        PanelGrafica1.setRoundBottomRight(20);
-        PanelGrafica1.setRoundTopLeft(20);
-        PanelGrafica1.setRoundTopRight(20);
-        PanelGrafica1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel13.add(PanelGrafica1, java.awt.BorderLayout.CENTER);
-
-        jPanel5.add(jPanel13, java.awt.BorderLayout.WEST);
-
-        jPanel14.setBackground(new java.awt.Color(231, 234, 239));
-        jPanel14.setPreferredSize(new java.awt.Dimension(400, 100));
-        jPanel14.setLayout(new java.awt.BorderLayout());
-
-        PanelGrafica2.setBackground(new java.awt.Color(253, 255, 254));
-        PanelGrafica2.setPreferredSize(new java.awt.Dimension(361, 292));
-        PanelGrafica2.setRoundBottomLeft(20);
-        PanelGrafica2.setRoundBottomRight(20);
-        PanelGrafica2.setRoundTopLeft(20);
-        PanelGrafica2.setRoundTopRight(20);
-        PanelGrafica2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel14.add(PanelGrafica2, java.awt.BorderLayout.CENTER);
-
-        jPanel5.add(jPanel14, java.awt.BorderLayout.EAST);
-
-        jPanel1.add(jPanel5, java.awt.BorderLayout.CENTER);
-
-        jPanel6.setBackground(new java.awt.Color(231, 234, 239));
-        jPanel6.setPreferredSize(new java.awt.Dimension(100, 5));
-        jPanel1.add(jPanel6, java.awt.BorderLayout.PAGE_START);
-
-        jPanel7.setBackground(new java.awt.Color(231, 234, 239));
-        jPanel7.setPreferredSize(new java.awt.Dimension(30, 100));
-        jPanel1.add(jPanel7, java.awt.BorderLayout.WEST);
-
-        pnlCenter.add(jPanel1, java.awt.BorderLayout.CENTER);
-
-        jPanel2.setLayout(new java.awt.BorderLayout());
-
-        jPanel10.setBackground(new java.awt.Color(231, 234, 239));
-        jPanel10.setPreferredSize(new java.awt.Dimension(30, 100));
-        jPanel2.add(jPanel10, java.awt.BorderLayout.WEST);
-
-        jPanel9.setBackground(new java.awt.Color(231, 234, 239));
-        jPanel2.add(jPanel9, java.awt.BorderLayout.NORTH);
-
-        jPanel8.setBackground(new java.awt.Color(231, 234, 239));
-        jPanel8.setLayout(new java.awt.BorderLayout());
-
-        PanelGrafica3.setBackground(new java.awt.Color(253, 255, 254));
-        PanelGrafica3.setPreferredSize(new java.awt.Dimension(938, 293));
-        PanelGrafica3.setRoundBottomLeft(20);
-        PanelGrafica3.setRoundBottomRight(20);
-        PanelGrafica3.setRoundTopLeft(20);
-        PanelGrafica3.setRoundTopRight(20);
-        PanelGrafica3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel8.add(PanelGrafica3, java.awt.BorderLayout.CENTER);
-
-        jPanel2.add(jPanel8, java.awt.BorderLayout.CENTER);
-
-        jPanel11.setBackground(new java.awt.Color(231, 234, 239));
-        jPanel11.setPreferredSize(new java.awt.Dimension(100, 10));
-        jPanel2.add(jPanel11, java.awt.BorderLayout.PAGE_END);
-
-        pnlCenter.add(jPanel2, java.awt.BorderLayout.SOUTH);
-
-        PanelFondo.add(pnlCenter, java.awt.BorderLayout.CENTER);
-
-        pnlEast.setBackground(new java.awt.Color(231, 234, 239));
-        pnlEast.setLayout(new java.awt.BorderLayout());
-
-        jPanel16.setBackground(new java.awt.Color(231, 234, 239));
-        jPanel16.setPreferredSize(new java.awt.Dimension(5, 100));
-        pnlEast.add(jPanel16, java.awt.BorderLayout.LINE_END);
+        panelRound.setBackground(new java.awt.Color(231, 234, 239));
+        panelRound.setRoundBottomRight(20);
+        panelRound.setLayout(new java.awt.GridBagLayout());
 
         PanelNotificaciones.setBackground(new java.awt.Color(253, 255, 254));
-        PanelNotificaciones.setPreferredSize(new java.awt.Dimension(165, 602));
+        PanelNotificaciones.setPreferredSize(new java.awt.Dimension(300, 200));
         PanelNotificaciones.setRoundBottomLeft(20);
         PanelNotificaciones.setRoundBottomRight(20);
         PanelNotificaciones.setRoundTopLeft(20);
         PanelNotificaciones.setRoundTopRight(20);
         PanelNotificaciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblNoti.setFont(new java.awt.Font("Roboto Black", 0, 14)); // NOI18N
-        lblNoti.setForeground(new java.awt.Color(42, 36, 56));
+        lblNoti.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        lblNoti.setForeground(new java.awt.Color(0, 0, 0));
         lblNoti.setText("Notificaciones");
         PanelNotificaciones.add(lblNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        pnlEast.add(PanelNotificaciones, java.awt.BorderLayout.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 10, 10);
+        panelRound.add(PanelNotificaciones, gridBagConstraints);
 
-        jPanel3.setBackground(new java.awt.Color(231, 234, 239));
-        pnlEast.add(jPanel3, java.awt.BorderLayout.WEST);
+        panelRound6.add(panelRound, java.awt.BorderLayout.CENTER);
+
+        panelRound2.add(panelRound6, java.awt.BorderLayout.EAST);
+
+        jPanel2.setPreferredSize(new java.awt.Dimension(600, 100));
+        jPanel2.setLayout(new java.awt.BorderLayout());
 
         jPanel4.setBackground(new java.awt.Color(231, 234, 239));
-        jPanel4.setPreferredSize(new java.awt.Dimension(100, 5));
-        pnlEast.add(jPanel4, java.awt.BorderLayout.PAGE_START);
+        jPanel2.add(jPanel4, java.awt.BorderLayout.PAGE_START);
 
-        jPanel15.setBackground(new java.awt.Color(231, 234, 239));
-        pnlEast.add(jPanel15, java.awt.BorderLayout.PAGE_END);
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
-        PanelFondo.add(pnlEast, java.awt.BorderLayout.EAST);
+        pnlNorthNotifi1.setBackground(new java.awt.Color(231, 234, 239));
+        pnlNorthNotifi1.setLayout(new java.awt.BorderLayout());
 
-        add(PanelFondo, java.awt.BorderLayout.CENTER);
+        jPanel5.setBackground(new java.awt.Color(231, 234, 239));
+        pnlNorthNotifi1.add(jPanel5, java.awt.BorderLayout.EAST);
+
+        jPanel7.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel7.setLayout(new java.awt.BorderLayout());
+
+        jPanel8.setPreferredSize(new java.awt.Dimension(100, 300));
+        jPanel8.setLayout(new java.awt.BorderLayout());
+
+        jPanel10.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel10.setLayout(new java.awt.BorderLayout());
+
+        panelRound3.setBackground(new java.awt.Color(231, 234, 239));
+        panelRound3.setPreferredSize(new java.awt.Dimension(505, 100));
+        panelRound3.setRoundBottomLeft(20);
+        panelRound3.setRoundBottomRight(20);
+        panelRound3.setRoundTopLeft(20);
+        panelRound3.setRoundTopRight(20);
+        panelRound3.setLayout(new java.awt.BorderLayout());
+
+        PanelGrafica2.setBackground(new java.awt.Color(253, 255, 254));
+        PanelGrafica2.setPreferredSize(new java.awt.Dimension(500, 400));
+        PanelGrafica2.setRoundBottomLeft(20);
+        PanelGrafica2.setRoundBottomRight(20);
+        PanelGrafica2.setRoundTopLeft(20);
+        PanelGrafica2.setRoundTopRight(20);
+        panelRound3.add(PanelGrafica2, java.awt.BorderLayout.EAST);
+
+        jPanel10.add(panelRound3, java.awt.BorderLayout.EAST);
+
+        PanelGrafica1.setBackground(new java.awt.Color(253, 255, 254));
+        PanelGrafica1.setPreferredSize(new java.awt.Dimension(400, 400));
+        PanelGrafica1.setRoundBottomLeft(20);
+        PanelGrafica1.setRoundBottomRight(20);
+        PanelGrafica1.setRoundTopLeft(20);
+        PanelGrafica1.setRoundTopRight(20);
+        jPanel10.add(PanelGrafica1, java.awt.BorderLayout.CENTER);
+
+        jPanel8.add(jPanel10, java.awt.BorderLayout.CENTER);
+
+        jPanel11.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel8.add(jPanel11, java.awt.BorderLayout.WEST);
+
+        jPanel7.add(jPanel8, java.awt.BorderLayout.CENTER);
+
+        jPanel9.setBackground(new java.awt.Color(42, 36, 56));
+        jPanel9.setPreferredSize(new java.awt.Dimension(100, 290));
+        jPanel9.setRequestFocusEnabled(false);
+        jPanel9.setLayout(new java.awt.BorderLayout());
+
+        jPanel6.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel6.setPreferredSize(new java.awt.Dimension(100, 5));
+        jPanel9.add(jPanel6, java.awt.BorderLayout.NORTH);
+
+        panelRound1.setBackground(new java.awt.Color(231, 234, 239));
+        panelRound1.setRoundBottomLeft(20);
+        panelRound1.setLayout(new java.awt.GridBagLayout());
+
+        PanelGrafica3.setBackground(new java.awt.Color(253, 255, 254));
+        PanelGrafica3.setPreferredSize(new java.awt.Dimension(990, 200));
+        PanelGrafica3.setRoundBottomLeft(20);
+        PanelGrafica3.setRoundBottomRight(20);
+        PanelGrafica3.setRoundTopLeft(20);
+        PanelGrafica3.setRoundTopRight(20);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.gridheight = java.awt.GridBagConstraints.RELATIVE;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.ipady = 1;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 10, 0);
+        panelRound1.add(PanelGrafica3, gridBagConstraints);
+
+        jPanel9.add(panelRound1, java.awt.BorderLayout.CENTER);
+
+        jPanel7.add(jPanel9, java.awt.BorderLayout.SOUTH);
+
+        pnlNorthNotifi1.add(jPanel7, java.awt.BorderLayout.CENTER);
+
+        jPanel1.add(pnlNorthNotifi1, java.awt.BorderLayout.CENTER);
+
+        jPanel2.add(jPanel1, java.awt.BorderLayout.CENTER);
+
+        panelRound2.add(jPanel2, java.awt.BorderLayout.CENTER);
+
+        add(panelRound2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Controles_Personalizados.Paneles.PanelRound PanelFondo;
     private Controles_Personalizados.Paneles.PanelRound PanelGrafica1;
     private Controles_Personalizados.Paneles.PanelRound PanelGrafica2;
     private Controles_Personalizados.Paneles.PanelRound PanelGrafica3;
@@ -230,13 +249,7 @@ public class PanelDashboard extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel14;
-    private javax.swing.JPanel jPanel15;
-    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -244,7 +257,13 @@ public class PanelDashboard extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel lblNoti;
-    private javax.swing.JPanel pnlCenter;
-    private javax.swing.JPanel pnlEast;
+    private Controles_Personalizados.Paneles.PanelRound panelRound;
+    private Controles_Personalizados.Paneles.PanelRound panelRound1;
+    private Controles_Personalizados.Paneles.PanelRound panelRound2;
+    private Controles_Personalizados.Paneles.PanelRound panelRound3;
+    private Controles_Personalizados.Paneles.PanelRound panelRound6;
+    private javax.swing.JPanel pnlNorthNotifi;
+    private javax.swing.JPanel pnlNorthNotifi1;
+    private javax.swing.JPanel pnlWestNotifi;
     // End of variables declaration//GEN-END:variables
 }
