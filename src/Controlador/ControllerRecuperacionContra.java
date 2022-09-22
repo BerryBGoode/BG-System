@@ -6,6 +6,8 @@
 package Controlador;
 
 import Modelo.ModelRecuperacionContra;
+import java.sql.Connection;
+import java.sql.ResultSet;
 
 /**
  *
@@ -16,7 +18,10 @@ public class ControllerRecuperacionContra {
     private String usuario;
     private String contra;
     private String PIN;
-
+    private String documento;
+    private int idTipoDoc;
+    Connection con = ControllerConexion.getConnectionModel();
+    
     public String getUsuario() {
         return usuario;
     }
@@ -40,8 +45,25 @@ public class ControllerRecuperacionContra {
     public void setContra(String contra) {
         this.contra = contra;
     }
-    
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(String documento) {
+        this.documento = documento;
+    }
+
+    public int getIdTipoDoc() {
+        return idTipoDoc;
+    }
+
+    public void setIdTipoDoc(int idTipoDoc) {
+        this.idTipoDoc = idTipoDoc;
+    }
         
+    
+    
     public int RecuperarContraPINController (){
         return ModelRecuperacionContra.RecuperarContraPIN_ValidarDatos(usuario, PIN);
     }
@@ -49,5 +71,13 @@ public class ControllerRecuperacionContra {
         
     public boolean RecuperarContraController (){
         return ModelRecuperacionContra.RecuperarContra(usuario, contra);
+    }
+    
+    public ResultSet CargarTipoDocumentoController(){
+        return ModelRecuperacionContra.CargarTipoDocumento(con);
+    }
+    
+    public int ValidarDocumentoController(){
+        return ModelRecuperacionContra.ValidarDocumento(usuario, documento, idTipoDoc, con);
     }
 }

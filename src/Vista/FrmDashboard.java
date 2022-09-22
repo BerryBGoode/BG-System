@@ -31,12 +31,14 @@ import javax.swing.JFrame;
  * @author danlo and ferna
  */
 public class FrmDashboard extends javax.swing.JFrame implements Runnable {
+    private String tipousuario;
 
     /**
      * Creates new form Dashboard
      */
     public FrmDashboard(String nombre, String tipo) {
         initComponents();
+        tipousuario=tipo;
         this.setLocationRelativeTo(null);
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
         AWTUtilities.setWindowShape(this, forma);
@@ -116,6 +118,37 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         }
         minutos = cal.get(Calendar.MINUTE) > 9 ? "" + cal.get(Calendar.MINUTE) : "0" + cal.get(Calendar.MINUTE);
         segundos = cal.get(Calendar.SECOND) > 9 ? "" + cal.get(Calendar.SECOND) : "0" + cal.get(Calendar.SECOND);
+        
+        if (Integer.valueOf(hora) >= 2 && Integer.valueOf(hora) <= 6 && ampm.equals("pm")) {
+            lblSun.setVisible(false);
+            lblSunset.setVisible(true);
+            lblNight.setVisible(false);
+        }
+        if (Integer.valueOf(hora) >= 7 && Integer.valueOf(hora) <= 11 && ampm.equals("pm")) {
+            lblSun.setVisible(false);
+            lblSunset.setVisible(false);
+            lblNight.setVisible(true);
+        }
+        if (Integer.valueOf(hora) >= 0 && Integer.valueOf(hora) <= 4 && ampm.equals("am")) {
+            lblSun.setVisible(false);
+            lblSunset.setVisible(false);
+            lblNight.setVisible(true);
+        }
+        if (Integer.valueOf(hora) == 5 && ampm.equals("am")) {
+            lblSun.setVisible(false);
+            lblSunset.setVisible(true);
+            lblNight.setVisible(false);
+        }
+        if (Integer.valueOf(hora) >= 6 && Integer.valueOf(hora) <= 11 && ampm.equals("am")) {
+            lblSun.setVisible(true);
+            lblSunset.setVisible(false);
+            lblNight.setVisible(false);
+        }
+        if (Integer.valueOf(hora) >= 0 && Integer.valueOf(hora) <= 1 && ampm.equals("pm")) {
+            lblSun.setVisible(true);
+            lblSunset.setVisible(false);
+            lblNight.setVisible(false);
+        }
     }
 
     /**
@@ -926,7 +959,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionLogout.setVisible(false);
         panelSeleccionAjustes.setVisible(false);
 
-        PanelAccesos pl = new PanelAccesos();
+        PanelAccesos pl = new PanelAccesos(tipousuario);
         pl.setSize(1270, 620);
         pl.setLocation(0, 0);
 

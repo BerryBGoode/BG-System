@@ -5,12 +5,16 @@
  */
 package Vista;
 
+import Controlador.ControllerConexion;
 import Controlador.ControllerContactos;
 import Controles_Personalizados.Botones.UWPButton;
 import Controles_Personalizados.RenderTable;
 import java.awt.Color;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -19,6 +23,12 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -37,17 +47,20 @@ public class PanelContactos extends javax.swing.JPanel {
     int panelcontactos = 0;
     private int prueba;
     int frmestate = 0;
+    int idContacto;
 
     FrmAgg_Contacto frmAgg_Contacto;
     UWPButton btnModificar = new UWPButton();
     UWPButton btnEliminar = new UWPButton();
+    UWPButton btnReporte = new UWPButton();
     ImageIcon Modificar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar.png"));
     ImageIcon Eliminar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/eliminar.png"));
+    ImageIcon Reporte = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report 1.png"));
 
     public PanelContactos() {
         initComponents();
 
-        String[] headerContactos = {"Id Contacto", "contacto", "Personal", "Tipo Contacto", "idPersonal", "idTipoContacto", "Modificar", "Eliminar"};
+        String[] headerContactos = {"Id Contacto", "contacto", "Personal", "Tipo Contacto", "idPersonal", "idTipoContacto", "Modificar", "Eliminar", "Registro"};
         model = new DefaultTableModel(null, headerContactos) {
             @Override
             public boolean isCellEditable(int row, int column) { // aqui esta
@@ -77,9 +90,11 @@ public class PanelContactos extends javax.swing.JPanel {
             while (rs.next()) {
                 btnModificar.setIcon(Modificar);
                 btnEliminar.setIcon(Eliminar);
+                btnReporte.setIcon(Reporte);
                 btnModificar.setBackground(new Color(231, 234, 239));
                 btnEliminar.setBackground(new Color(231, 234, 239));
-                Object[] oValues = {rs.getInt("idContacto"), rs.getString("contacto"), rs.getString("Personal"), rs.getString("tipo_contacto"), rs.getInt("idPersonal"), rs.getInt("idTipoContacto"), btnModificar, btnEliminar};
+                btnReporte.setBackground(new Color(231, 234, 239));
+                Object[] oValues = {rs.getInt("idContacto"), rs.getString("contacto"), rs.getString("Personal"), rs.getString("tipo_contacto"), rs.getInt("idPersonal"), rs.getInt("idTipoContacto"), btnModificar, btnEliminar, btnReporte};
                 model.addRow(oValues);
             }
         } catch (Exception e) {
@@ -98,11 +113,12 @@ public class PanelContactos extends javax.swing.JPanel {
 
         PanelFondo = new Controles_Personalizados.Paneles.PanelRound();
         lblContactos = new javax.swing.JLabel();
-        btnFiltrar = new Controles_Personalizados.Botones.UWPButton();
+        btnInforme = new Controles_Personalizados.Botones.UWPButton();
         btnAgregar = new Controles_Personalizados.Botones.UWPButton();
         PanelTabla = new javax.swing.JScrollPane();
         tbContactos = new Controles_Personalizados.Tables.Table();
         ScrollTabla = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
+        btnFiltrar1 = new Controles_Personalizados.Botones.UWPButton();
 
         setBackground(new java.awt.Color(42, 36, 56));
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -127,13 +143,18 @@ public class PanelContactos extends javax.swing.JPanel {
         lblContactos.setText("Contactos");
         PanelFondo.add(lblContactos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        btnFiltrar.setBackground(new java.awt.Color(58, 50, 75));
-        btnFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Filtrar Blanco.png"))); // NOI18N
-        btnFiltrar.setText(" Filtrar");
-        btnFiltrar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        btnFiltrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        PanelFondo.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 150, 40));
+        btnInforme.setBackground(new java.awt.Color(58, 50, 75));
+        btnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
+        btnInforme.setText("Informe");
+        btnInforme.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        btnInforme.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnInforme.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnInforme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInformeActionPerformed(evt);
+            }
+        });
+        PanelFondo.add(btnInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 120, 40));
 
         btnAgregar.setBackground(new java.awt.Color(58, 50, 75));
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Agregar Blanco.png"))); // NOI18N
@@ -217,8 +238,37 @@ public class PanelContactos extends javax.swing.JPanel {
         ScrollTabla.setBackground(new java.awt.Color(58, 50, 75));
         ScrollTabla.setForeground(new java.awt.Color(58, 50, 75));
         PanelFondo.add(ScrollTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(1238, 177, 10, 40));
-
         add(PanelFondo, java.awt.BorderLayout.CENTER);
+
+        btnFiltrar1.setBackground(new java.awt.Color(58, 50, 75));
+        btnFiltrar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Filtrar Blanco.png"))); // NOI18N
+        btnFiltrar1.setText(" Filtrar");
+        btnFiltrar1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        btnFiltrar1.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnFiltrar1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        PanelFondo.add(btnFiltrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 150, 40));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1270, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(PanelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 620, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(PanelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
     }// </editor-fold>//GEN-END:initComponents
 
     FrmPersonal_Contacto add = new FrmPersonal_Contacto();
@@ -242,8 +292,10 @@ public class PanelContactos extends javax.swing.JPanel {
         int row = evt.getY() / tbContactos.getRowHeight();
         btnModificar.setName("btnActualizar");
         btnEliminar.setName("btnEliminar");
+        btnReporte.setName("btnReporte");
         if (evt.getClickCount() == 1) {
             JTable rcp = (JTable) evt.getSource();
+            idContacto = (int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0);
             ValidacionesSistema.Parametros_Contactos.setIdcontacto((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0));
             ValidacionesSistema.Parametros_Contactos.setContacto(rcp.getModel().getValueAt(rcp.getSelectedRow(), 1).toString());
             ValidacionesSistema.Parametros_Contactos.setPersonal(rcp.getModel().getValueAt(rcp.getSelectedRow(), 2).toString());
@@ -262,10 +314,9 @@ public class PanelContactos extends javax.swing.JPanel {
                     frmestate = 1;
                     //this.setEnabled(false);
                     CargarTabla();
-
-                    //Actualizar Contacto metodo
-                }else{
-                    frmAgg_Contacto.setVisible(true);
+                }
+                if (btns.getName().equals("btnReporte")) {
+                    Imprimir1();
                 }
                 if (btns.getName().equals("btnEliminar")) {
                     int confirmar = JOptionPane.YES_NO_OPTION;
@@ -284,26 +335,61 @@ public class PanelContactos extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tbContactosMouseClicked
 
-    final void Refresh(){
-        if (frmestate == 1 && !(frmAgg_Contacto.isActive())) {
-            CargarTabla();
-            frmestate = 0;
+    void ImprimirReporte() {
+        Connection con = ControllerConexion.getConnectionModel();
+        try {
+            String path = "src/DocsReport/ReporteContactos.jasper";
+            JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(path);
+            JasperPrint jp = JasperFillManager.fillReport(jr, null, con);
+            JasperViewer jv = new JasperViewer(jp, false);
+            jv.setVisible(true);
+            System.out.println("si, se imprime");
+        } catch (JRException e) {
+            System.out.println("Error" + e.toString());
         }
     }
+    
+    void Imprimir1() {
+        Connection con = ControllerConexion.getConnectionModel();
+        try {
+            String path = "src/DocsReport/InformeContactos.jasper";
+            JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(path);
+            Map param = new HashMap<>();
+            param.put("idContacto", idContacto);
+            System.out.println(idContacto);
+            JasperPrint jp = JasperFillManager.fillReport(jr, param, con);
+            JasperViewer jv = new JasperViewer(jp, false);
+            jv.setVisible(true);
+            System.out.println("si, se imprime");
+        } catch (JRException e) {
+            System.out.println("Error" + e.toString());
+        }
+    }
+    
+//    final void Refresh(){
+//        if (frmestate == 1 && !(frmAgg_Contacto.isActive())) {
+//            CargarTabla();
+//            frmestate = 0;
+//        }
+//    }
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-        Refresh();
+//        Refresh();
     }//GEN-LAST:event_formMouseClicked
 
     private void tbContactosMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbContactosMouseMoved
         // TODO add your handling code here:
-        Refresh();
+//        Refresh();
     }//GEN-LAST:event_tbContactosMouseMoved
 
     private void PanelFondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseMoved
         // TODO add your handling code here:
-        Refresh();
+//        Refresh();
     }//GEN-LAST:event_PanelFondoMouseMoved
+
+    private void btnInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformeActionPerformed
+        ImprimirReporte();
+    }//GEN-LAST:event_btnInformeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -311,7 +397,8 @@ public class PanelContactos extends javax.swing.JPanel {
     private javax.swing.JScrollPane PanelTabla;
     private Controles_Personalizados.ScrollBar.ScrollBarCustom ScrollTabla;
     private Controles_Personalizados.Botones.UWPButton btnAgregar;
-    private Controles_Personalizados.Botones.UWPButton btnFiltrar;
+    private Controles_Personalizados.Botones.UWPButton btnFiltrar1;
+    private Controles_Personalizados.Botones.UWPButton btnInforme;
     private javax.swing.JLabel lblContactos;
     private Controles_Personalizados.Tables.Table tbContactos;
     // End of variables declaration//GEN-END:variables

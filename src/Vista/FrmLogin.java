@@ -27,21 +27,18 @@ public class FrmLogin extends javax.swing.JFrame {
      */
     public FrmLogin() {
         initComponents();
-         this.setLocationRelativeTo(null); 
-         Shape forma= new RoundRectangle2D.Double(0,0, this.getBounds() .width, this.getBounds() .height,40,40);
-         AWTUtilities. setWindowShape(this, forma);
-         this.setIconImage(Logo());               
         this.setLocationRelativeTo(null);
-        this.setTitle("Login");
-
+        Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
+        AWTUtilities.setWindowShape(this, forma);
         this.setIconImage(Logo());
-
+        this.setTitle("Login");
+        txtContra.setEchoChar('•');           
     }
 
     int nivel = 0;
     public int ID;
-    private String nombre;
-    private String tipo;
+    public static String nombre;
+    public static String tipo;
     private int intentos;
 
     public Image Logo() {
@@ -61,12 +58,12 @@ public class FrmLogin extends javax.swing.JFrame {
         PanelFondo = new Controles_Personalizados.Paneles.PanelRound();
         PanelContenedorCampos = new Controles_Personalizados.Paneles.PanelRound();
         LogoLogin = new javax.swing.JLabel();
-        txtContra = new Controles_Personalizados.textfields.PasswordField();
         txtUsuario = new Controles_Personalizados.textfields.TextField();
         btnConocerMas = new Controles_Personalizados.Botones.ButtonGradient();
         btnLogin = new Controles_Personalizados.Botones.ButtonGradient();
         lblOlvide = new javax.swing.JLabel();
         textologin = new javax.swing.JLabel();
+        txtContra = new Controles_Personalizados.textfields.PasswordField();
         ImagenLogin = new javax.swing.JLabel();
         btnMinimizar = new javax.swing.JLabel();
         btnCerrar = new javax.swing.JLabel();
@@ -93,24 +90,6 @@ public class FrmLogin extends javax.swing.JFrame {
 
         LogoLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/LogoB&GLogin.png"))); // NOI18N
         PanelContenedorCampos.add(LogoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
-
-        txtContra.setBackground(new java.awt.Color(254, 254, 254));
-        txtContra.setForeground(new java.awt.Color(42, 36, 56));
-        txtContra.setCaretColor(new java.awt.Color(42, 36, 56));
-        txtContra.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        txtContra.setLabelText("Contraseña");
-        txtContra.setLineColor(new java.awt.Color(42, 36, 56));
-        txtContra.setSelectionColor(new java.awt.Color(58, 50, 75));
-        txtContra.setShowAndHide(true);
-        txtContra.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtContraKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtContraKeyTyped(evt);
-            }
-        });
-        PanelContenedorCampos.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 450, 70));
 
         txtUsuario.setBackground(new java.awt.Color(254, 254, 254));
         txtUsuario.setForeground(new java.awt.Color(42, 36, 56));
@@ -166,6 +145,24 @@ public class FrmLogin extends javax.swing.JFrame {
         textologin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/TextoLogin.png"))); // NOI18N
         PanelContenedorCampos.add(textologin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 710, -1, -1));
 
+        txtContra.setBackground(new java.awt.Color(254, 254, 254));
+        txtContra.setForeground(new java.awt.Color(42, 36, 56));
+        txtContra.setCaretColor(new java.awt.Color(42, 36, 56));
+        txtContra.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
+        txtContra.setLabelText("Contraseña:");
+        txtContra.setLineColor(new java.awt.Color(42, 36, 56));
+        txtContra.setSelectionColor(new java.awt.Color(58, 50, 75));
+        txtContra.setShowAndHide(true);
+        txtContra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtContraKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtContraKeyTyped(evt);
+            }
+        });
+        PanelContenedorCampos.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 450, 70));
+
         PanelFondo.add(PanelContenedorCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 760));
 
         ImagenLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Login-amico.png"))); // NOI18N
@@ -195,37 +192,34 @@ public class FrmLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     void Login() {
-        
-        if (txtUsuario.getText().equals("") || txtContra.getText().equals("")) 
-        {
+
+        if (txtUsuario.getText().equals("") || txtContra.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Existen campos vacios", "Error de procesamiento", JOptionPane.WARNING_MESSAGE);
-        } 
-        else 
-        {
+        } else {
             ControllerLogin objc = new ControllerLogin();
             String contra = ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra(String.valueOf(txtContra.getPassword()));
 
             objc.setUsuario(txtUsuario.getText());
             objc.setContraseña(contra);
-            
+
             //Valida que exista un usuario
             int respuesta0 = objc.validarUsuarioController();
 
             if (respuesta0 == 1) {
                 //Valida estado del usuario
                 int respuesta1 = objc.ValidarUsuarioActivoController();
-                
+
                 if (respuesta1 == 1) {
                     //Valida informacion del 
                     int respuesta2 = objc.validarLoginC();
-                        
+
                     ControllerLogin cLogin = new ControllerLogin();
                     ResultSet rs;
-                    
+
                     if (respuesta2 == 1) {
                         //Restablece los intentos a 5
                         objc.setIntentos(5);
-                        objc.IntentosController();                    
+                        objc.IntentosController();
                         CargarDatos();
                         if (txtContra.getText().equals(txtUsuario.getText() + "123")) {
                             FrmRestablecimiento frm = new FrmRestablecimiento(nombre);
@@ -266,7 +260,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        Login();   
+        Login();
     }//GEN-LAST:event_btnLoginActionPerformed
 
     void CargarDatos() {
@@ -279,7 +273,6 @@ public class FrmLogin extends javax.swing.JFrame {
                 ID = rs.getInt("idUsuario");
                 nombre = rs.getString("nombre_usuario");
                 tipo = rs.getString("tipo_usuario");
-                System.out.println(tipo);
             }
         } catch (Exception e) {
 
@@ -309,13 +302,6 @@ public class FrmLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtUsuarioKeyPressed
 
-    private void txtContraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            Login();
-        }
-    }//GEN-LAST:event_txtContraKeyPressed
-
     private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
         // TODO add your handling code here:
         char car = evt.getKeyChar();
@@ -333,6 +319,17 @@ public class FrmLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtUsuarioKeyTyped
 
+    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioActionPerformed
+
+    private void txtContraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            Login();
+        }
+    }//GEN-LAST:event_txtContraKeyPressed
+
     private void txtContraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraKeyTyped
         // TODO add your handling code here:
         if (txtContra.getText().length() >= 20) {
@@ -341,10 +338,6 @@ public class FrmLogin extends javax.swing.JFrame {
             ValidacionesSistema.ValidacionesBeep_Go.SinEspacios(evt);
         }
     }//GEN-LAST:event_txtContraKeyTyped
-
-    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsuarioActionPerformed
 
     /**
      * @param args the command line arguments

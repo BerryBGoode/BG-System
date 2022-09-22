@@ -266,10 +266,10 @@ public class FrmConfigConection extends javax.swing.JFrame {
         try {
             FileWriter writer = new FileWriter(filename);
 
-            writer.write(ControllerConfig.getUsername());
-            writer.write("\n" + ControllerConfig.getIp());
-            writer.write("\n" + ControllerConfig.getHost());
-            writer.write("\n" + ControllerConfig.getPassword());
+            writer.write(ValidacionesSistema.ValidacionesBeep_Go.EBase64(ControllerConfig.getUsername()));
+            writer.write("\n" + ValidacionesSistema.ValidacionesBeep_Go.EBase64(ControllerConfig.getIp()));
+            writer.write("\n" + ValidacionesSistema.ValidacionesBeep_Go.EBase64(ControllerConfig.getHost()));
+            writer.write("\n" + ValidacionesSistema.ValidacionesBeep_Go.EBase64(ControllerConfig.getPassword()));
             writer.write("\nEste es un archivo de configuración para la conexión, porfavor no borrar\n");
             writer.write("This a file of configuration of connection on database, please don't delete this file");
             writer.close();
@@ -280,15 +280,15 @@ public class FrmConfigConection extends javax.swing.JFrame {
         }
     }
 
-    void readFile() {
+    public void readFile() {
         String cont;
         try {
             FileReader readerfile = new FileReader(filename);
             BufferedReader reader = new BufferedReader(readerfile);
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 4; i++) {
                 cont = reader.readLine();
                 String[] listconf = new String[]{cont};
-                data[i] = listconf[0];
+                data[i] = ValidacionesSistema.ValidacionesBeep_Go.DBase64(listconf[0]);
             }
             readerfile.close();
             reader.close();

@@ -131,7 +131,7 @@ public class ModelPersonal {
 
             ResultSet rs = ps.executeQuery();
             return rs;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.toString());
             return null;
         }
@@ -145,7 +145,7 @@ public class ModelPersonal {
 
             ResultSet rs = ps.executeQuery();
             return rs;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.toString());
             return null;
         }
@@ -177,23 +177,22 @@ public class ModelPersonal {
         }
     }
     
-    public boolean ActualizarAlumno(int idpersonal,String nombrep,String apellidop,String fecha,String correo,String direccion,String documento,int idtipodoc,int idgenero,int idempresa){
+    public boolean ActualizarAlumno(int idpersonal,String nombrep,String apellidop,String correo,String direccion,String documento,int idtipodoc,int idgenero,int idempresa){
         int idtipop=4;
         try {
             con=ModelConexion.getConnection();
-            String query="UPDATE tbPersonal SET nombre_p=?,apellido_p=?,fecha_nacimiento=?,correo=?,direccion=?,documento=?,idTipoDocumento=?,idTipoPersonal=?,idGenero=?,idEmpresa=? WHERE idPersonal=?";
+            String query="UPDATE tbPersonal SET nombre_p=?,apellido_p=?,correo=?,direccion=?,documento=?,idTipoDocumento=?,idTipoPersonal=?,idGenero=?,idEmpresa=? WHERE idPersonal=?";
             ps=con.prepareStatement(query);
             ps.setString(1, nombrep);
             ps.setString(2, apellidop);
-            ps.setString(3, fecha);
-            ps.setString(4, correo);
-            ps.setString(5, direccion);
-            ps.setString(6, documento);
-            ps.setInt(7, idtipodoc);
-            ps.setInt(8, idtipop);
-            ps.setInt(9, idgenero);
-            ps.setInt(10, idempresa);
-            ps.setInt(11, idpersonal);
+            ps.setString(3, correo);
+            ps.setString(4, direccion);
+            ps.setString(5, documento);
+            ps.setInt(6, idtipodoc);
+            ps.setInt(7, idtipop);
+            ps.setInt(8, idgenero);
+            ps.setInt(9, idempresa);
+            ps.setInt(10, idpersonal);
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -202,22 +201,21 @@ public class ModelPersonal {
             return false;
         }
     }
-    public boolean ActualizarPersonal(int idpersonal,String nombrep,String apellidop,String fecha,String correo,String direccion,String documento,int idtipodoc,int idgenero,int idempresa,int idtipop){
+    public boolean ActualizarPersonal(int idpersonal,String nombrep,String apellidop,String correo,String direccion,String documento,int idtipodoc,int idgenero,int idempresa,int idtipop){
         try {
             con=ModelConexion.getConnection();
-            String query="UPDATE tbPersonal SET nombre_p=?,apellido_p=?,fecha_nacimiento=?,correo=?,direccion=?,documento=?,idTipoDocumento=?,idTipoPersonal=?,idGenero=?,idEmpresa=? WHERE idPersonal=?";
+            String query="UPDATE tbPersonal SET nombre_p=?,apellido_p=?,correo=?,direccion=?,documento=?,idTipoDocumento=?,idTipoPersonal=?,idGenero=?,idEmpresa=? WHERE idPersonal=?";
             ps=con.prepareStatement(query);
             ps.setString(1, nombrep);
             ps.setString(2, apellidop);
-            ps.setString(3, fecha);
-            ps.setString(4, correo);
-            ps.setString(5, direccion);
-            ps.setString(6, documento);
-            ps.setInt(7, idtipodoc);
-            ps.setInt(8, idtipop);
-            ps.setInt(9, idgenero);
-            ps.setInt(10, idempresa);
-            ps.setInt(11, idpersonal);
+            ps.setString(3, correo);
+            ps.setString(4, direccion);
+            ps.setString(5, documento);
+            ps.setInt(6, idtipodoc);
+            ps.setInt(7, idtipop);
+            ps.setInt(8, idgenero);
+            ps.setInt(9, idempresa);
+            ps.setInt(10, idpersonal);
             ps.execute();
             return true;
         } catch (SQLException e) {

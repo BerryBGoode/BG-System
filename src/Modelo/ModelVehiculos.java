@@ -23,7 +23,7 @@ public class ModelVehiculos {
         
         try {
             connect = ModelConexion.getConnection();
-            String query = "SELECT * FROM tbVehiculos";
+            String query = "SELECT * FROM vwVehiculos_g";
             ps = connect.prepareStatement(query);
             rs = ps.executeQuery();
             return rs;
@@ -34,24 +34,24 @@ public class ModelVehiculos {
         
     }
     
-    public static ResultSet CargarCMBPersonal() {
+    public static ResultSet CargarTabla_Personal() {
         
         Connection connect;
         
         try {
             connect = ModelConexion.getConnection();
-            String query = "SELECT nombre_p, apellido_p FROM tbPersonal";
+            String query = "SELECT * FROM vwVehiculos_Personal";
             ps = connect.prepareStatement(query);
             rs = ps.executeQuery();
             return rs;
-        } catch (SQLException e) {
+        } catch(SQLException e) {
             JOptionPane.showMessageDialog(null, e.toString());
             return null;
         }
         
     }
-    
-    public static int RegistrarVehiculo(int idpersonal, String placa, String color) {
+
+    public static boolean RegistrarVehiculo(int idpersonal, String placa, String color) {
         Connection connect;
         try {
             connect = ModelConexion.getConnection();
@@ -61,10 +61,10 @@ public class ModelVehiculos {
             ps.setString(2, placa);
             ps.setString(3, color);
             ps.execute();
-            return 1;
+            return true;
         } catch(SQLException e) {
             JOptionPane.showMessageDialog(null, "Ocurrio un problema durante el proceso de insersión, vuelva a intentarlo" + e.toString(), "Proceso de insersion", JOptionPane.ERROR_MESSAGE);
-            return 0;
+            return false;
         }
         
     }
