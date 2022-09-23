@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="650" pageHeight="670" orientation="Landscape" columnWidth="610" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e323dd98-c9e8-4dde-a288-273fa3d2c4e5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idUsuario" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="imagenusu" class="java.io.InputStream">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     vwUsuarios."idUsuario" AS vwUsuarios_idUsuario,
+     vwUsuarios."nombre_p" AS vwUsuarios_nombre_p,
+     vwUsuarios."apellido_p" AS vwUsuarios_apellido_p,
+     vwUsuarios."nombre_usuario" AS vwUsuarios_nombre_usuario,
+     vwUsuarios."tipo_usuario" AS vwUsuarios_tipo_usuario,
+     vwUsuarios."estado_usuario" AS vwUsuarios_estado_usuario,
+     vwUsuarios."imagen" AS vwUsuarios_imagen
+FROM
+     "dbo"."vwUsuarios" vwUsuarios
+WHERE idUsuario = $P{idUsuario}]]>
+	</queryString>
+	<field name="vwUsuarios_idUsuario" class="java.lang.Integer"/>
+	<field name="vwUsuarios_nombre_p" class="java.lang.String"/>
+	<field name="vwUsuarios_apellido_p" class="java.lang.String"/>
+	<field name="vwUsuarios_nombre_usuario" class="java.lang.String"/>
+	<field name="vwUsuarios_tipo_usuario" class="java.lang.String"/>
+	<field name="vwUsuarios_estado_usuario" class="java.lang.String"/>
+	<field name="vwUsuarios_imagen" class="java.lang.Object"/>
+	<sortField name="vwUsuarios_imagen"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="237" splitType="Stretch">
+			<staticText>
+				<reportElement x="18" y="11" width="282" height="37" forecolor="#17141D" uuid="d1d2c173-6ac3-4f26-9b51-0aa0688f9f1a"/>
+				<textElement>
+					<font size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Detalles del usuario:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="187" y="101" width="100" height="20" uuid="a0965b76-3bc3-42ff-aa4c-d4452d69ae95"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombres:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="187" y="131" width="100" height="20" uuid="a98ba175-173c-489e-91b8-174d16213a91"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellidos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="187" y="70" width="100" height="20" uuid="97e4be7e-94cf-4c2d-9eef-2bdb726f1ff7"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID Usuario:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="319" y="101" width="215" height="20" uuid="06d03fc8-a354-4970-b155-e5c010c47f36"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vwUsuarios_nombre_p}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="319" y="70" width="215" height="20" uuid="ae55d216-9a40-4e15-be76-486d669feab2"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vwUsuarios_idUsuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="319" y="131" width="215" height="20" uuid="b723c91b-51fd-44e0-ae97-a19b79fc785e"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vwUsuarios_apellido_p}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="287" y="23" width="213" height="25" uuid="93d2ad96-092a-498e-91ad-bc6a97314594"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vwUsuarios_nombre_usuario}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="187" y="163" width="100" height="20" uuid="ede89ccc-85f5-4de2-8586-e82eb089b5de"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de usuario:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="187" y="196" width="113" height="20" uuid="7a4c8659-c299-4ac2-88f4-f282e5478a1d"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado del usuario:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="319" y="163" width="215" height="20" uuid="6f509d53-98f8-44b0-b27b-b4093a50a74d"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vwUsuarios_tipo_usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="319" y="196" width="215" height="20" uuid="dd691896-3a15-4845-8509-5093c7da8902"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vwUsuarios_estado_usuario}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="535" y="173" width="75" height="61" uuid="490527bc-92b4-4dc6-af42-6a131628e5f2"/>
+				<imageExpression><![CDATA[$P{Logo}.toString()]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="16" y="70" width="150" height="150" uuid="e7b5b058-6924-4f72-a807-ef7715d946f7"/>
+				<imageExpression><![CDATA[$P{imagenusu}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+</jasperReport>
