@@ -4,6 +4,12 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="idVehiculo" class="java.lang.Integer"/>
+	<parameter name="Logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Pie" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT  a.idVehiculo, c.Personal, b.Carnet, a.placa, a.color, b.idPersonal
 FROM tbVehiculos a, tbPersonal b, vwVehiculos_g c
@@ -20,10 +26,6 @@ WHERE a.idPersonal = b.idPersonal AND b.idPersonal = c.idPersonal AND a.idVehicu
 	</background>
 	<title>
 		<band height="102" splitType="Stretch">
-			<image>
-				<reportElement x="0" y="0" width="81" height="67" uuid="494b427e-6b7a-4885-a8e3-9b50fc6a7262"/>
-				<imageExpression><![CDATA["C:\\Users\\50377\\Documents\\GITHUB\\BG-System\\src\\Recursos_Proyecto\\LogoB&GLogin.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="160" y="0" width="277" height="92" uuid="29f8ac8e-16e4-43c3-b6e8-009cdaba4296"/>
 				<textElement>
@@ -31,6 +33,10 @@ WHERE a.idPersonal = b.idPersonal AND b.idPersonal = c.idPersonal AND a.idVehicu
 				</textElement>
 				<text><![CDATA[Vehiculos Parametrizado]]></text>
 			</staticText>
+			<image>
+				<reportElement x="3" y="0" width="85" height="71" uuid="c681494a-e8db-4d70-81a0-138499b138f3"/>
+				<imageExpression><![CDATA[$P{Logo}.toString()]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -132,7 +138,12 @@ WHERE a.idPersonal = b.idPersonal AND b.idPersonal = c.idPersonal AND a.idVehicu
 		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="96" splitType="Stretch"/>
+		<band height="96" splitType="Stretch">
+			<image>
+				<reportElement x="492" y="66" width="80" height="30" uuid="a6148d55-7a17-48aa-9b62-d242b9459338"/>
+				<imageExpression><![CDATA[$P{Pie}.toString()]]></imageExpression>
+			</image>
+		</band>
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>

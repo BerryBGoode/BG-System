@@ -723,6 +723,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     void DarkMode() {
 
         lblNormal.setVisible(true);
+        pnlNorth.setBackground(new Color(32,34,37));
         lblUsuarioDark.setVisible(true);
         panelFondo.setBackground(new Color(32, 34, 37));
         PanelContenedor.setBackground(new Color(47, 49, 54));
@@ -731,11 +732,15 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         PanelDatosUs.setBackground(new Color(32, 34, 37));
         lblDia.setForeground(Color.WHITE);
         lblHora.setForeground(Color.WHITE);
+        pnlNorthForm.setBackground(new Color(32,34,37));
+        jPanel5.setBackground(new Color(32,34,37));
         lblNombre.setForeground(Color.WHITE);
         lblTipo.setForeground(Color.WHITE);
+        jPanel8.setBackground(new Color(32,34,37));
         txtBuscador.setBackground(new Color(32, 34, 37));
         txtBuscador.setForeground(Color.WHITE);
         txtBuscador.setCaretColor(Color.WHITE);
+        pnlFilled.setBackground(new Color(32,34,37));
         PanelContenedorForms.setBackground(new Color(47, 49, 54));
     }
 
