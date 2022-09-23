@@ -37,23 +37,23 @@ public class PanelParqueo extends javax.swing.JPanel {
      */
     public PanelParqueo() {
         initComponents();
-        String[] headerpark = {"IDDetalle", "IDPersonal", "Carnet", "IDAcceso", "Fecha","Hora", "IDVehiculo","Placa","IDEstacionamiento", "Estacionamiento","IDParqueo", "Parqueo", "Ubicación","Modificar", "Eliminar"};
+        String[] headerpark = {"IDDetalle", "IDPersonal", "Carnet", "IDAcceso", "Fecha", "Hora", "IDVehiculo", "Placa", "IDEstacionamiento", "Estacionamiento", "IDParqueo", "Parqueo", "Ubicación", "Modificar", "Eliminar"};
         tbpark = new DefaultTableModel(null, headerpark);
         TbParqueosWhite.setModel(tbpark);
-        
+
         getdataPark();
-        
+
         TbParqueosWhite.removeColumn(TbParqueosWhite.getColumnModel().getColumn(0));
         TbParqueosWhite.removeColumn(TbParqueosWhite.getColumnModel().getColumn(0));
         TbParqueosWhite.removeColumn(TbParqueosWhite.getColumnModel().getColumn(1));
         TbParqueosWhite.removeColumn(TbParqueosWhite.getColumnModel().getColumn(3));
         TbParqueosWhite.removeColumn(TbParqueosWhite.getColumnModel().getColumn(4));
         TbParqueosWhite.removeColumn(TbParqueosWhite.getColumnModel().getColumn(5));
-        
+
         TbParqueosWhite.getColumnModel().getColumn(4).setPreferredWidth(100);//9
-        
+
         TbParqueosWhite.setDefaultRenderer(Object.class, new RenderTable());
-        
+
         btndelete.setBackground(new Color(231, 234, 239));
         btnupdate.setBackground(new Color(231, 234, 239));
         btndelete.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -143,6 +143,11 @@ public class PanelParqueo extends javax.swing.JPanel {
         PanelTabla.setHorizontalScrollBar(null);
         PanelTabla.setVerticalScrollBar(ScrollTabla);
         PanelTabla.setWheelScrollingEnabled(false);
+        PanelTabla.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                PanelTablaMouseMoved(evt);
+            }
+        });
 
         TbParqueosWhite = new Controles_Personalizados.Tables.Table(){
 
@@ -243,7 +248,7 @@ public class PanelParqueo extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAgregarMouseClicked
 
     FrmSetPark setPark = new FrmSetPark();
-    
+
     private void TbParqueosWhiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbParqueosWhiteMouseClicked
         Table tb = (Table) evt.getSource();//para obtener los datos de la fila
 
@@ -262,15 +267,14 @@ public class PanelParqueo extends javax.swing.JPanel {
                         }
                         //envio el station que en el q se registro, para que se habilite y pueda cambiar el parqueo
                         park.setStation(Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 9).toString()));
-                        park.setPark(tb.getModel().getValueAt(tb.getSelectedRow(), 11).toString());                        
-                                                
-                        
+                        park.setPark(tb.getModel().getValueAt(tb.getSelectedRow(), 11).toString());
+
                         int ID = Integer.parseInt(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString());
                         FrmSetPark.setIDDetail(ID);
-                        
+
                         int station = Integer.parseInt(tb.getModel().getValueAt(tb.getSelectedRow(), 8).toString());
                         ControllerParqueo.setNumberPark(station);
-                        
+
                         park.setVisible(true);
                         frmstate = 1;
                         FrmSetPark.action = 1;
@@ -279,7 +283,8 @@ public class PanelParqueo extends javax.swing.JPanel {
                     if (btn.getName().equals("btnEliminar")) {
                         int msg = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este dato?", "Confirmar acción", JOptionPane.YES_NO_OPTION);
                         if (msg == JOptionPane.YES_OPTION) {
-                            deletePark(Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString()));
+                            int IDDetail = Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString());
+                            deletePark(IDDetail);
                         }
                     }
                 }
@@ -309,29 +314,34 @@ public class PanelParqueo extends javax.swing.JPanel {
         refresh();
     }//GEN-LAST:event_formMouseReleased
 
+    private void PanelTablaMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelTablaMouseMoved
+        refresh();
+    }//GEN-LAST:event_PanelTablaMouseMoved
+
     public void getdataPark() {
         String tablename = "vwDetalle_Estacionamientos";
-        if (tbpark.getRowCount() > 0) {//si hay columnas antes de cargar 
-            tbpark.removeRow(0);      //borre las filas q tenía 
-        } else {//si no hay filas
-            try {
-                ResultSet rs = Controlador.ControllerAccesos.getdata(tablename);
-                while (rs.next()) {
-                    Object[] data = {rs.getInt("IDDetalle"), rs.getInt("idPersonal"), rs.getString("carnet"), rs.getInt("idAcceso"), rs.getDate("fecha"), rs.getTime("hora"), rs.getInt("idVehiculo"), rs.getString("placa"), rs.getInt("idEstacionamiento"), rs.getInt("numero_estacionamiento"),rs.getInt("idParqueo"),rs.getInt("numero_parqueo") , rs.getString("Ubicacion"), btnupdate, btndelete};
-                    tbpark.addRow(data);
-                    //que recupere los datos q especifico con la columname y los guarde en un object
-                }
-            } catch (SQLException e) {
-                System.out.println("Error view: " + e.toString());
-            }
-
+        while (tbpark.getRowCount() > 0) {
+            tbpark.removeRow(0);
         }
+
+        try {
+            ResultSet rs = Controlador.ControllerAccesos.getdata(tablename);
+            while (rs.next()) {
+                Object[] data = {rs.getInt("IDDetalle"), rs.getInt("idPersonal"), rs.getString("carnet"), rs.getInt("idAcceso"), rs.getDate("fecha"), rs.getTime("hora"), rs.getInt("idVehiculo"), rs.getString("placa"), rs.getInt("idEstacionamiento"), rs.getInt("numero_estacionamiento"), rs.getInt("idParqueo"), rs.getInt("numero_parqueo"), rs.getString("Ubicacion"), btnupdate, btndelete};
+                tbpark.addRow(data);
+                //que recupere los datos q especifico con la columname y los guarde en un object
+            }
+        } catch (SQLException e) {
+            System.out.println("Error view: " + e.toString());
+        }
+
     }
 
     public void deletePark(int ID) {
         ControllerParqueo park = new ControllerParqueo();
-        park.setID(ID);
-        if (park.getID() > 0) {
+        ControllerParqueo.setIDDetail(ID);
+        System.out.println(ControllerParqueo.getIDDetail());
+        if (ControllerParqueo.getIDDetail() > 0) {
             if (park.deletePark() == true) {
                 ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "Usuario eliminado", 1);
                 getdataPark();

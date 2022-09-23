@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+import com.sun.org.apache.xerces.internal.parsers.IntegratedParserConfiguration;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
@@ -78,7 +79,7 @@ public class ModelParqueo {
     }
 
     public boolean insertPark(int idacces, int idcar, int idstation) {
-        int avalible = 2;
+        int avalible = 1;
         try {
             con = ModelConexion.getConnection();
             sql = con.prepareStatement("INSERT INTO tbDetalle_Acceso VALUES (?,?,?,?)");
@@ -86,7 +87,8 @@ public class ModelParqueo {
             sql.setInt(1, idstation);
             sql.setInt(2, idacces);
             sql.setInt(3, idcar);
-            sql.setInt(4, avalible);
+            sql.setInt(4, 1);
+            
             sql.execute();
             return true;
         } catch (SQLException e) {
@@ -98,19 +100,19 @@ public class ModelParqueo {
         }
     }
 
-    public boolean updatePark(int idpark, int idacces, int idcar,  int idstation, int iddetail) {
+    public boolean updatePark(int idpark, int idacces, int idcar, int idstation, int iddetail) {
         int busy = 1;
         boolean result;
         try {
             con = ModelConexion.getConnection();
             sql = con.prepareStatement("UPDATE tbDetalle_Acceso SET  IDEstacionamiento =  ?, IDAcceso = ? , IDVehiculo = ?, IDEstado = ? WHERE IDDetalle  = ? ");
-            System.out.println("Model: "+idstation+" "+idacces+" "+idcar+" "+iddetail);
+            System.out.println("Model: " + idstation + " " + idacces + " " + idcar + " " + iddetail);
             sql.setInt(1, idstation);
             sql.setInt(2, idacces);
             sql.setInt(3, idcar);
             sql.setInt(4, busy);
-            sql.setInt(5, iddetail);            
-            
+            sql.setInt(5, iddetail);
+
             sql.execute();
             return result = true;
         } catch (SQLException e) {
@@ -169,13 +171,14 @@ public class ModelParqueo {
         }
     }
 
-    public boolean deletePark(int IDStation) {
-        int availeble = 2;
+    public boolean deletePark(int iddetail) {
+        int disable = 2;
         try {
             con = ModelConexion.getConnection();
-            sql = con.prepareStatement("UPDATE tbDetalle_Acceso SET idEstado = ? WHERE idEstacionamiento = ?");
-            sql.setInt(1, availeble);
-            sql.setInt(2, IDStation);
+            sql = con.prepareStatement("UPDATE tbDetalle_Acceso SET idEstado = ? WHERE IDDetalle = ?");
+            System.out.println("Eliminar");
+            sql.setInt(1, disable);
+            sql.setInt(2, iddetail);
             sql.execute();
             return true;
         } catch (SQLException e) {
@@ -183,17 +186,18 @@ public class ModelParqueo {
             return false;
         }
     }
+
     //con este método recupero los vehiculos que tenga registrado el personal con el carnet que se selecciono
-    public ResultSet getCarByPersonal(String viewname, String parametername, String carnet){
+    public ResultSet getCarByPersonal(String viewname, String parametername, String carnet) {
         try {
             con = ModelConexion.getConnection();
-            sql = con.prepareStatement("SELECT * FROM "+viewname+" WHERE "+parametername+" = ?");
+            sql = con.prepareStatement("SELECT * FROM " + viewname + " WHERE " + parametername + " = ?");
             sql.setString(1, carnet);
-            rs  = sql.executeQuery();
+            rs = sql.executeQuery();
             return rs;
         } catch (SQLException e) {
-            System.out.println("Error: "+e.toString());
+            System.out.println("Error: " + e.toString());
             return null;
         }
-    }    
+    }
 }

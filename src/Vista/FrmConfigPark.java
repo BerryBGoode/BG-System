@@ -43,6 +43,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
     private String park;
     private int chkProcess; //esta variable funciona para verificar si el proceso de actualizar o agregar
     //al dar click a actualizar el valor será 2 al agregar será 1 y antes será 0
+    public static boolean visibleFrm = false;//attri para verificar si un formulario de agregar esta abierto
 
     public int getStation() {
         return station;
@@ -507,49 +508,49 @@ public class FrmConfigPark extends javax.swing.JFrame {
 
     private void btnPark1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark1MouseClicked
         if (station == 1 || station == 0) {
-            modifPanelPark(panelPark1, "PARQUEO 1", 1);
+            modifPanelPark(panelPark1, 1);
         }
     }//GEN-LAST:event_btnPark1MouseClicked
 
     private void btnPark2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark2MouseClicked
         if (station == 2 || station == 0) {
-            modifPanelPark(panelPark2, "PARQUEO 2", 2);
+            modifPanelPark(panelPark2, 2);
         }
     }//GEN-LAST:event_btnPark2MouseClicked
 
     private void btnPark3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark3MouseClicked
         if (station == 3 || station == 0) {
-            modifPanelPark(panelPark3, "PARQUEO 3", 3);
+            modifPanelPark(panelPark3,3);
         }
     }//GEN-LAST:event_btnPark3MouseClicked
 
     private void btnPark4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark4MouseClicked
         if (station == 4 || station == 0) {
-            modifPanelPark(panelPark4, "PARQUEO 4", 4);
+            modifPanelPark(panelPark4, 4);
         }
     }//GEN-LAST:event_btnPark4MouseClicked
 
     private void btnPark11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark11MouseClicked
         if (station == 11 || station == 0) {
-            modifPanelPark(panelPark11, "PARQUEO 11", 11);
+            modifPanelPark(panelPark11,  11);
         }
     }//GEN-LAST:event_btnPark11MouseClicked
 
     private void btnPark12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark12MouseClicked
         if (station == 12 || station == 0) {
-            modifPanelPark(panelPark12, "PARQUEO 12", 12);
+            modifPanelPark(panelPark12,12);
         }
     }//GEN-LAST:event_btnPark12MouseClicked
 
     private void btnPark10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark10MouseClicked
         if (station == 10 || station == 0) {
-            modifPanelPark(panelPark10, "PARQUEO 10", 10);
+            modifPanelPark(panelPark10,  10);
         }
     }//GEN-LAST:event_btnPark10MouseClicked
 
     private void btnPark9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark9MouseClicked
         if (station == 9 || station == 0) {
-            modifPanelPark(panelPark9, "PARQUEO 9", 9);
+            modifPanelPark(panelPark9, 9);
 
         }
     }//GEN-LAST:event_btnPark9MouseClicked
@@ -695,58 +696,53 @@ public class FrmConfigPark extends javax.swing.JFrame {
 
     private void btnPark8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark8MouseClicked
         if (station == 8 || station == 0) {
-            modifPanelPark(panelPark8, "PARQUEO 8", 8);
+            modifPanelPark(panelPark8,  8);
 
         }
     }//GEN-LAST:event_btnPark8MouseClicked
 
     private void btnPark7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark7MouseClicked
         if (station == 7 || station == 0) {
-            modifPanelPark(panelPark7, "PARQUEO 7", 7);
+            modifPanelPark(panelPark7, 7);
 
         }
     }//GEN-LAST:event_btnPark7MouseClicked
 
     private void btnPark6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark6MouseClicked
         if (station == 6 || station == 0) {
-            modifPanelPark(panelPark6, "PARQUEO 6", 6);
+            modifPanelPark(panelPark6,  6);
         }
     }//GEN-LAST:event_btnPark6MouseClicked
 
     private void btnPark5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark5MouseClicked
         if (station == 5 || station == 0) {
-            modifPanelPark(panelPark5, "PARQUEO 5", 5);
+            modifPanelPark(panelPark5,  5);
         }
     }//GEN-LAST:event_btnPark5MouseClicked
 
     private void btnPark15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark15MouseClicked
         if (station == 15 || station == 0) {
-            modifPanelPark(panelPark15, "PARQUEO 15", 15);
+            modifPanelPark(panelPark15, 15);
         }
     }//GEN-LAST:event_btnPark15MouseClicked
 
     private void btnPark14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark14MouseClicked
         if (station == 14 || station == 0) {
-            modifPanelPark(panelPark14, "PARQUEO 14", 14);
+            modifPanelPark(panelPark14, 14);
         }
 
     }//GEN-LAST:event_btnPark14MouseClicked
 
     private void btnPark13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark13MouseClicked
         if (station == 13 || station == 0) {
-            modifPanelPark(panelPark13, "PARQUEO 13", 13);
+            modifPanelPark(panelPark13,  13);
         }
 
     }//GEN-LAST:event_btnPark13MouseClicked
 
     private void btnCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMousePressed
-        this.dispose();
-        PanelOpcionesPersonal.showinter = 0;
-        try {
-            Frmpark.dispose();
-        } catch (Exception e) {
-
-        }
+        this.dispose();        
+        visibleFrm = false;
     }//GEN-LAST:event_btnCerrarMousePressed
 
     private void btnMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseClicked
@@ -755,32 +751,32 @@ public class FrmConfigPark extends javax.swing.JFrame {
 
     private void btnPark16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark16MouseClicked
         if (station == 16 || station == 0) {
-            modifPanelPark(panelPark16, "PARQUEO 16", 16);
+            modifPanelPark(panelPark16, 16);
         }
     }//GEN-LAST:event_btnPark16MouseClicked
 
     private void btnPark17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark17MouseClicked
         if (station == 17 || station == 0) {
-            modifPanelPark(panelPark17, "PARQUEO 17", 17);
+            modifPanelPark(panelPark17, 17);
         }
     }//GEN-LAST:event_btnPark17MouseClicked
 
     private void btnPark18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark18MouseClicked
         if (station == 18 || station == 0) {
-            modifPanelPark(panelPark18, "PARQUEO 18", 18);
+            modifPanelPark(panelPark18, 18);
         }
     }//GEN-LAST:event_btnPark18MouseClicked
 
     private void btnPark19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark19MouseClicked
         if (station == 19 || station == 0) {
-            modifPanelPark(panelPark19, "PARQUEO 19", 19);
+            modifPanelPark(panelPark19, 19);
 
         }
     }//GEN-LAST:event_btnPark19MouseClicked
 
     private void btnPark20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark20MouseClicked
         if (station == 20 || station == 0) {
-            modifPanelPark(panelPark20, "PARQUEO 20", 20);
+            modifPanelPark(panelPark20, 20);
 
         }
     }//GEN-LAST:event_btnPark20MouseClicked
@@ -804,7 +800,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
     //este método requiere de un pnl contenedor del boton para acceder a añadir un registro de estacionamiento
     //el pnl para emodificarle el color, el nombre del parqueo para mostrar en el form siguente
     //el station para enviarlo para abrir el form de agregar y enviar el estacionamiento q se está utilizando
-    void modifPanelPark(PanelRound pnl, String parkname, int station) {
+    void modifPanelPark(PanelRound pnl, int station) {
         try {
             //guardar en una variable para el IDPARQUEO
             //igualarla a la lista q se creo cuando se carga el cmb
@@ -819,12 +815,12 @@ public class FrmConfigPark extends javax.swing.JFrame {
             Frmpark = new FrmSetPark(String.valueOf(IDPark), station);
             sendIDStation(station, IDPark);
 
-            if (Frmpark.isVisible()) {
-                Frmpark.setVisible(false);
-                JOptionPane.showMessageDialog(null, "Se cerro el formulario anterior,\ndebido a que no puede tenerlos \nal mismo tiempo abiertos", "Formulario cerrado", JOptionPane.WARNING_MESSAGE);
+            if (visibleFrm == true) {                
+                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("No se pudo abrir...", "No se pudo abrir, debido a que ya hay abierto y se debe cerrar", 3);
             } else {
                 Frmpark.setVisible(true);
-                FrmSetPark.setParkname(parkname);
+                visibleFrm = true;
+                FrmSetPark.setParkname(String.valueOf(station));
             }
 
         } catch (HeadlessException e) {

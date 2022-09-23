@@ -121,6 +121,11 @@ public class PanelContactos extends javax.swing.JPanel {
         btnFiltrar1 = new Controles_Personalizados.Botones.UWPButton();
 
         setBackground(new java.awt.Color(42, 36, 56));
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
+            }
+        });
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
@@ -154,7 +159,7 @@ public class PanelContactos extends javax.swing.JPanel {
                 btnInformeActionPerformed(evt);
             }
         });
-        PanelFondo.add(btnInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 120, 40));
+        PanelFondo.add(btnInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 130, 40));
 
         btnAgregar.setBackground(new java.awt.Color(58, 50, 75));
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Agregar Blanco.png"))); // NOI18N
@@ -177,6 +182,11 @@ public class PanelContactos extends javax.swing.JPanel {
         PanelTabla.setHorizontalScrollBar(null);
         PanelTabla.setVerticalScrollBar(ScrollTabla);
         PanelTabla.setWheelScrollingEnabled(false);
+        PanelTabla.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                PanelTablaMouseMoved(evt);
+            }
+        });
 
         tbContactos.setBackground(new java.awt.Color(231, 234, 239));
         tbContactos.setModel(new javax.swing.table.DefaultTableModel(
@@ -238,7 +248,6 @@ public class PanelContactos extends javax.swing.JPanel {
         ScrollTabla.setBackground(new java.awt.Color(58, 50, 75));
         ScrollTabla.setForeground(new java.awt.Color(58, 50, 75));
         PanelFondo.add(ScrollTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(1238, 177, 10, 40));
-        add(PanelFondo, java.awt.BorderLayout.CENTER);
 
         btnFiltrar1.setBackground(new java.awt.Color(58, 50, 75));
         btnFiltrar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Filtrar Blanco.png"))); // NOI18N
@@ -248,27 +257,7 @@ public class PanelContactos extends javax.swing.JPanel {
         btnFiltrar1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         PanelFondo.add(btnFiltrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 150, 40));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1270, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(PanelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(PanelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-
+        add(PanelFondo, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     FrmPersonal_Contacto add = new FrmPersonal_Contacto();
@@ -390,6 +379,14 @@ public class PanelContactos extends javax.swing.JPanel {
     private void btnInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformeActionPerformed
         ImprimirReporte();
     }//GEN-LAST:event_btnInformeActionPerformed
+
+    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+        CargarTabla();
+    }//GEN-LAST:event_formMouseMoved
+
+    private void PanelTablaMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelTablaMouseMoved
+        CargarTabla();
+    }//GEN-LAST:event_PanelTablaMouseMoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

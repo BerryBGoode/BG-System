@@ -114,7 +114,7 @@ public class ControllerParqueo {
     }
 
     public boolean deletePark() {
-        return mdpark.deletePark(getID());
+        return mdpark.deletePark(getIDDetail());
     }
 
     public ResultSet getCarByPersonal(String viewname, String parametername, String carnet) {

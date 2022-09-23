@@ -85,6 +85,11 @@ public Image Logo(){
         setFocusable(false);
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1099, 578));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelRound1.setBackground(new java.awt.Color(58, 50, 75));
@@ -209,6 +214,10 @@ public Image Logo(){
     private void btnConfirmar_CMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmar_CMouseClicked
         ActualizarVehiculo();
     }//GEN-LAST:event_btnConfirmar_CMouseClicked
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        setLocationRelativeTo(null);
+    }//GEN-LAST:event_formWindowActivated
 
     void GuardarVehiculo() {
         if (txtPlaca.getText().trim().isEmpty() || txtColor.getText().trim().isEmpty()) {
