@@ -10,24 +10,24 @@ import java.sql.Date;
 import java.sql.ResultSet;
 
 /**
- *
+ *  This class stores and connects the ModelP_U_Personal with the view, and makes possible the communication between both
  * @author Ander
  */
 public class ControllerP_U_Personal {
     
     ModelP_U_Personal useControllerP=new ModelP_U_Personal();
     
-    /**+
-     * Metodo para obtener los registros en la tabla de tipo documento
-     * @return 
+    /**
+     * Method to obtain the records in the document type table
+     * @return a ResultSet
      */
     public ResultSet cargarTipoDocumentoController(){
         return useControllerP.cargarTipD();
     }
     
     /**
-     * Metodo para obtener los registros en la tabla de géneros
-     * @return 
+     * Method to obtain registers in the gender table
+     * @return a ResultSet
      */
     public ResultSet cargarGeneroController(){
         return useControllerP.cargarGeneroP();
@@ -47,232 +47,232 @@ public class ControllerP_U_Personal {
     public String Carnet;
 
     /**
-     * Metodo para obtener el IDPersonal
-     * @return 
+     * Method to obtain the Personal ID
+     * @return an Integer
      */
     public int getIdpersonal() {
         return idpersonal;
     }
 
     /**
-     * Metodo para establecer el IDPersonal
-     * @param idpersonal 
+     * Method to set the Personal ID
+     * @param idpersonal referring to the Personal ID
      */
     public void setIdpersonal(int idpersonal) {
         this.idpersonal = idpersonal;
     }
 
     /**
-     * Metodo para obtener los nombres del personal
-     * @return 
+     * Method to get staff names
+     * @return a String
      */
     public String getNombre() {
         return nombre;
     }
 
     /**
-     * Metodo para establecer los nombres del personal
-     * @param nombre 
+     * Method to set staff names
+     * @param nombre referring to the staff names
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
     /**
-     * Metodo para obtener los apellidos del personal
-     * @return 
+     * Method to obtain the last names of the staff
+     * @return a String
      */
     public String getApellido() {
         return apellido;
     }
 
     /**
-     * Metodo para establecer los apellidos del personal
-     * @param apellido 
+     * Method to set staff last names
+     * @param apellido referring to the staff last names
      */
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
     
     /**
-     * Metodo para obtener el IDEmpresa
-     * @return 
+     * Method to obtain the company ID
+     * @return an Integer
      */
     public int getEmpresa() {
         return empresa;
     }
 
     /**
-     * Metodo para establecer el IDEmpresa
-     * @param empresa 
+     * Method to establish the company ID
+     * @param empresa referring to the company ID
      */
     public void setEmpresa(int empresa) {
         this.empresa = empresa;
     }
     
     /**
-     * Metodo para obtener la fecha de nacimiento del personal
-     * @return 
+     * Method to obtain the date of birth of the staff
+     * @return a String
      */
     public String getFechanac() {
         return fechanac;
     }
 
     /**
-     * Metodo para establecer la fecha de nacimiento del personal
-     * @param fechanac 
+     * Method for establishing the birth date of the staff
+     * @param fechanac referring to the birth date
      */
     public void setFechanac(String fechanac) {
         this.fechanac = fechanac;
     }
 
     /**
-     * Metodo para obtener el correo del personal
-     * @return 
+     * Method to obtain staff mail
+     * @return a String
      */
     public String getCorreo() {
         return correo;
     }
 
     /**
-     * Metodo para establecer el correo del personal
-     * @param correo 
+     * Method to establish staff mail
+     * @param correo referring to the mail of the user
      */
     public void setCorreo(String correo) {
         this.correo = correo;
     }
 
     /**
-     * Metodo para obtener la dirección del personal
-     * @return 
+     * Method to obtain the address of the staff
+     * @return a String
      */
     public String getDireccion() {
         return direccion;
     }
 
     /**
-     * Metodo para establecer la dirección del personal
-     * @param direccion 
+     * Method for setting staff address
+     * @param direccion referring to the address of the user
      */
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 
     /**
-     * Metodo para obtener el documento del personal (dui/nit)
-     * @return 
+     * Method to obtain the staff document (dui/nit)
+     * @return a String
      */
     public String getDui() {
         return dui;
     }
 
     /**
-     * Metodo para establecer el documento del personal (dui/nit)
-     * @param dui 
+     * Method to establish the staff document (dui/nit)
+     * @param dui referring to the document type
      */
     public void setDui(String dui) {
         this.dui = dui;
     }
 
     /**
-     * Metodo para obtener el idTipoDocumento (categoriza al campo del documento)
-     * @return 
+     * Method to obtain the idTipoDocumento (categorizes the document field)
+     * @return an Integer
      */
     public int getIdtipoDocumento() {
         return idtipoDocumento;
     }
 
     /**
-     * Metodo para establecer el idTipoDocumento (categoriza al campo del documento)
-     * @param idtipopersonal 
+     * Method to establish the idTipoDocumento (categorizes the document field)
+     * @param idtipopersonal referring to the staff type of the user
      */
     public void setIdtipoDocunmento(int idtipopersonal) {
         this.idtipoDocumento = idtipopersonal;
     }
 
     /**
-     * Metodo para obtener el genero del personal (ID)
-     * @return 
+     * Method to obtain the staff gender (ID)
+     * @return an Integer
      */
     public int getIdgenero() {
         return idgenero;
     }
 
     /**
-     * Metodo para establecer el genero del personal (ID)
-     * @param idgenero 
+     * Method to establish the staff gender (ID)
+     * @param idgenero referring to the gender of the user
      */
     public void setIdgenero(int idgenero) {
         this.idgenero = idgenero;
     }
 
     /**
-     * Metodo para obtener la imagen del usuario
-     * @return 
+     * Method to get the user image
+     * @return a Byte[]
      */
     public byte[] getLogo() {
         return foto;
     }
     
     /**
-     * Metodo para establecer la imagen del usuario
-     * @param foto 
+     * Method to set the user image
+     * @param foto referring to the image of the user
      */
     public void setLogo(byte[] foto) {
         this.foto = foto;
     }
     
     /**
-     * Metodo para comprobar si existe un registro en la tabla tbPersonal
-     * @return 
+     * Method to check if a register exists in the tbPersonal table
+     * @return a Boolean
      */
     public Boolean checkcontrollerPersonal(){
     return useControllerP.checkPersonal();
     }
 
     /**
-     * Metodo para obtener el Carnet del personal
-     * @return 
+     * Method to obtain the staff id - card
+     * @return a String
      */
     public String getCarnet() {
         return Carnet;
     }
 
     /**
-     * Metodo para establecer el carnet del personal
-     * @param Carnet 
+     * Method to establish the staff id - card
+     * @param Carnet referring to the id - card
      */
     public void setCarnet(String Carnet) {
         this.Carnet = Carnet;
     }
     
     /**
-     * Metodo para hacer una inserción en la tabla tbPersonal
-     * @return 
+     * Method to make an insert in the tbPersonal table
+     * @return a Boolean
      */
     public boolean IngresarPPersonalController(){
         return useControllerP.IngresarPPersonal(empresa,nombre, apellido, fechanac, correo, direccion, dui, idgenero, idtipoDocumento);
     }
     
     /**
-     * Metodo para obtener el IDEmpresa (en caso de que el programa se cierre a la mitad del primer uso)
-     * @return 
+     * Method to obtain the companyID (in case the program is closed in the middle of the first use)
+     * @return a ResultSet
      */
     public ResultSet ObteneridEmpresa(){
         return useControllerP.getEnterprise();
     }
     
     /**
-     * Metodo para asignar un carnet a un registro en la tabla tbPersonal
-     * @return 
+     * Method to assign a id - card to a register in the tbPersonal table
+     * @return a Boolean
      */
     public boolean IngresarCarnet(){
         return useControllerP.CarnetPersonal(idpersonal, Carnet);
     }
     
     /**
-     * Metodo para recuperar el tipo de documento por medio de su ID
-     * @return 
+     * Method to retrieve the document type by means of its ID
+     * @return a ResultSet
      */
     public ResultSet TipoDocumento(){
         return useControllerP.TipoDocumento(idtipoDocumento);

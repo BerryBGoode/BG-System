@@ -6,9 +6,43 @@
 package Controles_Personalizados.Paneles;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 public enum ShadowType {
-    CENTER, TOP_RIGHT, TOP_LEFT, BOT_RIGHT, BOT_LEFT, BOT, TOP
+
+    /**
+     *  Position of the Shadow
+     */
+    CENTER,
+
+    /**
+     *  Position of the Shadow
+     */
+    TOP_RIGHT,
+
+    /**
+     *  Position of the Shadow
+     */
+    TOP_LEFT,
+
+    /**
+     *  Position of the Shadow
+     */
+    BOT_RIGHT,
+
+    /**
+     *  Position of the Shadow
+     */
+    BOT_LEFT,
+
+    /**
+     *  Position of the Shadow
+     */
+    BOT,
+
+    /**
+     *  Position of the Shadow
+     */
+    TOP
 }

@@ -6,12 +6,16 @@
 package Controles_Personalizados.Paneles;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs
+ * @author danlo
+ */
 public class ShadowRenderer {
 
     // size of the shadow in pixels (defines the fuzziness)
@@ -23,28 +27,54 @@ public class ShadowRenderer {
     // color of the shadow
     private Color color = Color.BLACK;
 
+    /**
+     * Validates properties of the control
+     */
     public ShadowRenderer() {
         this(5, 0.5f, Color.BLACK);
     }
 
+    /**
+     *ShadowRenderer
+     * @param size Size of Shadow
+     * @param opacity Opacity of Shadow
+     * @param color Color of Shadow
+     */
     public ShadowRenderer(final int size, final float opacity, final Color color) {
         this.size = size;
         this.opacity = opacity;
         this.color = color;
     }
 
+    /**
+     *  Gets Color of Shadow
+     * @return Color
+     */
     public Color getColor() {
         return color;
     }
 
+    /**
+     *  Gets ShadowOpacity
+     * @return ShadowOpacity
+     */
     public float getOpacity() {
         return opacity;
     }
 
+    /**
+     *  Gets ShadowSize
+     * @return ShadowSize
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     *  Image
+     * @param image Image
+     * @return Image
+     */
     public BufferedImage createShadow(final BufferedImage image) {
         // Written by Sesbastien Petrucci
         int shadowSize = size * 2;

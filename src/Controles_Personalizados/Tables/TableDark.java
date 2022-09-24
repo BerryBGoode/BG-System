@@ -6,7 +6,7 @@
 package Controles_Personalizados.Tables;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
@@ -24,11 +24,18 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import Controles_Personalizados.ScrollBar.ScrollBarCustom;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs
+ * @author danlo
+ */
 public class TableDark extends JTable {
 
     private TableDarkHeader header;
     private TableDarkCell cell;
 
+    /**
+     * Constructor
+     */
     public TableDark() {
         header = new TableDarkHeader();
         cell = new TableDarkCell();
@@ -38,14 +45,29 @@ public class TableDark extends JTable {
         setRowHeight(30);
     }
 
+    /**
+     *  Set Column Alignment
+     * @param column Column
+     * @param align Alignment
+     */
     public void setColumnAlignment(int column, int align) {
         header.setAlignment(column, align);
     }
 
+    /**
+     * Cell Alignment
+     * @param column Column
+     * @param align Alignment
+     */
     public void setCellAlignment(int column, int align) {
         cell.setAlignment(column, align);
     }
 
+    /**
+     *  Set Column Width
+     * @param column Column
+     * @param width Width
+     */
     public void setColumnWidth(int column, int width) {
         getColumnModel().getColumn(column).setPreferredWidth(width);
         getColumnModel().getColumn(column).setMinWidth(width);
@@ -54,6 +76,10 @@ public class TableDark extends JTable {
         getColumnModel().getColumn(column).setMaxWidth(10000);
     }
 
+    /**
+     * Fix Table
+     * @param scroll Scroll 
+     */
     public void fixTable(JScrollPane scroll) {
         scroll.setVerticalScrollBar(new ScrollBarCustom());
         JPanel panel = new JPanel();

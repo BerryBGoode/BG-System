@@ -6,7 +6,7 @@
 package Controles_Personalizados.Tables;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
@@ -19,8 +19,15 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs
+ * @author danlo
+ */
 public class Table extends JTable {
 
+    /**
+     *  Constructor
+     */
     public Table() {
         setShowHorizontalLines(true);
         setGridColor(new Color(230, 230, 230));
@@ -49,11 +56,19 @@ public class Table extends JTable {
         });
     }
 
+    /**
+     * Row
+     * @param row Row
+     */
     public void addRow(Object[] row) {
         DefaultTableModel model = (DefaultTableModel) getModel();
         model.addRow(row);
     }
 
+    /**
+     * Scroll
+     * @param scroll Scroll
+     */
     public void fixTable(JScrollPane scroll) {
         scroll.setBorder(null);
         scroll.setVerticalScrollBar(new ScrollBar());
@@ -64,6 +79,10 @@ public class Table extends JTable {
         scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, p);
     }
 
+    /**
+     * RemoveRow
+     * @param i Remove
+     */
     public void removeRow(int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

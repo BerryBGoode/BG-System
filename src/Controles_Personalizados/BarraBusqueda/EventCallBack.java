@@ -6,10 +6,13 @@
 package Controles_Personalizados.BarraBusqueda;
 
 /**
- *
+ *  Event for other functions
  * @author danlo
  */
 public interface EventCallBack {
 
+    /**
+     *  Process Done
+     */
     public void done();
 }

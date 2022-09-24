@@ -6,7 +6,7 @@
 package Controles_Personalizados.ComboBox;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import Controles_Personalizados.ScrollBar.ScrollBarCustom;
@@ -36,6 +36,10 @@ import javax.swing.plaf.basic.BasicComboPopup;
 import javax.swing.plaf.basic.ComboPopup;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
+/**
+ *   Personalized control class, extends events and controls depends the needs
+ * @author danlo
+ */
 public class ComboSuggestionUI extends BasicComboBoxUI {
 
     @Override

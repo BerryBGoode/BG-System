@@ -6,12 +6,21 @@
 package Controles_Personalizados.Calendario;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.event.MouseEvent;
 
+/**
+ *  Event
+ * @author danlo
+ */
 public interface Event {
 
+    /**
+     * Execute the event
+     * @param evt event
+     * @param num time
+     */
     public void execute(MouseEvent evt, int num);
 }

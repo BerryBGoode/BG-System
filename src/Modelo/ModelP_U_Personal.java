@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *  This class stores all the sentences necessary for the correct functioning of the staff checking process
  * @author Ander
  */
 public class ModelP_U_Personal {
@@ -21,10 +21,10 @@ public class ModelP_U_Personal {
     Connection con;
 
     /**
-     * Metodo para ingresar el carnet en algún registro de un personal (IDPersonal)
-     * @param id
-     * @param Carne
-     * @return 
+     * Method to enter the id - card in a staff register (IDPersonal)
+     * @param id referring to the staff ID
+     * @param Carne referring to the id - card 
+     * @return a Boolean
      */
     public boolean CarnetPersonal(int id, String Carne) {
         try {
@@ -42,8 +42,8 @@ public class ModelP_U_Personal {
     }
 
     /**
-     * Metodo para obtener los registros ingresados en la tabla tbTipoDocumento
-     * @return 
+     * Method to obtain the registers stored in the table tbTipoDocumento
+     * @return a ResultSet
      */
     public ResultSet cargarTipD() {
         try {
@@ -59,8 +59,8 @@ public class ModelP_U_Personal {
     }
 
     /**
-     * Metodo para comprobar si existe un registro en la tabla tbPersonal
-     * @return 
+     * Method to check if a register exists in the tbPersonal table
+     * @return a Boolean
      */
     public boolean checkPersonal() {
 
@@ -75,8 +75,8 @@ public class ModelP_U_Personal {
     }
 
     /**
-     * Metodo para obtener los registros ingresados en la tabla tbGeneros
-     * @return 
+     * Method to obtain the registers stored in the tbGeneros table
+     * @return a ResultSet
      */
     public ResultSet cargarGeneroP() {
         try {
@@ -92,8 +92,8 @@ public class ModelP_U_Personal {
     }
 
     /**
-     * Metodo para obtener el IDEmpresa (se usa cuando el primer uso se cierra a medio proceso)
-     * @return 
+     * Method to obtain the companyID (used when the first use is closed in the middle of the process)
+     * @return a ResultSet
      */
     public ResultSet getEnterprise() {
         try {
@@ -108,17 +108,17 @@ public class ModelP_U_Personal {
     }
 
     /**
-     * Metodo para ingresar un personal
-     * @param idempresa
-     * @param nombrep
-     * @param apellidop
-     * @param fecha
-     * @param Correo
-     * @param direccion
-     * @param DUI
-     * @param genero
-     * @param idtipod
-     * @return 
+     * Method to register a staff
+     * @param idempresa referring to the company ID
+     * @param nombrep referring to the staff name
+     * @param apellidop referring to the staff last name
+     * @param fecha referring to the birth date of the staff
+     * @param Correo referring to the email of the staff
+     * @param direccion referring to the address of the staff
+     * @param DUI referring to the DUI of the staff
+     * @param genero referring to the Gender of the staff
+     * @param idtipod referring to the type of staff
+     * @return a Boolean
      */
     public boolean IngresarPPersonal(int idempresa, String nombrep, String apellidop, String fecha, String Correo, String direccion, String DUI, int genero, int idtipod) {
         try {
@@ -148,9 +148,9 @@ public class ModelP_U_Personal {
     }
     
     /**
-     * Metodo para recuperar el tipo de documento por medio de su ID
-     * @param ID
-     * @return 
+     * Method to retrieve the document type by means of its ID
+     * @param ID referring to the ID
+     * @return a ResultSet
      */
         public ResultSet TipoDocumento(int ID){
             try{

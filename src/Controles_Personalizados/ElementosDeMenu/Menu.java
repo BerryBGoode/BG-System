@@ -6,7 +6,7 @@
 package Controles_Personalizados.ElementosDeMenu;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.BorderLayout;
@@ -23,11 +23,18 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs 
+ * @author danlo
+ */
 public class Menu extends JPanel {
 
     private int index = -1;
     private final List<EventMenuSelected> events = new ArrayList<>();
 
+    /**
+     * Constructor
+     */
     public Menu() {
         init();
     }
@@ -99,10 +106,19 @@ public class Menu extends JPanel {
     }
 
     //  Public Method
+
+    /**
+     *  Menu
+     * @param menu Add menu item
+     */
     public void addMenuItem(ModelMenuItem menu) {
         panelMenu.add(createMenuItem(menu), "h 35!");
     }
 
+    /**
+     *  add title
+     * @param title title String
+     */
     public void addTitle(String title) {
         JLabel label = new JLabel(title);
         label.setBorder(new EmptyBorder(15, 20, 5, 5));
@@ -111,10 +127,19 @@ public class Menu extends JPanel {
         panelMenu.add(label);
     }
 
+    /**
+     * addSpace
+     * @param size Dimensions
+     */
     public void addSpace(int size) {
         panelMenu.add(new JLabel(), "h " + size + "!");
     }
 
+    /**
+     *  Menu indexes
+     * @param index index
+     * @param indexSubMenu SubMenu
+     */
     public void setSelectedIndex(int index, int indexSubMenu) {
         for (Component com : panelMenu.getComponents()) {
             if (com instanceof MenuItem) {
@@ -128,6 +153,9 @@ public class Menu extends JPanel {
         }
     }
 
+    /**
+     *  Clear Selected
+     */
     public void clearSelected() {
         for (Component com : panelMenu.getComponents()) {
             if (com instanceof MenuItem) {
@@ -137,6 +165,10 @@ public class Menu extends JPanel {
         }
     }
 
+    /**
+     *  Event
+     * @param event start Event
+     */
     public void addEvent(EventMenuSelected event) {
         events.add(event);
     }

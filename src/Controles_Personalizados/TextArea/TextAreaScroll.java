@@ -5,8 +5,8 @@
  */
 package Controles_Personalizados.TextArea;
 
-/**
- *
+/** 
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
@@ -24,6 +24,10 @@ import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import Controles_Personalizados.ScrollBar.ScrollBarCustom;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs
+ * @author danlo
+ */
 public class TextAreaScroll extends JScrollPane {
 
     private final Animator animator;
@@ -34,6 +38,9 @@ public class TextAreaScroll extends JScrollPane {
     private String labelText = "Label";
     private Color lineColor = new Color(3, 155, 216);
 
+    /**
+     * Set the properties to the scroll
+     */
     public TextAreaScroll() {
         setVerticalScrollBar(new ScrollBarCustom());
         ScrollBarCustom scrol = new ScrollBarCustom();
@@ -106,55 +113,107 @@ public class TextAreaScroll extends JScrollPane {
         g2.fillRect((int) (x + 2), height - 2, (int) size, 2);
     }
 
+    /**
+     * Animator
+     * @return Animation
+     */
     protected Animator getAnimator() {
         return animator;
     }
 
+    /**
+     *  Get Location of the animation
+     * @return Animation
+     */
     public float getAnimateLocation() {
         return animateLocation;
     }
 
+    /**
+     *  Animator
+     * @param animateLocation Location
+     */
     public void setAnimateLocation(float animateLocation) {
         this.animateLocation = animateLocation;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isMouseOver() {
         return mouseOver;
     }
 
+    /**
+     * Mouse Over
+     * @param mouseOver Location
+     */
     public void setMouseOver(boolean mouseOver) {
         this.mouseOver = mouseOver;
         repaint();
     }
 
+    /**
+     *  Animation check
+     * @return Boolean
+     */
     public boolean isAnimateHinText() {
         return animateHinText;
     }
 
+    /**
+     *  Animated text
+     * @param animateHinText Text
+     */
     public void setAnimateHinText(boolean animateHinText) {
         this.animateHinText = animateHinText;
     }
 
+    /**
+     *  Gets Label Text
+     * @return String
+     */
     public String getLabelText() {
         return labelText;
     }
 
+    /**
+     * Set Label text
+     * @param labelText String
+     */
     public void setLabelText(String labelText) {
         this.labelText = labelText;
     }
 
+    /**
+     *  Get Line Color
+     * @return Color
+     */
     public Color getLineColor() {
         return lineColor;
     }
 
+    /**
+     *  Set Line Color
+     * @param lineColor Color
+     */
     public void setLineColor(Color lineColor) {
         this.lineColor = lineColor;
     }
 
+    /**
+     *  State
+     * @return a Boolean
+     */
     public boolean isShow() {
         return show;
     }
 
+    /**
+     *  State
+     * @param show state
+     */
     public void setShow(boolean show) {
         this.show = show;
     }

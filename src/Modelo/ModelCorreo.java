@@ -12,11 +12,16 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *  This class stores all the sentences necessary for the correct functioning of the email send process
  * @author danlo
  */
 public class ModelCorreo {
 
+    /**
+     *  This method recovers the username of the user 
+     * @param Correo referring to the Username of the user
+     * @return a ResultSet
+     */
     public ResultSet Recuperar(String Correo) {
 
         //Variable de conexion
@@ -49,6 +54,11 @@ public class ModelCorreo {
         }
     }
 
+    /**
+     *  This method recovers the information of the user
+     * @param correo referring to the email of the user
+     * @return a ResultSet
+     */
     public ResultSet CapDatos(String correo) {
         //Variable de conexion
         Connection con;
@@ -74,6 +84,12 @@ public class ModelCorreo {
 
     }
 
+    /**
+     *  This method update the password of the user to a default one
+     * @param id referring to the user ID
+     * @param contra referring to the password
+     * @return a Boolean
+     */
     public static boolean ActualizarContra(int id, String contra) {
         Connection con;
         PreparedStatement ps;
@@ -96,6 +112,11 @@ public class ModelCorreo {
         }
     }
 
+    /**
+     *  This method recovers the Email filtered by a search parameter
+     * @param id referring to the staff ID
+     * @return a ResultSet
+     */
     public ResultSet CapCorreo(int id) {
         //Variable de conexion
         Connection con;
@@ -120,6 +141,11 @@ public class ModelCorreo {
 
     }
 
+    /**
+     *  This method capture the staff ID
+     * @param Correo referring to the email of the user
+     * @return a ResultSet
+     */
     public ResultSet CapturarIdPersonal(String Correo) {
         //Variable de conexion
         Connection con;

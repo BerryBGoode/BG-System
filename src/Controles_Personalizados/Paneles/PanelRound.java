@@ -6,7 +6,7 @@
 package Controles_Personalizados.Paneles;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Graphics;
@@ -18,39 +18,75 @@ import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.JPanel;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs
+ * @author danlo
+ */
 public class PanelRound extends JPanel {
 
+    /**
+     *  Gets the Dimension and Size
+     * @return an Integer
+     */
     public int getRoundTopLeft() {
         return roundTopLeft;
     }
 
+    /**
+     *  Set the Dimensions and Size
+     * @param roundTopLeft referring to the Dimensions 
+     */
     public void setRoundTopLeft(int roundTopLeft) {
         this.roundTopLeft = roundTopLeft;
         repaint();
     }
 
+    /**
+     *  Gets the Dimensions and Size
+     * @return an integer
+     */
     public int getRoundTopRight() {
         return roundTopRight;
     }
 
+    /**
+     * Set the Dimensions and Size
+     * @param roundTopRight referring to the Dimensions
+     */
     public void setRoundTopRight(int roundTopRight) {
         this.roundTopRight = roundTopRight;
         repaint();
     }
 
+    /**
+     *  Gets the Dimensions and Size 
+     * @return an Integer
+     */
     public int getRoundBottomLeft() {
         return roundBottomLeft;
     }
 
+    /**
+     * Set the DImensions and Size 
+     * @param roundBottomLeft referring to the Dimensions
+     */
     public void setRoundBottomLeft(int roundBottomLeft) {
         this.roundBottomLeft = roundBottomLeft;
         repaint();
     }
 
+    /**
+     * Gets the Dimensions and Size
+     * @return an integer
+     */
     public int getRoundBottomRight() {
         return roundBottomRight;
     }
 
+    /**
+     *  Set the Dimensions and Size
+     * @param roundBottomRight referring to the Dimensions
+     */
     public void setRoundBottomRight(int roundBottomRight) {
         this.roundBottomRight = roundBottomRight;
         repaint();
@@ -61,6 +97,9 @@ public class PanelRound extends JPanel {
     private int roundBottomLeft = 0;
     private int roundBottomRight = 0;
 
+    /**
+     *
+     */
     public PanelRound() {
         setOpaque(false);
     }

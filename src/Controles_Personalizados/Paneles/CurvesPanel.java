@@ -6,7 +6,7 @@
 package Controles_Personalizados.Paneles;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
@@ -25,6 +25,10 @@ import java.awt.geom.CubicCurve2D;
 import java.awt.geom.GeneralPath;
 import javax.swing.Timer;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs 
+ * @author danlo
+ */
 public class CurvesPanel extends GradientPanel {
 
     private RenderingHints hints;
@@ -36,14 +40,23 @@ public class CurvesPanel extends GradientPanel {
         }
     });
 
+    /**
+     * Start
+     */
     public void start() {
         timer.start();
     }
 
+    /**
+     *  Stop
+     */
     public void stop() {
         timer.stop();
     }
 
+    /**
+     *  Design
+     */
     public CurvesPanel() {
         super(Color.decode("#FFFFFF"), Color.decode("#FFFFFF"));
         hints = new RenderingHints(RenderingHints.KEY_ALPHA_INTERPOLATION,

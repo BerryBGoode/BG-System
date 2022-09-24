@@ -6,7 +6,7 @@
 package Controles_Personalizados.Botones;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.AlphaComposite;
@@ -26,6 +26,10 @@ import javax.swing.SwingUtilities;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs 
+ * @author danlo
+ */
 public class UWPButton extends JButton {
 
     private Animator animatorOver;
@@ -39,6 +43,9 @@ public class UWPButton extends JButton {
     private Color selectedColor = new Color(200, 200, 200);
     private Color effectColor = new Color(255, 255, 255);
 
+    /**
+     * Constructor 
+     */
     public UWPButton() {
         init();
     }
@@ -183,28 +190,52 @@ public class UWPButton extends JButton {
         return new RadialGradientPaint(center, radius, dist, colors);
     }
 
+    /**
+     * Gets Border Size
+     * @return an Integer
+     */
     public int getBorderSize() {
         return borderSize;
     }
 
+    /**
+     *  Set Border Size
+     * @param borderSize referring to the border Size
+     */
     public void setBorderSize(int borderSize) {
         this.borderSize = borderSize;
         repaint();
     }
 
+    /**
+     *  Gets the selected Color
+     * @return Color
+     */
     public Color getSelectedColor() {
         return selectedColor;
     }
 
+    /**
+     *  Set the selected Color
+     * @param selectedColor referring to the color
+     */
     public void setSelectedColor(Color selectedColor) {
         this.selectedColor = selectedColor;
         repaint();
     }
 
+    /**
+     *  Gets the Color of the Effect
+     * @return Color
+     */
     public Color getEffectColor() {
         return effectColor;
     }
 
+    /**
+     *  Set the effect Color
+     * @param effectColor referring to the Effect Color
+     */
     public void setEffectColor(Color effectColor) {
         this.effectColor = effectColor;
         repaint();

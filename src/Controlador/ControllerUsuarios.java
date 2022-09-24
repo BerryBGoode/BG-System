@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 
 /**
- *
+ *  This class stores and connects the ModelUsuarios with the view, and makes possible the communication between both
  * @author Rober
  */
 public class ControllerUsuarios {
@@ -19,24 +19,24 @@ public class ControllerUsuarios {
     ModelUsuarios mdlusu = new ModelUsuarios();
     
     /**
-     * Metodo para cargar los registros almacenados en la tabla de tbTipoUsuario
-     * @return 
+     * Method to load the registers stored in the tbTipoUsuario table
+     * @return a ResultSet
      */
     public ResultSet CargarTipoUsuarios_C(){
         return mdlusu.CargarTipoUsuarios(con);
     }
     
     /**
-     * Metodo para cargar los registros almacenados en la tabla de tbEstadoUsuario
-     * @return 
+     * Method to load the registers stored in the tbEstadoUsuario table
+     * @return a ResultSet
      */
     public ResultSet CargarEstadoUsuarios_C(){
         return mdlusu.CargarEstadoUsuarios(con);
     }  
     
     /**
-     * Metodo para cargar los registros almacenados en la tabla de tbPersonal
-     * @return 
+     * Method to load the registers stored in the tbPersonal table
+     * @return a ResultSet
      */
      public ResultSet CargarPersonal_C(){
         return mdlusu.CargarPersonal(con);
@@ -54,144 +54,144 @@ public class ControllerUsuarios {
      //Getter y setter
 
      /**
-      * Metodo para obtener el IDUsuario
-      * @return 
+      * Method to obtain the IDUuser
+      * @return an Integer
       */
     public int getID() {
         return ID;
     }
 
     /**
-     * Metodo para establecer el IDUsuario
-     * @param ID 
+     * Method to set the userID
+     * @param ID referring to the user ID
      */
     public void setID(int ID) {
         this.ID = ID;
     }
 
     /**
-     * Metodo para obtener el IDPersonal
-     * @return 
+     * Method to obtain the Staff ID
+     * @return an Integer
      */
     public int getIDPersonal() {
         return IDPersonal;
     }
 
     /**
-     * Metodo para establecer el IDUsuario
-     * @param IDPersonal 
+     * Method to set the userID
+     * @param IDPersonal referring to the staff ID
      */
     public void setIDPersonal(int IDPersonal) {
         this.IDPersonal = IDPersonal;
     }
 
     /**
-     * Metodo para obtener el nombre de usuario
-     * @return 
+     * Method to get username
+     * @return a String
      */
     public String getNombre_usuario() {
         return nombre_usuario;
     }
     
     /**
-     * Metodo para establecer el nombre de usuario
-     * @param nombre_usuario 
+     * Method to set username
+     * @param nombre_usuario referring to the username 
      */
     public void setNombre_usuario(String nombre_usuario) {
         this.nombre_usuario = nombre_usuario;
     }
 
     /**
-     * Metodo para obtener la contraseña
-     * @return 
+     * Method to get the password
+     * @return a String
      */
     public String getContraseña() {
         return contraseña;
     }
 
     /**
-     * Metodo para establecer la contraseña
-     * @param contraseña 
+     * Method to set the password
+     * @param contraseña referring to the password
      */
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
 
     /**
-     * Metodo para obtener el PIN del usuario
-     * @return 
+     * Method to obtain the user's PIN
+     * @return a String
      */
     public String getPIN() {
         return PIN;
     }
 
     /**
-     * Metodo para establecer el PIN
-     * @param PIN 
+     * Method to set the PIN
+     * @param PIN referring to the user's PIN
      */
     public void setPIN(String PIN) {
         this.PIN = PIN;
     }
 
     /**
-     * Metodo para obtener el tipo de usuario
-     * @return 
+     * Method to obtain the type of user
+     * @return an Integer
      */
     public int getIDTipoUsu() {
         return IDTipoUsu;
     }
 
     /**
-     * Metodo para establecer el tipo de usuario
-     * @param IDTipoUsu 
+     * Method to set user type
+     * @param IDTipoUsu referring to the user type ID
      */
     public void setIDTipoUsu(int IDTipoUsu) {
         this.IDTipoUsu = IDTipoUsu;
     }
 
     /**
-     * Metodo para obtener el estado del usuario
-     * @return 
+     * Method to get user status
+     * @return an Integer
      */
     public int getIDEstadoUsu() {
         return IDEstadoUsu;
     }
 
     /**
-     * Metodo para establecer el estado del usuario
-     * @param IDEstadoUsu 
+     * Method to set user status
+     * @param IDEstadoUsu referring to the user's status ID
      */
     public void setIDEstadoUsu(int IDEstadoUsu) {
         this.IDEstadoUsu = IDEstadoUsu;
     }
 
     /**
-     * Metodo para obtener la imagen del usuario
-     * @return 
+     * Method to get the user image
+     * @return a Byte[]
      */
     public byte[] getImagen() {
         return imagen;
     }
 
     /**
-     * Metodo para establecer la imagen del usuario
-     * @param imagen 
+     * Method to set the user image
+     * @param imagen referring to the user's image
      */
     public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }
 
     /**
-     * Metodo para obtener los intentos de inicio de sesión restantes
-     * @return 
+     * Method to get remaining login attempts
+     * @return an Integer
      */
     public int getIntentos() {
         return intentos;
     }
 
     /**
-     * Metodo para establecer los intentos de inicio de sesión restantes
-     * @param intentos 
+     * Method to set remaining login attempts
+     * @param intentos referring to the attempts
      */
     public void setIntentos(int intentos) {
         this.intentos = intentos;
@@ -200,15 +200,15 @@ public class ControllerUsuarios {
     //Constructores
 
     /**
-     * Constructor para la inserción de datos
-     * @param IDPersonal
-     * @param nombre_usuario
-     * @param contraseña
-     * @param PIN
-     * @param IDTipoUsu
-     * @param IDEstadoUsu
-     * @param imagen
-     * @param intentos 
+     * Constructor for data insertion
+     * @param IDPersonal referring to the staff ID
+     * @param nombre_usuario referring to the username
+     * @param contraseña referring to the password
+     * @param PIN referring to the user's PIN
+     * @param IDTipoUsu referring to the user type
+     * @param IDEstadoUsu referring to the user state
+     * @param imagen referring to the user's image
+     * @param intentos referring to the user's attempts
      */
     public ControllerUsuarios(int IDPersonal, String nombre_usuario, String contraseña, String PIN, int IDTipoUsu, int IDEstadoUsu, byte[] imagen, int intentos) {
         this.IDPersonal = IDPersonal;
@@ -222,13 +222,13 @@ public class ControllerUsuarios {
     }
 
     /**
-     * Constructor para la actualización de datos
-     * @param ID
-     * @param IDPersonal
-     * @param nombre_usuario
-     * @param IDTipoUsu
-     * @param IDEstadoUsu
-     * @param imagen 
+     * Constructor for data update
+     * @param ID referring to the user iD
+     * @param IDPersonal referring to the staff ID
+     * @param nombre_usuario referring to the username
+     * @param IDTipoUsu referring to the user type ID
+     * @param IDEstadoUsu referring to the user state ID
+     * @param imagen referring to the user's image
      */
     public ControllerUsuarios(int ID, int IDPersonal, String nombre_usuario, int IDTipoUsu, int IDEstadoUsu, byte[] imagen) {
         this.ID = ID;
@@ -240,79 +240,79 @@ public class ControllerUsuarios {
     }
 
     /**
-     * Constructor para la eliminación de datos
-     * @param ID 
+     * Constructor for data removal
+     * @param ID referring to the user ID
      */
     public ControllerUsuarios(int ID) {
         this.ID = ID;
     }
 
     /**
-     * Constructor vacio
+     * empty constructor
      */
     public ControllerUsuarios() {
     }
     
     
     /**
-     * Metodo para la inserción de datos
-     * @return 
+     * Method for inserting data
+     * @return a Boolean
      */
      public boolean NuevoUsuario_C(){
          return mdlusu.AgregarUsuario(IDPersonal, nombre_usuario, contraseña, PIN, IDTipoUsu, IDEstadoUsu, imagen, intentos, con);
     }
      
     /**
-     * Metodo para cargar los registros en la tabla tbUsuarios
-     * @return 
+     * Method to load the registers in the tbUsuarios table
+     * @return a ResultSet
      */
     public ResultSet CargarUsuarios_C(){
         return mdlusu.CargarUsuarios(con);
     }
     
     /**
-     * Metodo para la actualización de datos
-     * @return 
+     * Method for updating data
+     * @return a Boolean
      */
     public boolean ActualizarUsuario_C(){
         return mdlusu.ActualizarUsuario(IDPersonal, nombre_usuario, IDTipoUsu, IDEstadoUsu, imagen, ID, con);
     }
     
     /**
-     * Metodo para la eliminación de un usuario
-     * @return 
+     * Method for deleting a user
+     * @return a Boolean
      */
     public boolean EliminarUsuario_C(){
          return mdlusu.EliminarUsuario(ID, con);
     }
     
     /**
-     * Metodo para cargar los bytes de la imagen del usuario seleccionado
-     * @return 
+     * Method to load the bytes of the image of the selected user
+     * @return a ResultSet
      */
     public ResultSet BuscarImagen_C(){
         return mdlusu.BuscarImagen(ID, con);
     }
     
     /**
-     * Metodo para cargar el carnet del usuario seleccionado
-     * @return 
+     * Method to load the id - card of the selected user
+     * @return a ResultSet
      */
     public ResultSet BuscarCarnet_C(){
         return mdlusu.BuscaCarnet(IDPersonal, con);
     }
     
     /**
-     * Metodo para buscar el registro que contenga el IDActivo en la tabla de tbEstadoUsuario
-     * @return 
+     * Method to find the register that contains the Active ID in the tbEstadoUsuario table
+     * @return a ResultSet
      */
     public ResultSet BuscarIDActivo_C(){
         return mdlusu.BuscarIDActivo(con);
     }
     
     /**
-     * Metodo para buscar el registro que contenga el IDEstudiante en la tabla de tbTipoUsuario
-     * @return 
+     * Method to find the register that contains the StudentID in the tbTipoUsuario table
+     * @return a ResultSet
      */
     public ResultSet BuscarIDEstudiante_C(){
         return mdlusu.BuscarIDEstudiante(con);

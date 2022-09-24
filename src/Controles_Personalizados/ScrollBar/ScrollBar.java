@@ -6,14 +6,21 @@
 package Controles_Personalizados.ScrollBar;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Dimension;
 import javax.swing.JScrollBar;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs
+ * @author danlo
+ */
 public class ScrollBar extends JScrollBar {
 
+    /**
+     *  Set Properties to the control
+     */
     public ScrollBar() {
         setUI(new ModernScrollBarUI());
         setPreferredSize(new Dimension(5, 5));

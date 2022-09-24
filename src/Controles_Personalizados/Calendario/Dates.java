@@ -15,6 +15,10 @@ import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JButton;
 
+/**
+ *   Personalized Control package
+ * @author danlo
+ */
 public final class Dates extends javax.swing.JPanel {
 
     private Event event;
@@ -27,6 +31,9 @@ public final class Dates extends javax.swing.JPanel {
     private int startDate;
     private int max_of_month;
 
+    /**
+     *  Constructor 
+     */
     public Dates() {
         initComponents();
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
@@ -37,6 +44,12 @@ public final class Dates extends javax.swing.JPanel {
         YEAR = Integer.valueOf(toDay.split("-")[2]);
     }
 
+    /**
+     *  Show Date
+     * @param month month
+     * @param year year
+     * @param select selected
+     */
     public void showDate(int month, int year, SelectedDate select) {
         m = month;
         y = year;
@@ -74,6 +87,9 @@ public final class Dates extends javax.swing.JPanel {
         }
     }
 
+    /**
+     *  Clear Selected
+     */
     public void clearSelected() {
         for (int i = 7; i < getComponentCount(); i++) {
             JButton cmd = (JButton) getComponent(i);
@@ -94,6 +110,10 @@ public final class Dates extends javax.swing.JPanel {
         }
     }
 
+    /**
+     *  Set selected
+     * @param index index
+     */
     public void setSelected(int index) {
         selectDay = index;
     }
@@ -432,10 +452,18 @@ public final class Dates extends javax.swing.JPanel {
         add(cmd42);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     *  Event
+     * @return Event
+     */
     public Event getEvent() {
         return event;
     }
 
+    /**
+     *  Event
+     * @param event event
+     */
     public void setEvent(Event event) {
         this.event = event;
         addEvent();
@@ -493,6 +521,9 @@ public final class Dates extends javax.swing.JPanel {
     private Controles_Personalizados.Calendario.Button cmdWe;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     *  Start next 
+     */
     public void next() {
         if (selectDay == max_of_month) {
             selectDay = 0;
@@ -506,6 +537,9 @@ public final class Dates extends javax.swing.JPanel {
         }
     }
 
+    /**
+     *  Back - motion
+     */
     public void back() {
         if (selectDay <= 1) {
             selectDay = max_of_month + 1;
@@ -519,6 +553,9 @@ public final class Dates extends javax.swing.JPanel {
         }
     }
 
+    /**
+     *  Event 
+     */
     public void up() {
         JButton cmd = (JButton) getComponent(startDate - 1 + selectDay - 7);
         String n = cmd.getText();
@@ -529,6 +566,9 @@ public final class Dates extends javax.swing.JPanel {
         }
     }
 
+    /**
+     *  Event 
+     */
     public void down() {
         if (getComponents().length > startDate - 1 + selectDay + 7) {
             JButton cmd = (JButton) getComponent(startDate - 1 + selectDay + 7);

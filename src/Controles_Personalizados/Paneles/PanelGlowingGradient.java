@@ -6,7 +6,7 @@
 package Controles_Personalizados.Paneles;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
@@ -23,48 +23,92 @@ import Controles_Personalizados.Paneles.ShadowRenderer;
 import javax.swing.JComponent;
 import javax.swing.border.EmptyBorder;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs
+ * @author danlo
+ */
 public class PanelGlowingGradient extends JComponent {
 
+    /**
+     * Gets Shadow
+     * @return an integer
+     */
     public int getShadowSize() {
         return shadowSize;
     }
 
+    /**
+     *  Shadow Size
+     * @param shadowSize Shadow Dimensions
+     */
     public void setShadowSize(int shadowSize) {
         this.shadowSize = shadowSize;
         setBorder(new EmptyBorder(shadowSize, shadowSize, shadowSize, shadowSize));
     }
 
+    /**
+     *  Border Size
+     * @return an integer
+     */
     public int getBorderSize() {
         return borderSize;
     }
 
+    /**
+     *  Border Size
+     * @param borderSize Border Dimensions
+     */
     public void setBorderSize(int borderSize) {
         this.borderSize = borderSize;
         refresh();
     }
 
+    /**
+     *  Color 1
+     * @return Color 1
+     */
     public Color getGradientColor1() {
         return gradientColor1;
     }
 
+    /**
+     * Color 1 
+     * @param gradientColor1 Color 1
+     */
     public void setGradientColor1(Color gradientColor1) {
         this.gradientColor1 = gradientColor1;
         refresh();
     }
 
+    /**
+     * Color 2
+     * @return Color 
+     */
     public Color getGradientColor2() {
         return gradientColor2;
     }
 
+    /**
+     *  Color 2
+     * @param gradientColor2 Color 2
+     */
     public void setGradientColor2(Color gradientColor2) {
         this.gradientColor2 = gradientColor2;
         refresh();
     }
 
+    /**
+     * Background Color
+     * @return Color
+     */
     public Color getBackgroundLight() {
         return backgroundLight;
     }
 
+    /**
+     * BackGround Color 
+     * @param backgroundLight Background Color
+     */
     public void setBackgroundLight(Color backgroundLight) {
         this.backgroundLight = backgroundLight;
         refresh();
@@ -77,6 +121,9 @@ public class PanelGlowingGradient extends JComponent {
     private Color backgroundLight = new Color(35, 35, 35);
     private BufferedImage imageRender;
 
+    /**
+     *  Validates properties of the control
+     */
     public PanelGlowingGradient() {
         setBorder(new EmptyBorder(shadowSize, shadowSize, shadowSize, shadowSize));
         setBackground(new Color(20, 20, 20));

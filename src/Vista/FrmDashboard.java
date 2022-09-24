@@ -5,7 +5,7 @@
  */
 package Vista;
 
-import Controlador.ControllerBuscador;
+
 import Controlador.ControllerLogin;
 import Controles_Personalizados.Paneles.PanelRound;
 

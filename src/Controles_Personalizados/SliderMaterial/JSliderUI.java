@@ -6,7 +6,7 @@
 package Controles_Personalizados.SliderMaterial;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.BorderLayout;
@@ -33,12 +33,20 @@ import javax.swing.plaf.basic.BasicSliderUI;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
+/**
+ *   Personalized control class, extends events and controls depends the needs
+ * @author danlo
+ */
 public class JSliderUI extends BasicSliderUI {
 
     private final JWindow window = new JWindow();
     private final Animator animator;
     private boolean show;
 
+    /**
+     *  JSlider
+     * @param slider Slider
+     */
     public JSliderUI(JSlider slider) {
         super(slider);
         PanelSlider panel = new PanelSlider(slider);
@@ -113,16 +121,28 @@ public class JSliderUI extends BasicSliderUI {
         }
     }
 
+    /**
+     * Graphics
+     * @param grphcs Graphics
+     */
     @Override
     public void paintFocus(Graphics grphcs) {
 
     }
 
+    /**
+     *  Dimensions
+     * @return Dimensions
+     */
     @Override
     protected Dimension getThumbSize() {
         return new Dimension(15, 15);
     }
 
+    /**
+     *  Graphics
+     * @param grphcs Graphics
+     */
     @Override
     public void paintThumb(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs.create();
@@ -132,6 +152,10 @@ public class JSliderUI extends BasicSliderUI {
         g2.dispose();
     }
 
+    /**
+     *  Graphics
+     * @param grphcs Graphics
+     */
     @Override
     public void paintTrack(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs.create();

@@ -1,6 +1,0 @@
-c2E=
-bG9jYWxob3N0
-MTQzMw==
-RmVyTWVuYTMxOA==
-Este es un archivo de configuración para la conexión, porfavor no borrar
-This a file of configuration of connection on database, please don't delete this file

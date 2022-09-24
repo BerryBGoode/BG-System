@@ -6,7 +6,7 @@
 package Controles_Personalizados.textfields;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
@@ -23,20 +23,40 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.metal.MetalTextFieldUI;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs
+ * @author danlo
+ */
 public class TextFieldSuggestionUI extends MetalTextFieldUI {
 
+    /**
+     *  String List
+     * @return List
+     */
     public List<String> getItems() {
         return items;
     }
 
+    /**
+     *  items
+     * @param items items
+     */
     public void setItems(List<String> items) {
         this.items = items;
     }
 
+    /**
+     *  Gets values for Round
+     * @return Round
+     */
     public int getRound() {
         return round;
     }
 
+    /**
+     *  Set Round
+     * @param round Round
+     */
     public void setRound(int round) {
         this.round = round;
         border.setRound(round);
@@ -48,6 +68,10 @@ public class TextFieldSuggestionUI extends MetalTextFieldUI {
     private int round = 15;
     private List<String> items = new ArrayList<>();
 
+    /**
+     *  TextField
+     * @param textfield Text
+     */
     public TextFieldSuggestionUI(JTextField textfield) {
         this.textfield = textfield;
         border = new Border(10);

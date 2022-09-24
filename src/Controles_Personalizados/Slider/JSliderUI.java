@@ -6,7 +6,7 @@
 package Controles_Personalizados.Slider;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Dimension;
@@ -16,22 +16,42 @@ import java.awt.RenderingHints;
 import javax.swing.JSlider;
 import javax.swing.plaf.basic.BasicSliderUI;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs
+ * @author danlo
+ */
 public class JSliderUI extends BasicSliderUI {
 
+    /**
+     *  Initialize the Slider
+     * @param slider Slider
+     */
     public JSliderUI(JSlider slider) {
         super(slider);
     }
 
+    /**
+     *  Graphics
+     * @param grphcs Graphics
+     */
     @Override
     public void paintFocus(Graphics grphcs) {
 
     }
 
+    /**
+     *  Dimensions 
+     * @return Dimensions
+     */
     @Override
     protected Dimension getThumbSize() {
         return new Dimension(14, 14);
     }
 
+    /**
+     *  Graphics
+     * @param grphcs Graphics
+     */
     @Override
     public void paintThumb(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;
@@ -40,6 +60,10 @@ public class JSliderUI extends BasicSliderUI {
         g2.fillOval(thumbRect.x, thumbRect.y, thumbRect.width, thumbRect.height);
     }
 
+    /**
+     *  Graphics
+     * @param grphcs Graphics
+     */
     @Override
     public void paintTrack(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs;

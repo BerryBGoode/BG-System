@@ -7,11 +7,16 @@ package Controles_Personalizados.ComboBox;
 
 import javax.swing.JComboBox;
 /**
- *
+ *  Personalized control class, extends events and controls depends the needs
  * @author danlo
+ * @param <E> String list
  */
 public class ComboBoxSuggestion<E>extends JComboBox<E> {
-     public ComboBoxSuggestion() {
+
+    /**
+     *  Set Design
+     */
+    public ComboBoxSuggestion() {
              setUI(new ComboSuggestionUI()); 
      }
 }

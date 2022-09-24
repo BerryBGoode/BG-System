@@ -6,7 +6,7 @@
 package Controles_Personalizados.textfields;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
@@ -26,20 +26,40 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs
+ * @author danlo
+ */
 public class TextField extends JTextField {
 
+    /**
+     *  Gets Label Text
+     * @return Text
+     */
     public String getLabelText() {
         return labelText;
     }
 
+    /**
+     *  Set Label Text
+     * @param labelText Text
+     */
     public void setLabelText(String labelText) {
         this.labelText = labelText;
     }
 
+    /**
+     *  Line Color
+     * @return Color
+     */
     public Color getLineColor() {
         return lineColor;
     }
 
+    /**
+     *  Set the Line Color
+     * @param lineColor Color
+     */
     public void setLineColor(Color lineColor) {
         this.lineColor = lineColor;
     }
@@ -52,6 +72,9 @@ public class TextField extends JTextField {
     private String labelText = "Label";
     private Color lineColor = new Color(3, 155, 216);
 
+    /**
+     *  Validates properties of the control
+     */
     public TextField() {
         setBorder(new EmptyBorder(20, 3, 10, 3));
         setSelectionColor(new Color(76, 204, 255));

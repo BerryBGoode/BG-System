@@ -6,20 +6,32 @@
 package Controles_Personalizados.Calendario;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import javax.swing.JButton;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs 
+ * @author danlo
+ */
 public final class Years extends javax.swing.JPanel {
 
     private Event event;
     private int startYear;
 
+    /**
+     *  Constructor
+     */
     public Years() {
         initComponents();
     }
 
+    /**
+     *  Show Year
+     * @param year year
+     * @return an Integer
+     */
     public int showYear(int year) {
         year = calculateYear(year);
         for (int i = 0; i < getComponentCount(); i++) {
@@ -211,20 +223,38 @@ public final class Years extends javax.swing.JPanel {
         add(cmd20);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     *  Event
+     * @return Event
+     */
     public Event getEvent() {
         return event;
     }
 
+    /**
+     *  Event
+     * @param event event
+     */
     public void setEvent(Event event) {
         this.event = event;
         addEvent();
     }
 
+    /**
+     *  Year
+     * @param year year
+     * @return an Integer
+     */
     public int next(int year) {
         showYear(year + 20);
         return startYear;
     }
 
+    /**
+     *  Year
+     * @param year year
+     * @return an integer
+     */
     public int back(int year) {
         showYear(year - 20);
         return startYear;

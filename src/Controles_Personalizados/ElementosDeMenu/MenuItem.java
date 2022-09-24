@@ -6,7 +6,7 @@
 package Controles_Personalizados.ElementosDeMenu;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.BasicStroke;
@@ -28,6 +28,10 @@ import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs 
+ * @author danlo
+ */
 public class MenuItem extends JPanel {
 
     private final List<EventMenuSelected> events = new ArrayList<>();
@@ -37,6 +41,12 @@ public class MenuItem extends JPanel {
     private int buttonAngle = -1;
     private boolean open;
 
+    /**
+     *  item properties
+     * @param item item
+     * @param index index
+     * @param layout layout
+     */
     public MenuItem(ModelMenuItem item, int index, MigLayout layout) {
         this.index = index;
         this.hasSubMenu = item.getSubMenu().length > 0;
@@ -132,6 +142,10 @@ public class MenuItem extends JPanel {
         animator.start();
     }
 
+    /**
+     * Add Event
+     * @param event event 
+     */
     public void addEvent(EventMenuSelected event) {
         this.events.add(event);
     }
@@ -142,14 +156,25 @@ public class MenuItem extends JPanel {
         }
     }
 
+    /**
+     * Gets the index
+     * @return an Integer
+     */
     public int getIndex() {
         return index;
     }
 
+    /**
+     *  Check the state of Submenu
+     * @return a Boolean
+     */
     public boolean isHasSubMenu() {
         return hasSubMenu;
     }
 
+    /**
+     *  Clear
+     */
     public void clearSelected() {
         setForeground(new Color(170, 170, 170));
         for (Component com : getComponents()) {
@@ -158,6 +183,10 @@ public class MenuItem extends JPanel {
         }
     }
 
+    /**
+     *  Set Selected
+     * @param index index
+     */
     public void setSelectedIndex(int index) {
         for (Component com : getComponents()) {
             Item item = (Item) com;

@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *   This class stores all the sentences necessary for the correct functioning of the searchers section
  * @author danlo
  */
 public class ModelBuscador {
@@ -21,6 +21,11 @@ public class ModelBuscador {
     Connection con;
     PreparedStatement ps;
     
+    /**
+     *  Load the information of the view 
+     * @param Carnet referring to the id - card
+     * @return a ResultSet
+     */
     public ResultSet ResPersonal(String Carnet)
     {
         String identificacion;

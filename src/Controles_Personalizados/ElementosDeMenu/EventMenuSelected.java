@@ -6,10 +6,15 @@
 package Controles_Personalizados.ElementosDeMenu;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 public interface EventMenuSelected {
 
+    /**
+     *  Event
+     * @param index Index of menu
+     * @param indexSubMenu Index SubMenu
+     */
     public void menuSelected(int index, int indexSubMenu);
 }
