@@ -48,6 +48,7 @@ public class PanelVehiculos extends javax.swing.JPanel {
         };
         CargarTablaVehiculos();
         TbVehiculos.removeColumn(TbVehiculos.getColumnModel().getColumn(5));
+        TbVehiculos.removeColumn(TbVehiculos.getColumnModel().getColumn(0));
         TbVehiculos.setDefaultRenderer(Object.class, new RenderTable());
     }
     
@@ -107,6 +108,8 @@ public class PanelVehiculos extends javax.swing.JPanel {
         PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
         PanelFondo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         PanelFondo.setPreferredSize(new java.awt.Dimension(1270, 620));
+        PanelFondo.setRoundBottomLeft(20);
+        PanelFondo.setRoundBottomRight(20);
         PanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblVehiculos.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
@@ -209,7 +212,7 @@ public class PanelVehiculos extends javax.swing.JPanel {
                 btnInformeActionPerformed(evt);
             }
         });
-        PanelFondo.add(btnInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 140, 40));
+        PanelFondo.add(btnInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 140, 40));
 
         add(PanelFondo, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents

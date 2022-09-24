@@ -42,10 +42,10 @@ public class FrmPersonal_AggVehiculo extends javax.swing.JFrame {
             public boolean isCellEditable(int row, int column){
                 return false;
             }
-        };
-        tbVehiculos_Personal.setDefaultRenderer(Object.class, new RenderTable());
-        
+        };                        
         CargarTablaVehiculos();
+        tbVehiculos_Personal.removeColumn(tbVehiculos_Personal.getColumnModel().getColumn(0));
+        tbVehiculos_Personal.setDefaultRenderer(Object.class, new RenderTable());
     }
 public Image Logo(){
     Image retvalue=Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));

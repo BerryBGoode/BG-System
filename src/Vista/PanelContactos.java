@@ -136,6 +136,8 @@ public class PanelContactos extends javax.swing.JPanel {
         PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
         PanelFondo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         PanelFondo.setPreferredSize(new java.awt.Dimension(1270, 620));
+        PanelFondo.setRoundBottomLeft(20);
+        PanelFondo.setRoundBottomRight(20);
         PanelFondo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 PanelFondoMouseMoved(evt);

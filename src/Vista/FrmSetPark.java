@@ -525,10 +525,10 @@ public class FrmSetPark extends javax.swing.JFrame {
         if (chkCantbAcess.isSelected()) {
             TbAcesosWhite.setVisible(true);
             TbVehiculosWhite.setVisible(false);
-            /*if (modeltablecars.getRowCount() > 0) {
-                TbAcesosWhite.setVisible(true);
+            if (modeltablecars.getRowCount() > 0) {
                 modeltablecars.removeRow(0);
-            }*/
+                //TbAcesosWhite.setVisible(true);
+            }
 
         }
     }//GEN-LAST:event_chkCantbAcessActionPerformed
