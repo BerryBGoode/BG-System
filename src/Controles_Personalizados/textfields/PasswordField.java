@@ -6,7 +6,7 @@
 package Controles_Personalizados.textfields;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
@@ -31,29 +31,57 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
+/**
+ *   Personalized control class, extends events and controls depends the needs
+ * @author danlo
+ */
 public class PasswordField extends JPasswordField {
 
+    /**
+     * Check the state 
+     * @return Boolean
+     */
     public boolean isShowAndHide() {
         return showAndHide;
     }
 
+    /**
+     *  Set state
+     * @param showAndHide show or hide
+     */
     public void setShowAndHide(boolean showAndHide) {
         this.showAndHide = showAndHide;
         repaint();
     }
 
+    /** 
+     *  Gets label Text
+     * @return label Text
+     */
     public String getLabelText() {
         return labelText;
     }
 
+    /**
+     *  Set label Text
+     * @param labelText text
+     */
     public void setLabelText(String labelText) {
         this.labelText = labelText;
     }
 
+    /**
+     *  Line Color
+     * @return Color
+     */
     public Color getLineColor() {
         return lineColor;
     }
 
+    /**
+     *  Set Line Color
+     * @param lineColor Color
+     */
     public void setLineColor(Color lineColor) {
         this.lineColor = lineColor;
     }
@@ -70,6 +98,9 @@ public class PasswordField extends JPasswordField {
     private boolean hide = true;
     private boolean showAndHide;
 
+    /**
+     *  Validates the properties of the control
+     */
     public PasswordField() {
         setBorder(new EmptyBorder(20, 3, 10, 30));
         setSelectionColor(new Color(76, 204, 255));

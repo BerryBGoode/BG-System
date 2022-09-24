@@ -6,7 +6,7 @@
 package Controles_Personalizados.Tables;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
@@ -15,8 +15,16 @@ import java.awt.Graphics;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs
+ * @author danlo
+ */
 public class TableHeader extends JLabel {
 
+    /**
+     *  Set properties to the table 
+     * @param text String
+     */
     public TableHeader(String text) {
         super(text);
         setOpaque(true);

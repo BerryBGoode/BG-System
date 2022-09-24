@@ -27,12 +27,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- *
+ *  Add Access Form
  * @author ferna
  */
 public class FrmAgg_Acceso extends javax.swing.JFrame {
 
     ButtonGroup grpAccess = new ButtonGroup();
+
+    /**
+     *  Variables and Objects 
+     */
     public Font font = new Font("Roboto Black", Font.PLAIN, 18);
     DefaultTableModel tbmodel;
     DefaultTableModel tbmodel1;
@@ -45,40 +49,72 @@ public class FrmAgg_Acceso extends javax.swing.JFrame {
     private int ID;
     private int typeaccess;
 
+    /**
+     *  Gets Action
+     * @return Integer
+     */
     public int getAction() {
         return action;
     }
 
+    /**
+     *  Set Action
+     * @param action Value
+     */
     public void setAction(int action) {
         this.action = action;
     }
 
+    /**
+     *  Gets Notifications
+     * @return Notification
+     */
     public String getNofitication() {
         return nofitication;
     }
 
+    /**
+     *Set Notification
+     * @param nofitication Notification
+     */
     public void setNofitication(String nofitication) {
         this.nofitication = nofitication;
     }
 
+    /**
+     *  Gets ID
+     * @return Integer
+     */
     public int getID() {
         return ID;
     }
 
+    /**
+     *  Set ID
+     * @param ID The obtained ID
+     */
     public void setID(int ID) {
         this.ID = ID;
     }
 
+    /**
+     *  Gets Access Types
+     * @return Access Types
+     */
     public int getTypeaccess() {
         return typeaccess;
     }
 
+    /**
+     *  Set Access Type
+     * @param typeaccess Type
+     */
     public void setTypeaccess(int typeaccess) {
         this.typeaccess = typeaccess;
     }
 
     /**
-     * Creates new form FrmAgg_Acceso
+     * Creates new FrmAgg_Access form 
      */
     public FrmAgg_Acceso() {
         initComponents();
@@ -94,6 +130,10 @@ public class FrmAgg_Acceso extends javax.swing.JFrame {
         txtID.setVisible(false);
     }
 
+    /**
+     *  Image
+     * @return Image
+     */
     public Image Logo() {
         Image retvalue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
         return retvalue;

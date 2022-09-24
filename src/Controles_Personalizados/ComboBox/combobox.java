@@ -6,7 +6,7 @@
 package Controles_Personalizados.ComboBox;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
@@ -42,20 +42,41 @@ import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import Controles_Personalizados.ScrollBar.ScrollBarCustom;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs
+ * @author danlo
+ * @param <E> String List
+ */
 public class combobox<E> extends JComboBox<E> {
 
+    /**
+     *  Get Label
+     * @return String
+     */
     public String getLabeText() {
         return labeText;
     }
 
+    /**
+     *  Set Label
+     * @param labeText referring to the label
+     */
     public void setLabeText(String labeText) {
         this.labeText = labeText;
     }
 
+    /**
+     *  Get Color Line
+     * @return Color
+     */
     public Color getLineColor() {
         return lineColor;
     }
 
+    /**
+     *  Set Line Color
+     * @param lineColor referring to the line color
+     */
     public void setLineColor(Color lineColor) {
         this.lineColor = lineColor;
     }
@@ -64,6 +85,9 @@ public class combobox<E> extends JComboBox<E> {
     private Color lineColor = new Color(3, 155, 216);
     private boolean mouseOver;
 
+    /**
+     *  Validate properties of the control
+     */
     public combobox() {
         setBackground(Color.WHITE);
         setBorder(new EmptyBorder(15, 3, 5, 3));

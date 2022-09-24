@@ -11,7 +11,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
- *
+ *  Personalized control class, extends events and controls depends the needs
  * @author rocyr
  */
 public class Renderer extends DefaultTableCellRenderer{

@@ -6,19 +6,31 @@
 package Controles_Personalizados.Calendario;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Component;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs 
+ * @author danlo
+ */
 public class Slider extends javax.swing.JPanel {
 
     private boolean sliding = false;
 
+    /**
+     *  Constructor
+     */
     public Slider() {
         initComponents();
     }
 
+    /**
+     *  Slider
+     * @param com referring to the direction
+     * @return a Boolean
+     */
     public boolean slideToRight(Component com) {
         boolean act = false;
         if (!sliding) {
@@ -56,6 +68,11 @@ public class Slider extends javax.swing.JPanel {
         return act;
     }
 
+    /**
+     *  Slide 
+     * @param com directions
+     * @return a Boolean
+     */
     public boolean slideToRightBack(Component com) {
         boolean act = false;
         if (!sliding) {
@@ -93,6 +110,11 @@ public class Slider extends javax.swing.JPanel {
         return act;
     }
 
+    /**
+     *  Slide 
+     * @param com Directions
+     * @return a Boolean
+     */
     public boolean slideToLeft(Component com) {
         boolean act = false;
         if (!sliding) {
@@ -130,6 +152,11 @@ public class Slider extends javax.swing.JPanel {
         return act;
     }
 
+    /**
+     * Slide
+     * @param com Directions
+     * @return a Boolean
+     */
     public boolean slideToLeftBack(Component com) {
         boolean act = false;
         if (!sliding) {
@@ -167,6 +194,11 @@ public class Slider extends javax.swing.JPanel {
         return act;
     }
 
+    /**
+     * Slide
+     * @param com Directions
+     * @return a Boolean
+     */
     public boolean slideToDown(Component com) {
         boolean act = false;
         if (!sliding) {
@@ -204,6 +236,11 @@ public class Slider extends javax.swing.JPanel {
         return act;
     }
 
+    /**
+     *  Slide
+     * @param com Directions
+     * @return a Boolean
+     */
     public boolean slideToDownBack(Component com) {
         boolean act = false;
         if (!sliding) {
@@ -241,6 +278,10 @@ public class Slider extends javax.swing.JPanel {
         return act;
     }
 
+    /**
+     *  Slide Non
+     * @param com Directions
+     */
     public void slideNon(Component com) {
         this.removeAll();
         this.add(com);

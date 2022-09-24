@@ -6,7 +6,7 @@
 package Controles_Personalizados.Paneles;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
@@ -17,11 +17,20 @@ import java.awt.Paint;
 
 import javax.swing.JPanel;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs 
+ * @author danlo
+ */
 public class GradientPanel extends JPanel {
 
     private final Color gradientStart;
     private final Color gradientEnd;
 
+    /**
+     *  Gradient Design
+     * @param gradientStart Color 1
+     * @param gradientEnd Color 2
+     */
     public GradientPanel(Color gradientStart, Color gradientEnd) {
         this.gradientStart = gradientStart;
         this.gradientEnd = gradientEnd;

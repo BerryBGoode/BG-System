@@ -5,7 +5,7 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * This class stores all the sentences necessary for the correct functioning of the contacts section
  * @author danlo
  */
 public class ModelContactos {
@@ -13,6 +13,10 @@ public class ModelContactos {
     private static PreparedStatement ps;
     private static ResultSet rs;
     
+    /**
+     * Load the contact table with the information stored in the view
+     * @return a ResultSet
+     */
     public static ResultSet CargarTablaContactos() {
         
         Connection connect;
@@ -30,6 +34,10 @@ public class ModelContactos {
         
     }
     
+    /**
+     *  Load the contact table with the information stored in the view
+     * @return a ResultSet
+     */
     public static ResultSet CargarTablaPersonal() {
         Connection connect;
         try {
@@ -43,6 +51,10 @@ public class ModelContactos {
         }
     }
     
+    /**
+     *  Load the contact type combobox with the information stored in the table
+     * @return a ResultSet
+     */
     public static ResultSet CargarCMBTipoContacto() {
         
         Connection connect;
@@ -60,6 +72,13 @@ public class ModelContactos {
         
     }
     
+    /**
+     *  This method registers the contacts of the users
+     * @param contacto referring to the contact String
+     * @param idpersonal referring to the staff ID
+     * @param idtipocontacto referring to the contact type ID
+     * @return a Boolean
+     */
     public static boolean RegistrarContacto(String contacto, int idpersonal, int idtipocontacto) {
         
         Connection connect;
@@ -80,6 +99,11 @@ public class ModelContactos {
         
     }
     
+    /**
+     * This method capture the staff ID from the database table
+     * @param contacto referring to the contact String
+     * @return a ResultSet
+     */
     public static ResultSet capturar_idPersonal(String contacto){
         Connection connect;
         try{
@@ -93,6 +117,11 @@ public class ModelContactos {
         }
     }
     
+    /**
+     *  This method load the information filtered by a search parameter
+     * @param idper referring to the staff ID
+     * @return a ResultSet
+     */
     public static ResultSet cap_idPersonal_tbPersonal(String idper){
         Connection connect;
         try{
@@ -107,6 +136,14 @@ public class ModelContactos {
         }
     }
     
+    /**
+     *  This method update the contact information stored in the database
+     * @param idcontacto referring to the contact ID
+     * @param contacto referring to the contact String
+     * @param idpersonal referring to the staff ID
+     * @param idtipocontacto referring to the contact type ID
+     * @return a Boolean
+     */
     public static boolean ActualizarContacto(int idcontacto, String contacto, int idpersonal, int idtipocontacto) {
         
         Connection connect;
@@ -127,6 +164,10 @@ public class ModelContactos {
         
     }
     
+    /**
+     *  This method recovers the contact ID
+     * @return a ResultSet
+     */
     public static ResultSet capturar_idContacto(){
         Connection connect;
         try{
@@ -140,6 +181,11 @@ public class ModelContactos {
         }
     }
     
+    /**
+     *  This method delete the information stored in the database by a search parameter
+     * @param idcontacto referring to the contact ID
+     * @return a Boolean
+     */
     public static boolean EliminarContacto(int idcontacto) {
         
         Connection connect;

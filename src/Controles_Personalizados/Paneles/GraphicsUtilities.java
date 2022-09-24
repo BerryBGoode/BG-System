@@ -6,7 +6,7 @@
 package Controles_Personalizados.Paneles;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.image.BufferedImage;
@@ -23,7 +23,10 @@ import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
 
-
+/**
+ *  Personalized control class, extends events and controls depends the needs
+ * @author danlo
+ */
 public class GraphicsUtilities {
 
     private GraphicsUtilities() {
@@ -34,6 +37,11 @@ public class GraphicsUtilities {
                 getDefaultScreenDevice().getDefaultConfiguration();
     }
 
+    /**
+     *  Creates color model for the image
+     * @param image image
+     * @return Image
+     */
     public static BufferedImage createColorModelCompatibleImage(BufferedImage image) {
         ColorModel cm = image.getColorModel();
         return new BufferedImage(cm,
@@ -42,32 +50,67 @@ public class GraphicsUtilities {
                 cm.isAlphaPremultiplied(), null);
     }
 
+    /**
+     *  Creates the image
+     * @param image image
+     * @return Image
+     */
     public static BufferedImage createCompatibleImage(BufferedImage image) {
         return createCompatibleImage(image, image.getWidth(), image.getHeight());
     }
+
+    /**
+     *  Creates Image with dimensions
+     * @param image image
+     * @param width width
+     * @param height height
+     * @return Image
+     */
     public static BufferedImage createCompatibleImage(BufferedImage image,
             int width, int height) {
         return getGraphicsConfiguration().createCompatibleImage(width, height,
                 image.getTransparency());
     }
 
+    /**
+     *  Creates Image
+     * @param width width
+     * @param height height
+     * @return Image
+     */
     public static BufferedImage createCompatibleImage(int width, int height) {
         return getGraphicsConfiguration().createCompatibleImage(width, height);
     }
 
+    /**
+     *  Creates Image
+     * @param width width
+     * @param height height
+     * @return Image
+     */
     public static BufferedImage createCompatibleTranslucentImage(int width,
             int height) {
         return getGraphicsConfiguration().createCompatibleImage(width, height,
                 Transparency.TRANSLUCENT);
     }
 
+    /**
+     *  Path
+     * @param resource path
+     * @return Image
+     * @throws IOException error
+     */
     public static BufferedImage loadCompatibleImage(URL resource)
             throws IOException {
         BufferedImage image = ImageIO.read(resource);
         return toCompatibleImage(image);
     }
 
-
+    /**
+     *  Image
+     * @param image Image
+     * @return Image
+     */
     public static BufferedImage toCompatibleImage(BufferedImage image) {
         if (image.getColorModel().equals(
                 getGraphicsConfiguration().getColorModel())) {
@@ -85,7 +128,12 @@ public class GraphicsUtilities {
         return compatibleImage;
     }
 
-
+    /**
+     *  Resize Image
+     * @param image Image
+     * @param newSize Resize data
+     * @return Image
+     */
     public static BufferedImage createThumbnailFast(BufferedImage image,
             int newSize) {
         float ratio;
@@ -128,7 +176,13 @@ public class GraphicsUtilities {
         return temp;
     }
 
-
+    /**
+     * Image
+     * @param image Image
+     * @param newWidth new Dimensions
+     * @param newHeight new Dimensions
+     * @return Image
+     */
     public static BufferedImage createThumbnailFast(BufferedImage image,
             int newWidth, int newHeight) {
         if (newWidth >= image.getWidth()
@@ -151,6 +205,12 @@ public class GraphicsUtilities {
         return temp;
     }
 
+    /**
+     * Image
+     * @param image Image
+     * @param newSize NewSize
+     * @return Image
+     */
     public static BufferedImage createThumbnail(BufferedImage image,
             int newSize) {
         int width = image.getWidth();
@@ -206,6 +266,13 @@ public class GraphicsUtilities {
         return thumb;
     }
 
+    /**
+     *  Image
+     * @param image Image
+     * @param newWidth NewDimensions
+     * @param newHeight NewDimension
+     * @return Image
+     */
     public static BufferedImage createThumbnail(BufferedImage image,
             int newWidth, int newHeight) {
         int width = image.getWidth();
@@ -250,7 +317,16 @@ public class GraphicsUtilities {
         return thumb;
     }
 
-
+    /**
+     *  Dimensions and Location
+     * @param img Image
+     * @param x location x
+     * @param y location y
+     * @param w Width
+     * @param h Height
+     * @param pixels px
+     * @return Image
+     */
     public static int[] getPixels(BufferedImage img,
             int x, int y, int w, int h, int[] pixels) {
         if (w == 0 || h == 0) {
@@ -274,7 +350,15 @@ public class GraphicsUtilities {
         return img.getRGB(x, y, w, h, pixels, 0, w);
     }
 
-
+    /**
+     *  Image
+     * @param img Image
+     * @param x location x
+     * @param y location y
+     * @param w Width
+     * @param h Height
+     * @param pixels px
+     */
     public static void setPixels(BufferedImage img,
             int x, int y, int w, int h, int[] pixels) {
         if (pixels == null || w == 0 || h == 0) {

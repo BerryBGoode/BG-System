@@ -9,21 +9,33 @@ import Modelo.ModelQR;
 import java.sql.ResultSet;
 
 /**
- *
+ *  This class stores and connects the ModelQR with the view, and makes possible the communication between both
  * @author hp
  */
 public class ControllerQR {
     ModelQR modelQR=new ModelQR();
     private String usuario;
 
+    /**
+     *  Gets the Username
+     * @return a String
+     */
     public String getUsuario() {
         return usuario;
     }
 
+    /**
+     *  Set the username
+     * @param usuario referring to the username
+     */
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
     
+    /**
+     *  Validates the password recovery
+     * @return a ResultSet
+     */
     public ResultSet RecuperarContraQR(){
         return modelQR.ReucContraQR(getUsuario());
     }

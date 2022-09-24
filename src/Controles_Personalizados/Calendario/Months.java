@@ -6,7 +6,7 @@
 package Controles_Personalizados.Calendario;
 
 /**
- *
+ *   Personalized Control package
  * @author danlo
  */
 public final class Months extends javax.swing.JPanel {
@@ -14,6 +14,9 @@ public final class Months extends javax.swing.JPanel {
     private Event event;
     private int m;
 
+    /**
+     *  Personalized control class, extends events and controls depends the needs 
+     */
     public Months() {
         initComponents();
     }
@@ -129,10 +132,18 @@ public final class Months extends javax.swing.JPanel {
         add(cmd12);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     *  Get Event
+     * @return event
+     */
     public Event getEvent() {
         return event;
     }
 
+    /**
+     *  Set Event
+     * @param event event
+     */
     public void setEvent(Event event) {
         this.event = event;
         addEvent();

@@ -6,7 +6,7 @@
 package Controles_Personalizados.BarraBusqueda;
 
 /**
- *
+ *  Animation for the control
  * @author danlo
  */
 import java.awt.AlphaComposite;
@@ -35,20 +35,40 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs 
+ * @author danlo
+ */
 public class TextFieldAnimation extends JTextField {
 
+    /**
+     *  Gets the hint 
+     * @return a String
+     */
     public String getHintText() {
         return hintText;
     }
 
+    /**
+     *  Set the hint text
+     * @param hintText referring to the hintText
+     */
     public void setHintText(String hintText) {
         this.hintText = hintText;
     }
 
+    /**
+     *  Gets the animation Color
+     * @return Color
+     */
     public Color getAnimationColor() {
         return animationColor;
     }
 
+    /**
+     *  Set the animation Color
+     * @param animationColor referring to the Color of the animation
+     */
     public void setAnimationColor(Color animationColor) {
         this.animationColor = animationColor;
     }
@@ -66,6 +86,9 @@ public class TextFieldAnimation extends JTextField {
     private Thread thread;
     private final Animator animator;
 
+    /**
+     *  Validates the properties of the animation
+     */
     public TextFieldAnimation() {
         super.setBackground(new Color(255, 255, 255, 0)); //  Remove background
         setOpaque(false);
@@ -237,6 +260,10 @@ public class TextFieldAnimation extends JTextField {
         this.backgroundColor = color;
     }
 
+    /**
+     *  addEvent
+     * @param event event
+     */
     public void addEvent(EventTextField event) {
         this.event = event;
     }

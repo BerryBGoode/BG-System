@@ -6,7 +6,7 @@
 package Controles_Personalizados;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
@@ -16,18 +16,33 @@ import java.awt.Insets;
 import javax.swing.JProgressBar;
 import javax.swing.plaf.basic.BasicProgressBarUI;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs 
+ * @author danlo
+ */
 public class ProgressBarCustom extends JProgressBar {
     
+    /**
+     *  Gets the Color
+     * @return Color
+     */
     public Color getColorString() {
         return colorString;
     }
     
+    /**
+     *  Set the Color
+     * @param colorString referring to the Color
+     */
     public void setColorString(Color colorString) {
         this.colorString = colorString;
     }
     
     private Color colorString = new Color(0, 0, 0);
     
+    /**
+     *  Validates properties of the control
+     */
     public ProgressBarCustom() {
         setPreferredSize(new Dimension(100, 5));
         setBackground(new Color(77, 77, 77));

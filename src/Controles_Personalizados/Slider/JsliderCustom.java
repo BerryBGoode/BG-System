@@ -6,14 +6,21 @@
 package Controles_Personalizados.Slider;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
 import javax.swing.JSlider;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs
+ * @author danlo
+ */
 public class JsliderCustom extends JSlider {
 
+    /**
+     *  Set the properties to the Slider
+     */
     public JsliderCustom() {
         setOpaque(false);
         setBackground(new Color(180, 180, 180));

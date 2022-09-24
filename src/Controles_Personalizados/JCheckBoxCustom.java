@@ -6,7 +6,7 @@
 package Controles_Personalizados;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
@@ -16,10 +16,17 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import javax.swing.JCheckBox;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs 
+ * @author danlo
+ */
 public class JCheckBoxCustom extends JCheckBox {
 
     private final int border = 4;
 
+    /**
+     *  Validates the properties of the control
+     */
     public JCheckBoxCustom() {
         setCursor(new Cursor(Cursor.HAND_CURSOR));
         setOpaque(false);

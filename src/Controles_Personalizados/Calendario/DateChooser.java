@@ -6,7 +6,7 @@
 package Controles_Personalizados.Calendario;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
@@ -23,12 +23,24 @@ import java.util.List;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs 
+ * @author danlo
+ */
 public final class DateChooser extends javax.swing.JPanel {
 
+    /**
+     *  Gets Text reference
+     * @return text
+     */
     public JTextField getTextRefernce() {
         return textRefernce;
     }
 
+    /** 
+     *  start the event
+     * @param event referring to the event
+     */
     public void addEventDateChooser(EventDateChooser event) {
         events.add(event);
     }
@@ -44,6 +56,9 @@ public final class DateChooser extends javax.swing.JPanel {
     private SelectedDate selectedDate = new SelectedDate();
     private List<EventDateChooser> events;
 
+    /**
+     *  Start the date Chooser
+     */
     public DateChooser() {
         initComponents();
         execute();
@@ -56,6 +71,10 @@ public final class DateChooser extends javax.swing.JPanel {
         toDay(false);
     }
 
+    /**
+     *  Set text 
+     * @param txt referring to the text
+     */
     public void setTextRefernce(JTextField txt) {
         this.textRefernce = txt;
         this.textRefernce.setEditable(false);
@@ -168,6 +187,9 @@ public final class DateChooser extends javax.swing.JPanel {
         setText(runEvent, 0);
     }
 
+    /**
+     *  Constructor
+     */
     public void toDay() {
         toDay(true);
     }
@@ -210,14 +232,26 @@ public final class DateChooser extends javax.swing.JPanel {
         }
     }
 
+    /**
+     *  points of location
+     * @param com point 1
+     * @param x location x
+     * @param y location y
+     */
     public void showPopup(Component com, int x, int y) {
         popup.show(com, x, y);
     }
 
+    /**
+     *  Show
+     */
     public void showPopup() {
         popup.show(textRefernce, 0, textRefernce.getHeight());
     }
 
+    /**
+     *  Hide
+     */
     public void hidePopup() {
         popup.setVisible(false);
     }
@@ -460,14 +494,26 @@ public final class DateChooser extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_cmdPreviousKeyPressed
 
+    /**
+     * Gets date format
+     * @return String
+     */
     public String getDateFormat() {
         return dateFormat;
     }
 
+    /**
+     *  Set Date Format
+     * @param dateFormat referring to date format
+     */
     public void setDateFormat(String dateFormat) {
         this.dateFormat = dateFormat;
     }
 
+    /**
+     *  Set selected Date
+     * @param date referring to the selected date
+     */
     public void setSelectedDate(String date) {
         SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
         String d = df.format(date);
@@ -501,10 +547,18 @@ public final class DateChooser extends javax.swing.JPanel {
     private Controles_Personalizados.Calendario.Slider slide;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     *  Selected Date
+     * @return selected date
+     */
     public SelectedDate  getSelectedDate() {
         return selectedDate;
     }
 
+    /**
+     *  Set the selected date
+     * @param selectedDate referring to the selected date
+     */
     public void setSelectedDate(SelectedDate selectedDate) {
         this.selectedDate = selectedDate;
         DAY = selectedDate.getDay();
@@ -531,6 +585,9 @@ public final class DateChooser extends javax.swing.JPanel {
         }
     }
 
+    /**
+     *  Validates the state
+     */
     public void toFront() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

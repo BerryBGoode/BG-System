@@ -11,16 +11,16 @@ import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
- *
+ * This class stores all the sentences necessary for the correct functioning of the user's section
  * @author Rober
  */
 public class ModelUsuarios {
         PreparedStatement ps;
     
         /**
-         * Metodo para obtener los registros de la tabla tbTipoUsuario
-         * @param con
-         * @return 
+         * Method to obtain the records of the table tbTipoUsuario
+         * @param con referring to the Connection
+         * @return a ResultSet
          */
         public ResultSet CargarTipoUsuarios(Connection con){
             try{
@@ -35,9 +35,9 @@ public class ModelUsuarios {
         }
        
         /**
-         * Metodo para obtener los registros de la tabla tbEstadoUsuario
-         * @param con
-         * @return 
+         * Method to obtain the data of the table tbEstadoUsuario
+         * @param con referring to Connection
+         * @return a ResultSet
          */
         public ResultSet CargarEstadoUsuarios(Connection con){
             try{
@@ -52,9 +52,9 @@ public class ModelUsuarios {
         }
         
         /**
-         * Metodo para obtener los registros de la tabla tbPersonal (en este caso, nombres y apellidos)
-         * @param con
-         * @return 
+         * Method to obtain the records of the tbPersonal table (in this case, names and last names)
+         * @param con referring to Connection
+         * @return a ResultSet
          */
         public ResultSet CargarPersonal(Connection con){
             try{
@@ -69,9 +69,9 @@ public class ModelUsuarios {
         }
         
         /**
-         * Metodo para obtener los registros en la tabla tbUsuarios
-         * @param con
-         * @return 
+         * Method to obtain the records in the tbUsuarios table
+         * @param con referring to Connection
+         * @return a ResultSet
          */
         public ResultSet CargarUsuarios(Connection con){
             try{
@@ -86,17 +86,17 @@ public class ModelUsuarios {
         }
         
         /**
-         * Metodo para ingresar un usuario
-         * @param idPersonal
-         * @param nombre_usuario
-         * @param contraseña
-         * @param PIN
-         * @param idTipoUsuario
-         * @param idEstadoUsuario
-         * @param imagen
-         * @param intentos
-         * @param con
-         * @return 
+         * Method to save a user
+         * @param idPersonal referring to the staff ID
+         * @param nombre_usuario referring to the username
+         * @param contraseña referring to the password
+         * @param PIN referring to the PIN
+         * @param idTipoUsuario referring to the user type ID
+         * @param idEstadoUsuario referring to the user status ID
+         * @param imagen referring to the user image
+         * @param intentos referring to the attempts 
+         * @param con referring to Connection
+         * @return a Boolean
          */
         public boolean AgregarUsuario(int idPersonal, String nombre_usuario, String contraseña, String PIN, int idTipoUsuario, int idEstadoUsuario, byte[] imagen, int intentos, Connection con){
             try{
@@ -123,15 +123,15 @@ public class ModelUsuarios {
         }
         
         /**
-         * Metodo para actualizar un usuario
-         * @param idPersonal
-         * @param nombre_usuario
-         * @param idTipoUsuario
-         * @param idEstadoUsuario
-         * @param imagen
-         * @param ID
-         * @param con
-         * @return 
+         * Method to update a user
+         * @param idPersonal referring to the staff ID
+         * @param nombre_usuario referring to the username
+         * @param idTipoUsuario referring to the user type
+         * @param idEstadoUsuario referring to user status ID
+         * @param imagen referring to the user image
+         * @param ID referring to the ID
+         * @param con referring to the Connection
+         * @return  a Boolean
          */
          public boolean ActualizarUsuario(int idPersonal, String nombre_usuario, int idTipoUsuario, int idEstadoUsuario, byte[] imagen, int ID, Connection con){
             try{
@@ -152,10 +152,10 @@ public class ModelUsuarios {
         }
         
          /**
-          * Metodo para eliminar un usuario
-          * @param ID
-          * @param con
-          * @return 
+          * Method to delete a user
+          * @param ID referring to the ID
+          * @param con referring to the Connection
+          * @return a Boolean
           */
         public boolean EliminarUsuario(int ID, Connection con){
             try{
@@ -171,10 +171,10 @@ public class ModelUsuarios {
         }
         
         /**
-         * Metodo para obtener los bytes de la imagen del usuario
-         * @param ID
-         * @param con
-         * @return 
+         * Method to get the bytes of the user image
+         * @param ID referring to the ID
+         * @param con referring to Connection
+         * @return a ResultSet
          */
         public ResultSet BuscarImagen(int ID, Connection con){
             try{
@@ -190,10 +190,10 @@ public class ModelUsuarios {
         }
         
         /**
-         * Metodo para obtener el carnet del personal al que pertenece el usuario seleccionado (debe ser un usuario de estudiante)
-         * @param ID
-         * @param con
-         * @return 
+         * Method to obtain the card of the staff to which the selected user belongs (must be a student user)
+         * @param ID referring to the ID
+         * @param con referring to Connection
+         * @return a ResultSet
          */
         public ResultSet BuscaCarnet(int ID, Connection con){
             try{
@@ -209,9 +209,9 @@ public class ModelUsuarios {
         }
         
         /**
-         * Metodo para obtener el ID del estado "Activo"
-         * @param con
-         * @return 
+         * Method to obtain the ID of the "Active" state
+         * @param con referring to Connection
+         * @return a ResultSet
          */
         public ResultSet BuscarIDActivo(Connection con){
             try{
@@ -226,9 +226,9 @@ public class ModelUsuarios {
         }
         
         /**
-         * Metodo para obtener el ID del tipo de usuario: "Alumno"
-         * @param con
-         * @return 
+         * Method to obtain the ID of the user type: "Student"
+         * @param con referring to Connection
+         * @return a ResultSet
          */
         public ResultSet BuscarIDEstudiante(Connection con){
             try{

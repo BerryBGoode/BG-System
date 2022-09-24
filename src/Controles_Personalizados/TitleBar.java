@@ -6,7 +6,7 @@
 package Controles_Personalizados;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
@@ -29,6 +29,10 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import net.miginfocom.swing.MigLayout;
 
+/**
+ *Personalized control class, extends events and controls depends the needs 
+ * @author danlo
+ */
 public class TitleBar extends JComponent {
 
     private JFrame fram;
@@ -38,10 +42,17 @@ public class TitleBar extends JComponent {
     private int x;
     private int y;
 
+    /**
+     * Constructor
+     */
     public TitleBar() {
         init();
     }
 
+    /**
+     *  JFrame
+     * @param fram referring to the JFrame
+     */
     public void initJFram(JFrame fram) {
         this.fram = fram;
         resizer = new ComponentResizer();

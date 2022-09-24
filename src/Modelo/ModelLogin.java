@@ -12,11 +12,16 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *  This class stores all the sentences necessary for the correct functioning of the login process
  * @author danlo
  */
 public class ModelLogin {
 
+    /**
+     * Validates that the user exist
+     * @param usuario referring to the username of the user
+     * @return an Integer
+     */
     public static int ValidarUsuario(String usuario) {
         Connection con;
         int i = 0;
@@ -39,6 +44,12 @@ public class ModelLogin {
         }
     }
 
+    /**
+     *  Recovers the information of the user to compare it 
+     * @param usuario referring to the username
+     * @param clave referring to the user's password
+     * @return an Integer
+     */
     public static int ValidarLogin(String usuario, String clave) {
         Connection con;
         int i = 0;
@@ -62,6 +73,11 @@ public class ModelLogin {
         }
     }
 
+    /**
+     *  Validates the user status 
+     * @param usuario referring to the username of the user
+     * @return an Integer
+     */
     public static int ValidarUsuarioActivo(String usuario) {
         Connection con;
         int i = 0;
@@ -84,6 +100,11 @@ public class ModelLogin {
         }
     }
 
+    /**
+     *  Update the information of the user if the login process is correct
+     * @param usuario referring to the username of the user
+     * @return a Boolean
+     */
     public static boolean BloquearUsuario(String usuario) {
         Connection con;
         PreparedStatement ps;
@@ -100,6 +121,12 @@ public class ModelLogin {
         }
     }
 
+    /**
+     *  Update the attempts for login 
+     * @param intentos referring to the attempts 
+     * @param usuario referring to the username of the user
+     * @return a Boolean
+     */
     public static boolean Intentos(int intentos, String usuario) {
         Connection con;
         PreparedStatement ps;
@@ -117,6 +144,11 @@ public class ModelLogin {
         }
     }
 
+    /**
+     *  Capture the number of attempts 
+     * @param usuario referring to the username
+     * @return a ResultSet
+     */
     public static ResultSet CapturarIntentos(String usuario) {
         Connection con;
         PreparedStatement ps;
@@ -132,6 +164,11 @@ public class ModelLogin {
         }
     }
 
+    /**
+     *  Capture all the user's information
+     * @param usuario referring to username 
+     * @return a ResultSet
+     */
     public static ResultSet CapturarDatos(String usuario) {
         Connection con;
         PreparedStatement ps;
@@ -147,6 +184,11 @@ public class ModelLogin {
         }
     }
     
+    /**
+     *  Capture the user type of the user that logins
+     * @param usuario referring to the username of the user
+     * @return a ResultSet
+     */
     public static ResultSet CapturarTipoUs(String usuario){
         Connection con;
         PreparedStatement ps;
