@@ -958,7 +958,7 @@
                           <Image iconType="3" name="/Recursos_Proyecto/Maximizar.png"/>
                         </Property>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Default Cursor"/>
+                          <Color id="Cursor de Mano"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -971,7 +971,7 @@
                           <Image iconType="3" name="/Recursos_Proyecto/MinimizarLogin.png"/>
                         </Property>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Default Cursor"/>
+                          <Color id="Cursor de Mano"/>
                         </Property>
                       </Properties>
                       <Events>
@@ -984,7 +984,7 @@
                           <Image iconType="3" name="/Recursos_Proyecto/CerrarLogin.png"/>
                         </Property>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                          <Color id="Default Cursor"/>
+                          <Color id="Cursor de Mano"/>
                         </Property>
                       </Properties>
                       <Events>

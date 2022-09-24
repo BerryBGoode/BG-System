@@ -173,7 +173,7 @@ public class FrmSetPark extends javax.swing.JFrame {
 
         lblStation.setFont(new java.awt.Font("Roboto Medium", 0, 36)); // NOI18N
         lblStation.setForeground(new java.awt.Color(253, 255, 254));
-        lblStation.setText("PARKNAME");
+        lblStation.setText("Station");
         panelRound1.add(lblStation, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 10, 320, 40));
 
         lblParkname1.setFont(new java.awt.Font("Roboto Medium", 0, 36)); // NOI18N
@@ -359,8 +359,7 @@ public class FrmSetPark extends javax.swing.JFrame {
     private int IDPark;
     private static int IDStation;
     private static int IDDetail;
-    
-    
+
     public static String getParkname() {
         return parkname;
     }
@@ -398,11 +397,12 @@ public class FrmSetPark extends javax.swing.JFrame {
 
     private void btnCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMousePressed
         this.hide();
+        FrmConfigPark.visibleFrm = false;
     }//GEN-LAST:event_btnCerrarMousePressed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
 
-        lblStation.setText((parkname));
+        lblStation.setText(("Estacionamiento " + parkname));
         if (action == 1) {
             btnActualizar.setVisible(true);
             btnListo.setVisible(false);
@@ -417,10 +417,10 @@ public class FrmSetPark extends javax.swing.JFrame {
         if (park.getIDAcceso() > 0 && park.getIDVehiculo() > 0 && ControllerParqueo.getNumberPark() > 0 && park.getID() > 0 && ControllerParqueo.getIDParqueo() > 0) {
             if (park.updatePark()) {
                 val = true;
-                System.out.println("a");
-            }else{
+                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "Se lograron actualizar los datos con exito", 1);
+            } else {
                 val = false;
-                System.out.println("F");
+                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Error ", "No se lograron actualizar los datos", 2);
             }
         } else {
             JOptionPane.showMessageDialog(null, "No se permiten valores nulos.\nAgregar correctamente los datos", "Error", JOptionPane.ERROR_MESSAGE);
@@ -434,6 +434,7 @@ public class FrmSetPark extends javax.swing.JFrame {
         insertPark();
         if (confir == true) {
             this.dispose();
+            
         }
 
     }//GEN-LAST:event_btnListoActionPerformed
@@ -494,17 +495,18 @@ public class FrmSetPark extends javax.swing.JFrame {
                             modeltablecars.removeRow(0);
                             TbVehiculosWhite.setVisible(true);
                         } else {
-
+                            boolean notif_exist_car = false;
                             ResultSet rs = park.getCarByPersonal("vwVehiculos", "Carnet", setSourceCarnetAccess(evt));
                             try {
-                                if (rs.next()) {
-
-                                    Object data[] = {rs.getInt("idPersonal"), rs.getInt("idVehiculo"), rs.getString("Carnet"), rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("placa"), rs.getString("color"), _btnAgregarCar};
+                                while (rs.next()) {
+                                    Object data[] = {rs.getInt("idPersonal"), rs.getString("Carnet"), rs.getInt("idVehiculo"), rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("placa"), rs.getString("color"), _btnAgregarCar};
                                     TbVehiculosWhite.addRow(data);
-
-                                } else {
-                                    ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Error al cargar vehiculos", "No se ha podido cargar los vehiculos,ya que este personal no tiene un vehiculo registrado", 2);
+                                    notif_exist_car = true;
                                 }
+                                if (notif_exist_car == false) {
+                                    ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Error al cargar vehiculos", "No se ha podido cargar los vehiculos, debido a que este personal no tiene un vehiculo registrado", 2);
+                                }
+
                             } catch (Exception e) {
                                 System.out.println("Tabla: " + e.toString());
                             }
@@ -514,7 +516,7 @@ public class FrmSetPark extends javax.swing.JFrame {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Error do click table cars: " + e.toString());
+            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Error ", "Error al seleccionar el vehiculo", 3);
         }
 
     }//GEN-LAST:event_TbAcesosWhiteMouseClicked
@@ -523,10 +525,10 @@ public class FrmSetPark extends javax.swing.JFrame {
         if (chkCantbAcess.isSelected()) {
             TbAcesosWhite.setVisible(true);
             TbVehiculosWhite.setVisible(false);
-            /*if (modeltablecars.getRowCount() > 0) {
-                TbAcesosWhite.setVisible(true);
+            if (modeltablecars.getRowCount() > 0) {
                 modeltablecars.removeRow(0);
-            }*/
+                //TbAcesosWhite.setVisible(true);
+            }
 
         }
     }//GEN-LAST:event_chkCantbAcessActionPerformed
@@ -538,14 +540,13 @@ public class FrmSetPark extends javax.swing.JFrame {
     }//GEN-LAST:event_chkCantbCarsActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        
+
         //idacces se obtiene de la tabla de este formulario (por el click del btn)
         //idcar se obtiene de la tabla de este formulario (por el click del btn)
         //idstation se envie del dato de la tabla que esta en el panel del formulario principal y se le envia a un attr statico del controller
         park.setID(Integer.parseInt(txtIDDetail.getText()));//viene del panel del formulario principal y se carga en un control no visible de este formulario
         ControllerParqueo.setIDParqueo(Integer.parseInt(txtIDPark.getText()));//idpark se obtiene de la tabla del panel que esta en el dashbord
         //y se la envia a un control de este formulario
-        
 
         if (updatePark() == true) {
             this.dispose();
@@ -617,9 +618,10 @@ public class FrmSetPark extends javax.swing.JFrame {
         if (park.getIDAcceso() >= 0 && park.getIDVehiculo() >= 0 && ControllerParqueo.getNumberPark() >= 0) {
             if (park.insertPark() == true) {
                 confir = true;
-                
+                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "Se lograron ingresar los datos", 1);
             } else {
                 confir = false;
+                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Error  ", "No se lograron ingresar los datos", 2);
             }
         } else {
             JOptionPane.showMessageDialog(null, "No se permiten valores nulos.\nAgregar correctamente los datos", "Error", JOptionPane.ERROR_MESSAGE);

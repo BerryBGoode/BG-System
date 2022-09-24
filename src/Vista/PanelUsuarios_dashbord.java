@@ -45,6 +45,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
     FrmAgg_Usuarios agg = new FrmAgg_Usuarios();
     private int frmstate = 1;
     byte[] imagen;
+    
 
     /**
      * Creates new form PanelUsuario_dashbord
@@ -61,6 +62,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         tbUsuarios.setModel(modelo);
         tbUsuarios.setDefaultRenderer(Object.class, new RenderTable());
         CargarTabla();
+        tbUsuarios.setFont(font);
         tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(0));
         tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(0));
         tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(3));
@@ -79,9 +81,9 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         panelRound1 = new Controles_Personalizados.Paneles.PanelRound();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        PanelTabla = new javax.swing.JScrollPane();
-        tbUsuarios = new Controles_Personalizados.Tables.Table();
         ScrollTabla = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbUsuarios = new Controles_Personalizados.Tables.Table();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         btnAgregar = new Controles_Personalizados.Botones.UWPButton();
@@ -110,79 +112,33 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(231, 234, 239));
         jPanel2.setLayout(new java.awt.BorderLayout());
 
-        PanelTabla.setHorizontalScrollBar(null);
-        PanelTabla.setVerticalScrollBar(ScrollTabla);
-        PanelTabla.setWheelScrollingEnabled(false);
-
-        tbUsuarios = new Controles_Personalizados.Tables.Table(){
-
-            public boolean isCellEditable(int rowIndex, int colIndex){
-                return false;
-            }
-        };
-        tbUsuarios.setBackground(new java.awt.Color(231, 234, 239));
-        tbUsuarios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "CARNET", "NOMBRES", "TIPO USUARIO", "%ENTRADAS", "%SALIDAS", "ACCIONES"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tbUsuarios.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        tbUsuarios.setGridColor(new java.awt.Color(58, 50, 75));
-        tbUsuarios.setName(""); // NOI18N
-        tbUsuarios.setSelectionBackground(new java.awt.Color(58, 50, 75));
-        tbUsuarios.setShowVerticalLines(false);
-        tbUsuarios.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                tbUsuariosMouseMoved(evt);
-            }
-        });
-        tbUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbUsuariosMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                tbUsuariosMouseEntered(evt);
-            }
-        });
-        PanelTabla.setViewportView(tbUsuarios);
-
-        jPanel2.add(PanelTabla, java.awt.BorderLayout.CENTER);
-
         ScrollTabla.setBackground(new java.awt.Color(58, 50, 75));
         ScrollTabla.setForeground(new java.awt.Color(58, 50, 75));
         jPanel2.add(ScrollTabla, java.awt.BorderLayout.EAST);
+
+        jScrollPane1.setVerticalScrollBar(ScrollTabla);
+
+        tbUsuarios.setBackground(new java.awt.Color(231, 234, 239));
+        tbUsuarios.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tbUsuarios.setGridColor(new java.awt.Color(58, 50, 75));
+        tbUsuarios.setMaximumSize(new java.awt.Dimension(2147483647, 880));
+        tbUsuarios.setMinimumSize(new java.awt.Dimension(90, 880));
+        tbUsuarios.setPreferredSize(new java.awt.Dimension(450, 880));
+        tbUsuarios.setSelectionBackground(new java.awt.Color(58, 50, 75));
+        tbUsuarios.setShowVerticalLines(false);
+        jScrollPane1.setViewportView(tbUsuarios);
+
+        jPanel2.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
 
@@ -245,7 +201,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
 
         jPanel3.add(jPanel5, java.awt.BorderLayout.PAGE_START);
 
-        jPanel1.add(jPanel3, java.awt.BorderLayout.PAGE_START);
+        jPanel1.add(jPanel3, java.awt.BorderLayout.NORTH);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -343,71 +299,6 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         frmstate = 1;
     }//GEN-LAST:event_btnAgregarMouseClicked
 
-    private void tbUsuariosMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuariosMouseMoved
-        refresh();
-    }//GEN-LAST:event_tbUsuariosMouseMoved
-
-    private void tbUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuariosMouseClicked
-// TODO add your handling code here:
-        JTable tb = (JTable) evt.getSource();
-        String nombre = null;
-        int column = tbUsuarios.getColumnModel().getColumnIndexAtX(evt.getX());
-        int row = evt.getY() / tbUsuarios.getRowHeight();
-        btnActualizar.setName("btnActualizar");
-        btnEliminar.setName("btnEliminar");
-        btnReporte.setName("btnReporte");
-        if (evt.getClickCount() == 1) {
-            JTable rcp = (JTable) evt.getSource();
-            ValidacionesSistema.Parametros_Usuario.setID((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0));
-            ValidacionesSistema.Parametros_Usuario.setIdPersonal((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 1));
-            ValidacionesSistema.Parametros_Usuario.setNombre_usuario(rcp.getModel().getValueAt(rcp.getSelectedRow(), 4).toString());
-            ValidacionesSistema.Parametros_Usuario.setIdTipoUsuario((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 5));
-            ValidacionesSistema.Parametros_Usuario.setIdEstadoUsuario((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 7));
-            CargarImagen();
-            ValidacionesSistema.Parametros_Usuario.setImagen(imagen);
-        }
-
-        if (row < tbUsuarios.getRowCount() || row >= 0 || column < tbUsuarios.getColumnCount() || column >= 0) {
-            Object vals = tbUsuarios.getValueAt(row, column);
-            if (vals instanceof UWPButton) {
-                ((UWPButton) vals).doClick(); // aqui esta
-                UWPButton btns = (UWPButton) vals;
-                if (btns.getName().equals("btnActualizar")) {
-                    FrmAgg_Usuarios ac = new FrmAgg_Usuarios("Actualizar usuario");
-                    if (ac.isVisible()) {
-                        ac.toFront();
-                    } else {
-                        ac.setVisible(true);
-                        frmstate = 1;
-                    }
-
-                }
-                if (btns.getName().equals("btnEliminar")) {
-                    int confirmar = 0;
-                    nombre = ValidacionesSistema.Parametros_Usuario.getNombre_usuario();
-                    confirmar = JOptionPane.showConfirmDialog(this, "¿Desea eliminar el usuario de: " + nombre + "?", "Proceso de Eliminar", confirmar);
-                    if (confirmar == 0) {
-                        ControllerUsuarios obje = new ControllerUsuarios(ValidacionesSistema.Parametros_Usuario.getID());
-                        boolean respuesta = obje.EliminarUsuario_C();
-                        if (respuesta == true) {
-                            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "Usuario eliminado", 1);
-                            CargarTabla();
-                        } else {
-                            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso fallido", "Usuario no pudo ser eliminado", 2);
-                        }
-                    }
-                }
-                if (btns.getName().equals("btnReporte")) {
-                    ReportePar();
-                }
-            }
-        }
-    }//GEN-LAST:event_tbUsuariosMouseClicked
-
-    private void tbUsuariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuariosMouseEntered
-        refresh();
-    }//GEN-LAST:event_tbUsuariosMouseEntered
-
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -440,7 +331,6 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane PanelTabla;
     private Controles_Personalizados.ScrollBar.ScrollBarCustom ScrollTabla;
     private Controles_Personalizados.Botones.UWPButton btnAgregar;
     private Controles_Personalizados.Botones.UWPButton btnFiltrar;
@@ -450,6 +340,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblParqueo;
     private Controles_Personalizados.Paneles.PanelRound panelRound1;
     private Controles_Personalizados.Tables.Table tbUsuarios;

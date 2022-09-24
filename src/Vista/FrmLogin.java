@@ -238,6 +238,8 @@ public class FrmLogin extends javax.swing.JFrame {
                             this.dispose();
                         } else {
                             FrmDashboard frm = new FrmDashboard(nombre, tipo);
+                            PanelOpcionesPersonal.showinter= 0;//le doy este valor a este attr que sirve para detectar cual fue el panel que se abrio, entonces 
+                            //el valor en un switch que evalua este attr, el valor 0 no reenvía a otro panel
                             frm.setVisible(true);
                             this.dispose();
                         }
