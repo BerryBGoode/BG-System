@@ -238,6 +238,8 @@ public class FrmLogin extends javax.swing.JFrame {
                             this.dispose();
                         } else {
                             FrmDashboard frm = new FrmDashboard(nombre, tipo);
+                            PanelOpcionesPersonal.showinter= 0;//le doy este valor a este attr que sirve para detectar cual fue el panel que se abrio, entonces 
+                            //el valor en un switch que evalua este attr, el valor 0 no reenvía a otro panel
                             frm.setVisible(true);
                             this.dispose();
                         }
@@ -393,7 +395,9 @@ public class FrmLogin extends javax.swing.JFrame {
      */
     private void btnConocerMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConocerMasActionPerformed
         try {
-            Desktop.getDesktop().browse(new URI("https://sites.google.com/ricaldone.edu.sv/beep-go/"));
+            Desktop.getDesktop().browse(new URI("https://beep-go-system.netlify.app/"));
+            this.setExtendedState(JFrame.ICONIFIED);
+            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Minimizado", "El sistema ha sido minimizado para tu comodidad, puedes abrirlo de nuevo desde tu barra de tareas", 1);
         } catch (URISyntaxException ex) {
             JOptionPane.showMessageDialog(this, ex);
         }catch(IOException e){

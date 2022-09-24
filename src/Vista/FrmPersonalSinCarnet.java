@@ -68,6 +68,7 @@ public class FrmPersonalSinCarnet extends javax.swing.JFrame {
         BtnCarnet.setFont(font);
         //TbPersonalSC.removeColumn(TbPersonalSC.getColumnModel().getColumn(4));
         BtnCarnet.setText("Generar");
+        TbPersonalSC.removeColumn(TbPersonalSC.getColumnModel().getColumn(0));
         setLocationRelativeTo(null);
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
         AWTUtilities.setWindowShape(this, forma);

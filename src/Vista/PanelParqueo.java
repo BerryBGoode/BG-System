@@ -37,23 +37,23 @@ public class PanelParqueo extends javax.swing.JPanel {
      */
     public PanelParqueo() {
         initComponents();
-        String[] headerpark = {"IDDetalle", "IDPersonal", "Carnet", "IDAcceso", "Fecha","Hora", "IDVehiculo","Placa","IDEstacionamiento", "Estacionamiento","IDParqueo", "Parqueo", "Ubicación","Modificar", "Eliminar"};
+        String[] headerpark = {"IDDetalle", "IDPersonal", "Carnet", "IDAcceso", "Fecha", "Hora", "IDVehiculo", "Placa", "IDEstacionamiento", "Estacionamiento", "IDParqueo", "Parqueo", "Ubicación", "Modificar", "Eliminar"};
         tbpark = new DefaultTableModel(null, headerpark);
         TbParqueosWhite.setModel(tbpark);
-        
+
         getdataPark();
-        
+
         TbParqueosWhite.removeColumn(TbParqueosWhite.getColumnModel().getColumn(0));
         TbParqueosWhite.removeColumn(TbParqueosWhite.getColumnModel().getColumn(0));
         TbParqueosWhite.removeColumn(TbParqueosWhite.getColumnModel().getColumn(1));
         TbParqueosWhite.removeColumn(TbParqueosWhite.getColumnModel().getColumn(3));
         TbParqueosWhite.removeColumn(TbParqueosWhite.getColumnModel().getColumn(4));
         TbParqueosWhite.removeColumn(TbParqueosWhite.getColumnModel().getColumn(5));
-        
+
         TbParqueosWhite.getColumnModel().getColumn(4).setPreferredWidth(100);//9
-        
+
         TbParqueosWhite.setDefaultRenderer(Object.class, new RenderTable());
-        
+        TbParqueosWhite.setFont(ValidacionesSistema.ValidacionesBeep_Go.font);
         btndelete.setBackground(new Color(231, 234, 239));
         btnupdate.setBackground(new Color(231, 234, 239));
         btndelete.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -77,17 +77,21 @@ public class PanelParqueo extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
+        panelRound1 = new Controles_Personalizados.Paneles.PanelRound();
         jPanel1 = new javax.swing.JPanel();
-        PanelFondo = new Controles_Personalizados.Paneles.PanelRound();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         lblParqueo = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
         btnFiltrar = new Controles_Personalizados.Botones.UWPButton();
         btnAgregar = new Controles_Personalizados.Botones.UWPButton();
-        PanelTabla = new javax.swing.JScrollPane();
-        TbParqueosWhite = new Controles_Personalizados.Tables.Table();
-        ScrollTabla = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
-        jPanel2 = new javax.swing.JPanel();
+        btnInforme = new Controles_Personalizados.Botones.UWPButton();
         jPanel3 = new javax.swing.JPanel();
+        scrollBarCustom1 = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TbParqueosWhite = new Controles_Personalizados.Tables.Table();
 
         setBackground(new java.awt.Color(42, 36, 56));
         addFocusListener(new java.awt.event.FocusAdapter() {
@@ -107,17 +111,32 @@ public class PanelParqueo extends javax.swing.JPanel {
         });
         setLayout(new java.awt.BorderLayout());
 
+        panelRound1.setBackground(new java.awt.Color(231, 234, 239));
+        panelRound1.setRoundBottomLeft(20);
+        panelRound1.setRoundBottomRight(20);
+        panelRound1.setLayout(new java.awt.GridBagLayout());
+
         jPanel1.setLayout(new java.awt.BorderLayout());
 
-        PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
-        PanelFondo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        PanelFondo.setPreferredSize(new java.awt.Dimension(1270, 620));
-        PanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel2.setMinimumSize(new java.awt.Dimension(1240, 135));
+        jPanel2.setPreferredSize(new java.awt.Dimension(1240, 135));
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jPanel4.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel4.setPreferredSize(new java.awt.Dimension(1240, 75));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblParqueo.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
         lblParqueo.setForeground(new java.awt.Color(58, 50, 75));
         lblParqueo.setText("Parqueos");
-        PanelFondo.add(lblParqueo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jPanel4.add(lblParqueo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+
+        jPanel2.add(jPanel4, java.awt.BorderLayout.NORTH);
+
+        jPanel5.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel5.setPreferredSize(new java.awt.Dimension(1240, 70));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnFiltrar.setBackground(new java.awt.Color(58, 50, 75));
         btnFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Filtrar Blanco.png"))); // NOI18N
@@ -125,7 +144,7 @@ public class PanelParqueo extends javax.swing.JPanel {
         btnFiltrar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         btnFiltrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        PanelFondo.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 150, 40));
+        jPanel5.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 150, 40));
 
         btnAgregar.setBackground(new java.awt.Color(58, 50, 75));
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Agregar Blanco.png"))); // NOI18N
@@ -138,95 +157,69 @@ public class PanelParqueo extends javax.swing.JPanel {
                 btnAgregarMouseClicked(evt);
             }
         });
-        PanelFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 150, 40));
+        jPanel5.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 40));
 
-        PanelTabla.setHorizontalScrollBar(null);
-        PanelTabla.setVerticalScrollBar(ScrollTabla);
-        PanelTabla.setWheelScrollingEnabled(false);
-
-        TbParqueosWhite = new Controles_Personalizados.Tables.Table(){
-
-            public boolean isCellEditable(int rowIndex, int colIndex){
-                return false;
+        btnInforme.setBackground(new java.awt.Color(58, 50, 75));
+        btnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
+        btnInforme.setText("Informe");
+        btnInforme.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        btnInforme.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnInforme.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnInforme.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnInformeMouseClicked(evt);
             }
+        });
+        jPanel5.add(btnInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 150, 40));
 
-        };
+        jPanel2.add(jPanel5, java.awt.BorderLayout.CENTER);
+
+        jPanel1.add(jPanel2, java.awt.BorderLayout.NORTH);
+
+        jPanel3.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel3.setPreferredSize(new java.awt.Dimension(461, 403));
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        scrollBarCustom1.setBackground(new java.awt.Color(58, 50, 75));
+        scrollBarCustom1.setForeground(new java.awt.Color(58, 50, 75));
+        jPanel3.add(scrollBarCustom1, java.awt.BorderLayout.EAST);
+
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(15, 26));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(461, 403));
+        jScrollPane1.setVerticalScrollBar(scrollBarCustom1);
+
         TbParqueosWhite.setBackground(new java.awt.Color(231, 234, 239));
         TbParqueosWhite.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "CARNET", "NOMBRES", "TIPO USUARIO", "%ENTRADAS", "%SALIDAS", "ACCIONES"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        TbParqueosWhite.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        ));
         TbParqueosWhite.setGridColor(new java.awt.Color(58, 50, 75));
-        TbParqueosWhite.setName(""); // NOI18N
+        TbParqueosWhite.setPreferredSize(new java.awt.Dimension(450, 880));
         TbParqueosWhite.setSelectionBackground(new java.awt.Color(58, 50, 75));
         TbParqueosWhite.setShowVerticalLines(false);
-        TbParqueosWhite.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TbParqueosWhiteMouseClicked(evt);
-            }
-        });
-        PanelTabla.setViewportView(TbParqueosWhite);
+        jScrollPane1.setViewportView(TbParqueosWhite);
 
-        PanelFondo.add(PanelTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 1230, 480));
+        jPanel3.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        ScrollTabla.setBackground(new java.awt.Color(58, 50, 75));
-        ScrollTabla.setForeground(new java.awt.Color(58, 50, 75));
-        PanelFondo.add(ScrollTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(1238, 177, 10, 40));
+        jPanel1.add(jPanel3, java.awt.BorderLayout.CENTER);
 
-        jPanel1.add(PanelFondo, java.awt.BorderLayout.CENTER);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.ipady = 500;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(10, 15, 10, 15);
+        panelRound1.add(jPanel1, gridBagConstraints);
 
-        add(jPanel1, java.awt.BorderLayout.CENTER);
-
-        jPanel2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jPanel2formFocusGained(evt);
-            }
-        });
-        jPanel2.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                jPanel2formComponentShown(evt);
-            }
-        });
-        jPanel2.setLayout(new java.awt.BorderLayout());
-
-        jPanel3.setLayout(new java.awt.BorderLayout());
-        jPanel2.add(jPanel3, java.awt.BorderLayout.CENTER);
-
-        add(jPanel2, java.awt.BorderLayout.PAGE_START);
+        add(panelRound1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     FrmConfigPark park = new FrmConfigPark();
@@ -243,51 +236,6 @@ public class PanelParqueo extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAgregarMouseClicked
 
     FrmSetPark setPark = new FrmSetPark();
-    
-    private void TbParqueosWhiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbParqueosWhiteMouseClicked
-        Table tb = (Table) evt.getSource();//para obtener los datos de la fila
-
-        int row = evt.getY() / TbParqueosWhite.getRowHeight();
-        int col = TbParqueosWhite.getColumnModel().getColumnIndexAtX(evt.getX());
-        try {
-            if (row < TbParqueosWhite.getRowCount() && row >= 0 && col < TbParqueosWhite.getColumnCount() && col >= 0) {
-                Object obj = TbParqueosWhite.getValueAt(row, col);
-                if (obj instanceof UWPButton) {
-                    ((UWPButton) obj).doClick();
-                    UWPButton btn = (UWPButton) obj;
-                    if (btn.getName().equals("btnModificar")) {
-                        if (park.isShowing()) {
-                            park.setVisible(false);
-
-                        }
-                        //envio el station que en el q se registro, para que se habilite y pueda cambiar el parqueo
-                        park.setStation(Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 9).toString()));
-                        park.setPark(tb.getModel().getValueAt(tb.getSelectedRow(), 11).toString());                        
-                                                
-                        
-                        int ID = Integer.parseInt(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString());
-                        FrmSetPark.setIDDetail(ID);
-                        
-                        int station = Integer.parseInt(tb.getModel().getValueAt(tb.getSelectedRow(), 8).toString());
-                        ControllerParqueo.setNumberPark(station);
-                        
-                        park.setVisible(true);
-                        frmstate = 1;
-                        FrmSetPark.action = 1;
-
-                    }
-                    if (btn.getName().equals("btnEliminar")) {
-                        int msg = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este dato?", "Confirmar acción", JOptionPane.YES_NO_OPTION);
-                        if (msg == JOptionPane.YES_OPTION) {
-                            deletePark(Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString()));
-                        }
-                    }
-                }
-            }
-        } catch (Exception e) {
-
-        }
-    }//GEN-LAST:event_TbParqueosWhiteMouseClicked
 
     private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
         getdataPark();
@@ -297,41 +245,39 @@ public class PanelParqueo extends javax.swing.JPanel {
         getdataPark();
     }//GEN-LAST:event_formComponentShown
 
-    private void jPanel2formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel2formFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel2formFocusGained
-
-    private void jPanel2formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel2formComponentShown
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPanel2formComponentShown
-
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
         refresh();
     }//GEN-LAST:event_formMouseReleased
 
+    private void btnInformeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInformeMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnInformeMouseClicked
+
     public void getdataPark() {
         String tablename = "vwDetalle_Estacionamientos";
-        if (tbpark.getRowCount() > 0) {//si hay columnas antes de cargar 
-            tbpark.removeRow(0);      //borre las filas q tenía 
-        } else {//si no hay filas
-            try {
-                ResultSet rs = Controlador.ControllerAccesos.getdata(tablename);
-                while (rs.next()) {
-                    Object[] data = {rs.getInt("IDDetalle"), rs.getInt("idPersonal"), rs.getString("carnet"), rs.getInt("idAcceso"), rs.getDate("fecha"), rs.getTime("hora"), rs.getInt("idVehiculo"), rs.getString("placa"), rs.getInt("idEstacionamiento"), rs.getInt("numero_estacionamiento"),rs.getInt("idParqueo"),rs.getInt("numero_parqueo") , rs.getString("Ubicacion"), btnupdate, btndelete};
-                    tbpark.addRow(data);
-                    //que recupere los datos q especifico con la columname y los guarde en un object
-                }
-            } catch (SQLException e) {
-                System.out.println("Error view: " + e.toString());
-            }
-
+        while (tbpark.getRowCount() > 0) {
+            tbpark.removeRow(0);
         }
+
+        try {
+            ResultSet rs = Controlador.ControllerAccesos.getdata(tablename);
+            while (rs.next()) {
+                Object[] data = {rs.getInt("IDDetalle"), rs.getInt("idPersonal"), rs.getString("carnet"), rs.getInt("idAcceso"), rs.getDate("fecha"), rs.getTime("hora"), rs.getInt("idVehiculo"), rs.getString("placa"), rs.getInt("idEstacionamiento"), rs.getInt("numero_estacionamiento"), rs.getInt("idParqueo"), rs.getInt("numero_parqueo"), rs.getString("Ubicacion"), btnupdate, btndelete};
+                tbpark.addRow(data);
+                //que recupere los datos q especifico con la columname y los guarde en un object
+            }
+        } catch (SQLException e) {
+            System.out.println("Error view: " + e.toString());
+        }
+
     }
 
     public void deletePark(int ID) {
         ControllerParqueo park = new ControllerParqueo();
-        park.setID(ID);
-        if (park.getID() > 0) {
+        ControllerParqueo.setIDDetail(ID);
+        System.out.println(ControllerParqueo.getIDDetail());
+        if (ControllerParqueo.getIDDetail() > 0) {
             if (park.deletePark() == true) {
                 ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "Usuario eliminado", 1);
                 getdataPark();
@@ -343,15 +289,18 @@ public class PanelParqueo extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private Controles_Personalizados.Paneles.PanelRound PanelFondo;
-    private javax.swing.JScrollPane PanelTabla;
-    private Controles_Personalizados.ScrollBar.ScrollBarCustom ScrollTabla;
     private Controles_Personalizados.Tables.Table TbParqueosWhite;
     private Controles_Personalizados.Botones.UWPButton btnAgregar;
     private Controles_Personalizados.Botones.UWPButton btnFiltrar;
+    private Controles_Personalizados.Botones.UWPButton btnInforme;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblParqueo;
+    private Controles_Personalizados.Paneles.PanelRound panelRound1;
+    private Controles_Personalizados.ScrollBar.ScrollBarCustom scrollBarCustom1;
     // End of variables declaration//GEN-END:variables
 }

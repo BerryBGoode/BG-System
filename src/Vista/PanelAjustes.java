@@ -66,7 +66,6 @@ public class PanelAjustes extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelRound3 = new Controles_Personalizados.Paneles.PanelRound();
         PanelFondo = new Controles_Personalizados.Paneles.PanelRound();
         PanelContenedorCambioContra = new Controles_Personalizados.Paneles.PanelRound();
         txtUsuario = new Controles_Personalizados.textfields.TextField();
@@ -89,14 +88,6 @@ public class PanelAjustes extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(42, 36, 56));
         setLayout(new java.awt.BorderLayout());
-
-        panelRound3.setBackground(new java.awt.Color(58, 50, 75));
-        panelRound3.setRoundBottomLeft(30);
-        panelRound3.setRoundBottomRight(30);
-        panelRound3.setRoundTopLeft(30);
-        panelRound3.setRoundTopRight(30);
-        panelRound3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(panelRound3, java.awt.BorderLayout.CENTER);
 
         PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
         PanelFondo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -326,7 +317,6 @@ public class PanelAjustes extends javax.swing.JPanel {
     private javax.swing.JLabel lblTemas;
     private Controles_Personalizados.Paneles.PanelRound panelRound1;
     private Controles_Personalizados.Paneles.PanelRound panelRound2;
-    private Controles_Personalizados.Paneles.PanelRound panelRound3;
     private Controles_Personalizados.Paneles.PanelRound panelRound5;
     private javax.swing.JLabel textoConfig;
     private Controles_Personalizados.textfields.PasswordField txtClveNueva;

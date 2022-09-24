@@ -17,6 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.awt.Font;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.KeyStroke;
@@ -28,7 +29,7 @@ import javax.swing.KeyStroke;
 public class ValidacionesBeep_Go {
     
     public static int Modo;
-
+    public static final Font font = new Font("Roboto Black", Font.PLAIN, 18);
     /**
      * Constructor
      */

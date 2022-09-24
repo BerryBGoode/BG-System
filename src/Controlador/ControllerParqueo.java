@@ -210,7 +210,7 @@ public class ControllerParqueo {
      * @return a Boolean
      */
     public boolean deletePark() {
-        return mdpark.deletePark(getID());
+        return mdpark.deletePark(getIDDetail());
     }
 
     /**
