@@ -492,7 +492,7 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
                 btnMinimizarMouseClicked(evt);
             }
         });
-        panelRound1.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 11, -1, -1));
+        panelRound1.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 10, -1, -1));
 
         txtCorreo.setBackground(new java.awt.Color(58, 50, 75));
         txtCorreo.setForeground(new java.awt.Color(253, 255, 254));

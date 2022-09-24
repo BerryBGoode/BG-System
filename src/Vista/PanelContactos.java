@@ -120,13 +120,11 @@ public class PanelContactos extends javax.swing.JPanel {
         ScrollTabla = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
         btnFiltrar1 = new Controles_Personalizados.Botones.UWPButton();
 
-        setBackground(new java.awt.Color(42, 36, 56));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
             }
         });
-        setLayout(new java.awt.BorderLayout());
 
         PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
         PanelFondo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -238,7 +236,6 @@ public class PanelContactos extends javax.swing.JPanel {
         ScrollTabla.setBackground(new java.awt.Color(58, 50, 75));
         ScrollTabla.setForeground(new java.awt.Color(58, 50, 75));
         PanelFondo.add(ScrollTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(1238, 177, 10, 40));
-        add(PanelFondo, java.awt.BorderLayout.CENTER);
 
         btnFiltrar1.setBackground(new java.awt.Color(58, 50, 75));
         btnFiltrar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Filtrar Blanco.png"))); // NOI18N
@@ -268,7 +265,6 @@ public class PanelContactos extends javax.swing.JPanel {
                     .addComponent(PanelFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
-
     }// </editor-fold>//GEN-END:initComponents
 
     FrmPersonal_Contacto add = new FrmPersonal_Contacto();

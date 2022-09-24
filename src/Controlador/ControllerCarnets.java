@@ -35,7 +35,7 @@ public class ControllerCarnets {
         this.idPersonal = idPersonal;
     }
 
-        public ResultSet cargarTablaController() {
+    public ResultSet cargarTablaController() {
         return ObjModel.cargarTablaConCarnet();
     }
 

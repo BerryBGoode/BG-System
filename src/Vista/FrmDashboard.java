@@ -28,28 +28,23 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
-import javax.swing.JFrame;
 
 /**
  *
  * @author danlo and ferna
  */
 public class FrmDashboard extends javax.swing.JFrame implements Runnable {
-    private String tipousuario;
 
     /**
      * Creates new form Dashboard
      */
     public FrmDashboard(String nombre, String tipo) {
         initComponents();
-        tipousuario=tipo;
         this.setLocationRelativeTo(null);
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
         AWTUtilities.setWindowShape(this, forma);
         setIconImage(Logo());
-        this.setResizable(true);
-        //this.setExtendedState(MAXIMIZED_BOTH);
-        //jpanelfondo
+
         Niveles(tipo);
         lblNombre.setText(nombre);
         lblTipo.setText(tipo);
@@ -180,26 +175,23 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelFondo = new Controles_Personalizados.Paneles.PanelRound();
         jPanel3 = new javax.swing.JPanel();
         PanelContenedor = new Controles_Personalizados.Paneles.PanelRound();
-        pnlNorthForm = new Controles_Personalizados.Paneles.PanelRound();
+        PanelContenedorForms = new Controles_Personalizados.Paneles.PanelRound();
+        jPanel9 = new javax.swing.JPanel();
         txtBuscador = new Controles_Personalizados.textfields.TextFieldSuggestion();
-        pnlRellenoNorth1 = new javax.swing.JPanel();
         PanelFecha = new Controles_Personalizados.Paneles.PanelRound();
         lblHora = new javax.swing.JLabel();
         lblDia = new javax.swing.JLabel();
         lblSun = new javax.swing.JLabel();
         lblNight = new javax.swing.JLabel();
         lblSunset = new javax.swing.JLabel();
-        pnlRellenoNorth2 = new javax.swing.JPanel();
         PanelMO = new Controles_Personalizados.Paneles.PanelRound();
         lblNormal = new javax.swing.JLabel();
         btnMO = new javax.swing.JLabel();
-        pnlRellenoNorth3 = new javax.swing.JPanel();
         PanelDatosUs = new Controles_Personalizados.Paneles.PanelRound();
         lblNombre = new javax.swing.JLabel();
         lblTipo = new javax.swing.JLabel();
         lblUsuarioDark = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
-        PanelContenedorForms = new Controles_Personalizados.Paneles.PanelRound();
         pnlWest = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -238,9 +230,6 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         pnlEast = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setLocationByPlatform(true);
-        setMaximizedBounds(new java.awt.Rectangle(0, 0, 1920, 1080));
-        setMaximumSize(new java.awt.Dimension(1920, 1080));
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1373, 768));
         setResizable(false);
@@ -249,7 +238,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
                 formWindowActivated(evt);
             }
         });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
         panelFondo.setBackground(new java.awt.Color(42, 36, 56));
         panelFondo.setPreferredSize(new java.awt.Dimension(1366, 768));
@@ -262,6 +251,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         jPanel3.setBackground(new java.awt.Color(42, 36, 56));
         jPanel3.setLayout(new java.awt.BorderLayout());
 
+        PanelContenedor.setBackground(new java.awt.Color(231, 234, 239));
         PanelContenedor.setPreferredSize(new java.awt.Dimension(1155, 729));
         PanelContenedor.setRoundBottomLeft(30);
         PanelContenedor.setRoundBottomRight(30);
@@ -269,9 +259,13 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         PanelContenedor.setRoundTopRight(30);
         PanelContenedor.setLayout(new java.awt.BorderLayout());
 
-        pnlNorthForm.setBackground(new java.awt.Color(231, 234, 239));
-        pnlNorthForm.setRoundTopLeft(30);
-        pnlNorthForm.setRoundTopRight(30);
+        PanelContenedorForms.setBackground(new java.awt.Color(231, 234, 239));
+        PanelContenedorForms.setRoundBottomLeft(30);
+        PanelContenedorForms.setRoundBottomRight(30);
+        PanelContenedorForms.setLayout(new java.awt.BorderLayout());
+        PanelContenedor.add(PanelContenedorForms, java.awt.BorderLayout.CENTER);
+
+        jPanel9.setBackground(new java.awt.Color(231, 234, 239));
 
         txtBuscador.setText("Buscar");
         txtBuscador.setPreferredSize(new java.awt.Dimension(800, 50));
@@ -285,11 +279,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
                 txtBuscadorKeyPressed(evt);
             }
         });
-        pnlNorthForm.add(txtBuscador);
-
-        pnlRellenoNorth1.setBackground(new java.awt.Color(231, 234, 239));
-        pnlRellenoNorth1.setPreferredSize(new java.awt.Dimension(7, 65));
-        pnlNorthForm.add(pnlRellenoNorth1);
+        jPanel9.add(txtBuscador);
 
         PanelFecha.setBackground(new java.awt.Color(253, 255, 254));
         PanelFecha.setPreferredSize(new java.awt.Dimension(160, 52));
@@ -318,11 +308,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         lblSunset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/sunset.png"))); // NOI18N
         PanelFecha.add(lblSunset, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 5, -1, 40));
 
-        pnlNorthForm.add(PanelFecha);
-
-        pnlRellenoNorth2.setBackground(new java.awt.Color(231, 234, 239));
-        pnlRellenoNorth2.setPreferredSize(new java.awt.Dimension(7, 65));
-        pnlNorthForm.add(pnlRellenoNorth2);
+        jPanel9.add(PanelFecha);
 
         PanelMO.setBackground(new java.awt.Color(253, 255, 254));
         PanelMO.setPreferredSize(new java.awt.Dimension(57, 54));
@@ -350,11 +336,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         });
         PanelMO.add(btnMO, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 7, 40, 40));
 
-        pnlNorthForm.add(PanelMO);
-
-        pnlRellenoNorth3.setBackground(new java.awt.Color(231, 234, 239));
-        pnlRellenoNorth3.setPreferredSize(new java.awt.Dimension(7, 65));
-        pnlNorthForm.add(pnlRellenoNorth3);
+        jPanel9.add(PanelMO);
 
         PanelDatosUs.setBackground(new java.awt.Color(253, 255, 254));
         PanelDatosUs.setPreferredSize(new java.awt.Dimension(200, 55));
@@ -380,15 +362,9 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         lblUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-user-circle.png"))); // NOI18N
         PanelDatosUs.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 40, 60));
 
-        pnlNorthForm.add(PanelDatosUs);
+        jPanel9.add(PanelDatosUs);
 
-        PanelContenedor.add(pnlNorthForm, java.awt.BorderLayout.NORTH);
-
-        PanelContenedorForms.setBackground(new java.awt.Color(42, 36, 56));
-        PanelContenedorForms.setRoundBottomLeft(20);
-        PanelContenedorForms.setRoundBottomRight(20);
-        PanelContenedorForms.setLayout(new java.awt.BorderLayout());
-        PanelContenedor.add(PanelContenedorForms, java.awt.BorderLayout.CENTER);
+        PanelContenedor.add(jPanel9, java.awt.BorderLayout.NORTH);
 
         jPanel3.add(PanelContenedor, java.awt.BorderLayout.CENTER);
 
@@ -653,7 +629,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
 
         pnlFilled.setBackground(new java.awt.Color(42, 36, 56));
         pnlFilled.setPreferredSize(new java.awt.Dimension(1000, 100));
-        pnlFilled.setLayout(new java.awt.BorderLayout());
+        pnlFilled.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         pnlNorth.add(pnlFilled, java.awt.BorderLayout.CENTER);
 
         panelFondo.add(pnlNorth, java.awt.BorderLayout.NORTH);
@@ -668,7 +644,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         pnlEast.setLayout(new java.awt.BorderLayout());
         panelFondo.add(pnlEast, java.awt.BorderLayout.EAST);
 
-        getContentPane().add(panelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1373, 779));
+        getContentPane().add(panelFondo, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -976,7 +952,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionLogout.setVisible(false);
         panelSeleccionAjustes.setVisible(false);
 
-        PanelAccesos pl = new PanelAccesos(tipousuario);
+        PanelAccesos pl = new PanelAccesos();
         pl.setSize(1270, 620);
         pl.setLocation(0, 0);
 
@@ -1148,7 +1124,6 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         //setSize(2373, 1768);
     }//GEN-LAST:event_btnMaximizarMousePressed
 
-    
     private void btnCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMousePressed
         System.exit(0);
     }//GEN-LAST:event_btnCerrarMousePressed
@@ -1231,6 +1206,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel lblDia;
     private javax.swing.JLabel lblHora;
     private javax.swing.JLabel lblNight;
@@ -1254,10 +1230,6 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     private javax.swing.JPanel pnlFilled;
     private javax.swing.JPanel pnlModifWin;
     private javax.swing.JPanel pnlNorth;
-    private Controles_Personalizados.Paneles.PanelRound pnlNorthForm;
-    private javax.swing.JPanel pnlRellenoNorth1;
-    private javax.swing.JPanel pnlRellenoNorth2;
-    private javax.swing.JPanel pnlRellenoNorth3;
     private javax.swing.JPanel pnlSourth;
     private javax.swing.JPanel pnlWest;
     private Controles_Personalizados.textfields.TextFieldSuggestion txtBuscador;
