@@ -188,6 +188,12 @@ public class PanelParqueo extends javax.swing.JPanel {
         jScrollPane1.setPreferredSize(new java.awt.Dimension(461, 403));
         jScrollPane1.setVerticalScrollBar(scrollBarCustom1);
 
+        TbParqueosWhite = new Controles_Personalizados.Tables.Table(){
+
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         TbParqueosWhite.setBackground(new java.awt.Color(231, 234, 239));
         TbParqueosWhite.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
