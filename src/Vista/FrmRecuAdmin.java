@@ -31,7 +31,9 @@ public class FrmRecuAdmin extends javax.swing.JFrame {
      */
     DefaultComboBoxModel<String> modelocombo;
     private List myArrayListTD;
+    int idTipoDocA;
     int idTipoDoc;
+    String tipodoc;
     String nombre = FrmLogin.nombre;
     String tipo = FrmLogin.tipo;
     ControllerRecuperacionContra obj = new ControllerRecuperacionContra();
@@ -292,10 +294,23 @@ public class FrmRecuAdmin extends javax.swing.JFrame {
         PanelOpcionesPersonal.showinter = 0;
     }//GEN-LAST:event_btnContinuarActionPerformed
 
+    void CargarIDT() { 
+        ResultSet rs;
+        obj.setIdTipoDoc(idTipoDoc);
+        rs = obj.TipoDocumento();
+        try {
+            if (rs.next()) {
+                tipodoc = rs.getString("tipo_documento");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
+    }
+    
     private void cmbTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoItemStateChanged
         // TODO add your handling code here:
-        txtDoc.setText("");
-         if (evt.getStateChange() == ItemEvent.SELECTED) {
+        idTipoDocA = idTipoDoc;
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
             int pos = cmbTipo.getSelectedIndex();
             if (pos == 0) {
                 idTipoDoc = 0;
@@ -307,6 +322,10 @@ public class FrmRecuAdmin extends javax.swing.JFrame {
                     }
                 }
             }
+            CargarIDT();
+        }
+        if(idTipoDocA != idTipoDoc){
+            txtDoc.setText("");
         }
     }//GEN-LAST:event_cmbTipoItemStateChanged
 
@@ -321,8 +340,30 @@ public class FrmRecuAdmin extends javax.swing.JFrame {
 
     private void txtDocKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDocKeyTyped
         // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        ValidacionesSistema.ValidacionesBeep_Go.SoloNumeros(evt);
+        char key = evt.getKeyChar();
+        if(tipodoc != null){
+            if(tipodoc.equals("NIT")){
+                if(txtDoc.getText().length() >= 17){
+                    evt.consume();
+                }else if(txtDoc.getText().length() != 4 && txtDoc.getText().length() != 11 && txtDoc.getText().length() != 15 && key == '-'){
+                    evt.consume();
+                }else if((txtDoc.getText().length() == 4 || txtDoc.getText().length() == 11 || txtDoc.getText().length() == 15) && key != '-'){
+                    evt.consume();
+                }else if(! Character.isDigit(key) && key != '-' ){
+                    evt.consume();
+                }
+            }else if(tipodoc.equals("DUI")){
+                if(txtDoc.getText().length() >= 10){
+                    evt.consume();
+                }else if(txtDoc.getText().length() == 8 && key != '-'){
+                    evt.consume();
+                }else if(! Character.isDigit(key) && key != '-' ){
+                    evt.consume();
+                }
+            }
+        }else{
+            evt.consume();
+        }
     }//GEN-LAST:event_txtDocKeyTyped
 
     /**

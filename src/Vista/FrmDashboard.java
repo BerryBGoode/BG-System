@@ -45,6 +45,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
      */
     public FrmDashboard(String nombre, String tipo) {
         initComponents();
+        this.setTitle("Beep&Go");
         tipousuario = tipo;
         this.setLocationRelativeTo(null);
 //        Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
@@ -121,7 +122,10 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "am" : "pm";
 
         if (ampm.equals("pm")) {
-            int h = cal.get(Calendar.HOUR_OF_DAY) - 12;
+            int h = cal.get(Calendar.HOUR_OF_DAY);
+            if(h != 12){
+                h = cal.get(Calendar.HOUR_OF_DAY) - 12;
+            }
             hora = h > 9 ? "" + h : "0" + h;
         } else {
             hora = cal.get(Calendar.HOUR_OF_DAY) > 9 ? "" + cal.get(Calendar.HOUR_OF_DAY) : "0" + cal.get(Calendar.HOUR_OF_DAY);
