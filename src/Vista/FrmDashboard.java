@@ -39,6 +39,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
 
     private String tipousuario;
     PanelDashboard pld = new PanelDashboard();
+    PanelUsuarios_dashbord pu = new PanelUsuarios_dashbord();
     private int ev;
 
     /**
@@ -898,12 +899,11 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionContactos.setVisible(false);
         panelSeleccionAjustes.setVisible(false);
 
-        PanelUsuarios_dashbord pl = new PanelUsuarios_dashbord();
-        pl.setSize(1270, 620);
-        pl.setLocation(0, 0);
+        pu.setSize(1270, 620);
+        pu.setLocation(0, 0);
 
         PanelContenedorForms.removeAll();
-        PanelContenedorForms.add(pl);
+        PanelContenedorForms.add(pu);
         PanelContenedorForms.revalidate();
         PanelContenedorForms.repaint();
     }
@@ -1130,9 +1130,10 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
 
     private void lblNormalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNormalMouseClicked
         // TODO add your handling code here:
-        NormalMode();
         ValidacionesSistema.ValidacionesBeep_Go.Modo = 2;
+        NormalMode();
         pld.mode();
+        pu.darkmod();
         if (_pnldash.isShowing()) {
 
             _pnldash.hide();
@@ -1142,9 +1143,10 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
 
     private void btnMOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMOMouseClicked
         // TODO add your handling code here:
-        DarkMode();
         ValidacionesSistema.ValidacionesBeep_Go.Modo = 1;
+        DarkMode();
         pld.mode();
+        pu.darkmod();
         _pnldash.hide();
         if (_pnldash.isVisible()) {
 
