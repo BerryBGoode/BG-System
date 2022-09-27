@@ -50,7 +50,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
     ImageIcon reporte = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report 1.png"));
     ImageIcon Modificardark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar_white.png"));
     ImageIcon Eliminardark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-trash-alt white.png"));
-    ImageIcon reportedark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report 1.png"));
+    ImageIcon reportedark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report-White.png"));
     FrmAgg_Usuarios agg = new FrmAgg_Usuarios();
     private int frmstate = 1;
     byte[] imagen;
@@ -61,6 +61,13 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
     public PanelUsuarios_dashbord() {
         initComponents();
         System.out.println(ValidacionesSistema.ValidacionesBeep_Go.getModo());
+//        if (ValidacionesSistema.ValidacionesBeep_Go.getModo() == 2) {
+//            CargarTabladark();
+//            tbUsuarioDark.setModel(modelodark);
+//        } else if (ValidacionesSistema.ValidacionesBeep_Go.Modo == 1) {
+//            CargarTabla();
+//            tbUsuarios.setModel(modelo);
+//        }
         modo();
         //tbUsuarioDark.setVisible(false);
         //tbUsuarios.setVisible(true);
@@ -73,11 +80,12 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         };
         modelodark = new DefaultTableModel(null, TitulosTabla) {
             @Override
-            public boolean isCellEditable(int row, int colum) {
+            public boolean isCellEditable(int row, int column) { // aqui esta
                 return false;
             }
         };
-//        CargarTabla();
+        CargarTabla();
+        CargarTabladark();
         tbUsuarios.setModel(modelo);
         tbUsuarios.setDefaultRenderer(Object.class, new RenderTable());
         tbUsuarios.setFont(font);
@@ -87,7 +95,6 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(4));
         tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(5));
         //DarkTable
-        CargarTabladark();
         tbUsuarioDark.setModel(modelodark);
         tbUsuarioDark.setDefaultRenderer(Object.class, new RenderTable());
         tbUsuarioDark.setFont(font);
@@ -319,10 +326,10 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
                 btnActualizardark.setIcon(Modificardark);
                 btnEliminardark.setIcon(Eliminardark);
                 btnReportedark.setIcon(reportedark);
-                Object[] oValores = {rs.getInt("idUsuario"), rs.getInt("idPersonal"), rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("nombre_usuario"), rs.getInt("idTipoUsuario"), rs.getString("tipo_usuario"), rs.getInt("idEstadoUsuario"), rs.getString("estado_usuario"), rs.getBytes("imagen"), btnActualizar, btnEliminar, btnReporte};
+                Object[] oValores = {rs.getInt("idUsuario"), rs.getInt("idPersonal"), rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("nombre_usuario"), rs.getInt("idTipoUsuario"), rs.getString("tipo_usuario"), rs.getInt("idEstadoUsuario"), rs.getString("estado_usuario"), rs.getBytes("imagen"), btnActualizardark, btnEliminardark, btnReportedark};
 
                 modelodark.addRow(oValores);
-                System.out.println("cargando info dark");
+                System.out.println("cargando info normal");
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.toString());
@@ -341,9 +348,9 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
                 btnInforme.setBackground(new Color(32, 34, 37));
                 jPanel2.setBackground(new Color(47, 49, 54));
                 tbUsuarioDark.setGridColor(new Color(32, 34, 37));
-                btnActualizar.setBackground(new Color(47, 49, 54));
-                btnEliminar.setBackground(new Color(47, 49, 54));
-                btnReporte.setBackground(new Color(47, 49, 54));
+                btnActualizardark.setBackground(new Color(47, 49, 54));
+                btnEliminardark.setBackground(new Color(47, 49, 54));
+                btnReportedark.setBackground(new Color(47, 49, 54));
                 float xwhite = tbUsuarios.getX();
                 float ywhite = tbUsuarios.getY();
                 int widhtwhite = tbUsuarios.getWidth();
@@ -380,7 +387,6 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
 
     private void modo() {
         if (ValidacionesSistema.ValidacionesBeep_Go.Modo == 1) {
-            ScrollTabla.setVisible(false);
             panelRound1.setBackground(new Color(47, 49, 54));
             lblParqueo.setForeground(Color.WHITE);
             jPanel5.setBackground(new Color(47, 49, 54));
@@ -389,9 +395,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
             btnFiltrar.setBackground(new Color(32, 34, 37));
             btnInforme.setBackground(new Color(32, 34, 37));
             jPanel2.setBackground(new Color(47, 49, 54));
-            tbUsuarios.setGridColor(new Color(32, 34, 37));
-            tbUsuarios.setBackground(new Color(47, 49, 54));
-            tbUsuarios.setForeground(Color.WHITE);
+            tbUsuarioDark.setGridColor(new Color(32, 34, 37));
             btnActualizar.setBackground(new Color(47, 49, 54));
             btnEliminar.setBackground(new Color(47, 49, 54));
             btnReporte.setBackground(new Color(47, 49, 54));
@@ -409,14 +413,20 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
             tbUsuarioDark.setBackground(new Color(47, 49, 54));
             tbUsuarioDark.setForeground(Color.WHITE);
         } else {
+            panelRound1.setBackground(new Color(231, 234, 239));
+            lblParqueo.setForeground(new Color(58, 50, 75));
+            jPanel5.setBackground(new Color(231, 234, 239));
+            jPanel4.setBackground(new Color(231, 234, 239));
+            btnAgregar.setBackground(new Color(58, 50, 75));
+            btnFiltrar.setBackground(new Color(58, 50, 75));
+            btnInforme.setBackground(new Color(58, 50, 75));
+            jPanel2.setBackground(new Color(231, 234, 239));
             btnActualizar.setBackground(new Color(231, 234, 239));
-            btnReporte.setBackground(new Color(231, 234, 239));
             btnEliminar.setBackground(new Color(231, 234, 239));
+            btnReporte.setBackground(new Color(231, 234, 239));
             jScrollPane1.setVisible(true);
             tbUsuarios.setVisible(true);
-            ScrollTabla.setVisible(true);
             Scroll.setVisible(false);
-            scrollBarCustom1.setVisible(false);
             tbUsuarioDark.setVisible(false);
         }
     }

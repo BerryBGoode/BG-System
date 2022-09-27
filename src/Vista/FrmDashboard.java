@@ -19,6 +19,8 @@ import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.PointerInfo;
 import java.awt.Rectangle;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.TextStyle;
@@ -29,6 +31,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -39,8 +43,10 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
 
     private String tipousuario;
     PanelDashboard pld = new PanelDashboard();
+    ControllerLogin clog = new ControllerLogin();
     PanelUsuarios_dashbord pu = new PanelUsuarios_dashbord();
     private int ev;
+    private int iduser;
 
     /**
      * Creates new form Dashboard
@@ -800,6 +806,18 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         }
     }
 
+    void capturariduser() {
+        clog.setUsuario(lblNombre.getText());
+        ResultSet rs=clog.validaruseractive();
+        try {
+            if (rs.next()) {
+                iduser=rs.getInt("idUsuario");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     //Interface mode
     void DarkMode() {
 
@@ -848,18 +866,18 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         txtBuscador.setBackground(new Color(253, 255, 254));
         txtBuscador.setForeground(new Color(42, 36, 56));
         txtBuscador.setCaretColor(new Color(42, 36, 56));
-        pnlNorth.setBackground(new Color(231,234,239));
-        pnlNorthForm.setBackground(new Color(231,234,239));
-        jPanel5.setBackground(new Color(42,36,56));
-        jPanel8.setBackground(new Color(42,36,56));
-        jPanel7.setBackground(new Color(42,36,56));
-        pnlSourth.setBackground(new Color(42,36,56));
-        jPanel1.setBackground(new Color(42,36,56));
-        jPanel2.setBackground(new Color(42,36,56));
-        jPanel4.setBackground(new Color(42,36,56));
-        pnlEast.setBackground(new Color(42,36,56));
-        jPanel9.setBackground(new Color(231,234,239));
-        pnlFilled.setBackground(new Color(42,36,56));
+        pnlNorth.setBackground(new Color(231, 234, 239));
+        pnlNorthForm.setBackground(new Color(231, 234, 239));
+        jPanel5.setBackground(new Color(42, 36, 56));
+        jPanel8.setBackground(new Color(42, 36, 56));
+        jPanel7.setBackground(new Color(42, 36, 56));
+        pnlSourth.setBackground(new Color(42, 36, 56));
+        jPanel1.setBackground(new Color(42, 36, 56));
+        jPanel2.setBackground(new Color(42, 36, 56));
+        jPanel4.setBackground(new Color(42, 36, 56));
+        pnlEast.setBackground(new Color(42, 36, 56));
+        jPanel9.setBackground(new Color(231, 234, 239));
+        pnlFilled.setBackground(new Color(42, 36, 56));
     }
 
     //show Panel Action
@@ -1119,10 +1137,15 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionContactos.setVisible(false);
         panelSeleccionLogout.setVisible(true);
         panelSeleccionAjustes.setVisible(false);
-
-        this.dispose();
+        capturariduser();
+        clog.setIdestado(2);
+        clog.setIdusuario(iduser);
+        if (clog.ActualizarEstado()==true) {
+            System.out.println("Si se pudo y ahora esta inactivo");
+        }
         FrmLogin login = new FrmLogin();
         login.setVisible(true);
+        this.dispose();
     }
 
     PanelDashboard _pnldash = new PanelDashboard();
