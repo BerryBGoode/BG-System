@@ -31,7 +31,7 @@ public class Table extends JTable {
     public Table() {
         setShowHorizontalLines(true);
         setGridColor(new Color(230, 230, 230));
-        setRowHeight(40);
+        setRowHeight(40);       
         getTableHeader().setReorderingAllowed(false);
         getTableHeader().setDefaultRenderer(new DefaultTableCellRenderer() {
             @Override
@@ -45,6 +45,7 @@ public class Table extends JTable {
             public Component getTableCellRendererComponent(JTable jtable, Object o, boolean selected, boolean bln1, int i, int i1) {
                 Component com = super.getTableCellRendererComponent(jtable, o, selected, bln1, i, i1);
                 com.setBackground(Color.WHITE);
+                
                 setBorder(noFocusBorder);
                 if (selected) {
                     com.setForeground(SystemColor.MAIN_COLOR_1);
