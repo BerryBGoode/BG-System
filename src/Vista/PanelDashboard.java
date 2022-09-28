@@ -20,46 +20,83 @@ public class PanelDashboard extends javax.swing.JPanel {
         initComponents();
         mod();
     }
-    public void mode(){
-       switch(ValidacionesSistema.ValidacionesBeep_Go.getModo()){
-            case 1: 
-                
-                PanelGrafica1.setBackground(new Color(32,34,37));
-                PanelGrafica2.setBackground(new Color(32,34,37));
-                PanelGrafica3.setBackground(new Color(32,34,37));
+
+    public void mode() {
+        switch (ValidacionesSistema.ValidacionesBeep_Go.getModo()) {
+            case 1:
+
+                PanelGrafica1.setBackground(new Color(32, 34, 37));
+                PanelGrafica2.setBackground(new Color(32, 34, 37));
+                PanelGrafica3.setBackground(new Color(32, 34, 37));
+                jPanel10.setBackground(new Color(47, 49, 54));
+                jPanel4.setBackground(new Color(47, 49, 54));
+                jPanel11.setBackground(new Color(47, 49, 54));
+                panelRound1.setBackground(new Color(47, 49, 54));
+                panelRound2.setBackground(new Color(47, 49, 54));
+                PanelNotificaciones.setBackground(new Color(32, 34, 37));
+                pnlWestNotifi.setBackground(new Color(47, 49, 54));
+                pnlNorthNotifi.setBackground(new Color(47, 49, 54));
+                jPanel6.setBackground(new Color(47, 49, 54));
+                panelRound3.setBackground(new Color(47, 49, 54));
+                panelRound6.setBackground(new Color(47, 49, 54));
+                jPanel5.setBackground(new Color(47, 49, 54));
                 lblNoti.setForeground(Color.WHITE);
-                panelRound.setBackground(new Color(32,34,37)); 
+                panelRound.setBackground(new Color(47, 49, 54));
                 break;
             case 2:
-                
-                PanelGrafica1.setBackground(new Color(253,255,254));
-                PanelGrafica2.setBackground(new Color(253,255,254));
-                PanelGrafica3.setBackground(new Color(253,255,254));
+
+                PanelGrafica1.setBackground(new Color(253, 255, 254));
+                PanelGrafica2.setBackground(new Color(253, 255, 254));
+                PanelGrafica3.setBackground(new Color(253, 255, 254));
+                jPanel10.setBackground(new Color(231,234,239));
+                jPanel11.setBackground(new Color(231,234,239));
+                jPanel4.setBackground(new Color(231,234,239));
+                panelRound1.setBackground(new Color(231,234,239));
+                panelRound2.setBackground(new Color(231,234,239));
+                pnlWestNotifi.setBackground(new Color(231,234,239));
+                pnlNorthNotifi.setBackground(new Color(231,234,239));
+                panelRound6.setBackground(new Color(231,234,239));
+                jPanel6.setBackground(new Color(231,234,239));
+                panelRound3.setBackground(new Color(231,234,239));
+                jPanel5.setBackground(new Color(231,224,239));
+                panelRound.setBackground(new Color(231,234,239));
                 lblNoti.setForeground(Color.BLACK);
-                PanelNotificaciones.setBackground(new Color(253,255,254));
+                PanelNotificaciones.setBackground(new Color(253, 255, 254));
                 break;
-                
+
         }
     }
 
-    public void mod(){
+    public void mod() {
         if (ValidacionesSistema.ValidacionesBeep_Go.getModo() == 1) {
-            
-            PanelGrafica1.setBackground(new Color(32,34,37));
-            PanelGrafica2.setBackground(new Color(32,34,37));
-            PanelGrafica3.setBackground(new Color(32,34,37));
+            PanelGrafica1.setBackground(new Color(32, 34, 37));
+            PanelGrafica2.setBackground(new Color(32, 34, 37));
+            PanelGrafica3.setBackground(new Color(32, 34, 37));
+            jPanel10.setBackground(new Color(47, 49, 54));
+            jPanel4.setBackground(new Color(47, 49, 54));
+            jPanel11.setBackground(new Color(47, 49, 54));
+            panelRound1.setBackground(new Color(47, 49, 54));
+            panelRound2.setBackground(new Color(47, 49, 54));
+            PanelNotificaciones.setBackground(new Color(32, 34, 37));
+            pnlWestNotifi.setBackground(new Color(47, 49, 54));
+            pnlNorthNotifi.setBackground(new Color(47, 49, 54));
+            jPanel6.setBackground(new Color(47, 49, 54));
+            panelRound3.setBackground(new Color(47, 49, 54));
+            panelRound6.setBackground(new Color(47, 49, 54));
+            jPanel5.setBackground(new Color(47, 49, 54));
             lblNoti.setForeground(Color.WHITE);
-            PanelNotificaciones.setBackground(new Color(32,34,37)); 
-        }else if(ValidacionesSistema.ValidacionesBeep_Go.getModo() == 2){
-            
-            PanelGrafica1.setBackground(new Color(253,255,254));
-            PanelGrafica2.setBackground(new Color(253,255,254));
-            PanelGrafica3.setBackground(new Color(253,255,254));
+            panelRound.setBackground(new Color(47, 49, 54));
+        } else if (ValidacionesSistema.ValidacionesBeep_Go.getModo() == 2) {
+
+            PanelGrafica1.setBackground(new Color(253, 255, 254));
+            PanelGrafica2.setBackground(new Color(253, 255, 254));
+            PanelGrafica3.setBackground(new Color(253, 255, 254));
             lblNoti.setForeground(Color.BLACK);
-            PanelNotificaciones.setBackground(new Color(253,255,254));             
+            PanelNotificaciones.setBackground(new Color(253, 255, 254));
         }
     }
-     /**
+
+    /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
@@ -240,7 +277,7 @@ public class PanelDashboard extends javax.swing.JPanel {
         add(panelRound2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Controles_Personalizados.Paneles.PanelRound PanelGrafica1;
     private Controles_Personalizados.Paneles.PanelRound PanelGrafica2;

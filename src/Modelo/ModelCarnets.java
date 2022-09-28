@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * This class stores all the sentences necessary for the correct functioning of the id - cards section
+ *
  * @author danlo
  */
 public class ModelCarnets {
@@ -19,10 +19,6 @@ public class ModelCarnets {
     PreparedStatement ps;
     Connection con;
 
-    /**
-     * Load the view that filters the registers of the user's that have an id - card
-     * @return a ResultSet
-     */
     public ResultSet cargarTablaConCarnet() {
         try {
             con = ModelConexion.getConnection();
@@ -36,10 +32,6 @@ public class ModelCarnets {
         }
     }
 
-    /**
-     *  Load the view that filters the registers of the user's that doesn't have an id - card
-     * @return a ResultSet
-     */
     public ResultSet cargarTablaSinCarnet() {
         try {
             con = ModelConexion.getConnection();
@@ -52,12 +44,6 @@ public class ModelCarnets {
             return null;
         }
     }
-
-    /**
-     * This method generates the barcode for the id - cards
-     * @param idPersonal referring to the staff ID
-     * @return a ResultSet
-     */
     public ResultSet generabarra(int idPersonal){
         try {
             con=ModelConexion.getConnection();
@@ -71,13 +57,6 @@ public class ModelCarnets {
             return  null;
         }
     }
-
-    /**
-     * This method inserts the information of the id - card
-     * @param idpersonal referring to the staff ID
-     * @param carnet referring to the string of id - card
-     * @return a Boolean
-     */
     public boolean IngresandoCarnet(int idpersonal, String carnet){
         try {
             con=ModelConexion.getConnection();
@@ -93,4 +72,31 @@ public class ModelCarnets {
         }
     }
 
+    public ResultSet BuscarID(String carnet) {
+        try {
+            con = ModelConexion.getConnection();
+            String query = "SELECT idPersonal FROM tbPersonal WHERE Carnet = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, carnet);
+            ResultSet rs = ps.executeQuery();
+            return rs;
+        } catch (Exception e) {
+            System.out.println("Error"+e.toString());
+            return null;
+        }
+    }
+    
+    public ResultSet BuscarImagen(int ID) {
+        try {
+            con = ModelConexion.getConnection();
+            String query = "SELECT imagen FROM tbUsuarios WHERE idPersonal = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, ID);
+            ResultSet rs = ps.executeQuery();
+            return rs;
+        } catch (Exception e) {
+            System.out.println("Error"+e.toString());
+            return null;
+        }
+    }
 }

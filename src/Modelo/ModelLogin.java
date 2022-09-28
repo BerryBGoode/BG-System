@@ -12,13 +12,16 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
- *  This class stores all the sentences necessary for the correct functioning of the login process
+ * This class stores all the sentences necessary for the correct functioning of
+ * the login process
+ *
  * @author danlo
  */
 public class ModelLogin {
 
     /**
      * Validates that the user exist
+     *
      * @param usuario referring to the username of the user
      * @return an Integer
      */
@@ -45,7 +48,8 @@ public class ModelLogin {
     }
 
     /**
-     *  Recovers the information of the user to compare it 
+     * Recovers the information of the user to compare it
+     *
      * @param usuario referring to the username
      * @param clave referring to the user's password
      * @return an Integer
@@ -74,7 +78,8 @@ public class ModelLogin {
     }
 
     /**
-     *  Validates the user status 
+     * Validates the user status
+     *
      * @param usuario referring to the username of the user
      * @return an Integer
      */
@@ -101,7 +106,8 @@ public class ModelLogin {
     }
 
     /**
-     *  Update the information of the user if the login process is correct
+     * Update the information of the user if the login process is correct
+     *
      * @param usuario referring to the username of the user
      * @return a Boolean
      */
@@ -122,8 +128,9 @@ public class ModelLogin {
     }
 
     /**
-     *  Update the attempts for login 
-     * @param intentos referring to the attempts 
+     * Update the attempts for login
+     *
+     * @param intentos referring to the attempts
      * @param usuario referring to the username of the user
      * @return a Boolean
      */
@@ -145,7 +152,8 @@ public class ModelLogin {
     }
 
     /**
-     *  Capture the number of attempts 
+     * Capture the number of attempts
+     *
      * @param usuario referring to the username
      * @return a ResultSet
      */
@@ -164,9 +172,26 @@ public class ModelLogin {
         }
     }
 
+    public static ResultSet validaruseractive(String user) {
+        Connection con;
+        PreparedStatement ps;
+        try {
+            con = ModelConexion.getConnection();
+            String query = "select * from tbUsuarios Where nombre_usuario=?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, user);
+            ResultSet rs = ps.executeQuery();
+            return rs;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return null;
+        }
+    }
+
     /**
-     *  Capture all the user's information
-     * @param usuario referring to username 
+     * Capture all the user's information
+     *
+     * @param usuario referring to username
      * @return a ResultSet
      */
     public static ResultSet CapturarDatos(String usuario) {
@@ -183,13 +208,14 @@ public class ModelLogin {
             return null;
         }
     }
-    
+
     /**
-     *  Capture the user type of the user that logins
+     * Capture the user type of the user that logins
+     *
      * @param usuario referring to the username of the user
      * @return a ResultSet
      */
-    public static ResultSet CapturarTipoUs(String usuario){
+    public static ResultSet CapturarTipoUs(String usuario) {
         Connection con;
         PreparedStatement ps;
         try {
@@ -198,8 +224,24 @@ public class ModelLogin {
             ps.setString(1, usuario);
             ResultSet rs = ps.executeQuery();
             return rs;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return null;
+        }
+    }
+    public static boolean ActualizarEstadoUserLogin(int estado, int idusuario){
+       Connection con;
+       PreparedStatement ps;
+        try {
+            con=ModelConexion.getConnection();
+            String query="UPDATE tbUsuarios SET idEstadoUsuario=? WHERE idUsuario=?";
+            ps=con.prepareStatement(query);
+            ps.setInt(1, estado);
+            ps.setInt(2, idusuario);
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
         }
     }
 }

@@ -5,11 +5,12 @@
  */
 package Vista;
 
-import Controlador.ControllerP_U_Usuarios;
-import Controlador.ControllerRecuperacionContra;
-import java.util.HashSet;
-import java.util.Objects;
+import Controlador.ControllerAjustes;
+import java.awt.event.KeyEvent;
+import java.sql.ResultSet;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -21,8 +22,11 @@ public class PanelAjustes extends javax.swing.JPanel {
      * Creates new form PanelAjustes
      */
     
-        public String user;
-
+    public String user;
+    FrmConfigConection objcon = new FrmConfigConection();
+    ControllerAjustes objcontroller = new ControllerAjustes();
+    private String ContraA;
+    FrmLogin objlog = new FrmLogin();
 
     public String getUser() {
         return user;
@@ -34,28 +38,14 @@ public class PanelAjustes extends javax.swing.JPanel {
     
     public PanelAjustes(String usuario) {
         initComponents();
+        txtPIN.setEchoChar('•');
+        txtConfirmarPIN.setEchoChar('•');
+        txtContraAntigua.setEchoChar('•');
+        txtContra.setEchoChar('•');
+        txtConfirmarContra.setEchoChar('•');
         user = usuario;
-        txtUsuario.setText(usuario);
+        txtUsuarioPIN.setText(usuario);
     }
-    
-        void CambiarClave() {
-        if (Objects.equals(txtClveNueva.getText(), txtConfirmarClave.getText())) {
-            ControllerP_U_Usuarios cc = new ControllerP_U_Usuarios();
-            cc.setUsuario(user);
-            cc.setClave(ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra(txtConfirmarClave.getText()));
-            if (cc.CambiandoClave() == true) {
-                JOptionPane.showMessageDialog(null, "Su contraseña ha sido agregada, el sistema cerrara  para \nque pueda iniciar desde el login con sus nuevas credenciales");
-                System.exit(0);
-               
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al realizar el proceso");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Las claves ingresadas deden de ser las mismas", "Contraseña incorrecta", JOptionPane.WARNING_MESSAGE);
-
-        }
-    }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,14 +56,15 @@ public class PanelAjustes extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelRound3 = new Controles_Personalizados.Paneles.PanelRound();
         PanelFondo = new Controles_Personalizados.Paneles.PanelRound();
         PanelContenedorCambioContra = new Controles_Personalizados.Paneles.PanelRound();
-        txtUsuario = new Controles_Personalizados.textfields.TextField();
+        txtUsuarioPIN = new Controles_Personalizados.textfields.TextField();
         lblCambioClave = new javax.swing.JLabel();
         imgCambio = new javax.swing.JLabel();
-        btnCambio = new Controles_Personalizados.Botones.UWPButton();
-        txtConfirmarClave = new Controles_Personalizados.textfields.PasswordField();
-        txtClveNueva = new Controles_Personalizados.textfields.PasswordField();
+        btnCambiarPIN = new Controles_Personalizados.Botones.UWPButton();
+        txtConfirmarPIN = new Controles_Personalizados.textfields.PasswordField();
+        txtPIN = new Controles_Personalizados.textfields.PasswordField();
         PanelContenedorIdiomas = new Controles_Personalizados.Paneles.PanelRound();
         lblIdiomas = new javax.swing.JLabel();
         panelRound5 = new Controles_Personalizados.Paneles.PanelRound();
@@ -85,10 +76,25 @@ public class PanelAjustes extends javax.swing.JPanel {
         lblTemas = new javax.swing.JLabel();
         panelRound1 = new Controles_Personalizados.Paneles.PanelRound();
         panelRound2 = new Controles_Personalizados.Paneles.PanelRound();
+        PanelContenedorCambioContra1 = new Controles_Personalizados.Paneles.PanelRound();
+        lblCambioClave1 = new javax.swing.JLabel();
+        imgCambio1 = new javax.swing.JLabel();
+        txtCambiarContra = new Controles_Personalizados.Botones.UWPButton();
+        txtConfirmarContra = new Controles_Personalizados.textfields.PasswordField();
+        txtContraAntigua = new Controles_Personalizados.textfields.PasswordField();
+        txtContra = new Controles_Personalizados.textfields.PasswordField();
 
         setBackground(new java.awt.Color(42, 36, 56));
         setPreferredSize(new java.awt.Dimension(1250, 620));
         setLayout(new java.awt.BorderLayout());
+
+        panelRound3.setBackground(new java.awt.Color(58, 50, 75));
+        panelRound3.setRoundBottomLeft(30);
+        panelRound3.setRoundBottomRight(30);
+        panelRound3.setRoundTopLeft(30);
+        panelRound3.setRoundTopRight(30);
+        panelRound3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(panelRound3, java.awt.BorderLayout.CENTER);
 
         PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
         PanelFondo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -104,69 +110,85 @@ public class PanelAjustes extends javax.swing.JPanel {
         PanelContenedorCambioContra.setRoundTopRight(30);
         PanelContenedorCambioContra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtUsuario.setEditable(false);
-        txtUsuario.setBackground(new java.awt.Color(42, 36, 56));
-        txtUsuario.setForeground(new java.awt.Color(231, 234, 239));
-        txtUsuario.setCaretColor(new java.awt.Color(231, 234, 239));
-        txtUsuario.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        txtUsuario.setLabelText("Usuario");
-        txtUsuario.setLineColor(new java.awt.Color(231, 234, 239));
-        txtUsuario.addActionListener(new java.awt.event.ActionListener() {
+        txtUsuarioPIN.setEditable(false);
+        txtUsuarioPIN.setBackground(new java.awt.Color(42, 36, 56));
+        txtUsuarioPIN.setForeground(new java.awt.Color(231, 234, 239));
+        txtUsuarioPIN.setCaretColor(new java.awt.Color(231, 234, 239));
+        txtUsuarioPIN.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        txtUsuarioPIN.setLabelText("Usuario");
+        txtUsuarioPIN.setLineColor(new java.awt.Color(231, 234, 239));
+        txtUsuarioPIN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtUsuarioActionPerformed(evt);
+                txtUsuarioPINActionPerformed(evt);
             }
         });
-        PanelContenedorCambioContra.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 180, 70));
+        PanelContenedorCambioContra.add(txtUsuarioPIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 180, 70));
 
         lblCambioClave.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         lblCambioClave.setForeground(new java.awt.Color(231, 234, 239));
-        lblCambioClave.setText("Cambio de contraseña");
-        PanelContenedorCambioContra.add(lblCambioClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        lblCambioClave.setText("Cambio de PIN de seguridad");
+        PanelContenedorCambioContra.add(lblCambioClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        imgCambio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/reset-adentrosystem.png"))); // NOI18N
+        imgCambio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/pinajustes.png"))); // NOI18N
         PanelContenedorCambioContra.add(imgCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, -1, -1));
 
-        btnCambio.setBackground(new java.awt.Color(42, 36, 56));
-        btnCambio.setText("Confirmar Cambio");
-        btnCambio.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        btnCambio.addActionListener(new java.awt.event.ActionListener() {
+        btnCambiarPIN.setBackground(new java.awt.Color(42, 36, 56));
+        btnCambiarPIN.setText("Confirmar Cambio");
+        btnCambiarPIN.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        btnCambiarPIN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCambioActionPerformed(evt);
+                btnCambiarPINActionPerformed(evt);
             }
         });
-        PanelContenedorCambioContra.add(btnCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 245, 140, 40));
+        PanelContenedorCambioContra.add(btnCambiarPIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 245, 140, 40));
 
-        txtConfirmarClave.setBackground(new java.awt.Color(42, 36, 56));
-        txtConfirmarClave.setForeground(new java.awt.Color(231, 234, 239));
-        txtConfirmarClave.setCaretColor(new java.awt.Color(231, 234, 239));
-        txtConfirmarClave.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        txtConfirmarClave.setLabelText("Confirmar Contraseña");
-        txtConfirmarClave.setLineColor(new java.awt.Color(231, 234, 239));
-        txtConfirmarClave.setPreferredSize(new java.awt.Dimension(45, 6));
-        txtConfirmarClave.setShowAndHide(true);
-        txtConfirmarClave.addActionListener(new java.awt.event.ActionListener() {
+        txtConfirmarPIN.setBackground(new java.awt.Color(42, 36, 56));
+        txtConfirmarPIN.setForeground(new java.awt.Color(231, 234, 239));
+        txtConfirmarPIN.setCaretColor(new java.awt.Color(231, 234, 239));
+        txtConfirmarPIN.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        txtConfirmarPIN.setLabelText("Confirmar PIN");
+        txtConfirmarPIN.setLineColor(new java.awt.Color(231, 234, 239));
+        txtConfirmarPIN.setPreferredSize(new java.awt.Dimension(45, 6));
+        txtConfirmarPIN.setShowAndHide(true);
+        txtConfirmarPIN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtConfirmarClaveActionPerformed(evt);
+                txtConfirmarPINActionPerformed(evt);
             }
         });
-        PanelContenedorCambioContra.add(txtConfirmarClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 180, 70));
-
-        txtClveNueva.setBackground(new java.awt.Color(42, 36, 56));
-        txtClveNueva.setForeground(new java.awt.Color(231, 234, 239));
-        txtClveNueva.setCaretColor(new java.awt.Color(231, 234, 239));
-        txtClveNueva.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        txtClveNueva.setLabelText("Contraseña Nueva");
-        txtClveNueva.setLineColor(new java.awt.Color(231, 234, 239));
-        txtClveNueva.setPreferredSize(new java.awt.Dimension(45, 6));
-        txtClveNueva.setShowAndHide(true);
-        txtClveNueva.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtClveNuevaActionPerformed(evt);
+        txtConfirmarPIN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtConfirmarPINKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtConfirmarPINKeyTyped(evt);
             }
         });
-        PanelContenedorCambioContra.add(txtClveNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 180, 70));
+        PanelContenedorCambioContra.add(txtConfirmarPIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 180, 70));
 
-        PanelFondo.add(PanelContenedorCambioContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 310, 460, 300));
+        txtPIN.setBackground(new java.awt.Color(42, 36, 56));
+        txtPIN.setForeground(new java.awt.Color(231, 234, 239));
+        txtPIN.setCaretColor(new java.awt.Color(231, 234, 239));
+        txtPIN.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        txtPIN.setLabelText("PIN Nuevo");
+        txtPIN.setLineColor(new java.awt.Color(231, 234, 239));
+        txtPIN.setPreferredSize(new java.awt.Dimension(45, 6));
+        txtPIN.setShowAndHide(true);
+        txtPIN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPINActionPerformed(evt);
+            }
+        });
+        txtPIN.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPINKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPINKeyTyped(evt);
+            }
+        });
+        PanelContenedorCambioContra.add(txtPIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 180, 70));
+
+        PanelFondo.add(PanelContenedorCambioContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 460, 300));
 
         PanelContenedorIdiomas.setBackground(new java.awt.Color(42, 36, 56));
         PanelContenedorIdiomas.setRoundBottomLeft(30);
@@ -190,16 +212,16 @@ public class PanelAjustes extends javax.swing.JPanel {
         panelRound5.setLayout(panelRound5Layout);
         panelRound5Layout.setHorizontalGroup(
             panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 330, Short.MAX_VALUE)
+            .addGap(0, 240, Short.MAX_VALUE)
         );
         panelRound5Layout.setVerticalGroup(
             panelRound5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 160, Short.MAX_VALUE)
+            .addGap(0, 240, Short.MAX_VALUE)
         );
 
-        PanelContenedorIdiomas.add(panelRound5, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, -1, -1));
+        PanelContenedorIdiomas.add(panelRound5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 240, 240));
 
-        PanelFondo.add(PanelContenedorIdiomas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 750, 300));
+        PanelFondo.add(PanelContenedorIdiomas, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, 280, 300));
 
         lblAjustes.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
         lblAjustes.setForeground(new java.awt.Color(58, 50, 75));
@@ -269,7 +291,89 @@ public class PanelAjustes extends javax.swing.JPanel {
 
         PanelFondo.add(PanelContenedorTemas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 750, 230));
 
-        add(PanelFondo, java.awt.BorderLayout.CENTER);
+
+        PanelContenedorCambioContra1.setBackground(new java.awt.Color(42, 36, 56));
+        PanelContenedorCambioContra1.setRoundBottomLeft(30);
+        PanelContenedorCambioContra1.setRoundBottomRight(30);
+        PanelContenedorCambioContra1.setRoundTopLeft(30);
+        PanelContenedorCambioContra1.setRoundTopRight(30);
+        PanelContenedorCambioContra1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblCambioClave1.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
+        lblCambioClave1.setForeground(new java.awt.Color(231, 234, 239));
+        lblCambioClave1.setText("Cambio de contraseña");
+        PanelContenedorCambioContra1.add(lblCambioClave1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        imgCambio1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/reset-adentrosystem.png"))); // NOI18N
+        PanelContenedorCambioContra1.add(imgCambio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, -1, -1));
+
+        txtCambiarContra.setBackground(new java.awt.Color(42, 36, 56));
+        txtCambiarContra.setText("Confirmar Cambio");
+        txtCambiarContra.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        txtCambiarContra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCambiarContraActionPerformed(evt);
+            }
+        });
+        PanelContenedorCambioContra1.add(txtCambiarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 245, 140, 40));
+
+        txtConfirmarContra.setBackground(new java.awt.Color(42, 36, 56));
+        txtConfirmarContra.setForeground(new java.awt.Color(231, 234, 239));
+        txtConfirmarContra.setCaretColor(new java.awt.Color(231, 234, 239));
+        txtConfirmarContra.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        txtConfirmarContra.setLabelText("Confirmar contraseña ");
+        txtConfirmarContra.setLineColor(new java.awt.Color(231, 234, 239));
+        txtConfirmarContra.setPreferredSize(new java.awt.Dimension(45, 6));
+        txtConfirmarContra.setShowAndHide(true);
+        txtConfirmarContra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtConfirmarContraKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtConfirmarContraKeyTyped(evt);
+            }
+        });
+        PanelContenedorCambioContra1.add(txtConfirmarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 180, 70));
+
+        txtContraAntigua.setBackground(new java.awt.Color(42, 36, 56));
+        txtContraAntigua.setForeground(new java.awt.Color(231, 234, 239));
+        txtContraAntigua.setCaretColor(new java.awt.Color(231, 234, 239));
+        txtContraAntigua.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        txtContraAntigua.setLabelText("Contraseña antigua");
+        txtContraAntigua.setLineColor(new java.awt.Color(231, 234, 239));
+        txtContraAntigua.setPreferredSize(new java.awt.Dimension(45, 6));
+        txtContraAntigua.setShowAndHide(true);
+        txtContraAntigua.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtContraAntiguaKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtContraAntiguaKeyTyped(evt);
+            }
+        });
+        PanelContenedorCambioContra1.add(txtContraAntigua, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 180, 70));
+
+        txtContra.setBackground(new java.awt.Color(42, 36, 56));
+        txtContra.setForeground(new java.awt.Color(231, 234, 239));
+        txtContra.setCaretColor(new java.awt.Color(231, 234, 239));
+        txtContra.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        txtContra.setLabelText("Contraseña nueva");
+        txtContra.setLineColor(new java.awt.Color(231, 234, 239));
+        txtContra.setPreferredSize(new java.awt.Dimension(45, 6));
+        txtContra.setShowAndHide(true);
+        txtContra.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtContraKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtContraKeyTyped(evt);
+            }
+        });
+        PanelContenedorCambioContra1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 180, 70));
+
+        PanelFondo.add(PanelContenedorCambioContra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 310, 460, 300));
+
+        add(PanelFondo, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
     public static int exitdash = 0;
@@ -278,52 +382,237 @@ public class PanelAjustes extends javax.swing.JPanel {
         return exitdash;
     }
     
-    //FrmDashboard dash = new FrmDashboard();
     FrmLogin login = new FrmLogin();
-    
-
-    
+  
     private void VerificarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerificarTipoActionPerformed
         // TODO add your handling code here:
+        String tipo = FrmLogin.tipo;
+        JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+        if(tipo.equals("Root")){
+            if(objcon.isVisible()){
+                objcon.toFront();
+                frame.dispose();
+            }else{
+                objcon.setVisible(true);
+                frame.dispose();
+            }
+        }else{
+            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Permisos insuficientes", "Debe ser un usuario root para acceder a este apartado", 3);
+        }
     }//GEN-LAST:event_VerificarTipoActionPerformed
 
-    private void btnCambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambioActionPerformed
+    private void txtUsuarioPINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioPINActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsuarioPINActionPerformed
+
+    private void txtPINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPINActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPINActionPerformed
+
+    private void txtConfirmarPINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmarPINActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtConfirmarPINActionPerformed
+
+    void CambiarPIN(){
+       if(txtPIN.getText().equals("") || txtConfirmarPIN.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Campos vacios");
+        }else if(! txtPIN.getText().equals(txtConfirmarPIN.getText())){
+            JOptionPane.showMessageDialog(this, "Los PIN no coinciden");
+        }else if(txtPIN.getText().length() < 4){
+            JOptionPane.showMessageDialog(this, "El PIN ingresado no tiene el formato correcto");
+        }else{
+            objcontroller.setUsuario(txtUsuarioPIN.getText());
+            String PIN = ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra(txtPIN.getText());
+            objcontroller.setPIN(PIN);
+            boolean respuesta = objcontroller.CambiarPIN();
+            if(respuesta == true){
+                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado","PIN actualizado",1);
+                txtPIN.setText("");
+                txtConfirmarPIN.setText("");
+            }else{
+                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso no pudo ser completado","El PIN no pudo ser actualizado",3);
+            }
+        } 
+    }
+    
+    private void btnCambiarPINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarPINActionPerformed
         // TODO add your handling code here
-        CambiarClave();
-    }//GEN-LAST:event_btnCambioActionPerformed
+        CambiarPIN();
+    }//GEN-LAST:event_btnCambiarPINActionPerformed
 
-    private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
+    void CargarContraAntigua(){
+        ResultSet rs;
+        objcontroller.setUsuario(txtUsuarioPIN.getText());
+        rs = objcontroller.BuscarContraAntigua();
+        try {
+            if (rs.next()) {
+                ContraA = rs.getString("contraseña");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
+    }
+    
+    void CambiarContra(){
+        if(txtContra.getText().equals("") || txtConfirmarContra.getText().equals("") || txtContraAntigua.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Campos vacios");
+        }else if(txtContra.getText().equals(txtContraAntigua.getText())){
+            JOptionPane.showMessageDialog(this, "La contraseña a cambiar es igual a la contraseña antigua");
+        }else if(! txtContra.getText().equals(txtConfirmarContra.getText())){
+            JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden");
+        }else if(txtContra.getText().length() < 8){
+            JOptionPane.showMessageDialog(this, "La contraseña ingresada no tiene el formato correcto");
+        }else{
+            CargarContraAntigua();
+            if(! ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra(txtContraAntigua.getText()).equals(ContraA)){
+                JOptionPane.showMessageDialog(this, "La contraseña antigua es incorrecta");
+            }else{
+                String contra = ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra(txtContra.getText());
+                objcontroller.setUsuario(txtUsuarioPIN.getText());
+                objcontroller.setContra(contra);
+                
+                boolean respuesta = objcontroller.CambiarContra();
+                if(respuesta == true){
+                    ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado","Su contraseña ha sido actualizada",1);
+                    
+                    JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                    frame.dispose();
+                    objlog.setVisible(true);
+                }else{
+                     ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso no pudo ser completado","Su contraseña no pudo ser actualizada",3);
+                }
+            }
+        }
+    }
+    
+    private void txtCambiarContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCambiarContraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsuarioActionPerformed
+        CambiarContra();
+    }//GEN-LAST:event_txtCambiarContraActionPerformed
 
-    private void txtClveNuevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClveNuevaActionPerformed
+    private void txtPINKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPINKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtClveNuevaActionPerformed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtPIN.getText().equals("") && ! txtConfirmarPIN.getText().equals("")) {
+            CambiarPIN();
+        }else if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPINKeyPressed
 
-    private void txtConfirmarClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConfirmarClaveActionPerformed
+    private void txtConfirmarPINKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirmarPINKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtConfirmarClaveActionPerformed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtPIN.getText().equals("") && ! txtConfirmarPIN.getText().equals("")) {
+            CambiarPIN();
+        }else if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtConfirmarPINKeyPressed
+
+    private void txtPINKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPINKeyTyped
+        // TODO add your handling code here:
+        if(txtPIN.getText().length() >= 5){
+            evt.consume();
+        }else{
+            ValidacionesSistema.ValidacionesBeep_Go.SoloNumeros(evt);
+        }
+    }//GEN-LAST:event_txtPINKeyTyped
+
+    private void txtConfirmarPINKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirmarPINKeyTyped
+        // TODO add your handling code here:
+        if(txtConfirmarPIN.getText().length() >= 5){
+            evt.consume();
+        }else{
+            ValidacionesSistema.ValidacionesBeep_Go.SoloNumeros(evt);
+        }
+    }//GEN-LAST:event_txtConfirmarPINKeyTyped
+
+    private void txtContraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraKeyTyped
+        // TODO add your handling code here:
+        if(txtContra.getText().length() >= 30){
+            evt.consume();
+        }else{
+            ValidacionesSistema.ValidacionesBeep_Go.SinEspacios(evt);
+        }
+    }//GEN-LAST:event_txtContraKeyTyped
+
+    private void txtConfirmarContraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirmarContraKeyTyped
+        // TODO add your handling code here:
+        if(txtConfirmarContra.getText().length() >= 30){
+            evt.consume();
+        }else{
+            ValidacionesSistema.ValidacionesBeep_Go.SinEspacios(evt);
+        }
+    }//GEN-LAST:event_txtConfirmarContraKeyTyped
+
+    private void txtContraAntiguaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraAntiguaKeyTyped
+        // TODO add your handling code here:
+        if(txtContraAntigua.getText().length() >= 30){
+            evt.consume();
+        }else{
+            ValidacionesSistema.ValidacionesBeep_Go.SinEspacios(evt);
+        }
+    }//GEN-LAST:event_txtContraAntiguaKeyTyped
+
+    private void txtContraAntiguaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraAntiguaKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtContra.getText().equals("") && ! txtConfirmarContra.getText().equals("") && ! txtContraAntigua.getText().equals("")) {
+            CambiarContra();
+        }else if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtContraAntiguaKeyPressed
+
+    private void txtContraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtContra.getText().equals("") && ! txtConfirmarContra.getText().equals("") && ! txtContraAntigua.getText().equals("")) {
+            CambiarContra();
+        }else if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtContraKeyPressed
+
+    private void txtConfirmarContraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirmarContraKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtContra.getText().equals("") && ! txtConfirmarContra.getText().equals("") && ! txtContraAntigua.getText().equals("")) {
+            CambiarContra();
+        }else if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtConfirmarContraKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Controles_Personalizados.Paneles.PanelRound PanelContenedorCambioContra;
+    private Controles_Personalizados.Paneles.PanelRound PanelContenedorCambioContra1;
     private Controles_Personalizados.Paneles.PanelRound PanelContenedorConfiguracion;
     private Controles_Personalizados.Paneles.PanelRound PanelContenedorIdiomas;
     private Controles_Personalizados.Paneles.PanelRound PanelContenedorTemas;
     private Controles_Personalizados.Paneles.PanelRound PanelFondo;
     private Controles_Personalizados.Botones.UWPButton VerificarTipo;
-    private Controles_Personalizados.Botones.UWPButton btnCambio;
+    private Controles_Personalizados.Botones.UWPButton btnCambiarPIN;
     private javax.swing.JLabel imgCambio;
+    private javax.swing.JLabel imgCambio1;
     private javax.swing.JLabel lblAjustes;
     private javax.swing.JLabel lblCambioClave;
+    private javax.swing.JLabel lblCambioClave1;
     private javax.swing.JLabel lblIdiomas;
     private javax.swing.JLabel lblTemas;
     private Controles_Personalizados.Paneles.PanelRound panelRound1;
     private Controles_Personalizados.Paneles.PanelRound panelRound2;
+    private Controles_Personalizados.Paneles.PanelRound panelRound3;
     private Controles_Personalizados.Paneles.PanelRound panelRound5;
     private javax.swing.JLabel textoConfig;
-    private Controles_Personalizados.textfields.PasswordField txtClveNueva;
-    private Controles_Personalizados.textfields.PasswordField txtConfirmarClave;
-    private Controles_Personalizados.textfields.TextField txtUsuario;
+    private Controles_Personalizados.Botones.UWPButton txtCambiarContra;
+    private Controles_Personalizados.textfields.PasswordField txtConfirmarContra;
+    private Controles_Personalizados.textfields.PasswordField txtConfirmarPIN;
+    private Controles_Personalizados.textfields.PasswordField txtContra;
+    private Controles_Personalizados.textfields.PasswordField txtContraAntigua;
+    private Controles_Personalizados.textfields.PasswordField txtPIN;
+    private Controles_Personalizados.textfields.TextField txtUsuarioPIN;
     // End of variables declaration//GEN-END:variables
 }

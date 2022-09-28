@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="400" pageHeight="650" columnWidth="360" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="744583bb-03d5-4544-99f2-4b5d8cd99927">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="85"/>
+	<parameter name="idPersonal" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="imagenusu" class="java.io.InputStream">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CodBarra" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Plantilla" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tbPersonal."Carnet" AS tbPersonal_Carnet,
+     CONCAT(tbPersonal."nombre_p", ' ',  tbPersonal."apellido_p") AS tbPersonal_nombre_p,
+     tbTipoPersonal."tipo_personal" AS tbTipoPersonal_tipo_personal,
+     tbEmpresas."nombre_empresa" AS tbEmpresas_nombre_empresa
+FROM
+     "dbo"."tbTipoPersonal" tbTipoPersonal INNER JOIN "dbo"."tbPersonal" tbPersonal ON tbTipoPersonal."idTipoPersonal" = tbPersonal."idTipoPersonal"
+     INNER JOIN "dbo"."tbEmpresas" tbEmpresas ON tbPersonal."idEmpresa" = tbEmpresas."idEmpresa"
+WHERE
+     idPersonal = $P{idPersonal}]]>
+	</queryString>
+	<field name="tbPersonal_Carnet" class="java.lang.String"/>
+	<field name="tbPersonal_nombre_p" class="java.lang.String"/>
+	<field name="tbTipoPersonal_tipo_personal" class="java.lang.String"/>
+	<field name="tbEmpresas_nombre_empresa" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="600" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="361" height="600" uuid="f0aed4d1-b019-4e75-9713-8489b6790869"/>
+				<imageExpression><![CDATA[$P{Plantilla}.toString()]]></imageExpression>
+			</image>
+			<image vAlign="Middle">
+				<reportElement x="130" y="151" width="100" height="128" uuid="d2ea2d6a-f470-408c-96ca-8fd8a3f665db"/>
+				<imageExpression><![CDATA[$P{imagenusu}]]></imageExpression>
+			</image>
+			<image hAlign="Center">
+				<reportElement x="50" y="461" width="261" height="50" uuid="a524b949-14b7-46d9-bfd7-4883de23009c"/>
+				<imageExpression><![CDATA[$P{CodBarra}.toString()]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="17" y="103" width="319" height="53" forecolor="#3A324B" uuid="3f4f9f29-d7c4-4ca7-a012-808efe4b92e1"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbTipoPersonal_tipo_personal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="113" y="324" width="130" height="20" forecolor="#3A324B" uuid="ae1aaa93-7dcd-482d-8241-6ce057ec72ff"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbPersonal_Carnet}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="17" y="565" width="319" height="26" forecolor="#3A324B" uuid="b9e50766-0251-45ff-9903-a5aad9336db5"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbEmpresas_nombre_empresa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="17" y="300" width="319" height="21" forecolor="#3A324B" uuid="ef224374-b501-433e-be64-a58c987b6875"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbPersonal_nombre_p}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
