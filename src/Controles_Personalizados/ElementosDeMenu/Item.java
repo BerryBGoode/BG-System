@@ -6,7 +6,7 @@
 package Controles_Personalizados.ElementosDeMenu;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.AlphaComposite;
@@ -26,6 +26,10 @@ import javax.swing.border.EmptyBorder;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs 
+ * @author danlo
+ */
 public class Item extends JButton {
 
     private final Color mainColor = SystemColor.MAIN_COLOR_2;
@@ -36,6 +40,11 @@ public class Item extends JButton {
     private boolean mouseEnter;
     private float alpha;
 
+    /**
+     * Menu Items
+     * @param mainMenu Menu Structure
+     * @param index Index of menu
+     */
     public Item(boolean mainMenu, int index) {
         this.mainMenu = mainMenu;
         this.index = index;
@@ -128,6 +137,10 @@ public class Item extends JButton {
         }
     }
 
+    /**
+     *  Set Icon
+     * @param icon The icon design
+     */
     public void setGoogleIcon(GoogleMaterialDesignIcon icon) {
         if (icon != null) {
             this.icon = icon;
@@ -147,14 +160,26 @@ public class Item extends JButton {
         setGoogleIcon(icon);
     }
 
+    /**
+     *  Color of the menu
+     * @return Color
+     */
     public Color getMainColor() {
         return mainColor;
     }
 
+    /**
+     *  Get the Index
+     * @return an Integer
+     */
     public int getIndex() {
         return index;
     }
 
+    /**
+     *  Main Menu
+     * @return a Boolean
+     */
     public boolean isMainMenu() {
         return mainMenu;
     }

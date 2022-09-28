@@ -6,7 +6,7 @@
 package Controles_Personalizados.Calendario;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
@@ -17,12 +17,24 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs 
+ * @author danlo
+ */
 public final class Button extends JButton {
 
+    /**
+     *  Validates state
+     * @return a Boolean
+     */
     public boolean isPaintBackground() {
         return paintBackground;
     }
 
+    /**
+     *  Validates the state
+     * @param paintBackground referring to the paintBackground
+     */
     public void setPaintBackground(boolean paintBackground) {
         this.paintBackground = paintBackground;
     }
@@ -31,6 +43,9 @@ public final class Button extends JButton {
     private boolean paintBackground = true;
     private Color colorSelected;
 
+    /**
+     *  Constructor
+     */
     public Button() {
         setBorder(null);
         setContentAreaFilled(false);
@@ -52,10 +67,18 @@ public final class Button extends JButton {
         });
     }
 
+    /**
+     *  Gets the event
+     * @return Event
+     */
     public Event getEvent() {
         return event;
     }
 
+    /**
+     *  Set the event
+     * @param event referring to the event 
+     */
     public void setEvent(Event event) {
         this.event = event;
     }
@@ -76,10 +99,18 @@ public final class Button extends JButton {
         super.paint(grphcs);
     }
 
+    /**
+     *  Gets the color that has been selected
+     * @return
+     */
     public Color getColorSelected() {
         return colorSelected;
     }
 
+    /**
+     *  Set the selected Color
+     * @param colorSelected
+     */
     public void setColorSelected(Color colorSelected) {
         this.colorSelected = colorSelected;
     }

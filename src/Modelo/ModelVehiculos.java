@@ -9,14 +9,25 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *  This class stores all the sentences necessary for the correct functioning of the vehicle section
  * @author danlo
  */
 public class ModelVehiculos {
     
+    /**
+     *  PreparedStatement
+     */
     public static PreparedStatement ps;
+
+    /**
+     *  ResultSet
+     */
     public static ResultSet rs;
     
+    /**
+     *  Load all the information stored in the table
+     * @return a ResultSet
+     */
     public static ResultSet CargarTabla() {
         
         Connection connect;
@@ -34,6 +45,10 @@ public class ModelVehiculos {
         
     }
     
+    /**
+     *  Load the table with the information of the view
+     * @return a ResultSet
+     */
     public static ResultSet CargarTabla_Personal() {
         
         Connection connect;
@@ -51,6 +66,13 @@ public class ModelVehiculos {
         
     }
 
+    /**
+     *  Save vehicle
+     * @param idpersonal referring to the staff ID
+     * @param placa referring to the license plate
+     * @param color referring to the color of the vehicle
+     * @return a Boolean
+     */
     public static boolean RegistrarVehiculo(int idpersonal, String placa, String color) {
         Connection connect;
         try {
@@ -69,6 +91,14 @@ public class ModelVehiculos {
         
     }
     
+    /**
+     * Update vehicle 
+     * @param idVehiculo referring to the Vehicle ID
+     * @param idpersonal referring to the staff ID
+     * @param placa referring to the license plate
+     * @param color referring to the color of the vehicle
+     * @return a Boolean
+     */
     public static boolean ActualizarVehiculo(int idVehiculo, int idpersonal, String placa, String color) {
       Connection connect;
       try {
@@ -87,6 +117,11 @@ public class ModelVehiculos {
       }
     }
     
+    /**
+     * Delete the vehicle filter by a search parameter
+     * @param idVehiculo referring to the vehicle ID
+     * @return a Boolean
+     */
     public static boolean EliminarVehiculo(int idVehiculo) {
         Connection connect;
         try {

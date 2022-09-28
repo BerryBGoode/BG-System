@@ -11,7 +11,7 @@ import com.sun.org.apache.bcel.internal.util.ByteSequence;
 import java.sql.ResultSet;
 
 /**
- *
+ *  This class stores and connects the ModelP_U_Empresa with the view, and makes possible the communication between both
  * @author Ander
  */
 public class ControllerP_U_Empresa {
@@ -26,128 +26,128 @@ public class ControllerP_U_Empresa {
     public byte [] logo;
 
     /**
-     * Metodo para obtener el IDEmpresa
-     * @return 
+     * Method to obtain the company ID
+     * @return an Integer
      */
     public Integer getIdEmpresa() {
         return idEmpresa;
     }
 
     /**
-     * Metodo para establecer el IDEmpresa
-     * @param idEmpresa 
+     * Method to establish the company ID
+     * @param idEmpresa referring to the company ID
      */
     public void setIdEmpresa(Integer idEmpresa) {
         this.idEmpresa = idEmpresa;
     }
 
     /**
-     * Metodo para obtener el nombre de la empresa
-     * @return 
+     * Method to get company name
+     * @return a String 
      */
     public String getNombre_empresa() {
         return nombre_empresa;
     }
 
     /**
-     * Metodo para establecer el nombre de la empresa
-     * @param nombre_empresa 
+     * Method to set the company name
+     * @param nombre_empresa referring to the company name
      */
     public void setNombre_empresa(String nombre_empresa) {
         this.nombre_empresa = nombre_empresa;
     }
 
     /**
-     * Metodo para obtener el nombre del representante legal
-     * @return 
+     * Method to obtain the name of the legal representative
+     * @return a String
      */
     public String getRepresentante() {
         return representante;
     }
 
     /**
-     * Metodo para establecer el nombre del representante legal
-     * @param representante 
+     * Method to establish the name of the legal representative
+     * @param representante referring to the representative name
      */
     public void setRepresentante(String representante) {
         this.representante = representante;
     }
 
     /**
-     * Metodo para obtener la dirección de la empresa
-     * @return 
+     * Method to obtain the address of the company
+     * @return a String
      */
     public String getDireccion() {
         return direccion;
     }
 
     /**
-     * Metodo para establecer la dirección de la empresa
-     * @param direccion 
+     * Method to establish the address of the company
+     * @param direccion referring to the address of the company
      */
     public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 
     /**
-     * Metodo para obtener el NIT
-     * @return 
+     * Method to obtain the NIT
+     * @return a String
      */
     public String getNit() {
         return nit;
     }
 
     /**
-     * Metodo para establecer el NIT
-     * @param nit 
+     * Method to establish the NIT
+     * @param nit referring to the type of document 
      */
     public void setNit(String nit) {
         this.nit = nit;
     }
 
     /**
-     * Metodo para obtener el CNR
-     * @return 
+     * Method to obtain the CNR
+     * @return a String
      */
     public String getCnr() {
         return cnr;
     }
 
     /**
-     * Metodo para establecer el CNR
-     * @param cnr 
+     * Method to establish the CNR
+     * @param cnr referring to the register number of the company
      */
     public void setCnr(String cnr) {
         this.cnr = cnr;
     }
 
     /**
-     * Metodo para obtener el logo de la empresa
-     * @return 
+     * Method to obtain the company logo
+     * @return a Byte[]
      */
     public byte[] getLogo() {
         return logo;
     }
 
     /**
-     * Metodo para establecer el logo de la empresa
-     * @param logo 
+     * Method to establish the company logo
+     * @param logo referring to the company logo
      */
     public void setLogo(byte[] logo) {
         this.logo = logo;
     }
    
     /**
-     * Metodo para comprobar si existe una empresa en la base de datos
-     * @return 
+     * Method to check if a company exists in the database
+     * @return a Boolean
      */
     public boolean checkEnterprise(){
         return ModelpEmpresa.checkEnterprise();
     }
     
     /**
-     * Metodo para ingresar una empresa
-     * @return 
+     * Method to register a company
+     * @return a Boolean
      */
     public boolean IngresarP_EmpresaController(){
         return ModelpEmpresa.IngresarPEmpresa(nombre_empresa, representante, direccion, nit, cnr,logo);

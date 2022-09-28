@@ -167,11 +167,6 @@ public class PanelVehiculos extends javax.swing.JPanel {
         btnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
         btnInforme.setText("Informe");
         btnInforme.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        btnInforme.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInformeActionPerformed(evt);
-            }
-        });
         jPanel5.add(btnInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 150, 40));
 
         jPanel2.add(jPanel5, java.awt.BorderLayout.CENTER);
@@ -221,9 +216,6 @@ public class PanelVehiculos extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TbVehiculosMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                TbVehiculosMouseEntered(evt);
-            }
         });
         jScrollPane1.setViewportView(TbVehiculos);
 
@@ -262,9 +254,9 @@ public class PanelVehiculos extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void btnInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformeActionPerformed
+    private void btnInformeActionPerformed(java.awt.event.ActionEvent evt) {                                           
         ImprimirReporte();
-    }//GEN-LAST:event_btnInformeActionPerformed
+    }                                          
 
     private void TbVehiculosMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbVehiculosMouseMoved
         // TODO add your handling code here:
@@ -321,17 +313,16 @@ public class PanelVehiculos extends javax.swing.JPanel {
 
     }//GEN-LAST:event_TbVehiculosMouseClicked
 
-    private void TbVehiculosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbVehiculosMouseEntered
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_TbVehiculosMouseEntered
 
     void ImprimirReporte() {
         Connection con = ControllerConexion.getConnectionModel();
         try {
             String path = "src/DocsReport/VehiculosReporte.jasper";
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(path);
-            JasperPrint jp = JasperFillManager.fillReport(jr, null, con);
+            Map param = new HashMap();
+            param.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
+            param.put("Pie", "src\\Recursos_Proyecto\\TextoLogin.png");
+            JasperPrint jp = JasperFillManager.fillReport(jr, param, con);
             JasperViewer jv = new JasperViewer(jp, false);
             jv.setVisible(true);
             System.out.println("si, se imprime");
@@ -347,6 +338,8 @@ public class PanelVehiculos extends javax.swing.JPanel {
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(path);
             Map param = new HashMap<>();
             param.put("idVehiculo", idvehiculo);
+            param.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
+            param.put("Pie", "src\\Recursos_Proyecto\\TextoLogin.png");
             System.out.println(idvehiculo);
             JasperPrint jp = JasperFillManager.fillReport(jr, param, con);
             JasperViewer jv = new JasperViewer(jp, false);

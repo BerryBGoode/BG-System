@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *  This class stores all the sentences necessary for the correct functioning of the company checking process
  * @author danlo
  */
 public class ModelP_U_Empresa {
@@ -22,8 +22,8 @@ public class ModelP_U_Empresa {
     Connection con;
 
     /**
-     * Metodo para comprobar si hay una empresa ingresada en la base de datos
-     * @return 
+     * Method to check if there is a company entered in the database
+     * @return a Boolean
      */
     public boolean checkEnterprise(){
     
@@ -40,14 +40,14 @@ public class ModelP_U_Empresa {
     //Crear parametro tipo byte
     
     /**
-     * Metodo para ingresar una empresa
-     * @param nombre
-     * @param representante_Legal
-     * @param direccion
-     * @param NIT
-     * @param CNR
-     * @param logo
-     * @return 
+     *Method to register a company
+     * @param nombre referring to the company name
+     * @param representante_Legal referring to the legal representative
+     * @param direccion referring to the address of the company
+     * @param NIT referring to the NIT number of the company
+     * @param CNR referring to the CNR of the company
+     * @param logo referring to the logo of the company
+     * @return  a Boolean
      */
     public boolean IngresarPEmpresa(String nombre, String representante_Legal, String direccion, String NIT, String CNR, byte[] logo) {
         

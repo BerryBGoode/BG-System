@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *  This class stores all the sentences necessary for the correct functioning of the user's checking process
  * @author danlo
  */
 public class ModelP_U_Usuarios {
@@ -20,6 +20,10 @@ public class ModelP_U_Usuarios {
     PreparedStatement ps;
     Connection con;
 
+    /**
+     *  Check that tbUsuarios is fill with at least one register
+     * @return a Boolean
+     */
     public boolean checkUsuario() {
 
         try {
@@ -32,6 +36,10 @@ public class ModelP_U_Usuarios {
         }
     }
 
+    /**
+     *  Select the ID form the Table tbPersonal
+     * @return a ResultSet
+     */
     public ResultSet GetIdPersonal() {
         try {
             con = ModelConexion.getConnection();
@@ -44,6 +52,15 @@ public class ModelP_U_Usuarios {
         }
     }
 
+    /**
+     *  This method register an User
+     * @param Usuario referring to the username
+     * @param perfil referring to the image of the user
+     * @param Contra referring to the password
+     * @param pin referring to the user's PIN
+     * @param personal referring to the type of user
+     * @return a Boolean
+     */
     public boolean IngresarPUsuario(String Usuario, byte[] perfil, String Contra,String pin, int personal) {
         int idtipousuario = 1;
         int idestadousuario = 1;
@@ -71,6 +88,13 @@ public class ModelP_U_Usuarios {
             return false;
         }
     }
+
+    /**
+     *  Method to change the user password
+     * @param usuario referring to the username 
+     * @param newclave referring to the new password of the user
+     * @return a Boolean
+     */
     public boolean CambiarClave(String usuario, String newclave){
         try {
             con=ModelConexion.getConnection();
@@ -85,11 +109,4 @@ public class ModelP_U_Usuarios {
             return false;
         }
     }
-    /*public ResultSet getIdUsuario(){
-        try {
-            con=ModelConexion.getConnection();
-            String query="SELECT * FROM tbUsuarios";
-        } catch (Exception e) {
-        }
-    }*/
 }

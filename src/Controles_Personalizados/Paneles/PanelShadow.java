@@ -6,7 +6,7 @@
 package Controles_Personalizados.Paneles;
 
 /**
- *
+ *   Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
@@ -16,36 +16,72 @@ import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs
+ * @author danlo
+ */
 public class PanelShadow extends JPanel {
 
+    /**
+     *  Gets Shadow type 
+     * @return ShadowType
+     */
     public ShadowType getShadowType() {
         return shadowType;
     }
 
+    /**
+     *  Set ShadowType
+     * @param shadowType referring to the shadow type
+     */
     public void setShadowType(ShadowType shadowType) {
         this.shadowType = shadowType;
     }
 
+    /**
+     *  Gets ShadowSize
+     * @return ShadowSize
+     */
     public int getShadowSize() {
         return shadowSize;
     }
 
+    /**
+     * Set ShadowSize
+     * @param shadowSize referring to the ShadowSize
+     */
     public void setShadowSize(int shadowSize) {
         this.shadowSize = shadowSize;
     }
 
+    /**
+     *  Gets ShadowOpacity
+     * @return ShadowOpacity
+     */
     public float getShadowOpacity() {
         return shadowOpacity;
     }
 
+    /**
+     * Set ShadowOpacity
+     * @param shadowOpacity referring to the ShadowOpacity
+     */
     public void setShadowOpacity(float shadowOpacity) {
         this.shadowOpacity = shadowOpacity;
     }
 
+    /**
+     *  Gets ShadowColor
+     * @return ShadowColor
+     */
     public Color getShadowColor() {
         return shadowColor;
     }
 
+    /**
+     *  Set ShadowColor
+     * @param shadowColor referring to the ShadowColor 
+     */
     public void setShadowColor(Color shadowColor) {
         this.shadowColor = shadowColor;
     }
@@ -55,6 +91,9 @@ public class PanelShadow extends JPanel {
     private float shadowOpacity = 0.5f;
     private Color shadowColor = Color.BLACK;
 
+    /**
+     *
+     */
     public PanelShadow() {
         setOpaque(false);
     }

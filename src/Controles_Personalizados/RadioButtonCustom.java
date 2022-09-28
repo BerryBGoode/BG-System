@@ -6,7 +6,7 @@
 package Controles_Personalizados;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
@@ -16,8 +16,15 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import javax.swing.JRadioButton;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs 
+ * @author danlo
+ */
 public class RadioButtonCustom extends JRadioButton {
 
+    /**
+     *  Validates the properties of the control
+     */
     public RadioButtonCustom() {
         setOpaque(false);
         setCursor(new Cursor(Cursor.HAND_CURSOR));

@@ -52,7 +52,7 @@ public class PanelProfesores extends javax.swing.JPanel {
     private DefaultTableModel modelo = new DefaultTableModel();
     String respuesta;
     String carnet;
-    Controlador.ControllerBuscador objC = new ControllerBuscador();
+    ControllerBuscador objC = new ControllerBuscador();
     private int frmstate;
 
     /**

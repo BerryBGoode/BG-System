@@ -27,6 +27,10 @@ public class FrmAgg_Carnet extends javax.swing.JFrame {
     private int idPersonal;
     private ImageIcon img;
     
+    /**
+     *
+     * @param carnet
+     */
     public FrmAgg_Carnet(String carnet) {
         initComponents();
         carnets = carnet;
@@ -37,6 +41,9 @@ public class FrmAgg_Carnet extends javax.swing.JFrame {
         setIconImage(Logo());
     }
     
+    /**
+     *
+     */
     public FrmAgg_Carnet() {
         initComponents();
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
@@ -45,6 +52,10 @@ public class FrmAgg_Carnet extends javax.swing.JFrame {
         setIconImage(Logo());
     }
     
+    /**
+     *
+     * @return
+     */
     public Image Logo() {
         Image retvalue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
         return retvalue;
@@ -141,7 +152,7 @@ public class FrmAgg_Carnet extends javax.swing.JFrame {
         panelRound1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, -1, -1));
 
         btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Maximizar.png"))); // NOI18N
-        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMinimizarMouseClicked(evt);
@@ -150,7 +161,7 @@ public class FrmAgg_Carnet extends javax.swing.JFrame {
         panelRound1.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 10, -1, -1));
 
         btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/CerrarLogin.png"))); // NOI18N
-        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnCerrarMousePressed(evt);

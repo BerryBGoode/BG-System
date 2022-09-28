@@ -6,7 +6,7 @@
 package Controles_Personalizados.ScrollBar;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
@@ -21,6 +21,10 @@ import javax.swing.JComponent;
 import javax.swing.JScrollBar;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs
+ * @author danlo
+ */
 public class ModernScrollBarUI extends BasicScrollBarUI {
 
     private final int THUMB_SIZE = 40;
@@ -43,16 +47,32 @@ public class ModernScrollBarUI extends BasicScrollBarUI {
         }
     }
 
+    /**
+     * Creates JButton
+     * @param i Size
+     * @return JButton
+     */
     @Override
     protected JButton createIncreaseButton(int i) {
         return new ScrollBarButton();
     }
 
+    /**
+     * Creates JButton 
+     * @param i Size
+     * @return jButton
+     */
     @Override
     protected JButton createDecreaseButton(int i) {
         return new ScrollBarButton();
     }
 
+    /**
+     *  Alter Button Properties
+     * @param grphcs Graphics
+     * @param jc Component
+     * @param rctngl Rectangle
+     */
     @Override
     protected void paintTrack(Graphics grphcs, JComponent jc, Rectangle rctngl) {
         Graphics2D g2 = (Graphics2D) grphcs;
@@ -80,6 +100,12 @@ public class ModernScrollBarUI extends BasicScrollBarUI {
         g2.fillRect(x, y, width, height);
     }
 
+    /**
+     *  Paint Button
+     * @param grphcs Graphics
+     * @param jc Component
+     * @param rctngl Rectangle
+     */
     @Override
     protected void paintThumb(Graphics grphcs, JComponent jc, Rectangle rctngl) {
         Graphics2D g2 = (Graphics2D) grphcs;

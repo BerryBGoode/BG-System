@@ -6,7 +6,7 @@
 package Controles_Personalizados;
 
 /**
- *
+ * Personalized Control package
  * @author danlo
  */
 import java.awt.Component;
@@ -24,6 +24,10 @@ import java.util.Map;
 import javax.swing.JComponent;
 import javax.swing.SwingUtilities;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs 
+ * @author danlo
+ */
 public class ComponentResizer extends MouseAdapter {
 
     private final static Dimension MINIMUM_SIZE = new Dimension(10, 10);
@@ -44,9 +48,25 @@ public class ComponentResizer extends MouseAdapter {
     private Insets dragInsets;
     private Dimension snapSize;
     private int direction;
+
+    /**
+     *  Integer variable
+     */
     protected static final int NORTH = 1;
+
+    /**
+     *  Integer variable
+     */
     protected static final int WEST = 2;
+
+    /**
+     *  Integer variable
+     */
     protected static final int SOUTH = 4;
+
+    /**
+     *  Variables for the control functionality
+     */
     protected static final int EAST = 8;
     private Cursor sourceCursor;
     private boolean resizing;
@@ -56,52 +76,98 @@ public class ComponentResizer extends MouseAdapter {
     private Dimension minimumSize = MINIMUM_SIZE;
     private Dimension maximumSize = MAXIMUM_SIZE;
 
+    /**
+     *  Resizing the component
+     */
     public ComponentResizer() {
         this(new Insets(5, 5, 5, 5), new Dimension(1, 1));
     }
 
+    /**
+     *   Resizing the component with parameters
+     * @param components referring to the components of the control
+     */
     public ComponentResizer(Component... components) {
         this(new Insets(5, 5, 5, 5), new Dimension(1, 1), components);
     }
 
+    /**
+     *  Events
+     * @param dragInsets referring to the event
+     * @param components components
+     */
     public ComponentResizer(Insets dragInsets, Component... components) {
         this(dragInsets, new Dimension(1, 1), components);
     }
 
+    /**
+     *  Size change
+     * @param dragInsets event
+     * @param snapSize event
+     * @param components components
+     */
     public ComponentResizer(Insets dragInsets, Dimension snapSize, Component... components) {
         setDragInsets(dragInsets);
         setSnapSize(snapSize);
         registerComponent(components);
     }
 
+    /**
+     *  Gets the dimensions
+     * @return Insets
+     */
     public Insets getDragInsets() {
         return dragInsets;
     }
 
+    /**
+     *  Set the dimensions
+     * @param dragInsets referring to the Insets
+     */
     public void setDragInsets(Insets dragInsets) {
         validateMinimumAndInsets(minimumSize, dragInsets);
 
         this.dragInsets = dragInsets;
     }
 
+    /**
+     *  Gets maximum size
+     * @return Dimensions
+     */
     public Dimension getMaximumSize() {
         return maximumSize;
     }
 
+    /**
+     * Set the maximum size
+     * @param maximumSize referring to the dimension
+     */
     public void setMaximumSize(Dimension maximumSize) {
         this.maximumSize = maximumSize;
     }
 
+    /**
+     *  Get minimum size
+     * @return Dimensions
+     */
     public Dimension getMinimumSize() {
         return minimumSize;
     }
 
+    /**
+     *  Set the minimum size
+     * @param minimumSize referring to the dimension
+     */
     public void setMinimumSize(Dimension minimumSize) {
         validateMinimumAndInsets(minimumSize, dragInsets);
 
         this.minimumSize = minimumSize;
     }
 
+    /**
+     *  Process the components
+     * @param components referring the components
+     */
     public void deregisterComponent(Component... components) {
         for (Component component : components) {
             component.removeMouseListener(this);
@@ -109,6 +175,10 @@ public class ComponentResizer extends MouseAdapter {
         }
     }
 
+    /**
+     *  Register the components
+     * @param components referring to the components
+     */
     public void registerComponent(Component... components) {
         for (Component component : components) {
             component.addMouseListener(this);
@@ -116,10 +186,18 @@ public class ComponentResizer extends MouseAdapter {
         }
     }
 
+    /**
+     *  Dimension
+     * @return Dimension
+     */
     public Dimension getSnapSize() {
         return snapSize;
     }
 
+    /**
+     *  snapSize
+     * @param snapSize referring to the snapSize
+     */
     public void setSnapSize(Dimension snapSize) {
         this.snapSize = snapSize;
     }
@@ -220,6 +298,14 @@ public class ComponentResizer extends MouseAdapter {
         changeBounds(source, direction, bounds, pressed, dragged);
     }
 
+    /**
+     *  Change the direction 
+     * @param source path
+     * @param direction location
+     * @param bounds change
+     * @param pressed event
+     * @param current initial
+     */
     protected void changeBounds(Component source, int direction, Rectangle bounds, Point pressed, Point current) {
         //  Start with original locaton and size
         int x = bounds.x;

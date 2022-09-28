@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- *
+ * This class stores all the sentences necessary for the correct functioning of the QR recovery process
  * @author hp
  */
 public class ModelQR {
@@ -19,6 +19,11 @@ public class ModelQR {
         PreparedStatement ps;
         ResultSet rs;
 
+    /**
+     *  Recover the information stored in the database with a parameter
+     * @param Usuario referring to the username 
+     * @return a ResultSet
+     */
     public  ResultSet ReucContraQR(String Usuario) {
         try {
             con = ModelConexion.getConnection();

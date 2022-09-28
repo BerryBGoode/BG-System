@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- *
+ * This class stores all the sentences necessary for the correct functioning of the id - cards section
  * @author danlo
  */
 public class ModelCarnets {
@@ -19,6 +19,10 @@ public class ModelCarnets {
     PreparedStatement ps;
     Connection con;
 
+    /**
+     * Load the view that filters the registers of the user's that have an id - card
+     * @return a ResultSet
+     */
     public ResultSet cargarTablaConCarnet() {
         try {
             con = ModelConexion.getConnection();
@@ -32,6 +36,10 @@ public class ModelCarnets {
         }
     }
 
+    /**
+     *  Load the view that filters the registers of the user's that doesn't have an id - card
+     * @return a ResultSet
+     */
     public ResultSet cargarTablaSinCarnet() {
         try {
             con = ModelConexion.getConnection();
@@ -44,6 +52,12 @@ public class ModelCarnets {
             return null;
         }
     }
+
+    /**
+     * This method generates the barcode for the id - cards
+     * @param idPersonal referring to the staff ID
+     * @return a ResultSet
+     */
     public ResultSet generabarra(int idPersonal){
         try {
             con=ModelConexion.getConnection();
@@ -57,6 +71,13 @@ public class ModelCarnets {
             return  null;
         }
     }
+
+    /**
+     * This method inserts the information of the id - card
+     * @param idpersonal referring to the staff ID
+     * @param carnet referring to the string of id - card
+     * @return a Boolean
+     */
     public boolean IngresandoCarnet(int idpersonal, String carnet){
         try {
             con=ModelConexion.getConnection();

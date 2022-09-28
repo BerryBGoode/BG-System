@@ -6,7 +6,7 @@
 package Controles_Personalizados.Botones;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.AlphaComposite;
@@ -27,28 +27,56 @@ import javax.swing.JButton;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs 
+ * @author danlo
+ */
 public class ButtonGradient extends JButton {
 
+    /**
+     * Get Size Speed
+     * @return float
+     */
     public float getSizeSpeed() {
         return sizeSpeed;
     }
 
+    /**
+     * Set SizeSpeed
+     * @param sizeSpeed referring to the float
+     */
     public void setSizeSpeed(float sizeSpeed) {
         this.sizeSpeed = sizeSpeed;
     }
 
+    /**
+     *  Gets Color 1
+     * @return Color
+     */
     public Color getColor1() {
         return color1;
     }
 
+    /**
+     *  Set Color 1
+     * @param color1 referring to the color 1
+     */
     public void setColor1(Color color1) {
         this.color1 = color1;
     }
 
+    /**
+     *  Gets Color 2
+     * @return Color
+     */
     public Color getColor2() {
         return color2;
     }
 
+    /**
+     *  Set Color 2
+     * @param color2 referring to the Color 2
+     */
     public void setColor2(Color color2) {
         this.color2 = color2;
     }
@@ -65,6 +93,9 @@ public class ButtonGradient extends JButton {
     private float sizeSpeed = 1f;
     private float alphaPressed = 0.5f;
 
+    /**
+     *  Validate properties of the control
+     */
     public ButtonGradient() {
         setContentAreaFilled(false);
         setForeground(Color.WHITE);

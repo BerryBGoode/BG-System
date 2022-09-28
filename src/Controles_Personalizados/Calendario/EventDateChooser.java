@@ -6,10 +6,15 @@
 package Controles_Personalizados.Calendario;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 public interface EventDateChooser {
 
+    /**
+     *  Date selected
+     * @param action action start
+     * @param date date
+     */
     public void dateSelected(SelectedAction action, SelectedDate date);
 }

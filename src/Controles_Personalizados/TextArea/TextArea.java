@@ -6,7 +6,7 @@
 package Controles_Personalizados.TextArea;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 import java.awt.Color;
@@ -22,10 +22,17 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import org.jdesktop.animation.timing.Animator;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs
+ * @author danlo
+ */
 public class TextArea extends JTextArea {
 
     private TextAreaScroll scroll;
 
+    /**
+     * Set the format to the textArea
+     */
     public TextArea() {
         setWrapStyleWord(true);
         setLineWrap(true);

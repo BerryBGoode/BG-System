@@ -14,7 +14,7 @@ import Controles_Personalizados.Botones.UWPButton;
 import Controles_Personalizados.Botones.ButtonGradient;
 import Controles_Personalizados.Botones.UWPButton;
 /**
- *
+ *  Personalized control class, extends events and controls depends the needs 
  * @author ferna
  */
 public class RenderTable extends javax.swing.table.DefaultTableCellRenderer{

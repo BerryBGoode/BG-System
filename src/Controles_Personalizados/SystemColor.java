@@ -6,14 +6,25 @@
 package Controles_Personalizados;
 
 /**
- *
+ *  Personalized Control package
  * @author danlo
  */
 
 import java.awt.Color;
 
+/**
+ *  Personalized control class, extends events and controls depends the needs 
+ * @author danlo
+ */
 public class SystemColor {
 
+    /**
+     *  Main Color 1
+     */
     public final static Color MAIN_COLOR_1 = Color.decode("#0C1540");
+
+    /**
+     *  Main Color 2
+     */
     public final static Color MAIN_COLOR_2 = Color.decode("#253165");
 }

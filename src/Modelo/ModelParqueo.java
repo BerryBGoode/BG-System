@@ -12,7 +12,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- *
+ *  This class stores all the sentences necessary for the correct functioning of the parking section
  * @author danlo
  */
 public class ModelParqueo {
@@ -22,6 +22,12 @@ public class ModelParqueo {
     Connection con;
 
     //con este método recupero el ID del parqueo con el número de parqueo (el que sale en el cmb de configPark)
+
+    /**
+     *  With this method the ID of the parking lot is retrieved with the parking number
+     * @param park referring to the parking lot ID
+     * @return a ResultSet
+     */
     public ResultSet getIDPark(int park) {
         try {
             con = ModelConexion.getConnection();
@@ -36,6 +42,11 @@ public class ModelParqueo {
     }
 
     //cargar los datos que se leen en el textfield y en el cmb de configpark
+
+    /**
+     *  Load the data that is read in the textfield and in the cmb of configpark
+     * @return a ResultSet
+     */
     public ResultSet loadPark() {
         try {
             con = ModelConexion.getConnection();
@@ -49,6 +60,13 @@ public class ModelParqueo {
     }
 
     //método para obtener el idestacionamiento, por medio del numero de estacionamiento y el IDparqueo
+
+    /**
+     *  Method to obtain the identification, by the parking number and the IDparqueo
+     * @param station referring to the spot of the parking lot
+     * @param idpark referring to the park ID
+     * @return a ResultSet
+     */
     public ResultSet getIDStation(int station, int idpark) {
         try {
             con = ModelConexion.getConnection();
@@ -65,6 +83,12 @@ public class ModelParqueo {
     }
 
     //cargar la ubicación del parqueo a partir del número de parqueo, (cuando se seleccione un parqueo en el cmb, se traera los datos que saque este método)
+
+    /**
+     * Load the location of the parking lot from the parking number, (when a parking lot is selected in the cmb, the data obtained by this method will be brought)
+     * @param parkString referring to the location
+     * @return a ResultSet
+     */
     public ResultSet getLocation(String parkString) {
         try {
             con = ModelConexion.getConnection();
@@ -78,6 +102,13 @@ public class ModelParqueo {
         }
     }
 
+    /**
+     * This method save the registers of parking 
+     * @param idacces referring to the access ID
+     * @param idcar referring to the car ID 
+     * @param idstation referring to the spot ID
+     * @return a Boolean
+     */
     public boolean insertPark(int idacces, int idcar, int idstation) {
         int avalible = 1;
         try {
@@ -100,7 +131,17 @@ public class ModelParqueo {
         }
     }
 
-    public boolean updatePark(int idpark, int idacces, int idcar, int idstation, int iddetail) {
+
+    /**
+     * This method save the registers of parking 
+     * @param idpark referring to the park ID
+     * @param idacces referring to the access ID
+     * @param idcar referring to the car ID
+     * @param idstation referring to the spot ID
+     * @param iddetail referring to the detail ID
+     * @return a Boolean
+     */
+    public boolean updatePark(int idpark, int idacces, int idcar,  int idstation, int iddetail) {
         int busy = 1;
         boolean result;
         try {
@@ -121,6 +162,10 @@ public class ModelParqueo {
         }
     }
 
+    /**
+     *Gets the spot ID
+     * @return a ResultSet
+     */
     public ResultSet getIDStation() {
         try {
             con = ModelConexion.getConnection();
@@ -133,6 +178,11 @@ public class ModelParqueo {
         }
     }
 
+    /**
+     *  Check the parking spot State
+     * @param park referring to the park spot ID
+     * @return an Integer
+     */
     public int checkState(int park) {
         int result;
         try {
@@ -170,7 +220,12 @@ public class ModelParqueo {
             return -1;
         }
     }
-
+    
+    /**
+     *  This method delete the information filtered by the ID of the park spot
+     * @param IDStation referring to the spot in the parking lot
+     * @return a Boolean
+     */
     public boolean deletePark(int iddetail) {
         int disable = 2;
         try {
@@ -188,7 +243,14 @@ public class ModelParqueo {
     }
 
     //con este método recupero los vehiculos que tenga registrado el personal con el carnet que se selecciono
-    public ResultSet getCarByPersonal(String viewname, String parametername, String carnet) {
+    /**
+     *  With this method, the vehicles registered by the staff with the card that was selected are recovered.
+     * @param viewname referring to the view of the database
+     * @param parametername referring to the parameters
+     * @param carnet referring to the id - card of the user
+     * @return a ResultSet
+     */
+    public ResultSet getCarByPersonal(String viewname, String parametername, String carnet){
         try {
             con = ModelConexion.getConnection();
             sql = con.prepareStatement("SELECT * FROM " + viewname + " WHERE " + parametername + " = ?");

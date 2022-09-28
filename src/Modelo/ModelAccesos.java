@@ -8,7 +8,7 @@ package Modelo;
 import java.sql.*;
 
 /**
- *
+ * This class stores all the sentences necessary for the correct functioning of the access section
  * @author danlo
  */
 public class ModelAccesos {
@@ -17,6 +17,11 @@ public class ModelAccesos {
     static PreparedStatement sql;
     static Connection con;
 
+    /**
+     *  Creation of a ResultSet for the general information of the table
+     * @param tablename referring to the table name as a search parameter
+     * @return a ResultSet
+     */
     public static ResultSet getdata(String tablename) {
         try {
             con = ModelConexion.getConnection();
@@ -29,6 +34,11 @@ public class ModelAccesos {
         }
     }
 
+    /**
+     *  Creation of a ResultSet for the specific information of the table
+     * @param tablename referring to the table name as a search parameter
+     * @return a ResulSet
+     */
     public static ResultSet getdataEntry(String tablename) {
         try {
             con = ModelConexion.getConnection();
@@ -41,6 +51,11 @@ public class ModelAccesos {
         }
     }
 
+    /**
+     *  Creation of a ResultSet for the specific information of the table
+     * @param tablename referring to the table name as a search parameter
+     * @return a ResulSet
+     */
     public static ResultSet getdataExit(String tablename) {
         try {
             con = ModelConexion.getConnection();
@@ -54,6 +69,16 @@ public class ModelAccesos {
     }
 
     //Method for insert access of staff
+
+    /**
+     * Method for insert access of staff
+     * @param ID referring to the access ID
+     * @param typeaccess referring to the access type
+     * @param date referring to the access date
+     * @param hour referring to the access hour
+     * @param justif referring to the access justification
+     * @return a Boolean
+     */
     public static boolean insertAccess(int ID, int typeaccess, String date, String hour, String justif) {
         try {
             con = ModelConexion.getConnection();
@@ -71,6 +96,14 @@ public class ModelAccesos {
         }
     }
 
+    /**
+     *  Method for update the access of staff
+     * @param personal referring to the staff ID
+     * @param acceso referring to the access registered
+     * @param notification referring to the justification
+     * @param ID referring to the access registered ID
+     * @return a Boolean
+     */
     public static boolean updateAccess(int personal, int acceso, String notification, int ID) {
         try {
             con = ModelConexion.getConnection();
@@ -86,6 +119,11 @@ public class ModelAccesos {
         }
     }
 
+    /**
+     * Method for delete access of staff
+     * @param ID referring to the access ID
+     * @return a Boolean
+     */
     public static boolean deleteAccess(int ID) {
         try {
             con = ModelConexion.getConnection();
@@ -99,6 +137,11 @@ public class ModelAccesos {
         }
     }
 
+    /**
+     *  Method for search the staff by their id - card number
+     * @param carne referring to the id - card
+     * @return a ResultSet
+     */
     public static ResultSet LookingForId_Personal(String carne) {
         ResultSet rs;
         Connection con;
@@ -117,6 +160,15 @@ public class ModelAccesos {
 
     }
 
+    /**
+     * Method for insert the barcode at the access attempt
+     * @param ID referring to the access ID
+     * @param typeaccess referring to the access type 
+     * @param date referring to the access date
+     * @param hour referring to the access hour
+     * @param justif referring to the access justification
+     * @return a Boolean
+     */
     public static boolean insertAccessBarCode(int ID, int typeaccess, String date, String hour, String justif) {
         try {
             con = ModelConexion.getConnection();

@@ -17,13 +17,13 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JFrame;
 
 /**
- *
+ * Welcome Form
  * @author danlo
  */
 public class Bienvenida extends javax.swing.JFrame {
 
     /**
-     * Creates new form Bienvenida
+     * Creates new Welcome Form
      */
     public Bienvenida() {
         initComponents();
@@ -35,8 +35,8 @@ public class Bienvenida extends javax.swing.JFrame {
     }
 
     /**
-     * Metodo para cargar el logo en al barra de tareas
-     * @return 
+     * Method to load the logo in the taskbar
+     * @return Image
      */
     public Image Logo() {
         Image retvalue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
@@ -44,7 +44,7 @@ public class Bienvenida extends javax.swing.JFrame {
     }
 
     /**
-     * Metodo para comprobar si el proceso del primer uso se ha realizado correctamente
+     * Method to check if the process of the first use has been carried out correctly
      */
     private void primerus() {
         ControllerP_U_Empresa VistapEmpresa = new ControllerP_U_Empresa();
@@ -140,8 +140,8 @@ public class Bienvenida extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Metodo para abrir el siguiente formulario
-     * @param evt 
+     * Method to open the following form
+     * @param evt event
      */
     private void BtnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNextActionPerformed
         // TODO add your handling code here:
@@ -150,16 +150,16 @@ public class Bienvenida extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnNextActionPerformed
 
     /**
-     * Metodo para cerrar la aplicación
-     * @param evt 
+     * Method to close the application
+     * @param evt event
      */
     private void btnCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMousePressed
         System.exit(0);
     }//GEN-LAST:event_btnCerrarMousePressed
 
     /**
-     * Metodo para minimizar la aplicación
-     * @param evt 
+     * Method to minimize the application
+     * @param evt event
      */
     private void btnMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseClicked
         // TODO add your handling code here:
