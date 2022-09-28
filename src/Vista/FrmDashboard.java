@@ -45,6 +45,8 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     PanelDashboard pld = new PanelDashboard();
     ControllerLogin clog = new ControllerLogin();
     PanelUsuarios_dashbord pu = new PanelUsuarios_dashbord();
+    PanelProfesores pp = new PanelProfesores();
+    PanelEstudiantes pe = new PanelEstudiantes();
     private int ev;
     private int iduser;
 
@@ -808,10 +810,10 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
 
     void capturariduser() {
         clog.setUsuario(lblNombre.getText());
-        ResultSet rs=clog.validaruseractive();
+        ResultSet rs = clog.validaruseractive();
         try {
             if (rs.next()) {
-                iduser=rs.getInt("idUsuario");
+                iduser = rs.getInt("idUsuario");
             }
         } catch (SQLException ex) {
             Logger.getLogger(FrmDashboard.class.getName()).log(Level.SEVERE, null, ex);
@@ -937,13 +939,11 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionAccesos.setVisible(false);
         panelSeleccionContactos.setVisible(false);
         panelSeleccionAjustes.setVisible(false);
-
-        PanelEstudiantes pl = new PanelEstudiantes();
-        pl.setSize(1270, 620);
-        pl.setLocation(0, 0);
+        pe.setSize(1270, 620);
+        pe.setLocation(0, 0);
 
         PanelContenedorForms.removeAll();
-        PanelContenedorForms.add(pl);
+        PanelContenedorForms.add(pe);
         PanelContenedorForms.revalidate();
         PanelContenedorForms.repaint();
     }
@@ -959,13 +959,11 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionAccesos.setVisible(false);
         panelSeleccionContactos.setVisible(false);
         panelSeleccionAjustes.setVisible(false);
-
-        PanelProfesores pl = new PanelProfesores();
-        pl.setSize(1270, 620);
-        pl.setLocation(0, 0);
+        pp.setSize(1270, 620);
+        pp.setLocation(0, 0);
 
         PanelContenedorForms.removeAll();
-        PanelContenedorForms.add(pl);
+        PanelContenedorForms.add(pp);
         PanelContenedorForms.revalidate();
         PanelContenedorForms.repaint();
     }
@@ -1140,7 +1138,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         capturariduser();
         clog.setIdestado(2);
         clog.setIdusuario(iduser);
-        if (clog.ActualizarEstado()==true) {
+        if (clog.ActualizarEstado() == true) {
             System.out.println("Si se pudo y ahora esta inactivo");
         }
         FrmLogin login = new FrmLogin();
@@ -1157,6 +1155,8 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         NormalMode();
         pld.mode();
         pu.darkmod();
+        pe.mododash();
+        pp.mododash();
         if (_pnldash.isShowing()) {
 
             _pnldash.hide();
@@ -1170,6 +1170,8 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         DarkMode();
         pld.mode();
         pu.darkmod();
+        pe.mododash();
+        pp.mododash();
         _pnldash.hide();
         if (_pnldash.isVisible()) {
 
@@ -1335,7 +1337,14 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
 
 
     private void btnCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMousePressed
-        System.exit(0);
+
+        capturariduser();
+        clog.setIdestado(2);
+        clog.setIdusuario(iduser);
+        if (clog.ActualizarEstado() == true) {
+            System.out.println("Si se pudo y ahora esta inactivo");
+            System.exit(0);
+        }
     }//GEN-LAST:event_btnCerrarMousePressed
 
 
