@@ -85,6 +85,7 @@ public class PanelAjustes extends javax.swing.JPanel {
         txtContra = new Controles_Personalizados.textfields.PasswordField();
 
         setBackground(new java.awt.Color(42, 36, 56));
+        setPreferredSize(new java.awt.Dimension(1250, 620));
         setLayout(new java.awt.BorderLayout());
 
         panelRound3.setBackground(new java.awt.Color(58, 50, 75));
@@ -98,6 +99,8 @@ public class PanelAjustes extends javax.swing.JPanel {
         PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
         PanelFondo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         PanelFondo.setPreferredSize(new java.awt.Dimension(1270, 620));
+        PanelFondo.setRoundBottomLeft(20);
+        PanelFondo.setRoundBottomRight(20);
         PanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         PanelContenedorCambioContra.setBackground(new java.awt.Color(42, 36, 56));
@@ -287,6 +290,7 @@ public class PanelAjustes extends javax.swing.JPanel {
         PanelContenedorTemas.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 330, 160));
 
         PanelFondo.add(PanelContenedorTemas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 750, 230));
+
 
         PanelContenedorCambioContra1.setBackground(new java.awt.Color(42, 36, 56));
         PanelContenedorCambioContra1.setRoundBottomLeft(30);

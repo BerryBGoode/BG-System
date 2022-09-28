@@ -163,6 +163,12 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
 
         jScrollPane1.setVerticalScrollBar(ScrollTabla);
 
+        tbUsuarios = new Controles_Personalizados.Tables.Table(){
+
+            public boolean isCellEditable(int indexRow, int indexCol){
+                return false;
+            }
+        };
         tbUsuarios.setBackground(new java.awt.Color(231, 234, 239));
         tbUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -190,6 +196,10 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbUsuariosMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tbUsuariosMouseEntered(evt);
+            }
+
         });
         jScrollPane1.setViewportView(tbUsuarios);
 
@@ -258,8 +268,6 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         btnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
         btnInforme.setText("Informe");
         btnInforme.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        btnInforme.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        btnInforme.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnInforme.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnInformeMouseClicked(evt);
@@ -578,7 +586,6 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_tbUsuariosMouseClicked
-
     private void panelRound1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound1MouseMoved
         // TODO add your handling code here:
         refresh();
