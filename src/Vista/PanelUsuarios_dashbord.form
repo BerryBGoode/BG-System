@@ -133,6 +133,14 @@
                         </Property>
                         <Property name="showVerticalLines" type="boolean" value="false"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="tbUsuariosMouseMoved"/>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbUsuariosMouseClicked"/>
+                        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbUsuariosMouseEntered"/>
+                      </Events>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tbUsuarios = new Controles_Personalizados.Tables.Table(){&#xa;&#xa;    public boolean isCellEditable(int indexRow, int indexCol){&#xa;            return false;&#xa;        }&#xa;};"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -229,8 +237,6 @@
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Roboto" size="18" style="0"/>
                         </Property>
-                        <Property name="horizontalAlignment" type="int" value="10"/>
-                        <Property name="horizontalTextPosition" type="int" value="4"/>
                       </Properties>
                       <Events>
                         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnInformeMouseClicked"/>

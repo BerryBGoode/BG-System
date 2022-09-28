@@ -163,8 +163,6 @@ public class PanelParqueo extends javax.swing.JPanel {
         btnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
         btnInforme.setText("Informe");
         btnInforme.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        btnInforme.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        btnInforme.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnInforme.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnInformeMouseClicked(evt);
@@ -184,7 +182,9 @@ public class PanelParqueo extends javax.swing.JPanel {
         scrollBarCustom1.setForeground(new java.awt.Color(58, 50, 75));
         jPanel3.add(scrollBarCustom1, java.awt.BorderLayout.EAST);
 
+        jScrollPane1.setBackground(new java.awt.Color(231, 234, 239));
         jScrollPane1.setMinimumSize(new java.awt.Dimension(15, 26));
+        jScrollPane1.setName(""); // NOI18N
         jScrollPane1.setPreferredSize(new java.awt.Dimension(461, 403));
         jScrollPane1.setVerticalScrollBar(scrollBarCustom1);
 
@@ -210,6 +210,11 @@ public class PanelParqueo extends javax.swing.JPanel {
         TbParqueosWhite.setPreferredSize(new java.awt.Dimension(450, 880));
         TbParqueosWhite.setSelectionBackground(new java.awt.Color(58, 50, 75));
         TbParqueosWhite.setShowVerticalLines(false);
+        TbParqueosWhite.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TbParqueosWhiteMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TbParqueosWhite);
 
         jPanel3.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -257,8 +262,54 @@ public class PanelParqueo extends javax.swing.JPanel {
 
     private void btnInformeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInformeMouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_btnInformeMouseClicked
+
+    private void TbParqueosWhiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbParqueosWhiteMouseClicked
+        // TODO add your handling code here:
+        Table tb = (Table) evt.getSource();//para obtener los datos de la fila
+
+        int row = evt.getY() / TbParqueosWhite.getRowHeight();
+        int col = TbParqueosWhite.getColumnModel().getColumnIndexAtX(evt.getX());
+        try {
+            if (row < TbParqueosWhite.getRowCount() && row >= 0 && col < TbParqueosWhite.getColumnCount() && col >= 0) {
+                Object obj = TbParqueosWhite.getValueAt(row, col);
+                if (obj instanceof UWPButton) {
+                    ((UWPButton) obj).doClick();
+                    UWPButton btn = (UWPButton) obj;
+                    if (btn.getName().equals("btnModificar")) {
+                        if (park.isShowing()) {
+                            park.setVisible(false);
+
+                        }
+                        //envio el station que en el q se registro, para que se habilite y pueda cambiar el parqueo
+                        park.setStation(Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 9).toString()));
+                        park.setPark(tb.getModel().getValueAt(tb.getSelectedRow(), 11).toString());
+
+                        int ID = Integer.parseInt(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString());
+                        FrmSetPark.setIDDetail(ID);
+
+                        int station = Integer.parseInt(tb.getModel().getValueAt(tb.getSelectedRow(), 8).toString());
+                        ControllerParqueo.setNumberPark(station);
+
+                        park.setVisible(true);
+                        frmstate = 1;
+                        FrmSetPark.action = 1;
+
+                    }
+                    if (btn.getName().equals("btnEliminar")) {
+                        int msg = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este dato?", "Confirmar acción", JOptionPane.YES_NO_OPTION);
+                        if (msg == JOptionPane.YES_OPTION) {
+                            int IDDetail = Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString());
+                            deletePark(IDDetail);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+
+        }
+    }//GEN-LAST:event_TbParqueosWhiteMouseClicked
 
     public void getdataPark() {
         String tablename = "vwDetalle_Estacionamientos";

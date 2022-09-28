@@ -45,7 +45,6 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
     FrmAgg_Usuarios agg = new FrmAgg_Usuarios();
     private int frmstate = 1;
     byte[] imagen;
-    
 
     /**
      * Creates new form PanelUsuario_dashbord
@@ -118,6 +117,12 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
 
         jScrollPane1.setVerticalScrollBar(ScrollTabla);
 
+        tbUsuarios = new Controles_Personalizados.Tables.Table(){
+
+            public boolean isCellEditable(int indexRow, int indexCol){
+                return false;
+            }
+        };
         tbUsuarios.setBackground(new java.awt.Color(231, 234, 239));
         tbUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -136,6 +141,19 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         tbUsuarios.setPreferredSize(new java.awt.Dimension(450, 880));
         tbUsuarios.setSelectionBackground(new java.awt.Color(58, 50, 75));
         tbUsuarios.setShowVerticalLines(false);
+        tbUsuarios.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                tbUsuariosMouseMoved(evt);
+            }
+        });
+        tbUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbUsuariosMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                tbUsuariosMouseEntered(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbUsuarios);
 
         jPanel2.add(jScrollPane1, java.awt.BorderLayout.CENTER);
@@ -179,8 +197,6 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         btnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
         btnInforme.setText("Informe");
         btnInforme.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        btnInforme.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        btnInforme.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnInforme.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnInformeMouseClicked(evt);
@@ -328,6 +344,73 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, e.toString());
         }
     }//GEN-LAST:event_btnInformeMouseClicked
+
+    private void tbUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuariosMouseClicked
+        // TODO add your handling code here:
+        JTable tb = (JTable) evt.getSource();
+        String nombre = null;
+        int column = tbUsuarios.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / tbUsuarios.getRowHeight();
+        btnActualizar.setName("btnActualizar");
+        btnEliminar.setName("btnEliminar");
+        btnReporte.setName("btnReporte");
+        if (evt.getClickCount() == 1) {
+            JTable rcp = (JTable) evt.getSource();
+            ValidacionesSistema.Parametros_Usuario.setID((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0));
+            ValidacionesSistema.Parametros_Usuario.setIdPersonal((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 1));
+            ValidacionesSistema.Parametros_Usuario.setNombre_usuario(rcp.getModel().getValueAt(rcp.getSelectedRow(), 4).toString());
+            ValidacionesSistema.Parametros_Usuario.setIdTipoUsuario((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 5));
+            ValidacionesSistema.Parametros_Usuario.setIdEstadoUsuario((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 7));
+            CargarImagen();
+            ValidacionesSistema.Parametros_Usuario.setImagen(imagen);
+        }
+
+        if (row < tbUsuarios.getRowCount() || row >= 0 || column < tbUsuarios.getColumnCount() || column >= 0) {
+            Object vals = tbUsuarios.getValueAt(row, column);
+            if (vals instanceof UWPButton) {
+                ((UWPButton) vals).doClick(); // aqui esta
+                UWPButton btns = (UWPButton) vals;
+                if (btns.getName().equals("btnActualizar")) {
+                    FrmAgg_Usuarios ac = new FrmAgg_Usuarios("Actualizar usuario");
+                    if (ac.isVisible()) {
+                        ac.toFront();
+                    } else {
+                        ac.setVisible(true);
+                        frmstate = 1;
+                    }
+
+                }
+                if (btns.getName().equals("btnEliminar")) {
+                    int confirmar = 0;
+                    nombre = ValidacionesSistema.Parametros_Usuario.getNombre_usuario();
+                    confirmar = JOptionPane.showConfirmDialog(this, "¿Desea eliminar el usuario de: " + nombre + "?", "Proceso de Eliminar", confirmar);
+                    if (confirmar == 0) {
+                        ControllerUsuarios obje = new ControllerUsuarios(ValidacionesSistema.Parametros_Usuario.getID());
+                        boolean respuesta = obje.EliminarUsuario_C();
+                        if (respuesta == true) {
+                            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "Usuario eliminado", 1);
+                            CargarTabla();
+                        } else {
+                            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso fallido", "Usuario no pudo ser eliminado", 2);
+                        }
+                    }
+                }
+                if (btns.getName().equals("btnReporte")) {
+                    ReportePar();
+                }
+            }
+        }
+    }//GEN-LAST:event_tbUsuariosMouseClicked
+
+    private void tbUsuariosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuariosMouseEntered
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_tbUsuariosMouseEntered
+
+    private void tbUsuariosMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuariosMouseMoved
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_tbUsuariosMouseMoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

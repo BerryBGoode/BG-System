@@ -313,7 +313,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="4b" green="32" red="3a" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Confirmar"/>
+            <Property name="text" type="java.lang.String" value="Listo"/>
             <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fe" green="ff" red="fd" type="rgb"/>
             </Property>
