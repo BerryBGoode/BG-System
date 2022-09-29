@@ -543,36 +543,46 @@ public class FrmConfigPark extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPark9MouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
-        //AQUÍ LOS VERIFICA Y LOS ESTACIONAMIENTOS ÚTILIZADOS Y POR MEDIO DEL SIGUIENTE MÉTODO "checkState"
-        checkState(panelPark1, 1);
-        checkState(panelPark2, 2);
-        checkState(panelPark3, 3);
-        checkState(panelPark4, 4);
-        checkState(panelPark5, 5);
-        checkState(panelPark6, 6);
-        checkState(panelPark7, 7);
-        checkState(panelPark8, 8);
-        checkState(panelPark9, 9);
-        checkState(panelPark10, 10);
-        checkState(panelPark11, 11);
-        checkState(panelPark12, 12);
-        checkState(panelPark13, 13);
-        checkState(panelPark14, 14);
-        checkState(panelPark15, 15);
-        checkState(panelPark16, 16);
-        checkState(panelPark17, 17);
-        checkState(panelPark18, 18);
-        checkState(panelPark19, 19);
-        checkState(panelPark20, 20);
+           switch (FrmSetPark.action) {
+            case 1:
+                //verficar cual es el estacionamiento utilizado
+               
+                if (getPark() == null) {
 
-        //verficar cual es el estacionamiento utilizado
-        checkStationUpdate();
-        if (getPark() == null) {
+                } else {
+                    CmbParqueos.setSelectedItem(getPark());//porque primero se carga el cmb es, que no salen los que están 
+                    
+                } 
+                checkStationUpdate();//carga el estacionamiento a modificar
+                break;
+            case 2:
+                // TODO add your handling code here:
+                //AQUÍ LOS VERIFICA Y LOS ESTACIONAMIENTOS ÚTILIZADOS Y POR MEDIO DEL SIGUIENTE MÉTODO "checkState"
+                checkState(panelPark1, 1);
+                checkState(panelPark2, 2);
+                checkState(panelPark3, 3);
+                checkState(panelPark4, 4);
+                checkState(panelPark5, 5);
+                checkState(panelPark6, 6);
+                checkState(panelPark7, 7);
+                checkState(panelPark8, 8);
+                checkState(panelPark9, 9);
+                checkState(panelPark10, 10);
+                checkState(panelPark11, 11);
+                checkState(panelPark12, 12);
+                checkState(panelPark13, 13);
+                checkState(panelPark14, 14);
+                checkState(panelPark15, 15);
+                checkState(panelPark16, 16);
+                checkState(panelPark17, 17);
+                checkState(panelPark18, 18);
+                checkState(panelPark19, 19);
+                checkState(panelPark20, 20);
 
-        } else {
-            CmbParqueos.setSelectedItem(getPark());
+                break;
         }
+
+
     }//GEN-LAST:event_formWindowActivated
     //este método es para cambiar el color del panel y hacerlo gris pero para ahorramete codigo lo hago así
     void setBusyPnl(PanelRound pnl1, PanelRound pnl2, PanelRound pnl3, PanelRound pnl4, PanelRound pnl5, PanelRound pnl6, PanelRound pnl7, PanelRound pnl8, PanelRound pnl9, PanelRound pnl10, PanelRound pnl11, PanelRound pnl12, PanelRound pnl13, PanelRound pnl14, PanelRound pnl15, PanelRound pnl16, PanelRound pnl17, PanelRound pnl18, PanelRound pnl19) {
@@ -692,14 +702,12 @@ public class FrmConfigPark extends javax.swing.JFrame {
     private void btnPark8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark8MouseClicked
         if (station == 8 || station == 0) {
             modifPanelPark(panelPark8, 8);
-
         }
     }//GEN-LAST:event_btnPark8MouseClicked
 
     private void btnPark7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark7MouseClicked
         if (station == 7 || station == 0) {
             modifPanelPark(panelPark7, 7);
-
         }
     }//GEN-LAST:event_btnPark7MouseClicked
 
@@ -811,7 +819,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
             sendIDStation(station, IDPark);
 
             if (visibleFrm == true) {
-                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("No se pudo abrir...", "No se pudo abrir, debido a que ya hay abierto y se debe cerrar", 3);
+                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("No se pudo abrir...", "No se pudo abrir, debido a que ya hay uno abierto y se debe cerrar", 3);
             } else {
                 Frmpark.setVisible(true);
                 visibleFrm = true;
@@ -827,20 +835,24 @@ public class FrmConfigPark extends javax.swing.JFrame {
     //esté método detecta que estacionamiento está ocupado, de manera que
     //el método para cargar el estado, cierra el panel contenedor y va a verificar el estado
     //luego lo vuelve a abrir
-    void checkState(PanelRound pnl, int idstation) {
+    void checkState(PanelRound pnl,  int idstation) {
         try {
             int IDPark = (int) list.get(CmbParqueos.getSelectedIndex());
             ResultSet rs = controllerpark.checkStatePark(IDPark, idstation);
             if (rs.next()) {
                 switch (rs.getInt("idEstado")) {
-            case 0:
+                    case 0:
                         pnl.setBackground(Color.white);
+                        pnl.setEnabled(true);
                         break;
                     case 1:
                         pnl.setBackground(Color.white);
+                        pnl.setEnabled(true);
                         break;
                     case 2:
                         pnl.setBackground(Color.gray);
+                        pnl.setEnabled(false);
+                        //station = idstation;
                         break;
                 }
             }
@@ -877,7 +889,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
                     }
                 } while (rs.next());
 
-                checkState(panelPark1, 1);
+                checkState(panelPark1,1);
                 checkState(panelPark2, 2);
                 checkState(panelPark3, 3);
                 checkState(panelPark4, 4);

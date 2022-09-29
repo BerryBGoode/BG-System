@@ -243,7 +243,7 @@ public class PanelParqueo extends javax.swing.JPanel {
         }
         park = new FrmConfigPark();
         park.setVisible(true);
-
+        FrmSetPark.action = 2;
     }//GEN-LAST:event_btnAgregarMouseClicked
 
     FrmSetPark setPark = new FrmSetPark();

@@ -188,15 +188,13 @@ public class ModelParqueo {
      * @param idstation
      * @return an ResultSet
      */
-    public ResultSet checkState(int idpark, int idstation) {
-        int result;
+    public ResultSet checkState(int idpark, int idstation) {       
         try {
             con = ModelConexion.getConnection();
             sql = con.prepareStatement("SELECT * FROM tbEstacionamientos WHERE idParqueo = ? AND numero_estacionamiento = ?");
             sql.setInt(1, idpark);
             sql.setInt(2, idstation);
 
-            System.out.println(idpark + " " + idstation + " check");
             rs = sql.executeQuery();
             
             return rs;
