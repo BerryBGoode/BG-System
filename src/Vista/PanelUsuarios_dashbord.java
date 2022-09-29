@@ -45,6 +45,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
     FrmAgg_Usuarios agg = new FrmAgg_Usuarios();
     private int frmstate = 1;
     byte[] imagen;
+    FrmReportesPar frmreporte = new FrmReportesPar("Usuarios", "Ingrese tipo de usuario/estado del usuario:");
 
     /**
      * Creates new form PanelUsuario_dashbord
@@ -189,6 +190,11 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         btnFiltrar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         btnFiltrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarActionPerformed(evt);
+            }
+        });
         jPanel4.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 150, 40));
 
         btnInforme.setBackground(new java.awt.Color(58, 50, 75));
@@ -276,7 +282,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
             Connection con = ControllerConexion.getConnectionModel();
             JasperReport reporte = null;
 
-            String dir = "src\\DocsReport\\UsuarioPReport.jasper";
+            String dir = "src\\DocsReport\\UsuarioPReportID.jasper";
             Map parametros = new HashMap();
             parametros.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
             parametros.put("idUsuario", ValidacionesSistema.Parametros_Usuario.getID());
@@ -411,6 +417,16 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         // TODO add your handling code here:
         refresh();
     }//GEN-LAST:event_tbUsuariosMouseMoved
+
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        // TODO add your handling code here:
+        if (frmreporte.isVisible()) {
+            frmreporte.toFront();
+
+        } else {
+            frmreporte.setVisible(true);
+        }
+    }//GEN-LAST:event_btnFiltrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

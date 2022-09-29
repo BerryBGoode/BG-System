@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="400" pageHeight="650" columnWidth="360" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="744583bb-03d5-4544-99f2-4b5d8cd99927">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="475" pageHeight="712" columnWidth="435" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4920cb24-9a8c-4bea-86b0-d1758170b1bc">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="85"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="idPersonal" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
-	<parameter name="imagenusu" class="java.io.InputStream">
+	<parameter name="CodBarra" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
-	<parameter name="CodBarra" class="java.lang.String">
+	<parameter name="imagenusu" class="java.io.InputStream">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Plantilla" class="java.lang.String">
@@ -44,47 +44,47 @@ WHERE
 		<band splitType="Stretch"/>
 	</columnHeader>
 	<detail>
-		<band height="600" splitType="Stretch">
+		<band height="672" splitType="Stretch">
 			<image>
-				<reportElement x="0" y="0" width="361" height="600" uuid="f0aed4d1-b019-4e75-9713-8489b6790869"/>
+				<reportElement x="1" y="2" width="434" height="670" uuid="51feb11f-0523-410b-8063-c95faba3d538"/>
 				<imageExpression><![CDATA[$P{Plantilla}.toString()]]></imageExpression>
 			</image>
-			<image vAlign="Middle">
-				<reportElement x="130" y="151" width="100" height="128" uuid="d2ea2d6a-f470-408c-96ca-8fd8a3f665db"/>
-				<imageExpression><![CDATA[$P{imagenusu}]]></imageExpression>
-			</image>
-			<image hAlign="Center">
-				<reportElement x="50" y="461" width="261" height="50" uuid="a524b949-14b7-46d9-bfd7-4883de23009c"/>
-				<imageExpression><![CDATA[$P{CodBarra}.toString()]]></imageExpression>
-			</image>
 			<textField>
-				<reportElement x="17" y="103" width="319" height="53" forecolor="#3A324B" uuid="3f4f9f29-d7c4-4ca7-a012-808efe4b92e1"/>
-				<textElement textAlignment="Center">
-					<font size="16" isBold="true"/>
+				<reportElement x="36" y="130" width="360" height="32" forecolor="#3A324B" uuid="ab71d9a3-68f6-4842-bbe4-359b95e87a8d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tbTipoPersonal_tipo_personal}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="113" y="324" width="130" height="20" forecolor="#3A324B" uuid="ae1aaa93-7dcd-482d-8241-6ce057ec72ff"/>
+				<reportElement x="36" y="360" width="360" height="36" forecolor="#3A324B" uuid="b3cdeaaa-9f1d-4134-9dcc-d70051df99bc"/>
 				<textElement textAlignment="Center">
-					<font size="14" isBold="true"/>
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbPersonal_nombre_p}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="36" y="382" width="360" height="29" forecolor="#3A324B" uuid="abf19fed-4534-410e-90d3-b5cec441095f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tbPersonal_Carnet}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="17" y="565" width="319" height="26" forecolor="#3A324B" uuid="b9e50766-0251-45ff-9903-a5aad9336db5"/>
-				<textElement textAlignment="Center">
-					<font size="16" isBold="true"/>
+				<reportElement x="36" y="607" width="360" height="30" forecolor="#3A324B" uuid="0b27aa65-095c-4b29-a0f2-497c127c3a6a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tbEmpresas_nombre_empresa}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="17" y="300" width="319" height="21" forecolor="#3A324B" uuid="ef224374-b501-433e-be64-a58c987b6875"/>
-				<textElement textAlignment="Center">
-					<font size="16" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{tbPersonal_nombre_p}]]></textFieldExpression>
-			</textField>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="160" y="192" width="113" height="148" uuid="977ffff8-f866-4340-a5b3-7b3ad14d178c"/>
+				<imageExpression><![CDATA[$P{imagenusu}]]></imageExpression>
+			</image>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="81" y="478" width="271" height="50" uuid="65a17ca2-465c-4261-a71c-35a8fc15f8a3"/>
+				<imageExpression><![CDATA[$P{CodBarra}.toString()]]></imageExpression>
+			</image>
 		</band>
 	</detail>
 	<columnFooter>

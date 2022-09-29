@@ -336,4 +336,22 @@ public class ModelPersonal {
         }
     }
 
+    /**
+     * Gets the type of document according to id
+     * @param ID referring the ID (idTipoDocumento)
+     * @return a ResultSet
+     */
+    public ResultSet TipoDocumento(int ID){
+            try{
+                con = ModelConexion.getConnection();
+                String query = "SELECT tipo_documento FROM tbTipoDocumento WHERE idTipoDocumento = ?";
+                ps = con.prepareStatement(query);
+                ps.setInt(1, ID);
+                ResultSet rs = ps.executeQuery();
+                return rs;
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e.toString());
+                return null;
+            }
+    }
 }

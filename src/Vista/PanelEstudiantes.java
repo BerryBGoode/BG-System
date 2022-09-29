@@ -47,7 +47,7 @@ public class PanelEstudiantes extends javax.swing.JPanel {
     private ImageIcon reporteimg = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report 1.png"));
     private int frmstate;
     private int ID;
-
+    FrmReportesPar frmreportes = new FrmReportesPar("Estudiantes", "Ingrese genero:");
     /**
      * Creates new form PanelPersonal
      */
@@ -172,6 +172,11 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         btnFiltrar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         btnFiltrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarActionPerformed(evt);
+            }
+        });
         PanelFondo.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 150, 40));
 
         PanelTabla.setHorizontalScrollBar(null);
@@ -342,6 +347,15 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         // TODO add your handling code here:
         imprimir();
     }//GEN-LAST:event_BtnReporteActionPerformed
+
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        // TODO add your handling code here:
+        if(frmreportes.isVisible()){
+            frmreportes.toFront();
+        }else{
+            frmreportes.setVisible(true);
+        }
+    }//GEN-LAST:event_btnFiltrarActionPerformed
     void imprimironly1() {
         Connection con = ControllerConexion.getConnectionModel();
         try {

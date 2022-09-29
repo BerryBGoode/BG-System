@@ -60,7 +60,7 @@ public class PanelContactos extends javax.swing.JPanel {
     public PanelContactos() {
         initComponents();
 
-        String[] headerContactos = {"Id Contacto", "contacto", "Personal", "Tipo Contacto", "idPersonal", "idTipoContacto", "Modificar", "Eliminar", "Registro"};
+        String[] headerContactos = {"Id Contacto", "Contacto", "Personal", "Tipo Contacto", "idPersonal", "idTipoContacto", "Modificar", "Eliminar", "Registro"};
         model = new DefaultTableModel(null, headerContactos) {
             @Override
             public boolean isCellEditable(int row, int column) { // aqui esta
