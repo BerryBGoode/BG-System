@@ -45,7 +45,6 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     PanelDashboard pld = new PanelDashboard();
     ControllerLogin clog = new ControllerLogin();
     PanelUsuarios_dashbord pu = new PanelUsuarios_dashbord();
-    PanelCarnets pc = new PanelCarnets();
     PanelProfesores pp = new PanelProfesores();
     PanelEstudiantes pe = new PanelEstudiantes();
     private int ev;
@@ -56,7 +55,6 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
      */
     public FrmDashboard(String nombre, String tipo) {
         initComponents();
-        this.setTitle("Beep&Go");
         tipousuario = tipo;
         this.setLocationRelativeTo(null);
 //        Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
@@ -131,10 +129,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         ampm = cal.get(Calendar.AM_PM) == Calendar.AM ? "am" : "pm";
 
         if (ampm.equals("pm")) {
-            int h = cal.get(Calendar.HOUR_OF_DAY);
-            if(h != 12){
-                h = cal.get(Calendar.HOUR_OF_DAY) - 12;
-            }
+            int h = cal.get(Calendar.HOUR_OF_DAY) - 12;
             hora = h > 9 ? "" + h : "0" + h;
         } else {
             hora = cal.get(Calendar.HOUR_OF_DAY) > 9 ? "" + cal.get(Calendar.HOUR_OF_DAY) : "0" + cal.get(Calendar.HOUR_OF_DAY);
@@ -338,7 +333,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
                 .addGroup(PanelMOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNormal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnMO, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         PanelMOLayout.setVerticalGroup(
             PanelMOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -983,11 +978,13 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionContactos.setVisible(false);
         panelSeleccionAjustes.setVisible(false);
         panelSeleccionLogout.setVisible(false);
-        pc.setSize(1270, 620);
-        pc.setLocation(0, 0);
+
+        PanelCarnets pl = new PanelCarnets();
+        pl.setSize(1270, 620);
+        pl.setLocation(0, 0);
 
         PanelContenedorForms.removeAll();
-        PanelContenedorForms.add(pc);
+        PanelContenedorForms.add(pl);
         PanelContenedorForms.revalidate();
         PanelContenedorForms.repaint();
     }
@@ -1160,7 +1157,6 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         pu.darkmod();
         pe.mododash();
         pp.mododash();
-        pc.mododash();
         if (_pnldash.isShowing()) {
 
             _pnldash.hide();
@@ -1176,7 +1172,6 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         pu.darkmod();
         pe.mododash();
         pp.mododash();
-        pc.mododash();
         _pnldash.hide();
         if (_pnldash.isVisible()) {
 
