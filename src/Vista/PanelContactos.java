@@ -20,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import javax.swing.table.DefaultTableModel;
@@ -60,7 +61,7 @@ public class PanelContactos extends javax.swing.JPanel {
     public PanelContactos() {
         initComponents();
 
-        String[] headerContactos = {"Id Contacto", "contacto", "Personal", "Tipo Contacto", "idPersonal", "idTipoContacto", "Modificar", "Eliminar", "Registro"};
+        String[] headerContactos = {"Id Contacto", "Personal", "Contacto", "Tipo Contacto", "idPersonal", "idTipoContacto", "Modificar", "Eliminar", "Registro"};
         model = new DefaultTableModel(null, headerContactos) {
             @Override
             public boolean isCellEditable(int row, int column) { // aqui esta
@@ -95,7 +96,7 @@ public class PanelContactos extends javax.swing.JPanel {
                 btnModificar.setBackground(new Color(231, 234, 239));
                 btnEliminar.setBackground(new Color(231, 234, 239));
                 btnReporte.setBackground(new Color(231, 234, 239));
-                Object[] oValues = {rs.getInt("idContacto"), rs.getString("contacto"), rs.getString("Personal"), rs.getString("tipo_contacto"), rs.getInt("idPersonal"), rs.getInt("idTipoContacto"), btnModificar, btnEliminar, btnReporte};
+                Object[] oValues = {rs.getInt("idContacto"),  rs.getString("Personal"),rs.getString("contacto"), rs.getString("tipo_contacto"), rs.getInt("idPersonal"), rs.getInt("idTipoContacto"), btnModificar, btnEliminar, btnReporte};
                 model.addRow(oValues);
             }
         } catch (Exception e) {
@@ -288,11 +289,14 @@ public class PanelContactos extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     void ImprimirReporte() {
-        Connection con = ControllerConexion.getConnectionModel();
+       Connection con = ControllerConexion.getConnectionModel();
         try {
-            String path = "src/DocsReport/ReporteContactos.jasper";
+            String path = "src/DocsReport/ReporteContactosGeneral.jasper";
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(path);
-            JasperPrint jp = JasperFillManager.fillReport(jr, null, con);
+            Map param = new HashMap();
+            param.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
+            param.put("Pie", "src\\Recursos_Proyecto\\TextoLogin.png");
+            JasperPrint jp = JasperFillManager.fillReport(jr, param, con);
             JasperViewer jv = new JasperViewer(jp, false);
             jv.setVisible(true);
             System.out.println("si, se imprime");

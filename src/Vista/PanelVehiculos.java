@@ -167,6 +167,11 @@ public class PanelVehiculos extends javax.swing.JPanel {
         btnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
         btnInforme.setText("Informe");
         btnInforme.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnInforme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInformeActionPerformed(evt);
+            }
+        });
         jPanel5.add(btnInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 150, 40));
 
         jPanel2.add(jPanel5, java.awt.BorderLayout.CENTER);
@@ -253,10 +258,7 @@ public class PanelVehiculos extends javax.swing.JPanel {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarActionPerformed
-
-    private void btnInformeActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        ImprimirReporte();
-    }                                          
+                                   
 
     private void TbVehiculosMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbVehiculosMouseMoved
         // TODO add your handling code here:
@@ -312,6 +314,10 @@ public class PanelVehiculos extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_TbVehiculosMouseClicked
+
+    private void btnInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformeActionPerformed
+       ImprimirReporte();
+    }//GEN-LAST:event_btnInformeActionPerformed
 
 
     void ImprimirReporte() {

@@ -6,6 +6,7 @@
 package Vista;
 
 import Controlador.ControllerAccesos;
+import Controlador.ControllerConexion;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
@@ -16,13 +17,22 @@ import Controles_Personalizados.Tables.Table;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -312,7 +322,24 @@ public class PanelAccesos extends javax.swing.JPanel {
     }//GEN-LAST:event_PanelFondoMouseClicked
 
     private void btnInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformeActionPerformed
-       
+        try {
+            Connection con = ControllerConexion.getConnectionModel();
+            JasperReport reporte = null;
+            String dir = "src\\DocsReport\\AcesosGeneralReporte.jasper";
+            Map param = new HashMap<>();
+            param.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
+            param.put("TextoFooter", "src\\Recursos_Proyecto\\TextoLogin.png");
+
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(dir);
+
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, param, con);
+
+            JasperViewer view = new JasperViewer(jprint, false);
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            view.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
     }//GEN-LAST:event_btnInformeActionPerformed
 
     private void TbAccesosWhite4MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbAccesosWhite4MouseMoved

@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Controlador.ControllerConexion;
 import Controlador.ControllerParqueo;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
@@ -17,7 +18,16 @@ import java.awt.Cursor;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.security.spec.RSAPrivateCrtKeySpec;
+import java.sql.Connection;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -261,7 +271,24 @@ public class PanelParqueo extends javax.swing.JPanel {
     }//GEN-LAST:event_formMouseReleased
 
     private void btnInformeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInformeMouseClicked
-        // TODO add your handling code here:
+      try {
+            Connection con = ControllerConexion.getConnectionModel();
+            JasperReport reporte = null;
+            String dir = "src\\DocsReport\\DetalleEstacionamientosGeneral.jasper";
+            Map param = new HashMap<>();
+            param.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
+            param.put("TextoFooter", "src\\Recursos_Proyecto\\TextoLogin.png");
+
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(dir);
+
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, param, con);
+
+            JasperViewer view = new JasperViewer(jprint, false);
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            view.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
 
     }//GEN-LAST:event_btnInformeMouseClicked
 
