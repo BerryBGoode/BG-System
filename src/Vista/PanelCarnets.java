@@ -60,29 +60,25 @@ public class PanelCarnets extends javax.swing.JPanel {
     private int frmstate;
     public Font font = new Font("Roboto Black", Font.PLAIN, 18);
     ImageIcon modifIcon = new ImageIcon(getClass().getResource("/Recursos_Proyecto/Barcode.png"));
-    ImageIcon reporte = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report 1.png"));
+    ImageIcon modifIcondark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bx-barcode-White.png"));
 
     /**
      * Creates new form PanelCarnets
      */
     public PanelCarnets() {
         initComponents();
-        String[] TitulosCarnets = {"Nombre", "Apellido", "Carné", "Tipo de usuario", "idPersonal", "Codigo de barra", "Imprimir carnet"};
+        modo();
+        String[] TitulosCarnets = {"Nombre", "Apellido", "Carné", "Tipo de usuario", "idPersonal", "Codigo de barra"};
         model = new DefaultTableModel(null, TitulosCarnets);
         TbCarnets.setModel(model);
         TbCarnets.setDefaultRenderer(Object.class, new RenderTable());
-        btnGenerar.setBackground(new Color(231, 235, 239));
-        btnGenerar.setForeground(new Color(58, 50, 75));
         btnGenerar.setFont(font);
         btnGenerar.setText("Generar");
-        btnGenerar.setIcon(modifIcon);
-
-        btnReporte.setBackground(new Color(231, 235, 239));
-        btnReporte.setForeground(new Color(58, 50, 75));
-        btnReporte.setFont(font);
-        btnReporte.setIcon(reporte);
         TbCarnets.removeColumn(TbCarnets.getColumnModel().getColumn(4));
-        TbCarnets.setFont(font);
+        //DarkTable
+        TbCarnetsDark.setModel(model);
+        TbCarnetsDark.setDefaultRenderer(Object.class, new RenderTable());
+        TbCarnetsDark.removeColumn(TbCarnetsDark.getColumnModel().getColumn(4));
         cargarTabla();
     }
 
@@ -108,6 +104,71 @@ public class PanelCarnets extends javax.swing.JPanel {
         } else {
             return false;
         }
+    }
+
+    void modo() {
+        if (ValidacionesSistema.ValidacionesBeep_Go.getModo() == 1) {
+            PanelFondo.setBackground(new Color(47, 49, 54));
+            btnAgregar.setBackground(new Color(32, 34, 37));
+            btnFiltrar.setBackground(new Color(32, 34, 37));
+            TbCarnetsDark.setBackground(new Color(47, 49, 54));
+            TbCarnetsDark.setForeground(Color.WHITE);
+            lblCarnets.setForeground(Color.WHITE);
+            PanelTabla.setVisible(false);
+            TbCarnets.setVisible(false);
+            jScrollPane2.setVisible(true);
+            TbCarnetsDark.setVisible(true);
+            btnGenerar.setBackground(new Color(32, 34, 37));
+            btnGenerar.setForeground(Color.WHITE);
+            btnGenerar.setIcon(modifIcondark);
+
+        } else {
+            btnGenerar.setBackground(new Color(231, 235, 239));
+            btnGenerar.setForeground(new Color(58, 50, 75));
+            btnGenerar.setIcon(modifIcon);
+            PanelFondo.setBackground(new Color(231, 235, 239));
+            btnAgregar.setBackground(new Color(58, 50, 75));
+            btnFiltrar.setBackground(new Color(58, 50, 75));
+            lblCarnets.setForeground(new Color(58, 50, 75));
+            PanelTabla.setVisible(true);
+            TbCarnets.setVisible(true);
+            jScrollPane2.setVisible(false);
+            TbCarnetsDark.setVisible(false);
+        }
+    }
+
+    void mododash() {
+        switch (ValidacionesSistema.ValidacionesBeep_Go.getModo()) {
+            case 1:
+            PanelFondo.setBackground(new Color(47, 49, 54));
+            btnAgregar.setBackground(new Color(32, 34, 37));
+            btnFiltrar.setBackground(new Color(32, 34, 37));
+            TbCarnetsDark.setBackground(new Color(47, 49, 54));
+            TbCarnetsDark.setForeground(Color.WHITE);
+            lblCarnets.setForeground(Color.WHITE);
+            PanelTabla.setVisible(false);
+            TbCarnets.setVisible(false);
+            jScrollPane2.setVisible(true);
+            TbCarnetsDark.setVisible(true);
+            btnGenerar.setBackground(new Color(32, 34, 37));
+            btnGenerar.setForeground(Color.WHITE);
+            btnGenerar.setIcon(modifIcondark);
+                break;
+            case 2:
+                btnGenerar.setBackground(new Color(231, 235, 239));
+                btnGenerar.setForeground(new Color(58, 50, 75));
+                btnGenerar.setIcon(modifIcon);
+                PanelFondo.setBackground(new Color(231, 235, 239));
+                btnAgregar.setBackground(new Color(58, 50, 75));
+                btnFiltrar.setBackground(new Color(58, 50, 75));
+                lblCarnets.setForeground(new Color(58, 50, 75));
+                PanelTabla.setVisible(true);
+                TbCarnets.setVisible(true);
+                jScrollPane2.setVisible(false);
+                TbCarnetsDark.setVisible(false);
+                break;
+        }
+
     }
 
     void CrearCodigodeBarra() {
@@ -156,9 +217,11 @@ public class PanelCarnets extends javax.swing.JPanel {
         jPanel4 = new javax.swing.JPanel();
         btnFiltrar = new Controles_Personalizados.Botones.UWPButton();
         btnAgregar = new Controles_Personalizados.Botones.UWPButton();
-        btnInforme = new Controles_Personalizados.Botones.UWPButton();
-        jPanel5 = new javax.swing.JPanel();
-        lblCarnets = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TbCarnetsDark = new Controles_Personalizados.Tables.TableDark();
+        PanelTabla = new javax.swing.JScrollPane();
+        TbCarnets = new Controles_Personalizados.Tables.Table();
+        scrollBar1 = new Controles_Personalizados.ScrollBar.ScrollBar();
 
         setBackground(new java.awt.Color(42, 36, 56));
         setLayout(new java.awt.BorderLayout());
@@ -243,24 +306,34 @@ public class PanelCarnets extends javax.swing.JPanel {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel4.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 40));
+        PanelFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 150, 40));
 
-        btnInforme.setBackground(new java.awt.Color(58, 50, 75));
-        btnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
-        btnInforme.setText("Informe");
-        btnInforme.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        btnInforme.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnInformeMouseClicked(evt);
+        TbCarnetsDark.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        });
-        jPanel4.add(btnInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 150, 40));
+        ));
+        TbCarnetsDark.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jScrollPane2.setViewportView(TbCarnetsDark);
 
-        jPanel3.add(jPanel4, java.awt.BorderLayout.CENTER);
+        PanelFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 1230, 480));
 
-        jPanel5.setBackground(new java.awt.Color(231, 234, 239));
-        jPanel5.setPreferredSize(new java.awt.Dimension(1240, 75));
-        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelTabla.setHorizontalScrollBar(null);
+        PanelTabla.setVerticalScrollBar(scrollBar1);
+        PanelTabla.setWheelScrollingEnabled(false);
+
+        TbCarnets = new Controles_Personalizados.Tables.Table(){
+
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        jPanel4.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 40));
 
         lblCarnets.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
         lblCarnets.setForeground(new java.awt.Color(58, 50, 75));
@@ -423,8 +496,13 @@ public class PanelCarnets extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Controles_Personalizados.Paneles.PanelRound PanelFondo;
     private Controles_Personalizados.Tables.Table TbCarnets;
+    private Controles_Personalizados.Tables.TableDark TbCarnetsDark;
     private Controles_Personalizados.Botones.UWPButton btnAgregar;
     private Controles_Personalizados.Botones.UWPButton btnFiltrar;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblCarnets;
+    private Controles_Personalizados.ScrollBar.ScrollBar scrollBar1;
+
     private Controles_Personalizados.Botones.UWPButton btnInforme;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
