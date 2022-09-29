@@ -99,7 +99,7 @@ public class RecuCorreo extends javax.swing.JFrame {
         PanelCampos.setRoundTopLeft(35);
         PanelCampos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        textoRest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/TextoRecuperacionCorreo.png"))); // NOI18N
+        textoRest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/txtRecuCorreo.png"))); // NOI18N
         PanelCampos.add(textoRest, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
 
         btnGoBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-left-arrow-circle 1.png"))); // NOI18N
@@ -114,7 +114,7 @@ public class RecuCorreo extends javax.swing.JFrame {
         txtCorreo.setForeground(new java.awt.Color(42, 36, 56));
         txtCorreo.setCaretColor(new java.awt.Color(42, 36, 56));
         txtCorreo.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        txtCorreo.setLabelText("Correo electronico");
+        txtCorreo.setLabelText("Correo electrónico");
         txtCorreo.setLineColor(new java.awt.Color(42, 36, 56));
         txtCorreo.setSelectionColor(new java.awt.Color(58, 50, 75));
         txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -127,7 +127,7 @@ public class RecuCorreo extends javax.swing.JFrame {
         });
         PanelCampos.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 310, 70));
 
-        btnRestablecer.setText("Restablecer");
+        btnRestablecer.setText("Reestablecer");
         btnRestablecer.setToolTipText("");
         btnRestablecer.setColor1(new java.awt.Color(42, 36, 56));
         btnRestablecer.setColor2(new java.awt.Color(42, 36, 56));

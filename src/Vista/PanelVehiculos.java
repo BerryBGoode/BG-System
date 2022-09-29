@@ -6,11 +6,11 @@
 package Vista;
 
 import Controlador.ControllerConexion;
-import Controlador.ControllerContactos;
 import Controlador.ControllerVehiculos;
 import Controles_Personalizados.Botones.UWPButton;
 import Controles_Personalizados.RenderTable;
 import java.awt.Color;
+import java.awt.Font;
 import java.sql.Connection;
 
 import java.sql.ResultSet;
@@ -36,6 +36,8 @@ public class PanelVehiculos extends javax.swing.JPanel {
     /**
      * Creates new form PanelVehiculos
      */
+    private Font font = new Font("Roboto Black", Font.PLAIN, 18);
+
     public PanelVehiculos() {
         initComponents();
 
@@ -47,6 +49,7 @@ public class PanelVehiculos extends javax.swing.JPanel {
             }
         };
         CargarTablaVehiculos();
+        TbVehiculos.setFont(font);
         TbVehiculos.removeColumn(TbVehiculos.getColumnModel().getColumn(5));
         TbVehiculos.removeColumn(TbVehiculos.getColumnModel().getColumn(0));
         TbVehiculos.setDefaultRenderer(Object.class, new RenderTable());
@@ -114,7 +117,7 @@ public class PanelVehiculos extends javax.swing.JPanel {
 
         lblVehiculos.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
         lblVehiculos.setForeground(new java.awt.Color(58, 50, 75));
-        lblVehiculos.setText("Vehiculos");
+        lblVehiculos.setText("Vehículos");
         PanelFondo.add(lblVehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         btnFiltrar.setBackground(new java.awt.Color(58, 50, 75));

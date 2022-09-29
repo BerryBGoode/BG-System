@@ -118,7 +118,7 @@ public class FrmLogin extends javax.swing.JFrame {
 
         btnConocerMas.setBackground(new java.awt.Color(254, 254, 254));
         btnConocerMas.setForeground(new java.awt.Color(42, 36, 56));
-        btnConocerMas.setText("Conocer mas...");
+        btnConocerMas.setText("Conocer más");
         btnConocerMas.setColor1(new java.awt.Color(239, 239, 239));
         btnConocerMas.setColor2(new java.awt.Color(239, 239, 239));
         btnConocerMas.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
@@ -130,7 +130,7 @@ public class FrmLogin extends javax.swing.JFrame {
         PanelContenedorCampos.add(btnConocerMas, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 710, 170, -1));
 
         btnLogin.setBackground(new java.awt.Color(254, 254, 254));
-        btnLogin.setText("Iniciar Sesion");
+        btnLogin.setText("Iniciar Sesión ");
         btnLogin.setColor1(new java.awt.Color(42, 36, 56));
         btnLogin.setColor2(new java.awt.Color(58, 50, 75));
         btnLogin.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N

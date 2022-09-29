@@ -37,10 +37,12 @@ import net.sourceforge.barbecue.output.OutputException;
  * @author danlo
  */
 public class PanelCarnets extends javax.swing.JPanel {
+    
+    
 
-    private DefaultTableModel model;
+    public DefaultTableModel model;
     private ControllerCarnets ObjController = new ControllerCarnets();
-    private final UWPButton btnGenerar = new UWPButton();
+    public final UWPButton btnGenerar = new UWPButton();
     private int ID;
     private File file;
     private static String Carnet;
@@ -65,6 +67,7 @@ public class PanelCarnets extends javax.swing.JPanel {
         btnGenerar.setIcon(modifIcon);
         TbCarnets.removeColumn(TbCarnets.getColumnModel().getColumn(4));
         cargarTabla();
+        TbCarnets.setFont(font);
     }
 
     void cargarTabla() {

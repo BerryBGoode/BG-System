@@ -125,7 +125,7 @@ public class RecuQR extends javax.swing.JFrame {
         });
         PanelContenedorCampos.add(btnGoBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        textoRest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/TextoRecuQR.png"))); // NOI18N
+        textoRest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/txtRecuQR.png"))); // NOI18N
         PanelContenedorCampos.add(textoRest, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
 
         txtCorreo.setBackground(new java.awt.Color(254, 254, 254));
@@ -137,7 +137,7 @@ public class RecuQR extends javax.swing.JFrame {
         txtCorreo.setSelectionColor(new java.awt.Color(58, 50, 75));
         PanelContenedorCampos.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, 310, 70));
 
-        btnGenerar.setText("Generar Codigo");
+        btnGenerar.setText("Generar Código");
         btnGenerar.setToolTipText("");
         btnGenerar.setColor1(new java.awt.Color(42, 36, 56));
         btnGenerar.setColor2(new java.awt.Color(42, 36, 56));

@@ -76,7 +76,7 @@ public Image Logo(){
 
         btnDatosBio.setBackground(new java.awt.Color(42, 36, 56));
         btnDatosBio.setForeground(new java.awt.Color(254, 254, 254));
-        btnDatosBio.setText("Datos Biometricos");
+        btnDatosBio.setText("Datos biométricos");
         btnDatosBio.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
         btnDatosBio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,7 +104,7 @@ public Image Logo(){
 
         btnCorreo.setBackground(new java.awt.Color(42, 36, 56));
         btnCorreo.setForeground(new java.awt.Color(254, 254, 254));
-        btnCorreo.setText("Correo Electronico");
+        btnCorreo.setText("Correo electrónico");
         btnCorreo.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
         btnCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,7 +118,7 @@ public Image Logo(){
 
         btnQR.setBackground(new java.awt.Color(42, 36, 56));
         btnQR.setForeground(new java.awt.Color(254, 254, 254));
-        btnQR.setText("Codigo QR");
+        btnQR.setText("Código QR");
         btnQR.setFont(new java.awt.Font("Roboto Black", 1, 18)); // NOI18N
         btnQR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,7 +144,7 @@ public Image Logo(){
         Sobre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-envelope 1.png"))); // NOI18N
         PanelFondo.add(Sobre, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 320, -1, 50));
 
-        lblText.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/OlvideContraText.png"))); // NOI18N
+        lblText.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/txtMetodosRecu.png"))); // NOI18N
         PanelFondo.add(lblText, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 120, -1, -1));
 
         btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Maximizar.png"))); // NOI18N

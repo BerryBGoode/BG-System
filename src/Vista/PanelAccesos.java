@@ -57,6 +57,7 @@ public class PanelAccesos extends javax.swing.JPanel {
             String[] header = {"IDAcceso", "IDPersonal", "Carnet", "Fecha", "IDTipoAcceso", "Hora", "Acceso", "Notificación"};
             tb = new DefaultTableModel(null, header);
             loadTableToSegurity();
+            TbAccesosWhite4.setFont(font);
             TbAccesosWhite4.setDefaultRenderer(Object.class, new RenderTable());
             TbAccesosWhite4.setModel(tb);
             TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(0));
@@ -68,6 +69,7 @@ public class PanelAccesos extends javax.swing.JPanel {
             String[] header = {"IDAcceso", "IDPersonal", "Carnet", "Fecha", "IDTipoAcceso", "Hora", "Acceso", "Notificación", "Modificar", "Eliminar"};
             tb = new DefaultTableModel(null, header);
             loadTable();
+            TbAccesosWhite4.setFont(font);
             TbAccesosWhite4.setDefaultRenderer(Object.class, new RenderTable());
             TbAccesosWhite4.setModel(tb);
             TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(0));

@@ -11,10 +11,10 @@ import Controles_Personalizados.Botones.UWPButton;
 import Controles_Personalizados.RenderTable;
 import Controles_Personalizados.Tables.Table;
 import java.awt.Color;
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ImageIcon;
@@ -35,13 +35,13 @@ import net.sf.jasperreports.view.JasperViewer;
 public class PanelEstudiantes extends javax.swing.JPanel {
 
     private FrmAgg_Personal add = new FrmAgg_Personal();
-    private ControllerPersonal objControllerP = new ControllerPersonal();
-    private final DefaultTableModel ModelAlumnos;
-    private final UWPButton btnActualizar = new UWPButton();
-    private final UWPButton btnEliminar = new UWPButton();
-    private final UWPButton btnReporteP = new UWPButton();
+    public ControllerPersonal objControllerP = new ControllerPersonal();
+    public final DefaultTableModel ModelAlumnos;
+    public final UWPButton btnActualizar = new UWPButton();
+    public final UWPButton btnEliminar = new UWPButton();
+    public final UWPButton btnReporteP = new UWPButton();
     //Codigo para colocar la letra que se utilza en el proyecto
-    //(private Font font = new Font("Roboto Black", Font.PLAIN, 18);
+    private Font font = new Font("Roboto Black", Font.PLAIN, 18);
     private ImageIcon modificar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar.png"));
     private ImageIcon eliminar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/eliminar.png"));
     private ImageIcon reporteimg = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report 1.png"));
@@ -64,6 +64,7 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         };
         TbAlumnos.setModel(ModelAlumnos);
         TbAlumnos.setDefaultRenderer(Object.class, new RenderTable());
+        TbAlumnos.setFont(font);
         cargarTabla();
         TbAlumnos.removeColumn(TbAlumnos.getColumnModel().getColumn(0));
         TbAlumnos.removeColumn(TbAlumnos.getColumnModel().getColumn(12));
@@ -83,7 +84,7 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         }
     }
 
-    private void cargarTabla() {
+    public void cargarTabla() {
         while (ModelAlumnos.getRowCount() > 0) {
             ModelAlumnos.removeRow(0);
         }
