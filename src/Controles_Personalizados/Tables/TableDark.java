@@ -40,7 +40,7 @@ public class TableDark extends JTable {
         header = new TableDarkHeader();
         cell = new TableDarkCell();
         getTableHeader().setDefaultRenderer(header);
-        getTableHeader().setPreferredSize(new Dimension(0, 35));
+        getTableHeader().setPreferredSize(new Dimension(0, 40));
         setDefaultRenderer(Object.class, cell);
         setRowHeight(30);
     }
@@ -83,9 +83,9 @@ public class TableDark extends JTable {
     public void fixTable(JScrollPane scroll) {
         scroll.setVerticalScrollBar(new ScrollBarCustom());
         JPanel panel = new JPanel();
-        panel.setBackground(new Color(30, 30, 30));
+        panel.setBackground(new Color(32, 34, 37));
         scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, panel);
-        scroll.getViewport().setBackground(new Color(30, 30, 30));
+        scroll.getViewport().setBackground(new Color(32, 34, 37));
         scroll.setBorder(BorderFactory.createLineBorder(new Color(60, 60, 60), 2));
     }
 
@@ -102,7 +102,7 @@ public class TableDark extends JTable {
             Component com = super.getTableCellRendererComponent(jtable, o, bln, bln1, i, i1);
             com.setBackground(new Color(30, 30, 30));
             com.setForeground(new Color(200, 200, 200));
-            com.setFont(com.getFont().deriveFont(Font.BOLD, 12));
+            com.setFont(com.getFont().deriveFont(Font.BOLD, 18));
             if (alignment.containsKey(i1)) {
                 setHorizontalAlignment(alignment.get(i1));
             } else {

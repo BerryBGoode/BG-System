@@ -10,6 +10,7 @@ import Controlador.ControllerContactos;
 import Controles_Personalizados.Botones.UWPButton;
 import Controles_Personalizados.RenderTable;
 import java.awt.Color;
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -39,6 +40,8 @@ public class PanelContactos extends javax.swing.JPanel {
     /**
      * Creates new form PanelContactos
      */
+    
+     private Font font = new Font("Roboto Black", Font.PLAIN, 18);
     DefaultTableModel model;
     DefaultComboBoxModel<String> modelcombo = new DefaultComboBoxModel<>();
     ArrayList list;
@@ -68,6 +71,7 @@ public class PanelContactos extends javax.swing.JPanel {
             }
         };
         CargarTabla();
+        tbContactos.setFont(font);
         tbContactos.removeColumn(tbContactos.getColumnModel().getColumn(0));
         tbContactos.removeColumn(tbContactos.getColumnModel().getColumn(3));
         tbContactos.removeColumn(tbContactos.getColumnModel().getColumn(3));

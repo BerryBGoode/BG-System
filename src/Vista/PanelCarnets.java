@@ -6,37 +6,26 @@
 package Vista;
 
 import Controlador.ControllerCarnets;
-import Controlador.ControllerConexion;
+import Controles_Personalizados.Botones.ButtonGradient;
 import Controles_Personalizados.Botones.UWPButton;
 import Controles_Personalizados.RenderTable;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperPrintManager;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.util.JRLoader;
-import net.sf.jasperreports.view.JasperViewer;
 import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.BarcodeFactory;
@@ -48,41 +37,37 @@ import net.sourceforge.barbecue.output.OutputException;
  * @author danlo
  */
 public class PanelCarnets extends javax.swing.JPanel {
+    
+    
 
-    private DefaultTableModel model;
+    public DefaultTableModel model;
     private ControllerCarnets ObjController = new ControllerCarnets();
-    private final UWPButton btnGenerar = new UWPButton();
-    private final UWPButton btnReporte = new UWPButton();
+    public final UWPButton btnGenerar = new UWPButton();
     private int ID;
-    private byte[] imagen;
     private File file;
     private static String Carnet;
     private int frmstate;
     public Font font = new Font("Roboto Black", Font.PLAIN, 18);
     ImageIcon modifIcon = new ImageIcon(getClass().getResource("/Recursos_Proyecto/Barcode.png"));
-    ImageIcon reporte = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report 1.png"));
 
     /**
      * Creates new form PanelCarnets
      */
     public PanelCarnets() {
         initComponents();
-        String[] TitulosCarnets = {"Nombre", "Apellido", "Carné", "Tipo de usuario", "idPersonal", "Codigo de barra", "Imprimir carnet"};
+        String[] TitulosCarnets = {"Nombre", "Apellido", "Carné", "Tipo de usuario", "idPersonal", "Codigo de barra"};
         model = new DefaultTableModel(null, TitulosCarnets);
         TbCarnets.setModel(model);
         TbCarnets.setDefaultRenderer(Object.class, new RenderTable());
         btnGenerar.setBackground(new Color(231, 235, 239));
+        ImageIcon modificar;
         btnGenerar.setForeground(new Color(58, 50, 75));
         btnGenerar.setFont(font);
         btnGenerar.setText("Generar");
         btnGenerar.setIcon(modifIcon);
-        
-        btnReporte.setBackground(new Color(231, 235, 239));
-        btnReporte.setForeground(new Color(58, 50, 75));
-        btnReporte.setFont(font);
-        btnReporte.setIcon(reporte);
         TbCarnets.removeColumn(TbCarnets.getColumnModel().getColumn(4));
         cargarTabla();
+        TbCarnets.setFont(font);
     }
 
     void cargarTabla() {
@@ -92,7 +77,7 @@ public class PanelCarnets extends javax.swing.JPanel {
         try {
             ResultSet rs = ObjController.cargarTablaController();
             while (rs.next()) {
-                Object[] Valores = {rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("Carnet"), rs.getString("tipo_personal"), rs.getInt("idPersonal"), btnGenerar, btnReporte};
+                Object[] Valores = {rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("Carnet"), rs.getString("tipo_personal"), rs.getInt("idPersonal"), btnGenerar};
                 model.addRow(Valores);
             }
         } catch (SQLException e) {
@@ -162,6 +147,8 @@ public class PanelCarnets extends javax.swing.JPanel {
         PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
         PanelFondo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         PanelFondo.setPreferredSize(new java.awt.Dimension(1270, 620));
+        PanelFondo.setRoundBottomLeft(20);
+        PanelFondo.setRoundBottomRight(20);
         PanelFondo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 PanelFondoMouseMoved(evt);
@@ -314,81 +301,11 @@ public class PanelCarnets extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    void BuscarIDPersonal(){
-        ResultSet rs;
-        ObjController.setCarnet(Carnet);
-        rs = ObjController.BuscarID();
-        try {
-            if (rs.next()) {
-                ID = rs.getInt("idPersonal");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.toString());
-        }
-    }
-    
-    void BuscarImagen(){
-        ResultSet rs;
-        ObjController.setIdPersonal(ID);
-        rs = ObjController.BuscarImagen();
-        try {
-            if (rs.next()) {
-                imagen = rs.getBytes("imagen");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.toString());
-        }
-    }
-    
-    void CargarDatos(){
-        BuscarIDPersonal();
-        BuscarImagen();
-    }
-    
-    boolean checkFile() {
-        file = new File("src\\Codigos_Barra\\" + Carnet + ".png");
-        if (file.exists()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-    void ReportePar() {
-        try {
-            Connection con = ControllerConexion.getConnectionModel();
-            JasperReport reporte = null;
-
-            String dir = "src\\DocsReport\\ReporteCarnet.jasper";
-            Map parametros = new HashMap();
-            parametros.put("Plantilla", "src\\Recursos_Proyecto\\PCarnet.png");
-            boolean respuesta = checkFile();
-            if(respuesta == true){
-                parametros.put("CodBarra", "src\\Codigos_Barra\\" + Carnet + ".png");
-            }
-            parametros.put("idPersonal", ID);
-            if (imagen != null) {
-                InputStream input = new ByteArrayInputStream(imagen);
-                parametros.put("imagenusu", input);
-            }
-            reporte = (JasperReport) JRLoader.loadObjectFromFile(dir);
-
-            JasperPrint jprint = JasperFillManager.fillReport(reporte, parametros, con);
-            
-            JasperViewer view = new JasperViewer(jprint, false);
-            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            view.setVisible(true);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.toString());
-        }
-    }
-    
     private void TbCarnetsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbCarnetsMouseClicked
         // TODO add your handling code here:
         int column = TbCarnets.getColumnModel().getColumnIndexAtX(evt.getX());
         int row = evt.getY() / TbCarnets.getRowHeight();
         btnGenerar.setName("btnGenerar");
-        btnReporte.setName("btnReporte");
         if (evt.getClickCount() == 1) {
             JTable rcp = (JTable) evt.getSource();
             ID = (int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 4);
@@ -410,11 +327,6 @@ public class PanelCarnets extends javax.swing.JPanel {
                             frmc.setVisible(true);
                         }
                     }
-                }else if(btns.getName().equals("btnReporte")){
-                    ID = 0;
-                    imagen = null;
-                    CargarDatos();
-                    ReportePar();
                 }
             }
         }

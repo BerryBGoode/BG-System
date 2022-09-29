@@ -71,7 +71,7 @@ public Image Logo(){
         PanelCampos.setRoundTopLeft(35);
         PanelCampos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        textoRest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/TextoRecuDatosBio.png"))); // NOI18N
+        textoRest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/txtDatosBio.png"))); // NOI18N
         PanelCampos.add(textoRest, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
 
         btnGoBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-left-arrow-circle 1.png"))); // NOI18N
@@ -86,7 +86,7 @@ public Image Logo(){
         txtUsuario.setForeground(new java.awt.Color(42, 36, 56));
         txtUsuario.setCaretColor(new java.awt.Color(42, 36, 56));
         txtUsuario.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        txtUsuario.setLabelText("Correo electronico");
+        txtUsuario.setLabelText("Correo electrónico");
         txtUsuario.setLineColor(new java.awt.Color(42, 36, 56));
         txtUsuario.setSelectionColor(new java.awt.Color(58, 50, 75));
         PanelCampos.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 320, 310, 70));
@@ -95,7 +95,7 @@ public Image Logo(){
         btnVerificar.setColor1(new java.awt.Color(42, 36, 56));
         btnVerificar.setColor2(new java.awt.Color(42, 36, 56));
         btnVerificar.setFont(new java.awt.Font("Roboto Black", 0, 18)); // NOI18N
-        btnVerificar.setLabel("Comenzar Verificacion");
+        btnVerificar.setLabel("Comenzar verificación ");
         btnVerificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVerificarActionPerformed(evt);

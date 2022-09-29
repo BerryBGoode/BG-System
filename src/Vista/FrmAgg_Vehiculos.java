@@ -103,7 +103,7 @@ public class FrmAgg_Vehiculos extends javax.swing.JFrame {
         txtPlaca.setCaretColor(new java.awt.Color(253, 255, 254));
         txtPlaca.setDisabledTextColor(new java.awt.Color(253, 255, 254));
         txtPlaca.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        txtPlaca.setLabelText("Placa - Vehiculo");
+        txtPlaca.setLabelText("Placa - Vehículo");
         txtPlaca.setLineColor(new java.awt.Color(253, 255, 254));
         txtPlaca.setSelectedTextColor(new java.awt.Color(58, 50, 75));
         txtPlaca.setSelectionColor(new java.awt.Color(253, 255, 254));
@@ -122,7 +122,7 @@ public class FrmAgg_Vehiculos extends javax.swing.JFrame {
         txtColor.setCaretColor(new java.awt.Color(253, 255, 254));
         txtColor.setDisabledTextColor(new java.awt.Color(253, 255, 254));
         txtColor.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        txtColor.setLabelText("Color - Vehiculo");
+        txtColor.setLabelText("Color - Vehículo");
         txtColor.setLineColor(new java.awt.Color(253, 255, 254));
         txtColor.setSelectedTextColor(new java.awt.Color(58, 50, 75));
         txtColor.setSelectionColor(new java.awt.Color(253, 255, 254));
@@ -158,7 +158,7 @@ public class FrmAgg_Vehiculos extends javax.swing.JFrame {
         panelRound1.add(btnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 480, 150, -1));
 
         btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/CerrarLogin.png"))); // NOI18N
-        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnCerrarMousePressed(evt);
@@ -167,7 +167,7 @@ public class FrmAgg_Vehiculos extends javax.swing.JFrame {
         panelRound1.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 10, -1, -1));
 
         btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Maximizar.png"))); // NOI18N
-        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMinimizarMouseClicked(evt);

@@ -15,6 +15,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ImageIcon;
@@ -22,6 +23,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -35,13 +37,19 @@ import net.sf.jasperreports.view.JasperViewer;
 public class PanelUsuarios_dashbord extends javax.swing.JPanel {
 
     DefaultTableModel modelo;
-    private final UWPButton btnActualizar = new UWPButton();
-    private final UWPButton btnEliminar = new UWPButton();
-    private final UWPButton btnReporte = new UWPButton();
+    public final UWPButton btnActualizar = new UWPButton();
+    public final UWPButton btnEliminar = new UWPButton();
+    public final UWPButton btnReporte = new UWPButton();
+    private final UWPButton btnActualizardark = new UWPButton();
+    private final UWPButton btnEliminardark = new UWPButton();
+    private final UWPButton btnReportedark = new UWPButton();
     private Font font = new Font("Roboto Black", Font.PLAIN, 18);
     ImageIcon Modificar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar.png"));
     ImageIcon Eliminar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/eliminar.png"));
     ImageIcon reporte = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report 1.png"));
+    ImageIcon Modificardark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar_white.png"));
+    ImageIcon Eliminardark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-trash-alt white.png"));
+    ImageIcon reportedark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report-White.png"));
     FrmAgg_Usuarios agg = new FrmAgg_Usuarios();
     private int frmstate = 1;
     byte[] imagen;
@@ -52,6 +60,17 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
      */
     public PanelUsuarios_dashbord() {
         initComponents();
+        System.out.println(ValidacionesSistema.ValidacionesBeep_Go.getModo());
+//        if (ValidacionesSistema.ValidacionesBeep_Go.getModo() == 2) {
+//            CargarTabladark();
+//            tbUsuarioDark.setModel(modelodark);
+//        } else if (ValidacionesSistema.ValidacionesBeep_Go.Modo == 1) {
+//            CargarTabla();
+//            tbUsuarios.setModel(modelo);
+//        }
+        modo();
+        //tbUsuarioDark.setVisible(false);
+        //tbUsuarios.setVisible(true);
         String[] TitulosTabla = {"ID", "idPersonal", "Nombres", "Apellidos", "Usuario", "idTipoUsuario", "Tipo de usuario", "idEstadoUsuario", "Estado", "Imagen", "Modificar", "Eliminar", "Registro"};
         modelo = new DefaultTableModel(null, TitulosTabla) {
             @Override
@@ -59,15 +78,31 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
                 return false;
             }
         };
+        modelodark = new DefaultTableModel(null, TitulosTabla) {
+            @Override
+            public boolean isCellEditable(int row, int column) { // aqui esta
+                return false;
+            }
+        };
+        CargarTabla();
+        CargarTabladark();
         tbUsuarios.setModel(modelo);
         tbUsuarios.setDefaultRenderer(Object.class, new RenderTable());
-        CargarTabla();
         tbUsuarios.setFont(font);
         tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(0));
         tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(0));
         tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(3));
         tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(4));
         tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(5));
+        //DarkTable
+        tbUsuarioDark.setModel(modelodark);
+        tbUsuarioDark.setDefaultRenderer(Object.class, new RenderTable());
+        tbUsuarioDark.setFont(font);
+        tbUsuarioDark.removeColumn(tbUsuarioDark.getColumnModel().getColumn(0));
+        tbUsuarioDark.removeColumn(tbUsuarioDark.getColumnModel().getColumn(0));
+        tbUsuarioDark.removeColumn(tbUsuarioDark.getColumnModel().getColumn(3));
+        tbUsuarioDark.removeColumn(tbUsuarioDark.getColumnModel().getColumn(4));
+        tbUsuarioDark.removeColumn(tbUsuarioDark.getColumnModel().getColumn(5));
     }
 
     /**
@@ -86,6 +121,9 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         ScrollTabla = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbUsuarios = new Controles_Personalizados.Tables.Table();
+        scrollBarCustom1 = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
+        Scroll = new javax.swing.JScrollPane();
+        tbUsuarioDark = new Controles_Personalizados.Tables.TableDark();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         btnAgregar = new Controles_Personalizados.Botones.UWPButton();
@@ -156,6 +194,30 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tbUsuarios);
 
         jPanel2.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        scrollBarCustom1.setBackground(new java.awt.Color(58, 50, 75));
+        scrollBarCustom1.setForeground(new java.awt.Color(58, 50, 75));
+        jPanel2.add(scrollBarCustom1, java.awt.BorderLayout.EAST);
+
+        Scroll.setBackground(new java.awt.Color(0, 0, 0));
+        Scroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        Scroll.setVerticalScrollBar(scrollBarCustom1);
+
+        tbUsuarioDark.setBackground(new java.awt.Color(0, 0, 0));
+        tbUsuarioDark.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        Scroll.setViewportView(tbUsuarioDark);
+
+        jPanel2.add(Scroll, java.awt.BorderLayout.PAGE_START);
 
         jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
 
@@ -237,7 +299,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         add(panelRound1, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void CargarTabla() {
+    public final void CargarTabla() {
         ControllerUsuarios obj = new ControllerUsuarios();
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
@@ -248,15 +310,129 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
                 btnActualizar.setIcon(Modificar);
                 btnEliminar.setIcon(Eliminar);
                 btnReporte.setIcon(reporte);
-                btnActualizar.setBackground(new Color(231, 234, 239));
-                btnReporte.setBackground(new Color(231, 234, 239));
-                btnEliminar.setBackground(new Color(231, 234, 239));
                 Object[] oValores = {rs.getInt("idUsuario"), rs.getInt("idPersonal"), rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("nombre_usuario"), rs.getInt("idTipoUsuario"), rs.getString("tipo_usuario"), rs.getInt("idEstadoUsuario"), rs.getString("estado_usuario"), rs.getBytes("imagen"), btnActualizar, btnEliminar, btnReporte};
 
                 modelo.addRow(oValores);
+                System.out.println("cargando info normal");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+
+    public final void CargarTabladark() {
+        ControllerUsuarios obj = new ControllerUsuarios();
+        while (modelodark.getRowCount() > 0) {
+            modelodark.removeRow(0);
+        }
+        try {
+            ResultSet rs = obj.CargarUsuarios_C();
+            while (rs.next()) {
+                btnActualizardark.setIcon(Modificardark);
+                btnEliminardark.setIcon(Eliminardark);
+                btnReportedark.setIcon(reportedark);
+                Object[] oValores = {rs.getInt("idUsuario"), rs.getInt("idPersonal"), rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("nombre_usuario"), rs.getInt("idTipoUsuario"), rs.getString("tipo_usuario"), rs.getInt("idEstadoUsuario"), rs.getString("estado_usuario"), rs.getBytes("imagen"), btnActualizardark, btnEliminardark, btnReportedark};
+
+                modelodark.addRow(oValores);
+                System.out.println("cargando info normal");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+
+    public final void darkmod() {
+        switch (ValidacionesSistema.ValidacionesBeep_Go.getModo()) {
+            case 1:
+                panelRound1.setBackground(new Color(47, 49, 54));
+                lblParqueo.setForeground(Color.WHITE);
+                jPanel5.setBackground(new Color(47, 49, 54));
+                jPanel4.setBackground(new Color(47, 49, 54));
+                btnAgregar.setBackground(new Color(32, 34, 37));
+                btnFiltrar.setBackground(new Color(32, 34, 37));
+                btnInforme.setBackground(new Color(32, 34, 37));
+                jPanel2.setBackground(new Color(47, 49, 54));
+                tbUsuarioDark.setGridColor(new Color(32, 34, 37));
+                btnActualizardark.setBackground(new Color(47, 49, 54));
+                btnEliminardark.setBackground(new Color(47, 49, 54));
+                btnReportedark.setBackground(new Color(47, 49, 54));
+                float xwhite = tbUsuarios.getX();
+                float ywhite = tbUsuarios.getY();
+                int widhtwhite = tbUsuarios.getWidth();
+                int heightwhite = tbUsuarios.getHeight();
+                jScrollPane1.setVisible(false);
+                tbUsuarios.setVisible(false);
+                Scroll.setVisible(true);
+                tbUsuarioDark.setVisible(true);
+                tbUsuarioDark.setAlignmentY(ywhite);
+                tbUsuarioDark.setSize(widhtwhite, heightwhite);
+                tbUsuarioDark.setAlignmentX(xwhite);
+                tbUsuarioDark.setBackground(new Color(47, 49, 54));
+                tbUsuarioDark.setForeground(Color.WHITE);
+                break;
+            case 2:
+                panelRound1.setBackground(new Color(231, 234, 239));
+                lblParqueo.setForeground(new Color(58, 50, 75));
+                jPanel5.setBackground(new Color(231, 234, 239));
+                jPanel4.setBackground(new Color(231, 234, 239));
+                btnAgregar.setBackground(new Color(58, 50, 75));
+                btnFiltrar.setBackground(new Color(58, 50, 75));
+                btnInforme.setBackground(new Color(58, 50, 75));
+                jPanel2.setBackground(new Color(231, 234, 239));
+                btnActualizar.setBackground(new Color(231, 234, 239));
+                btnEliminar.setBackground(new Color(231, 234, 239));
+                btnReporte.setBackground(new Color(231, 234, 239));
+                jScrollPane1.setVisible(true);
+                tbUsuarios.setVisible(true);
+                Scroll.setVisible(false);
+                tbUsuarioDark.setVisible(false);
+                break;
+        }
+    }
+
+    private void modo() {
+        if (ValidacionesSistema.ValidacionesBeep_Go.Modo == 1) {
+            panelRound1.setBackground(new Color(47, 49, 54));
+            lblParqueo.setForeground(Color.WHITE);
+            jPanel5.setBackground(new Color(47, 49, 54));
+            jPanel4.setBackground(new Color(47, 49, 54));
+            btnAgregar.setBackground(new Color(32, 34, 37));
+            btnFiltrar.setBackground(new Color(32, 34, 37));
+            btnInforme.setBackground(new Color(32, 34, 37));
+            jPanel2.setBackground(new Color(47, 49, 54));
+            tbUsuarioDark.setGridColor(new Color(32, 34, 37));
+            btnActualizar.setBackground(new Color(47, 49, 54));
+            btnEliminar.setBackground(new Color(47, 49, 54));
+            btnReporte.setBackground(new Color(47, 49, 54));
+            float xwhite = tbUsuarios.getX();
+            float ywhite = tbUsuarios.getY();
+            int widhtwhite = tbUsuarios.getWidth();
+            int heightwhite = tbUsuarios.getHeight();
+            jScrollPane1.setVisible(false);
+            tbUsuarios.setVisible(false);
+            Scroll.setVisible(true);
+            tbUsuarioDark.setVisible(true);
+            tbUsuarioDark.setAlignmentY(ywhite);
+            tbUsuarioDark.setSize(widhtwhite, heightwhite);
+            tbUsuarioDark.setAlignmentX(xwhite);
+            tbUsuarioDark.setBackground(new Color(47, 49, 54));
+            tbUsuarioDark.setForeground(Color.WHITE);
+        } else {
+            panelRound1.setBackground(new Color(231, 234, 239));
+            lblParqueo.setForeground(new Color(58, 50, 75));
+            jPanel5.setBackground(new Color(231, 234, 239));
+            jPanel4.setBackground(new Color(231, 234, 239));
+            btnAgregar.setBackground(new Color(58, 50, 75));
+            btnFiltrar.setBackground(new Color(58, 50, 75));
+            btnInforme.setBackground(new Color(58, 50, 75));
+            jPanel2.setBackground(new Color(231, 234, 239));
+            btnActualizar.setBackground(new Color(231, 234, 239));
+            btnEliminar.setBackground(new Color(231, 234, 239));
+            btnReporte.setBackground(new Color(231, 234, 239));
+            jScrollPane1.setVisible(true);
+            tbUsuarios.setVisible(true);
+            Scroll.setVisible(false);
+            tbUsuarioDark.setVisible(false);
         }
     }
 
@@ -272,7 +448,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
             if (rs.next()) {
                 imagen = rs.getBytes("imagen");
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, e.toString());
         }
     }
@@ -297,7 +473,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
             JasperViewer view = new JasperViewer(jprint, false);
             view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             view.setVisible(true);
-        } catch (Exception e) {
+        } catch (JRException e) {
             JOptionPane.showMessageDialog(this, e.toString());
         }
     }
@@ -430,6 +606,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane Scroll;
     private Controles_Personalizados.ScrollBar.ScrollBarCustom ScrollTabla;
     private Controles_Personalizados.Botones.UWPButton btnAgregar;
     private Controles_Personalizados.Botones.UWPButton btnFiltrar;
@@ -442,6 +619,8 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblParqueo;
     private Controles_Personalizados.Paneles.PanelRound panelRound1;
+    private Controles_Personalizados.ScrollBar.ScrollBarCustom scrollBarCustom1;
+    private Controles_Personalizados.Tables.TableDark tbUsuarioDark;
     private Controles_Personalizados.Tables.Table tbUsuarios;
     // End of variables declaration//GEN-END:variables
 }

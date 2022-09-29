@@ -12,7 +12,6 @@ import java.io.*;
 import Controlador.*;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
@@ -233,8 +232,6 @@ public class FrmConfigConection extends javax.swing.JFrame {
         if (evt.isControlDown() || evt.isShiftDown())
         {
             evt.consume();
-        }else if(evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtcontra.getText().equals("") && ! txtIP.getText().equals("") && ! txtUsuario.getText().equals("") && ! txtHost.getText().equals("")){
-            saveConfig();
         }
     }//GEN-LAST:event_txtUsuarioKeyPressed
 
@@ -247,8 +244,6 @@ public class FrmConfigConection extends javax.swing.JFrame {
         if (evt.isControlDown() || evt.isShiftDown())
         {
             evt.consume();
-        }else if(evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtcontra.getText().equals("") && ! txtIP.getText().equals("") && ! txtUsuario.getText().equals("") && ! txtHost.getText().equals("")){
-            saveConfig();
         }
     }//GEN-LAST:event_txtIPKeyPressed
 
@@ -261,8 +256,6 @@ public class FrmConfigConection extends javax.swing.JFrame {
         if (evt.isControlDown() || evt.isShiftDown())
         {
             evt.consume();
-        }else if(evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtcontra.getText().equals("") && ! txtIP.getText().equals("") && ! txtUsuario.getText().equals("") && ! txtHost.getText().equals("")){
-            saveConfig();
         }
     }//GEN-LAST:event_txtHostKeyPressed
 
@@ -343,8 +336,6 @@ public class FrmConfigConection extends javax.swing.JFrame {
         if (evt.isControlDown() || evt.isShiftDown())
         {
             evt.consume();
-        }else if(evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtcontra.getText().equals("") && ! txtIP.getText().equals("") && ! txtUsuario.getText().equals("") && ! txtHost.getText().equals("")){
-            saveConfig();
         }
     }//GEN-LAST:event_txtcontraKeyPressed
     
