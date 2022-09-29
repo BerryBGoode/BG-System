@@ -47,23 +47,25 @@ public class PanelCarnets extends javax.swing.JPanel {
     private int frmstate;
     public Font font = new Font("Roboto Black", Font.PLAIN, 18);
     ImageIcon modifIcon = new ImageIcon(getClass().getResource("/Recursos_Proyecto/Barcode.png"));
+    ImageIcon modifIcondark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bx-barcode-White.png"));
 
     /**
      * Creates new form PanelCarnets
      */
     public PanelCarnets() {
         initComponents();
+        modo();
         String[] TitulosCarnets = {"Nombre", "Apellido", "Carné", "Tipo de usuario", "idPersonal", "Codigo de barra"};
         model = new DefaultTableModel(null, TitulosCarnets);
         TbCarnets.setModel(model);
         TbCarnets.setDefaultRenderer(Object.class, new RenderTable());
-        btnGenerar.setBackground(new Color(231, 235, 239));
-        ImageIcon modificar;
-        btnGenerar.setForeground(new Color(58, 50, 75));
         btnGenerar.setFont(font);
         btnGenerar.setText("Generar");
-        btnGenerar.setIcon(modifIcon);
         TbCarnets.removeColumn(TbCarnets.getColumnModel().getColumn(4));
+        //DarkTable
+        TbCarnetsDark.setModel(model);
+        TbCarnetsDark.setDefaultRenderer(Object.class, new RenderTable());
+        TbCarnetsDark.removeColumn(TbCarnetsDark.getColumnModel().getColumn(4));
         cargarTabla();
     }
 
@@ -89,6 +91,71 @@ public class PanelCarnets extends javax.swing.JPanel {
         } else {
             return false;
         }
+    }
+
+    void modo() {
+        if (ValidacionesSistema.ValidacionesBeep_Go.getModo() == 1) {
+            PanelFondo.setBackground(new Color(47, 49, 54));
+            btnAgregar.setBackground(new Color(32, 34, 37));
+            btnFiltrar.setBackground(new Color(32, 34, 37));
+            TbCarnetsDark.setBackground(new Color(47, 49, 54));
+            TbCarnetsDark.setForeground(Color.WHITE);
+            lblCarnets.setForeground(Color.WHITE);
+            PanelTabla.setVisible(false);
+            TbCarnets.setVisible(false);
+            jScrollPane2.setVisible(true);
+            TbCarnetsDark.setVisible(true);
+            btnGenerar.setBackground(new Color(32, 34, 37));
+            btnGenerar.setForeground(Color.WHITE);
+            btnGenerar.setIcon(modifIcondark);
+
+        } else {
+            btnGenerar.setBackground(new Color(231, 235, 239));
+            btnGenerar.setForeground(new Color(58, 50, 75));
+            btnGenerar.setIcon(modifIcon);
+            PanelFondo.setBackground(new Color(231, 235, 239));
+            btnAgregar.setBackground(new Color(58, 50, 75));
+            btnFiltrar.setBackground(new Color(58, 50, 75));
+            lblCarnets.setForeground(new Color(58, 50, 75));
+            PanelTabla.setVisible(true);
+            TbCarnets.setVisible(true);
+            jScrollPane2.setVisible(false);
+            TbCarnetsDark.setVisible(false);
+        }
+    }
+
+    void mododash() {
+        switch (ValidacionesSistema.ValidacionesBeep_Go.getModo()) {
+            case 1:
+            PanelFondo.setBackground(new Color(47, 49, 54));
+            btnAgregar.setBackground(new Color(32, 34, 37));
+            btnFiltrar.setBackground(new Color(32, 34, 37));
+            TbCarnetsDark.setBackground(new Color(47, 49, 54));
+            TbCarnetsDark.setForeground(Color.WHITE);
+            lblCarnets.setForeground(Color.WHITE);
+            PanelTabla.setVisible(false);
+            TbCarnets.setVisible(false);
+            jScrollPane2.setVisible(true);
+            TbCarnetsDark.setVisible(true);
+            btnGenerar.setBackground(new Color(32, 34, 37));
+            btnGenerar.setForeground(Color.WHITE);
+            btnGenerar.setIcon(modifIcondark);
+                break;
+            case 2:
+                btnGenerar.setBackground(new Color(231, 235, 239));
+                btnGenerar.setForeground(new Color(58, 50, 75));
+                btnGenerar.setIcon(modifIcon);
+                PanelFondo.setBackground(new Color(231, 235, 239));
+                btnAgregar.setBackground(new Color(58, 50, 75));
+                btnFiltrar.setBackground(new Color(58, 50, 75));
+                lblCarnets.setForeground(new Color(58, 50, 75));
+                PanelTabla.setVisible(true);
+                TbCarnets.setVisible(true);
+                jScrollPane2.setVisible(false);
+                TbCarnetsDark.setVisible(false);
+                break;
+        }
+
     }
 
     void CrearCodigodeBarra() {
@@ -132,11 +199,11 @@ public class PanelCarnets extends javax.swing.JPanel {
         lblCarnets = new javax.swing.JLabel();
         btnFiltrar = new Controles_Personalizados.Botones.UWPButton();
         btnAgregar = new Controles_Personalizados.Botones.UWPButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TbCarnetsDark = new Controles_Personalizados.Tables.TableDark();
         PanelTabla = new javax.swing.JScrollPane();
         TbCarnets = new Controles_Personalizados.Tables.Table();
         scrollBar1 = new Controles_Personalizados.ScrollBar.ScrollBar();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        table1 = new Controles_Personalizados.Tables.Table();
 
         setBackground(new java.awt.Color(42, 36, 56));
         setLayout(new java.awt.BorderLayout());
@@ -188,6 +255,22 @@ public class PanelCarnets extends javax.swing.JPanel {
             }
         });
         PanelFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 150, 40));
+
+        TbCarnetsDark.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        TbCarnetsDark.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jScrollPane2.setViewportView(TbCarnetsDark);
+
+        PanelFondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 1230, 480));
 
         PanelTabla.setHorizontalScrollBar(null);
         PanelTabla.setVerticalScrollBar(scrollBar1);
@@ -260,21 +343,6 @@ public class PanelCarnets extends javax.swing.JPanel {
 
         PanelFondo.add(scrollBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 140, 10, 480));
 
-        table1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(table1);
-
-        PanelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, -1, -1));
-
         add(PanelFondo, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -285,13 +353,13 @@ public class PanelCarnets extends javax.swing.JPanel {
             add.toFront();
         } else {
             add.setVisible(true);
-            frmstate=1;
+            frmstate = 1;
         }
     }//GEN-LAST:event_btnAgregarMouseClicked
-    final void refresh(){
-        if (frmstate==1&&!(add.isActive())) {
+    final void refresh() {
+        if (frmstate == 1 && !(add.isActive())) {
             cargarTabla();
-            frmstate=0;
+            frmstate = 0;
         }
     }
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -349,11 +417,11 @@ public class PanelCarnets extends javax.swing.JPanel {
     private Controles_Personalizados.Paneles.PanelRound PanelFondo;
     private javax.swing.JScrollPane PanelTabla;
     private Controles_Personalizados.Tables.Table TbCarnets;
+    private Controles_Personalizados.Tables.TableDark TbCarnetsDark;
     private Controles_Personalizados.Botones.UWPButton btnAgregar;
     private Controles_Personalizados.Botones.UWPButton btnFiltrar;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblCarnets;
     private Controles_Personalizados.ScrollBar.ScrollBar scrollBar1;
-    private Controles_Personalizados.Tables.Table table1;
     // End of variables declaration//GEN-END:variables
 }

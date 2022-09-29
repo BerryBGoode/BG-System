@@ -45,6 +45,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     PanelDashboard pld = new PanelDashboard();
     ControllerLogin clog = new ControllerLogin();
     PanelUsuarios_dashbord pu = new PanelUsuarios_dashbord();
+    PanelCarnets pc = new PanelCarnets();
     PanelProfesores pp = new PanelProfesores();
     PanelEstudiantes pe = new PanelEstudiantes();
     private int ev;
@@ -978,13 +979,11 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionContactos.setVisible(false);
         panelSeleccionAjustes.setVisible(false);
         panelSeleccionLogout.setVisible(false);
-
-        PanelCarnets pl = new PanelCarnets();
-        pl.setSize(1270, 620);
-        pl.setLocation(0, 0);
+        pc.setSize(1270, 620);
+        pc.setLocation(0, 0);
 
         PanelContenedorForms.removeAll();
-        PanelContenedorForms.add(pl);
+        PanelContenedorForms.add(pc);
         PanelContenedorForms.revalidate();
         PanelContenedorForms.repaint();
     }
@@ -1157,6 +1156,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         pu.darkmod();
         pe.mododash();
         pp.mododash();
+        pc.mododash();
         if (_pnldash.isShowing()) {
 
             _pnldash.hide();
@@ -1172,6 +1172,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         pu.darkmod();
         pe.mododash();
         pp.mododash();
+        pc.mododash();
         _pnldash.hide();
         if (_pnldash.isVisible()) {
 
