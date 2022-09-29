@@ -15,12 +15,8 @@ import java.awt.Font;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -38,10 +34,10 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class PanelProfesores extends javax.swing.JPanel {
 
-    DefaultTableModel ModelProf;
-    private final UWPButton btnActualizar = new UWPButton();
-    private final UWPButton btnEliminar = new UWPButton();
-    private final UWPButton btnReporteP = new UWPButton();
+    public DefaultTableModel ModelProf;
+    public final UWPButton btnActualizar = new UWPButton();
+    public final UWPButton btnEliminar = new UWPButton();
+    public final UWPButton btnReporteP = new UWPButton();
     private ControllerPersonal objControllerP = new ControllerPersonal();
     private Font font = new Font("Roboto Black", Font.PLAIN, 18);
     private ImageIcon modificar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar.png"));
@@ -52,7 +48,7 @@ public class PanelProfesores extends javax.swing.JPanel {
     ImageIcon reportedark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report-White.png"));
     private int ID;
     private int panelperoes = PanelOpcionesPersonal.showinter;
-    private DefaultTableModel modelo = new DefaultTableModel();
+    public DefaultTableModel modelo = new DefaultTableModel();
     String respuesta;
     String carnet;
     ControllerBuscador objC = new ControllerBuscador();
@@ -74,6 +70,7 @@ public class PanelProfesores extends javax.swing.JPanel {
         TbProfesoresWhite.setModel(ModelProf);
         TbProfesoresWhite.setDefaultRenderer(Object.class, new RenderTable());
         cargarTablaProf();
+        TbProfesoresWhite.setFont(font);
         TbProfesoresWhite.removeColumn(TbProfesoresWhite.getColumnModel().getColumn(0));
         TbProfesoresWhite.removeColumn(TbProfesoresWhite.getColumnModel().getColumn(12));
         TbProfesoresWhite.removeColumn(TbProfesoresWhite.getColumnModel().getColumn(11));
@@ -103,7 +100,7 @@ public class PanelProfesores extends javax.swing.JPanel {
         }
     }
 
-    private void cargarTablaProf() {
+    public void cargarTablaProf() {
         while (ModelProf.getRowCount() > 0) {
             ModelProf.removeRow(0);
         }
@@ -503,7 +500,7 @@ public class PanelProfesores extends javax.swing.JPanel {
         imprimirPersonales();
     }//GEN-LAST:event_BtnInformeActionPerformed
 
-    final void CargarResultados() {
+    public void CargarResultados() {
         while (ModelProf.getRowCount() > 0) {
             ModelProf.removeRow(0);
         }

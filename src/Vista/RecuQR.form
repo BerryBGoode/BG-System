@@ -89,7 +89,7 @@
             <Component class="javax.swing.JLabel" name="textoRest">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Recursos_Proyecto/TextoRecuQR.png"/>
+                  <Image iconType="3" name="/Recursos_Proyecto/txtRecuQR.png"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -128,7 +128,7 @@
             </Component>
             <Component class="Controles_Personalizados.Botones.ButtonGradient" name="btnGenerar">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Generar Codigo"/>
+                <Property name="text" type="java.lang.String" value="Generar C&#xf3;digo"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="38" green="24" red="2a" type="rgb"/>

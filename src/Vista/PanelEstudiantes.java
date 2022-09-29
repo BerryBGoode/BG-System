@@ -11,10 +11,10 @@ import Controles_Personalizados.Botones.UWPButton;
 import Controles_Personalizados.RenderTable;
 import Controles_Personalizados.Tables.Table;
 import java.awt.Color;
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ImageIcon;
@@ -35,13 +35,13 @@ import net.sf.jasperreports.view.JasperViewer;
 public class PanelEstudiantes extends javax.swing.JPanel {
 
     private FrmAgg_Personal add = new FrmAgg_Personal();
-    private ControllerPersonal objControllerP = new ControllerPersonal();
-    private final DefaultTableModel ModelAlumnos;
-    private final UWPButton btnActualizar = new UWPButton();
-    private final UWPButton btnEliminar = new UWPButton();
-    private final UWPButton btnReporteP = new UWPButton();
+    public ControllerPersonal objControllerP = new ControllerPersonal();
+    public final DefaultTableModel ModelAlumnos;
+    public final UWPButton btnActualizar = new UWPButton();
+    public final UWPButton btnEliminar = new UWPButton();
+    public final UWPButton btnReporteP = new UWPButton();
     //Codigo para colocar la letra que se utilza en el proyecto
-    //(private Font font = new Font("Roboto Black", Font.PLAIN, 18);
+    private Font font = new Font("Roboto Black", Font.PLAIN, 18);
     private ImageIcon modificar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar.png"));
     private ImageIcon eliminar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/eliminar.png"));
     private ImageIcon reporteimg = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report 1.png"));
@@ -68,6 +68,7 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         };
         TbAlumnos.setModel(ModelAlumnos);
         TbAlumnos.setDefaultRenderer(Object.class, new RenderTable());
+        TbAlumnos.setFont(font);
         cargarTabla();
         TbAlumnos.removeColumn(TbAlumnos.getColumnModel().getColumn(0));
         TbAlumnos.removeColumn(TbAlumnos.getColumnModel().getColumn(12));
@@ -99,74 +100,6 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         }
     }
 
-    void mododash() {
-        switch (ValidacionesSistema.ValidacionesBeep_Go.getModo()) {
-            case 1:
-                btnEliminar.setIcon(Eliminardark);
-                btnActualizar.setIcon(Modificardark);
-                btnReporteP.setIcon(reportedark);
-                btnReporteP.setBackground(new Color(47, 49, 54));
-                btnActualizar.setBackground(new Color(47, 49, 54));
-                btnEliminar.setBackground(new Color(47, 49, 54));
-                btnAgregar.setBackground(new Color(32, 34, 37));
-                BtnReporte.setBackground(new Color(32, 34, 37));
-                btnFiltrar.setBackground(new Color(32, 34, 37));
-                PanelFondo.setBackground(new Color(47, 49, 54));
-                lblPersonal.setForeground(Color.WHITE);
-                TbAlumnosDark.setForeground(Color.white);
-                TablaDark.setVisible(true);
-                TbAlumnosDark.setVisible(true);
-                PanelTabla.setVisible(false);
-                TbAlumnos.setVisible(false);
-                break;
-            case 2:
-                btnEliminar.setIcon(eliminar);
-                btnActualizar.setIcon(modificar);
-                btnReporteP.setIcon(reporteimg);
-                btnReporteP.setBackground(new Color(231, 234, 239));
-                btnActualizar.setBackground(new Color(231, 234, 239));
-                btnEliminar.setBackground(new Color(231, 234, 239));
-                PanelFondo.setBackground(new Color(231,234,239));
-                lblPersonal.setForeground(new Color(58,50,75));
-                TbAlumnos.setVisible(true);
-                PanelTabla.setVisible(true);
-                TablaDark.setVisible(false);
-                TbAlumnosDark.setVisible(false);
-                break;
-        }
-    }
-
-    void mood() {
-        if (ValidacionesSistema.ValidacionesBeep_Go.getModo() == 1) {
-            btnEliminar.setIcon(Eliminardark);
-            btnActualizar.setIcon(Modificardark);
-            btnReporteP.setIcon(reportedark);
-            btnReporteP.setBackground(new Color(47, 49, 54));
-            btnActualizar.setBackground(new Color(47, 49, 54));
-            btnEliminar.setBackground(new Color(47, 49, 54));
-            btnAgregar.setBackground(new Color(32, 34, 37));
-            BtnReporte.setBackground(new Color(32, 34, 37));
-            btnFiltrar.setBackground(new Color(32, 34, 37));
-            PanelFondo.setBackground(new Color(47, 49, 54));
-            lblPersonal.setBackground(Color.WHITE);
-            TbAlumnosDark.setForeground(Color.white);
-            TablaDark.setVisible(true);
-            TbAlumnosDark.setVisible(true);
-            PanelTabla.setVisible(false);
-            TbAlumnos.setVisible(false);
-        } else {
-            btnEliminar.setIcon(eliminar);
-            btnActualizar.setIcon(modificar);
-            btnReporteP.setIcon(reporteimg);
-            btnReporteP.setBackground(new Color(231, 234, 239));
-            btnActualizar.setBackground(new Color(231, 234, 239));
-            btnEliminar.setBackground(new Color(231, 234, 239));
-            TbAlumnos.setVisible(true);
-            PanelTabla.setVisible(true);
-            TablaDark.setVisible(false);
-            TbAlumnosDark.setVisible(false);
-        }
-    }
 
     private void cargarTabla() {
         while (ModelAlumnos.getRowCount() > 0) {

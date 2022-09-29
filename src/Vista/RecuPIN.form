@@ -74,7 +74,7 @@
             <Component class="javax.swing.JLabel" name="textoRest">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Recursos_Proyecto/TextoRecuPIN.png"/>
+                  <Image iconType="3" name="/Recursos_Proyecto/txtRecuPIN.png"/>
                 </Property>
               </Properties>
               <Constraints>
@@ -132,7 +132,7 @@
             </Component>
             <Component class="Controles_Personalizados.Botones.ButtonGradient" name="btnRestablecer">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Restablecer"/>
+                <Property name="text" type="java.lang.String" value="Reestablecer"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="color1" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="38" green="24" red="2a" type="rgb"/>

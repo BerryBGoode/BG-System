@@ -164,11 +164,11 @@ public class FrmConfigPark extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Parking-amico.png"))); // NOI18N
         panelRound1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 200, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/TextoEstacionamiento.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/txtEstacionamiento.png"))); // NOI18N
         panelRound1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 50, -1, -1));
 
         btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Maximizar.png"))); // NOI18N
-        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMinimizarMouseClicked(evt);
@@ -177,7 +177,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         panelRound1.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 11, -1, -1));
 
         btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/CerrarLogin.png"))); // NOI18N
-        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnCerrarMousePressed(evt);
@@ -216,7 +216,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         panelPark17.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnPark17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/vehiculo-park.png"))); // NOI18N
-        btnPark17.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPark17.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPark17.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPark17MouseClicked(evt);
@@ -230,7 +230,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         panelPark18.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnPark18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/vehiculo-park.png"))); // NOI18N
-        btnPark18.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPark18.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPark18.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPark18MouseClicked(evt);
@@ -244,7 +244,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         panelPark19.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnPark19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/vehiculo-park.png"))); // NOI18N
-        btnPark19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPark19.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPark19.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPark19MouseClicked(evt);
@@ -258,7 +258,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         panelPark20.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnPark20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/vehiculo-park.png"))); // NOI18N
-        btnPark20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPark20.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPark20.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPark20MouseClicked(evt);
@@ -272,7 +272,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         panelPark3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnPark3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/vehiculo-park.png"))); // NOI18N
-        btnPark3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPark3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPark3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPark3MouseClicked(evt);
@@ -286,7 +286,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         panelPark4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnPark4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/vehiculo-park.png"))); // NOI18N
-        btnPark4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPark4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPark4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPark4MouseClicked(evt);
@@ -300,7 +300,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         panelPark11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnPark11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/vehiculo-park.png"))); // NOI18N
-        btnPark11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPark11.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPark11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPark11MouseClicked(evt);
@@ -314,7 +314,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         panelPark12.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnPark12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/vehiculo-park.png"))); // NOI18N
-        btnPark12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPark12.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPark12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPark12MouseClicked(evt);
@@ -328,7 +328,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         panelPark10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnPark10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/vehiculo-park.png"))); // NOI18N
-        btnPark10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPark10.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPark10.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPark10MouseClicked(evt);
@@ -342,7 +342,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         panelPark9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnPark9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/vehiculo-park.png"))); // NOI18N
-        btnPark9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPark9.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPark9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPark9MouseClicked(evt);
@@ -356,7 +356,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         panelPark8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnPark8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/vehiculo-park.png"))); // NOI18N
-        btnPark8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPark8.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPark8.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPark8MouseClicked(evt);
@@ -370,7 +370,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         panelPark7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnPark7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/vehiculo-park.png"))); // NOI18N
-        btnPark7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPark7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPark7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPark7MouseClicked(evt);
@@ -384,7 +384,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         panelPark6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnPark6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/vehiculo-park.png"))); // NOI18N
-        btnPark6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPark6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPark6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPark6MouseClicked(evt);
@@ -398,7 +398,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         panelPark5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnPark5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/vehiculo-park.png"))); // NOI18N
-        btnPark5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPark5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPark5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPark5MouseClicked(evt);
@@ -412,7 +412,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         panelPark16.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnPark16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/vehiculo-park.png"))); // NOI18N
-        btnPark16.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPark16.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPark16.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPark16MouseClicked(evt);
@@ -426,7 +426,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         panelPark15.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnPark15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/vehiculo-park.png"))); // NOI18N
-        btnPark15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPark15.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPark15.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPark15MouseClicked(evt);
@@ -440,7 +440,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         panelPark14.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnPark14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/vehiculo-park.png"))); // NOI18N
-        btnPark14.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPark14.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPark14.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPark14MouseClicked(evt);
@@ -454,7 +454,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         panelPark13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnPark13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/vehiculo-park.png"))); // NOI18N
-        btnPark13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPark13.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPark13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPark13MouseClicked(evt);
@@ -468,7 +468,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         panelPark2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnPark2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/vehiculo-park.png"))); // NOI18N
-        btnPark2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPark2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPark2.setFocusable(false);
         btnPark2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -483,7 +483,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         panelPark1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnPark1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/vehiculo-park.png"))); // NOI18N
-        btnPark1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPark1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnPark1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnPark1MouseClicked(evt);

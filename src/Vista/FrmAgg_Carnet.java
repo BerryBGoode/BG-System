@@ -113,7 +113,7 @@ public class FrmAgg_Carnet extends javax.swing.JFrame {
                 btngeneretCodActionPerformed(evt);
             }
         });
-        panelRound1.add(btngeneretCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 310, -1));
+        panelRound1.add(btngeneretCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 380, 310, -1));
 
         ContenedorCodigoQR.setBackground(new java.awt.Color(253, 255, 254));
         ContenedorCodigoQR.setPreferredSize(new java.awt.Dimension(259, 252));
@@ -133,7 +133,7 @@ public class FrmAgg_Carnet extends javax.swing.JFrame {
 
         ContenedorCodigoQR.add(PanelCodigoQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 480, 130));
 
-        panelRound1.add(ContenedorCodigoQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 530, 170));
+        panelRound1.add(ContenedorCodigoQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 530, 170));
 
         btnContinuar.setBackground(new java.awt.Color(42, 36, 56));
         btnContinuar.setForeground(new java.awt.Color(58, 50, 75));
