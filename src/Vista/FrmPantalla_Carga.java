@@ -91,12 +91,13 @@ public class FrmPantalla_Carga extends javax.swing.JFrame {
                         //si existen, pasar al login 
                         //si no exsiten la primer uso
                         else {
-                            JOptionPane.showMessageDialog(null, "No, se logro establercer conexion con la base de datos", "Error de conexion", JOptionPane.ERROR_MESSAGE);
+                            
                             config.setVisible(true);//para volver a config, porque salio algo mal                        
                             config.deleteFile();
                         }
                     } else {
-                        config.setVisible(true);//cuando no exista el archivo
+                        ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Configuración inexistente", "No se ha encontrado un archivo de configuración.\nConfigure su conexión", 1);
+                        config.setVisible(true);//cuando no exista el archivo                        
                     }
                     this.dispose();
                 }
