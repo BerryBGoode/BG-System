@@ -45,6 +45,9 @@ public class PanelEstudiantes extends javax.swing.JPanel {
     private ImageIcon modificar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar.png"));
     private ImageIcon eliminar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/eliminar.png"));
     private ImageIcon reporteimg = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report 1.png"));
+    ImageIcon Modificardark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar_white.png"));
+    ImageIcon Eliminardark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-trash-alt white.png"));
+    ImageIcon reportedark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report-White.png"));
     private int frmstate;
     private int ID;
 
@@ -53,6 +56,7 @@ public class PanelEstudiantes extends javax.swing.JPanel {
      */
     public PanelEstudiantes() {
         initComponents();
+        mood();
         //Titulos de los campos que se cargan en la tabla
         String[] TitulosAlumnos = {"IDPersonal", "Nombres", "Apellidos", " Nacimiento", "Documento", "Carné", "Tipo Personal", "Direccion", "Correo", "IDTD", "IDTP", "IDG", "Genero", "Tipo Documento", "Modificar", "Eliminar", "Registro"};
         ModelAlumnos = new DefaultTableModel(null, TitulosAlumnos) {
@@ -75,6 +79,18 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         TbAlumnos.removeColumn(TbAlumnos.getColumnModel().getColumn(7));
         TbAlumnos.removeColumn(TbAlumnos.getColumnModel().getColumn(6));
         TbAlumnos.removeColumn(TbAlumnos.getColumnModel().getColumn(5));
+        TbAlumnosDark.setModel(ModelAlumnos);
+        TbAlumnosDark.setDefaultRenderer(Object.class, new RenderTable());
+        TbAlumnosDark.removeColumn(TbAlumnosDark.getColumnModel().getColumn(0));
+        TbAlumnosDark.removeColumn(TbAlumnosDark.getColumnModel().getColumn(12));
+        TbAlumnosDark.removeColumn(TbAlumnosDark.getColumnModel().getColumn(11));
+        TbAlumnosDark.removeColumn(TbAlumnosDark.getColumnModel().getColumn(10));
+        TbAlumnosDark.removeColumn(TbAlumnosDark.getColumnModel().getColumn(9));
+        TbAlumnosDark.removeColumn(TbAlumnosDark.getColumnModel().getColumn(8));
+        TbAlumnosDark.removeColumn(TbAlumnosDark.getColumnModel().getColumn(7));
+        TbAlumnosDark.removeColumn(TbAlumnosDark.getColumnModel().getColumn(6));
+        TbAlumnosDark.removeColumn(TbAlumnosDark.getColumnModel().getColumn(5));
+
     }
 
     final void refresh() {
@@ -84,19 +100,14 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         }
     }
 
-    public void cargarTabla() {
+
+    private void cargarTabla() {
         while (ModelAlumnos.getRowCount() > 0) {
             ModelAlumnos.removeRow(0);
         }
         try {
             ResultSet rs = objControllerP.MostrarEstudiantesController();
             while (rs.next()) {
-                btnEliminar.setIcon(eliminar);
-                btnActualizar.setIcon(modificar);
-                btnReporteP.setIcon(reporteimg);
-                btnReporteP.setBackground(new Color(231, 234, 239));
-                btnActualizar.setBackground(new Color(231, 234, 239));
-                btnEliminar.setBackground(new Color(231, 234, 239));
                 Object[] Campos = {rs.getInt("idPersonal"), rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("fecha_nacimiento"), rs.getString("documento"), rs.getString("Carnet"), rs.getString("tipo_personal"), rs.getString("direccion"), rs.getString("correo"), rs.getInt("idTipoDocumento"), rs.getInt("idTipoPersonal"), rs.getInt("idGenero"), rs.getString("genero"), rs.getString("tipo_documento"), btnActualizar, btnEliminar, btnReporteP};
                 ModelAlumnos.addRow(Campos);
             }
@@ -120,6 +131,9 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         btnAgregar = new Controles_Personalizados.Botones.UWPButton();
         BtnReporte = new Controles_Personalizados.Botones.UWPButton();
         btnFiltrar = new Controles_Personalizados.Botones.UWPButton();
+        TablaDark = new javax.swing.JScrollPane();
+        TbAlumnosDark = new Controles_Personalizados.Tables.TableDark();
+        ScrollDark = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
         PanelTabla = new javax.swing.JScrollPane();
         TbAlumnos = new Controles_Personalizados.Tables.Table();
         ScrollTabla = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
@@ -174,6 +188,26 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         btnFiltrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         PanelFondo.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 150, 40));
+
+        TablaDark.setVerticalScrollBar(ScrollDark);
+
+        TbAlumnosDark.setBackground(new java.awt.Color(47, 49, 54));
+        TbAlumnosDark.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        TbAlumnosDark.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        TablaDark.setViewportView(TbAlumnosDark);
+
+        PanelFondo.add(TablaDark, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 143, 1230, 480));
+        PanelFondo.add(ScrollDark, new org.netbeans.lib.awtextra.AbsoluteConstraints(1238, 177, 10, 40));
 
         PanelTabla.setHorizontalScrollBar(null);
         PanelTabla.setVerticalScrollBar(ScrollTabla);
@@ -285,7 +319,7 @@ public class PanelEstudiantes extends javax.swing.JPanel {
                 ((UWPButton) vals).doClick(); // aqui esta
                 UWPButton btns = (UWPButton) vals;
                 if (btns.getName().equals("btnActualizar")) {
-                    if (rcp.getModel().getValueAt(rcp.getSelectedRow(), 5)==null) {
+                    if (rcp.getModel().getValueAt(rcp.getSelectedRow(), 5) == null) {
                         JOptionPane.showMessageDialog(null, "Ocurrieron problemas, al intentar cargar la informacion debido que este registro no tiene carné", "Error de carné", JOptionPane.WARNING_MESSAGE);
                     } else {
                         System.out.println(ValidacionesSistema.Parametros_Personal.getCarnet());
@@ -383,8 +417,11 @@ public class PanelEstudiantes extends javax.swing.JPanel {
     private Controles_Personalizados.Botones.UWPButton BtnReporte;
     private Controles_Personalizados.Paneles.PanelRound PanelFondo;
     private javax.swing.JScrollPane PanelTabla;
+    private Controles_Personalizados.ScrollBar.ScrollBarCustom ScrollDark;
     private Controles_Personalizados.ScrollBar.ScrollBarCustom ScrollTabla;
+    private javax.swing.JScrollPane TablaDark;
     private Controles_Personalizados.Tables.Table TbAlumnos;
+    private Controles_Personalizados.Tables.TableDark TbAlumnosDark;
     private Controles_Personalizados.Botones.UWPButton btnAgregar;
     private Controles_Personalizados.Botones.UWPButton btnFiltrar;
     private javax.swing.JLabel lblPersonal;

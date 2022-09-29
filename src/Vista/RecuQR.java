@@ -63,6 +63,7 @@ public class RecuQR extends javax.swing.JFrame {
         ImageIcon FondoQR = new ImageIcon(getClass().getResource("/Recursos_Proyecto/Rectangle 1.png"));
         LblQr.setIcon(FondoQR);
         CapCarnet();
+        System.out.println(Carne);
         if (!usuario.equals(txtCorreo.getText())) {
             JOptionPane.showMessageDialog(null, "Verificar, el usuario, no se encontro ningun usuario con ese nombre", "Usuario Inexistente", JOptionPane.WARNING_MESSAGE);
         } else {

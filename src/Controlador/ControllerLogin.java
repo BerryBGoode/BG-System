@@ -19,6 +19,8 @@ public class ControllerLogin {
      */
     public static String usuario;
     private String contraseña;
+    private int idusuario;
+    private int idestado;
     private int intentos;
 
     /**
@@ -51,6 +53,22 @@ public class ControllerLogin {
      */
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
+    }
+
+    public int getIdusuario() {
+        return idusuario;
+    }
+
+    public void setIdusuario(int idusuario) {
+        this.idusuario = idusuario;
+    }
+
+    public int getIdestado() {
+        return idestado;
+    }
+
+    public void setIdestado(int idestado) {
+        this.idestado = idestado;
     }
 
     /**
@@ -131,6 +149,12 @@ public class ControllerLogin {
      */
     public ResultSet CapturarTipoUsController(){
         return ModelLogin.CapturarTipoUs(usuario);
+    }
+    public ResultSet validaruseractive(){
+        return ModelLogin.validaruseractive(usuario);
+    }
+    public boolean ActualizarEstado(){
+        return ModelLogin.ActualizarEstadoUserLogin(idestado, idusuario);
     }
 
 }

@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -33,25 +36,42 @@ public class FrmLogin extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Login");
         txtContra.setEchoChar('•');
-         this.setLocationRelativeTo(null); 
-         Shape forma= new RoundRectangle2D.Double(0,0, this.getBounds() .width, this.getBounds() .height,40,40);
-         AWTUtilities. setWindowShape(this, forma);
-         this.setIconImage(Logo());               
+        this.setLocationRelativeTo(null);
+        Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
+        AWTUtilities.setWindowShape(this, forma);
+        this.setIconImage(Logo());
     }
 
     int nivel = 0;
     public int ID;
     public static String nombre;
+    private int estadouser;
+    private int capiduser;
     public static String tipo;
     private int intentos;
 
     /**
      * Metodo para colocar la imagen del logo en la barra de tareas
-     * @return 
+     *
+     * @return
      */
     public Image Logo() {
         Image retvalue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
         return retvalue;
+    }
+
+    void capestadouser() {
+        ControllerLogin cl = new ControllerLogin();
+        cl.setUsuario(txtUsuario.getText());
+        ResultSet rs = cl.validaruseractive();
+        try {
+            if (rs.next()) {
+                estadouser = rs.getInt("idEstadoUsuario");
+                capiduser = rs.getInt("idUsuario");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -199,8 +219,9 @@ public class FrmLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /** 
-     * Metodo para acceder al sistema (valida el usuario, la contraseña, y los intentos)
+    /**
+     * Metodo para acceder al sistema (valida el usuario, la contraseña, y los
+     * intentos)
      */
     void Login() {
 
@@ -218,9 +239,8 @@ public class FrmLogin extends javax.swing.JFrame {
 
             if (respuesta0 == 1) {
                 //Valida estado del usuario
-                int respuesta1 = objc.ValidarUsuarioActivoController();
-
-                if (respuesta1 == 1) {
+                capestadouser();
+                if (estadouser == 2) {
                     //Valida informacion del 
                     int respuesta2 = objc.validarLoginC();
 
@@ -238,9 +258,14 @@ public class FrmLogin extends javax.swing.JFrame {
                             this.dispose();
                         } else {
                             FrmDashboard frm = new FrmDashboard(nombre, tipo);
-                            PanelOpcionesPersonal.showinter= 0;//le doy este valor a este attr que sirve para detectar cual fue el panel que se abrio, entonces 
+                            PanelOpcionesPersonal.showinter = 0;//le doy este valor a este attr que sirve para detectar cual fue el panel que se abrio, entonces 
                             //el valor en un switch que evalua este attr, el valor 0 no reenvía a otro panel
                             frm.setVisible(true);
+                            cLogin.setIdestado(1);
+                            cLogin.setIdusuario(capiduser);
+                            if (cLogin.ActualizarEstado() == true) {
+                                System.out.println("Si se actualiza a 1");
+                            }
                             this.dispose();
                         }
                     } else {
@@ -249,7 +274,7 @@ public class FrmLogin extends javax.swing.JFrame {
                             if (rs.next()) {
                                 intentos = rs.getInt("intentos");
                             }
-                        } catch (Exception e) {
+                        } catch (SQLException e) {
                             JOptionPane.showMessageDialog(null, "Error al validar las credenciales");
                         }
                         if (intentos > 1) {
@@ -262,6 +287,8 @@ public class FrmLogin extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "Usuario bloqueado");
                         }
                     }
+                } else if (estadouser == 1) {
+                    JOptionPane.showMessageDialog(null, "El usuario esta abierto en otro dispositivo");
                 } else {
                     JOptionPane.showMessageDialog(null, "Usuario bloqueado");
                 }
@@ -273,7 +300,8 @@ public class FrmLogin extends javax.swing.JFrame {
 
     /**
      * Metodo para activar el inicio de sesión
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
@@ -281,7 +309,8 @@ public class FrmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
-     * Metodo para cargar los datos del usuario (su nombre de usuario y tipo de usuario)
+     * Metodo para cargar los datos del usuario (su nombre de usuario y tipo de
+     * usuario)
      */
     void CargarDatos() {
         ControllerLogin objc = new ControllerLogin();
@@ -301,7 +330,8 @@ public class FrmLogin extends javax.swing.JFrame {
 
     /**
      * Metodo para acceder al form de recuperar contraseña
-     * @param evt 
+     *
+     * @param evt
      */
     private void lblOlvideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOlvideMouseClicked
         // TODO add your handling code here:
@@ -312,7 +342,8 @@ public class FrmLogin extends javax.swing.JFrame {
 
     /**
      * Metodo para cerrar la aplicación
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMousePressed
         System.exit(0);
@@ -320,7 +351,8 @@ public class FrmLogin extends javax.swing.JFrame {
 
     /**
      * Metodo para minimizar la aplicación
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseClicked
         // TODO add your handling code here:
@@ -329,21 +361,22 @@ public class FrmLogin extends javax.swing.JFrame {
 
     /**
      * Validaciones para el txtUsuario
-     * @param evt 
+     *
+     * @param evt
      */
     private void txtUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtUsuario.getText().equals("") && ! txtContra.getText().equals("")) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && !txtUsuario.getText().equals("") && !txtContra.getText().equals("")) {
             Login();
-        }else if (evt.isControlDown() || evt.isShiftDown())
-        {
+        } else if (evt.isControlDown() || evt.isShiftDown()) {
             evt.consume();
         }
     }//GEN-LAST:event_txtUsuarioKeyPressed
 
     /**
      * Validaciones para el txtUsuario
-     * @param evt 
+     *
+     * @param evt
      */
     private void txtUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyTyped
         // TODO add your handling code here:
@@ -364,21 +397,22 @@ public class FrmLogin extends javax.swing.JFrame {
 
     /**
      * Validaciones para el txtContra
-     * @param evt 
+     *
+     * @param evt
      */
     private void txtContraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtUsuario.getText().equals("") && ! txtContra.getText().equals("")) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && !txtUsuario.getText().equals("") && !txtContra.getText().equals("")) {
             Login();
-        }else if (evt.isControlDown() || evt.isShiftDown())
-        {
+        } else if (evt.isControlDown() || evt.isShiftDown()) {
             evt.consume();
         }
     }//GEN-LAST:event_txtContraKeyPressed
 
     /**
      * Validaciones para el txtContra
-     * @param evt 
+     *
+     * @param evt
      */
     private void txtContraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraKeyTyped
         // TODO add your handling code here:
@@ -391,7 +425,8 @@ public class FrmLogin extends javax.swing.JFrame {
 
     /**
      * Metodo para abrir el google sites con más información del sistema
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnConocerMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConocerMasActionPerformed
         try {
@@ -400,7 +435,7 @@ public class FrmLogin extends javax.swing.JFrame {
             ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Minimizado", "El sistema ha sido minimizado para tu comodidad, puedes abrirlo de nuevo desde tu barra de tareas", 1);
         } catch (URISyntaxException ex) {
             JOptionPane.showMessageDialog(this, ex);
-        }catch(IOException e){
+        } catch (IOException e) {
             JOptionPane.showMessageDialog(this, e);
         }
     }//GEN-LAST:event_btnConocerMasActionPerformed

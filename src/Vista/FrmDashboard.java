@@ -35,6 +35,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.ChartFactory;
@@ -60,6 +62,12 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     PanelParqueo plpk = new PanelParqueo();
     PanelContactos plCon = new PanelContactos();
     ControllerBuscador obj = new ControllerBuscador();
+    PanelDashboard pld = new PanelDashboard();
+    ControllerLogin clog = new ControllerLogin();
+    PanelUsuarios_dashbord pu = new PanelUsuarios_dashbord();
+    PanelProfesores pp = new PanelProfesores();
+    PanelEstudiantes pe = new PanelEstudiantes();
+    private int iduser;
 
     /**
      * Creates new form Dashboard
@@ -95,15 +103,13 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionAjustes.setVisible(false);
         panelSeleccionLogout.setVisible(false);
 
-        PanelDashboard pl = new PanelDashboard();
-        pl.setSize(1270, 620);
-        pl.setLocation(0, 0);
+        pld.setSize(1270, 620);
+        pld.setLocation(0, 0);
 
         PanelContenedorForms.removeAll();
-        PanelContenedorForms.add(pl);
+        PanelContenedorForms.add(pld);
         PanelContenedorForms.revalidate();
         PanelContenedorForms.repaint();
-
         h1 = new Thread(this);
         h1.start();
 
@@ -834,6 +840,18 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         }
     }
 
+    void capturariduser() {
+        clog.setUsuario(lblNombre.getText());
+        ResultSet rs = clog.validaruseractive();
+        try {
+            if (rs.next()) {
+                iduser = rs.getInt("idUsuario");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FrmDashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     //Interface mode
     void DarkMode() {
 
@@ -847,11 +865,18 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         PanelDatosUs.setBackground(new Color(32, 34, 37));
         lblDia.setForeground(Color.WHITE);
         lblHora.setForeground(Color.WHITE);
-        pnlNorthForm.setBackground(new Color(32, 34, 37));
+        pnlNorthForm.setBackground(new Color(47, 49, 54));
         jPanel5.setBackground(new Color(32, 34, 37));
         lblNombre.setForeground(Color.WHITE);
         lblTipo.setForeground(Color.WHITE);
         jPanel8.setBackground(new Color(32, 34, 37));
+        jPanel7.setBackground(new Color(32, 34, 37));
+        pnlSourth.setBackground(new Color(32, 34, 37));
+        jPanel1.setBackground(new Color(32, 34, 37));
+        jPanel2.setBackground(new Color(32, 34, 37));
+        jPanel4.setBackground(new Color(32, 34, 37));
+        pnlEast.setBackground(new Color(32, 34, 37));
+        jPanel9.setBackground(new Color(47, 49, 54));
         txtBuscador.setBackground(new Color(32, 34, 37));
         txtBuscador.setForeground(Color.WHITE);
         txtBuscador.setCaretColor(Color.WHITE);
@@ -874,13 +899,19 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         lblTipo.setForeground(new Color(42, 36, 56));
         txtBuscador.setBackground(new Color(253, 255, 254));
         txtBuscador.setForeground(new Color(42, 36, 56));
-        //PanelGrafica1.setBackground(new Color(253,255,254));
-        //PanelGrafica2.setBackground(new Color(253,255,254));
-        //PanelGrafica3.setBackground(new Color(253,255,254));
-        //PanelNotificaciones.setForeground(new Color(42,36,56));
-        //PanelNotificaciones.setBackground(new Color(253,255,254));
         txtBuscador.setCaretColor(new Color(42, 36, 56));
-
+        pnlNorth.setBackground(new Color(231, 234, 239));
+        pnlNorthForm.setBackground(new Color(231, 234, 239));
+        jPanel5.setBackground(new Color(42, 36, 56));
+        jPanel8.setBackground(new Color(42, 36, 56));
+        jPanel7.setBackground(new Color(42, 36, 56));
+        pnlSourth.setBackground(new Color(42, 36, 56));
+        jPanel1.setBackground(new Color(42, 36, 56));
+        jPanel2.setBackground(new Color(42, 36, 56));
+        jPanel4.setBackground(new Color(42, 36, 56));
+        pnlEast.setBackground(new Color(42, 36, 56));
+        jPanel9.setBackground(new Color(231, 234, 239));
+        pnlFilled.setBackground(new Color(42, 36, 56));
     }
 
     //show Panel Action
@@ -927,6 +958,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
 
         PanelContenedorForms.removeAll();
         PanelContenedorForms.add(plU);
+
         PanelContenedorForms.revalidate();
         PanelContenedorForms.repaint();
         val = "2";
@@ -950,6 +982,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
 
         PanelContenedorForms.removeAll();
         PanelContenedorForms.add(plE);
+
         PanelContenedorForms.revalidate();
         PanelContenedorForms.repaint();
         val = "3";
@@ -1158,10 +1191,15 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionContactos.setVisible(false);
         panelSeleccionLogout.setVisible(true);
         panelSeleccionAjustes.setVisible(false);
-
-        this.dispose();
+        capturariduser();
+        clog.setIdestado(2);
+        clog.setIdusuario(iduser);
+        if (clog.ActualizarEstado() == true) {
+            System.out.println("Si se pudo y ahora esta inactivo");
+        }
         FrmLogin login = new FrmLogin();
         login.setVisible(true);
+        this.dispose();
     }
 
     PanelDashboard _pnldash = new PanelDashboard();
@@ -1169,8 +1207,12 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
 
     private void lblNormalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNormalMouseClicked
         // TODO add your handling code here:
-        NormalMode();
         ValidacionesSistema.ValidacionesBeep_Go.Modo = 2;
+        NormalMode();
+        pld.mode();
+        pu.darkmod();
+        pe.mododash();
+        pp.mododash();
         if (_pnldash.isShowing()) {
 
             _pnldash.hide();
@@ -1180,8 +1222,12 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
 
     private void btnMOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMOMouseClicked
         // TODO add your handling code here:
-        DarkMode();
         ValidacionesSistema.ValidacionesBeep_Go.Modo = 1;
+        DarkMode();
+        pld.mode();
+        pu.darkmod();
+        pe.mododash();
+        pp.mododash();
         _pnldash.hide();
         if (_pnldash.isVisible()) {
 
@@ -1347,7 +1393,14 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
 
 
     private void btnCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMousePressed
-        System.exit(0);
+
+        capturariduser();
+        clog.setIdestado(2);
+        clog.setIdusuario(iduser);
+        if (clog.ActualizarEstado() == true) {
+            System.out.println("Si se pudo y ahora esta inactivo");
+            System.exit(0);
+        }
     }//GEN-LAST:event_btnCerrarMousePressed
 
 
