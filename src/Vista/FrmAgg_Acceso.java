@@ -367,7 +367,11 @@ public class FrmAgg_Acceso extends javax.swing.JFrame {
 
         ControllerAccesos.setDate(date);
         ControllerAccesos.setHour(hour);
-        ControllerAccesos.setJustification(txtJustificacion.getText());
+        if (txtJustificacion.getText().contentEquals("")) {
+            ControllerAccesos.setJustification("Sin Justificar");
+        }else{
+            ControllerAccesos.setJustification(txtJustificacion.getText());            
+        }
     }
 
     private void btnListoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListoActionPerformed
@@ -493,11 +497,8 @@ public class FrmAgg_Acceso extends javax.swing.JFrame {
         } else if (getTypeaccess() == 2) {
             rbtnSalida.setSelected(true);
         }
-        if (getNofitication().isEmpty()) {
-            txtJustificacion.setText("");
-        }
         ControllerAccesos.setID(ID);
-        txtJustificacion.setText(getNofitication());
+       txtJustificacion.setText(getNofitication());
 
     }
 

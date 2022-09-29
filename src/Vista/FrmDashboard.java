@@ -335,7 +335,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
                 .addGroup(PanelMOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNormal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnMO, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelMOLayout.setVerticalGroup(
             PanelMOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

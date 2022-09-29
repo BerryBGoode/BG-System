@@ -163,12 +163,6 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
 
         jScrollPane1.setVerticalScrollBar(ScrollTabla);
 
-        tbUsuarios = new Controles_Personalizados.Tables.Table(){
-
-            public boolean isCellEditable(int indexRow, int indexCol){
-                return false;
-            }
-        };
         tbUsuarios.setBackground(new java.awt.Color(231, 234, 239));
         tbUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -187,19 +181,10 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         tbUsuarios.setPreferredSize(new java.awt.Dimension(450, 880));
         tbUsuarios.setSelectionBackground(new java.awt.Color(58, 50, 75));
         tbUsuarios.setShowVerticalLines(false);
-        tbUsuarios.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                tbUsuariosMouseMoved(evt);
-            }
-        });
         tbUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbUsuariosMouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                tbUsuariosMouseEntered(evt);
-            }
-
         });
         jScrollPane1.setViewportView(tbUsuarios);
 
@@ -590,11 +575,6 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         // TODO add your handling code here:
         refresh();
     }//GEN-LAST:event_panelRound1MouseMoved
-
-    private void tbUsuariosMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuariosMouseMoved
-        // TODO add your handling code here:
-        refresh();
-    }//GEN-LAST:event_tbUsuariosMouseMoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
