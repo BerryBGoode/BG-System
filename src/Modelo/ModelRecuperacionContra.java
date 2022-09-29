@@ -12,17 +12,10 @@ import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
- * This class stores all the sentences necessary for the correct functioning of the password recovery process
+ *
  * @author danlo
  */
 public class ModelRecuperacionContra {
-
-    /**
-     *  This method is for password recovery by PIN
-     * @param usuario referring to the username
-     * @param PIN referring to the PIN of the user
-     * @return an integer
-     */
     public static int RecuperarContraPIN_ValidarDatos(String usuario, String PIN){
         Connection con;
         int i = 0;
@@ -46,12 +39,6 @@ public class ModelRecuperacionContra {
         }
     }
     
-    /**
-     *  This method update the password of the user to a default one
-     * @param usuario referring to the username
-     * @param contra referring to the password
-     * @return a Boolean
-     */
     public static boolean RecuperarContra(String usuario, String contra){
         Connection con;
         PreparedStatement ps;
@@ -70,12 +57,6 @@ public class ModelRecuperacionContra {
     }
     
     //Por intervención de administrador
-
-    /**
-     * Load the document type 
-     * @param con referring to Connection
-     * @return a ResultSet
-     */
     
     public static ResultSet CargarTipoDocumento(Connection con){
         PreparedStatement ps;
@@ -89,14 +70,6 @@ public class ModelRecuperacionContra {
         }
     }
     
-    /**
-     *  Password recovery by admin intervention 
-     * @param usuario referring to the username 
-     * @param documento referring to the document of the user
-     * @param idTipoDoc referring to the document type 
-     * @param con referring to the Connection
-     * @return an Integer
-     */
     public static int ValidarDocumento(String usuario, String documento, int idTipoDoc, Connection con){
         int i = 0;
         PreparedStatement ps;
@@ -118,4 +91,18 @@ public class ModelRecuperacionContra {
             return 0;
         }
     }
+    
+    public static ResultSet TipoDocumento(int ID, Connection con){
+            try{
+                String query = "SELECT tipo_documento FROM tbTipoDocumento WHERE idTipoDocumento = ?";
+                PreparedStatement ps;
+                ps = con.prepareStatement(query);
+                ps.setInt(1, ID);
+                ResultSet rs = ps.executeQuery();
+                return rs;
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e.toString());
+                return null;
+            }
+        }
 }

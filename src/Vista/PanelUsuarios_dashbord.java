@@ -181,11 +181,6 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         tbUsuarios.setPreferredSize(new java.awt.Dimension(450, 880));
         tbUsuarios.setSelectionBackground(new java.awt.Color(58, 50, 75));
         tbUsuarios.setShowVerticalLines(false);
-        tbUsuarios.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                tbUsuariosMouseMoved(evt);
-            }
-        });
         tbUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbUsuariosMouseClicked(evt);
@@ -258,8 +253,6 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         btnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
         btnInforme.setText("Informe");
         btnInforme.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        btnInforme.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        btnInforme.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnInforme.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnInformeMouseClicked(evt);
@@ -578,16 +571,10 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_tbUsuariosMouseClicked
-
     private void panelRound1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound1MouseMoved
         // TODO add your handling code here:
         refresh();
     }//GEN-LAST:event_panelRound1MouseMoved
-
-    private void tbUsuariosMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuariosMouseMoved
-        // TODO add your handling code here:
-        refresh();
-    }//GEN-LAST:event_tbUsuariosMouseMoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
