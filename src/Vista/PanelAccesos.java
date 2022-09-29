@@ -52,10 +52,10 @@ public class PanelAccesos extends javax.swing.JPanel {
         initComponents();
         tipouser = tipousuario;
         TbAccesosWhite4.setFont(font);
+        String[] header = {"IDAcceso", "IDPersonal", "Carnet", "Fecha", "IDTipoAcceso", "Hora", "Acceso", "Notificación", "Modificar", "Eliminar"};
         //TxtCodigoBarra.setEditable(false);
         if (tipouser.equals("Seguridad")) {
-            System.out.println(tipouser);
-            String[] header = {"IDAcceso", "IDPersonal", "Carnet", "Fecha", "IDTipoAcceso", "Hora", "Acceso", "Notificación"};
+            System.out.println(tipouser);            
             tb = new DefaultTableModel(null, header);
             loadTableToSegurity();
             TbAccesosWhite4.setDefaultRenderer(Object.class, new RenderTable());
@@ -63,11 +63,13 @@ public class PanelAccesos extends javax.swing.JPanel {
             TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(0));
             TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(0));
             TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(2));
+            TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(5));
+            TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(5));
             
         } else {
             btnupdate = new UWPButton();
             btndelete = new UWPButton();
-            String[] header = {"IDAcceso", "IDPersonal", "Carnet", "Fecha", "IDTipoAcceso", "Hora", "Acceso", "Notificación", "Modificar", "Eliminar"};
+            
             tb = new DefaultTableModel(null, header);
             loadTable();
             TbAccesosWhite4.setDefaultRenderer(Object.class, new RenderTable());
@@ -336,17 +338,24 @@ public class PanelAccesos extends javax.swing.JPanel {
                             add.setVisible(false);
                         }
                         add.setAction(2);
-                        String notification = tb.getModel().getValueAt(tb.getSelectedRow(), 7).toString();
-
-                        if ("".equals(notification)) {
+                        add.setID(Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString()));
+                        add.setAction(2);
+                        String notification = TbAccesosWhite4.getModel().getValueAt(TbAccesosWhite4.getSelectedRow(), 7 ).toString();
+                                        
+                        if (notification.contentEquals("")) {
+                            add.setNofitication("Sin justificar");
+                            frmstate = 1;
+                        }else{
+                            add.setNofitication(notification);
+                        }
+                            
+                        /*if (notification.equals("")) {
                             add.setNofitication("");                                                        
                             frmstate = 1;
                         } else {
                             add.setNofitication(tb.getModel().getValueAt(tb.getSelectedRow(), 7).toString());                            
-                        }
-                        add.setID(Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString()));
+                        }*/
                         add.setTypeaccess(Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 4).toString()));
-                        add.setAction(2);
                         add.setVisible(true);
 
                     }

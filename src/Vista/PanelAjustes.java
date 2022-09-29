@@ -55,9 +55,11 @@ public class PanelAjustes extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
-        panelRound3 = new Controles_Personalizados.Paneles.PanelRound();
         PanelFondo = new Controles_Personalizados.Paneles.PanelRound();
+        jPanel1 = new javax.swing.JPanel();
+        lblAjustes = new javax.swing.JLabel();
         PanelContenedorCambioContra = new Controles_Personalizados.Paneles.PanelRound();
         txtUsuarioPIN = new Controles_Personalizados.textfields.TextField();
         lblCambioClave = new javax.swing.JLabel();
@@ -68,14 +70,6 @@ public class PanelAjustes extends javax.swing.JPanel {
         PanelContenedorIdiomas = new Controles_Personalizados.Paneles.PanelRound();
         lblIdiomas = new javax.swing.JLabel();
         panelRound5 = new Controles_Personalizados.Paneles.PanelRound();
-        lblAjustes = new javax.swing.JLabel();
-        PanelContenedorConfiguracion = new Controles_Personalizados.Paneles.PanelRound();
-        textoConfig = new javax.swing.JLabel();
-        VerificarTipo = new Controles_Personalizados.Botones.UWPButton();
-        PanelContenedorTemas = new Controles_Personalizados.Paneles.PanelRound();
-        lblTemas = new javax.swing.JLabel();
-        panelRound1 = new Controles_Personalizados.Paneles.PanelRound();
-        panelRound2 = new Controles_Personalizados.Paneles.PanelRound();
         PanelContenedorCambioContra1 = new Controles_Personalizados.Paneles.PanelRound();
         lblCambioClave1 = new javax.swing.JLabel();
         imgCambio1 = new javax.swing.JLabel();
@@ -83,25 +77,32 @@ public class PanelAjustes extends javax.swing.JPanel {
         txtConfirmarContra = new Controles_Personalizados.textfields.PasswordField();
         txtContraAntigua = new Controles_Personalizados.textfields.PasswordField();
         txtContra = new Controles_Personalizados.textfields.PasswordField();
+        PanelContenedorConfiguracion = new Controles_Personalizados.Paneles.PanelRound();
+        textoConfig = new javax.swing.JLabel();
+        VerificarTipo = new Controles_Personalizados.Botones.UWPButton();
+        PanelContenedorTemas = new Controles_Personalizados.Paneles.PanelRound();
+        lblTemas = new javax.swing.JLabel();
+        panelRound1 = new Controles_Personalizados.Paneles.PanelRound();
+        panelRound2 = new Controles_Personalizados.Paneles.PanelRound();
 
         setBackground(new java.awt.Color(42, 36, 56));
         setPreferredSize(new java.awt.Dimension(1250, 620));
         setLayout(new java.awt.BorderLayout());
-
-        panelRound3.setBackground(new java.awt.Color(58, 50, 75));
-        panelRound3.setRoundBottomLeft(30);
-        panelRound3.setRoundBottomRight(30);
-        panelRound3.setRoundTopLeft(30);
-        panelRound3.setRoundTopRight(30);
-        panelRound3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        add(panelRound3, java.awt.BorderLayout.CENTER);
 
         PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
         PanelFondo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         PanelFondo.setPreferredSize(new java.awt.Dimension(1270, 620));
         PanelFondo.setRoundBottomLeft(20);
         PanelFondo.setRoundBottomRight(20);
-        PanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelFondo.setLayout(new java.awt.GridBagLayout());
+
+        jPanel1.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblAjustes.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
+        lblAjustes.setForeground(new java.awt.Color(58, 50, 75));
+        lblAjustes.setText("Ajustes");
+        jPanel1.add(lblAjustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
 
         PanelContenedorCambioContra.setBackground(new java.awt.Color(42, 36, 56));
         PanelContenedorCambioContra.setRoundBottomLeft(30);
@@ -188,7 +189,7 @@ public class PanelAjustes extends javax.swing.JPanel {
         });
         PanelContenedorCambioContra.add(txtPIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 180, 70));
 
-        PanelFondo.add(PanelContenedorCambioContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 460, 300));
+        jPanel1.add(PanelContenedorCambioContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 460, 300));
 
         PanelContenedorIdiomas.setBackground(new java.awt.Color(42, 36, 56));
         PanelContenedorIdiomas.setRoundBottomLeft(30);
@@ -221,76 +222,7 @@ public class PanelAjustes extends javax.swing.JPanel {
 
         PanelContenedorIdiomas.add(panelRound5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 240, 240));
 
-        PanelFondo.add(PanelContenedorIdiomas, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, 280, 300));
-
-        lblAjustes.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
-        lblAjustes.setForeground(new java.awt.Color(58, 50, 75));
-        lblAjustes.setText("Ajustes");
-        PanelFondo.add(lblAjustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-
-        PanelContenedorConfiguracion.setBackground(new java.awt.Color(42, 36, 56));
-        PanelContenedorConfiguracion.setRoundBottomLeft(30);
-        PanelContenedorConfiguracion.setRoundBottomRight(30);
-        PanelContenedorConfiguracion.setRoundTopLeft(30);
-        PanelContenedorConfiguracion.setRoundTopRight(30);
-        PanelContenedorConfiguracion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        textoConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Indicacion Config.png"))); // NOI18N
-        PanelContenedorConfiguracion.add(textoConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
-
-        VerificarTipo.setBackground(new java.awt.Color(42, 36, 56));
-        VerificarTipo.setText("Verificar mi usuario");
-        VerificarTipo.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        VerificarTipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                VerificarTipoActionPerformed(evt);
-            }
-        });
-        PanelContenedorConfiguracion.add(VerificarTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 170, 50));
-
-        PanelFondo.add(PanelContenedorConfiguracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 70, 460, 230));
-
-        PanelContenedorTemas.setBackground(new java.awt.Color(42, 36, 56));
-        PanelContenedorTemas.setRoundBottomLeft(30);
-        PanelContenedorTemas.setRoundBottomRight(30);
-        PanelContenedorTemas.setRoundTopLeft(30);
-        PanelContenedorTemas.setRoundTopRight(30);
-        PanelContenedorTemas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblTemas.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
-        lblTemas.setForeground(new java.awt.Color(231, 234, 239));
-        lblTemas.setText("Temas - Beep&Go");
-        PanelContenedorTemas.add(lblTemas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        panelRound1.setBackground(new java.awt.Color(58, 50, 75));
-        panelRound1.setRoundBottomLeft(30);
-        panelRound1.setRoundBottomRight(30);
-        panelRound1.setRoundTopLeft(30);
-        panelRound1.setRoundTopRight(30);
-        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        PanelContenedorTemas.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 330, 160));
-
-        panelRound2.setBackground(new java.awt.Color(58, 50, 75));
-        panelRound2.setRoundBottomLeft(30);
-        panelRound2.setRoundBottomRight(30);
-        panelRound2.setRoundTopLeft(30);
-        panelRound2.setRoundTopRight(30);
-
-        javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
-        panelRound2.setLayout(panelRound2Layout);
-        panelRound2Layout.setHorizontalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 330, Short.MAX_VALUE)
-        );
-        panelRound2Layout.setVerticalGroup(
-            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 160, Short.MAX_VALUE)
-        );
-
-        PanelContenedorTemas.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 330, 160));
-
-        PanelFondo.add(PanelContenedorTemas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 750, 230));
-
+        jPanel1.add(PanelContenedorIdiomas, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 320, 280, 300));
 
         PanelContenedorCambioContra1.setBackground(new java.awt.Color(42, 36, 56));
         PanelContenedorCambioContra1.setRoundBottomLeft(30);
@@ -371,9 +303,82 @@ public class PanelAjustes extends javax.swing.JPanel {
         });
         PanelContenedorCambioContra1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 180, 70));
 
-        PanelFondo.add(PanelContenedorCambioContra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 310, 460, 300));
+        jPanel1.add(PanelContenedorCambioContra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 320, 460, 300));
 
-        add(PanelFondo, java.awt.BorderLayout.PAGE_START);
+        PanelContenedorConfiguracion.setBackground(new java.awt.Color(42, 36, 56));
+        PanelContenedorConfiguracion.setRoundBottomLeft(30);
+        PanelContenedorConfiguracion.setRoundBottomRight(30);
+        PanelContenedorConfiguracion.setRoundTopLeft(30);
+        PanelContenedorConfiguracion.setRoundTopRight(30);
+        PanelContenedorConfiguracion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        textoConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Indicacion Config.png"))); // NOI18N
+        PanelContenedorConfiguracion.add(textoConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
+
+        VerificarTipo.setBackground(new java.awt.Color(42, 36, 56));
+        VerificarTipo.setText("Verificar mi usuario");
+        VerificarTipo.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        VerificarTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerificarTipoActionPerformed(evt);
+            }
+        });
+        PanelContenedorConfiguracion.add(VerificarTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 170, 50));
+
+        jPanel1.add(PanelContenedorConfiguracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 70, 460, 230));
+
+        PanelContenedorTemas.setBackground(new java.awt.Color(42, 36, 56));
+        PanelContenedorTemas.setRoundBottomLeft(30);
+        PanelContenedorTemas.setRoundBottomRight(30);
+        PanelContenedorTemas.setRoundTopLeft(30);
+        PanelContenedorTemas.setRoundTopRight(30);
+        PanelContenedorTemas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblTemas.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
+        lblTemas.setForeground(new java.awt.Color(231, 234, 239));
+        lblTemas.setText("Temas - Beep&Go");
+        PanelContenedorTemas.add(lblTemas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        panelRound1.setBackground(new java.awt.Color(58, 50, 75));
+        panelRound1.setRoundBottomLeft(30);
+        panelRound1.setRoundBottomRight(30);
+        panelRound1.setRoundTopLeft(30);
+        panelRound1.setRoundTopRight(30);
+        panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelContenedorTemas.add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 330, 160));
+
+        panelRound2.setBackground(new java.awt.Color(58, 50, 75));
+        panelRound2.setRoundBottomLeft(30);
+        panelRound2.setRoundBottomRight(30);
+        panelRound2.setRoundTopLeft(30);
+        panelRound2.setRoundTopRight(30);
+
+        javax.swing.GroupLayout panelRound2Layout = new javax.swing.GroupLayout(panelRound2);
+        panelRound2.setLayout(panelRound2Layout);
+        panelRound2Layout.setHorizontalGroup(
+            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 330, Short.MAX_VALUE)
+        );
+        panelRound2Layout.setVerticalGroup(
+            panelRound2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 160, Short.MAX_VALUE)
+        );
+
+        PanelContenedorTemas.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 330, 160));
+
+        jPanel1.add(PanelContenedorTemas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 750, 230));
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(10, 15, 10, 15);
+        PanelFondo.add(jPanel1, gridBagConstraints);
+
+        add(PanelFondo, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     public static int exitdash = 0;
@@ -597,6 +602,7 @@ public class PanelAjustes extends javax.swing.JPanel {
     private Controles_Personalizados.Botones.UWPButton btnCambiarPIN;
     private javax.swing.JLabel imgCambio;
     private javax.swing.JLabel imgCambio1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblAjustes;
     private javax.swing.JLabel lblCambioClave;
     private javax.swing.JLabel lblCambioClave1;
@@ -604,7 +610,6 @@ public class PanelAjustes extends javax.swing.JPanel {
     private javax.swing.JLabel lblTemas;
     private Controles_Personalizados.Paneles.PanelRound panelRound1;
     private Controles_Personalizados.Paneles.PanelRound panelRound2;
-    private Controles_Personalizados.Paneles.PanelRound panelRound3;
     private Controles_Personalizados.Paneles.PanelRound panelRound5;
     private javax.swing.JLabel textoConfig;
     private Controles_Personalizados.Botones.UWPButton txtCambiarContra;

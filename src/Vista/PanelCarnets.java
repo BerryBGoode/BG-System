@@ -76,7 +76,7 @@ public class PanelCarnets extends javax.swing.JPanel {
         btnGenerar.setFont(font);
         btnGenerar.setText("Generar");
         btnGenerar.setIcon(modifIcon);
-        
+
         btnReporte.setBackground(new Color(231, 235, 239));
         btnReporte.setForeground(new Color(58, 50, 75));
         btnReporte.setFont(font);
@@ -166,16 +166,6 @@ public class PanelCarnets extends javax.swing.JPanel {
         PanelFondo.setBackground(new java.awt.Color(231, 234, 239));
         PanelFondo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         PanelFondo.setPreferredSize(new java.awt.Dimension(1270, 620));
-        PanelFondo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                PanelFondoMouseMoved(evt);
-            }
-        });
-        PanelFondo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                PanelFondoMouseClicked(evt);
-            }
-        });
         PanelFondo.setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setLayout(new java.awt.BorderLayout());
@@ -208,11 +198,6 @@ public class PanelCarnets extends javax.swing.JPanel {
         TbCarnets.setPreferredSize(new java.awt.Dimension(450, 880));
         TbCarnets.setSelectionBackground(new java.awt.Color(58, 50, 75));
         TbCarnets.setShowVerticalLines(false);
-        TbCarnets.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                TbCarnetsMouseMoved(evt);
-            }
-        });
         TbCarnets.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TbCarnetsMouseClicked(evt);
@@ -308,17 +293,19 @@ public class PanelCarnets extends javax.swing.JPanel {
             frmstate = 1;
         }
     }//GEN-LAST:event_btnAgregarMouseClicked
+
     final void refresh() {
         if (frmstate == 1 && !(add.isActive())) {
             cargarTabla();
             frmstate = 0;
         }
     }
+
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    void BuscarIDPersonal(){
+    void BuscarIDPersonal() {
         ResultSet rs;
         ObjController.setCarnet(Carnet);
         rs = ObjController.BuscarID();
@@ -330,8 +317,8 @@ public class PanelCarnets extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, e.toString());
         }
     }
-    
-    void BuscarImagen(){
+
+    void BuscarImagen() {
         ResultSet rs;
         ObjController.setIdPersonal(ID);
         rs = ObjController.BuscarImagen();
@@ -343,12 +330,12 @@ public class PanelCarnets extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, e.toString());
         }
     }
-    
-    void CargarDatos(){
+
+    void CargarDatos() {
         BuscarIDPersonal();
         BuscarImagen();
     }
-    
+
     boolean checkFile() {
         file = new File("src\\Codigos_Barra\\" + Carnet + ".png");
         if (file.exists()) {
@@ -357,7 +344,7 @@ public class PanelCarnets extends javax.swing.JPanel {
             return false;
         }
     }
-    
+
     void ReportePar() {
         try {
             Connection con = ControllerConexion.getConnectionModel();
@@ -367,7 +354,7 @@ public class PanelCarnets extends javax.swing.JPanel {
             Map parametros = new HashMap();
             parametros.put("Plantilla", "src\\Recursos_Proyecto\\PCarnet.png");
             boolean respuesta = checkFile();
-            if(respuesta == true){
+            if (respuesta == true) {
                 parametros.put("CodBarra", "src\\Codigos_Barra\\" + Carnet + ".png");
             }
             parametros.put("idPersonal", ID);
@@ -378,7 +365,7 @@ public class PanelCarnets extends javax.swing.JPanel {
             reporte = (JasperReport) JRLoader.loadObjectFromFile(dir);
 
             JasperPrint jprint = JasperFillManager.fillReport(reporte, parametros, con);
-            
+
             JasperViewer view = new JasperViewer(jprint, false);
             view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             view.setVisible(true);
@@ -386,7 +373,7 @@ public class PanelCarnets extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, e.toString());
         }
     }
-    
+
     private void TbCarnetsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbCarnetsMouseClicked
         // TODO add your handling code here:
         int column = TbCarnets.getColumnModel().getColumnIndexAtX(evt.getX());
@@ -414,7 +401,7 @@ public class PanelCarnets extends javax.swing.JPanel {
                             frmc.setVisible(true);
                         }
                     }
-                }else if(btns.getName().equals("btnReporte")){
+                } else if (btns.getName().equals("btnReporte")) {
                     ID = 0;
                     imagen = null;
                     CargarDatos();
@@ -429,6 +416,9 @@ public class PanelCarnets extends javax.swing.JPanel {
         refresh();
     }//GEN-LAST:event_TbCarnetsMouseEntered
 
+    private void btnInformeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInformeMouseClicked
+
+    }//GEN-LAST:event_btnInformeMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Controles_Personalizados.Paneles.PanelRound PanelFondo;
