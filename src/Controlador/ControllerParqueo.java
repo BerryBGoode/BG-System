@@ -21,7 +21,7 @@ public class ControllerParqueo {
     private int IDAcceso;
     private static int IDParqueo;
     private static int numberPark;
-    private static int IDDetail;
+    private static int IDDetail;    
 
     /**
      *  Gets the parking ID
@@ -181,10 +181,12 @@ public class ControllerParqueo {
 
     /**
      *  Check the occupied spots in the parking lot
-     * @return an Integer
+     * @param idpark
+     * @param idtation
+     * @return an ResultSet
      */
-    public int checkStatePark() {
-        return mdpark.checkState(getNumberPark());
+    public ResultSet checkStatePark(int idpark, int idtation) {
+        return mdpark.checkState(idpark, idtation);
     }
 
     /**
@@ -210,7 +212,7 @@ public class ControllerParqueo {
      * @return a Boolean
      */
     public boolean deletePark() {
-        return mdpark.deletePark(getIDDetail());
+        return mdpark.deletePark(getIDDetail(), getIDEstacionamiento());
     }
 
     /**
@@ -223,4 +225,5 @@ public class ControllerParqueo {
     public ResultSet getCarByPersonal(String viewname, String parametername, String carnet) {
         return mdpark.getCarByPersonal(viewname, parametername, carnet);
     }
+
 }

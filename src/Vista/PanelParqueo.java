@@ -301,7 +301,8 @@ public class PanelParqueo extends javax.swing.JPanel {
                         int msg = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este dato?", "Confirmar acción", JOptionPane.YES_NO_OPTION);
                         if (msg == JOptionPane.YES_OPTION) {
                             int IDDetail = Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString());
-                            deletePark(IDDetail);
+                            int IDStation = Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 8).toString());
+                            deletePark(IDDetail, IDStation);
                         }
                     }
                 }
@@ -330,9 +331,10 @@ public class PanelParqueo extends javax.swing.JPanel {
 
     }
 
-    public void deletePark(int ID) {
+    public void deletePark(int ID, int IDStation) {
         ControllerParqueo park = new ControllerParqueo();
         ControllerParqueo.setIDDetail(ID);
+        park.setIDEstacionamiento(IDStation);
         System.out.println(ControllerParqueo.getIDDetail());
         if (ControllerParqueo.getIDDetail() > 0) {
             if (park.deletePark() == true) {

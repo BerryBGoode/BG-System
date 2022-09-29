@@ -72,19 +72,6 @@ public class FrmConfigPark extends javax.swing.JFrame {
         setIconImage(Logo());
         loadPark();
         loadLocationPark();
-
-        /*checkState(panelPark1, 1);
-        checkState(panelPark2, 2);
-        checkState(panelPark3, 3);
-        checkState(panelPark4, 4);
-        checkState(panelPark5, 5);
-        checkState(panelPark6, 6);
-        checkState(panelPark7, 7);
-        checkState(panelPark8, 8);
-        checkState(panelPark9, 9);
-        checkState(panelPark10, 10);
-        checkState(panelPark11, 11);
-        checkState(panelPark12, 12);*/
     }
 
     public Image Logo() {
@@ -520,7 +507,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
 
     private void btnPark3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark3MouseClicked
         if (station == 3 || station == 0) {
-            modifPanelPark(panelPark3,3);
+            modifPanelPark(panelPark3, 3);
         }
     }//GEN-LAST:event_btnPark3MouseClicked
 
@@ -532,19 +519,19 @@ public class FrmConfigPark extends javax.swing.JFrame {
 
     private void btnPark11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark11MouseClicked
         if (station == 11 || station == 0) {
-            modifPanelPark(panelPark11,  11);
+            modifPanelPark(panelPark11, 11);
         }
     }//GEN-LAST:event_btnPark11MouseClicked
 
     private void btnPark12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark12MouseClicked
         if (station == 12 || station == 0) {
-            modifPanelPark(panelPark12,12);
+            modifPanelPark(panelPark12, 12);
         }
     }//GEN-LAST:event_btnPark12MouseClicked
 
     private void btnPark10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark10MouseClicked
         if (station == 10 || station == 0) {
-            modifPanelPark(panelPark10,  10);
+            modifPanelPark(panelPark10, 10);
         }
     }//GEN-LAST:event_btnPark10MouseClicked
 
@@ -558,7 +545,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
         //AQUÍ LOS VERIFICA Y LOS ESTACIONAMIENTOS ÚTILIZADOS Y POR MEDIO DEL SIGUIENTE MÉTODO "checkState"
-        /* checkState(panelPark1, 1);
+        checkState(panelPark1, 1);
         checkState(panelPark2, 2);
         checkState(panelPark3, 3);
         checkState(panelPark4, 4);
@@ -569,7 +556,15 @@ public class FrmConfigPark extends javax.swing.JFrame {
         checkState(panelPark9, 9);
         checkState(panelPark10, 10);
         checkState(panelPark11, 11);
-        checkState(panelPark12, 12);*/
+        checkState(panelPark12, 12);
+        checkState(panelPark13, 13);
+        checkState(panelPark14, 14);
+        checkState(panelPark15, 15);
+        checkState(panelPark16, 16);
+        checkState(panelPark17, 17);
+        checkState(panelPark18, 18);
+        checkState(panelPark19, 19);
+        checkState(panelPark20, 20);
 
         //verficar cual es el estacionamiento utilizado
         checkStationUpdate();
@@ -696,7 +691,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
 
     private void btnPark8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark8MouseClicked
         if (station == 8 || station == 0) {
-            modifPanelPark(panelPark8,  8);
+            modifPanelPark(panelPark8, 8);
 
         }
     }//GEN-LAST:event_btnPark8MouseClicked
@@ -710,13 +705,13 @@ public class FrmConfigPark extends javax.swing.JFrame {
 
     private void btnPark6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark6MouseClicked
         if (station == 6 || station == 0) {
-            modifPanelPark(panelPark6,  6);
+            modifPanelPark(panelPark6, 6);
         }
     }//GEN-LAST:event_btnPark6MouseClicked
 
     private void btnPark5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark5MouseClicked
         if (station == 5 || station == 0) {
-            modifPanelPark(panelPark5,  5);
+            modifPanelPark(panelPark5, 5);
         }
     }//GEN-LAST:event_btnPark5MouseClicked
 
@@ -735,13 +730,13 @@ public class FrmConfigPark extends javax.swing.JFrame {
 
     private void btnPark13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark13MouseClicked
         if (station == 13 || station == 0) {
-            modifPanelPark(panelPark13,  13);
+            modifPanelPark(panelPark13, 13);
         }
 
     }//GEN-LAST:event_btnPark13MouseClicked
 
     private void btnCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMousePressed
-        this.dispose();        
+        this.dispose();
         visibleFrm = false;
     }//GEN-LAST:event_btnCerrarMousePressed
 
@@ -815,7 +810,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
             Frmpark = new FrmSetPark(String.valueOf(IDPark), station);
             sendIDStation(station, IDPark);
 
-            if (visibleFrm == true) {                
+            if (visibleFrm == true) {
                 ValidacionesSistema.ValidacionesBeep_Go.Notificacion("No se pudo abrir...", "No se pudo abrir, debido a que ya hay abierto y se debe cerrar", 3);
             } else {
                 Frmpark.setVisible(true);
@@ -832,19 +827,26 @@ public class FrmConfigPark extends javax.swing.JFrame {
     //esté método detecta que estacionamiento está ocupado, de manera que
     //el método para cargar el estado, cierra el panel contenedor y va a verificar el estado
     //luego lo vuelve a abrir
-    void checkState(PanelRound pnl, int idDetalle) {
-        ControllerParqueo.setNumberPark(idDetalle);
-        switch (controllerpark.checkStatePark()) {
+    void checkState(PanelRound pnl, int idstation) {
+        try {
+            int IDPark = (int) list.get(CmbParqueos.getSelectedIndex());
+            ResultSet rs = controllerpark.checkStatePark(IDPark, idstation);
+            if (rs.next()) {
+                switch (rs.getInt("idEstado")) {
             case 0:
-                pnl.setBackground(Color.white);
-                break;
-            case 1:
-                pnl.setBackground(Color.white);
-                break;
-            case 2:
-                pnl.setBackground(Color.gray);
-                break;
+                        pnl.setBackground(Color.white);
+                        break;
+                    case 1:
+                        pnl.setBackground(Color.white);
+                        break;
+                    case 2:
+                        pnl.setBackground(Color.gray);
+                        break;
+                }
+            }
+        } catch (Exception e) {
         }
+
     }
 
     //método para cargar el número de parqueo registrado
@@ -875,7 +877,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
                     }
                 } while (rs.next());
 
-                /*checkState(panelPark1, 1);
+                checkState(panelPark1, 1);
                 checkState(panelPark2, 2);
                 checkState(panelPark3, 3);
                 checkState(panelPark4, 4);
@@ -886,7 +888,15 @@ public class FrmConfigPark extends javax.swing.JFrame {
                 checkState(panelPark9, 9);
                 checkState(panelPark10, 10);
                 checkState(panelPark11, 11);
-                checkState(panelPark12, 12);*/
+                checkState(panelPark12, 12);
+                checkState(panelPark13, 13);
+                checkState(panelPark14, 14);
+                checkState(panelPark15, 15);
+                checkState(panelPark16, 16);
+                checkState(panelPark17, 17);
+                checkState(panelPark18, 18);
+                checkState(panelPark19, 19);
+                checkState(panelPark20, 20);
             }
         } catch (SQLException e) {
             System.out.println("Error:" + e.toString());
