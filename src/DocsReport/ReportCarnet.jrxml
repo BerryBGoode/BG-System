@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="475" pageHeight="712" columnWidth="435" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4920cb24-9a8c-4bea-86b0-d1758170b1bc">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idPersonal" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CodBarra" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="imagenusu" class="java.io.InputStream">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Plantilla" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tbPersonal."Carnet" AS tbPersonal_Carnet,
+     CONCAT(tbPersonal."nombre_p", ' ',  tbPersonal."apellido_p") AS tbPersonal_nombre_p,
+     tbTipoPersonal."tipo_personal" AS tbTipoPersonal_tipo_personal,
+     tbEmpresas."nombre_empresa" AS tbEmpresas_nombre_empresa
+FROM
+     "dbo"."tbTipoPersonal" tbTipoPersonal INNER JOIN "dbo"."tbPersonal" tbPersonal ON tbTipoPersonal."idTipoPersonal" = tbPersonal."idTipoPersonal"
+     INNER JOIN "dbo"."tbEmpresas" tbEmpresas ON tbPersonal."idEmpresa" = tbEmpresas."idEmpresa"
+WHERE
+     idPersonal = $P{idPersonal}]]>
+	</queryString>
+	<field name="tbPersonal_Carnet" class="java.lang.String"/>
+	<field name="tbPersonal_nombre_p" class="java.lang.String"/>
+	<field name="tbTipoPersonal_tipo_personal" class="java.lang.String"/>
+	<field name="tbEmpresas_nombre_empresa" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="672" splitType="Stretch">
+			<image>
+				<reportElement x="1" y="2" width="434" height="670" uuid="51feb11f-0523-410b-8063-c95faba3d538"/>
+				<imageExpression><![CDATA[$P{Plantilla}.toString()]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="36" y="130" width="360" height="32" forecolor="#3A324B" uuid="ab71d9a3-68f6-4842-bbe4-359b95e87a8d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbTipoPersonal_tipo_personal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="36" y="360" width="360" height="36" forecolor="#3A324B" uuid="b3cdeaaa-9f1d-4134-9dcc-d70051df99bc"/>
+				<textElement textAlignment="Center">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbPersonal_nombre_p}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="36" y="382" width="360" height="29" forecolor="#3A324B" uuid="abf19fed-4534-410e-90d3-b5cec441095f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbPersonal_Carnet}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="36" y="607" width="360" height="30" forecolor="#3A324B" uuid="0b27aa65-095c-4b29-a0f2-497c127c3a6a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbEmpresas_nombre_empresa}]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="160" y="192" width="113" height="148" uuid="977ffff8-f866-4340-a5b3-7b3ad14d178c"/>
+				<imageExpression><![CDATA[$P{imagenusu}]]></imageExpression>
+			</image>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="81" y="478" width="271" height="50" uuid="65a17ca2-465c-4261-a71c-35a8fc15f8a3"/>
+				<imageExpression><![CDATA[$P{CodBarra}.toString()]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

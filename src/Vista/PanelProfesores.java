@@ -53,6 +53,7 @@ public class PanelProfesores extends javax.swing.JPanel {
     String carnet;
     ControllerBuscador objC = new ControllerBuscador();
     private int frmstate;
+    FrmReportesPar frmreporte = new FrmReportesPar("Personal", "Ingrese tipo de personal/genero:");
 
     /**
      * Creates new form PanelProfesores
@@ -259,7 +260,6 @@ public class PanelProfesores extends javax.swing.JPanel {
         lblPersonal = new javax.swing.JLabel();
         btnAgregar = new Controles_Personalizados.Botones.UWPButton();
         btnFiltrar = new Controles_Personalizados.Botones.UWPButton();
-        txtBuscar = new Controles_Personalizados.textfields.TextField();
         BtnInforme = new Controles_Personalizados.Botones.UWPButton();
         PanelTablaDark = new javax.swing.JScrollPane();
         TbProfesoresDark = new Controles_Personalizados.Tables.TableDark();
@@ -310,15 +310,6 @@ public class PanelProfesores extends javax.swing.JPanel {
             }
         });
         PanelFondo.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 150, 40));
-
-        txtBuscar.setBackground(new java.awt.Color(231, 234, 239));
-        txtBuscar.setForeground(new java.awt.Color(58, 50, 75));
-        txtBuscar.setCaretColor(new java.awt.Color(58, 50, 75));
-        txtBuscar.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        txtBuscar.setLabelText("Buscar");
-        txtBuscar.setLineColor(new java.awt.Color(58, 50, 75));
-        txtBuscar.setSelectionColor(new java.awt.Color(58, 50, 75));
-        PanelFondo.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 40, 450, 80));
 
         BtnInforme.setBackground(new java.awt.Color(58, 50, 75));
         BtnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
@@ -482,7 +473,12 @@ public class PanelProfesores extends javax.swing.JPanel {
     }//GEN-LAST:event_TbProfesoresWhiteMouseClicked
 
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
-        CargarResultados();
+        if (frmreporte.isVisible()) {
+            frmreporte.toFront();
+
+        } else {
+            frmreporte.setVisible(true);
+        }
     }//GEN-LAST:event_btnFiltrarActionPerformed
 
     private void PanelFondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseMoved
@@ -499,6 +495,7 @@ public class PanelProfesores extends javax.swing.JPanel {
         // TODO add your handling code here:
         imprimirPersonales();
     }//GEN-LAST:event_BtnInformeActionPerformed
+
 
     public void CargarResultados() {
         while (ModelProf.getRowCount() > 0) {
@@ -540,6 +537,5 @@ public class PanelProfesores extends javax.swing.JPanel {
     private Controles_Personalizados.Botones.UWPButton btnAgregar;
     private Controles_Personalizados.Botones.UWPButton btnFiltrar;
     private javax.swing.JLabel lblPersonal;
-    private Controles_Personalizados.textfields.TextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

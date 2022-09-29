@@ -37,7 +37,6 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
 
     private ControllerPersonal objControllerP = new ControllerPersonal();
     private int genero;
-    private int tipodocu;
     private int tipopersonal;
     private int ID;
     private Calendar c;
@@ -54,7 +53,9 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
     private String apellidos;
     private Date ufecha;
     private int identpanel = PanelOpcionesPersonal.showinter;
-
+    private int tipodocu = 0;
+    private int tipodanterior = 0;
+    private String tipodoc;
     /**
      * Creates new form FrmAgg_Personal
      * @param idpersonal
@@ -240,7 +241,11 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Revisar si ha ingresado correctamente, la informacion solicitada", "Verficar campos", JOptionPane.WARNING_MESSAGE);
         } else if (anios < 18) {
             JOptionPane.showMessageDialog(null, "No, se permiten registros menores a 18 años de edad", "Menor de edad", JOptionPane.WARNING_MESSAGE);
-        } else {
+        } else if ((tipodoc.equals("DUI") && txtDocumento.getText().length() < 10) || (tipodoc.equals("NIT") && txtDocumento.getText().length() < 17)){
+            JOptionPane.showMessageDialog(null, "El documento ingresado no tiene el formato correcto", "Error de formato", JOptionPane.WARNING_MESSAGE);
+        }else if(! txtCorreo.getText().contains(".") || ! txtCorreo.getText().contains("@")){
+            JOptionPane.showMessageDialog(null, "El correo ingresado no tiene el formato correcto", "Error de formato", JOptionPane.WARNING_MESSAGE);
+        }else{
             int mes=c.get(Calendar.MONTH)+1;
             String nacimiento = String.valueOf(c.get(Calendar.YEAR) + "/" + mes+ "/" + c.get(Calendar.DAY_OF_MONTH));
             objControllerP.nombre = txtNombres.getText();
@@ -264,6 +269,7 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
                     }
 
                 }
+                this.dispose();
             }
         }
     }
@@ -319,7 +325,11 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Revisar si ha ingresado correctamente, la informacion solicitada", "Verficar campos", JOptionPane.WARNING_MESSAGE);
         } else if (anios < 11) {
             JOptionPane.showMessageDialog(null, "La edad del estudiante, debe coincidir con las edades permitidas por el MINED", "Verficar Edad", JOptionPane.WARNING_MESSAGE);
-        } else {
+        } else if ((tipodoc.equals("DUI") && txtDocumento.getText().length() < 10) || (tipodoc.equals("NIT") && txtDocumento.getText().length() < 17)){
+            JOptionPane.showMessageDialog(null, "El documento ingresado no tiene el formato correcto", "Error de formato", JOptionPane.WARNING_MESSAGE);
+        }else if(! txtCorreo.getText().contains(".") || ! txtCorreo.getText().contains("@")){
+            JOptionPane.showMessageDialog(null, "El correo ingresado no tiene el formato correcto", "Error de formato", JOptionPane.WARNING_MESSAGE);
+        }else{
             int mes=c.get(Calendar.MONTH)+1;
             String nacimiento = String.valueOf(c.get(Calendar.YEAR) + "/" +mes + "/" + c.get(Calendar.DAY_OF_MONTH));
             objControllerP.nombre = txtNombres.getText();
@@ -342,6 +352,7 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
                     }
 
                 }
+                this.dispose();
             }
         }
 
@@ -350,7 +361,11 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
     void ActualizarEstudiante() {
         if (txtApellidos.getText().trim().isEmpty() || txtNombres.getText().trim().isEmpty() || txtDocumento.getText().trim().isEmpty() || txtCorreo.getText().trim().isEmpty() || TxtDireccion.getText().trim().isEmpty() || CmbGenero.getSelectedItem() == "" || CmbTipoDoc.getSelectedItem() == "") {
             JOptionPane.showMessageDialog(null, "Revisar si ha ingresado correctamente, la informacion solicitada", "Verficar campos", JOptionPane.WARNING_MESSAGE);
-        } else {
+        } else if ((tipodoc.equals("DUI") && txtDocumento.getText().length() < 10) || (tipodoc.equals("NIT") && txtDocumento.getText().length() < 17)){
+            JOptionPane.showMessageDialog(null, "El documento ingresado no tiene el formato correcto", "Error de formato", JOptionPane.WARNING_MESSAGE);
+        }else if(! txtCorreo.getText().contains(".") || ! txtCorreo.getText().contains("@")){
+            JOptionPane.showMessageDialog(null, "El correo ingresado no tiene el formato correcto", "Error de formato", JOptionPane.WARNING_MESSAGE);
+        }else{
             objControllerP.idpersonal = idpersonales;
             objControllerP.nombre = txtNombres.getText();
             objControllerP.apellido = txtApellidos.getText();
@@ -373,7 +388,11 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
     void ActualizarPersonal() {
         if (txtApellidos.getText().trim().isEmpty() || txtNombres.getText().trim().isEmpty() || txtDocumento.getText().trim().isEmpty() || txtCorreo.getText().trim().isEmpty() || TxtDireccion.getText().trim().isEmpty() || CmbGenero.getSelectedItem() == "" || CmbTipoDoc.getSelectedItem() == "") {
             JOptionPane.showMessageDialog(null, "Revisar si ha ingresado correctamente, la informacion solicitada", "Verficar campos", JOptionPane.WARNING_MESSAGE);
-        } else {
+        } else if ((tipodoc.equals("DUI") && txtDocumento.getText().length() < 10) || (tipodoc.equals("NIT") && txtDocumento.getText().length() < 17)){
+            JOptionPane.showMessageDialog(null, "El documento ingresado no tiene el formato correcto", "Error de formato", JOptionPane.WARNING_MESSAGE);
+        }else if(! txtCorreo.getText().contains(".") || ! txtCorreo.getText().contains("@")){
+            JOptionPane.showMessageDialog(null, "El correo ingresado no tiene el formato correcto", "Error de formato", JOptionPane.WARNING_MESSAGE);
+        }else{
             objControllerP.idpersonal = idpersonales;
             objControllerP.nombre = txtNombres.getText();
             objControllerP.apellido = txtApellidos.getText();
@@ -503,6 +522,14 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
         txtCorreo.setLineColor(new java.awt.Color(253, 255, 254));
         txtCorreo.setSelectedTextColor(new java.awt.Color(58, 50, 75));
         txtCorreo.setSelectionColor(new java.awt.Color(253, 255, 254));
+        txtCorreo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCorreoKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCorreoKeyTyped(evt);
+            }
+        });
         panelRound1.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 310, 70));
 
         txtApellidos.setBackground(new java.awt.Color(58, 50, 75));
@@ -515,6 +542,9 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
         txtApellidos.setSelectedTextColor(new java.awt.Color(58, 50, 75));
         txtApellidos.setSelectionColor(new java.awt.Color(253, 255, 254));
         txtApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtApellidosKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtApellidosKeyTyped(evt);
             }
@@ -536,6 +566,9 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
             }
         });
         txtNombres.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombresKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombresKeyTyped(evt);
             }
@@ -582,6 +615,14 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
         TxtDireccion.setLineColor(new java.awt.Color(253, 255, 254));
         TxtDireccion.setSelectedTextColor(new java.awt.Color(58, 50, 75));
         TxtDireccion.setSelectionColor(new java.awt.Color(253, 255, 254));
+        TxtDireccion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TxtDireccionKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                TxtDireccionKeyTyped(evt);
+            }
+        });
         panelRound1.add(TxtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 30, 310, 70));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/PersonalImgAdd.png"))); // NOI18N
@@ -673,7 +714,6 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         // TODO add your handling code here:
         ValidarMetodos();
-        this.dispose();
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnMinimizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseClicked
@@ -704,8 +744,22 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_CmbTipoPersonalItemStateChanged
 
+    void CargarIDT() { 
+        ResultSet rs;
+        objControllerP.idtipoDoc = tipodocu;
+        rs = objControllerP.TipoDocumento();
+        try {
+            if (rs.next()) {
+                tipodoc = rs.getString("tipo_documento");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
+    }
+    
     private void CmbTipoDocItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbTipoDocItemStateChanged
         // TODO add your handling code here:
+        tipodanterior = tipodocu;
         if (evt.getStateChange() == ItemEvent.SELECTED) {
             int pos = CmbTipoDoc.getSelectedIndex();
             if (pos == 0) {
@@ -718,6 +772,10 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
                     }
                 }
             }
+            CargarIDT();
+        }
+        if(tipodanterior != tipodocu && tipodanterior != 0){
+            txtDocumento.setText("");
         }
     }//GEN-LAST:event_CmbTipoDocItemStateChanged
 
@@ -745,55 +803,78 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
 
     private void txtDocumentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDocumentoKeyTyped
         // TODO add your handling code here:
-        char key = evt.getKeyChar();
-        ValidacionesSistema.ValidacionesBeep_Go.SoloNumeros(evt);
+                char key = evt.getKeyChar();
+        if(tipodoc != null){
+            if(tipodoc.equals("NIT")){
+                if(txtDocumento.getText().length() >= 17){
+                    evt.consume();
+                }else if(txtDocumento.getText().length() != 4 && txtDocumento.getText().length() != 11 && txtDocumento.getText().length() != 15 && key == '-'){
+                    evt.consume();
+                }else if((txtDocumento.getText().length() == 4 || txtDocumento.getText().length() == 11 || txtDocumento.getText().length() == 15) && key != '-'){
+                    evt.consume();
+                }else if(! Character.isDigit(key) && key != '-' ){
+                    evt.consume();
+                }
+            }else if(tipodoc.equals("DUI")){
+                if(txtDocumento.getText().length() >= 10){
+                    evt.consume();
+                }else if(txtDocumento.getText().length() == 8 && key != '-'){
+                    evt.consume();
+                }else if(! Character.isDigit(key) && key != '-' ){
+                    evt.consume();
+                }
+            }else if(CmbTipoDoc.getSelectedIndex() == 0){
+                evt.consume();
+            }
+        }else{
+            evt.consume();
+        }
     }//GEN-LAST:event_txtDocumentoKeyTyped
 
     private void txtNombresKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresKeyTyped
         // TODO add your handling code here:
         char key = evt.getKeyChar();
-        try {
-            ValidacionesSistema.ValidacionesBeep_Go.SoloLetras(evt);
-            if (txtNombres.getText().length() >= 75) {
+        ValidacionesSistema.ValidacionesBeep_Go.SoloLetras(evt);
+        if(txtNombres.getText().length() >= 35){
+            evt.consume();
+        }else if(txtNombres.getText().length() == 0 && Character.isWhitespace(key)){
+            evt.consume();
+        }else if(txtNombres.getText().length() == 0 && ! Character.isUpperCase(key)){
+            evt.consume();
+        }else if(txtNombres.getText().length() > 0){
+            String text = txtNombres.getText();
+            String ultimo = text.substring(text.length() - 1);
+            if(ultimo != null && ultimo.equals(" ") && (Character.isWhitespace(key) || !Character.isUpperCase(key))){
+               evt.consume();
+            }else if(ultimo != null && Character.isUpperCase(ultimo.charAt(0)) && !Character.isLowerCase(key) && !Character.isWhitespace(key)){
                 evt.consume();
-            } else if (txtNombres.getText().length() == 0 && !Character.isUpperCase(key)) {
+            }else if(ultimo != null && Character.isLowerCase(ultimo.charAt(0)) && !Character.isLowerCase(key) && !Character.isWhitespace(key)){
                 evt.consume();
-            } else if (txtNombres.getText().contains(" ") && Character.isWhitespace(key)) {
-                evt.consume();
-            } else {
-                String capnombre = txtNombres.getText();
-                String ultimo = capnombre.substring(capnombre.length() - 1);
-                if (ultimo.equals(" ") && !Character.isUpperCase(key)) {
-                    evt.consume();
-                }
             }
-        } catch (Exception e) {
-
         }
     }//GEN-LAST:event_txtNombresKeyTyped
 
     private void txtApellidosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosKeyTyped
         // TODO add your handling code here:
         char key = evt.getKeyChar();
-        try {
-            ValidacionesSistema.ValidacionesBeep_Go.SoloLetras(evt);
-            if (txtApellidos.getText().length() >= 75) {
+        ValidacionesSistema.ValidacionesBeep_Go.SoloLetras(evt);
+        if(txtApellidos.getText().length() >= 30){
+            evt.consume();
+        }else if(txtApellidos.getText().length() == 0 && Character.isWhitespace(key)){
+            evt.consume();
+        }else if(txtApellidos.getText().length() == 0 && ! Character.isUpperCase(key)){
+            evt.consume();
+        }else if(txtApellidos.getText().length() > 0){
+            String text = txtApellidos.getText();
+            String ultimo = text.substring(text.length() - 1);
+            if(ultimo != null && ultimo.equals(" ") && (Character.isWhitespace(key) || !Character.isUpperCase(key))){
+               evt.consume();
+            }else if(ultimo != null && Character.isUpperCase(ultimo.charAt(0)) && !Character.isLowerCase(key) && !Character.isWhitespace(key)){
                 evt.consume();
-            } else if (txtApellidos.getText().length() == 0 && !Character.isUpperCase(key)) {
+            }else if(ultimo != null && Character.isLowerCase(ultimo.charAt(0)) && !Character.isLowerCase(key) && !Character.isWhitespace(key)){
                 evt.consume();
-            } else if (txtApellidos.getText().contains(" ") && Character.isWhitespace(key)) {
-                evt.consume();
-            } else {
-                String capapellido = txtApellidos.getText();
-                String ultimo = capapellido.substring(capapellido.length() - 1);
-                if (ultimo.equals(" ") && !Character.isUpperCase(key)) {
-                    evt.consume();
-                }
             }
-        } catch (Exception e) {
-
         }
-
     }//GEN-LAST:event_txtApellidosKeyTyped
 
     private void txtNombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombresActionPerformed
@@ -803,6 +884,63 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
     private void CbGenerarCarnetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CbGenerarCarnetActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CbGenerarCarnetActionPerformed
+
+    private void txtNombresKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresKeyPressed
+        // TODO add your handling code here:
+        if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }        
+    }//GEN-LAST:event_txtNombresKeyPressed
+
+    private void txtApellidosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosKeyPressed
+        // TODO add your handling code here:
+        if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }        
+    }//GEN-LAST:event_txtApellidosKeyPressed
+
+    private void TxtDireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtDireccionKeyTyped
+        // TODO add your handling code here:
+        char key = evt.getKeyChar();
+        if(TxtDireccion.getText().length() >= 200){
+            evt.consume();
+        }else if(TxtDireccion.getText().length() == 0 && Character.isWhitespace(key)){
+            evt.consume();
+        }else if(TxtDireccion.getText().length() > 0){
+            String text = TxtDireccion.getText();
+            String ultimo = text.substring(text.length() - 1);
+            if(ultimo != null && ultimo.equals(" ") && Character.isWhitespace(key)){
+               evt.consume();
+            }   
+        }
+    }//GEN-LAST:event_TxtDireccionKeyTyped
+
+    private void TxtDireccionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtDireccionKeyPressed
+        // TODO add your handling code here:
+        if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_TxtDireccionKeyPressed
+
+    private void txtCorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyTyped
+        // TODO add your handling code here:
+        if(txtCorreo.getText().length() >= 60){
+            evt.consume();
+        }else{
+            ValidacionesSistema.ValidacionesBeep_Go.SinEspacios(evt);
+        }
+    }//GEN-LAST:event_txtCorreoKeyTyped
+
+    private void txtCorreoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCorreoKeyPressed
+        // TODO add your handling code here:
+        if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCorreoKeyPressed
 
     /**
      * @param args the command line arguments

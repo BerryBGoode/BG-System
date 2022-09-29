@@ -218,7 +218,7 @@ public class FrmPersonal_Contacto extends javax.swing.JFrame {
                 if (btns.getName().equals("btnAgregar")) {
                     FrmAgg_Contacto frmAgg_Contacto = new FrmAgg_Contacto();
                     frmAgg_Contacto.setVisible(true);
-
+                    this.dispose();
                     //Actualizar Contacto metodo
                 }
             }
