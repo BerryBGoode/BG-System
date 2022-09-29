@@ -62,7 +62,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     PanelParqueo plpk = new PanelParqueo();
     PanelContactos plCon = new PanelContactos();
     ControllerBuscador obj = new ControllerBuscador();
-    PanelDashboard pld = new PanelDashboard();
+    //PanelDashboard pld = new PanelDashboard();
     ControllerLogin clog = new ControllerLogin();
     PanelUsuarios_dashbord pu = new PanelUsuarios_dashbord();
     PanelProfesores pp = new PanelProfesores();
@@ -1211,7 +1211,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         NormalMode();
         pld.mode();
         pu.darkmod();
-        pe.mododash();
+        //pe.mododash();
         pp.mododash();
         if (_pnldash.isShowing()) {
 
@@ -1226,7 +1226,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         DarkMode();
         pld.mode();
         pu.darkmod();
-        pe.mododash();
+       // pe.mododash();
         pp.mododash();
         _pnldash.hide();
         if (_pnldash.isVisible()) {

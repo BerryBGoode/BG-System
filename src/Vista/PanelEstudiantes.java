@@ -56,7 +56,6 @@ public class PanelEstudiantes extends javax.swing.JPanel {
      */
     public PanelEstudiantes() {
         initComponents();
-        mood();
         //Titulos de los campos que se cargan en la tabla
         String[] TitulosAlumnos = {"IDPersonal", "Nombres", "Apellidos", " Nacimiento", "Documento", "Carné", "Tipo Personal", "Direccion", "Correo", "IDTD", "IDTP", "IDG", "Genero", "Tipo Documento", "Modificar", "Eliminar", "Registro"};
         ModelAlumnos = new DefaultTableModel(null, TitulosAlumnos) {
@@ -101,7 +100,7 @@ public class PanelEstudiantes extends javax.swing.JPanel {
     }
 
 
-    private void cargarTabla() {
+    public void cargarTabla() {
         while (ModelAlumnos.getRowCount() > 0) {
             ModelAlumnos.removeRow(0);
         }

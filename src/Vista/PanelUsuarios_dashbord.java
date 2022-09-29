@@ -37,6 +37,7 @@ import net.sf.jasperreports.view.JasperViewer;
 public class PanelUsuarios_dashbord extends javax.swing.JPanel {
 
     DefaultTableModel modelo;
+    DefaultTableModel modelodark;
     public final UWPButton btnActualizar = new UWPButton();
     public final UWPButton btnEliminar = new UWPButton();
     public final UWPButton btnReporte = new UWPButton();

@@ -157,7 +157,6 @@ public class PanelDashboard extends javax.swing.JPanel {
 
                 PanelGrafica1.setBackground(new Color(253, 255, 254));
                 PanelGrafica3.setBackground(new Color(253, 255, 254));
-                PanelGrafica2.setBackground(new Color(253, 255, 254));
                 PanelGrafica3.setBackground(new Color(253, 255, 254));
                 jPanel10.setBackground(new Color(231,234,239));
                 jPanel11.setBackground(new Color(231,234,239));
@@ -168,7 +167,6 @@ public class PanelDashboard extends javax.swing.JPanel {
                 pnlNorthNotifi.setBackground(new Color(231,234,239));
                 panelRound6.setBackground(new Color(231,234,239));
                 jPanel6.setBackground(new Color(231,234,239));
-                panelRound3.setBackground(new Color(231,234,239));
                 jPanel5.setBackground(new Color(231,224,239));
                 panelRound.setBackground(new Color(231,234,239));
 

@@ -131,7 +131,6 @@ public class PanelProfesores extends javax.swing.JPanel {
                 btnActualizar.setIcon(Modificardark);
                 btnReporteP.setIcon(reportedark);
                 PanelFondo.setBackground(new Color(47, 49, 54));
-                txtBuscar.setBackground(new Color(32, 34, 37));
                 btnAgregar.setBackground(new Color(32, 34, 37));
                 BtnInforme.setBackground(new Color(32, 34, 37));
                 btnFiltrar.setBackground(new Color(32, 34, 37));
@@ -152,7 +151,6 @@ public class PanelProfesores extends javax.swing.JPanel {
                 btnActualizar.setIcon(modificar);
                 btnReporteP.setIcon(reporteimg);
                 PanelFondo.setBackground(new Color(231, 234, 239));
-                txtBuscar.setBackground(new Color(231, 234, 239));
                 btnAgregar.setBackground(new Color(58, 50, 75));
                 btnFiltrar.setBackground(new Color(58, 50, 75));
                 BtnInforme.setBackground(new Color(58, 50, 75));
@@ -178,7 +176,6 @@ public class PanelProfesores extends javax.swing.JPanel {
             btnActualizar.setIcon(Modificardark);
             btnReporteP.setIcon(reportedark);
             PanelFondo.setBackground(new Color(47, 49, 54));
-            txtBuscar.setBackground(new Color(32, 34, 37));
             btnAgregar.setBackground(new Color(32, 34, 37));
             BtnInforme.setBackground(new Color(32, 34, 37));
             btnFiltrar.setBackground(new Color(32, 34, 37));
@@ -198,7 +195,6 @@ public class PanelProfesores extends javax.swing.JPanel {
             btnActualizar.setIcon(modificar);
             btnReporteP.setIcon(reporteimg);
             PanelFondo.setBackground(new Color(231, 234, 239));
-            txtBuscar.setBackground(new Color(231, 234, 239));
             btnAgregar.setBackground(new Color(58, 50, 75));
             btnFiltrar.setBackground(new Color(58, 50, 75));
             BtnInforme.setBackground(new Color(58, 50, 75));
@@ -497,31 +493,6 @@ public class PanelProfesores extends javax.swing.JPanel {
     }//GEN-LAST:event_BtnInformeActionPerformed
 
 
-    public void CargarResultados() {
-        while (ModelProf.getRowCount() > 0) {
-            ModelProf.removeRow(0);
-        }
-        panelperoes = 1;
-        ResultSet rs;
-        respuesta = txtBuscar.getText();
-
-        objC.setCarnetVehiculo(respuesta);
-        rs = objC.CargarVehiculosCarnetController(respuesta);
-        switch (panelperoes) {
-            case 1:
-                try {
-                    while (rs.next()) {
-
-                        Object[] obj = {rs.getInt("idPersonal"), rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("fecha_nacimiento"), rs.getString("documento"), rs.getString("Carnet"), rs.getString("tipo_personal"), rs.getInt("idTipoDocumento"), rs.getInt("idGenero"), rs.getString("genero"), rs.getInt("idTipoPersonal"), rs.getString("tipo_documento"), rs.getString("direccion"), rs.getString("correo"), btnActualizar, btnEliminar};
-                        ModelProf.addRow(obj);
-                    }
-                } catch (SQLException e) {
-                    JOptionPane.showMessageDialog(null, e.toString());
-                    System.out.println(e.toString());
-                }
-                break;
-        }
-    }
 
     FrmAgg_Personal add = new FrmAgg_Personal();
 
