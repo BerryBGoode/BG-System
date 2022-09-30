@@ -46,6 +46,7 @@ public class FrmAgg_Vehiculos extends javax.swing.JFrame {
 //constructor que se utiliza para cuando se va a agregar un vehiculo
     FrmAgg_Vehiculos() {
         initComponents();
+        setIconImage(Logo());
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
         AWTUtilities.setWindowShape(this, forma);
         btnConfirmar.setVisible(true);
@@ -102,10 +103,18 @@ public class FrmAgg_Vehiculos extends javax.swing.JFrame {
         txtPlaca.setCaretColor(new java.awt.Color(253, 255, 254));
         txtPlaca.setDisabledTextColor(new java.awt.Color(253, 255, 254));
         txtPlaca.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        txtPlaca.setLabelText("Placa - Vehiculo");
+        txtPlaca.setLabelText("Placa - Vehículo");
         txtPlaca.setLineColor(new java.awt.Color(253, 255, 254));
         txtPlaca.setSelectedTextColor(new java.awt.Color(58, 50, 75));
         txtPlaca.setSelectionColor(new java.awt.Color(253, 255, 254));
+        txtPlaca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPlacaKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPlacaKeyTyped(evt);
+            }
+        });
         panelRound1.add(txtPlaca, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 310, 70));
 
         txtColor.setBackground(new java.awt.Color(58, 50, 75));
@@ -113,10 +122,18 @@ public class FrmAgg_Vehiculos extends javax.swing.JFrame {
         txtColor.setCaretColor(new java.awt.Color(253, 255, 254));
         txtColor.setDisabledTextColor(new java.awt.Color(253, 255, 254));
         txtColor.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        txtColor.setLabelText("Color - Vehiculo");
+        txtColor.setLabelText("Color - Vehículo");
         txtColor.setLineColor(new java.awt.Color(253, 255, 254));
         txtColor.setSelectedTextColor(new java.awt.Color(58, 50, 75));
         txtColor.setSelectionColor(new java.awt.Color(253, 255, 254));
+        txtColor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtColorKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtColorKeyTyped(evt);
+            }
+        });
         panelRound1.add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 310, 70));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Car.png"))); // NOI18N
@@ -141,7 +158,7 @@ public class FrmAgg_Vehiculos extends javax.swing.JFrame {
         panelRound1.add(btnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 480, 150, -1));
 
         btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/CerrarLogin.png"))); // NOI18N
-        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnCerrarMousePressed(evt);
@@ -150,7 +167,7 @@ public class FrmAgg_Vehiculos extends javax.swing.JFrame {
         panelRound1.add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 10, -1, -1));
 
         btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Maximizar.png"))); // NOI18N
-        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMinimizarMouseClicked(evt);
@@ -220,6 +237,54 @@ public class FrmAgg_Vehiculos extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         setLocationRelativeTo(null);
     }//GEN-LAST:event_formWindowActivated
+
+    private void txtColorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorKeyTyped
+        // TODO add your handling code here:
+        char key = evt.getKeyChar();
+        if(txtColor.getText().length() >= 200){
+            evt.consume();
+        }else if(txtColor.getText().length() == 0 && Character.isWhitespace(key)){
+            evt.consume();
+        }else if(txtColor.getText().length() > 0){
+            String text = txtColor.getText();
+            String ultimo = text.substring(text.length() - 1);
+            if(ultimo != null && ultimo.equals(" ") && Character.isWhitespace(key)){
+               evt.consume();
+            }   
+        }
+    }//GEN-LAST:event_txtColorKeyTyped
+
+    private void txtColorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorKeyPressed
+        // TODO add your handling code here:
+        if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtColorKeyPressed
+
+    private void txtPlacaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlacaKeyPressed
+        // TODO add your handling code here:
+        if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPlacaKeyPressed
+
+    private void txtPlacaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPlacaKeyTyped
+        // TODO add your handling code here:
+        char key = evt.getKeyChar();
+        if(txtPlaca.getText().length() >= 8){
+            evt.consume();
+        }else if(txtPlaca.getText().length() == 0 && ! Character.isUpperCase(key)){
+            evt.consume();
+        }else if(txtPlaca.getText().length() == 4 && ! txtPlaca.getText().contains("-") && key != '-'){
+            evt.consume();
+        }else if(! Character.isDigit(key) && key != '-' && txtPlaca.getText().length() >= 1){
+            evt.consume();
+        }else if(txtPlaca.getText().contains("-") && key == '-'){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPlacaKeyTyped
 
     void GuardarVehiculo() {
         if (txtPlaca.getText().trim().isEmpty() || txtColor.getText().trim().isEmpty()) {

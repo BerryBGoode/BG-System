@@ -76,7 +76,7 @@ public Image Logo(){
         PanelCampos.setRoundTopLeft(35);
         PanelCampos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        textoRest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/TextoRecuPIN.png"))); // NOI18N
+        textoRest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/txtRecuPIN.png"))); // NOI18N
         PanelCampos.add(textoRest, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, -1, -1));
 
         btnGoBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-left-arrow-circle 1.png"))); // NOI18N
@@ -104,7 +104,7 @@ public Image Logo(){
         });
         PanelCampos.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 350, 310, 70));
 
-        btnRestablecer.setText("Restablecer");
+        btnRestablecer.setText("Reestablecer");
         btnRestablecer.setToolTipText("");
         btnRestablecer.setColor1(new java.awt.Color(42, 36, 56));
         btnRestablecer.setColor2(new java.awt.Color(42, 36, 56));

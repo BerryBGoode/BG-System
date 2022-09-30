@@ -178,4 +178,12 @@ public class ControllerPersonal {
     public boolean EliminarRegistroController(){
         return objModelP.EliminarRegistro(idpersonal);
     }
+    
+    /**
+     * Gets the type of document according to id
+     * @return a ResultSet
+     */
+   public ResultSet TipoDocumento(){
+       return objModelP.TipoDocumento(idtipoDoc);
+   }
 }

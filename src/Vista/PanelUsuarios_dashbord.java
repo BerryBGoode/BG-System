@@ -38,9 +38,9 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
 
     DefaultTableModel modelo;
     DefaultTableModel modelodark;
-    private final UWPButton btnActualizar = new UWPButton();
-    private final UWPButton btnEliminar = new UWPButton();
-    private final UWPButton btnReporte = new UWPButton();
+    public final UWPButton btnActualizar = new UWPButton();
+    public final UWPButton btnEliminar = new UWPButton();
+    public final UWPButton btnReporte = new UWPButton();
     private final UWPButton btnActualizardark = new UWPButton();
     private final UWPButton btnEliminardark = new UWPButton();
     private final UWPButton btnReportedark = new UWPButton();
@@ -54,6 +54,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
     FrmAgg_Usuarios agg = new FrmAgg_Usuarios();
     private int frmstate = 1;
     byte[] imagen;
+    FrmReportesPar frmreporte = new FrmReportesPar("Usuarios", "Ingrese tipo de usuario/estado del usuario:");
 
     /**
      * Creates new form PanelUsuario_dashbord
@@ -181,6 +182,11 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         tbUsuarios.setPreferredSize(new java.awt.Dimension(450, 880));
         tbUsuarios.setSelectionBackground(new java.awt.Color(58, 50, 75));
         tbUsuarios.setShowVerticalLines(false);
+        tbUsuarios.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                tbUsuariosMouseMoved(evt);
+            }
+        });
         tbUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbUsuariosMouseClicked(evt);
@@ -247,12 +253,19 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         btnFiltrar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         btnFiltrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarActionPerformed(evt);
+            }
+        });
         jPanel4.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 150, 40));
 
         btnInforme.setBackground(new java.awt.Color(58, 50, 75));
         btnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
         btnInforme.setText("Informe");
         btnInforme.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        btnInforme.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnInforme.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnInforme.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnInformeMouseClicked(evt);
@@ -446,7 +459,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
             Connection con = ControllerConexion.getConnectionModel();
             JasperReport reporte = null;
 
-            String dir = "src\\DocsReport\\UsuarioPReport.jasper";
+            String dir = "src\\DocsReport\\UsuarioPReportID.jasper";
             Map parametros = new HashMap();
             parametros.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
             parametros.put("idUsuario", ValidacionesSistema.Parametros_Usuario.getID());
@@ -571,10 +584,26 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_tbUsuariosMouseClicked
+
     private void panelRound1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound1MouseMoved
         // TODO add your handling code here:
         refresh();
     }//GEN-LAST:event_panelRound1MouseMoved
+
+    private void tbUsuariosMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuariosMouseMoved
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_tbUsuariosMouseMoved
+
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        // TODO add your handling code here:
+        if (frmreporte.isVisible()) {
+            frmreporte.toFront();
+
+        } else {
+            frmreporte.setVisible(true);
+        }
+    }//GEN-LAST:event_btnFiltrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

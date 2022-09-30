@@ -205,9 +205,8 @@ public class ModelParqueo {
     }
 
     /**
-     * This method delete the information filtered by the ID of the park spot
-     *
-     * @param IDStation referring to the spot in the parking lot
+     *  This method delete the information filtered by the ID of the park spot
+     * @param   iddetail  referring to the spot in the parking lot
      * @return a Boolean
      */
     public boolean deletePark(int iddetail, int idstation) {

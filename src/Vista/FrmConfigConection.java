@@ -12,7 +12,6 @@ import java.io.*;
 import Controlador.*;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
@@ -233,8 +232,6 @@ public class FrmConfigConection extends javax.swing.JFrame {
         if (evt.isControlDown() || evt.isShiftDown())
         {
             evt.consume();
-        }else if(evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtcontra.getText().equals("") && ! txtIP.getText().equals("") && ! txtUsuario.getText().equals("") && ! txtHost.getText().equals("")){
-            saveConfig();
         }
     }//GEN-LAST:event_txtUsuarioKeyPressed
 
@@ -247,8 +244,6 @@ public class FrmConfigConection extends javax.swing.JFrame {
         if (evt.isControlDown() || evt.isShiftDown())
         {
             evt.consume();
-        }else if(evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtcontra.getText().equals("") && ! txtIP.getText().equals("") && ! txtUsuario.getText().equals("") && ! txtHost.getText().equals("")){
-            saveConfig();
         }
     }//GEN-LAST:event_txtIPKeyPressed
 
@@ -261,8 +256,6 @@ public class FrmConfigConection extends javax.swing.JFrame {
         if (evt.isControlDown() || evt.isShiftDown())
         {
             evt.consume();
-        }else if(evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtcontra.getText().equals("") && ! txtIP.getText().equals("") && ! txtUsuario.getText().equals("") && ! txtHost.getText().equals("")){
-            saveConfig();
         }
     }//GEN-LAST:event_txtHostKeyPressed
 
@@ -343,8 +336,6 @@ public class FrmConfigConection extends javax.swing.JFrame {
         if (evt.isControlDown() || evt.isShiftDown())
         {
             evt.consume();
-        }else if(evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtcontra.getText().equals("") && ! txtIP.getText().equals("") && ! txtUsuario.getText().equals("") && ! txtHost.getText().equals("")){
-            saveConfig();
         }
     }//GEN-LAST:event_txtcontraKeyPressed
     
@@ -361,7 +352,7 @@ public class FrmConfigConection extends javax.swing.JFrame {
             if (ControllerConexion.getConnectionModel() != null) {
                 createFile();
                 writeFile();
-                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso exitoso", "Se guardo un archivo con\nla configuración de la conexión", 1);                
+                JOptionPane.showMessageDialog(null, "Se guardo un archivo con\nlos datos de la conexón", "Archivo guardado", JOptionPane.INFORMATION_MESSAGE);
                 if (verficarpu.checkEnterprise() == false) {
                     FrmP_U_Empresa cargarempresa = new FrmP_U_Empresa();
                     cargarempresa.setVisible(true);
@@ -393,7 +384,7 @@ public class FrmConfigConection extends javax.swing.JFrame {
             } else {
                 /*esto porque me cerraba el frm al dale ok al msg anterior */
                 int conf = JOptionPane.YES_NO_OPTION;
-                JOptionPane.showConfirmDialog(this, "No se pudo establecer \n" + "conexión con la base de \n" + "datos" + "\n CE 001", "¿Desea volver a intentar?", conf);
+                JOptionPane.showConfirmDialog(this, "No se pudo establecer \n" + "conexión con la base de \n" + "datos" + "\n Error 001", "¿Desea volver a intentar?", conf);
                 if (conf == JOptionPane.YES_OPTION) {
                     FrmConfigConection config = new FrmConfigConection();
                     config.setVisible(true);
@@ -504,7 +495,9 @@ public class FrmConfigConection extends javax.swing.JFrame {
     void deleteFile() {
         file = new File(filename);
         if (file.delete()) {
-            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("CE 001","No se pudo establecer la conexión\ndebido a que existen datos erroneos", 2);            
+            JOptionPane.showMessageDialog(null, "No se pudo establecer \n" + "conexión con la base de \n" + "datos, porque existen datos erroneos \n en el archivo creado", "Archivo eliminado", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "No se pudo establecer \n" + "conexión con la base de \n" + "datos, y no se pudo borrar el archivo\n con las configuraciones", "Error grave", JOptionPane.WARNING_MESSAGE);
         }
     }
     /**
@@ -578,11 +571,11 @@ public class FrmConfigConection extends javax.swing.JFrame {
                     //si existen, pasar al login 
                     //si no exsiten la primer uso
                     else {
-                       ValidacionesSistema.ValidacionesBeep_Go.Notificacion("CE 001","No se pudo establecer la conexión\ndebido a que existen datos erroneos", 2);
+                        JOptionPane.showMessageDialog(null, "No, se logro establercer conexion con la base de datos", "Error de conexion", JOptionPane.ERROR_MESSAGE);
                         config.setVisible(true);//para volver a config, porque salio algo mal                        
                         config.deleteFile();
                     }
-                } else {                    
+                } else {
                     config.setVisible(true);//cuando no exista el archivo
                 }
             }

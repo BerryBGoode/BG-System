@@ -35,10 +35,10 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class PanelParqueo extends javax.swing.JPanel {
 
-    private final UWPButton btnupdate = new UWPButton();
-    private final UWPButton btndelete = new UWPButton();
-    private final ImageIcon modifIcon = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar.png"));
-    private final ImageIcon deleteIcon = new ImageIcon(getClass().getResource("/Recursos_Proyecto/eliminar.png"));
+    public final UWPButton btnupdate = new UWPButton();
+    public final UWPButton btndelete = new UWPButton();
+    public final ImageIcon modifIcon = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar.png"));
+    public final ImageIcon deleteIcon = new ImageIcon(getClass().getResource("/Recursos_Proyecto/eliminar.png"));
     private int frmstate = 1;
     public Font font = new Font("Roboto Black", Font.PLAIN, 18);
 
@@ -173,6 +173,8 @@ public class PanelParqueo extends javax.swing.JPanel {
         btnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
         btnInforme.setText("Informe");
         btnInforme.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        btnInforme.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnInforme.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnInforme.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnInformeMouseClicked(evt);
@@ -192,9 +194,7 @@ public class PanelParqueo extends javax.swing.JPanel {
         scrollBarCustom1.setForeground(new java.awt.Color(58, 50, 75));
         jPanel3.add(scrollBarCustom1, java.awt.BorderLayout.EAST);
 
-        jScrollPane1.setBackground(new java.awt.Color(231, 234, 239));
         jScrollPane1.setMinimumSize(new java.awt.Dimension(15, 26));
-        jScrollPane1.setName(""); // NOI18N
         jScrollPane1.setPreferredSize(new java.awt.Dimension(461, 403));
         jScrollPane1.setVerticalScrollBar(scrollBarCustom1);
 

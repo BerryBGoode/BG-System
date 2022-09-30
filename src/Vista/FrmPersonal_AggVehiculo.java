@@ -217,7 +217,7 @@ public Image Logo(){
                 if (btns.getName().equals("btnAgregar")) {
                     FrmAgg_Vehiculos vehiculos = new FrmAgg_Vehiculos();
                     vehiculos.setVisible(true);
-
+                    this.dispose();
                     //Actualizar Contacto metodo
                 }
             }

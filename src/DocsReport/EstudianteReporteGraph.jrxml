@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="700" pageHeight="460" columnWidth="660" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a295cf5c-9d87-42ff-8968-50e040405374">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="Genero" uuid="9d3d59c1-5d8e-451c-a73c-2a7f15c97878">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     COUNT(tbPersonal."idGenero") AS tbPersonal_idGenero,
+     tbGeneros."genero" AS tbGeneros_genero
+FROM
+     "dbo"."tbGeneros" tbGeneros INNER JOIN "dbo"."tbPersonal" tbPersonal ON tbGeneros."idGenero" = tbPersonal."idGenero"
+WHERE tbPersonal.idTipoPersonal = 4
+GROUP BY tbGeneros.genero
+]]>
+		</queryString>
+		<field name="tbPersonal_idGenero" class="java.lang.Integer"/>
+		<field name="tbGeneros_genero" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="Logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TextoFooter" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     COUNT(tbPersonal."idPersonal") AS tbPersonal_idPersonal
+FROM
+     "dbo"."tbPersonal" tbPersonal
+WHERE tbPersonal.idTipoPersonal = 4]]>
+	</queryString>
+	<field name="tbPersonal_idPersonal" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="420" splitType="Stretch">
+			<pieChart>
+				<chart>
+					<reportElement x="31" y="95" width="594" height="279" uuid="e19153a7-3737-44f8-b2da-08835b6c3778"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset>
+						<datasetRun subDataset="Genero" uuid="fe692255-494e-43cd-8538-2d0f6e7c099d"/>
+					</dataset>
+					<keyExpression><![CDATA[$F{tbGeneros_genero}]]></keyExpression>
+					<valueExpression><![CDATA[$F{tbPersonal_idGenero}]]></valueExpression>
+					<labelExpression><![CDATA[$F{tbPersonal_idGenero}.toString()]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+			<image>
+				<reportElement x="5" y="5" width="63" height="53" uuid="58240cd4-7c9b-4045-ba73-bed2e35e7c2a"/>
+				<imageExpression><![CDATA[$P{Logo}.toString()]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="5" width="655" height="43" forecolor="#17141D" uuid="eebc0dda-ebf6-4883-87c3-e8eee30a6c83"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="26" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Estudiantes según su género:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="178" y="48" width="195" height="28" forecolor="#000000" uuid="7379d3e1-4148-4244-a457-8929aa692a1d"/>
+				<textElement textAlignment="Left">
+					<font fontName="SansSerif" size="16" isBold="true" isStrikeThrough="false"/>
+				</textElement>
+				<text><![CDATA[Total de estudiantes:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="351" y="48" width="129" height="28" uuid="d2963083-cd26-426f-92ae-552dafc2007e"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbPersonal_idPersonal}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="580" y="390" width="80" height="30" uuid="4d9cce61-b5a5-419e-8908-dcb52c596046"/>
+				<imageExpression><![CDATA[$P{TextoFooter}.toString()]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
