@@ -58,7 +58,7 @@ public class ModelRecuperacionContra {
         
         try{
             con = ModelConexion.getConnection();
-            ps = con.prepareStatement("UPDATE tbUsuarios SET contraseña = ?, idEstadoUsuario = 1, intentos = 5 WHERE nombre_usuario = ?");
+            ps = con.prepareStatement("UPDATE tbUsuarios SET contraseña = ?, idEstadoUsuario = 2, intentos = 5 WHERE nombre_usuario = ?");
             ps.setString(1, contra);
             ps.setString(2, usuario);
             ps.execute();
@@ -117,5 +117,26 @@ public class ModelRecuperacionContra {
             JOptionPane.showMessageDialog(null, "Credenciales invalidas" + e.toString(), "ERROR CRITICO", JOptionPane.WARNING_MESSAGE);
             return 0;
         }
+    }
+    
+        /**
+     * Gets the type of document according to id
+     * @param ID referring the ID (idTipoDocumento)
+     * @return a ResultSet
+     */
+    public static ResultSet TipoDocumento(int ID){
+            try{
+                Connection con;
+                PreparedStatement ps;
+                con = ModelConexion.getConnection();
+                String query = "SELECT tipo_documento FROM tbTipoDocumento WHERE idTipoDocumento = ?";
+                ps = con.prepareStatement(query);
+                ps.setInt(1, ID);
+                ResultSet rs = ps.executeQuery();
+                return rs;
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e.toString());
+                return null;
+            }
     }
 }

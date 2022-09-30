@@ -133,4 +133,8 @@ public class ControllerRecuperacionContra {
     public int ValidarDocumentoController(){
         return ModelRecuperacionContra.ValidarDocumento(usuario, documento, idTipoDoc, con);
     }
+    
+     public ResultSet TipoDocumento(){
+       return ModelRecuperacionContra.TipoDocumento(idTipoDoc);
+   }
 }
