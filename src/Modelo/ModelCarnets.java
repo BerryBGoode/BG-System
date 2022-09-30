@@ -93,4 +93,31 @@ public class ModelCarnets {
         }
     }
 
+    public ResultSet BuscarID(String carnet) {
+        try {
+            con = ModelConexion.getConnection();
+            String query = "SELECT idPersonal FROM tbPersonal WHERE Carnet = ?";
+            ps = con.prepareStatement(query);
+            ps.setString(1, carnet);
+            ResultSet rs = ps.executeQuery();
+            return rs;
+        } catch (Exception e) {
+            System.out.println("Error"+e.toString());
+            return null;
+        }
+    }
+    
+    public ResultSet BuscarImagen(int ID) {
+        try {
+            con = ModelConexion.getConnection();
+            String query = "SELECT imagen FROM tbUsuarios WHERE idPersonal = ?";
+            ps = con.prepareStatement(query);
+            ps.setInt(1, ID);
+            ResultSet rs = ps.executeQuery();
+            return rs;
+        } catch (Exception e) {
+            System.out.println("Error"+e.toString());
+            return null;
+        }
+    }
 }

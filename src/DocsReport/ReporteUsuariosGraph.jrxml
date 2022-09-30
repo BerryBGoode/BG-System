@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="460" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0a667a34-8491-437d-aebd-c14f45b98770">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TextoFooter" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tbTipoUsuario."tipo_usuario" AS tbTipoUsuario_tipo_usuario,
+     COUNT(tbUsuarios."idTipoUsuario") AS tbUsuarios_idTipoUsuario
+FROM
+     "dbo"."tbTipoUsuario" tbTipoUsuario INNER JOIN "dbo"."tbUsuarios" tbUsuarios ON tbTipoUsuario."idTipoUsuario" = tbUsuarios."idTipoUsuario"
+GROUP BY tbTipoUsuario.tipo_usuario;]]>
+	</queryString>
+	<field name="tbTipoUsuario_tipo_usuario" class="java.lang.String"/>
+	<field name="tbUsuarios_idTipoUsuario" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="420" splitType="Stretch">
+			<barChart>
+				<chart>
+					<reportElement x="32" y="83" width="483" height="284" uuid="3bf713e6-3349-44e8-bc4a-94b7d83ab485"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{tbTipoUsuario_tipo_usuario}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{tbTipoUsuario_tipo_usuario}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{tbUsuarios_idTipoUsuario}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<image>
+				<reportElement x="9" y="9" width="61" height="56" uuid="d9be36e5-7392-4db8-abba-ddc62d76f497"/>
+				<imageExpression><![CDATA[$P{Logo}.toString()]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="475" y="389" width="80" height="30" uuid="fa1e980a-7e86-42f6-8fdd-3da7c004c867"/>
+				<imageExpression><![CDATA[$P{TextoFooter}.toString()]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="168" y="19" width="224" height="33" forecolor="#17141D" uuid="87044054-2695-4484-a6ff-f103d8611ff8"/>
+				<textElement>
+					<font size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipos de usuario:]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

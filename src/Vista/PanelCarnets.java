@@ -6,26 +6,32 @@
 package Vista;
 
 import Controlador.ControllerCarnets;
-import Controles_Personalizados.Botones.ButtonGradient;
+import Controlador.ControllerConexion;
 import Controles_Personalizados.Botones.UWPButton;
 import Controles_Personalizados.RenderTable;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import net.sourceforge.barbecue.Barcode;
 import net.sourceforge.barbecue.BarcodeException;
 import net.sourceforge.barbecue.BarcodeFactory;
@@ -43,28 +49,35 @@ public class PanelCarnets extends javax.swing.JPanel {
     public DefaultTableModel model;
     private ControllerCarnets ObjController = new ControllerCarnets();
     public final UWPButton btnGenerar = new UWPButton();
+    public final UWPButton btnReporte = new UWPButton();
     private int ID;
     private File file;
     private static String Carnet;
     private int frmstate;
     public Font font = new Font("Roboto Black", Font.PLAIN, 18);
     ImageIcon modifIcon = new ImageIcon(getClass().getResource("/Recursos_Proyecto/Barcode.png"));
+    ImageIcon report = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report 1.png"));
+    byte[] imagen;
 
     /**
      * Creates new form PanelCarnets
      */
     public PanelCarnets() {
         initComponents();
-        String[] TitulosCarnets = {"Nombre", "Apellido", "Carné", "Tipo de usuario", "idPersonal", "Codigo de barra"};
+        String[] TitulosCarnets = {"Nombre", "Apellido", "Carné", "Tipo de usuario", "idPersonal", "Codigo de barra", "Imprimir carnet"};
         model = new DefaultTableModel(null, TitulosCarnets);
         TbCarnets.setModel(model);
         TbCarnets.setDefaultRenderer(Object.class, new RenderTable());
         btnGenerar.setBackground(new Color(231, 235, 239));
-        ImageIcon modificar;
+        btnReporte.setBackground(new Color(231, 235, 239));
         btnGenerar.setForeground(new Color(58, 50, 75));
         btnGenerar.setFont(font);
         btnGenerar.setText("Generar");
         btnGenerar.setIcon(modifIcon);
+        btnReporte.setBackground(new Color(231, 235, 239));
+        btnReporte.setForeground(new Color(58, 50, 75));
+        btnReporte.setFont(font);
+        btnReporte.setIcon(report);
         TbCarnets.removeColumn(TbCarnets.getColumnModel().getColumn(4));
         cargarTabla();
         TbCarnets.setFont(font);
@@ -77,7 +90,7 @@ public class PanelCarnets extends javax.swing.JPanel {
         try {
             ResultSet rs = ObjController.cargarTablaController();
             while (rs.next()) {
-                Object[] Valores = {rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("Carnet"), rs.getString("tipo_personal"), rs.getInt("idPersonal"), btnGenerar};
+                Object[] Valores = {rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("Carnet"), rs.getString("tipo_personal"), rs.getInt("idPersonal"), btnGenerar, btnReporte};
                 model.addRow(Valores);
             }
         } catch (SQLException e) {
@@ -133,7 +146,6 @@ public class PanelCarnets extends javax.swing.JPanel {
 
         PanelFondo = new Controles_Personalizados.Paneles.PanelRound();
         lblCarnets = new javax.swing.JLabel();
-        btnFiltrar = new Controles_Personalizados.Botones.UWPButton();
         btnAgregar = new Controles_Personalizados.Botones.UWPButton();
         PanelTabla = new javax.swing.JScrollPane();
         TbCarnets = new Controles_Personalizados.Tables.Table();
@@ -165,14 +177,6 @@ public class PanelCarnets extends javax.swing.JPanel {
         lblCarnets.setForeground(new java.awt.Color(58, 50, 75));
         lblCarnets.setText("Carnets");
         PanelFondo.add(lblCarnets, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-
-        btnFiltrar.setBackground(new java.awt.Color(58, 50, 75));
-        btnFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Filtrar Blanco.png"))); // NOI18N
-        btnFiltrar.setText(" Filtrar");
-        btnFiltrar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        btnFiltrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        PanelFondo.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 150, 40));
 
         btnAgregar.setBackground(new java.awt.Color(58, 50, 75));
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Agregar Blanco.png"))); // NOI18N
@@ -301,11 +305,81 @@ public class PanelCarnets extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+    void BuscarIDPersonal() {
+        ResultSet rs;
+        ObjController.setCarnet(Carnet);
+        rs = ObjController.BuscarID();
+        try {
+            if (rs.next()) {
+                ID = rs.getInt("idPersonal");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
+    }
+
+    void BuscarImagen() {
+        ResultSet rs;
+        ObjController.setIdPersonal(ID);
+        rs = ObjController.BuscarImagen();
+        try {
+            if (rs.next()) {
+                imagen = rs.getBytes("imagen");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
+    }
+
+    void CargarDatos() {
+        BuscarIDPersonal();
+        BuscarImagen();
+    }
+
+    boolean checkFile() {
+        file = new File("src\\Codigos_Barra\\" + Carnet + ".png");
+        if (file.exists()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    void ReportePar() {
+        try {
+            Connection con = ControllerConexion.getConnectionModel();
+            JasperReport reporte = null;
+
+            String dir = "src\\DocsReport\\ReportCarnet.jasper";
+            Map parametros = new HashMap();
+            parametros.put("Plantilla", "src\\Recursos_Proyecto\\PCarnet1.png");
+            boolean respuesta = checkFile();
+            if (respuesta == true) {
+                parametros.put("CodBarra", "src\\Codigos_Barra\\" + Carnet + ".png");
+            }
+            parametros.put("idPersonal", ID);
+            if (imagen != null) {
+                InputStream input = new ByteArrayInputStream(imagen);
+                parametros.put("imagenusu", input);
+            }
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(dir);
+
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, parametros, con);
+
+            JasperViewer view = new JasperViewer(jprint, false);
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            view.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
+    }
+
     private void TbCarnetsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbCarnetsMouseClicked
         // TODO add your handling code here:
         int column = TbCarnets.getColumnModel().getColumnIndexAtX(evt.getX());
         int row = evt.getY() / TbCarnets.getRowHeight();
         btnGenerar.setName("btnGenerar");
+        btnReporte.setName("btnReporte");
         if (evt.getClickCount() == 1) {
             JTable rcp = (JTable) evt.getSource();
             ID = (int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 4);
@@ -327,6 +401,11 @@ public class PanelCarnets extends javax.swing.JPanel {
                             frmc.setVisible(true);
                         }
                     }
+                }else if(btns.getName().equals("btnReporte")){
+                    ID = 0;
+                    imagen = null;
+                    CargarDatos();
+                    ReportePar();
                 }
             }
         }
@@ -353,7 +432,6 @@ public class PanelCarnets extends javax.swing.JPanel {
     private javax.swing.JScrollPane PanelTabla;
     private Controles_Personalizados.Tables.Table TbCarnets;
     private Controles_Personalizados.Botones.UWPButton btnAgregar;
-    private Controles_Personalizados.Botones.UWPButton btnFiltrar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCarnets;
     private Controles_Personalizados.ScrollBar.ScrollBar scrollBar1;
