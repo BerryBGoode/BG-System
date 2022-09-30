@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="700" pageHeight="900" columnWidth="660" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="adfc6b17-ae9d-4bd8-9625-e3eb68bb9ffa">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="68"/>
+	<subDataset name="Genero" uuid="07e75494-af43-48a7-9a46-a2a79f1f8605">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     COUNT(tbPersonal."idGenero") AS tbPersonal_idGenero,
+     tbGeneros."genero" AS tbGeneros_genero
+FROM
+     "dbo"."tbGeneros" tbGeneros INNER JOIN "dbo"."tbPersonal" tbPersonal ON tbGeneros."idGenero" = tbPersonal."idGenero"
+WHERE tbPersonal.idTipoPersonal != 4
+GROUP BY tbGeneros.genero]]>
+		</queryString>
+		<field name="tbPersonal_idGenero" class="java.lang.Integer"/>
+		<field name="tbGeneros_genero" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="TipoPersonal" uuid="da02834e-5b79-48da-a3fb-fde6e6f093fb">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+    COUNT( tbPersonal."idTipoPersonal") AS tbPersonal_idTipoPersonal,
+     tbTipoPersonal."tipo_personal" AS tbTipoPersonal_tipo_personal
+FROM
+     "dbo"."tbTipoPersonal" tbTipoPersonal INNER JOIN "dbo"."tbPersonal" tbPersonal ON tbTipoPersonal."idTipoPersonal" = tbPersonal."idTipoPersonal"
+WHERE tbPersonal.idTipoPersonal != 4
+GROUP BY tbTipoPersonal.tipo_personal]]>
+		</queryString>
+		<field name="tbPersonal_idTipoPersonal" class="java.lang.Integer"/>
+		<field name="tbTipoPersonal_tipo_personal" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="Logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TextoFooter" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     COUNT(tbPersonal."idPersonal") AS tbPersonal_idPersonal
+FROM
+     "dbo"."tbPersonal" tbPersonal
+WHERE tbPersonal.idTipoPersonal != 4]]>
+	</queryString>
+	<field name="tbPersonal_idPersonal" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="860" splitType="Stretch">
+			<pieChart>
+				<chart>
+					<reportElement x="37" y="533" width="575" height="271" uuid="1194d741-5417-4c43-bebe-713f5c154266"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<dataset>
+						<datasetRun subDataset="Genero" uuid="ed7045ee-7fca-4cda-9a1c-27e990176f00"/>
+					</dataset>
+					<keyExpression><![CDATA[$F{tbGeneros_genero}]]></keyExpression>
+					<valueExpression><![CDATA[$F{tbPersonal_idGenero}]]></valueExpression>
+					<labelExpression><![CDATA[$F{tbPersonal_idGenero}.toString()]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot/>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+			<barChart>
+				<chart>
+					<reportElement x="37" y="156" width="575" height="327" uuid="e941fa2f-faf9-4236-8dff-0fda431e4ffc"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<dataset>
+						<datasetRun subDataset="TipoPersonal" uuid="420b3c96-0b00-4341-9835-a012dc898fed"/>
+					</dataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{tbTipoPersonal_tipo_personal}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{tbTipoPersonal_tipo_personal}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{tbPersonal_idTipoPersonal}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<staticText>
+				<reportElement x="241" y="124" width="226" height="43" forecolor="#000000" uuid="c2d35e20-c775-4bd8-bce0-9be8e7f4599a"/>
+				<textElement>
+					<font fontName="SansSerif" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de personal:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="497" width="246" height="43" forecolor="#000000" uuid="d2c8733a-762e-4371-b2ba-eaddb2d3b2b6"/>
+				<textElement>
+					<font fontName="SansSerif" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Personal según su género:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="10" width="635" height="43" forecolor="#17141D" uuid="a488d0dc-fc5e-4290-80b2-3d42bbcd5dc5"/>
+				<textElement textAlignment="Center">
+					<font fontName="SansSerif" size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de personal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="206" y="49" width="226" height="25" forecolor="#000000" uuid="46f995ae-2dc8-4e10-9060-4bb514689dc5"/>
+				<textElement>
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total de personal:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="351" y="51" width="191" height="25" uuid="34d987fd-7f28-4c31-b85e-21b3fe5d8bd6"/>
+				<textElement textAlignment="Left">
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbPersonal_idPersonal}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="10" y="10" width="85" height="71" uuid="a0a7bf2b-a9f3-4408-be90-6a5f0399472c"/>
+				<imageExpression><![CDATA[$P{Logo}.toString()]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="580" y="830" width="80" height="30" uuid="19b43a65-d761-4605-b95a-a6dd4091fa8f"/>
+				<imageExpression><![CDATA[$P{TextoFooter}.toString()]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

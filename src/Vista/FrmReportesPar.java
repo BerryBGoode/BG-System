@@ -75,6 +75,7 @@ public class FrmReportesPar extends javax.swing.JFrame {
         txtPar = new Controles_Personalizados.textfields.TextField();
         lblImg = new javax.swing.JLabel();
         btnReporte = new Controles_Personalizados.Botones.ButtonGradient();
+        btnGrafico = new Controles_Personalizados.Botones.ButtonGradient();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -148,7 +149,20 @@ public class FrmReportesPar extends javax.swing.JFrame {
                 btnReporteActionPerformed(evt);
             }
         });
-        panelRound1.add(btnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, 240, 50));
+        panelRound1.add(btnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 180, 50));
+
+        btnGrafico.setBackground(new java.awt.Color(253, 255, 254));
+        btnGrafico.setForeground(new java.awt.Color(58, 50, 75));
+        btnGrafico.setText("Generar gráfico");
+        btnGrafico.setColor1(new java.awt.Color(253, 255, 254));
+        btnGrafico.setColor2(new java.awt.Color(253, 255, 254));
+        btnGrafico.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnGrafico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGraficoActionPerformed(evt);
+            }
+        });
+        panelRound1.add(btnGrafico, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 270, 180, 50));
 
         getContentPane().add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, -1));
 
@@ -208,8 +222,33 @@ public class FrmReportesPar extends javax.swing.JFrame {
         }
     }
     
+    
+    void Reporte(String dir) {
+        try {
+            Connection con = ControllerConexion.getConnectionModel();
+            JasperReport reporte = null;
+
+            Map parametros = new HashMap();
+            parametros.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
+            parametros.put("TextoFooter", "src\\Recursos_Proyecto\\TextoLogin.png");
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(dir);
+
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, parametros, con);
+
+            JasperViewer view = new JasperViewer(jprint, false);
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            view.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
+    }
+    
     void HacerReporte(){
+<<<<<<< Updated upstream
         if(nombre.equals("Usuarios")){
+=======
+         if(nombre.equals("Usuarios")){
+>>>>>>> Stashed changes
                 objcontroller.setParam(txtPar.getText());
                 boolean respuesta1U = objcontroller.BuscarEstadoUsuario();
                 boolean respuesta2U = objcontroller.BuscarTipoUsuario();
@@ -238,13 +277,29 @@ public class FrmReportesPar extends javax.swing.JFrame {
                 }else{
                     JOptionPane.showMessageDialog(this, "No existen registros para mostrar", "Parametro inválido", JOptionPane.WARNING_MESSAGE);
                 }
-        }
+        }/**else if(nombre.equals("Vehiculos")){
+                reportedir = "src\\DocsReport\\VehiculosParReporte.jasper";
+                ReportePar(txtPar.getText());
+        }**/
+         this.dispose();
     }
     
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
         // TODO add your handling code here:
         HacerReporte();
     }//GEN-LAST:event_btnReporteActionPerformed
+
+    private void btnGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficoActionPerformed
+        // TODO add your handling code here:
+        if(nombre.equals("Usuarios")){
+            Reporte("src\\DocsReport\\ReporteUsuariosGraph.jasper");
+        }else if(nombre.equals("Personal")){
+            Reporte("src\\DocsReport\\PersonalReporteGraph.jasper");
+        }else if(nombre.equals("Estudiantes")){
+            Reporte("src\\DocsReport\\EstudianteReporteGraph.jasper");
+        }
+        this.dispose();
+    }//GEN-LAST:event_btnGraficoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -283,6 +338,7 @@ public class FrmReportesPar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnCerrar;
+    private Controles_Personalizados.Botones.ButtonGradient btnGrafico;
     private javax.swing.JLabel btnMinimizar;
     private Controles_Personalizados.Botones.ButtonGradient btnReporte;
     private javax.swing.JLabel lblForm;

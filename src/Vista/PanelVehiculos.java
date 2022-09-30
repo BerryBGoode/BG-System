@@ -62,6 +62,7 @@ public class PanelVehiculos extends javax.swing.JPanel {
     ImageIcon modificar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar.png"));
     ImageIcon eliminar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/eliminar.png"));
     ImageIcon reporte = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report 1.png"));
+    FrmReportesPar frmreporte = new FrmReportesPar("Vehiculos", "Ingrese nombres/apellidos/carné");
 
     final void CargarTablaVehiculos() {
 
@@ -126,6 +127,11 @@ public class PanelVehiculos extends javax.swing.JPanel {
         btnFiltrar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         btnFiltrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarActionPerformed(evt);
+            }
+        });
         PanelFondo.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 150, 40));
 
         btnAgregar.setBackground(new java.awt.Color(58, 50, 75));
@@ -282,6 +288,15 @@ public class PanelVehiculos extends javax.swing.JPanel {
         ImprimirReporte();
     }//GEN-LAST:event_btnInformeActionPerformed
 
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        // TODO add your handling code here:
+        if(frmreporte.isVisible()){
+            frmreporte.toFront();
+        }else{
+            frmreporte.setVisible(true);
+        }
+    }//GEN-LAST:event_btnFiltrarActionPerformed
+
     void ImprimirReporte() {
         Connection con = ControllerConexion.getConnectionModel();
         try {
@@ -302,7 +317,7 @@ public class PanelVehiculos extends javax.swing.JPanel {
     void Imprimir1() {
         Connection con = ControllerConexion.getConnectionModel();
         try {
-            String path = "src/DocsReport/InformeVehiculos.jasper";
+            String path = "src/DocsReport/VehiculosReportPar.jasper";
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(path);
             Map param = new HashMap<>();
             param.put("idVehiculo", idvehiculo);

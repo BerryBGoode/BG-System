@@ -15,8 +15,11 @@
 	<parameter name="TextoFooter" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="Parametro" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
-		<![CDATA[SELECT a.idPersonal,a.nombre_p,a.apellido_p,b.genero,a.documento,a.Carnet,a.correo FROM tbPersonal a,tbGeneros b WHERE a.idGenero = b.idGenero AND a.idTipoPersonal = 4]]>
+		<![CDATA[SELECT a.idPersonal,a.nombre_p,a.apellido_p,b.genero,a.documento,a.Carnet,a.correo FROM tbPersonal a,tbGeneros b WHERE a.idGenero = b.idGenero AND a.idTipoPersonal = 4 AND b.genero = $P{Parametro}]]>
 	</queryString>
 	<field name="idPersonal" class="java.lang.Integer"/>
 	<field name="nombre_p" class="java.lang.String"/>
@@ -132,6 +135,6 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</summary>
 </jasperReport>

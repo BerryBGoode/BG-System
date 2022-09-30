@@ -6,19 +6,31 @@
 	<parameter name="Logo" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
-	<parameter name="Pie" class="java.lang.String">
+	<parameter name="TextoFooter" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
-	<queryString language="SQL">
-		<![CDATA[SELECT * FROM vwVehiculos]]>
+	<parameter name="Parametro" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     vwVehiculos."idPersonal" AS vwVehiculos_idPersonal,
+     vwVehiculos."idVehiculo" AS vwVehiculos_idVehiculo,
+     vwVehiculos."Carnet" AS vwVehiculos_Carnet,
+     vwVehiculos."nombre_p" AS vwVehiculos_nombre_p,
+     vwVehiculos."apellido_p" AS vwVehiculos_apellido_p,
+     vwVehiculos."placa" AS vwVehiculos_placa,
+     vwVehiculos."color" AS vwVehiculos_color
+FROM
+     "dbo"."vwVehiculos" vwVehiculos]]>
 	</queryString>
-	<field name="idPersonal" class="java.lang.Integer"/>
-	<field name="idVehiculo" class="java.lang.Integer"/>
-	<field name="Carnet" class="java.lang.String"/>
-	<field name="nombre_p" class="java.lang.String"/>
-	<field name="apellido_p" class="java.lang.String"/>
-	<field name="placa" class="java.lang.String"/>
-	<field name="color" class="java.lang.String"/>
+	<field name="vwVehiculos_idPersonal" class="java.lang.Integer"/>
+	<field name="vwVehiculos_idVehiculo" class="java.lang.Integer"/>
+	<field name="vwVehiculos_Carnet" class="java.lang.String"/>
+	<field name="vwVehiculos_nombre_p" class="java.lang.String"/>
+	<field name="vwVehiculos_apellido_p" class="java.lang.String"/>
+	<field name="vwVehiculos_placa" class="java.lang.String"/>
+	<field name="vwVehiculos_color" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
