@@ -21,7 +21,6 @@ public class PanelAjustes extends javax.swing.JPanel {
     /**
      * Creates new form PanelAjustes
      */
-    
     public String user;
     FrmConfigConection objcon = new FrmConfigConection();
     ControllerAjustes objcontroller = new ControllerAjustes();
@@ -35,7 +34,7 @@ public class PanelAjustes extends javax.swing.JPanel {
     public void setUser(String user) {
         this.user = user;
     }
-    
+
     public PanelAjustes(String usuario) {
         initComponents();
         txtPIN.setEchoChar('•');
@@ -386,22 +385,27 @@ public class PanelAjustes extends javax.swing.JPanel {
     public static int getExitdash() {
         return exitdash;
     }
-    
+
     FrmLogin login = new FrmLogin();
-  
+
     private void VerificarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerificarTipoActionPerformed
         // TODO add your handling code here:
         String tipo = FrmLogin.tipo;
         JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-        if(tipo.equals("Root")){
-            if(objcon.isVisible()){
+        if (tipo.equals("Root")) {
+            if (objcon.isVisible()) {
                 objcon.toFront();
                 frame.dispose();
-            }else{
+            } else {
+
                 objcon.setVisible(true);
+                objcontroller.setUsuario(user);
+                if (objcontroller.ActualizarEstado()) {
+                    System.out.println("Estado actualizado");
+                }
                 frame.dispose();
             }
-        }else{
+        } else {
             ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Permisos insuficientes", "Debe ser un usuario root para acceder a este apartado", 3);
         }
     }//GEN-LAST:event_VerificarTipoActionPerformed
@@ -418,34 +422,34 @@ public class PanelAjustes extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtConfirmarPINActionPerformed
 
-    void CambiarPIN(){
-       if(txtPIN.getText().equals("") || txtConfirmarPIN.getText().equals("")){
+    void CambiarPIN() {
+        if (txtPIN.getText().equals("") || txtConfirmarPIN.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Campos vacios");
-        }else if(! txtPIN.getText().equals(txtConfirmarPIN.getText())){
+        } else if (!txtPIN.getText().equals(txtConfirmarPIN.getText())) {
             JOptionPane.showMessageDialog(this, "Los PIN no coinciden");
-        }else if(txtPIN.getText().length() < 4){
+        } else if (txtPIN.getText().length() < 4) {
             JOptionPane.showMessageDialog(this, "El PIN ingresado no tiene el formato correcto");
-        }else{
+        } else {
             objcontroller.setUsuario(txtUsuarioPIN.getText());
             String PIN = ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra(txtPIN.getText());
             objcontroller.setPIN(PIN);
             boolean respuesta = objcontroller.CambiarPIN();
-            if(respuesta == true){
-                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado","PIN actualizado",1);
+            if (respuesta == true) {
+                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "PIN actualizado", 1);
                 txtPIN.setText("");
                 txtConfirmarPIN.setText("");
-            }else{
-                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso no pudo ser completado","El PIN no pudo ser actualizado",3);
+            } else {
+                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso no pudo ser completado", "El PIN no pudo ser actualizado", 3);
             }
-        } 
+        }
     }
-    
+
     private void btnCambiarPINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarPINActionPerformed
         // TODO add your handling code here
         CambiarPIN();
     }//GEN-LAST:event_btnCambiarPINActionPerformed
 
-    void CargarContraAntigua(){
+    void CargarContraAntigua() {
         ResultSet rs;
         objcontroller.setUsuario(txtUsuarioPIN.getText());
         rs = objcontroller.BuscarContraAntigua();
@@ -457,135 +461,132 @@ public class PanelAjustes extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, e.toString());
         }
     }
-    
-    void CambiarContra(){
-        if(txtContra.getText().equals("") || txtConfirmarContra.getText().equals("") || txtContraAntigua.getText().equals("")){
+
+    void CambiarContra() {
+        if (txtContra.getText().equals("") || txtConfirmarContra.getText().equals("") || txtContraAntigua.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Campos vacios");
-        }else if(txtContra.getText().equals(txtContraAntigua.getText())){
+        } else if (txtContra.getText().equals(txtContraAntigua.getText())) {
             JOptionPane.showMessageDialog(this, "La contraseña a cambiar es igual a la contraseña antigua");
-        }else if(! txtContra.getText().equals(txtConfirmarContra.getText())){
+        } else if (!txtContra.getText().equals(txtConfirmarContra.getText())) {
             JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden");
-        }else if(txtContra.getText().length() < 8){
+        } else if (txtContra.getText().length() < 8) {
             JOptionPane.showMessageDialog(this, "La contraseña ingresada no tiene el formato correcto");
-        }else{
+        } else {
             CargarContraAntigua();
-            if(! ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra(txtContraAntigua.getText()).equals(ContraA)){
+            if (!ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra(txtContraAntigua.getText()).equals(ContraA)) {
                 JOptionPane.showMessageDialog(this, "La contraseña antigua es incorrecta");
-            }else{
+            } else {
                 String contra = ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra(txtContra.getText());
                 objcontroller.setUsuario(txtUsuarioPIN.getText());
                 objcontroller.setContra(contra);
-                
+
                 boolean respuesta = objcontroller.CambiarContra();
-                if(respuesta == true){
-                    ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado","Su contraseña ha sido actualizada",1);
-                    
+                if (respuesta == true) {
+                    ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "Su contraseña ha sido actualizada", 1);
+
                     JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
                     frame.dispose();
                     objlog.setVisible(true);
-                }else{
-                     ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso no pudo ser completado","Su contraseña no pudo ser actualizada",3);
+                } else {
+                    ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso no pudo ser completado", "Su contraseña no pudo ser actualizada", 3);
                 }
             }
         }
     }
-    
+
     private void txtCambiarContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCambiarContraActionPerformed
         // TODO add your handling code here:
         CambiarContra();
+        objcontroller.setUsuario(user);
+        objcontroller.ActualizarEstado();
     }//GEN-LAST:event_txtCambiarContraActionPerformed
 
     private void txtPINKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPINKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtPIN.getText().equals("") && ! txtConfirmarPIN.getText().equals("")) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && !txtPIN.getText().equals("") && !txtConfirmarPIN.getText().equals("")) {
             CambiarPIN();
-        }else if (evt.isControlDown() || evt.isShiftDown())
-        {
+        } else if (evt.isControlDown() || evt.isShiftDown()) {
             evt.consume();
         }
     }//GEN-LAST:event_txtPINKeyPressed
 
     private void txtConfirmarPINKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirmarPINKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtPIN.getText().equals("") && ! txtConfirmarPIN.getText().equals("")) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && !txtPIN.getText().equals("") && !txtConfirmarPIN.getText().equals("")) {
             CambiarPIN();
-        }else if (evt.isControlDown() || evt.isShiftDown())
-        {
+        } else if (evt.isControlDown() || evt.isShiftDown()) {
             evt.consume();
         }
     }//GEN-LAST:event_txtConfirmarPINKeyPressed
 
     private void txtPINKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPINKeyTyped
         // TODO add your handling code here:
-        if(txtPIN.getText().length() >= 5){
+        if (txtPIN.getText().length() >= 5) {
             evt.consume();
-        }else{
+        } else {
             ValidacionesSistema.ValidacionesBeep_Go.SoloNumeros(evt);
         }
     }//GEN-LAST:event_txtPINKeyTyped
 
     private void txtConfirmarPINKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirmarPINKeyTyped
         // TODO add your handling code here:
-        if(txtConfirmarPIN.getText().length() >= 5){
+        if (txtConfirmarPIN.getText().length() >= 5) {
             evt.consume();
-        }else{
+        } else {
             ValidacionesSistema.ValidacionesBeep_Go.SoloNumeros(evt);
         }
     }//GEN-LAST:event_txtConfirmarPINKeyTyped
 
     private void txtContraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraKeyTyped
         // TODO add your handling code here:
-        if(txtContra.getText().length() >= 30){
+        if (txtContra.getText().length() >= 30) {
             evt.consume();
-        }else{
+        } else {
             ValidacionesSistema.ValidacionesBeep_Go.SinEspacios(evt);
         }
     }//GEN-LAST:event_txtContraKeyTyped
 
     private void txtConfirmarContraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirmarContraKeyTyped
         // TODO add your handling code here:
-        if(txtConfirmarContra.getText().length() >= 30){
+        if (txtConfirmarContra.getText().length() >= 30) {
             evt.consume();
-        }else{
+        } else {
             ValidacionesSistema.ValidacionesBeep_Go.SinEspacios(evt);
         }
     }//GEN-LAST:event_txtConfirmarContraKeyTyped
 
     private void txtContraAntiguaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraAntiguaKeyTyped
         // TODO add your handling code here:
-        if(txtContraAntigua.getText().length() >= 30){
+        if (txtContraAntigua.getText().length() >= 30) {
             evt.consume();
-        }else{
+        } else {
             ValidacionesSistema.ValidacionesBeep_Go.SinEspacios(evt);
         }
     }//GEN-LAST:event_txtContraAntiguaKeyTyped
 
     private void txtContraAntiguaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraAntiguaKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtContra.getText().equals("") && ! txtConfirmarContra.getText().equals("") && ! txtContraAntigua.getText().equals("")) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && !txtContra.getText().equals("") && !txtConfirmarContra.getText().equals("") && !txtContraAntigua.getText().equals("")) {
             CambiarContra();
-        }else if (evt.isControlDown() || evt.isShiftDown())
-        {
+        } else if (evt.isControlDown() || evt.isShiftDown()) {
             evt.consume();
         }
     }//GEN-LAST:event_txtContraAntiguaKeyPressed
 
     private void txtContraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContraKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtContra.getText().equals("") && ! txtConfirmarContra.getText().equals("") && ! txtContraAntigua.getText().equals("")) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && !txtContra.getText().equals("") && !txtConfirmarContra.getText().equals("") && !txtContraAntigua.getText().equals("")) {
             CambiarContra();
-        }else if (evt.isControlDown() || evt.isShiftDown())
-        {
+        } else if (evt.isControlDown() || evt.isShiftDown()) {
             evt.consume();
         }
     }//GEN-LAST:event_txtContraKeyPressed
 
     private void txtConfirmarContraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirmarContraKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER && ! txtContra.getText().equals("") && ! txtConfirmarContra.getText().equals("") && ! txtContraAntigua.getText().equals("")) {
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER && !txtContra.getText().equals("") && !txtConfirmarContra.getText().equals("") && !txtContraAntigua.getText().equals("")) {
             CambiarContra();
-        }else if (evt.isControlDown() || evt.isShiftDown())
-        {
+        } else if (evt.isControlDown() || evt.isShiftDown()) {
             evt.consume();
         }
     }//GEN-LAST:event_txtConfirmarContraKeyPressed

@@ -215,7 +215,7 @@ public class ModelUsuarios {
          */
         public ResultSet BuscarIDActivo(Connection con){
             try{
-                String query = "SELECT idEstadoUsuario FROM tbEstadoUsuario WHERE estado_usuario = 'Activo'";
+                String query = "SELECT idEstadoUsuario FROM tbEstadoUsuario WHERE estado_usuario = 'Inactivo'";
                 ps = con.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
                 return rs;

@@ -31,16 +31,18 @@ public class FrmRecuAdmin extends javax.swing.JFrame {
      */
     DefaultComboBoxModel<String> modelocombo;
     private List myArrayListTD;
+    int idTipoDocA;
     int idTipoDoc;
+    String tipodoc;
     String nombre = FrmLogin.nombre;
     String tipo = FrmLogin.tipo;
     ControllerRecuperacionContra obj = new ControllerRecuperacionContra();
-    
+
     public FrmRecuAdmin() {
         initComponents();
         txtAdmin.setText(nombre);
         txtTipoUsu.setText(tipo);
-        if(ValidacionesSistema.Parametros_Usuario.getNombre_usuario() != null){
+        if (ValidacionesSistema.Parametros_Usuario.getNombre_usuario() != null) {
             txtUsuario.setText(ValidacionesSistema.Parametros_Usuario.getNombre_usuario());
         }
         txtAdmin.setEditable(false);
@@ -53,7 +55,7 @@ public class FrmRecuAdmin extends javax.swing.JFrame {
         AWTUtilities.setWindowShape(this, forma);
         setIconImage(Logo());
     }
-    
+
     public Image Logo() {
         Image retvalue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
         return retvalue;
@@ -79,7 +81,7 @@ public class FrmRecuAdmin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No se han podido cargar los datos, favor consulta con el administrador del sistema", "Error critico", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -269,33 +271,46 @@ public class FrmRecuAdmin extends javax.swing.JFrame {
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         // TODO add your handling code here:
-        if(txtDoc.getText().equals("") || cmbTipo.getSelectedIndex() == 0){
+        if (txtDoc.getText().equals("") || cmbTipo.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(this, "Campos vacios");
-        }else{
+        } else {
             obj.setUsuario(txtUsuario.getText());
             obj.setDocumento(txtDoc.getText());
             obj.setIdTipoDoc(idTipoDoc);
             int respuesta = obj.ValidarDocumentoController();
-            if(respuesta == 1){
-                obj.setContra(ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra(txtUsuario.getText()+"123"));
+            if (respuesta == 1) {
+                obj.setContra(ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra(txtUsuario.getText() + "123"));
                 boolean respuesta2 = obj.RecuperarContraController();
-                if(respuesta2 == true){
+                if (respuesta2 == true) {
                     ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "La contraseña ha sido actualizada", 1);
                     this.dispose();
-                }else{
+                } else {
                     ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso fallido", "La contraseña no pudo ser actualizada", 3);
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Credenciales incorrectas");
             }
         }
         PanelOpcionesPersonal.showinter = 0;
     }//GEN-LAST:event_btnContinuarActionPerformed
 
+      void CargarIDT() { 
+        ResultSet rs;
+        obj.setIdTipoDoc(idTipoDoc); 
+        rs = obj.TipoDocumento();
+        try {
+            if (rs.next()) {
+                tipodoc = rs.getString("tipo_documento");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.toString());
+        }
+    }
+    
     private void cmbTipoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTipoItemStateChanged
         // TODO add your handling code here:
-        txtDoc.setText("");
-         if (evt.getStateChange() == ItemEvent.SELECTED) {
+        idTipoDocA = idTipoDoc;
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
             int pos = cmbTipo.getSelectedIndex();
             if (pos == 0) {
                 idTipoDoc = 0;
@@ -307,6 +322,10 @@ public class FrmRecuAdmin extends javax.swing.JFrame {
                     }
                 }
             }
+            CargarIDT();
+        }
+        if (idTipoDocA != idTipoDoc && idTipoDocA != 0) {
+            txtDoc.setText("");
         }
     }//GEN-LAST:event_cmbTipoItemStateChanged
 
@@ -321,8 +340,35 @@ public class FrmRecuAdmin extends javax.swing.JFrame {
 
     private void txtDocKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDocKeyTyped
         // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        ValidacionesSistema.ValidacionesBeep_Go.SoloNumeros(evt);
+        char key = evt.getKeyChar();
+        if (tipodoc != null) {
+            if (tipodoc.equals("NIT")) {
+                if (txtDoc.getText().length() >= 17) {
+                    evt.consume();
+                } else if (txtDoc.getText().length() != 4 && txtDoc.getText().length() != 11 && txtDoc.getText().length() != 15 && key == '-') {
+                    evt.consume();
+                } else if ((txtDoc.getText().length() == 4 || txtDoc.getText().length() == 11 || txtDoc.getText().length() == 15) && key != '-') {
+                    evt.consume();
+                } else if (!Character.isDigit(key) && key != '-') {
+                    evt.consume();
+                }
+            } else if (tipodoc.equals("DUI")) {
+                if (txtDoc.getText().length() >= 10) {
+                    evt.consume();
+                } else if (txtDoc.getText().length() == 8 && key != '-') {
+                    evt.consume();
+                } else if (!Character.isDigit(key) && key != '-') {
+                    evt.consume();
+                }else if(txtDoc.getText().contains("-") && key == '-'){
+                    evt.consume();
+                }
+            } else if (cmbTipo.getSelectedIndex() == 0) {
+                evt.consume();
+            }
+        } else {
+            evt.consume();
+        }
+
     }//GEN-LAST:event_txtDocKeyTyped
 
     /**

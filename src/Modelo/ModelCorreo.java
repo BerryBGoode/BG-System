@@ -93,7 +93,7 @@ public class ModelCorreo {
     public static boolean ActualizarContra(int id, String contra) {
         Connection con;
         PreparedStatement ps;
-        int Estado = 1;
+        int Estado = 2;
         int intentos = 5;
         try {
             con = ModelConexion.getConnection();
