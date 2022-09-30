@@ -209,8 +209,7 @@ public class FrmReportesPar extends javax.swing.JFrame {
     }
     
     void HacerReporte(){
-         switch(nombre){
-            case "Usuarios":
+        if(nombre.equals("Usuarios")){
                 objcontroller.setParam(txtPar.getText());
                 boolean respuesta1U = objcontroller.BuscarEstadoUsuario();
                 boolean respuesta2U = objcontroller.BuscarTipoUsuario();
@@ -220,7 +219,7 @@ public class FrmReportesPar extends javax.swing.JFrame {
                 }else{
                     JOptionPane.showMessageDialog(this, "No existen registros para mostrar", "Parametro inválido", JOptionPane.WARNING_MESSAGE);
                 }
-            case "Estudiantes":
+        }else if(nombre.equals("Estudiantes")){
                 objcontroller.setParam(txtPar.getText());
                 boolean respuesta = objcontroller.BuscarGenero();
                 if(respuesta == true){
@@ -229,7 +228,7 @@ public class FrmReportesPar extends javax.swing.JFrame {
                 }else{
                     JOptionPane.showMessageDialog(this, "No existen registros para mostrar", "Parametro inválido", JOptionPane.WARNING_MESSAGE);
                 }
-            case "Personal":
+        }else if(nombre.equals("Personal")){
                 objcontroller.setParam(txtPar.getText());
                 boolean respuesta1P = objcontroller.BuscarTipoPersonal();
                 boolean respuesta2P = objcontroller.BuscarGeneroP();

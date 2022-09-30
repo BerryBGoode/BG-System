@@ -85,4 +85,12 @@ public class ControllerCarnets {
     public boolean IngresarCarnet(){
         return ObjModel.IngresandoCarnet(getIdPersonal(), getCarnet());
     }
+    
+    public ResultSet BuscarID(){
+        return ObjModel.BuscarID(carnet);
+    }
+    
+    public ResultSet BuscarImagen(){
+        return ObjModel.BuscarImagen(idPersonal);
+    }
 }
