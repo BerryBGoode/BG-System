@@ -92,12 +92,7 @@ public class ModelCarnets {
             return false;
         }
     }
-<<<<<<< Updated upstream
 
-=======
-    
-    
->>>>>>> Stashed changes
     public ResultSet BuscarID(String carnet) {
         try {
             con = ModelConexion.getConnection();

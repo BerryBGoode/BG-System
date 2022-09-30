@@ -244,11 +244,7 @@ public class FrmReportesPar extends javax.swing.JFrame {
     }
     
     void HacerReporte(){
-<<<<<<< Updated upstream
         if(nombre.equals("Usuarios")){
-=======
-         if(nombre.equals("Usuarios")){
->>>>>>> Stashed changes
                 objcontroller.setParam(txtPar.getText());
                 boolean respuesta1U = objcontroller.BuscarEstadoUsuario();
                 boolean respuesta2U = objcontroller.BuscarTipoUsuario();

@@ -56,14 +56,9 @@ public class PanelCarnets extends javax.swing.JPanel {
     private int frmstate;
     public Font font = new Font("Roboto Black", Font.PLAIN, 18);
     ImageIcon modifIcon = new ImageIcon(getClass().getResource("/Recursos_Proyecto/Barcode.png"));
-<<<<<<< Updated upstream
     ImageIcon report = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report 1.png"));
     byte[] imagen;
-=======
-    ImageIcon reporteimg = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report 1.png"));
-    byte[] imagen;
 
->>>>>>> Stashed changes
     /**
      * Creates new form PanelCarnets
      */
@@ -74,26 +69,15 @@ public class PanelCarnets extends javax.swing.JPanel {
         TbCarnets.setModel(model);
         TbCarnets.setDefaultRenderer(Object.class, new RenderTable());
         btnGenerar.setBackground(new Color(231, 235, 239));
-<<<<<<< Updated upstream
         btnReporte.setBackground(new Color(231, 235, 239));
-=======
->>>>>>> Stashed changes
         btnGenerar.setForeground(new Color(58, 50, 75));
         btnGenerar.setFont(font);
         btnGenerar.setText("Generar");
         btnGenerar.setIcon(modifIcon);
-        
-<<<<<<< Updated upstream
-        btnReporte.setForeground(new Color(58, 50, 75));
-        btnReporte.setFont(font);
-        btnReporte.setIcon(report);
-=======
         btnReporte.setBackground(new Color(231, 235, 239));
         btnReporte.setForeground(new Color(58, 50, 75));
         btnReporte.setFont(font);
-        btnReporte.setIcon(reporteimg);
-        
->>>>>>> Stashed changes
+        btnReporte.setIcon(report);
         TbCarnets.removeColumn(TbCarnets.getColumnModel().getColumn(4));
         cargarTabla();
         TbCarnets.setFont(font);
@@ -321,12 +305,7 @@ public class PanelCarnets extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-<<<<<<< Updated upstream
-void BuscarIDPersonal() {
-=======
-    
     void BuscarIDPersonal() {
->>>>>>> Stashed changes
         ResultSet rs;
         ObjController.setCarnet(Carnet);
         rs = ObjController.BuscarID();
@@ -394,11 +373,7 @@ void BuscarIDPersonal() {
             JOptionPane.showMessageDialog(this, e.toString());
         }
     }
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
-    
     private void TbCarnetsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbCarnetsMouseClicked
         // TODO add your handling code here:
         int column = TbCarnets.getColumnModel().getColumnIndexAtX(evt.getX());
