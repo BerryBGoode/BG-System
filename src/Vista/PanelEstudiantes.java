@@ -51,11 +51,14 @@ public class PanelEstudiantes extends javax.swing.JPanel {
     private int frmstate;
     private int ID;
     FrmReportesPar frmreportes = new FrmReportesPar("Estudiantes", "Ingrese genero:");
+
     /**
      * Creates new form PanelPersonal
      */
     public PanelEstudiantes() {
         initComponents();
+        TbAlumnosDark.setVisible(false);
+        TablaDark.setVisible(false);
         //Titulos de los campos que se cargan en la tabla
         String[] TitulosAlumnos = {"IDPersonal", "Nombres", "Apellidos", " Nacimiento", "Documento", "Carné", "Tipo Personal", "Direccion", "Correo", "IDTD", "IDTP", "IDG", "Genero", "Tipo Documento", "Modificar", "Eliminar", "Registro"};
         ModelAlumnos = new DefaultTableModel(null, TitulosAlumnos) {
@@ -99,7 +102,6 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         }
     }
 
-
     public void cargarTabla() {
         while (ModelAlumnos.getRowCount() > 0) {
             ModelAlumnos.removeRow(0);
@@ -107,6 +109,12 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         try {
             ResultSet rs = objControllerP.MostrarEstudiantesController();
             while (rs.next()) {
+                btnActualizar.setIcon(modificar);
+                btnEliminar.setIcon(eliminar);
+                btnReporteP.setIcon(reporteimg);
+                btnActualizar.setBackground(new Color(231, 234, 239));
+                btnEliminar.setBackground(new Color(231, 234, 239));
+                btnReporteP.setBackground(new Color(231, 234, 239));
                 Object[] Campos = {rs.getInt("idPersonal"), rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("fecha_nacimiento"), rs.getString("documento"), rs.getString("Carnet"), rs.getString("tipo_personal"), rs.getString("direccion"), rs.getString("correo"), rs.getInt("idTipoDocumento"), rs.getInt("idTipoPersonal"), rs.getInt("idGenero"), rs.getString("genero"), rs.getString("tipo_documento"), btnActualizar, btnEliminar, btnReporteP};
                 ModelAlumnos.addRow(Campos);
             }
@@ -384,9 +392,9 @@ public class PanelEstudiantes extends javax.swing.JPanel {
 
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
         // TODO add your handling code here:
-        if(frmreportes.isVisible()){
+        if (frmreportes.isVisible()) {
             frmreportes.toFront();
-        }else{
+        } else {
             frmreportes.setVisible(true);
         }
     }//GEN-LAST:event_btnFiltrarActionPerformed
