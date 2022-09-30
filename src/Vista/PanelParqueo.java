@@ -253,7 +253,7 @@ public class PanelParqueo extends javax.swing.JPanel {
         }
         park = new FrmConfigPark();
         park.setVisible(true);
-        FrmSetPark.action = 2;
+        FrmSetPark.action = 2;//me refiero a que se va a agregar, entonces que en wl switch verifique los estados de lo estacionamientos
     }//GEN-LAST:event_btnAgregarMouseClicked
 
     FrmSetPark setPark = new FrmSetPark();
@@ -292,6 +292,7 @@ public class PanelParqueo extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnInformeMouseClicked
 
+    ControllerParqueo controllerParqueo = new ControllerParqueo();
     private void TbParqueosWhiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbParqueosWhiteMouseClicked
         // TODO add your handling code here:
         Table tb = (Table) evt.getSource();//para obtener los datos de la fila
@@ -309,15 +310,24 @@ public class PanelParqueo extends javax.swing.JPanel {
                             park.setVisible(false);
 
                         }
-                        //envio el station que en el q se registro, para que se habilite y pueda cambiar el parqueo
-                        park.setStation(Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 9).toString()));
-                        park.setPark(tb.getModel().getValueAt(tb.getSelectedRow(), 11).toString());
-
+                        //envio el station que en el q se registro, para que se habilite y pueda cambiar el parqueo                        
+                        int IDAcceso = Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 3).toString());
+                        int IDVehiuclo = Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 6).toString());
+                        int IDstation = Integer.parseInt(tb.getModel().getValueAt(tb.getSelectedRow(), 8).toString());//numberpark
                         int ID = Integer.parseInt(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString());
+                        int station =  Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 9).toString());
+                        int IDPark = Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 11).toString());
+                        FrmSetPark.action = 1;//me refiero a que se va a actualizar, entonces que en wl switch bloquee todos los estacionamientos menos en el q se ingreso  
+                        //FrmSetPark.setIDDetail(ID);
+                        //setteo 
+                        
+                        controllerParqueo.setIDAcceso(IDAcceso);
+                        controllerParqueo.setIDVehiculo(IDVehiuclo);
+                        controllerParqueo.setIDEstacionamiento(IDstation);
                         FrmSetPark.setIDDetail(ID);
-
-                        int station = Integer.parseInt(tb.getModel().getValueAt(tb.getSelectedRow(), 8).toString());
-                        ControllerParqueo.setNumberPark(station);
+                        ControllerParqueo.setNumberPark(IDPark);
+                        park.setStation(station);
+                        park.setPark(tb.getModel().getValueAt(tb.getSelectedRow(), 11).toString());                                                
 
                         park.setVisible(true);
                         frmstate = 1;
@@ -365,10 +375,10 @@ public class PanelParqueo extends javax.swing.JPanel {
         System.out.println(ControllerParqueo.getIDDetail());
         if (ControllerParqueo.getIDDetail() > 0) {
             if (park.deletePark() == true) {
-                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "Usuario eliminado", 1);
+                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "datos  eliminados", 1);
                 getdataPark();
             } else {
-                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso fallido", "Usuario no pudo ser eliminado", 2);
+                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso fallido", "No se pudo eliminar los datos", 2);
             }
         }
 

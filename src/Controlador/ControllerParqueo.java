@@ -22,7 +22,8 @@ public class ControllerParqueo {
     private static int IDParqueo;
     private static int numberPark;
     private static int IDDetail;    
-
+    private static int IDAccess;
+    
     /**
      *  Gets the parking ID
      * @return an Integer
@@ -134,6 +135,23 @@ public class ControllerParqueo {
     public static void setIDDetail(int IDDetail) {
         ControllerParqueo.IDDetail = IDDetail;
     }    
+    /**
+     * Gets the Access ID
+     * @return a Integer 
+     */
+    public static int getIDAccess() {
+        return IDAccess;
+    }
+    /**
+     * Set the Access ID
+     * @param IDAccess 
+     * @param IDDetail referring to the Access ID
+     */
+    public static void setIDAccess(int IDAccess) {
+        ControllerParqueo.IDAccess = IDAccess;
+    }
+    
+    
     
     ModelParqueo mdpark = new ModelParqueo();
 
@@ -145,7 +163,9 @@ public class ControllerParqueo {
     public ResultSet getID(int NParqueo) {
         return mdpark.getIDPark(NParqueo);
     }
+    
 
+    
     /**
      *  Load the parking spot that are occupied
      * @return a ResultSet
@@ -176,7 +196,7 @@ public class ControllerParqueo {
      * @return a Boolean
      */
     public boolean updatePark() {
-        return mdpark.updatePark(getIDParqueo(), getIDAcceso(), getIDVehiculo(), getNumberPark(), getID());
+        return mdpark.updatePark(getIDAcceso(), getIDVehiculo(), getIDEstacionamiento(), getID());
     }
 
     /**

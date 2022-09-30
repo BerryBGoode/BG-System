@@ -143,7 +143,7 @@ public class ModelParqueo {
      * @param iddetail referring to the detail ID
      * @return a Boolean
      */
-    public boolean updatePark(int idpark, int idacces, int idcar, int idstation, int iddetail) {
+    public boolean updatePark(int idacces, int idcar, int idstation, int iddetail) {
         int busy = 1;
         boolean result;
         try {

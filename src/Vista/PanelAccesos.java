@@ -321,25 +321,9 @@ public class PanelAccesos extends javax.swing.JPanel {
         refresh();
     }//GEN-LAST:event_PanelFondoMouseClicked
 
+    FrmOpcionesReportesAccesos op_report = new FrmOpcionesReportesAccesos();
     private void btnInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformeActionPerformed
-        try {
-            Connection con = ControllerConexion.getConnectionModel();
-            JasperReport reporte = null;
-            String dir = "src\\DocsReport\\AcesosGeneralReporte.jasper";
-            Map param = new HashMap<>();
-            param.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
-            param.put("TextoFooter", "src\\Recursos_Proyecto\\TextoLogin.png");
-
-            reporte = (JasperReport) JRLoader.loadObjectFromFile(dir);
-
-            JasperPrint jprint = JasperFillManager.fillReport(reporte, param, con);
-
-            JasperViewer view = new JasperViewer(jprint, false);
-            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            view.setVisible(true);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.toString());
-        }
+        op_report.setVisible(true);        
     }//GEN-LAST:event_btnInformeActionPerformed
 
     private void TbAccesosWhite4MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbAccesosWhite4MouseMoved

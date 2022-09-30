@@ -412,9 +412,11 @@ public class FrmSetPark extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowActivated
 
+    FrmConfigPark configpark = new FrmConfigPark();
     boolean updatePark() {
         boolean val;
-        if (park.getIDAcceso() > 0 && park.getIDVehiculo() > 0 && ControllerParqueo.getNumberPark() > 0 && park.getID() > 0 && ControllerParqueo.getIDParqueo() > 0) {
+        ControllerParqueo.setIDDetail(getIDDetail());
+        if (park.getIDAcceso() > 0 && park.getIDVehiculo() > 0 && park.getIDEstacionamiento()> 0 && ControllerParqueo.getIDDetail()> 0 && ControllerParqueo.getNumberPark()> 0) {
             if (park.updatePark()) {
                 val = true;
                 ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "Se lograron actualizar los datos con exito", 1);
@@ -425,6 +427,7 @@ public class FrmSetPark extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "No se permiten valores nulos.\nAgregar correctamente los datos", "Error", JOptionPane.ERROR_MESSAGE);
             val = false;
+            System.out.println(park.getIDAcceso()+ " "+park.getIDVehiculo()+" "+ park.getIDEstacionamiento()+" "+ControllerParqueo.getNumberPark() + " "+ControllerParqueo.getIDDetail());
         }
         return val;
     }
@@ -625,7 +628,7 @@ public class FrmSetPark extends javax.swing.JFrame {
             }
         } else {
             JOptionPane.showMessageDialog(null, "No se permiten valores nulos.\nAgregar correctamente los datos", "Error", JOptionPane.ERROR_MESSAGE);
-            System.out.println(park.getIDAcceso() + " " + park.getIDVehiculo());
+            System.out.println(park.getIDVehiculo());
         }
     }
 
