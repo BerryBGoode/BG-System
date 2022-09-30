@@ -6,6 +6,7 @@
 package Vista;
 
 import Controlador.ControllerAccesos;
+import Controlador.ControllerConexion;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
@@ -16,13 +17,22 @@ import Controles_Personalizados.Tables.Table;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -206,7 +216,7 @@ public class PanelAccesos extends javax.swing.JPanel {
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return false;
             }
         });
         TbAccesosWhite4.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N

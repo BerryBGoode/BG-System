@@ -21,8 +21,9 @@ public class ControllerParqueo {
     private int IDAcceso;
     private static int IDParqueo;
     private static int numberPark;
-    private static int IDDetail;
-
+    private static int IDDetail;    
+    private static int IDAccess;
+    
     /**
      *  Gets the parking ID
      * @return an Integer
@@ -134,6 +135,23 @@ public class ControllerParqueo {
     public static void setIDDetail(int IDDetail) {
         ControllerParqueo.IDDetail = IDDetail;
     }    
+    /**
+     * Gets the Access ID
+     * @return a Integer 
+     */
+    public static int getIDAccess() {
+        return IDAccess;
+    }
+    /**
+     * Set the Access ID
+     * @param IDAccess 
+     * @param IDDetail referring to the Access ID
+     */
+    public static void setIDAccess(int IDAccess) {
+        ControllerParqueo.IDAccess = IDAccess;
+    }
+    
+    
     
     ModelParqueo mdpark = new ModelParqueo();
 
@@ -145,7 +163,9 @@ public class ControllerParqueo {
     public ResultSet getID(int NParqueo) {
         return mdpark.getIDPark(NParqueo);
     }
+    
 
+    
     /**
      *  Load the parking spot that are occupied
      * @return a ResultSet
@@ -176,15 +196,17 @@ public class ControllerParqueo {
      * @return a Boolean
      */
     public boolean updatePark() {
-        return mdpark.updatePark(getIDParqueo(), getIDAcceso(), getIDVehiculo(), getNumberPark(), getID());
+        return mdpark.updatePark(getIDAcceso(), getIDVehiculo(), getIDEstacionamiento(), getID());
     }
 
     /**
      *  Check the occupied spots in the parking lot
-     * @return an Integer
+     * @param idpark
+     * @param idtation
+     * @return an ResultSet
      */
-    public int checkStatePark() {
-        return mdpark.checkState(getNumberPark());
+    public ResultSet checkStatePark(int idpark, int idtation) {
+        return mdpark.checkState(idpark, idtation);
     }
 
     /**
@@ -210,7 +232,7 @@ public class ControllerParqueo {
      * @return a Boolean
      */
     public boolean deletePark() {
-        return mdpark.deletePark(getIDDetail());
+        return mdpark.deletePark(getIDDetail(), getIDEstacionamiento());
     }
 
     /**
@@ -223,4 +245,5 @@ public class ControllerParqueo {
     public ResultSet getCarByPersonal(String viewname, String parametername, String carnet) {
         return mdpark.getCarByPersonal(viewname, parametername, carnet);
     }
+
 }

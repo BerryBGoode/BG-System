@@ -147,9 +147,17 @@ public class PanelVehiculos extends javax.swing.JPanel {
         });
         PanelFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 150, 40));
 
-        PanelTabla.setHorizontalScrollBar(null);
-        PanelTabla.setVerticalScrollBar(ScrollTabla);
-        PanelTabla.setWheelScrollingEnabled(false);
+
+        btnInforme.setBackground(new java.awt.Color(58, 50, 75));
+        btnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
+        btnInforme.setText("Informe");
+        btnInforme.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnInforme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInformeActionPerformed(evt);
+            }
+        });
+        
 
         TbVehiculos.setBackground(new java.awt.Color(231, 234, 239));
         TbVehiculos.setModel(new javax.swing.table.DefaultTableModel(
@@ -186,7 +194,7 @@ public class PanelVehiculos extends javax.swing.JPanel {
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return false;
             }
         });
         TbVehiculos.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -235,6 +243,16 @@ public class PanelVehiculos extends javax.swing.JPanel {
             add.setVisible(true);
         }
     }//GEN-LAST:event_btnAgregarMouseClicked
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarActionPerformed
+                                   
+
+    private void TbVehiculosMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbVehiculosMouseMoved
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_TbVehiculosMouseMoved
 
     private void TbVehiculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbVehiculosMouseClicked
         int column = TbVehiculos.getColumnModel().getColumnIndexAtX(evt.getX());

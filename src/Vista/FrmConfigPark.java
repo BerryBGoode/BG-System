@@ -44,6 +44,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
     private int chkProcess; //esta variable funciona para verificar si el proceso de actualizar o agregar
     //al dar click a actualizar el valor será 2 al agregar será 1 y antes será 0
     public static boolean visibleFrm = false;//attri para verificar si un formulario de agregar esta abierto
+    public static boolean SelectOther;
 
     public int getStation() {
         return station;
@@ -72,19 +73,9 @@ public class FrmConfigPark extends javax.swing.JFrame {
         setIconImage(Logo());
         loadPark();
         loadLocationPark();
-
-        /*checkState(panelPark1, 1);
-        checkState(panelPark2, 2);
-        checkState(panelPark3, 3);
-        checkState(panelPark4, 4);
-        checkState(panelPark5, 5);
-        checkState(panelPark6, 6);
-        checkState(panelPark7, 7);
-        checkState(panelPark8, 8);
-        checkState(panelPark9, 9);
-        checkState(panelPark10, 10);
-        checkState(panelPark11, 11);
-        checkState(panelPark12, 12);*/
+        chkSelectOther.setVisible(false);
+        chkSelectOther.setFont(ValidacionesSistema.ValidacionesBeep_Go.font);
+        chkSelectOther.setForeground(Color.WHITE);
     }
 
     public Image Logo() {
@@ -148,6 +139,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
         btnPark2 = new javax.swing.JLabel();
         panelPark1 = new Controles_Personalizados.Paneles.PanelRound();
         btnPark1 = new javax.swing.JLabel();
+        chkSelectOther = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -493,7 +485,18 @@ public class FrmConfigPark extends javax.swing.JFrame {
 
         pnlEstacionamientos.add(panelPark1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 60, 60));
 
-        panelRound1.add(pnlEstacionamientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 550, 320));
+        panelRound1.add(pnlEstacionamientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 550, 320));
+
+        chkSelectOther.setBackground(new java.awt.Color(58, 50, 75));
+        chkSelectOther.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        chkSelectOther.setText("Seleccionar otro");
+        chkSelectOther.setActionCommand("");
+        chkSelectOther.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkSelectOtherActionPerformed(evt);
+            }
+        });
+        panelRound1.add(chkSelectOther, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 210, -1, -1));
 
         getContentPane().add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1108, 580));
 
@@ -507,77 +510,101 @@ public class FrmConfigPark extends javax.swing.JFrame {
     //y 0, cuando venga de "agregar"
 
     private void btnPark1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark1MouseClicked
-        if (station == 1 || station == 0) {
+        if (station == 1 || station == 0 || panelPark1.getBackground().equals(Color.white)) {
             modifPanelPark(panelPark1, 1);
         }
     }//GEN-LAST:event_btnPark1MouseClicked
 
     private void btnPark2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark2MouseClicked
-        if (station == 2 || station == 0) {
+        if (station == 2 || station == 0 || panelPark2.getBackground().equals(Color.WHITE)) {
             modifPanelPark(panelPark2, 2);
         }
     }//GEN-LAST:event_btnPark2MouseClicked
 
     private void btnPark3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark3MouseClicked
-        if (station == 3 || station == 0) {
-            modifPanelPark(panelPark3,3);
+        if (station == 3 || station == 0 || panelPark3.getBackground().equals(Color.white)) {
+            modifPanelPark(panelPark3, 3);
         }
     }//GEN-LAST:event_btnPark3MouseClicked
 
     private void btnPark4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark4MouseClicked
-        if (station == 4 || station == 0) {
+        if (station == 4 || station == 0 || panelPark4.getBackground().equals(Color.white)) {
             modifPanelPark(panelPark4, 4);
         }
     }//GEN-LAST:event_btnPark4MouseClicked
 
     private void btnPark11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark11MouseClicked
-        if (station == 11 || station == 0) {
-            modifPanelPark(panelPark11,  11);
+        if (station == 11 || station == 0 || panelPark11.getBackground().equals(Color.white)) {
+            modifPanelPark(panelPark11, 11);
         }
     }//GEN-LAST:event_btnPark11MouseClicked
 
     private void btnPark12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark12MouseClicked
-        if (station == 12 || station == 0) {
-            modifPanelPark(panelPark12,12);
+        if (station == 12 || station == 0 || panelPark12.getBackground().equals(Color.white)) {
+            modifPanelPark(panelPark12, 12);
         }
     }//GEN-LAST:event_btnPark12MouseClicked
 
     private void btnPark10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark10MouseClicked
-        if (station == 10 || station == 0) {
-            modifPanelPark(panelPark10,  10);
+        if (station == 10 || station == 0 || panelPark10.getBackground().equals(Color.WHITE)) {
+            modifPanelPark(panelPark10, 10);
         }
     }//GEN-LAST:event_btnPark10MouseClicked
 
     private void btnPark9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark9MouseClicked
-        if (station == 9 || station == 0) {
+        if (station == 9 || station == 0 || panelPark9.getBackground().equals(Color.WHITE)) {
             modifPanelPark(panelPark9, 9);
 
         }
     }//GEN-LAST:event_btnPark9MouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
-        //AQUÍ LOS VERIFICA Y LOS ESTACIONAMIENTOS ÚTILIZADOS Y POR MEDIO DEL SIGUIENTE MÉTODO "checkState"
-        /* checkState(panelPark1, 1);
-        checkState(panelPark2, 2);
-        checkState(panelPark3, 3);
-        checkState(panelPark4, 4);
-        checkState(panelPark5, 5);
-        checkState(panelPark6, 6);
-        checkState(panelPark7, 7);
-        checkState(panelPark8, 8);
-        checkState(panelPark9, 9);
-        checkState(panelPark10, 10);
-        checkState(panelPark11, 11);
-        checkState(panelPark12, 12);*/
+        switch (FrmSetPark.action) {
+            case 1:
+                //verficar cual es el estacionamiento utilizado
+                
+                if (getPark() == null) {
 
-        //verficar cual es el estacionamiento utilizado
-        checkStationUpdate();
-        if (getPark() == null) {
+                } else {
+                    CmbParqueos.setSelectedItem(getPark());//porque primero se carga el cmb es, que no salen los que están 
 
-        } else {
-            CmbParqueos.setSelectedItem(getPark());
+                }
+                checkStationUpdate();
+                if (SelectOther == false) {
+                    checkStationUpdate();//carga el estacionamiento a modificar
+                }
+
+                chkSelectOther.setVisible(true);//para poder evaluar los estados
+                break;
+            case 2:
+                // TODO add your handling code here:
+                //AQUÍ LOS VERIFICA Y LOS ESTACIONAMIENTOS ÚTILIZADOS Y POR MEDIO DEL SIGUIENTE MÉTODO "checkState"
+                chkSelectOther.setVisible(false);
+                checkState(panelPark1, 1);
+                checkState(panelPark2, 2);
+                checkState(panelPark3, 3);
+                checkState(panelPark4, 4);
+                checkState(panelPark5, 5);
+                checkState(panelPark6, 6);
+                checkState(panelPark7, 7);
+                checkState(panelPark8, 8);
+                checkState(panelPark9, 9);
+                checkState(panelPark10, 10);
+                checkState(panelPark11, 11);
+                checkState(panelPark12, 12);
+                checkState(panelPark13, 13);
+                checkState(panelPark14, 14);
+                checkState(panelPark15, 15);
+                checkState(panelPark16, 16);
+                checkState(panelPark17, 17);
+                checkState(panelPark18, 18);
+                checkState(panelPark19, 19);
+                checkState(panelPark20, 20);
+
+                break;
         }
+
+
     }//GEN-LAST:event_formWindowActivated
     //este método es para cambiar el color del panel y hacerlo gris pero para ahorramete codigo lo hago así
     void setBusyPnl(PanelRound pnl1, PanelRound pnl2, PanelRound pnl3, PanelRound pnl4, PanelRound pnl5, PanelRound pnl6, PanelRound pnl7, PanelRound pnl8, PanelRound pnl9, PanelRound pnl10, PanelRound pnl11, PanelRound pnl12, PanelRound pnl13, PanelRound pnl14, PanelRound pnl15, PanelRound pnl16, PanelRound pnl17, PanelRound pnl18, PanelRound pnl19) {
@@ -695,53 +722,51 @@ public class FrmConfigPark extends javax.swing.JFrame {
     }
 
     private void btnPark8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark8MouseClicked
-        if (station == 8 || station == 0) {
-            modifPanelPark(panelPark8,  8);
-
+        if (station == 8 || station == 0 || panelPark8.getBackground().equals(Color.white)) {
+            modifPanelPark(panelPark8, 8);
         }
     }//GEN-LAST:event_btnPark8MouseClicked
 
     private void btnPark7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark7MouseClicked
-        if (station == 7 || station == 0) {
+        if (station == 7 || station == 0 || panelPark7.getBackground().equals(Color.white)) {
             modifPanelPark(panelPark7, 7);
-
         }
     }//GEN-LAST:event_btnPark7MouseClicked
 
     private void btnPark6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark6MouseClicked
-        if (station == 6 || station == 0) {
-            modifPanelPark(panelPark6,  6);
+        if (station == 6 || station == 0 || panelPark6.getBackground().equals(Color.WHITE)) {
+            modifPanelPark(panelPark6, 6);
         }
     }//GEN-LAST:event_btnPark6MouseClicked
 
     private void btnPark5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark5MouseClicked
-        if (station == 5 || station == 0) {
-            modifPanelPark(panelPark5,  5);
+        if (station == 5 || station == 0 || panelPark5.getBackground().equals(Color.WHITE)) {
+            modifPanelPark(panelPark5, 5);
         }
     }//GEN-LAST:event_btnPark5MouseClicked
 
     private void btnPark15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark15MouseClicked
-        if (station == 15 || station == 0) {
+        if (station == 15 || station == 0 || panelPark15.getBackground().equals(Color.WHITE)) {
             modifPanelPark(panelPark15, 15);
         }
     }//GEN-LAST:event_btnPark15MouseClicked
 
     private void btnPark14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark14MouseClicked
-        if (station == 14 || station == 0) {
+        if (station == 14 || station == 0 || panelPark14.getBackground().equals(Color.WHITE)) {
             modifPanelPark(panelPark14, 14);
         }
 
     }//GEN-LAST:event_btnPark14MouseClicked
 
     private void btnPark13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark13MouseClicked
-        if (station == 13 || station == 0) {
-            modifPanelPark(panelPark13,  13);
+        if (station == 13 || station == 0 || panelPark13.getBackground().equals(Color.white)) {
+            modifPanelPark(panelPark13, 13);
         }
 
     }//GEN-LAST:event_btnPark13MouseClicked
 
     private void btnCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMousePressed
-        this.dispose();        
+        this.dispose();
         visibleFrm = false;
     }//GEN-LAST:event_btnCerrarMousePressed
 
@@ -750,32 +775,32 @@ public class FrmConfigPark extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMinimizarMouseClicked
 
     private void btnPark16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark16MouseClicked
-        if (station == 16 || station == 0) {
+        if (station == 16 || station == 0 || panelPark16.getBackground().equals(Color.white)) {
             modifPanelPark(panelPark16, 16);
         }
     }//GEN-LAST:event_btnPark16MouseClicked
 
     private void btnPark17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark17MouseClicked
-        if (station == 17 || station == 0) {
+        if (station == 17 || station == 0 || panelPark17.getBackground().equals(Color.white)) {
             modifPanelPark(panelPark17, 17);
         }
     }//GEN-LAST:event_btnPark17MouseClicked
 
     private void btnPark18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark18MouseClicked
-        if (station == 18 || station == 0) {
+        if (station == 18 || station == 0 || panelPark18.getBackground().equals(Color.white)) {
             modifPanelPark(panelPark18, 18);
         }
     }//GEN-LAST:event_btnPark18MouseClicked
 
     private void btnPark19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark19MouseClicked
-        if (station == 19 || station == 0) {
+        if (station == 19 || station == 0 || panelPark19.getBackground().equals(Color.white)) {
             modifPanelPark(panelPark19, 19);
 
         }
     }//GEN-LAST:event_btnPark19MouseClicked
 
     private void btnPark20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark20MouseClicked
-        if (station == 20 || station == 0) {
+        if (station == 20 || station == 0 || panelPark20.getBackground().equals(Color.WHITE)) {
             modifPanelPark(panelPark20, 20);
 
         }
@@ -797,6 +822,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
 
     }
 
+
     //este método requiere de un pnl contenedor del boton para acceder a añadir un registro de estacionamiento
     //el pnl para emodificarle el color, el nombre del parqueo para mostrar en el form siguente
     //el station para enviarlo para abrir el form de agregar y enviar el estacionamiento q se está utilizando
@@ -815,8 +841,8 @@ public class FrmConfigPark extends javax.swing.JFrame {
             Frmpark = new FrmSetPark(String.valueOf(IDPark), station);
             sendIDStation(station, IDPark);
 
-            if (visibleFrm == true) {                
-                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("No se pudo abrir...", "No se pudo abrir, debido a que ya hay abierto y se debe cerrar", 3);
+            if (visibleFrm == true) {
+                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("No se pudo abrir...", "No se pudo abrir, debido a que ya hay uno abierto y se debe cerrar", 3);
             } else {
                 Frmpark.setVisible(true);
                 visibleFrm = true;
@@ -832,19 +858,28 @@ public class FrmConfigPark extends javax.swing.JFrame {
     //esté método detecta que estacionamiento está ocupado, de manera que
     //el método para cargar el estado, cierra el panel contenedor y va a verificar el estado
     //luego lo vuelve a abrir
-    void checkState(PanelRound pnl, int idDetalle) {
-        ControllerParqueo.setNumberPark(idDetalle);
-        switch (controllerpark.checkStatePark()) {
-            case 0:
-                pnl.setBackground(Color.white);
-                break;
-            case 1:
-                pnl.setBackground(Color.white);
-                break;
-            case 2:
-                pnl.setBackground(Color.gray);
-                break;
+    void checkState(PanelRound pnl, int idstation) {
+        try {
+            int IDPark = (int) list.get(CmbParqueos.getSelectedIndex());
+            ResultSet rs = controllerpark.checkStatePark(IDPark, idstation);
+            if (rs.next()) {
+                switch (rs.getInt("idEstado")) {
+                    case 1:
+                        pnl.setBackground(Color.white);
+                        pnl.setEnabled(true);
+
+                        break;
+                    case 2://ocupado
+                        pnl.setBackground(Color.gray);
+                        pnl.setEnabled(false);
+                        //station = idstation;
+
+                        break;
+                }
+            }
+        } catch (Exception e) {
         }
+
     }
 
     //método para cargar el número de parqueo registrado
@@ -875,7 +910,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
                     }
                 } while (rs.next());
 
-                /*checkState(panelPark1, 1);
+                checkState(panelPark1, 1);
                 checkState(panelPark2, 2);
                 checkState(panelPark3, 3);
                 checkState(panelPark4, 4);
@@ -886,12 +921,49 @@ public class FrmConfigPark extends javax.swing.JFrame {
                 checkState(panelPark9, 9);
                 checkState(panelPark10, 10);
                 checkState(panelPark11, 11);
-                checkState(panelPark12, 12);*/
+                checkState(panelPark12, 12);
+                checkState(panelPark13, 13);
+                checkState(panelPark14, 14);
+                checkState(panelPark15, 15);
+                checkState(panelPark16, 16);
+                checkState(panelPark17, 17);
+                checkState(panelPark18, 18);
+                checkState(panelPark19, 19);
+                checkState(panelPark20, 20);
             }
         } catch (SQLException e) {
             System.out.println("Error:" + e.toString());
         }
     }//GEN-LAST:event_CmbParqueosItemStateOnChanged
+
+    private void chkSelectOtherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkSelectOtherActionPerformed
+        if (chkSelectOther.isSelected()) {
+            SelectOther = true;
+            checkState(panelPark1, 1);
+            checkState(panelPark2, 2);
+            checkState(panelPark3, 3);
+            checkState(panelPark4, 4);
+            checkState(panelPark5, 5);
+            checkState(panelPark6, 6);
+            checkState(panelPark7, 7);
+            checkState(panelPark8, 8);
+            checkState(panelPark9, 9);
+            checkState(panelPark10, 10);
+            checkState(panelPark11, 11);
+            checkState(panelPark12, 12);
+            checkState(panelPark13, 13);
+            checkState(panelPark14, 14);
+            checkState(panelPark15, 15);
+            checkState(panelPark16, 16);
+            checkState(panelPark17, 17);
+            checkState(panelPark18, 18);
+            checkState(panelPark19, 19);
+            checkState(panelPark20, 20);
+        } else {
+            SelectOther = false;
+            checkStationUpdate();
+        }
+    }//GEN-LAST:event_chkSelectOtherActionPerformed
 
     void loadLocationPark() {
 
@@ -967,6 +1039,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
     private javax.swing.JLabel btnPark7;
     private javax.swing.JLabel btnPark8;
     private javax.swing.JLabel btnPark9;
+    private javax.swing.JCheckBox chkSelectOther;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private Controles_Personalizados.Paneles.PanelRound panelPark1;

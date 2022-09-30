@@ -37,19 +37,36 @@
 			</staticText>
 		</band>
 	</title>
+<<<<<<< HEAD
+=======
 	<pageHeader>
 		<band splitType="Stretch"/>
 	</pageHeader>
+>>>>>>> master
 	<columnHeader>
-		<band height="42" splitType="Stretch">
+		<band height="24" splitType="Stretch">
 			<staticText>
+<<<<<<< HEAD
+				<reportElement x="0" y="0" width="200" height="20" uuid="f1d77c9e-821e-4421-8701-7c86b58b0c11"/>
+=======
 				<reportElement x="9" y="18" width="26" height="24" uuid="b83955e3-05cd-4e45-bcb8-d84d69602fcc"/>
+>>>>>>> master
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ID]]></text>
+				<text><![CDATA[Personal:]]></text>
 			</staticText>
 			<staticText>
+<<<<<<< HEAD
+				<reportElement x="335" y="0" width="129" height="20" uuid="1bfe5da3-169f-4922-afd2-82e7623adb4a"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Placa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="464" y="0" width="108" height="20" uuid="5f30519c-cc7e-41f4-8a7b-5b252b394ab1"/>
+=======
 				<reportElement x="48" y="18" width="156" height="24" uuid="5de1cccb-1442-407d-a30b-6f4b5772300d"/>
 				<textElement>
 					<font size="14" isBold="true"/>
@@ -58,12 +75,20 @@
 			</staticText>
 			<staticText>
 				<reportElement x="266" y="18" width="66" height="24" uuid="41e65d9a-322f-4ace-bf0c-f8f8cc96039d"/>
+>>>>>>> master
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Carnet]]></text>
+				<text><![CDATA[Color:]]></text>
 			</staticText>
 			<staticText>
+<<<<<<< HEAD
+				<reportElement x="200" y="0" width="135" height="20" uuid="0bd97859-c87e-4baf-8114-28eac6211f83"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Carnet:]]></text>
+=======
 				<reportElement x="371" y="18" width="70" height="24" uuid="d99cbcd9-8f14-4bf4-96b0-64c99936db96"/>
 				<textElement>
 					<font size="14" isBold="true"/>
@@ -76,10 +101,18 @@
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Color]]></text>
+>>>>>>> master
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
+<<<<<<< HEAD
+		<band height="17" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="200" height="16" forecolor="#333333" uuid="adec1c68-7cb4-48ab-94ee-b94400c8d7ed"/>
+				<textElement>
+					<font size="10"/>
+=======
 		<band height="58" splitType="Stretch">
 			<textField>
 				<reportElement x="8" y="2" width="26" height="27" forecolor="#333333" uuid="2bdbc559-81d9-4fb7-b4b0-9fd960bc2937"/>
@@ -92,10 +125,16 @@
 				<reportElement x="48" y="2" width="207" height="42" forecolor="#333333" uuid="adec1c68-7cb4-48ab-94ee-b94400c8d7ed"/>
 				<textElement>
 					<font size="14"/>
+>>>>>>> master
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombre_p} + " " + $F{apellido_p}]]></textFieldExpression>
 			</textField>
 			<textField>
+<<<<<<< HEAD
+				<reportElement x="335" y="0" width="127" height="16" forecolor="#333333" uuid="a6324758-7a36-4234-bcc0-3b6dd8858cab"/>
+				<textElement>
+					<font size="10"/>
+=======
 				<reportElement x="266" y="0" width="92" height="27" forecolor="#333333" uuid="9a7832ca-db5e-41f4-ac5f-d3ae61694cb1"/>
 				<textElement>
 					<font size="14"/>
@@ -106,30 +145,41 @@
 				<reportElement x="371" y="0" width="92" height="27" forecolor="#333333" uuid="a6324758-7a36-4234-bcc0-3b6dd8858cab"/>
 				<textElement>
 					<font size="14"/>
+>>>>>>> master
 				</textElement>
 				<textFieldExpression><![CDATA[$F{placa}]]></textFieldExpression>
 			</textField>
 			<textField>
+<<<<<<< HEAD
+				<reportElement x="464" y="0" width="108" height="16" forecolor="#333333" uuid="85754f44-ebfc-4eff-b892-8a6b8b8339ff"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{color}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="135" height="16" forecolor="#333333" uuid="9a7832ca-db5e-41f4-ac5f-d3ae61694cb1"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Carnet}]]></textFieldExpression>
+			</textField>
+=======
 				<reportElement x="477" y="0" width="95" height="27" forecolor="#333333" uuid="85754f44-ebfc-4eff-b892-8a6b8b8339ff"/>
 				<textElement>
 					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{color}]]></textFieldExpression>
 			</textField>
+>>>>>>> master
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
-		<band height="96" splitType="Stretch">
+		<band height="46" splitType="Stretch">
 			<image>
-				<reportElement x="492" y="66" width="80" height="30" uuid="436a83c3-82a2-46b0-8f4e-23946d1f2dff"/>
+				<reportElement x="492" y="16" width="80" height="30" uuid="436a83c3-82a2-46b0-8f4e-23946d1f2dff"/>
 				<imageExpression><![CDATA[$P{Pie}.toString()]]></imageExpression>
 			</image>
 		</band>
 	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>
