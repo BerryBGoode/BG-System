@@ -143,7 +143,7 @@ public class ModelParqueo {
      * @param iddetail referring to the detail ID
      * @return a Boolean
      */
-    public boolean updatePark(int idacces, int idcar, int idstation, int iddetail/*, int before_station*/) {
+    public boolean updatePark(int idacces, int idcar, int idstation, int iddetail) {
         int busy = 1;
         boolean result;
         try {
@@ -156,33 +156,11 @@ public class ModelParqueo {
             sql.setInt(4, busy);
             sql.setInt(5, iddetail);
 
-            /*result = */sql.execute();
-           /* if (result == true) {
-                changeStateonStation(idstation);
-                deleteStateStation(before_station);
-                result = true;
-            }*/
+            sql.execute();
             return result = true;
         } catch (SQLException e) {
             System.out.println("Error: " + e.toString());
             return result = false;
-        }
-    }
-    /*
-    *this method modify the state on tbEstacionamientos
-    */
-    public boolean changeStateonStation(int idstation){
-        int busy = 2;
-        try {
-            con  = ModelConexion.getConnection();
-            sql = con.prepareStatement("UPDATE tbEstacionamientos SET idEstado = ? WHERE  idEstacionamiento = ?");
-            sql.setInt(1, busy);
-            sql.setInt(2, idstation);
-            sql.execute();
-            return true;
-        } catch (SQLException e) {
-            System.out.println("Error: "+e.toString());
-            return false;
         }
     }
 
@@ -241,7 +219,7 @@ public class ModelParqueo {
             sql.setInt(1, disable);
             sql.setInt(2, iddetail);
             sql.execute();
-            deleteStateStation(idstation);
+            deleteStateStion(idstation);
             return true;
         } catch (SQLException e) {
             System.out.println("Error: " + e.toString());
@@ -300,7 +278,7 @@ public class ModelParqueo {
      * @param idstation
      * @return 
      */
-    public boolean deleteStateStation(int idstation){
+    public boolean deleteStateStion(int idstation){
          int avalible = 1;
         try {
             con = ModelConexion.getConnection();
