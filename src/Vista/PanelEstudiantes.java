@@ -250,6 +250,7 @@ public class PanelEstudiantes extends javax.swing.JPanel {
 
         jPanel3.add(jPanel6, java.awt.BorderLayout.NORTH);
 
+        jPanel7.setBackground(new java.awt.Color(231, 234, 239));
         jPanel7.setLayout(new java.awt.BorderLayout());
 
         scrollBarWhite.setBackground(new java.awt.Color(58, 50, 75));

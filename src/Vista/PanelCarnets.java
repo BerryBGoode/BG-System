@@ -225,9 +225,11 @@ public class PanelCarnets extends javax.swing.JPanel {
 
         jPanel3.setLayout(new java.awt.BorderLayout());
 
+        jPanel6.setBackground(new java.awt.Color(231, 234, 239));
         jPanel6.setLayout(new java.awt.BorderLayout());
         jPanel3.add(jPanel6, java.awt.BorderLayout.NORTH);
 
+        jPanel7.setBackground(new java.awt.Color(231, 234, 239));
         jPanel7.setLayout(new java.awt.BorderLayout());
 
         scrollBarCustom2.setBackground(new java.awt.Color(58, 50, 75));

@@ -99,6 +99,8 @@ public class PanelParqueo extends javax.swing.JPanel {
         btnAgregar = new Controles_Personalizados.Botones.UWPButton();
         btnInforme = new Controles_Personalizados.Botones.UWPButton();
         jPanel3 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
         scrollBarCustom1 = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
         jScrollPane1 = new javax.swing.JScrollPane();
         TbParqueosWhite = new Controles_Personalizados.Tables.Table();
@@ -173,8 +175,6 @@ public class PanelParqueo extends javax.swing.JPanel {
         btnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
         btnInforme.setText("Informe");
         btnInforme.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        btnInforme.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        btnInforme.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnInforme.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnInformeMouseClicked(evt);
@@ -190,9 +190,14 @@ public class PanelParqueo extends javax.swing.JPanel {
         jPanel3.setPreferredSize(new java.awt.Dimension(461, 403));
         jPanel3.setLayout(new java.awt.BorderLayout());
 
+        jPanel6.setPreferredSize(new java.awt.Dimension(100, 0));
+        jPanel3.add(jPanel6, java.awt.BorderLayout.PAGE_START);
+
+        jPanel7.setLayout(new java.awt.BorderLayout());
+
         scrollBarCustom1.setBackground(new java.awt.Color(58, 50, 75));
         scrollBarCustom1.setForeground(new java.awt.Color(58, 50, 75));
-        jPanel3.add(scrollBarCustom1, java.awt.BorderLayout.EAST);
+        jPanel7.add(scrollBarCustom1, java.awt.BorderLayout.EAST);
 
         jScrollPane1.setMinimumSize(new java.awt.Dimension(15, 26));
         jScrollPane1.setPreferredSize(new java.awt.Dimension(461, 403));
@@ -227,7 +232,9 @@ public class PanelParqueo extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(TbParqueosWhite);
 
-        jPanel3.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        jPanel7.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        jPanel3.add(jPanel7, java.awt.BorderLayout.CENTER);
 
         jPanel1.add(jPanel3, java.awt.BorderLayout.CENTER);
 
@@ -271,7 +278,7 @@ public class PanelParqueo extends javax.swing.JPanel {
     }//GEN-LAST:event_formMouseReleased
 
     private void btnInformeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInformeMouseClicked
-      try {
+        try {
             Connection con = ControllerConexion.getConnectionModel();
             JasperReport reporte = null;
             String dir = "src\\DocsReport\\DetalleEstacionamientosGeneral.jasper";
@@ -315,19 +322,19 @@ public class PanelParqueo extends javax.swing.JPanel {
                         int IDVehiuclo = Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 6).toString());
                         int IDstation = Integer.parseInt(tb.getModel().getValueAt(tb.getSelectedRow(), 8).toString());//numberpark
                         int ID = Integer.parseInt(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString());
-                        int station =  Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 9).toString());
+                        int station = Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 9).toString());
                         int IDPark = Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 11).toString());
                         FrmSetPark.action = 1;//me refiero a que se va a actualizar, entonces que en wl switch bloquee todos los estacionamientos menos en el q se ingreso  
                         //FrmSetPark.setIDDetail(ID);
                         //setteo 
-                        
+
                         controllerParqueo.setIDAcceso(IDAcceso);
                         controllerParqueo.setIDVehiculo(IDVehiuclo);
                         controllerParqueo.setIDEstacionamiento(IDstation);
                         FrmSetPark.setIDDetail(ID);
                         ControllerParqueo.setNumberPark(IDPark);
                         park.setStation(station);
-                        park.setPark(tb.getModel().getValueAt(tb.getSelectedRow(), 11).toString());                                                
+                        park.setPark(tb.getModel().getValueAt(tb.getSelectedRow(), 11).toString());
 
                         park.setVisible(true);
                         frmstate = 1;
@@ -394,6 +401,8 @@ public class PanelParqueo extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblParqueo;
     private Controles_Personalizados.Paneles.PanelRound panelRound1;
