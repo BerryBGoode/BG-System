@@ -233,8 +233,6 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Agregar Blanco.png"))); // NOI18N
         btnAgregar.setText(" Agregar");
         btnAgregar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        btnAgregar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        btnAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAgregarMouseClicked(evt);
@@ -251,8 +249,6 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         btnFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Filtrar Blanco.png"))); // NOI18N
         btnFiltrar.setText(" Filtrar");
         btnFiltrar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        btnFiltrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFiltrarActionPerformed(evt);
@@ -264,8 +260,6 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         btnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
         btnInforme.setText("Informe");
         btnInforme.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        btnInforme.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        btnInforme.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnInforme.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnInformeMouseClicked(evt);

@@ -130,7 +130,6 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-<<<<<<< HEAD
             <Container class="javax.swing.JPanel" name="jPanel2">
               <Properties>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -274,9 +273,7 @@
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="jPanel3">
-=======
             <Component class="Controles_Personalizados.Tables.Table" name="TbVehiculos">
->>>>>>> master
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ef" green="ea" red="e7" type="rgb"/>

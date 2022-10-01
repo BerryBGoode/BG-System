@@ -156,6 +156,11 @@ public class PanelAccesos extends javax.swing.JPanel {
         btnFiltrar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         btnFiltrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnFiltrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnFiltrarMouseClicked(evt);
+            }
+        });
         PanelFondo.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 150, 40));
 
         btnAgregar.setBackground(new java.awt.Color(58, 50, 75));
@@ -216,7 +221,7 @@ public class PanelAccesos extends javax.swing.JPanel {
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return false;
+                return canEdit [columnIndex];
             }
         });
         TbAccesosWhite4.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -356,6 +361,11 @@ public class PanelAccesos extends javax.swing.JPanel {
         // TODO add your handling code here:
         refresh();
     }//GEN-LAST:event_PanelFondoMouseClicked
+
+    FrmOpcionesReportesAccesos accessReport = new FrmOpcionesReportesAccesos();
+    private void btnFiltrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrarMouseClicked
+        accessReport.setVisible(true);
+    }//GEN-LAST:event_btnFiltrarMouseClicked
 
     void loadTable() {
         ResultSet rs;

@@ -251,17 +251,26 @@ public class PanelProfesores extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         PanelFondo = new Controles_Personalizados.Paneles.PanelRound();
-        lblPersonal = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        scrollBarCustom2 = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
+        PanelTablaDark = new javax.swing.JScrollPane();
+        TbProfesoresDark = new Controles_Personalizados.Tables.TableDark();
+        jPanel7 = new javax.swing.JPanel();
+        scrollBarCustom1 = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
+        PanelTabla = new javax.swing.JScrollPane();
+        TbProfesoresWhite = new Controles_Personalizados.Tables.Table();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         btnAgregar = new Controles_Personalizados.Botones.UWPButton();
         btnFiltrar = new Controles_Personalizados.Botones.UWPButton();
         BtnInforme = new Controles_Personalizados.Botones.UWPButton();
-        PanelTablaDark = new javax.swing.JScrollPane();
-        TbProfesoresDark = new Controles_Personalizados.Tables.TableDark();
-        PanelTabla = new javax.swing.JScrollPane();
-        TbProfesoresWhite = new Controles_Personalizados.Tables.Table();
-        ScrollTabla = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
+        jPanel5 = new javax.swing.JPanel();
+        lblPersonal = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(42, 36, 56));
         setLayout(new java.awt.BorderLayout());
@@ -274,49 +283,16 @@ public class PanelProfesores extends javax.swing.JPanel {
                 PanelFondoMouseMoved(evt);
             }
         });
-        PanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelFondo.setLayout(new java.awt.GridBagLayout());
 
-        lblPersonal.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
-        lblPersonal.setForeground(new java.awt.Color(58, 50, 75));
-        lblPersonal.setText("Personal");
-        PanelFondo.add(lblPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
-        btnAgregar.setBackground(new java.awt.Color(58, 50, 75));
-        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Agregar Blanco.png"))); // NOI18N
-        btnAgregar.setText(" Agregar");
-        btnAgregar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        btnAgregar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        btnAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
-        PanelFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 150, 40));
+        jPanel2.setLayout(new java.awt.BorderLayout());
 
-        btnFiltrar.setBackground(new java.awt.Color(58, 50, 75));
-        btnFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Filtrar Blanco.png"))); // NOI18N
-        btnFiltrar.setText(" Filtrar");
-        btnFiltrar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        btnFiltrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFiltrarActionPerformed(evt);
-            }
-        });
-        PanelFondo.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 150, 40));
+        jPanel6.setLayout(new java.awt.BorderLayout());
+        jPanel6.add(scrollBarCustom2, java.awt.BorderLayout.CENTER);
 
-        BtnInforme.setBackground(new java.awt.Color(58, 50, 75));
-        BtnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
-        BtnInforme.setText("Informe");
-        BtnInforme.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        BtnInforme.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnInformeActionPerformed(evt);
-            }
-        });
-        PanelFondo.add(BtnInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 150, 40));
+        PanelTablaDark.setVerticalScrollBar(scrollBarCustom2);
 
         TbProfesoresDark.setBackground(new java.awt.Color(47, 49, 54));
         TbProfesoresDark.setModel(new javax.swing.table.DefaultTableModel(
@@ -333,60 +309,36 @@ public class PanelProfesores extends javax.swing.JPanel {
         TbProfesoresDark.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         PanelTablaDark.setViewportView(TbProfesoresDark);
 
-        PanelFondo.add(PanelTablaDark, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 1230, 480));
+        jPanel6.add(PanelTablaDark, java.awt.BorderLayout.CENTER);
 
-        PanelTabla.setHorizontalScrollBar(null);
-        PanelTabla.setVerticalScrollBar(ScrollTabla);
-        PanelTabla.setWheelScrollingEnabled(false);
+        jPanel2.add(jPanel6, java.awt.BorderLayout.NORTH);
+
+        jPanel7.setLayout(new java.awt.BorderLayout());
+
+        scrollBarCustom1.setBackground(new java.awt.Color(58, 50, 75));
+        scrollBarCustom1.setForeground(new java.awt.Color(58, 50, 75));
+        jPanel7.add(scrollBarCustom1, java.awt.BorderLayout.WEST);
+
+        PanelTabla.setVerticalScrollBar(scrollBarCustom1);
 
         TbProfesoresWhite.setBackground(new java.awt.Color(231, 234, 239));
         TbProfesoresWhite.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "CARNET", "NOMBRES", "APELLIDOS", "%ENTRADAS", "%SALIDAS", "ACCIONES"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, true, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        TbProfesoresWhite.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        ));
         TbProfesoresWhite.setGridColor(new java.awt.Color(58, 50, 75));
-        TbProfesoresWhite.setName(""); // NOI18N
+        TbProfesoresWhite.setMaximumSize(new java.awt.Dimension(2147483647, 880));
+        TbProfesoresWhite.setMinimumSize(new java.awt.Dimension(90, 880));
+        TbProfesoresWhite.setPreferredSize(new java.awt.Dimension(450, 880));
         TbProfesoresWhite.setSelectionBackground(new java.awt.Color(58, 50, 75));
         TbProfesoresWhite.setShowVerticalLines(false);
-        TbProfesoresWhite.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                TbProfesoresWhiteMouseMoved(evt);
-            }
-        });
         TbProfesoresWhite.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TbProfesoresWhiteMouseClicked(evt);
@@ -394,11 +346,82 @@ public class PanelProfesores extends javax.swing.JPanel {
         });
         PanelTabla.setViewportView(TbProfesoresWhite);
 
-        PanelFondo.add(PanelTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 1230, 480));
+        jPanel7.add(PanelTabla, java.awt.BorderLayout.CENTER);
 
-        ScrollTabla.setBackground(new java.awt.Color(58, 50, 75));
-        ScrollTabla.setForeground(new java.awt.Color(58, 50, 75));
-        PanelFondo.add(ScrollTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(1238, 177, 10, 40));
+        jPanel2.add(jPanel7, java.awt.BorderLayout.CENTER);
+
+        jPanel1.add(jPanel2, java.awt.BorderLayout.CENTER);
+
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        jPanel4.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel4.setPreferredSize(new java.awt.Dimension(1240, 70));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnAgregar.setBackground(new java.awt.Color(58, 50, 75));
+        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Agregar Blanco.png"))); // NOI18N
+        btnAgregar.setText(" Agregar");
+        btnAgregar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        btnAgregar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 40));
+
+        btnFiltrar.setBackground(new java.awt.Color(58, 50, 75));
+        btnFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Filtrar Blanco.png"))); // NOI18N
+        btnFiltrar.setText(" Filtrar");
+        btnFiltrar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        btnFiltrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 150, 40));
+
+        BtnInforme.setBackground(new java.awt.Color(58, 50, 75));
+        BtnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
+        BtnInforme.setText("Informe");
+        BtnInforme.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        BtnInforme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnInformeActionPerformed(evt);
+            }
+        });
+        jPanel4.add(BtnInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 150, 40));
+
+        jPanel3.add(jPanel4, java.awt.BorderLayout.CENTER);
+
+        jPanel5.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel5.setPreferredSize(new java.awt.Dimension(1240, 75));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblPersonal.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
+        lblPersonal.setForeground(new java.awt.Color(58, 50, 75));
+        lblPersonal.setText("Personal");
+        jPanel5.add(lblPersonal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+
+        jPanel3.add(jPanel5, java.awt.BorderLayout.NORTH);
+
+        jPanel1.add(jPanel3, java.awt.BorderLayout.NORTH);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.ipady = 853;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(10, 15, 10, 15);
+        PanelFondo.add(jPanel1, gridBagConstraints);
 
         add(PanelFondo, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -413,8 +436,27 @@ public class PanelProfesores extends javax.swing.JPanel {
         frmstate = 1;
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void TbProfesoresWhiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbProfesoresWhiteMouseClicked
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        if (frmreporte.isVisible()) {
+            frmreporte.toFront();
+
+        } else {
+            frmreporte.setVisible(true);
+        }
+    }//GEN-LAST:event_btnFiltrarActionPerformed
+
+    private void PanelFondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseMoved
         // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_PanelFondoMouseMoved
+
+    private void BtnInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInformeActionPerformed
+        // TODO add your handling code here:
+        imprimirPersonales();
+    }//GEN-LAST:event_BtnInformeActionPerformed
+
+    private void TbProfesoresWhiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbProfesoresWhiteMouseClicked
+               // TODO add your handling code here:
         int column = TbProfesoresWhite.getColumnModel().getColumnIndexAtX(evt.getX());
         int row = evt.getY() / TbProfesoresWhite.getRowHeight();
         btnActualizar.setName("btnActualizar");
@@ -466,31 +508,8 @@ public class PanelProfesores extends javax.swing.JPanel {
                 }
             }
         }
+ 
     }//GEN-LAST:event_TbProfesoresWhiteMouseClicked
-
-    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
-        if (frmreporte.isVisible()) {
-            frmreporte.toFront();
-
-        } else {
-            frmreporte.setVisible(true);
-        }
-    }//GEN-LAST:event_btnFiltrarActionPerformed
-
-    private void PanelFondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseMoved
-        // TODO add your handling code here:
-        refresh();
-    }//GEN-LAST:event_PanelFondoMouseMoved
-
-    private void TbProfesoresWhiteMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbProfesoresWhiteMouseMoved
-        // TODO add your handling code here:
-        refresh();
-    }//GEN-LAST:event_TbProfesoresWhiteMouseMoved
-
-    private void BtnInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInformeActionPerformed
-        // TODO add your handling code here:
-        imprimirPersonales();
-    }//GEN-LAST:event_BtnInformeActionPerformed
 
 
 
@@ -502,11 +521,19 @@ public class PanelProfesores extends javax.swing.JPanel {
     private Controles_Personalizados.Paneles.PanelRound PanelFondo;
     private javax.swing.JScrollPane PanelTabla;
     private javax.swing.JScrollPane PanelTablaDark;
-    private Controles_Personalizados.ScrollBar.ScrollBarCustom ScrollTabla;
     private Controles_Personalizados.Tables.TableDark TbProfesoresDark;
     private Controles_Personalizados.Tables.Table TbProfesoresWhite;
     private Controles_Personalizados.Botones.UWPButton btnAgregar;
     private Controles_Personalizados.Botones.UWPButton btnFiltrar;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JLabel lblPersonal;
+    private Controles_Personalizados.ScrollBar.ScrollBarCustom scrollBarCustom1;
+    private Controles_Personalizados.ScrollBar.ScrollBarCustom scrollBarCustom2;
     // End of variables declaration//GEN-END:variables
 }

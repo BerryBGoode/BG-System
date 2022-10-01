@@ -134,8 +134,7 @@ public class ModelParqueo {
     }
 
     /**
-     * This method save the registers of parking
-     *
+     * This method save the registers of parking*
      * @param idpark referring to the park ID
      * @param idacces referring to the access ID
      * @param idcar referring to the car ID
