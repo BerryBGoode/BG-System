@@ -96,15 +96,23 @@ public class PanelVehiculos extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         PanelFondo = new Controles_Personalizados.Paneles.PanelRound();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         lblVehiculos = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
         btnFiltrar = new Controles_Personalizados.Botones.UWPButton();
         btnAgregar = new Controles_Personalizados.Botones.UWPButton();
-        PanelTabla = new javax.swing.JScrollPane();
-        TbVehiculos = new Controles_Personalizados.Tables.Table();
-        ScrollTabla = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
         btnInforme = new Controles_Personalizados.Botones.UWPButton();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        scrollBarCustom1 = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TbVehiculos = new Controles_Personalizados.Tables.Table();
 
         setBackground(new java.awt.Color(42, 36, 56));
         setLayout(new java.awt.BorderLayout());
@@ -114,12 +122,27 @@ public class PanelVehiculos extends javax.swing.JPanel {
         PanelFondo.setPreferredSize(new java.awt.Dimension(1270, 620));
         PanelFondo.setRoundBottomLeft(20);
         PanelFondo.setRoundBottomRight(20);
-        PanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelFondo.setLayout(new java.awt.GridBagLayout());
+
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        jPanel2.setPreferredSize(new java.awt.Dimension(1240, 135));
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jPanel4.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel4.setPreferredSize(new java.awt.Dimension(1240, 75));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblVehiculos.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
         lblVehiculos.setForeground(new java.awt.Color(58, 50, 75));
-        lblVehiculos.setText("Vehículos");
-        PanelFondo.add(lblVehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        lblVehiculos.setText("Vehiculos");
+        jPanel4.add(lblVehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+
+        jPanel2.add(jPanel4, java.awt.BorderLayout.NORTH);
+
+        jPanel5.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel5.setPreferredSize(new java.awt.Dimension(1240, 70));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnFiltrar.setBackground(new java.awt.Color(58, 50, 75));
         btnFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Filtrar Blanco.png"))); // NOI18N
@@ -127,12 +150,7 @@ public class PanelVehiculos extends javax.swing.JPanel {
         btnFiltrar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         btnFiltrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFiltrarActionPerformed(evt);
-            }
-        });
-        PanelFondo.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 150, 40));
+        jPanel5.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 150, 40));
 
         btnAgregar.setBackground(new java.awt.Color(58, 50, 75));
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Agregar Blanco.png"))); // NOI18N
@@ -145,8 +163,12 @@ public class PanelVehiculos extends javax.swing.JPanel {
                 btnAgregarMouseClicked(evt);
             }
         });
-        PanelFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 150, 40));
-
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+        jPanel5.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 40));
 
         btnInforme.setBackground(new java.awt.Color(58, 50, 75));
         btnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
@@ -157,74 +179,79 @@ public class PanelVehiculos extends javax.swing.JPanel {
                 btnInformeActionPerformed(evt);
             }
         });
-        
+        jPanel5.add(btnInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 0, 150, 40));
 
+        jPanel2.add(jPanel5, java.awt.BorderLayout.CENTER);
+
+        jPanel1.add(jPanel2, java.awt.BorderLayout.NORTH);
+
+        jPanel3.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel3.setPreferredSize(new java.awt.Dimension(461, 403));
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        jPanel7.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel7.setLayout(new java.awt.BorderLayout());
+        jPanel3.add(jPanel7, java.awt.BorderLayout.NORTH);
+
+        jPanel6.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel6.setLayout(new java.awt.BorderLayout());
+
+        scrollBarCustom1.setBackground(new java.awt.Color(58, 50, 75));
+        scrollBarCustom1.setForeground(new java.awt.Color(58, 50, 75));
+        jPanel6.add(scrollBarCustom1, java.awt.BorderLayout.EAST);
+
+        jScrollPane1.setVerticalScrollBar(scrollBarCustom1);
+
+        TbVehiculos = new Controles_Personalizados.Tables.Table(){
+
+            public boolean isCellEditable(int indexRow, int indexCol){
+                return false;
+            }
+        };
         TbVehiculos.setBackground(new java.awt.Color(231, 234, 239));
         TbVehiculos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "CARNET", "NOMBRES", "TIPO USUARIO", "%ENTRADAS", "%SALIDAS", "ACCIONES"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return false;
-            }
-        });
-        TbVehiculos.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        ));
         TbVehiculos.setGridColor(new java.awt.Color(58, 50, 75));
-        TbVehiculos.setName(""); // NOI18N
+        TbVehiculos.setMaximumSize(new java.awt.Dimension(2147483647, 880));
+        TbVehiculos.setMinimumSize(new java.awt.Dimension(90, 880));
+        TbVehiculos.setPreferredSize(new java.awt.Dimension(450, 880));
         TbVehiculos.setSelectionBackground(new java.awt.Color(58, 50, 75));
         TbVehiculos.setShowVerticalLines(false);
+        TbVehiculos.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                TbVehiculosMouseMoved(evt);
+            }
+        });
         TbVehiculos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TbVehiculosMouseClicked(evt);
             }
         });
-        PanelTabla.setViewportView(TbVehiculos);
+        jScrollPane1.setViewportView(TbVehiculos);
 
-        PanelFondo.add(PanelTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 1230, 480));
+        jPanel6.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
-        ScrollTabla.setBackground(new java.awt.Color(58, 50, 75));
-        ScrollTabla.setForeground(new java.awt.Color(58, 50, 75));
-        PanelFondo.add(ScrollTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(1238, 177, 10, 40));
+        jPanel3.add(jPanel6, java.awt.BorderLayout.CENTER);
 
-        btnInforme.setBackground(new java.awt.Color(58, 50, 75));
-        btnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
-        btnInforme.setText("Informe");
-        btnInforme.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        btnInforme.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInformeActionPerformed(evt);
-            }
-        });
-        PanelFondo.add(btnInforme, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 140, 40));
+        jPanel1.add(jPanel3, java.awt.BorderLayout.CENTER);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(10, 15, 10, 15);
+        PanelFondo.add(jPanel1, gridBagConstraints);
 
         add(PanelFondo, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -353,12 +380,19 @@ public class PanelVehiculos extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Controles_Personalizados.Paneles.PanelRound PanelFondo;
-    private javax.swing.JScrollPane PanelTabla;
-    private Controles_Personalizados.ScrollBar.ScrollBarCustom ScrollTabla;
     private Controles_Personalizados.Tables.Table TbVehiculos;
     private Controles_Personalizados.Botones.UWPButton btnAgregar;
     private Controles_Personalizados.Botones.UWPButton btnFiltrar;
     private Controles_Personalizados.Botones.UWPButton btnInforme;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblVehiculos;
+    private Controles_Personalizados.ScrollBar.ScrollBarCustom scrollBarCustom1;
     // End of variables declaration//GEN-END:variables
 }

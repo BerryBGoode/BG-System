@@ -313,6 +313,7 @@ public class PanelProfesores extends javax.swing.JPanel {
 
         jPanel2.add(jPanel6, java.awt.BorderLayout.NORTH);
 
+        jPanel7.setBackground(new java.awt.Color(231, 234, 239));
         jPanel7.setLayout(new java.awt.BorderLayout());
 
         scrollBarCustom1.setBackground(new java.awt.Color(58, 50, 75));
