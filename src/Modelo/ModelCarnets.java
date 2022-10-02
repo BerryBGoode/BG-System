@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  * This class stores all the sentences necessary for the correct functioning of the id - cards section
@@ -118,6 +119,25 @@ public class ModelCarnets {
         } catch (Exception e) {
             System.out.println("Error"+e.toString());
             return null;
+        }
+    }
+    
+        /**
+     * Sets the carnets to people who do not have one
+     * @return 
+     */
+    public boolean GenerarCarnetsTodos(String año){
+        try {
+            con=ModelConexion.getConnection();
+            String query="UPDATE tbPersonal set Carnet = SUBSTRING(nombre_p, 1, 1) + SUBSTRING(apellido_p, 1,1) + ? + REPLACE(STR(idPersonal, 4), SPACE(1), '0') WHERE Carnet is null";
+            ps=con.prepareStatement(query);
+            ps.setString(1, año);
+            ps.execute();
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al llenar los carnets","Error al actualizar",JOptionPane.ERROR_MESSAGE);
+            System.out.println(e.toString());
+            return false;
         }
     }
 }

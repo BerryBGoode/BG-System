@@ -306,6 +306,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
             modelo.removeRow(0);
         }
         try {
+            obj.setNombre_usuario(FrmLogin.nombre);
             ResultSet rs = obj.CargarUsuarios_C();
             while (rs.next()) {
                 btnActualizar.setIcon(Modificar);
@@ -327,6 +328,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
             modelodark.removeRow(0);
         }
         try {
+            obj.setNombre_usuario(FrmLogin.nombre);
             ResultSet rs = obj.CargarUsuarios_C();
             while (rs.next()) {
                 btnActualizardark.setIcon(Modificardark);

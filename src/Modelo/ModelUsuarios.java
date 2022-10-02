@@ -73,10 +73,11 @@ public class ModelUsuarios {
          * @param con referring to Connection
          * @return a ResultSet
          */
-        public ResultSet CargarUsuarios(Connection con){
+        public ResultSet CargarUsuarios(String usuario, Connection con){
             try{
-                String query = "SELECT * FROM vwUsuarios";
+                String query = "SELECT * FROM vwUsuarios WHERE nombre_usuario != ?";
                 ps = con.prepareStatement(query);
+                ps.setString(1, usuario);
                 ResultSet rs = ps.executeQuery();
                 return rs;
             }catch(Exception e){

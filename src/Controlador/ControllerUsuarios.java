@@ -267,7 +267,7 @@ public class ControllerUsuarios {
      * @return a ResultSet
      */
     public ResultSet CargarUsuarios_C(){
-        return mdlusu.CargarUsuarios(con);
+        return mdlusu.CargarUsuarios(nombre_usuario, con);
     }
     
     /**
