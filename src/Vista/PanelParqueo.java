@@ -226,6 +226,11 @@ public class PanelParqueo extends javax.swing.JPanel {
         TbParqueosWhite = new Controles_Personalizados.Tables.Table();
 
         setBackground(new java.awt.Color(42, 36, 56));
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
+            }
+        });
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 formFocusGained(evt);
@@ -416,6 +421,7 @@ public class PanelParqueo extends javax.swing.JPanel {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         getdataPark();
+        refresh();
     }//GEN-LAST:event_formComponentShown
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
@@ -464,23 +470,27 @@ public class PanelParqueo extends javax.swing.JPanel {
                         }
                         //envio el station que en el q se registro, para que se habilite y pueda cambiar el parqueo                        
                         int IDAcceso = Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 3).toString());
-                        int IDVehiuclo = Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 6).toString());
+                        //int IDVehiuclo = Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 6).toString());
                         int IDstation = Integer.parseInt(tb.getModel().getValueAt(tb.getSelectedRow(), 8).toString());//numberpark
                         int ID = Integer.parseInt(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString());
                         int station = Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 9).toString());
                         int IDPark = Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 11).toString());
+                        
+                        int IDBeforeStation = IDstation;//esta variable sirve para guardar el IDestacionamiento  antes de actualizar, y sí se llega a cambiar, entonces a este estacionamiento
+                        //se le cambiará el estado a disponible
                         FrmSetPark.action = 1;//me refiero a que se va a actualizar, entonces que en wl switch bloquee todos los estacionamientos menos en el q se ingreso  
                         //FrmSetPark.setIDDetail(ID);
+                       
                         //setteo 
-
+                        //el objeto "park" hace referencia al FRMconfigpark 
                         controllerParqueo.setIDAcceso(IDAcceso);
-                        controllerParqueo.setIDVehiculo(IDVehiuclo);
+                        //controllerParqueo.setIDVehiculo(IDVehiuclo);
                         controllerParqueo.setIDEstacionamiento(IDstation);
                         FrmSetPark.setIDDetail(ID);
                         ControllerParqueo.setNumberPark(IDPark);
                         park.setStation(station);
                         park.setPark(tb.getModel().getValueAt(tb.getSelectedRow(), 11).toString());
-
+                        ControllerParqueo.setBeforeStation(IDBeforeStation);
                         park.setVisible(true);
                         frmstate = 1;
                         FrmSetPark.action = 1;
@@ -556,6 +566,11 @@ public class PanelParqueo extends javax.swing.JPanel {
             System.out.println(e.toString());
         }
     }//GEN-LAST:event_TbParqueosDarkMouseClicked
+    
+    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_formMouseMoved
 
     public void getdataPark() {
         String tablename = "vwDetalle_Estacionamientos";
