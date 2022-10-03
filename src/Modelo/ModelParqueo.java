@@ -120,7 +120,8 @@ public class ModelParqueo {
             sql.setInt(2, idacces);
             sql.setInt(3, idcar);
             sql.setInt(4, avalible);
-
+            System.out.println(idcar);
+            
             sql.execute();
             busyStateStation(idstation);
             return true;

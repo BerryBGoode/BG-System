@@ -6,7 +6,6 @@
 package Controlador;
 
 import Modelo.ModelParqueo;
-import java.awt.Color;
 import java.sql.ResultSet;
 
 /**

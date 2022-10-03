@@ -863,6 +863,8 @@ public class FrmConfigPark extends javax.swing.JFrame {
             int IDPark = (int) list.get(CmbParqueos.getSelectedIndex());
             ResultSet rs = controllerpark.checkStatePark(IDPark, idstation);
             if (rs.next()) {
+                //sí intentas borrar todos los detalles los estacionamientos saldrán igual, porque se debe actualizar
+                //los estacionamientos a estado 1
                 switch (rs.getInt("idEstado")) {
                     case 1:
                         pnl.setBackground(Color.white);
@@ -877,6 +879,7 @@ public class FrmConfigPark extends javax.swing.JFrame {
                         break;
                 }
             }
+            
         } catch (Exception e) {
         }
 
