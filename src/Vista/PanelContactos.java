@@ -21,6 +21,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import javax.swing.table.DefaultTableModel;
@@ -40,8 +41,7 @@ public class PanelContactos extends javax.swing.JPanel {
     /**
      * Creates new form PanelContactos
      */
-    
-     private Font font = new Font("Roboto Black", Font.PLAIN, 18);
+    private Font font = new Font("Roboto Black", Font.PLAIN, 18);
     DefaultTableModel model;
     DefaultComboBoxModel<String> modelcombo = new DefaultComboBoxModel<>();
     ArrayList list;
@@ -53,6 +53,7 @@ public class PanelContactos extends javax.swing.JPanel {
     int idContacto;
 
     FrmAgg_Contacto frmAgg_Contacto;
+    FrmReportesPar frmreporte = new FrmReportesPar("Contactos", "Ingrese nombres/apellidos/carné");
     UWPButton btnModificar = new UWPButton();
     UWPButton btnEliminar = new UWPButton();
     UWPButton btnReporte = new UWPButton();
@@ -261,6 +262,11 @@ public class PanelContactos extends javax.swing.JPanel {
         btnFiltrar1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         btnFiltrar1.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnFiltrar1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnFiltrar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrar1ActionPerformed(evt);
+            }
+        });
         PanelFondo.add(btnFiltrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 150, 40));
 
         add(PanelFondo, java.awt.BorderLayout.CENTER);
@@ -331,19 +337,26 @@ public class PanelContactos extends javax.swing.JPanel {
     }//GEN-LAST:event_tbContactosMouseClicked
 
     void ImprimirReporte() {
-        Connection con = ControllerConexion.getConnectionModel();
         try {
-            String path = "src/DocsReport/ReporteContactos.jasper";
-            JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(path);
-            JasperPrint jp = JasperFillManager.fillReport(jr, null, con);
-            JasperViewer jv = new JasperViewer(jp, false);
-            jv.setVisible(true);
-            System.out.println("si, se imprime");
-        } catch (JRException e) {
-            System.out.println("Error" + e.toString());
+            Connection con = ControllerConexion.getConnectionModel();
+            JasperReport reporte = null;
+            String dir = "src\\DocsReport\\ReporteContactos.jasper";
+            Map param = new HashMap<>();
+            param.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
+            param.put("Footer", "src\\Recursos_Proyecto\\TextoLogin.png");
+
+            reporte = (JasperReport) JRLoader.loadObjectFromFile(dir);
+
+            JasperPrint jprint = JasperFillManager.fillReport(reporte, param, con);
+
+            JasperViewer view = new JasperViewer(jprint, false);
+            view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            view.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.toString());
         }
     }
-    
+
     void Imprimir1() {
         Connection con = ControllerConexion.getConnectionModel();
         try {
@@ -351,16 +364,16 @@ public class PanelContactos extends javax.swing.JPanel {
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(path);
             Map param = new HashMap<>();
             param.put("idContacto", idContacto);
-            System.out.println(idContacto);
+            param.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
+            param.put("Footer", "src\\Recursos_Proyecto\\TextoLogin.png");
             JasperPrint jp = JasperFillManager.fillReport(jr, param, con);
             JasperViewer jv = new JasperViewer(jp, false);
             jv.setVisible(true);
-            System.out.println("si, se imprime");
         } catch (JRException e) {
             System.out.println("Error" + e.toString());
         }
     }
-    
+
 //    final void Refresh(){
 //        if (frmestate == 1 && !(frmAgg_Contacto.isActive())) {
 //            CargarTabla();
@@ -393,6 +406,15 @@ public class PanelContactos extends javax.swing.JPanel {
     private void PanelTablaMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelTablaMouseMoved
         CargarTabla();
     }//GEN-LAST:event_PanelTablaMouseMoved
+
+    private void btnFiltrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrar1ActionPerformed
+        // TODO add your handling code here:
+        if(frmreporte.isVisible()){
+            frmreporte.toFront();
+        }else{
+            frmreporte.setVisible(true);
+        }
+    }//GEN-LAST:event_btnFiltrar1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -208,7 +208,6 @@ public class FrmAgg_Vehiculos extends javax.swing.JFrame {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         GuardarVehiculo();
-        this.dispose();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMousePressed
@@ -223,7 +222,6 @@ public class FrmAgg_Vehiculos extends javax.swing.JFrame {
 
     private void btnConfirmar_CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmar_CActionPerformed
         ActualizarVehiculo();
-        this.dispose();
     }//GEN-LAST:event_btnConfirmar_CActionPerformed
 
     private void btnConfirmarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarMouseClicked
@@ -241,16 +239,20 @@ public class FrmAgg_Vehiculos extends javax.swing.JFrame {
     private void txtColorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorKeyTyped
         // TODO add your handling code here:
         char key = evt.getKeyChar();
-        if(txtColor.getText().length() >= 200){
+        if(! Character.isLetter(key) && ! Character.isWhitespace(key)){
             evt.consume();
-        }else if(txtColor.getText().length() == 0 && Character.isWhitespace(key)){
-            evt.consume();
-        }else if(txtColor.getText().length() > 0){
-            String text = txtColor.getText();
-            String ultimo = text.substring(text.length() - 1);
-            if(ultimo != null && ultimo.equals(" ") && Character.isWhitespace(key)){
-               evt.consume();
-            }   
+        }else{
+            if(txtColor.getText().length() >= 20){
+                evt.consume();
+            }else if(txtColor.getText().length() == 0 && Character.isWhitespace(key)){
+                evt.consume();
+            }else if(txtColor.getText().length() > 0){
+                String text = txtColor.getText();
+                String ultimo = text.substring(text.length() - 1);
+                if(ultimo != null && ultimo.equals(" ") && Character.isWhitespace(key)){
+                   evt.consume();
+                }   
+            }
         }
     }//GEN-LAST:event_txtColorKeyTyped
 
@@ -290,27 +292,41 @@ public class FrmAgg_Vehiculos extends javax.swing.JFrame {
         if (txtPlaca.getText().trim().isEmpty() || txtColor.getText().trim().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Existen campos vacios, favor llenarlos todos", "Campos vacios", JOptionPane.WARNING_MESSAGE);
         } else {
-            ControllerVehiculos.idPersonal = Integer.parseInt(txtIDPersonal.getText());
-            ControllerVehiculos.placa = txtPlaca.getText();
-            ControllerVehiculos.color = txtColor.getText();
-            if (ControllerVehiculos.RegistrarVehiculo_Controller() == true) {
-                JOptionPane.showMessageDialog(this, "Vehiculo registrado con exito", "Proceso de registro", JOptionPane.INFORMATION_MESSAGE);
-            } else {
-                JOptionPane.showMessageDialog(this, "Vehiculo no fue registrado", "Proceso de registro", JOptionPane.ERROR_MESSAGE);
+            if(txtPlaca.getText().length() > 5){
+                ControllerVehiculos.idPersonal = Integer.parseInt(txtIDPersonal.getText());
+                ControllerVehiculos.placa = txtPlaca.getText();
+                ControllerVehiculos.color = txtColor.getText();
+                if (ControllerVehiculos.RegistrarVehiculo_Controller() == true) {
+                    ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso de registro", "Vehiculo registrado con exito", 1);
+                    this.dispose();
+                } else {
+                    ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso de registro", "Vehiculo no fue registrado", 3);
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "El formato de la placa ingresada es incorrecto", "Informacion erronea", JOptionPane.WARNING_MESSAGE);
             }
         }
     }
 
     void ActualizarVehiculo() {
-        ControllerVehiculos.idvehiculo = idvehiculo;
-        ControllerVehiculos.placa = txtPlaca.getText();
-        ControllerVehiculos.color = txtColor.getText();
-        ControllerVehiculos.idPersonal = idpersonal;
-        System.out.println(idpersonal);
-        if (ControllerVehiculos.ActualizarVehiculo_Controller() == true) {
-            JOptionPane.showMessageDialog(this, "Vehiculo actualizado con exito", "Proceso de actualizacion", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(this, "Vehiculo no fue actualizado", "Proceso de actualizacion", JOptionPane.ERROR_MESSAGE);
+        if (txtPlaca.getText().trim().isEmpty() || txtColor.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Existen campos vacios, favor llenarlos todos", "Campos vacios", JOptionPane.WARNING_MESSAGE);
+        }else {
+            if(txtPlaca.getText().length() > 5){
+                ControllerVehiculos.idvehiculo = idvehiculo;
+                ControllerVehiculos.placa = txtPlaca.getText();
+                ControllerVehiculos.color = txtColor.getText();
+                ControllerVehiculos.idPersonal = idpersonal;
+                System.out.println(idpersonal);
+                if (ControllerVehiculos.ActualizarVehiculo_Controller() == true) {
+                    ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso de actualizacion", "Vehiculo actualizado con exito", 1);
+                    this.dispose();
+                } else {
+                    ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso de actualizacion", "Vehiculo no fue actualizado", 3);
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "El formato de la placa ingresada es incorrecto", "Informacion erronea", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }
 

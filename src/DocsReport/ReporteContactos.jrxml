@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4361fc05-972d-4c31-ad39-4d785c733b89">
-	<queryString language="SQL">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Footer" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
 		<![CDATA[SELECT * FROM vwContactos]]>
 	</queryString>
 	<field name="idContacto" class="java.lang.Integer"/>
@@ -13,24 +22,92 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="169" y="23" width="283" height="34" forecolor="#17141D" uuid="a1283cdf-5043-495a-8fd7-b7204a11c8ed"/>
+				<textElement>
+					<font size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de contactos:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="1" y="3" width="85" height="71" uuid="7c6347cf-625c-4e21-8245-4b09a5636607"/>
+				<imageExpression><![CDATA[$P{Logo}.toString()]]></imageExpression>
+			</image>
+		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch"/>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="113" y="8" width="100" height="20" uuid="b687b768-a739-4b20-ae6a-8f08f4a2b23d"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contacto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="228" y="8" width="100" height="20" uuid="4014b194-75ee-496a-ad57-24fd0ed77e60"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Personal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="454" y="8" width="126" height="20" uuid="1fa0c759-bb8b-4f50-a2a4-8b4e7527ddbe"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de contacto]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="c95b18b2-d467-4009-8580-700c25b6360d"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idContacto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="113" y="0" width="100" height="20" uuid="588bf876-89f4-4991-bb4a-105deb488d51"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contacto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="228" y="0" width="218" height="20" uuid="fb7782cd-5bc2-4ef1-88b6-f4b0c7dcbe5f"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Personal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="458" y="0" width="114" height="20" uuid="66e27b1c-a733-4f02-aa91-dfc59bcb5a2e"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo_contacto}]]></textFieldExpression>
+			</textField>
+		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="54" splitType="Stretch">
+			<image>
+				<reportElement x="492" y="24" width="80" height="30" uuid="7c9e31ab-ee6c-4e23-a2b7-3d030a767478"/>
+				<imageExpression><![CDATA[$P{Footer}.toString()]]></imageExpression>
+			</image>
+		</band>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</summary>
 </jasperReport>

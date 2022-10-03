@@ -210,7 +210,7 @@ public class PanelVehiculos extends javax.swing.JPanel {
         btnInforme.setBackground(new java.awt.Color(58, 50, 75));
         btnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
         btnInforme.setText("Informe");
-        btnInforme.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        btnInforme.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         btnInforme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInformeActionPerformed(evt);
@@ -320,14 +320,13 @@ public class PanelVehiculos extends javax.swing.JPanel {
             String path = "src/DocsReport/VehiculosReportPar.jasper";
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(path);
             Map param = new HashMap<>();
-            param.put("idVehiculo", idvehiculo);
+            System.out.println(idvehiculo);
+            param.put("idvehiculo", idvehiculo);
             param.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
             param.put("Pie", "src\\Recursos_Proyecto\\TextoLogin.png");
-            System.out.println(idvehiculo);
             JasperPrint jp = JasperFillManager.fillReport(jr, param, con);
             JasperViewer jv = new JasperViewer(jp, false);
             jv.setVisible(true);
-            System.out.println("si, se imprime");
         } catch (JRException e) {
             System.out.println("Error" + e.toString());
         }
