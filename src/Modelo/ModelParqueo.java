@@ -5,14 +5,14 @@
  */
 package Modelo;
 
-import com.sun.org.apache.xerces.internal.parsers.IntegratedParserConfiguration;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- *  This class stores all the sentences necessary for the correct functioning of the parking section
+ * This class stores all the sentences necessary for the correct functioning of the parking section
+ *
  * @author danlo
  */
 public class ModelParqueo {
@@ -22,9 +22,9 @@ public class ModelParqueo {
     Connection con;
 
     //con este método recupero el ID del parqueo con el número de parqueo (el que sale en el cmb de configPark)
-
     /**
-     *  With this method the ID of the parking lot is retrieved with the parking number
+     * With this method the ID of the parking lot is retrieved with the parking number
+     *
      * @param park referring to the parking lot ID
      * @return a ResultSet
      */
@@ -42,9 +42,9 @@ public class ModelParqueo {
     }
 
     //cargar los datos que se leen en el textfield y en el cmb de configpark
-
     /**
-     *  Load the data that is read in the textfield and in the cmb of configpark
+     * Load the data that is read in the textfield and in the cmb of configpark
+     *
      * @return a ResultSet
      */
     public ResultSet loadPark() {
@@ -60,9 +60,9 @@ public class ModelParqueo {
     }
 
     //método para obtener el idestacionamiento, por medio del numero de estacionamiento y el IDparqueo
-
     /**
-     *  Method to obtain the identification, by the parking number and the IDparqueo
+     * Method to obtain the identification, by the parking number and the IDparqueo
+     *
      * @param station referring to the spot of the parking lot
      * @param idpark referring to the park ID
      * @return a ResultSet
@@ -83,9 +83,9 @@ public class ModelParqueo {
     }
 
     //cargar la ubicación del parqueo a partir del número de parqueo, (cuando se seleccione un parqueo en el cmb, se traera los datos que saque este método)
-
     /**
      * Load the location of the parking lot from the parking number, (when a parking lot is selected in the cmb, the data obtained by this method will be brought)
+     *
      * @param parkString referring to the location
      * @return a ResultSet
      */
@@ -103,9 +103,10 @@ public class ModelParqueo {
     }
 
     /**
-     * This method save the registers of parking 
+     * This method save the registers of parking
+     *
      * @param idacces referring to the access ID
-     * @param idcar referring to the car ID 
+     * @param idcar referring to the car ID
      * @param idstation referring to the spot ID
      * @return a Boolean
      */
@@ -118,9 +119,11 @@ public class ModelParqueo {
             sql.setInt(1, idstation);
             sql.setInt(2, idacces);
             sql.setInt(3, idcar);
-            sql.setInt(4, 1);
+            sql.setInt(4, avalible);
+            System.out.println(idcar);
             
             sql.execute();
+            busyStateStation(idstation);
             return true;
         } catch (SQLException e) {
             System.out.println("Error: " + e.toString());
@@ -131,9 +134,8 @@ public class ModelParqueo {
         }
     }
 
-
     /**
-     * This method save the registers of parking 
+     * This method save the registers of parking*
      * @param idpark referring to the park ID
      * @param idacces referring to the access ID
      * @param idcar referring to the car ID
@@ -141,10 +143,15 @@ public class ModelParqueo {
      * @param iddetail referring to the detail ID
      * @return a Boolean
      */
-    public boolean updatePark(int idpark, int idacces, int idcar,  int idstation, int iddetail) {
+    public boolean updatePark(int idacces, int idcar, int idstation, int iddetail, int beforestation) {
         int busy = 1;
         boolean result;
         try {
+            System.out.println(beforestation);
+            if (idstation != beforestation) {
+                deleteStateStion(beforestation);
+                System.out.println("Son diferentes");
+            }
             con = ModelConexion.getConnection();
             sql = con.prepareStatement("UPDATE tbDetalle_Acceso SET  IDEstacionamiento =  ?, IDAcceso = ? , IDVehiculo = ?, IDEstado = ? WHERE IDDetalle  = ? ");
             System.out.println("Model: " + idstation + " " + idacces + " " + idcar + " " + iddetail);
@@ -152,9 +159,9 @@ public class ModelParqueo {
             sql.setInt(2, idacces);
             sql.setInt(3, idcar);
             sql.setInt(4, busy);
-            sql.setInt(5, iddetail);
-
+            sql.setInt(5, iddetail);            
             sql.execute();
+            busyStateStation(idstation);
             return result = true;
         } catch (SQLException e) {
             System.out.println("Error: " + e.toString());
@@ -163,7 +170,8 @@ public class ModelParqueo {
     }
 
     /**
-     *Gets the spot ID
+     * Gets the spot ID
+     *
      * @return a ResultSet
      */
     public ResultSet getIDStation() {
@@ -179,54 +187,34 @@ public class ModelParqueo {
     }
 
     /**
-     *  Check the parking spot State
-     * @param park referring to the park spot ID
-     * @return an Integer
+     * Check the parking spot State
+     *
+     * @param idpark referring to the park spot
+     * @param idstation
+     * @return an ResultSet
      */
-    public int checkState(int park) {
-        int result;
+    public ResultSet checkState(int idpark, int idstation) {       
         try {
             con = ModelConexion.getConnection();
-            sql = con.prepareStatement("SELECT idEstado FROM tbEstacionamientos WHERE idParqueo = ? ");
-            sql.setInt(1, park);
+            sql = con.prepareStatement("SELECT * FROM tbEstacionamientos WHERE idParqueo = ? AND numero_estacionamiento = ?");
+            sql.setInt(1, idpark);
+            sql.setInt(2, idstation);
+
             rs = sql.executeQuery();
-            if (rs.next()) {
-                switch (rs.getInt("idEstado")) {
-                    case 0:
-                        result = 0;
-                        //no esta regristado ni por primera vez
-                        //o desocupad
-                        break;
-                    case 1:
-                        result = 1;
-                        //esta regristrado y esta disponible
-                        break;
-                    case 2:
-                        result = 2;
-                        //esta registrado y ocupado
-                        break;
-                    default:
-                        result = 3;
-                        //no se evaluan en niguno
-                        break;
-                }
-            } else {
-                result = 0;
-                //no hay dats
-            }
-            return result;
+            
+            return rs;
         } catch (SQLException e) {
             System.out.println("Error: " + e.toString());
-            return -1;
+            return null;
         }
     }
-    
+
     /**
      *  This method delete the information filtered by the ID of the park spot
      * @param   iddetail  referring to the spot in the parking lot
      * @return a Boolean
      */
-    public boolean deletePark(int iddetail) {
+    public boolean deletePark(int iddetail, int idstation) {
         int disable = 2;
         try {
             con = ModelConexion.getConnection();
@@ -235,6 +223,7 @@ public class ModelParqueo {
             sql.setInt(1, disable);
             sql.setInt(2, iddetail);
             sql.execute();
+            deleteStateStion(idstation);
             return true;
         } catch (SQLException e) {
             System.out.println("Error: " + e.toString());
@@ -244,13 +233,14 @@ public class ModelParqueo {
 
     //con este método recupero los vehiculos que tenga registrado el personal con el carnet que se selecciono
     /**
-     *  With this method, the vehicles registered by the staff with the card that was selected are recovered.
+     * With this method, the vehicles registered by the staff with the card that was selected are recovered.
+     *
      * @param viewname referring to the view of the database
      * @param parametername referring to the parameters
      * @param carnet referring to the id - card of the user
      * @return a ResultSet
      */
-    public ResultSet getCarByPersonal(String viewname, String parametername, String carnet){
+    public ResultSet getCarByPersonal(String viewname, String parametername, String carnet) {
         try {
             con = ModelConexion.getConnection();
             sql = con.prepareStatement("SELECT * FROM " + viewname + " WHERE " + parametername + " = ?");
@@ -262,4 +252,50 @@ public class ModelParqueo {
             return null;
         }
     }
+
+    /**
+     * With this method set update in tbestacionamientos, this method chage the state on this table on database, for checked state where the user wannna to enter a data
+     *
+     * @param idpark
+     * @param idstation
+     * @return
+     */
+    public boolean busyStateStation(int idstation) {
+        int busy = 2;
+        try {
+            con = ModelConexion.getConnection();
+            sql = con.prepareStatement("UPDATE tbEstacionamientos SET idEstado = ? WHERE  idEstacionamiento = ? ");
+            sql.setInt(1, busy);
+            sql.setInt(2, idstation);
+            sql.execute();
+            System.out.println(idstation);
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error Model: " + e.toString());
+            return false;
+        }
+    }
+    
+    /**
+     * 
+     * this method chage the state on busy to avalible  in tbEstacionamientos
+     * @param idstation
+     * @return 
+     */
+    public boolean deleteStateStion(int idstation){
+         int avalible = 1;
+        try {
+            con = ModelConexion.getConnection();
+            sql = con.prepareStatement("UPDATE tbEstacionamientos SET idEstado = ? WHERE  idEstacionamiento = ? ");
+            sql.setInt(1, avalible);
+            sql.setInt(2, idstation);
+            sql.execute();
+            System.out.println("cambia el estado del estacionamiento: "+idstation);
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error Model: " + e.toString());
+            return false;
+        }
+    }
+    
 }

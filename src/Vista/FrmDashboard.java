@@ -64,9 +64,6 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     ControllerBuscador obj = new ControllerBuscador();
     //PanelDashboard pld = new PanelDashboard();
     ControllerLogin clog = new ControllerLogin();
-    PanelUsuarios_dashbord pu = new PanelUsuarios_dashbord();
-    PanelProfesores pp = new PanelProfesores();
-    PanelEstudiantes pe = new PanelEstudiantes();
     private int iduser;
 
     /**
@@ -1210,9 +1207,10 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         ValidacionesSistema.ValidacionesBeep_Go.Modo = 2;
         NormalMode();
         pld.mode();
-        pu.darkmod();
-        //pe.mododash();
-        pp.mododash();
+        plU.darkmod();
+        plE.mododash();
+        plP.mododash();
+        plC.mooddash();
         if (_pnldash.isShowing()) {
 
             _pnldash.hide();
@@ -1225,9 +1223,10 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         ValidacionesSistema.ValidacionesBeep_Go.Modo = 1;
         DarkMode();
         pld.mode();
-        pu.darkmod();
-       // pe.mododash();
-        pp.mododash();
+        plE.mododash();
+        plU.darkmod();
+        plP.mododash();
+        plC.mooddash();
         _pnldash.hide();
         if (_pnldash.isVisible()) {
 

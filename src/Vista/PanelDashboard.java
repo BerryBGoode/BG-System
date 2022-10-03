@@ -22,22 +22,32 @@ public class PanelDashboard extends javax.swing.JPanel {
      */
     public PanelDashboard() {
         initComponents();
+        System.out.println(ValidacionesSistema.ValidacionesBeep_Go.Modo);
         CargarGraficasGeneral();
-        Grafica1.addLegend("Entradas", new Color(53, 47, 68));
-        Grafica1.setBackground(new Color(231,234,239));
-        Grafica1.addLegend("Salidas", new Color(92, 84, 112));
-        Grafica1.addData(new ModelChart("Entradas", new double[]{Cont, 0, 0,0}));
-        Grafica1.addData(new ModelChart("Salidas", new double[]{Cont2, 0,0,0} ));
-        Grafica2.setBackground(new Color(231,234,239));
-        Grafica2.addLegend("Administradores", new Color(53, 47, 68));
-        Grafica2.addData(new ModelChart("Administradores", new double[]{R_Admins, 0,0,0} ));
-        Grafica2.addLegend("Docentes", new Color(92, 84, 112));
-        Grafica2.addData(new ModelChart("Docentes", new double[]{R_Profes, 0,0,0} ));
-        Grafica2.addLegend("Alumnos", new Color(92, 84, 112));
-        Grafica2.addData(new ModelChart("Alumnos", new double[]{R_Alumnos, 0,0,0} ));
-        Grafica2.addLegend("Seguridad", new Color(219, 216, 227));
-        Grafica2.addData(new ModelChart("Seguridad", new double[]{R_Seguridad, 0,0,0} ));
+        System.out.println("PanelDashBoard modo: "+ValidacionesSistema.ValidacionesBeep_Go.Modo);
         mod();
+        //            Grafica1.addLegend("Entradas", new Color(58, 50, 75));
+//            Grafica1.setBackground(new Color(231, 234, 239));
+//            Grafica1.addLegend("Salidas", new Color(58, 50, 75));
+//            Grafica2.setBackground(new Color(231, 234, 239));
+//            Grafica2.addLegend("Administradores", new Color(58, 50, 75));
+//            Grafica2.addLegend("Docentes", new Color(58, 50, 75));
+//            Grafica2.addLegend("Alumnos", new Color(58, 50, 75));
+//            Grafica2.addLegend("Seguridad", new Color(58, 50, 75));
+        Grafica1.addLegend("Entradas", new Color(92, 84, 112));
+        Grafica1.setBackground(new Color(231, 234, 239));
+        Grafica1.addLegend("Salidas", new Color(92, 84, 112));
+        Grafica2.setBackground(new Color(231, 234, 239));
+        Grafica2.addLegend("Administradores", new Color(92, 84, 112));
+        Grafica2.addLegend("Docentes", new Color(92, 84, 112));
+        Grafica2.addLegend("Alumnos", new Color(92, 84, 112));
+        Grafica2.addLegend("Seguridad", new Color(92, 84, 112));
+        Grafica1.addData(new ModelChart("Entradas", new double[]{Cont, 0, 0, 0}));
+        Grafica1.addData(new ModelChart("Salidas", new double[]{Cont2, 0, 0, 0}));
+        Grafica2.addData(new ModelChart("Administradores", new double[]{R_Admins, 0, 0, 0}));
+        Grafica2.addData(new ModelChart("Docentes", new double[]{R_Profes, 0, 0, 0}));
+        Grafica2.addData(new ModelChart("Alumnos", new double[]{R_Alumnos, 0, 0, 0}));
+        Grafica2.addData(new ModelChart("Seguridad", new double[]{R_Seguridad, 0, 0, 0}));
     }
 
     ControllerBuscador obj = new ControllerBuscador();
@@ -84,9 +94,8 @@ public class PanelDashboard extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
-    
-    void CargarAdmins()
-    {
+
+    void CargarAdmins() {
         ResultSet rs = obj.cargarAdminsController();
         R_Admins = 0;
         try {
@@ -99,9 +108,8 @@ public class PanelDashboard extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
-    
-    void CargarProfes()
-    {
+
+    void CargarProfes() {
         ResultSet rs = obj.cargarProfesController();
         R_Profes = 0;
         try {
@@ -114,9 +122,8 @@ public class PanelDashboard extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
-    
-        void CargarAlumnos()
-    {
+
+    void CargarAlumnos() {
         ResultSet rs = obj.cargarAlumnosController();
         R_Alumnos = 0;
         try {
@@ -129,9 +136,8 @@ public class PanelDashboard extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
-        
-         void CargarSeguridad()
-    {
+
+    void CargarSeguridad() {
         ResultSet rs = obj.cargarSeguridadController();
         R_Seguridad = 0;
         try {
@@ -144,34 +150,50 @@ public class PanelDashboard extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
-        
-
 
     public void mode() {
         switch (ValidacionesSistema.ValidacionesBeep_Go.getModo()) {
             case 1:
-
-                PanelGrafica1.setBackground(new Color(32, 34, 37));
+                jPanel7.setBackground(new Color(47, 49, 54));
+                jPanel5.setBackground(new Color(47, 49, 54));
+                pnlWestNotifi.setBackground(new Color(47, 49, 54));
+                panelRound2.setBackground(new Color(47, 49, 54));
+                panelRound6.setBackground(new Color(47, 49, 54));
+                pnlNorthNotifi.setBackground(new Color(47, 49, 54));
+                jPanel1.setBackground(new Color(47, 49, 54));
+                jPanel4.setBackground(new Color(47, 49, 54));
+                jPanel11.setBackground(new Color(47, 49, 54));
+                PanelGrafica1.setBackground(new Color(47, 49, 54));
+                panelRound1.setBackground(new Color(47, 49, 54));
+                jPanel6.setBackground(new Color(47, 49, 54));
+                jPanel9.setBackground(new Color(47, 49, 54));
+                PanelGrafica3.setBackground(new Color(47, 49, 54));
+                lblNoti.setForeground(new Color(231, 234, 239));
+                PanelNotificaciones.setBackground(new Color(32, 34, 37));
+                panelRound.setBackground(new Color(47, 49, 54));
+                Grafica1.setBackground(new Color(32, 34, 37));
+                Grafica2.setBackground(new Color(32, 34, 37));
                 break;
             case 2:
-
-                PanelGrafica1.setBackground(new Color(253, 255, 254));
-                PanelGrafica3.setBackground(new Color(253, 255, 254));
-                PanelGrafica3.setBackground(new Color(253, 255, 254));
-                jPanel10.setBackground(new Color(231,234,239));
-                jPanel11.setBackground(new Color(231,234,239));
-                jPanel4.setBackground(new Color(231,234,239));
-                panelRound1.setBackground(new Color(231,234,239));
-                panelRound2.setBackground(new Color(231,234,239));
-                pnlWestNotifi.setBackground(new Color(231,234,239));
-                pnlNorthNotifi.setBackground(new Color(231,234,239));
-                panelRound6.setBackground(new Color(231,234,239));
-                jPanel6.setBackground(new Color(231,234,239));
-                jPanel5.setBackground(new Color(231,224,239));
-                panelRound.setBackground(new Color(231,234,239));
-
-                lblNoti.setForeground(Color.BLACK);
-                PanelNotificaciones.setBackground(new Color(253, 255, 254));
+                jPanel7.setBackground(new Color(231, 234, 239));
+                jPanel5.setBackground(new Color(231, 234, 239));
+                pnlWestNotifi.setBackground(new Color(231, 234, 239));
+                panelRound2.setBackground(new Color(231, 234, 239));
+                panelRound6.setBackground(new Color(231, 234, 239));
+                pnlNorthNotifi.setBackground(new Color(231, 234, 239));
+                jPanel1.setBackground(new Color(231, 234, 239));
+                jPanel4.setBackground(new Color(231, 234, 239));
+                jPanel11.setBackground(new Color(231, 234, 239));
+                PanelGrafica1.setBackground(new Color(231, 234, 239));
+                panelRound1.setBackground(new Color(231, 234, 239));
+                jPanel6.setBackground(new Color(231, 234, 239));
+                jPanel9.setBackground(new Color(231, 234, 239));
+                PanelGrafica3.setBackground(new Color(231, 234, 239));
+                lblNoti.setForeground(new Color(0, 0, 0));
+                PanelNotificaciones.setBackground(new Color(255, 255, 254));
+                panelRound.setBackground(new Color(231, 234, 239));
+                Grafica1.setBackground(new Color(231, 234, 239));
+                Grafica2.setBackground(new Color(231, 234, 239));
                 break;
 
         }
@@ -179,11 +201,58 @@ public class PanelDashboard extends javax.swing.JPanel {
 
     public void mod() {
         if (ValidacionesSistema.ValidacionesBeep_Go.getModo() == 1) {
-
-        } else if (ValidacionesSistema.ValidacionesBeep_Go.getModo() == 2) {
-
+            jPanel7.setBackground(new Color(47, 49, 54));
+            jPanel5.setBackground(new Color(47, 49, 54));
+            pnlWestNotifi.setBackground(new Color(47, 49, 54));
+            panelRound2.setBackground(new Color(47, 49, 54));
+            panelRound6.setBackground(new Color(47, 49, 54));
+            pnlNorthNotifi.setBackground(new Color(47, 49, 54));
+            jPanel1.setBackground(new Color(47, 49, 54));
+            jPanel4.setBackground(new Color(47, 49, 54));
+            jPanel11.setBackground(new Color(47, 49, 54));
+            PanelGrafica1.setBackground(new Color(47, 49, 54));
+            panelRound1.setBackground(new Color(47, 49, 54));
+            jPanel6.setBackground(new Color(47, 49, 54));
+            jPanel9.setBackground(new Color(47, 49, 54));
+            PanelGrafica3.setBackground(new Color(47, 49, 54));
+            lblNoti.setForeground(new Color(231, 234, 239));
+            PanelNotificaciones.setBackground(new Color(32, 34, 37));
             panelRound.setBackground(new Color(47, 49, 54));
+//            Grafica1.addLegend("Entradas", new Color(231, 234, 239));
+//            Grafica1.setBackground(new Color(32, 34, 37));
+//            Grafica1.addLegend("Salidas", new Color(231, 234, 239));
+//            Grafica2.setBackground(new Color(32, 34, 37));
+//            Grafica2.addLegend("Administradores", new Color(231, 234, 239));
+//            Grafica2.addLegend("Docentes", new Color(231, 234, 239));
+//            Grafica2.addLegend("Alumnos", new Color(231, 234, 239));
+//            Grafica2.addLegend("Seguridad", new Color(231, 234, 239));
+
         } else if (ValidacionesSistema.ValidacionesBeep_Go.getModo() == 2) {
+            jPanel7.setBackground(new Color(231, 234, 239));
+            jPanel5.setBackground(new Color(231, 234, 239));
+            pnlWestNotifi.setBackground(new Color(231, 234, 239));
+            panelRound2.setBackground(new Color(231, 234, 239));
+            panelRound6.setBackground(new Color(231, 234, 239));
+            pnlNorthNotifi.setBackground(new Color(231, 234, 239));
+            jPanel1.setBackground(new Color(231, 234, 239));
+            jPanel4.setBackground(new Color(231, 234, 239));
+            jPanel11.setBackground(new Color(231, 234, 239));
+            PanelGrafica1.setBackground(new Color(231, 234, 239));
+            panelRound1.setBackground(new Color(231, 234, 239));
+            jPanel6.setBackground(new Color(231, 234, 239));
+            jPanel9.setBackground(new Color(231, 234, 239));
+            PanelGrafica3.setBackground(new Color(231, 234, 239));
+            lblNoti.setForeground(new Color(0, 0, 0));
+            PanelNotificaciones.setBackground(new Color(255, 255, 254));
+            panelRound.setBackground(new Color(231, 234, 239));
+//            Grafica1.addLegend("Entradas", new Color(58, 50, 75));
+//            Grafica1.setBackground(new Color(231, 234, 239));
+//            Grafica1.addLegend("Salidas", new Color(58, 50, 75));
+//            Grafica2.setBackground(new Color(231, 234, 239));
+//            Grafica2.addLegend("Administradores", new Color(58, 50, 75));
+//            Grafica2.addLegend("Docentes", new Color(58, 50, 75));
+//            Grafica2.addLegend("Alumnos", new Color(58, 50, 75));
+//            Grafica2.addLegend("Seguridad", new Color(58, 50, 75));
         }
     }
 
