@@ -57,8 +57,8 @@ public class PanelEstudiantes extends javax.swing.JPanel {
      */
     public PanelEstudiantes() {
         initComponents();
-        TbAlumnosDark.setVisible(false);
-        TablaDark.setVisible(false);
+        mood();
+        System.out.println("El modo en estudiantes es: " + ValidacionesSistema.ValidacionesBeep_Go.Modo);
         //Titulos de los campos que se cargan en la tabla
         String[] TitulosAlumnos = {"IDPersonal", "Nombres", "Apellidos", " Nacimiento", "Documento", "Carné", "Tipo Personal", "Direccion", "Correo", "IDTD", "IDTP", "IDG", "Genero", "Tipo Documento", "Modificar", "Eliminar", "Registro"};
         ModelAlumnos = new DefaultTableModel(null, TitulosAlumnos) {
@@ -92,14 +92,113 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         TbAlumnosDark.removeColumn(TbAlumnosDark.getColumnModel().getColumn(7));
         TbAlumnosDark.removeColumn(TbAlumnosDark.getColumnModel().getColumn(6));
         TbAlumnosDark.removeColumn(TbAlumnosDark.getColumnModel().getColumn(5));
-        
-        
     }
 
     final void refresh() {
         if (frmstate == 1 && !(add.isActive())) {
             cargarTabla();
             frmstate = 0;
+        }
+    }
+
+    void mood() {
+        if (ValidacionesSistema.ValidacionesBeep_Go.Modo == 1) {
+            lblPersonal.setForeground(Color.WHITE);
+            jPanel4.setBackground(new Color(47, 49, 54));
+            PanelFondo.setBackground(new Color(47, 49, 54));
+            jPanel5.setBackground(new Color(47, 49, 54));
+            jPanel2.setBackground(new Color(47, 49, 54));
+            btnAgregar.setBackground(new Color(32, 34, 37));
+            btnFiltrar.setBackground(new Color(32, 34, 37));
+            BtnReporte.setBackground(new Color(32, 34, 37));
+            jPanel6.setBackground(new Color(47, 49, 54));
+            jPanel7.setBackground(new Color(47, 49, 54));
+            btnActualizar.setBackground(new Color(32, 34, 37));
+            btnEliminar.setBackground(new Color(32, 34, 37));
+            btnReporteP.setBackground(new Color(32, 34, 37));
+            btnActualizar.setIcon(Modificardark);
+            btnEliminar.setIcon(Eliminardark);
+            btnReporteP.setIcon(reportedark);
+            TbAlumnosDark.setForeground(Color.WHITE);
+            TablaDark.setVisible(true);
+            TbAlumnosDark.setVisible(true);
+            scrollBarWhite.setVisible(false);
+            jScrollPane1.setVisible(false);
+            TbAlumnos.setVisible(false);
+        } else {
+            lblPersonal.setForeground(new Color(58, 50, 75));
+            jPanel4.setBackground(new Color(231, 234, 239));
+            PanelFondo.setBackground(new Color(231, 234, 239));
+            jPanel5.setBackground(new Color(231, 234, 239));
+            jPanel2.setBackground(new Color(231, 234, 239));
+            btnAgregar.setBackground(new Color(58, 50, 75));
+            btnFiltrar.setBackground(new Color(58, 50, 75));
+            BtnReporte.setBackground(new Color(58, 50, 75));
+            jPanel6.setBackground(new Color(231, 234, 239));
+            jPanel7.setBackground(new Color(231, 234, 239));
+            btnActualizar.setBackground(new Color(231, 234, 239));
+            btnEliminar.setBackground(new Color(231, 234, 239));
+            btnReporteP.setBackground(new Color(231, 234, 239));
+            btnActualizar.setIcon(modificar);
+            btnEliminar.setIcon(eliminar);
+            btnReporteP.setIcon(reporteimg);
+            TablaDark.setVisible(false);
+            TbAlumnosDark.setVisible(false);
+            scrollBarWhite.setVisible(true);
+            jScrollPane1.setVisible(true);
+            TbAlumnos.setVisible(true);
+        }
+    }
+
+    public void mododash() {
+        switch (ValidacionesSistema.ValidacionesBeep_Go.getModo()) {
+            case 1:
+                lblPersonal.setForeground(Color.WHITE);
+                jPanel4.setBackground(new Color(47, 49, 54));
+                PanelFondo.setBackground(new Color(47, 49, 54));
+                jPanel5.setBackground(new Color(47, 49, 54));
+                jPanel2.setBackground(new Color(47, 49, 54));
+                btnAgregar.setBackground(new Color(32, 34, 37));
+                btnFiltrar.setBackground(new Color(32, 34, 37));
+                BtnReporte.setBackground(new Color(32, 34, 37));
+                jPanel6.setBackground(new Color(47, 49, 54));
+                jPanel7.setBackground(new Color(47, 49, 54));
+                btnActualizar.setBackground(new Color(32, 34, 37));
+                btnEliminar.setBackground(new Color(32, 34, 37));
+                btnReporteP.setBackground(new Color(32, 34, 37));
+                btnActualizar.setIcon(Modificardark);
+                btnEliminar.setIcon(Eliminardark);
+                btnReporteP.setIcon(reportedark);
+                TbAlumnosDark.setForeground(Color.WHITE);
+                TablaDark.setVisible(true);
+                TbAlumnosDark.setVisible(true);
+                scrollBarWhite.setVisible(false);
+                jScrollPane1.setVisible(false);
+                TbAlumnos.setVisible(false);
+                break;
+            case 2:
+                lblPersonal.setForeground(new Color(58, 50, 75));
+                jPanel4.setBackground(new Color(231, 234, 239));
+                PanelFondo.setBackground(new Color(231, 234, 239));
+                jPanel5.setBackground(new Color(231, 234, 239));
+                jPanel2.setBackground(new Color(231, 234, 239));
+                btnAgregar.setBackground(new Color(58, 50, 75));
+                btnFiltrar.setBackground(new Color(58, 50, 75));
+                BtnReporte.setBackground(new Color(58, 50, 75));
+                jPanel6.setBackground(new Color(231, 234, 239));
+                jPanel7.setBackground(new Color(231, 234, 239));
+                btnActualizar.setBackground(new Color(231, 234, 239));
+                btnEliminar.setBackground(new Color(231, 234, 239));
+                btnReporteP.setBackground(new Color(231, 234, 239));
+                btnActualizar.setIcon(modificar);
+                btnEliminar.setIcon(eliminar);
+                btnReporteP.setIcon(reporteimg);
+                TablaDark.setVisible(false);
+                TbAlumnosDark.setVisible(false);
+                scrollBarWhite.setVisible(true);
+                jScrollPane1.setVisible(true);
+                TbAlumnos.setVisible(true);
+                break;
         }
     }
 
@@ -110,12 +209,6 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         try {
             ResultSet rs = objControllerP.MostrarEstudiantesController();
             while (rs.next()) {
-                btnActualizar.setIcon(modificar);
-                btnEliminar.setIcon(eliminar);
-                btnReporteP.setIcon(reporteimg);
-                btnActualizar.setBackground(new Color(231, 234, 239));
-                btnEliminar.setBackground(new Color(231, 234, 239));
-                btnReporteP.setBackground(new Color(231, 234, 239));
                 Object[] Campos = {rs.getInt("idPersonal"), rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("fecha_nacimiento"), rs.getString("documento"), rs.getString("Carnet"), rs.getString("tipo_personal"), rs.getString("direccion"), rs.getString("correo"), rs.getInt("idTipoDocumento"), rs.getInt("idTipoPersonal"), rs.getInt("idGenero"), rs.getString("genero"), rs.getString("tipo_documento"), btnActualizar, btnEliminar, btnReporteP};
                 ModelAlumnos.addRow(Campos);
             }
@@ -244,6 +337,14 @@ public class PanelEstudiantes extends javax.swing.JPanel {
             }
         ));
         TbAlumnosDark.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        TbAlumnosDark.setRowHeight(40);
+        TbAlumnosDark.setSelectionBackground(new java.awt.Color(47, 49, 54));
+        TbAlumnosDark.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        TbAlumnosDark.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TbAlumnosDarkMouseClicked(evt);
+            }
+        });
         TablaDark.setViewportView(TbAlumnosDark);
 
         jPanel6.add(TablaDark, java.awt.BorderLayout.PAGE_START);
@@ -341,12 +442,11 @@ public class PanelEstudiantes extends javax.swing.JPanel {
     private void TbAlumnosMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbAlumnosMouseMoved
         // TODO add your handling code here:
         refresh();
-        
+
     }//GEN-LAST:event_TbAlumnosMouseMoved
 
     private void TbAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbAlumnosMouseClicked
         // TODO add your handling code here:
-       // TODO add your handling code here:
         Table tb = (Table) evt.getSource();
         JTable rcp = (JTable) evt.getSource();
         int column = TbAlumnos.getColumnModel().getColumnIndexAtX(evt.getX());
@@ -401,25 +501,72 @@ public class PanelEstudiantes extends javax.swing.JPanel {
                             JOptionPane.showMessageDialog(null, "Su registro a sido Eliminado", "Proceso Completado", JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
-                    /*switch (confirmar) {
-                        case JOptionPane.YES_OPTION:
-                            objControllerP.idpersonal = ValidacionesSistema.Parametros_Personal.getIdPersonal();
-                            if (objControllerP.EliminarRegistroController() == true) {
-                                JOptionPane.showMessageDialog(null, "Su registro a sido Eliminado", "Proceso Completado", JOptionPane.INFORMATION_MESSAGE);
-                            }
-                            break;
-                        case JOptionPane.NO_OPTION:
-                            System.out.println("No se elimino");
-                            break;
-                        default:
-                            break;
-                    }*/
-                    // Eliminar Contacto metodo
 
                 }
             }
         }
     }//GEN-LAST:event_TbAlumnosMouseClicked
+
+    private void TbAlumnosDarkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbAlumnosDarkMouseClicked
+        // TODO add your handling code here:
+        JTable rcp = (JTable) evt.getSource();
+        int column = TbAlumnosDark.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / TbAlumnosDark.getRowHeight();
+        btnActualizar.setName("btnActualizar");
+        btnEliminar.setName("btnEliminar");
+        btnReporteP.setName("btnReport");
+        if (evt.getClickCount() == 1) {
+            ID = (int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0);
+            ValidacionesSistema.Parametros_Personal.setIdPersonal((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0));
+            ValidacionesSistema.Parametros_Personal.setnombre_personal(rcp.getModel().getValueAt(rcp.getSelectedRow(), 1).toString());
+            ValidacionesSistema.Parametros_Personal.setApellido_personal(rcp.getModel().getValueAt(rcp.getSelectedRow(), 2).toString());
+            ValidacionesSistema.Parametros_Personal.setFecha_nacimiento(rcp.getModel().getValueAt(rcp.getSelectedRow(), 3).toString());
+            ValidacionesSistema.Parametros_Personal.setDocumento(rcp.getModel().getValueAt(rcp.getSelectedRow(), 4).toString());
+            //ValidacionesSistema.Parametros_Personal.setCarnet(rcp.getModel().getValueAt(rcp.getSelectedRow(), 5).toString());
+            ValidacionesSistema.Parametros_Personal.setCorreo(rcp.getModel().getValueAt(rcp.getSelectedRow(), 8).toString());
+            ValidacionesSistema.Parametros_Personal.setDireccion(rcp.getModel().getValueAt(rcp.getSelectedRow(), 7).toString());
+            ValidacionesSistema.Parametros_Personal.setIdTipoPersonal((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 10));
+            ValidacionesSistema.Parametros_Personal.setIdTipoDocumento((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 9));
+            ValidacionesSistema.Parametros_Personal.setIdGenero((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 11));
+            ValidacionesSistema.Parametros_Personal.setTipoPersonal(rcp.getModel().getValueAt(rcp.getSelectedRow(), 6).toString());
+            ValidacionesSistema.Parametros_Personal.setTipoDocumento(rcp.getModel().getValueAt(rcp.getSelectedRow(), 13).toString());
+            ValidacionesSistema.Parametros_Personal.setGenero(rcp.getModel().getValueAt(rcp.getSelectedRow(), 12).toString());
+        }
+        if (row < TbAlumnosDark.getRowCount() || row >= 0 || column < TbAlumnosDark.getColumnCount() || column >= 0) {
+            Object vals = TbAlumnosDark.getValueAt(row, column);
+            if (vals instanceof UWPButton) {
+                ((UWPButton) vals).doClick(); // aqui esta
+                UWPButton btns = (UWPButton) vals;
+                if (btns.getName().equals("btnActualizar")) {
+                    if (rcp.getModel().getValueAt(rcp.getSelectedRow(), 5) == null) {
+                        JOptionPane.showMessageDialog(null, "Ocurrieron problemas, al intentar cargar la informacion debido que este registro no tiene carné", "Error de carné", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        System.out.println(ValidacionesSistema.Parametros_Personal.getCarnet());
+                        FrmAgg_Personal frmAgg_Personal = new FrmAgg_Personal(ValidacionesSistema.Parametros_Personal.getIdPersonal());
+                        frmAgg_Personal.show();
+                        frmstate = 1;
+                    }
+
+                    //Actualizar Contacto metodo
+                }
+                if (btns.getName().equals("btnReport")) {
+                    imprimironly1();
+
+                }
+                if (btns.getName().equals("btnEliminar")) {
+                    int confirmar = JOptionPane.YES_NO_OPTION;
+                    int a = JOptionPane.showConfirmDialog(this, "¿Desea Eliminar el registro de: " + ValidacionesSistema.Parametros_Personal.getnombre_personal() + "?", "Proceso de Eliminar", confirmar);
+                    if (a == 0) {
+                        objControllerP.idpersonal = ValidacionesSistema.Parametros_Personal.getIdPersonal();
+                        if (objControllerP.EliminarRegistroController() == true) {
+                            JOptionPane.showMessageDialog(null, "Su registro a sido Eliminado", "Proceso Completado", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
+
+                }
+            }
+        }
+    }//GEN-LAST:event_TbAlumnosDarkMouseClicked
     void imprimironly1() {
         Connection con = ControllerConexion.getConnectionModel();
         try {
