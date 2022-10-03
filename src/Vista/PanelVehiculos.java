@@ -14,6 +14,7 @@ import java.awt.Font;
 import java.sql.Connection;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ImageIcon;
@@ -40,7 +41,7 @@ public class PanelVehiculos extends javax.swing.JPanel {
 
     public PanelVehiculos() {
         initComponents();
-
+        modo();
         String[] header = {"ID", "Personal", "Carnet", "Placa", "Color", "Id personal", "Modificar", "Eliminar", "Registro"};
         model = new DefaultTableModel(null, header) {
             @Override
@@ -49,10 +50,17 @@ public class PanelVehiculos extends javax.swing.JPanel {
             }
         };
         CargarTablaVehiculos();
+        TbVehiculos.setModel(model);
+        TbVehiculos.setDefaultRenderer(Object.class, new RenderTable());
         TbVehiculos.setFont(font);
         TbVehiculos.removeColumn(TbVehiculos.getColumnModel().getColumn(5));
         TbVehiculos.removeColumn(TbVehiculos.getColumnModel().getColumn(0));
-        TbVehiculos.setDefaultRenderer(Object.class, new RenderTable());
+        //table dark
+        TbVehiculosDark.setModel(model);
+        TbVehiculosDark.setDefaultRenderer(Object.class, new RenderTable());
+        TbVehiculosDark.setFont(font);
+        TbVehiculosDark.removeColumn(TbVehiculosDark.getColumnModel().getColumn(5));
+        TbVehiculosDark.removeColumn(TbVehiculosDark.getColumnModel().getColumn(0));
     }
 
     int idvehiculo;
@@ -62,11 +70,12 @@ public class PanelVehiculos extends javax.swing.JPanel {
     ImageIcon modificar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar.png"));
     ImageIcon eliminar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/eliminar.png"));
     ImageIcon reporte = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report 1.png"));
+    ImageIcon Modificardark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar_white.png"));
+    ImageIcon Eliminardark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-trash-alt white.png"));
+    ImageIcon reportedark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report-White.png"));
     FrmReportesPar frmreporte = new FrmReportesPar("Vehiculos", "Ingrese nombres/apellidos/carné");
 
     final void CargarTablaVehiculos() {
-
-        TbVehiculos.setModel(model);
 
         while (model.getRowCount() > 0) {
             model.removeRow(0);
@@ -74,18 +83,116 @@ public class PanelVehiculos extends javax.swing.JPanel {
         try {
             rs = ControllerVehiculos.CargarTabla();
             while (rs.next()) {
+                Object[] oValues = {rs.getInt("idVehiculo"), rs.getString("Personal"), rs.getString("Carnet"), rs.getString("placa"), rs.getString("color"), rs.getInt("idPersonal"), btnModificar, btnEliminar, btnReporte};
+                model.addRow(oValues);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+        }
+
+    }
+
+    void modo() {
+        if (ValidacionesSistema.ValidacionesBeep_Go.Modo == 1) {
+            jScrollPane1.setVisible(false);
+            TbVehiculos.setVisible(false);
+            ScrollDark.setVisible(true);
+            TbVehiculosDark.setVisible(true);
+            jPanel4.setBackground(new Color(47, 49, 54));
+            jPanel5.setBackground(new Color(47, 49, 54));
+            jPanel2.setBackground(new Color(47, 49, 54));
+            jPanel1.setBackground(new Color(47, 49, 54));
+            jPanel7.setBackground(new Color(47, 49, 54));
+            jPanel6.setBackground(new Color(47, 49, 54));
+            PanelFondo.setBackground(new Color(47, 49, 54));
+            lblVehiculos.setForeground(Color.WHITE);
+            btnAgregar.setBackground(new Color(32, 34, 37));
+            btnFiltrar.setBackground(new Color(32, 34, 37));
+            btnInforme.setBackground(new Color(32, 34, 37));
+            btnModificar.setBackground(new Color(32, 34, 37));
+            btnEliminar.setBackground(new Color(32, 34, 37));
+            btnReporte.setBackground(new Color(32, 34, 37));
+            btnModificar.setIcon(Modificardark);
+            btnEliminar.setIcon(Eliminardark);
+            ScrollDark.setBackground(new Color(47, 49, 54));
+            btnReporte.setIcon(reportedark);
+            TbVehiculosDark.setForeground(Color.WHITE);
+        } else {
+            jScrollPane1.setVisible(true);
+            TbVehiculos.setVisible(true);
+            ScrollDark.setVisible(false);
+            TbVehiculosDark.setVisible(false);
+            jPanel4.setBackground(new Color(231, 234, 239));
+            jPanel5.setBackground(new Color(231, 234, 239));
+            jPanel2.setBackground(new Color(231, 234, 239));
+            jPanel1.setBackground(new Color(231, 234, 239));
+            jPanel7.setBackground(new Color(231, 234, 239));
+            jPanel6.setBackground(new Color(231, 234, 239));
+            PanelFondo.setBackground(new Color(231, 234, 239));
+            lblVehiculos.setForeground(new Color(58, 50, 75));
+            btnAgregar.setBackground(new Color(58, 50, 75));
+            btnFiltrar.setBackground(new Color(58, 50, 75));
+            btnInforme.setBackground(new Color(58, 50, 75));
+            btnModificar.setIcon(modificar);
+            btnEliminar.setIcon(eliminar);
+            btnReporte.setIcon(reporte);
+            btnModificar.setBackground(new Color(231, 234, 239));
+            btnEliminar.setBackground(new Color(231, 234, 239));
+            btnReporte.setBackground(new Color(231, 234, 239));
+        }
+    }
+
+    public void mododash() {
+        switch (ValidacionesSistema.ValidacionesBeep_Go.getModo()) {
+            case 1:
+                jScrollPane1.setVisible(false);
+                TbVehiculos.setVisible(false);
+                ScrollDark.setVisible(true);
+                TbVehiculosDark.setVisible(true);
+                jPanel4.setBackground(new Color(47, 49, 54));
+                jPanel5.setBackground(new Color(47, 49, 54));
+                jPanel2.setBackground(new Color(47, 49, 54));
+                jPanel1.setBackground(new Color(47, 49, 54));
+                jPanel7.setBackground(new Color(47, 49, 54));
+                jPanel6.setBackground(new Color(47, 49, 54));
+                PanelFondo.setBackground(new Color(47, 49, 54));
+                lblVehiculos.setForeground(Color.WHITE);
+                btnAgregar.setBackground(new Color(32, 34, 37));
+                btnFiltrar.setBackground(new Color(32, 34, 37));
+                btnInforme.setBackground(new Color(32, 34, 37));
+                btnModificar.setBackground(new Color(32, 34, 37));
+                btnEliminar.setBackground(new Color(32, 34, 37));
+                btnReporte.setBackground(new Color(32, 34, 37));
+                btnModificar.setIcon(Modificardark);
+                btnEliminar.setIcon(Eliminardark);
+                ScrollDark.setBackground(new Color(47, 49, 54));
+                btnReporte.setIcon(reportedark);
+                TbVehiculosDark.setForeground(Color.WHITE);
+                break;
+            case 2:
+                jScrollPane1.setVisible(true);
+                TbVehiculos.setVisible(true);
+                ScrollDark.setVisible(false);
+                TbVehiculosDark.setVisible(false);
+                jPanel4.setBackground(new Color(231, 234, 239));
+                jPanel5.setBackground(new Color(231, 234, 239));
+                jPanel2.setBackground(new Color(231, 234, 239));
+                jPanel1.setBackground(new Color(231, 234, 239));
+                jPanel7.setBackground(new Color(231, 234, 239));
+                jPanel6.setBackground(new Color(231, 234, 239));
+                PanelFondo.setBackground(new Color(231, 234, 239));
+                lblVehiculos.setForeground(new Color(58, 50, 75));
+                btnAgregar.setBackground(new Color(58, 50, 75));
+                btnFiltrar.setBackground(new Color(58, 50, 75));
+                btnInforme.setBackground(new Color(58, 50, 75));
                 btnModificar.setIcon(modificar);
                 btnEliminar.setIcon(eliminar);
                 btnReporte.setIcon(reporte);
                 btnModificar.setBackground(new Color(231, 234, 239));
                 btnEliminar.setBackground(new Color(231, 234, 239));
                 btnReporte.setBackground(new Color(231, 234, 239));
-                Object[] oValues = {rs.getInt("idVehiculo"), rs.getString("Personal"), rs.getString("Carnet"), rs.getString("placa"), rs.getString("color"), rs.getInt("idPersonal"), btnModificar, btnEliminar, btnReporte};
-                model.addRow(oValues);
-            }
-        } catch (Exception e) {
+                break;
         }
-
     }
 
     /**
@@ -109,6 +216,8 @@ public class PanelVehiculos extends javax.swing.JPanel {
         btnInforme = new Controles_Personalizados.Botones.UWPButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
+        ScrollDark = new javax.swing.JScrollPane();
+        TbVehiculosDark = new Controles_Personalizados.Tables.TableDark();
         jPanel6 = new javax.swing.JPanel();
         scrollBarCustom1 = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -191,6 +300,29 @@ public class PanelVehiculos extends javax.swing.JPanel {
 
         jPanel7.setBackground(new java.awt.Color(231, 234, 239));
         jPanel7.setLayout(new java.awt.BorderLayout());
+
+        TbVehiculosDark.setBackground(new java.awt.Color(47, 49, 54));
+        TbVehiculosDark.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        TbVehiculosDark.setRowHeight(40);
+        TbVehiculosDark.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TbVehiculosDarkMouseClicked(evt);
+            }
+        });
+        ScrollDark.setViewportView(TbVehiculosDark);
+
+        jPanel7.add(ScrollDark, java.awt.BorderLayout.PAGE_START);
+
         jPanel3.add(jPanel7, java.awt.BorderLayout.NORTH);
 
         jPanel6.setBackground(new java.awt.Color(231, 234, 239));
@@ -274,7 +406,7 @@ public class PanelVehiculos extends javax.swing.JPanel {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAgregarActionPerformed
-                                   
+
 
     private void TbVehiculosMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbVehiculosMouseMoved
         // TODO add your handling code here:
@@ -335,12 +467,61 @@ public class PanelVehiculos extends javax.swing.JPanel {
 
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
         // TODO add your handling code here:
-        if(frmreporte.isVisible()){
+        if (frmreporte.isVisible()) {
             frmreporte.toFront();
-        }else{
+        } else {
             frmreporte.setVisible(true);
         }
     }//GEN-LAST:event_btnFiltrarActionPerformed
+
+    private void TbVehiculosDarkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbVehiculosDarkMouseClicked
+        // TODO add your handling code here:
+        int column = TbVehiculosDark.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / TbVehiculosDark.getRowHeight();
+        btnModificar.setName("btnActualizar");
+        btnEliminar.setName("btnEliminar");
+        btnReporte.setName("btnReporte");
+        if (evt.getClickCount() == 1) {
+            JTable rcp = (JTable) evt.getSource();
+            idvehiculo = (int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0);
+            ValidacionesSistema.Parametros_Vehiculos.setIdvehiculo((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0));
+            ValidacionesSistema.Parametros_Vehiculos.setPersonal(rcp.getModel().getValueAt(rcp.getSelectedRow(), 1).toString());
+            ValidacionesSistema.Parametros_Vehiculos.setCarnet(rcp.getModel().getValueAt(rcp.getSelectedRow(), 2).toString());
+            ValidacionesSistema.Parametros_Vehiculos.setPlaca(rcp.getModel().getValueAt(rcp.getSelectedRow(), 3).toString());
+            ValidacionesSistema.Parametros_Vehiculos.setColor(rcp.getModel().getValueAt(rcp.getSelectedRow(), 4).toString());
+            ValidacionesSistema.Parametros_Vehiculos.setIdPersonal((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 5));
+        }
+        if (row < TbVehiculosDark.getRowCount() || row >= 0 || column < TbVehiculosDark.getColumnCount() || column >= 0) {
+            Object vals = TbVehiculosDark.getValueAt(row, column);
+            if (vals instanceof UWPButton) {
+                ((UWPButton) vals).doClick(); // aqui esta
+                UWPButton btns = (UWPButton) vals;
+                if (btns.getName().equals("btnActualizar")) {
+                    frmVehiculos = new FrmAgg_Vehiculos(ValidacionesSistema.Parametros_Vehiculos.getIdvehiculo());
+                    frmVehiculos.setVisible(true);
+                    //this.setEnabled(false);
+                    CargarTablaVehiculos();
+                    //Actualizar Contacto metodo
+                }
+                if (btns.getName().equals("btnReporte")) {
+                    Imprimir1();
+                }
+                if (btns.getName().equals("btnEliminar")) {
+                    int confirmar = JOptionPane.YES_NO_OPTION;
+                    int a = JOptionPane.showConfirmDialog(this, "¿Desea eliminar el vehiculo con placa: " + ValidacionesSistema.Parametros_Vehiculos.getPlaca() + "?", "Proceso de Eliminar", confirmar);
+                    if (a == 0) {
+                        ControllerVehiculos.idvehiculo = ValidacionesSistema.Parametros_Vehiculos.getIdvehiculo();
+                        if (ControllerVehiculos.EliminarVehiculo_Controller() == true) {
+                            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso de eliminacion", "Registro del vehiculo eliminado con exito", 1);
+                            CargarTablaVehiculos();
+                        }
+                    }
+                    // Eliminar Contacto metodo
+
+                }
+            }
+        }
+    }//GEN-LAST:event_TbVehiculosDarkMouseClicked
 
     void ImprimirReporte() {
         Connection con = ControllerConexion.getConnectionModel();
@@ -380,7 +561,9 @@ public class PanelVehiculos extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Controles_Personalizados.Paneles.PanelRound PanelFondo;
+    private javax.swing.JScrollPane ScrollDark;
     private Controles_Personalizados.Tables.Table TbVehiculos;
+    private Controles_Personalizados.Tables.TableDark TbVehiculosDark;
     private Controles_Personalizados.Botones.UWPButton btnAgregar;
     private Controles_Personalizados.Botones.UWPButton btnFiltrar;
     private Controles_Personalizados.Botones.UWPButton btnInforme;
