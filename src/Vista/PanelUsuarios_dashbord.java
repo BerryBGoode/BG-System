@@ -37,13 +37,9 @@ import net.sf.jasperreports.view.JasperViewer;
 public class PanelUsuarios_dashbord extends javax.swing.JPanel {
 
     DefaultTableModel modelo;
-    DefaultTableModel modelodark;
     public final UWPButton btnActualizar = new UWPButton();
     public final UWPButton btnEliminar = new UWPButton();
     public final UWPButton btnReporte = new UWPButton();
-    private final UWPButton btnActualizardark = new UWPButton();
-    private final UWPButton btnEliminardark = new UWPButton();
-    private final UWPButton btnReportedark = new UWPButton();
     private Font font = new Font("Roboto Black", Font.PLAIN, 18);
     ImageIcon Modificar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar.png"));
     ImageIcon Eliminar = new ImageIcon(getClass().getResource("/Recursos_Proyecto/eliminar.png"));
@@ -61,17 +57,8 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
      */
     public PanelUsuarios_dashbord() {
         initComponents();
-        System.out.println(ValidacionesSistema.ValidacionesBeep_Go.getModo());
-//        if (ValidacionesSistema.ValidacionesBeep_Go.getModo() == 2) {
-//            CargarTabladark();
-//            tbUsuarioDark.setModel(modelodark);
-//        } else if (ValidacionesSistema.ValidacionesBeep_Go.Modo == 1) {
-//            CargarTabla();
-//            tbUsuarios.setModel(modelo);
-//        }
+        System.out.println("PanelUsuario modo: " + ValidacionesSistema.ValidacionesBeep_Go.getModo());
         modo();
-        //tbUsuarioDark.setVisible(false);
-        //tbUsuarios.setVisible(true);
         String[] TitulosTabla = {"ID", "idPersonal", "Nombres", "Apellidos", "Usuario", "idTipoUsuario", "Tipo de usuario", "idEstadoUsuario", "Estado", "Imagen", "Modificar", "Eliminar", "Registro"};
         modelo = new DefaultTableModel(null, TitulosTabla) {
             @Override
@@ -79,14 +66,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
                 return false;
             }
         };
-        modelodark = new DefaultTableModel(null, TitulosTabla) {
-            @Override
-            public boolean isCellEditable(int row, int column) { // aqui esta
-                return false;
-            }
-        };
         CargarTabla();
-        CargarTabladark();
         tbUsuarios.setModel(modelo);
         tbUsuarios.setDefaultRenderer(Object.class, new RenderTable());
         tbUsuarios.setFont(font);
@@ -96,7 +76,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(4));
         tbUsuarios.removeColumn(tbUsuarios.getColumnModel().getColumn(5));
         //DarkTable
-        tbUsuarioDark.setModel(modelodark);
+        tbUsuarioDark.setModel(modelo);
         tbUsuarioDark.setDefaultRenderer(Object.class, new RenderTable());
         tbUsuarioDark.setFont(font);
         tbUsuarioDark.removeColumn(tbUsuarioDark.getColumnModel().getColumn(0));
@@ -131,7 +111,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         btnFiltrar = new Controles_Personalizados.Botones.UWPButton();
         btnInforme = new Controles_Personalizados.Botones.UWPButton();
         jPanel5 = new javax.swing.JPanel();
-        lblParqueo = new javax.swing.JLabel();
+        LblUsuario = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(42, 36, 56));
         addMouseListener(new java.awt.event.MouseAdapter() {
@@ -204,7 +184,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         Scroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         Scroll.setVerticalScrollBar(scrollBarCustom1);
 
-        tbUsuarioDark.setBackground(new java.awt.Color(0, 0, 0));
+        tbUsuarioDark.setBackground(new java.awt.Color(47, 49, 54));
         tbUsuarioDark.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -216,6 +196,14 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbUsuarioDark.setRowHeight(40);
+        tbUsuarioDark.setSelectionBackground(new java.awt.Color(47, 49, 54));
+        tbUsuarioDark.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        tbUsuarioDark.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbUsuarioDarkMouseClicked(evt);
+            }
+        });
         Scroll.setViewportView(tbUsuarioDark);
 
         jPanel2.add(Scroll, java.awt.BorderLayout.PAGE_START);
@@ -233,8 +221,6 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Agregar Blanco.png"))); // NOI18N
         btnAgregar.setText(" Agregar");
         btnAgregar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        btnAgregar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        btnAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnAgregarMouseClicked(evt);
@@ -251,8 +237,6 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         btnFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Filtrar Blanco.png"))); // NOI18N
         btnFiltrar.setText(" Filtrar");
         btnFiltrar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        btnFiltrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFiltrarActionPerformed(evt);
@@ -264,8 +248,6 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         btnInforme.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-file-doc-white.png"))); // NOI18N
         btnInforme.setText("Informe");
         btnInforme.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        btnInforme.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
-        btnInforme.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnInforme.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnInformeMouseClicked(evt);
@@ -279,10 +261,10 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         jPanel5.setPreferredSize(new java.awt.Dimension(1240, 75));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblParqueo.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
-        lblParqueo.setForeground(new java.awt.Color(58, 50, 75));
-        lblParqueo.setText("Usuarios");
-        jPanel5.add(lblParqueo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+        LblUsuario.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
+        LblUsuario.setForeground(new java.awt.Color(58, 50, 75));
+        LblUsuario.setText("Usuarios");
+        jPanel5.add(LblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
 
         jPanel3.add(jPanel5, java.awt.BorderLayout.PAGE_START);
 
@@ -309,35 +291,9 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
             obj.setNombre_usuario(FrmLogin.nombre);
             ResultSet rs = obj.CargarUsuarios_C();
             while (rs.next()) {
-                btnActualizar.setIcon(Modificar);
-                btnEliminar.setIcon(Eliminar);
-                btnReporte.setIcon(reporte);
                 Object[] oValores = {rs.getInt("idUsuario"), rs.getInt("idPersonal"), rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("nombre_usuario"), rs.getInt("idTipoUsuario"), rs.getString("tipo_usuario"), rs.getInt("idEstadoUsuario"), rs.getString("estado_usuario"), rs.getBytes("imagen"), btnActualizar, btnEliminar, btnReporte};
 
                 modelo.addRow(oValores);
-                System.out.println("cargando info normal");
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.toString());
-        }
-    }
-
-    public final void CargarTabladark() {
-        ControllerUsuarios obj = new ControllerUsuarios();
-        while (modelodark.getRowCount() > 0) {
-            modelodark.removeRow(0);
-        }
-        try {
-            obj.setNombre_usuario(FrmLogin.nombre);
-            ResultSet rs = obj.CargarUsuarios_C();
-            while (rs.next()) {
-                btnActualizardark.setIcon(Modificardark);
-                btnEliminardark.setIcon(Eliminardark);
-                btnReportedark.setIcon(reportedark);
-                Object[] oValores = {rs.getInt("idUsuario"), rs.getInt("idPersonal"), rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("nombre_usuario"), rs.getInt("idTipoUsuario"), rs.getString("tipo_usuario"), rs.getInt("idEstadoUsuario"), rs.getString("estado_usuario"), rs.getBytes("imagen"), btnActualizardark, btnEliminardark, btnReportedark};
-
-                modelodark.addRow(oValores);
-                System.out.println("cargando info normal");
             }
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.toString());
@@ -348,47 +304,52 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         switch (ValidacionesSistema.ValidacionesBeep_Go.getModo()) {
             case 1:
                 panelRound1.setBackground(new Color(47, 49, 54));
-                lblParqueo.setForeground(Color.WHITE);
+                LblUsuario.setForeground(Color.WHITE);
                 jPanel5.setBackground(new Color(47, 49, 54));
                 jPanel4.setBackground(new Color(47, 49, 54));
+                jPanel3.setBackground(new Color(47, 49, 54));
+                jPanel2.setBackground(new Color(47, 49, 54));
+                jPanel1.setBackground(new Color(47, 49, 54));
                 btnAgregar.setBackground(new Color(32, 34, 37));
                 btnFiltrar.setBackground(new Color(32, 34, 37));
                 btnInforme.setBackground(new Color(32, 34, 37));
-                jPanel2.setBackground(new Color(47, 49, 54));
-                tbUsuarioDark.setGridColor(new Color(32, 34, 37));
-                btnActualizardark.setBackground(new Color(47, 49, 54));
-                btnEliminardark.setBackground(new Color(47, 49, 54));
-                btnReportedark.setBackground(new Color(47, 49, 54));
-                float xwhite = tbUsuarios.getX();
-                float ywhite = tbUsuarios.getY();
-                int widhtwhite = tbUsuarios.getWidth();
-                int heightwhite = tbUsuarios.getHeight();
-                jScrollPane1.setVisible(false);
+                btnActualizar.setBackground(new Color(32, 34, 37));
+                btnEliminar.setBackground(new Color(32, 34, 37));
+                btnReporte.setBackground(new Color(32, 34, 37));
+                btnActualizar.setIcon(Modificardark);
+                btnEliminar.setIcon(Eliminardark);
+                btnReporte.setIcon(reportedark);
+                tbUsuarioDark.setForeground(Color.white);
                 tbUsuarios.setVisible(false);
-                Scroll.setVisible(true);
+                jScrollPane1.setVisible(false);
+                ScrollTabla.setVisible(false);
                 tbUsuarioDark.setVisible(true);
-                tbUsuarioDark.setAlignmentY(ywhite);
-                tbUsuarioDark.setSize(widhtwhite, heightwhite);
-                tbUsuarioDark.setAlignmentX(xwhite);
-                tbUsuarioDark.setBackground(new Color(47, 49, 54));
-                tbUsuarioDark.setForeground(Color.WHITE);
+                Scroll.setVisible(true);
+                scrollBarCustom1.setVisible(true);
                 break;
             case 2:
                 panelRound1.setBackground(new Color(231, 234, 239));
-                lblParqueo.setForeground(new Color(58, 50, 75));
+                LblUsuario.setForeground(new Color(58, 50, 75));
                 jPanel5.setBackground(new Color(231, 234, 239));
                 jPanel4.setBackground(new Color(231, 234, 239));
+                jPanel3.setBackground(new Color(231, 234, 239));
+                jPanel2.setBackground(new Color(231, 234, 239));
+                jPanel1.setBackground(new Color(231, 234, 239));
                 btnAgregar.setBackground(new Color(58, 50, 75));
                 btnFiltrar.setBackground(new Color(58, 50, 75));
                 btnInforme.setBackground(new Color(58, 50, 75));
-                jPanel2.setBackground(new Color(231, 234, 239));
                 btnActualizar.setBackground(new Color(231, 234, 239));
                 btnEliminar.setBackground(new Color(231, 234, 239));
                 btnReporte.setBackground(new Color(231, 234, 239));
-                jScrollPane1.setVisible(true);
+                btnActualizar.setIcon(Modificar);
+                btnEliminar.setIcon(Eliminar);
+                btnReporte.setIcon(reporte);
                 tbUsuarios.setVisible(true);
-                Scroll.setVisible(false);
+                jScrollPane1.setVisible(true);
+                ScrollTabla.setVisible(true);
                 tbUsuarioDark.setVisible(false);
+                Scroll.setVisible(false);
+                scrollBarCustom1.setVisible(false);
                 break;
         }
     }
@@ -396,46 +357,51 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
     private void modo() {
         if (ValidacionesSistema.ValidacionesBeep_Go.Modo == 1) {
             panelRound1.setBackground(new Color(47, 49, 54));
-            lblParqueo.setForeground(Color.WHITE);
+            LblUsuario.setForeground(Color.WHITE);
             jPanel5.setBackground(new Color(47, 49, 54));
             jPanel4.setBackground(new Color(47, 49, 54));
+            jPanel3.setBackground(new Color(47, 49, 54));
+            jPanel2.setBackground(new Color(47, 49, 54));
+            jPanel1.setBackground(new Color(47, 49, 54));
             btnAgregar.setBackground(new Color(32, 34, 37));
             btnFiltrar.setBackground(new Color(32, 34, 37));
             btnInforme.setBackground(new Color(32, 34, 37));
-            jPanel2.setBackground(new Color(47, 49, 54));
-            tbUsuarioDark.setGridColor(new Color(32, 34, 37));
-            btnActualizar.setBackground(new Color(47, 49, 54));
-            btnEliminar.setBackground(new Color(47, 49, 54));
-            btnReporte.setBackground(new Color(47, 49, 54));
-            float xwhite = tbUsuarios.getX();
-            float ywhite = tbUsuarios.getY();
-            int widhtwhite = tbUsuarios.getWidth();
-            int heightwhite = tbUsuarios.getHeight();
-            jScrollPane1.setVisible(false);
+            btnActualizar.setBackground(new Color(32, 34, 37));
+            btnEliminar.setBackground(new Color(32, 34, 37));
+            btnReporte.setBackground(new Color(32, 34, 37));
+            btnActualizar.setIcon(Modificardark);
+            btnEliminar.setIcon(Eliminardark);
+            btnReporte.setIcon(reportedark);
+            tbUsuarioDark.setForeground(Color.white);
             tbUsuarios.setVisible(false);
-            Scroll.setVisible(true);
+            jScrollPane1.setVisible(false);
+            ScrollTabla.setVisible(false);
             tbUsuarioDark.setVisible(true);
-            tbUsuarioDark.setAlignmentY(ywhite);
-            tbUsuarioDark.setSize(widhtwhite, heightwhite);
-            tbUsuarioDark.setAlignmentX(xwhite);
-            tbUsuarioDark.setBackground(new Color(47, 49, 54));
-            tbUsuarioDark.setForeground(Color.WHITE);
+            Scroll.setVisible(true);
+            scrollBarCustom1.setVisible(true);
         } else {
             panelRound1.setBackground(new Color(231, 234, 239));
-            lblParqueo.setForeground(new Color(58, 50, 75));
+            LblUsuario.setForeground(new Color(58, 50, 75));
             jPanel5.setBackground(new Color(231, 234, 239));
             jPanel4.setBackground(new Color(231, 234, 239));
+            jPanel3.setBackground(new Color(231, 234, 239));
+            jPanel2.setBackground(new Color(231, 234, 239));
+            jPanel1.setBackground(new Color(231, 234, 239));
             btnAgregar.setBackground(new Color(58, 50, 75));
             btnFiltrar.setBackground(new Color(58, 50, 75));
             btnInforme.setBackground(new Color(58, 50, 75));
-            jPanel2.setBackground(new Color(231, 234, 239));
             btnActualizar.setBackground(new Color(231, 234, 239));
             btnEliminar.setBackground(new Color(231, 234, 239));
             btnReporte.setBackground(new Color(231, 234, 239));
-            jScrollPane1.setVisible(true);
+            btnActualizar.setIcon(Modificar);
+            btnEliminar.setIcon(Eliminar);
+            btnReporte.setIcon(reporte);
             tbUsuarios.setVisible(true);
-            Scroll.setVisible(false);
+            jScrollPane1.setVisible(true);
+            ScrollTabla.setVisible(true);
             tbUsuarioDark.setVisible(false);
+            Scroll.setVisible(false);
+            scrollBarCustom1.setVisible(false);
         }
     }
 
@@ -607,8 +573,66 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnFiltrarActionPerformed
 
+    private void tbUsuarioDarkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuarioDarkMouseClicked
+        // TODO add your handling code here:
+        JTable tb = (JTable) evt.getSource();
+        String nombre = null;
+        int column = tbUsuarioDark.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / tbUsuarioDark.getRowHeight();
+        btnActualizar.setName("btnActualizar");
+        btnEliminar.setName("btnEliminar");
+        btnReporte.setName("btnReporte");
+        if (evt.getClickCount() == 1) {
+            JTable rcp = (JTable) evt.getSource();
+            ValidacionesSistema.Parametros_Usuario.setID((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0));
+            ValidacionesSistema.Parametros_Usuario.setIdPersonal((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 1));
+            ValidacionesSistema.Parametros_Usuario.setNombre_usuario(rcp.getModel().getValueAt(rcp.getSelectedRow(), 4).toString());
+            ValidacionesSistema.Parametros_Usuario.setIdTipoUsuario((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 5));
+            ValidacionesSistema.Parametros_Usuario.setIdEstadoUsuario((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 7));
+            CargarImagen();
+            ValidacionesSistema.Parametros_Usuario.setImagen(imagen);
+        }
+
+        if (row < tbUsuarioDark.getRowCount() || row >= 0 || column < tbUsuarioDark.getColumnCount() || column >= 0) {
+            Object vals = tbUsuarioDark.getValueAt(row, column);
+            if (vals instanceof UWPButton) {
+                ((UWPButton) vals).doClick(); // aqui esta
+                UWPButton btns = (UWPButton) vals;
+                if (btns.getName().equals("btnActualizar")) {
+                    FrmAgg_Usuarios ac = new FrmAgg_Usuarios("Actualizar usuario");
+                    if (ac.isVisible()) {
+                        ac.toFront();
+                    } else {
+                        ac.setVisible(true);
+                        frmstate = 1;
+                    }
+
+                }
+                if (btns.getName().equals("btnEliminar")) {
+                    int confirmar = 0;
+                    nombre = ValidacionesSistema.Parametros_Usuario.getNombre_usuario();
+                    confirmar = JOptionPane.showConfirmDialog(this, "¿Desea eliminar el usuario de: " + nombre + "?", "Proceso de Eliminar", confirmar);
+                    if (confirmar == 0) {
+                        ControllerUsuarios obje = new ControllerUsuarios(ValidacionesSistema.Parametros_Usuario.getID());
+                        boolean respuesta = obje.EliminarUsuario_C();
+                        if (respuesta == true) {
+                            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "Usuario eliminado", 1);
+                            CargarTabla();
+                        } else {
+                            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso fallido", "Usuario no pudo ser eliminado", 2);
+                        }
+                    }
+                }
+                if (btns.getName().equals("btnReporte")) {
+                    ReportePar();
+                }
+            }
+        }
+    }//GEN-LAST:event_tbUsuarioDarkMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LblUsuario;
     private javax.swing.JScrollPane Scroll;
     private Controles_Personalizados.ScrollBar.ScrollBarCustom ScrollTabla;
     private Controles_Personalizados.Botones.UWPButton btnAgregar;
@@ -620,7 +644,6 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblParqueo;
     private Controles_Personalizados.Paneles.PanelRound panelRound1;
     private Controles_Personalizados.ScrollBar.ScrollBarCustom scrollBarCustom1;
     private Controles_Personalizados.Tables.TableDark tbUsuarioDark;

@@ -346,6 +346,7 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
         cmbTipo.setSelectedIndex(0);
         cmbEstado.setSelectedIndex(0);
         cmbPersonal.setSelectedIndex(0);
+        cbAuto.setSelected(false);
         this.dispose();
         PanelOpcionesPersonal.showinter = 0;
     }//GEN-LAST:event_btnCerrarMousePressed

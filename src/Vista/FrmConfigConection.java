@@ -384,7 +384,7 @@ public class FrmConfigConection extends javax.swing.JFrame {
             } else {
                 /*esto porque me cerraba el frm al dale ok al msg anterior */
                 int conf = JOptionPane.YES_NO_OPTION;
-                JOptionPane.showConfirmDialog(this, "No se pudo establecer \n" + "conexión con la base de \n" + "datos" + "\n Error 001", "¿Desea volver a intentar?", conf);
+                JOptionPane.showConfirmDialog(this, "No se pudo establecer " + "conexión con la\nbase de" + "datos" + "\n Error 001", "¿Desea volver a intentar?", conf);
                 if (conf == JOptionPane.YES_OPTION) {
                     FrmConfigConection config = new FrmConfigConection();
                     config.setVisible(true);

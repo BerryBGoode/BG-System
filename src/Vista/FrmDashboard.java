@@ -12,7 +12,6 @@ import Controlador.ControllerUsuarios;
 import Controlador.ControllerVehiculos;
 import Controles_Personalizados.Paneles.PanelRound;
 
-
 import java.awt.Color;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
@@ -58,15 +57,13 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     PanelEstudiantes plE = new PanelEstudiantes();
     PanelProfesores plP = new PanelProfesores();
     PanelCarnets plC = new PanelCarnets();
+    PanelAccesos plA;
     PanelVehiculos plV = new PanelVehiculos();
     PanelParqueo plpk = new PanelParqueo();
     PanelContactos plCon = new PanelContactos();
     ControllerBuscador obj = new ControllerBuscador();
     //PanelDashboard pld = new PanelDashboard();
     ControllerLogin clog = new ControllerLogin();
-    PanelUsuarios_dashbord pu = new PanelUsuarios_dashbord();
-    PanelProfesores pp = new PanelProfesores();
-    PanelEstudiantes pe = new PanelEstudiantes();
     private int iduser;
 
     /**
@@ -76,6 +73,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         initComponents();
         tipousuario = tipo;
         this.setTitle("Beep&Go");
+        plA=new PanelAccesos(tipousuario);
         this.setLocationRelativeTo(null);
 //        Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
 //        AWTUtilities.setWindowShape(this, forma);
@@ -1142,8 +1140,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionContactos.setVisible(false);
         panelSeleccionLogout.setVisible(false);
         panelSeleccionAjustes.setVisible(false);
-        
-        PanelAccesos plA = new PanelAccesos(tipousuario);
+
         plA.setSize(1270, 620);
         plA.setLocation(0, 0);
 
@@ -1205,15 +1202,18 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
 
     PanelDashboard _pnldash = new PanelDashboard();
     PanelUsuarios_dashbord _pnlusers = new PanelUsuarios_dashbord();
-
     private void lblNormalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNormalMouseClicked
         // TODO add your handling code here:
         ValidacionesSistema.ValidacionesBeep_Go.Modo = 2;
         NormalMode();
         pld.mode();
-        pu.darkmod();
-        //pe.mododash();
-        pp.mododash();
+        plU.darkmod();
+        plE.mododash();
+        plP.mododash();
+        plC.mooddash();
+        plV.mododash();
+        plpk.mododash();
+        plA.mododash();
         if (_pnldash.isShowing()) {
 
             _pnldash.hide();
@@ -1226,9 +1226,13 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         ValidacionesSistema.ValidacionesBeep_Go.Modo = 1;
         DarkMode();
         pld.mode();
-        pu.darkmod();
-       // pe.mododash();
-        pp.mododash();
+        plE.mododash();
+        plU.darkmod();
+        plP.mododash();
+        plC.mooddash();
+        plV.mododash();
+        plpk.mododash();
+        plA.mododash();
         _pnldash.hide();
         if (_pnldash.isVisible()) {
 

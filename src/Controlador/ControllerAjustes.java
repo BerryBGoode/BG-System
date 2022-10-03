@@ -56,4 +56,7 @@ public class ControllerAjustes {
     public ResultSet BuscarContraAntigua(){
         return objmodel.BuscarContraAntigua(usuario, con);
     }
+    public boolean ActualizarEstado(){
+            return objmodel.ActulizarEstado(usuario, con);
+        }
 }

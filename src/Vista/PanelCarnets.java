@@ -43,8 +43,6 @@ import net.sourceforge.barbecue.output.OutputException;
  * @author danlo
  */
 public class PanelCarnets extends javax.swing.JPanel {
-    
-    
 
     public DefaultTableModel model;
     private ControllerCarnets ObjController = new ControllerCarnets();
@@ -56,7 +54,9 @@ public class PanelCarnets extends javax.swing.JPanel {
     private int frmstate;
     public Font font = new Font("Roboto Black", Font.PLAIN, 18);
     ImageIcon modifIcon = new ImageIcon(getClass().getResource("/Recursos_Proyecto/Barcode.png"));
+    ImageIcon modifIcondark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bx-barcode-White.png"));
     ImageIcon report = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report 1.png"));
+    ImageIcon reportedark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report-White.png"));
     byte[] imagen;
 
     /**
@@ -64,22 +64,26 @@ public class PanelCarnets extends javax.swing.JPanel {
      */
     public PanelCarnets() {
         initComponents();
+        mood();
         String[] TitulosCarnets = {"Nombre", "Apellido", "Carné", "Tipo de usuario", "idPersonal", "Codigo de barra", "Imprimir carnet"};
-        model = new DefaultTableModel(null, TitulosCarnets);
+
+        model = new DefaultTableModel(null, TitulosCarnets) {
+            @Override
+            public boolean isCellEditable(int row, int column) { // aqui esta
+                return false;
+            }
+
+        };
+        cargarTabla();
         TbCarnets.setModel(model);
         TbCarnets.setDefaultRenderer(Object.class, new RenderTable());
-        btnGenerar.setBackground(new Color(231, 235, 239));
-        btnReporte.setBackground(new Color(231, 235, 239));
-        btnGenerar.setForeground(new Color(58, 50, 75));
         btnGenerar.setFont(font);
         btnGenerar.setText("Generar");
-        btnGenerar.setIcon(modifIcon);
-        btnReporte.setBackground(new Color(231, 235, 239));
-        btnReporte.setForeground(new Color(58, 50, 75));
         btnReporte.setFont(font);
-        btnReporte.setIcon(report);
         TbCarnets.removeColumn(TbCarnets.getColumnModel().getColumn(4));
-        cargarTabla();
+        tbCarnetsDark.setModel(model);
+        tbCarnetsDark.setDefaultRenderer(Object.class, new RenderTable());
+        tbCarnetsDark.removeColumn(tbCarnetsDark.getColumnModel().getColumn(4));
         TbCarnets.setFont(font);
     }
 
@@ -135,6 +139,97 @@ public class PanelCarnets extends javax.swing.JPanel {
 
     }
 
+    void mood() {
+        if (ValidacionesSistema.ValidacionesBeep_Go.getModo() == 1) {
+            tbCarnetsDark.setVisible(true);
+            PanelDark.setVisible(true);
+            PanelTabla.setVisible(false);
+            TbCarnets.setVisible(false);
+            lblCarnets.setForeground(Color.WHITE);
+            PanelFondo.setBackground(new Color(47, 49, 54));
+            jPanel4.setBackground(new Color(47, 49, 54));
+            jPanel5.setBackground(new Color(47, 49, 54));
+            jPanel2.setBackground(new Color(47, 49, 54));
+            jPanel1.setBackground(new Color(47, 49, 54));
+            jPanel6.setBackground(new Color(47, 49, 54));
+            jPanel7.setBackground(new Color(47, 49, 54));
+            btnGenerar.setBackground(new Color(32, 34, 37));
+            btnAgregar.setBackground(new Color(32, 34, 37));
+            btnReporte.setBackground(new Color(32, 34, 37));
+            btnGenerar.setForeground(Color.WHITE);
+            btnReporte.setIcon(reportedark);
+            tbCarnetsDark.setForeground(Color.WHITE);
+            btnGenerar.setIcon(modifIcondark);
+        } else {
+            tbCarnetsDark.setVisible(false);
+            PanelDark.setVisible(false);
+            PanelTabla.setVisible(true);
+            TbCarnets.setVisible(true);
+            lblCarnets.setForeground(new Color(58, 50, 75));
+            PanelFondo.setBackground(new Color(231, 235, 239));
+            jPanel4.setBackground(new Color(231, 235, 239));
+            jPanel5.setBackground(new Color(231, 235, 239));
+            jPanel2.setBackground(new Color(231, 235, 239));
+            jPanel1.setBackground(new Color(231, 235, 239));
+            jPanel6.setBackground(new Color(231, 235, 239));
+            jPanel7.setBackground(new Color(231, 235, 239));
+            btnGenerar.setBackground(new Color(231, 235, 239));
+            btnReporte.setBackground(new Color(231, 235, 239));
+            btnGenerar.setForeground(new Color(58, 50, 75));
+            btnGenerar.setIcon(modifIcon);
+            btnReporte.setBackground(new Color(231, 235, 239));
+            btnReporte.setForeground(new Color(58, 50, 75));
+            btnReporte.setIcon(report);
+        }
+    }
+
+    public void mooddash() {
+        switch (ValidacionesSistema.ValidacionesBeep_Go.getModo()) {
+            case 1:
+                tbCarnetsDark.setVisible(true);
+                PanelDark.setVisible(true);
+                PanelTabla.setVisible(false);
+                TbCarnets.setVisible(false);
+                lblCarnets.setForeground(Color.WHITE);
+                PanelFondo.setBackground(new Color(47, 49, 54));
+                jPanel4.setBackground(new Color(47, 49, 54));
+                jPanel5.setBackground(new Color(47, 49, 54));
+                jPanel2.setBackground(new Color(47, 49, 54));
+                jPanel1.setBackground(new Color(47, 49, 54));
+                jPanel6.setBackground(new Color(47, 49, 54));
+                jPanel7.setBackground(new Color(47, 49, 54));
+                btnGenerar.setBackground(new Color(32, 34, 37));
+                btnAgregar.setBackground(new Color(32, 34, 37));
+                btnReporte.setBackground(new Color(32, 34, 37));
+                btnGenerar.setForeground(Color.WHITE);
+                btnReporte.setIcon(reportedark);
+                tbCarnetsDark.setForeground(Color.WHITE);
+                btnGenerar.setIcon(modifIcondark);
+                break;
+            case 2:
+                tbCarnetsDark.setVisible(false);
+                PanelDark.setVisible(false);
+                PanelTabla.setVisible(true);
+                TbCarnets.setVisible(true);
+                lblCarnets.setForeground(new Color(58, 50, 75));
+                PanelFondo.setBackground(new Color(231, 235, 239));
+                jPanel4.setBackground(new Color(231, 235, 239));
+                jPanel5.setBackground(new Color(231, 235, 239));
+                jPanel2.setBackground(new Color(231, 235, 239));
+                jPanel1.setBackground(new Color(231, 235, 239));
+                jPanel6.setBackground(new Color(231, 235, 239));
+                jPanel7.setBackground(new Color(231, 235, 239));
+                btnGenerar.setBackground(new Color(231, 235, 239));
+                btnReporte.setBackground(new Color(231, 235, 239));
+                btnGenerar.setForeground(new Color(58, 50, 75));
+                btnGenerar.setIcon(modifIcon);
+                btnReporte.setBackground(new Color(231, 235, 239));
+                btnReporte.setForeground(new Color(58, 50, 75));
+                btnReporte.setIcon(report);
+                break;
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -143,15 +238,23 @@ public class PanelCarnets extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         PanelFondo = new Controles_Personalizados.Paneles.PanelRound();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         lblCarnets = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
         btnAgregar = new Controles_Personalizados.Botones.UWPButton();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        PanelDark = new javax.swing.JScrollPane();
+        tbCarnetsDark = new Controles_Personalizados.Tables.TableDark();
+        jPanel7 = new javax.swing.JPanel();
+        scrollBarCustom2 = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
         PanelTabla = new javax.swing.JScrollPane();
         TbCarnets = new Controles_Personalizados.Tables.Table();
-        scrollBar1 = new Controles_Personalizados.ScrollBar.ScrollBar();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        table1 = new Controles_Personalizados.Tables.Table();
 
         setBackground(new java.awt.Color(42, 36, 56));
         setLayout(new java.awt.BorderLayout());
@@ -171,12 +274,26 @@ public class PanelCarnets extends javax.swing.JPanel {
                 PanelFondoMouseClicked(evt);
             }
         });
-        PanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelFondo.setLayout(new java.awt.GridBagLayout());
+
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jPanel4.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel4.setPreferredSize(new java.awt.Dimension(1240, 75));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblCarnets.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
         lblCarnets.setForeground(new java.awt.Color(58, 50, 75));
         lblCarnets.setText("Carnets");
-        PanelFondo.add(lblCarnets, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jPanel4.add(lblCarnets, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+
+        jPanel2.add(jPanel4, java.awt.BorderLayout.NORTH);
+
+        jPanel5.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel5.setPreferredSize(new java.awt.Dimension(1240, 70));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnAgregar.setBackground(new java.awt.Color(58, 50, 75));
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Agregar Blanco.png"))); // NOI18N
@@ -194,60 +311,68 @@ public class PanelCarnets extends javax.swing.JPanel {
                 btnAgregarActionPerformed(evt);
             }
         });
-        PanelFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 150, 40));
+        jPanel5.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 40));
 
-        PanelTabla.setHorizontalScrollBar(null);
-        PanelTabla.setVerticalScrollBar(scrollBar1);
-        PanelTabla.setWheelScrollingEnabled(false);
+        jPanel2.add(jPanel5, java.awt.BorderLayout.CENTER);
 
-        TbCarnets = new Controles_Personalizados.Tables.Table(){
+        jPanel1.add(jPanel2, java.awt.BorderLayout.NORTH);
 
-            public boolean isCellEditable(int rowIndex, int colIndex){
-                return false;
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        jPanel6.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel6.setLayout(new java.awt.BorderLayout());
+
+        tbCarnetsDark.setBackground(new java.awt.Color(47, 49, 54));
+        tbCarnetsDark.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
+        ));
+        tbCarnetsDark.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        tbCarnetsDark.setRowHeight(40);
+        tbCarnetsDark.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbCarnetsDarkMouseClicked(evt);
+            }
+        });
+        PanelDark.setViewportView(tbCarnetsDark);
 
-        };
+        jPanel6.add(PanelDark, java.awt.BorderLayout.PAGE_START);
+
+        jPanel3.add(jPanel6, java.awt.BorderLayout.NORTH);
+
+        jPanel7.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel7.setLayout(new java.awt.BorderLayout());
+
+        scrollBarCustom2.setBackground(new java.awt.Color(58, 50, 75));
+        scrollBarCustom2.setForeground(new java.awt.Color(58, 50, 75));
+        jPanel7.add(scrollBarCustom2, java.awt.BorderLayout.EAST);
+
+        PanelTabla.setBackground(new java.awt.Color(58, 50, 75));
+        PanelTabla.setVerticalScrollBar(scrollBarCustom2);
+
         TbCarnets.setBackground(new java.awt.Color(231, 234, 239));
         TbCarnets.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "CARNET", "NOMBRES", "TIPO USUARIO", "%ENTRADAS", "%SALIDAS", "ACCIONES"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        TbCarnets.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        ));
         TbCarnets.setGridColor(new java.awt.Color(58, 50, 75));
-        TbCarnets.setName(""); // NOI18N
+        TbCarnets.setMaximumSize(new java.awt.Dimension(2147483647, 880));
+        TbCarnets.setMinimumSize(new java.awt.Dimension(90, 880));
+        TbCarnets.setPreferredSize(new java.awt.Dimension(450, 880));
         TbCarnets.setSelectionBackground(new java.awt.Color(58, 50, 75));
         TbCarnets.setShowVerticalLines(false);
         TbCarnets.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -262,25 +387,22 @@ public class PanelCarnets extends javax.swing.JPanel {
         });
         PanelTabla.setViewportView(TbCarnets);
 
-        PanelFondo.add(PanelTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 1230, 480));
-        PanelTabla.getAccessibleContext().setAccessibleParent(PanelTabla);
+        jPanel7.add(PanelTabla, java.awt.BorderLayout.CENTER);
 
-        PanelFondo.add(scrollBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 140, 10, 480));
+        jPanel3.add(jPanel7, java.awt.BorderLayout.CENTER);
 
-        table1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(table1);
+        jPanel1.add(jPanel3, java.awt.BorderLayout.CENTER);
 
-        PanelFondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, -1, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = -100;
+        gridBagConstraints.ipady = -100;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(10, 15, 10, 15);
+        PanelFondo.add(jPanel1, gridBagConstraints);
 
         add(PanelFondo, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -292,13 +414,13 @@ public class PanelCarnets extends javax.swing.JPanel {
             add.toFront();
         } else {
             add.setVisible(true);
-            frmstate=1;
+            frmstate = 1;
         }
     }//GEN-LAST:event_btnAgregarMouseClicked
-    final void refresh(){
-        if (frmstate==1&&!(add.isActive())) {
+    final void refresh() {
+        if (frmstate == 1 && !(add.isActive())) {
             cargarTabla();
-            frmstate=0;
+            frmstate = 0;
         }
     }
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -374,6 +496,16 @@ public class PanelCarnets extends javax.swing.JPanel {
         }
     }
 
+    private void PanelFondoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseClicked
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_PanelFondoMouseClicked
+
+    private void PanelFondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseMoved
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_PanelFondoMouseMoved
+
     private void TbCarnetsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbCarnetsMouseClicked
         // TODO add your handling code here:
         int column = TbCarnets.getColumnModel().getColumnIndexAtX(evt.getX());
@@ -401,7 +533,7 @@ public class PanelCarnets extends javax.swing.JPanel {
                             frmc.setVisible(true);
                         }
                     }
-                }else if(btns.getName().equals("btnReporte")){
+                } else if (btns.getName().equals("btnReporte")) {
                     ID = 0;
                     imagen = null;
                     CargarDatos();
@@ -411,30 +543,64 @@ public class PanelCarnets extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_TbCarnetsMouseClicked
 
-    private void PanelFondoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseClicked
-        // TODO add your handling code here:
-        refresh();
-    }//GEN-LAST:event_PanelFondoMouseClicked
-
     private void TbCarnetsMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbCarnetsMouseMoved
         // TODO add your handling code here:
         refresh();
     }//GEN-LAST:event_TbCarnetsMouseMoved
 
-    private void PanelFondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseMoved
+    private void tbCarnetsDarkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCarnetsDarkMouseClicked
         // TODO add your handling code here:
-        refresh();
-    }//GEN-LAST:event_PanelFondoMouseMoved
+        int column = tbCarnetsDark.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / tbCarnetsDark.getRowHeight();
+        btnGenerar.setName("btnGenerar");
+        btnReporte.setName("btnReporte");
+        if (evt.getClickCount() == 1) {
+            JTable rcp = (JTable) evt.getSource();
+            ID = (int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 4);
+            Carnet = rcp.getModel().getValueAt(rcp.getSelectedRow(), 2).toString();
+        }
+        if (row < tbCarnetsDark.getRowCount() || row >= 0 || column < tbCarnetsDark.getColumnCount() || column >= 0) {
+            Object vals = tbCarnetsDark.getValueAt(row, column);
+            if (vals instanceof UWPButton) {
+                ((UWPButton) vals).doClick(); // aqui esta
+                UWPButton btns = (UWPButton) vals;
+                if (btns.getName().equals("btnGenerar")) {
+                    CrearCodigodeBarra();
+                    if (validarImagen() == true) {
+
+                        FrmAgg_Carnet frmc = new FrmAgg_Carnet(Carnet);
+                        if (frmc.isVisible()) {
+                            frmc.toFront();
+                        } else {
+                            frmc.setVisible(true);
+                        }
+                    }
+                } else if (btns.getName().equals("btnReporte")) {
+                    ID = 0;
+                    imagen = null;
+                    CargarDatos();
+                    ReportePar();
+                }
+            }
+        }
+    }//GEN-LAST:event_tbCarnetsDarkMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane PanelDark;
     private Controles_Personalizados.Paneles.PanelRound PanelFondo;
     private javax.swing.JScrollPane PanelTabla;
     private Controles_Personalizados.Tables.Table TbCarnets;
     private Controles_Personalizados.Botones.UWPButton btnAgregar;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JLabel lblCarnets;
-    private Controles_Personalizados.ScrollBar.ScrollBar scrollBar1;
-    private Controles_Personalizados.Tables.Table table1;
+    private Controles_Personalizados.ScrollBar.ScrollBarCustom scrollBarCustom2;
+    private Controles_Personalizados.Tables.TableDark tbCarnetsDark;
     // End of variables declaration//GEN-END:variables
 }

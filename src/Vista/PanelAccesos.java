@@ -6,6 +6,7 @@
 package Vista;
 
 import Controlador.ControllerAccesos;
+import Controlador.ControllerConexion;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
@@ -16,13 +17,22 @@ import Controles_Personalizados.Tables.Table;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.HeadlessException;
+import java.sql.Connection;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -38,6 +48,8 @@ public class PanelAccesos extends javax.swing.JPanel {
     UWPButton btndelete;
     ImageIcon modifIcon = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar.png"));
     ImageIcon deleteIcon = new ImageIcon(getClass().getResource("/Recursos_Proyecto/eliminar.png"));
+    ImageIcon Modificardark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/editar_white.png"));
+    ImageIcon Eliminardark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-trash-alt white.png"));
     private String CapCarnet;
     private int idPersonal;
     private int frmstate;
@@ -55,7 +67,12 @@ public class PanelAccesos extends javax.swing.JPanel {
         if (tipouser.equals("Seguridad")) {
             System.out.println(tipouser);
             String[] header = {"IDAcceso", "IDPersonal", "Carnet", "Fecha", "IDTipoAcceso", "Hora", "Acceso", "Notificación"};
-            tb = new DefaultTableModel(null, header);
+            tb = new DefaultTableModel(null, header) {
+                @Override
+                public boolean isCellEditable(int row, int column) { // aqui esta
+                    return false;
+                }
+            };
             loadTableToSegurity();
             TbAccesosWhite4.setFont(font);
             TbAccesosWhite4.setDefaultRenderer(Object.class, new RenderTable());
@@ -63,6 +80,14 @@ public class PanelAccesos extends javax.swing.JPanel {
             TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(0));
             TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(0));
             TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(2));
+            //Table dark
+            TbAcessoDark.setFont(font);
+            TbAcessoDark.setDefaultRenderer(Object.class, new RenderTable());
+            TbAcessoDark.setModel(tb);
+            TbAcessoDark.removeColumn(TbAcessoDark.getColumnModel().getColumn(0));
+            TbAcessoDark.removeColumn(TbAcessoDark.getColumnModel().getColumn(0));
+            TbAcessoDark.removeColumn(TbAcessoDark.getColumnModel().getColumn(2));
+            modoseguridad();
         } else {
             btnupdate = new UWPButton();
             btndelete = new UWPButton();
@@ -75,16 +100,21 @@ public class PanelAccesos extends javax.swing.JPanel {
             TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(0));
             TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(0));
             TbAccesosWhite4.removeColumn(TbAccesosWhite4.getColumnModel().getColumn(2));
-            btnupdate.setName("btnModificar");
-            btnupdate.setBackground(new Color(231, 234, 239));
-            btnupdate.setIcon(modifIcon);
+            //Table dark
+            TbAcessoDark.setFont(font);
+            TbAcessoDark.setDefaultRenderer(Object.class, new RenderTable());
+            TbAcessoDark.setModel(tb);
+            TbAcessoDark.removeColumn(TbAcessoDark.getColumnModel().getColumn(0));
+            TbAcessoDark.removeColumn(TbAcessoDark.getColumnModel().getColumn(0));
+            TbAcessoDark.removeColumn(TbAcessoDark.getColumnModel().getColumn(2));
 
+            btnupdate.setName("btnModificar");
             btndelete.setName("btnEliminar");
-            btndelete.setBackground(new Color(231, 234, 239));
-            btndelete.setIcon(deleteIcon);
+            modo();
         }
 
     }
+
     /**
      * This function is to refresh the Jtable in the systemAn
      */
@@ -98,6 +128,171 @@ public class PanelAccesos extends javax.swing.JPanel {
         }
     }
 
+    void modoseguridad() {
+        if (ValidacionesSistema.ValidacionesBeep_Go.Modo == 1) {
+            jScrollPane1.setVisible(false);
+            TbAccesosWhite4.setVisible(false);
+            ScrollDark.setVisible(true);
+            jPanel7.setVisible(true);
+            TbAcessoDark.setVisible(true);
+            TbAcessoDark.setForeground(Color.white);
+            PanelFondo.setBackground(new Color(47, 49, 54));
+            jPanel4.setBackground(new Color(47, 49, 54));
+            jPanel5.setBackground(new Color(47, 49, 54));
+            jPanel2.setBackground(new Color(47, 49, 54));
+            jPanel1.setBackground(new Color(47, 49, 54));
+            jPanel7.setBackground(new Color(47, 49, 54));
+            jPanel6.setBackground(new Color(47, 49, 54));
+            lblAccesos.setForeground(Color.WHITE);
+            btnAgregar.setBackground(new Color(32, 34, 37));
+            btnFiltrar.setBackground(new Color(32, 34, 37));
+        } else {
+            jScrollPane1.setVisible(true);
+            TbAccesosWhite4.setVisible(true);
+            ScrollDark.setVisible(false);
+            TbAcessoDark.setVisible(false);
+            PanelFondo.setBackground(new Color(231, 234, 239));
+            jPanel4.setBackground(new Color(231, 234, 239));
+            jPanel5.setBackground(new Color(231, 234, 239));
+            jPanel2.setBackground(new Color(231, 234, 239));
+            jPanel1.setBackground(new Color(231, 234, 239));
+            jPanel7.setBackground(new Color(231, 234, 239));
+            jPanel6.setBackground(new Color(231, 234, 239));
+            lblAccesos.setForeground(new Color(58, 50, 75));
+            btnAgregar.setBackground(new Color(58, 50, 75));
+            btnFiltrar.setBackground(new Color(58, 50, 75));
+        }
+    }
+
+    void modo() {
+        if (ValidacionesSistema.ValidacionesBeep_Go.Modo == 1) {
+            jScrollPane1.setVisible(false);
+            TbAccesosWhite4.setVisible(false);
+            ScrollDark.setVisible(true);
+            jPanel7.setVisible(true);
+            TbAcessoDark.setVisible(true);
+            TbAcessoDark.setForeground(Color.white);
+            PanelFondo.setBackground(new Color(47, 49, 54));
+            jPanel4.setBackground(new Color(47, 49, 54));
+            jPanel5.setBackground(new Color(47, 49, 54));
+            jPanel2.setBackground(new Color(47, 49, 54));
+            jPanel1.setBackground(new Color(47, 49, 54));
+            jPanel7.setBackground(new Color(47, 49, 54));
+            jPanel6.setBackground(new Color(47, 49, 54));
+            lblAccesos.setForeground(Color.WHITE);
+            btnAgregar.setBackground(new Color(32, 34, 37));
+            btnFiltrar.setBackground(new Color(32, 34, 37));
+            btnupdate.setBackground(new Color(32, 34, 37));
+            btndelete.setBackground(new Color(32, 34, 37));
+            btnupdate.setIcon(Modificardark);
+            btndelete.setIcon(Eliminardark);
+        } else {
+            jScrollPane1.setVisible(true);
+            TbAccesosWhite4.setVisible(true);
+            ScrollDark.setVisible(false);
+            TbAcessoDark.setVisible(false);
+            PanelFondo.setBackground(new Color(231, 234, 239));
+            jPanel4.setBackground(new Color(231, 234, 239));
+            jPanel5.setBackground(new Color(231, 234, 239));
+            jPanel2.setBackground(new Color(231, 234, 239));
+            jPanel1.setBackground(new Color(231, 234, 239));
+            jPanel7.setBackground(new Color(231, 234, 239));
+            jPanel6.setBackground(new Color(231, 234, 239));
+            lblAccesos.setForeground(new Color(58, 50, 75));
+            btnAgregar.setBackground(new Color(58, 50, 75));
+            btnFiltrar.setBackground(new Color(58, 50, 75));
+            btnupdate.setBackground(new Color(231, 234, 239));
+            btndelete.setBackground(new Color(231, 234, 239));
+            btnupdate.setIcon(modifIcon);
+            btndelete.setIcon(deleteIcon);
+        }
+    }
+
+    public void mododash() {
+        switch (ValidacionesSistema.ValidacionesBeep_Go.getModo()) {
+            case 1:
+                if (!tipouser.equals("Seguridad")) {
+                    btnupdate.setBackground(new Color(32, 34, 37));
+                    btndelete.setBackground(new Color(32, 34, 37));
+                    btnupdate.setIcon(Modificardark);
+                    btndelete.setIcon(Eliminardark);
+                    jScrollPane1.setVisible(false);
+                    TbAccesosWhite4.setVisible(false);
+                    ScrollDark.setVisible(true);
+                    jPanel7.setVisible(true);
+                    TbAcessoDark.setVisible(true);
+                    TbAcessoDark.setForeground(Color.white);
+                    PanelFondo.setBackground(new Color(47, 49, 54));
+                    jPanel4.setBackground(new Color(47, 49, 54));
+                    jPanel5.setBackground(new Color(47, 49, 54));
+                    jPanel2.setBackground(new Color(47, 49, 54));
+                    jPanel1.setBackground(new Color(47, 49, 54));
+                    jPanel7.setBackground(new Color(47, 49, 54));
+                    jPanel6.setBackground(new Color(47, 49, 54));
+                    lblAccesos.setForeground(Color.WHITE);
+                    btnAgregar.setBackground(new Color(32, 34, 37));
+                    btnFiltrar.setBackground(new Color(32, 34, 37));
+                } else {
+                    jScrollPane1.setVisible(false);
+                    TbAccesosWhite4.setVisible(false);
+                    ScrollDark.setVisible(true);
+                    jPanel7.setVisible(true);
+                    TbAcessoDark.setVisible(true);
+                    TbAcessoDark.setForeground(Color.white);
+                    PanelFondo.setBackground(new Color(47, 49, 54));
+                    jPanel4.setBackground(new Color(47, 49, 54));
+                    jPanel5.setBackground(new Color(47, 49, 54));
+                    jPanel2.setBackground(new Color(47, 49, 54));
+                    jPanel1.setBackground(new Color(47, 49, 54));
+                    jPanel7.setBackground(new Color(47, 49, 54));
+                    jPanel6.setBackground(new Color(47, 49, 54));
+                    lblAccesos.setForeground(Color.WHITE);
+                    btnAgregar.setBackground(new Color(32, 34, 37));
+                    btnFiltrar.setBackground(new Color(32, 34, 37));
+                }
+
+                break;
+            case 2:
+                if (!tipouser.equals("Seguridad")) {
+                    jScrollPane1.setVisible(true);
+                    TbAccesosWhite4.setVisible(true);
+                    ScrollDark.setVisible(false);
+                    TbAcessoDark.setVisible(false);
+                    PanelFondo.setBackground(new Color(231, 234, 239));
+                    jPanel4.setBackground(new Color(231, 234, 239));
+                    jPanel5.setBackground(new Color(231, 234, 239));
+                    jPanel2.setBackground(new Color(231, 234, 239));
+                    jPanel1.setBackground(new Color(231, 234, 239));
+                    jPanel7.setBackground(new Color(231, 234, 239));
+                    jPanel6.setBackground(new Color(231, 234, 239));
+                    lblAccesos.setForeground(new Color(58, 50, 75));
+                    btnAgregar.setBackground(new Color(58, 50, 75));
+                    btnFiltrar.setBackground(new Color(58, 50, 75));
+                    btnupdate.setBackground(new Color(231, 234, 239));
+                    btndelete.setBackground(new Color(231, 234, 239));
+                    btnupdate.setIcon(modifIcon);
+                    btndelete.setIcon(deleteIcon);
+                } else {
+                    jScrollPane1.setVisible(true);
+                    TbAccesosWhite4.setVisible(true);
+                    ScrollDark.setVisible(false);
+                    TbAcessoDark.setVisible(false);
+                    PanelFondo.setBackground(new Color(231, 234, 239));
+                    jPanel4.setBackground(new Color(231, 234, 239));
+                    jPanel5.setBackground(new Color(231, 234, 239));
+                    jPanel2.setBackground(new Color(231, 234, 239));
+                    jPanel1.setBackground(new Color(231, 234, 239));
+                    jPanel7.setBackground(new Color(231, 234, 239));
+                    jPanel6.setBackground(new Color(231, 234, 239));
+                    lblAccesos.setForeground(new Color(58, 50, 75));
+                    btnAgregar.setBackground(new Color(58, 50, 75));
+                    btnFiltrar.setBackground(new Color(58, 50, 75));
+                }
+
+                break;
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -106,14 +301,24 @@ public class PanelAccesos extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         PanelFondo = new Controles_Personalizados.Paneles.PanelRound();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
         lblAccesos = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
         btnFiltrar = new Controles_Personalizados.Botones.UWPButton();
         btnAgregar = new Controles_Personalizados.Botones.UWPButton();
-        PanelTabla = new javax.swing.JScrollPane();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
+        scrollBarCustom1 = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
+        jScrollPane1 = new javax.swing.JScrollPane();
         TbAccesosWhite4 = new Controles_Personalizados.Tables.Table();
-        ScrollTabla = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
+        jPanel7 = new javax.swing.JPanel();
+        ScrollDark = new javax.swing.JScrollPane();
+        TbAcessoDark = new Controles_Personalizados.Tables.TableDark();
 
         setBackground(new java.awt.Color(42, 36, 56));
         setLayout(new java.awt.BorderLayout());
@@ -133,12 +338,26 @@ public class PanelAccesos extends javax.swing.JPanel {
                 PanelFondoMouseClicked(evt);
             }
         });
-        PanelFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelFondo.setLayout(new java.awt.GridBagLayout());
+
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jPanel4.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel4.setPreferredSize(new java.awt.Dimension(100, 75));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblAccesos.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
         lblAccesos.setForeground(new java.awt.Color(58, 50, 75));
         lblAccesos.setText("Accesos");
-        PanelFondo.add(lblAccesos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jPanel4.add(lblAccesos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+
+        jPanel2.add(jPanel4, java.awt.BorderLayout.NORTH);
+
+        jPanel5.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel5.setPreferredSize(new java.awt.Dimension(100, 70));
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnFiltrar.setBackground(new java.awt.Color(58, 50, 75));
         btnFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Filtrar Blanco.png"))); // NOI18N
@@ -146,7 +365,12 @@ public class PanelAccesos extends javax.swing.JPanel {
         btnFiltrar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         btnFiltrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        PanelFondo.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 150, 40));
+        btnFiltrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnFiltrarMouseClicked(evt);
+            }
+        });
+        jPanel5.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 150, 40));
 
         btnAgregar.setBackground(new java.awt.Color(58, 50, 75));
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Agregar Blanco.png"))); // NOI18N
@@ -159,59 +383,38 @@ public class PanelAccesos extends javax.swing.JPanel {
                 btnAgregarMouseClicked(evt);
             }
         });
-        PanelFondo.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 150, 40));
+        jPanel5.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 40));
 
-        PanelTabla.setHorizontalScrollBar(null);
-        PanelTabla.setVerticalScrollBar(ScrollTabla);
-        PanelTabla.setWheelScrollingEnabled(false);
+        jPanel2.add(jPanel5, java.awt.BorderLayout.CENTER);
 
-        TbAccesosWhite4 = new Controles_Personalizados.Tables.Table(){
+        jPanel1.add(jPanel2, java.awt.BorderLayout.NORTH);
 
-            public boolean isCellEditable(int rowIndex, int colIndex){
-                return false;
-            }
-        };
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        jPanel6.setLayout(new java.awt.BorderLayout());
+
+        scrollBarCustom1.setBackground(new java.awt.Color(58, 50, 75));
+        scrollBarCustom1.setForeground(new java.awt.Color(58, 50, 75));
+        jPanel6.add(scrollBarCustom1, java.awt.BorderLayout.EAST);
+
+        jScrollPane1.setVerticalScrollBar(scrollBarCustom1);
+
         TbAccesosWhite4.setBackground(new java.awt.Color(231, 234, 239));
         TbAccesosWhite4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "CARNET", "NOMBRES", "TIPO USUARIO", "%ENTRADAS", "%SALIDAS", "ACCIONES"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        TbAccesosWhite4.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        ));
         TbAccesosWhite4.setGridColor(new java.awt.Color(58, 50, 75));
-        TbAccesosWhite4.setName(""); // NOI18N
+        TbAccesosWhite4.setMaximumSize(new java.awt.Dimension(2147483647, 880));
+        TbAccesosWhite4.setMinimumSize(new java.awt.Dimension(90, 880));
+        TbAccesosWhite4.setPreferredSize(new java.awt.Dimension(450, 880));
         TbAccesosWhite4.setSelectionBackground(new java.awt.Color(58, 50, 75));
         TbAccesosWhite4.setShowVerticalLines(false);
         TbAccesosWhite4.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -223,17 +426,52 @@ public class PanelAccesos extends javax.swing.JPanel {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TbAccesosWhite4MouseClicked(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                TbAccesosWhite4MouseEntered(evt);
+        });
+        jScrollPane1.setViewportView(TbAccesosWhite4);
+
+        jPanel6.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        jPanel3.add(jPanel6, java.awt.BorderLayout.CENTER);
+
+        jPanel7.setLayout(new java.awt.BorderLayout());
+
+        TbAcessoDark.setBackground(new java.awt.Color(47, 49, 54));
+        TbAcessoDark.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        TbAcessoDark.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        TbAcessoDark.setRowHeight(40);
+        TbAcessoDark.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TbAcessoDarkMouseClicked(evt);
             }
         });
-        PanelTabla.setViewportView(TbAccesosWhite4);
+        ScrollDark.setViewportView(TbAcessoDark);
 
-        PanelFondo.add(PanelTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 1230, 480));
+        jPanel7.add(ScrollDark, java.awt.BorderLayout.PAGE_START);
 
-        ScrollTabla.setBackground(new java.awt.Color(58, 50, 75));
-        ScrollTabla.setForeground(new java.awt.Color(58, 50, 75));
-        PanelFondo.add(ScrollTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(1238, 177, 10, 40));
+        jPanel3.add(jPanel7, java.awt.BorderLayout.PAGE_START);
+
+        jPanel1.add(jPanel3, java.awt.BorderLayout.CENTER);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = -100;
+        gridBagConstraints.ipady = -100;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(10, 15, 10, 15);
+        PanelFondo.add(jPanel1, gridBagConstraints);
 
         add(PanelFondo, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -259,19 +497,6 @@ public class PanelAccesos extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnAgregarMouseClicked
 
-    private void TbAccesosWhite4MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbAccesosWhite4MouseEntered
-        int col = TbAccesosWhite4.getColumnModel().getColumnIndexAtX(evt.getX());
-        int row = evt.getY() / TbAccesosWhite4.getRowHeight();
-        if (row < TbAccesosWhite4.getRowCount() && row > 0 && col > 0 && col < TbAccesosWhite4.getColumnCount()) {
-            Object value = TbAccesosWhite4.getValueAt(row, col);
-            if (value instanceof UWPButton) {
-                ((UWPButton) value).doClick();
-                UWPButton btn = (UWPButton) value;
-
-            }
-        }
-    }//GEN-LAST:event_TbAccesosWhite4MouseEntered
-
     void deleteAccess(int ID) {
         ControllerAccesos.setID(ID);
         if (ControllerAccesos.getID() > 0) {
@@ -284,6 +509,26 @@ public class PanelAccesos extends javax.swing.JPanel {
             System.out.println(ControllerAccesos.getID());
         }
     }
+
+    private void PanelFondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseMoved
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_PanelFondoMouseMoved
+
+    private void PanelFondoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseClicked
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_PanelFondoMouseClicked
+
+    FrmOpcionesReportesAccesos accessReport = new FrmOpcionesReportesAccesos();
+    private void btnFiltrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFiltrarMouseClicked
+        accessReport.setVisible(true);
+    }//GEN-LAST:event_btnFiltrarMouseClicked
+
+    private void TbAccesosWhite4MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbAccesosWhite4MouseMoved
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_TbAccesosWhite4MouseMoved
 
     private void TbAccesosWhite4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbAccesosWhite4MouseClicked
         Table tb = (Table) evt.getSource();//para obtener los datos de la fila
@@ -332,20 +577,53 @@ public class PanelAccesos extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_TbAccesosWhite4MouseClicked
 
-    private void PanelFondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseMoved
+    private void TbAcessoDarkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbAcessoDarkMouseClicked
         // TODO add your handling code here:
-        refresh();
-    }//GEN-LAST:event_PanelFondoMouseMoved
+        Table rc = (Table) evt.getSource();//para obtener los datos de la fila
 
-    private void TbAccesosWhite4MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbAccesosWhite4MouseMoved
-        // TODO add your handling code here:
-        refresh();
-    }//GEN-LAST:event_TbAccesosWhite4MouseMoved
+        int row = evt.getY() / TbAcessoDark.getRowHeight();
+        int col = TbAcessoDark.getColumnModel().getColumnIndexAtX(evt.getX());
+        try {
+            if (row < TbAcessoDark.getRowCount() && row >= 0 && col < TbAcessoDark.getColumnCount() && col >= 0) {
+                Object obj = TbAcessoDark.getValueAt(row, col);
+                if (obj instanceof UWPButton) {
+                    ((UWPButton) obj).doClick();
+                    UWPButton btn = (UWPButton) obj;
+                    if (btn.getName().equals("btnModificar")) {
+                        //aquí
+                        if (add.isShowing()) {
+                            add.setVisible(false);
+                        }
+                        add.setAction(2);
+                        String notification = rc.getModel().getValueAt(rc.getSelectedRow(), 7).toString();
 
-    private void PanelFondoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseClicked
-        // TODO add your handling code here:
-        refresh();
-    }//GEN-LAST:event_PanelFondoMouseClicked
+                        if ("".equals(notification)) {
+                            add.setNofitication("");
+                            System.out.println(notification + "ds");
+                            add.setVisible(true);
+                            frmstate = 1;
+                        } else {
+                            add.setNofitication(rc.getModel().getValueAt(rc.getSelectedRow(), 7).toString());
+                            System.out.println(notification + "f");
+                        }
+                        add.setID(Integer.valueOf(rc.getModel().getValueAt(rc.getSelectedRow(), 0).toString()));
+                        add.setTypeaccess(Integer.valueOf(rc.getModel().getValueAt(rc.getSelectedRow(), 4).toString()));
+
+                        add.setVisible(true);
+
+                    }
+                    if (btn.getName().equals("btnEliminar")) {
+                        int msg = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este dato?", "Confirmar acción", JOptionPane.YES_NO_OPTION);
+                        if (msg == JOptionPane.YES_OPTION) {
+                            deleteAccess(Integer.valueOf(rc.getModel().getValueAt(rc.getSelectedRow(), 0).toString()));
+                        }
+                    }
+                }
+            }
+        } catch (HeadlessException | NumberFormatException e) {
+            System.out.println(e.toString());
+        }
+    }//GEN-LAST:event_TbAcessoDarkMouseClicked
 
     void loadTable() {
         ResultSet rs;
@@ -382,11 +660,20 @@ public class PanelAccesos extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Controles_Personalizados.Paneles.PanelRound PanelFondo;
-    private javax.swing.JScrollPane PanelTabla;
-    private Controles_Personalizados.ScrollBar.ScrollBarCustom ScrollTabla;
+    private javax.swing.JScrollPane ScrollDark;
     private Controles_Personalizados.Tables.Table TbAccesosWhite4;
+    private Controles_Personalizados.Tables.TableDark TbAcessoDark;
     private Controles_Personalizados.Botones.UWPButton btnAgregar;
     private Controles_Personalizados.Botones.UWPButton btnFiltrar;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAccesos;
+    private Controles_Personalizados.ScrollBar.ScrollBarCustom scrollBarCustom1;
     // End of variables declaration//GEN-END:variables
 }
