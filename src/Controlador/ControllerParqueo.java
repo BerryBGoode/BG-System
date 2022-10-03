@@ -9,7 +9,8 @@ import Modelo.ModelParqueo;
 import java.sql.ResultSet;
 
 /**
- *  This class stores and connects the ModelParqueo with the view, and makes possible the communication between both
+ * This class stores and connects the ModelParqueo with the view, and makes possible the communication between both
+ *
  * @author danlo
  */
 public class ControllerParqueo {
@@ -20,11 +21,15 @@ public class ControllerParqueo {
     private int IDAcceso;
     private static int IDParqueo;
     private static int numberPark;
-    private static int IDDetail;    
+    private static int IDDetail;
     private static int IDAccess;
-    
+
+    private static int BeforeStation; //este attributo sirve para comparar si el estacionamiento anterior es diferente al que se va actualizar
+    //ya que cuando sea diferente va a cambiar el estado del anterior o el que se recupera en este attributo
+
     /**
-     *  Gets the parking ID
+     * Gets the parking ID
+     *
      * @return an Integer
      */
     public int getID() {
@@ -32,15 +37,17 @@ public class ControllerParqueo {
     }
 
     /**
-     *  Set the parking ID
-     * @param ID referring to the parking ID 
+     * Set the parking ID
+     *
+     * @param ID referring to the parking ID
      */
     public void setID(int ID) {
         this.ID = ID;
     }
 
     /**
-     *  Gets the vehicle ID
+     * Gets the vehicle ID
+     *
      * @return an Integer
      */
     public int getIDVehiculo() {
@@ -48,7 +55,8 @@ public class ControllerParqueo {
     }
 
     /**
-     *  Set the vehicle ID
+     * Set the vehicle ID
+     *
      * @param IDVehiculo referring to the vehicle ID
      */
     public void setIDVehiculo(int IDVehiculo) {
@@ -56,7 +64,8 @@ public class ControllerParqueo {
     }
 
     /**
-     *  Gets the parking lot ID
+     * Gets the parking lot ID
+     *
      * @return an Integer
      */
     public int getIDEstacionamiento() {
@@ -64,7 +73,8 @@ public class ControllerParqueo {
     }
 
     /**
-     *  Set the parking lot ID
+     * Set the parking lot ID
+     *
      * @param IDEstacionamiento referring to the parking lot ID
      */
     public void setIDEstacionamiento(int IDEstacionamiento) {
@@ -72,7 +82,8 @@ public class ControllerParqueo {
     }
 
     /**
-     *  Gets the access ID
+     * Gets the access ID
+     *
      * @return an Integer
      */
     public int getIDAcceso() {
@@ -80,7 +91,8 @@ public class ControllerParqueo {
     }
 
     /**
-     *  Set the access ID
+     * Set the access ID
+     *
      * @param IDAcceso referring to the access ID
      */
     public void setIDAcceso(int IDAcceso) {
@@ -88,7 +100,8 @@ public class ControllerParqueo {
     }
 
     /**
-     *  Gets the parking ID
+     * Gets the parking ID
+     *
      * @return an Integer
      */
     public static int getIDParqueo() {
@@ -96,7 +109,8 @@ public class ControllerParqueo {
     }
 
     /**
-     *  Set the parking ID
+     * Set the parking ID
+     *
      * @param IDParqueo referring to the parking ID
      */
     public static void setIDParqueo(int IDParqueo) {
@@ -104,7 +118,8 @@ public class ControllerParqueo {
     }
 
     /**
-     *  Gets the parking spot number
+     * Gets the parking spot number
+     *
      * @return an Integer
      */
     public static int getNumberPark() {
@@ -112,7 +127,8 @@ public class ControllerParqueo {
     }
 
     /**
-     *  Set the parking spot number
+     * Set the parking spot number
+     *
      * @param numberPark referring to the parking spot number
      */
     public static void setNumberPark(int numberPark) {
@@ -120,7 +136,8 @@ public class ControllerParqueo {
     }
 
     /**
-     *  Gets the detail ID
+     * Gets the detail ID
+     *
      * @return an Integer
      */
     public static int getIDDetail() {
@@ -128,30 +145,41 @@ public class ControllerParqueo {
     }
 
     /**
-     *  Set the detail ID
+     * Set the detail ID
+     *
      * @param IDDetail referring to the detail ID
      */
     public static void setIDDetail(int IDDetail) {
         ControllerParqueo.IDDetail = IDDetail;
-    }    
+    }
+
     /**
      * Gets the Access ID
-     * @return a Integer 
+     *
+     * @return a Integer
      */
     public static int getIDAccess() {
         return IDAccess;
     }
+
     /**
      * Set the Access ID
-     * @param IDAccess 
+     *
+     * @param IDAccess
      * @param IDDetail referring to the Access ID
      */
     public static void setIDAccess(int IDAccess) {
         ControllerParqueo.IDAccess = IDAccess;
     }
-    
-    
-    
+
+    public static int getBeforeStation() {
+        return BeforeStation;
+    }
+
+    public static void setBeforeStation(int BeforeStation) {
+        ControllerParqueo.BeforeStation = BeforeStation;
+    }
+     
     ModelParqueo mdpark = new ModelParqueo();
 
     /**
@@ -162,11 +190,10 @@ public class ControllerParqueo {
     public ResultSet getID(int NParqueo) {
         return mdpark.getIDPark(NParqueo);
     }
-    
 
-    
     /**
-     *  Load the parking spot that are occupied
+     * Load the parking spot that are occupied
+     *
      * @return a ResultSet
      */
     public ResultSet loadPark() {
@@ -183,7 +210,8 @@ public class ControllerParqueo {
     }
 
     /**
-     *  Save the information for the parking lot
+     * Save the information for the parking lot
+     *
      * @return a Boolean
      */
     public boolean insertPark() {
@@ -191,15 +219,17 @@ public class ControllerParqueo {
     }
 
     /**
-     *  Update the information for the parking lot
+     * Update the information for the parking lot
+     *
      * @return a Boolean
      */
     public boolean updatePark() {
-        return mdpark.updatePark(getIDAcceso(), getIDVehiculo(), getIDEstacionamiento(), getID());
+        return mdpark.updatePark(getIDAcceso(), getIDVehiculo(), getIDEstacionamiento(), getID(), getBeforeStation());
     }
 
     /**
-     *  Check the occupied spots in the parking lot
+     * Check the occupied spots in the parking lot
+     *
      * @param idpark
      * @param idtation
      * @return an ResultSet
@@ -209,7 +239,8 @@ public class ControllerParqueo {
     }
 
     /**
-     *  Gets the station ID
+     * Gets the station ID
+     *
      * @return a ResultSet
      */
     public ResultSet getIDStation() {
@@ -218,6 +249,7 @@ public class ControllerParqueo {
 
     /**
      * Parameters for the parking lot processes
+     *
      * @param idstation referring to the spot ID
      * @param idpark referring to the parking lot ID
      * @return a ResultSet
@@ -227,7 +259,8 @@ public class ControllerParqueo {
     }
 
     /**
-     *  Delete the parking information
+     * Delete the parking information
+     *
      * @return a Boolean
      */
     public boolean deletePark() {
@@ -235,7 +268,8 @@ public class ControllerParqueo {
     }
 
     /**
-     *  Filters the spots assign to a specific user
+     * Filters the spots assign to a specific user
+     *
      * @param viewname referring to the group of information required
      * @param parametername referring to the search parameters
      * @param carnet referring to the id - card of the user
