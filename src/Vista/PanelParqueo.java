@@ -330,10 +330,14 @@ public class PanelParqueo extends javax.swing.JPanel {
                         int ID = Integer.parseInt(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString());
                         int station = Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 9).toString());
                         int IDPark = Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 11).toString());
+                        
+                        int IDBeforeStation = IDstation;//esta variable sirve para guardar el IDestacionamiento  antes de actualizar, y sí se llega a cambiar, entonces a este estacionamiento
+                        //se le cambiará el estado a disponible
                         FrmSetPark.action = 1;//me refiero a que se va a actualizar, entonces que en wl switch bloquee todos los estacionamientos menos en el q se ingreso  
                         //FrmSetPark.setIDDetail(ID);
+                       
                         //setteo 
-
+                        //el objeto "park" hace referencia al FRMconfigpark 
                         controllerParqueo.setIDAcceso(IDAcceso);
                         //controllerParqueo.setIDVehiculo(IDVehiuclo);
                         controllerParqueo.setIDEstacionamiento(IDstation);
@@ -341,7 +345,7 @@ public class PanelParqueo extends javax.swing.JPanel {
                         ControllerParqueo.setNumberPark(IDPark);
                         park.setStation(station);
                         park.setPark(tb.getModel().getValueAt(tb.getSelectedRow(), 11).toString());
-
+                        ControllerParqueo.setBeforeStation(IDBeforeStation);
                         park.setVisible(true);
                         frmstate = 1;
                         FrmSetPark.action = 1;
