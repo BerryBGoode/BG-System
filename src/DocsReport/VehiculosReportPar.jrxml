@@ -1,144 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="270" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="61605bc1-0186-43e0-b0d6-b0a5aad4d05a">
-	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
-	<parameter name="idvehiculo" class="java.lang.Integer">
-		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
-	</parameter>
-	<parameter name="Logo" class="java.lang.String">
-		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
-	</parameter>
-	<parameter name="Pie" class="java.lang.String">
-		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
-	</parameter>
-	<queryString>
-		<![CDATA[SELECT
-     vwVehiculos."idVehiculo" AS vwVehiculos_idVehiculo,
-     vwVehiculos."Carnet" AS vwVehiculos_Carnet,
-     CONCAT(vwVehiculos."nombre_p", ' ', vwVehiculos."apellido_p") as vwVehiculos_nombre_p,
-     vwVehiculos."placa" AS vwVehiculos_placa,
-     vwVehiculos."color" AS vwVehiculos_color
-FROM
-     "dbo"."vwVehiculos" vwVehiculos
-WHERE vwVehiculos.idVehiculo = $P{idvehiculo}]]>
-	</queryString>
-	<field name="vwVehiculos_idVehiculo" class="java.lang.Integer"/>
-	<field name="vwVehiculos_Carnet" class="java.lang.String"/>
-	<field name="vwVehiculos_nombre_p" class="java.lang.String"/>
-	<field name="vwVehiculos_placa" class="java.lang.String"/>
-	<field name="vwVehiculos_color" class="java.lang.String"/>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
-	<title>
-		<band height="79" splitType="Stretch">
-			<staticText>
-				<reportElement x="209" y="17" width="123" height="37" forecolor="#17141D" uuid="f9bc89de-a58c-4f57-869d-135d5a697829"/>
-				<textElement>
-					<font size="26" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Vehículo]]></text>
-			</staticText>
-			<image>
-				<reportElement x="2" y="4" width="85" height="71" uuid="b2d9d24e-ed55-4484-95bc-073be8da3897"/>
-				<imageExpression><![CDATA[$P{Logo}.toString()]]></imageExpression>
-			</image>
-		</band>
-	</title>
-	<pageHeader>
-		<band splitType="Stretch"/>
-	</pageHeader>
-	<columnHeader>
-		<band height="32" splitType="Stretch">
-			<staticText>
-				<reportElement x="84" y="12" width="139" height="20" uuid="9c70a4aa-c1ca-41be-b814-35e9de22e7e9"/>
-				<textElement>
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Personal]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="254" y="12" width="92" height="20" uuid="8b4f0176-b362-4196-8af1-a5081fd51d71"/>
-				<textElement>
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Carnet]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="362" y="12" width="82" height="20" uuid="f36c045a-d156-4978-91a3-75aea36355e3"/>
-				<textElement>
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Placa]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="455" y="12" width="100" height="20" uuid="1c48bc38-78f7-461b-9b30-3e805754b185"/>
-				<textElement>
-					<font size="14" isBold="true" isItalic="false"/>
-				</textElement>
-				<text><![CDATA[Color]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="0" y="12" width="59" height="20" uuid="7fc368cc-1810-4aca-853c-1bb87e234f35"/>
-				<textElement>
-					<font size="14" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ID]]></text>
-			</staticText>
-		</band>
-	</columnHeader>
-	<detail>
-		<band height="50" splitType="Stretch">
-			<textField>
-				<reportElement x="0" y="0" width="59" height="20" uuid="dfa1120f-72bc-4379-ae92-7e29c312715b"/>
-				<textElement>
-					<font size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{vwVehiculos_idVehiculo}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="84" y="0" width="170" height="42" uuid="6dcfc897-a474-4df9-a634-55ab8d836239"/>
-				<textElement>
-					<font size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{vwVehiculos_nombre_p}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="254" y="0" width="92" height="20" uuid="ccf7e8c2-3f38-4829-bf53-7a483806ceb4"/>
-				<textElement>
-					<font size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{vwVehiculos_Carnet}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="362" y="0" width="82" height="20" uuid="f37fb7d9-322a-4a02-9849-b1227a8022a0"/>
-				<textElement>
-					<font size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{vwVehiculos_placa}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="455" y="0" width="100" height="42" uuid="2d654912-74aa-423b-87ff-960cfdd71434"/>
-				<textElement>
-					<font size="14"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{vwVehiculos_color}]]></textFieldExpression>
-			</textField>
-		</band>
-	</detail>
-	<columnFooter>
-		<band splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="49" splitType="Stretch">
-			<image>
-				<reportElement x="475" y="19" width="80" height="30" uuid="25cd8a37-4ce5-46e1-8c44-bc16d75f4e3d"/>
-				<imageExpression><![CDATA[$P{Pie}.toString()]]></imageExpression>
-			</image>
-		</band>
-	</pageFooter>
-	<summary>
-		<band splitType="Stretch"/>
-	</summary>
+<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD JasperReport//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+
+<jasperReport name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+    <background>
+        <band/>
+    </background>
+    <title>
+        <band height="79"/>
+    </title>
+    <pageHeader>
+        <band height="35"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="61"/>
+    </columnHeader>
+    <detail>
+        <band height="125"/>
+    </detail>
+    <columnFooter>
+        <band height="45"/>
+    </columnFooter>
+    <pageFooter>
+        <band height="54"/>
+    </pageFooter>
+    <summary>
+        <band height="42"/>
+    </summary>
 </jasperReport>

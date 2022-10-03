@@ -45,12 +45,4 @@ public class ControllerReportes {
     public boolean BuscarTipoPersonal(){
         return objmodel.BuscarTipoPersonal(Param, con);
     }
-    
-    public boolean BuscarVehiculosPersonal(){
-        return objmodel.BuscarVehiculosPersonal(Param, con);
-    }
-    
-    public boolean BuscarContactosPersonal(){
-        return objmodel.BuscarVehiculosPersonal(Param, con);
-    }
 }

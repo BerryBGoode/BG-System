@@ -19,7 +19,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT a.idPersonal,a.nombre_p,a.apellido_p,b.genero,a.documento,a.Carnet,a.correo, c.tipo_personal FROM tbPersonal a,tbGeneros b, tbTipoPersonal c WHERE a.idGenero = b.idGenero AND a.idTipoPersonal = c.idTipoPersonal AND a.idTipoPersonal != 4 AND c.tipo_personal = $P{Parametro} OR b.genero = $P{Parametro}]]>
+		<![CDATA[SELECT a.idPersonal,a.nombre_p,a.apellido_p,b.genero,a.documento,a.Carnet,a.correo, c.tipo_personal FROM tbPersonal a,tbGeneros b, tbTipoPersonal c WHERE a.idGenero = b.idGenero AND a.idTipoPersonal = c.idTipoPersonal AND a.idTipoPersonal != 4 AND c.tipo_personal = $P{Parametro} OR b.genero = $P{Parametro} ]]>
 	</queryString>
 	<field name="idPersonal" class="java.lang.Integer"/>
 	<field name="nombre_p" class="java.lang.String"/>
@@ -141,7 +141,7 @@
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<image>
-				<reportElement x="580" y="24" width="80" height="30" uuid="d2968980-50a5-4a9c-beb6-0f19d0ae1ab4"/>
+				<reportElement x="570" y="24" width="80" height="30" uuid="d2968980-50a5-4a9c-beb6-0f19d0ae1ab4"/>
 				<imageExpression><![CDATA[$P{TextoFooter}.toString()]]></imageExpression>
 			</image>
 		</band>

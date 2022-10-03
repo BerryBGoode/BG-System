@@ -354,7 +354,7 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "La persona que se esta ingresando debe ser mayor de edad", "Menor de edad", JOptionPane.WARNING_MESSAGE);
             } else if(! txtCorreo.getText().contains(".") || ! txtCorreo.getText().contains("@")){
                 JOptionPane.showMessageDialog(null, "El correo electrónico ingresado no tiene un formato correcto", "Error de formato", JOptionPane.WARNING_MESSAGE);
-            }else if((txtDocumento.getText().length() != 17 && tipodoc.equals("NIT")) || (txtDocumento.getText().length() != 10 && tipodoc.equals("DUI")) || (txtDocumento.getText().length() < 8 && tipodoc.equals("Pasaporte"))){
+            }else if((txtDocumento.getText().length() != 17 && tipodoc.equals("NIT")) || (txtDocumento.getText().length() != 10 && tipodoc.equals("DUI"))){
                 JOptionPane.showMessageDialog(null, "El documento ingresado no tiene un formato correcto", "Error de formato", JOptionPane.WARNING_MESSAGE);
             }else{
                 int mes=c.get(Calendar.MONTH)+1;
@@ -953,7 +953,7 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
      */
     private void txtDocumentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDocumentoKeyTyped
         // TODO add your handling code here:
-char key = evt.getKeyChar();
+        char key = evt.getKeyChar();
         if(tipodoc != null){
             if(tipodoc.equals("NIT")){
                 if(txtDocumento.getText().length() >= 17){
@@ -970,19 +970,9 @@ char key = evt.getKeyChar();
                     evt.consume();
                 }else if(txtDocumento.getText().length() == 8 && key != '-'){
                     evt.consume();
-                }else if(txtDocumento.getText().contains("-") && key == '-'){
-                    evt.consume();
                 }else if(! Character.isDigit(key) && key != '-' ){
                     evt.consume();
                 }
-            }else if(tipodoc.equals("Pasaporte")){
-                if(txtDocumento.getText().length() >= 9){
-                    evt.consume();
-                }else if(! Character.isDigit(key) && ! Character.isUpperCase(key)){
-                    evt.consume();
-                }
-            }else if(CmbTipoDocumento.getSelectedIndex() == 0){
-                evt.consume();
             }
         }else{
             evt.consume();

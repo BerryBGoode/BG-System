@@ -798,15 +798,12 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
 
     private void txtDocumentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDocumentoKeyPressed
         // TODO add your handling code here:
-        if (evt.isControlDown() || evt.isShiftDown())
-        {
-            evt.consume();
-        }   
+
     }//GEN-LAST:event_txtDocumentoKeyPressed
 
     private void txtDocumentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDocumentoKeyTyped
         // TODO add your handling code here:
-        char key = evt.getKeyChar();
+                char key = evt.getKeyChar();
         if(tipodoc != null){
             if(tipodoc.equals("NIT")){
                 if(txtDocumento.getText().length() >= 17){
@@ -823,15 +820,7 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
                     evt.consume();
                 }else if(txtDocumento.getText().length() == 8 && key != '-'){
                     evt.consume();
-                }else if(txtDocumento.getText().contains("-") && key == '-'){
-                    evt.consume();
                 }else if(! Character.isDigit(key) && key != '-' ){
-                    evt.consume();
-                }
-            }else if(tipodoc.equals("Pasaporte")){
-                if(txtDocumento.getText().length() >= 9){
-                    evt.consume();
-                }else if(! Character.isDigit(key) && ! Character.isUpperCase(key)){
                     evt.consume();
                 }
             }else if(CmbTipoDoc.getSelectedIndex() == 0){
