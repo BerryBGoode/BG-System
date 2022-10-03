@@ -54,7 +54,9 @@ public class PanelCarnets extends javax.swing.JPanel {
     private int frmstate;
     public Font font = new Font("Roboto Black", Font.PLAIN, 18);
     ImageIcon modifIcon = new ImageIcon(getClass().getResource("/Recursos_Proyecto/Barcode.png"));
+    ImageIcon modifIcondark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bx-barcode-White.png"));
     ImageIcon report = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report 1.png"));
+    ImageIcon reportedark = new ImageIcon(getClass().getResource("/Recursos_Proyecto/bxs-report-White.png"));
     byte[] imagen;
 
     /**
@@ -62,6 +64,7 @@ public class PanelCarnets extends javax.swing.JPanel {
      */
     public PanelCarnets() {
         initComponents();
+        mood();
         String[] TitulosCarnets = {"Nombre", "Apellido", "Carné", "Tipo de usuario", "idPersonal", "Codigo de barra", "Imprimir carnet"};
 
         model = new DefaultTableModel(null, TitulosCarnets) {
@@ -71,20 +74,16 @@ public class PanelCarnets extends javax.swing.JPanel {
             }
 
         };
+        cargarTabla();
         TbCarnets.setModel(model);
         TbCarnets.setDefaultRenderer(Object.class, new RenderTable());
-        btnGenerar.setBackground(new Color(231, 235, 239));
-        btnReporte.setBackground(new Color(231, 235, 239));
-        btnGenerar.setForeground(new Color(58, 50, 75));
         btnGenerar.setFont(font);
         btnGenerar.setText("Generar");
-        btnGenerar.setIcon(modifIcon);
-        btnReporte.setBackground(new Color(231, 235, 239));
-        btnReporte.setForeground(new Color(58, 50, 75));
         btnReporte.setFont(font);
-        btnReporte.setIcon(report);
         TbCarnets.removeColumn(TbCarnets.getColumnModel().getColumn(4));
-        cargarTabla();
+        tbCarnetsDark.setModel(model);
+        tbCarnetsDark.setDefaultRenderer(Object.class, new RenderTable());
+        tbCarnetsDark.removeColumn(tbCarnetsDark.getColumnModel().getColumn(4));
         TbCarnets.setFont(font);
     }
 
@@ -140,8 +139,101 @@ public class PanelCarnets extends javax.swing.JPanel {
 
     }
 
+    void mood() {
+        if (ValidacionesSistema.ValidacionesBeep_Go.getModo() == 1) {
+            tbCarnetsDark.setVisible(true);
+            PanelDark.setVisible(true);
+            PanelTabla.setVisible(false);
+            TbCarnets.setVisible(false);
+            lblCarnets.setForeground(Color.WHITE);
+            PanelFondo.setBackground(new Color(47, 49, 54));
+            jPanel4.setBackground(new Color(47, 49, 54));
+            jPanel5.setBackground(new Color(47, 49, 54));
+            jPanel2.setBackground(new Color(47, 49, 54));
+            jPanel1.setBackground(new Color(47, 49, 54));
+            jPanel6.setBackground(new Color(47, 49, 54));
+            jPanel7.setBackground(new Color(47, 49, 54));
+            btnGenerar.setBackground(new Color(32, 34, 37));
+            btnAgregar.setBackground(new Color(32, 34, 37));
+            btnReporte.setBackground(new Color(32, 34, 37));
+            btnGenerar.setForeground(Color.WHITE);
+            btnReporte.setIcon(reportedark);
+            tbCarnetsDark.setForeground(Color.WHITE);
+            btnGenerar.setIcon(modifIcondark);
+        } else {
+            tbCarnetsDark.setVisible(false);
+            PanelDark.setVisible(false);
+            PanelTabla.setVisible(true);
+            TbCarnets.setVisible(true);
+            lblCarnets.setForeground(new Color(58, 50, 75));
+            PanelFondo.setBackground(new Color(231, 235, 239));
+            jPanel4.setBackground(new Color(231, 235, 239));
+            jPanel5.setBackground(new Color(231, 235, 239));
+            jPanel2.setBackground(new Color(231, 235, 239));
+            jPanel1.setBackground(new Color(231, 235, 239));
+            jPanel6.setBackground(new Color(231, 235, 239));
+            jPanel7.setBackground(new Color(231, 235, 239));
+            btnGenerar.setBackground(new Color(231, 235, 239));
+            btnReporte.setBackground(new Color(231, 235, 239));
+            btnGenerar.setForeground(new Color(58, 50, 75));
+            btnGenerar.setIcon(modifIcon);
+            btnReporte.setBackground(new Color(231, 235, 239));
+            btnReporte.setForeground(new Color(58, 50, 75));
+            btnReporte.setIcon(report);
+        }
+    }
+
+    public void mooddash() {
+        switch (ValidacionesSistema.ValidacionesBeep_Go.getModo()) {
+            case 1:
+                tbCarnetsDark.setVisible(true);
+                PanelDark.setVisible(true);
+                PanelTabla.setVisible(false);
+                TbCarnets.setVisible(false);
+                lblCarnets.setForeground(Color.WHITE);
+                PanelFondo.setBackground(new Color(47, 49, 54));
+                jPanel4.setBackground(new Color(47, 49, 54));
+                jPanel5.setBackground(new Color(47, 49, 54));
+                jPanel2.setBackground(new Color(47, 49, 54));
+                jPanel1.setBackground(new Color(47, 49, 54));
+                jPanel6.setBackground(new Color(47, 49, 54));
+                jPanel7.setBackground(new Color(47, 49, 54));
+                btnGenerar.setBackground(new Color(32, 34, 37));
+                btnAgregar.setBackground(new Color(32, 34, 37));
+                btnReporte.setBackground(new Color(32, 34, 37));
+                btnGenerar.setForeground(Color.WHITE);
+                btnReporte.setIcon(reportedark);
+                tbCarnetsDark.setForeground(Color.WHITE);
+                btnGenerar.setIcon(modifIcondark);
+                break;
+            case 2:
+                tbCarnetsDark.setVisible(false);
+                PanelDark.setVisible(false);
+                PanelTabla.setVisible(true);
+                TbCarnets.setVisible(true);
+                lblCarnets.setForeground(new Color(58, 50, 75));
+                PanelFondo.setBackground(new Color(231, 235, 239));
+                jPanel4.setBackground(new Color(231, 235, 239));
+                jPanel5.setBackground(new Color(231, 235, 239));
+                jPanel2.setBackground(new Color(231, 235, 239));
+                jPanel1.setBackground(new Color(231, 235, 239));
+                jPanel6.setBackground(new Color(231, 235, 239));
+                jPanel7.setBackground(new Color(231, 235, 239));
+                btnGenerar.setBackground(new Color(231, 235, 239));
+                btnReporte.setBackground(new Color(231, 235, 239));
+                btnGenerar.setForeground(new Color(58, 50, 75));
+                btnGenerar.setIcon(modifIcon);
+                btnReporte.setBackground(new Color(231, 235, 239));
+                btnReporte.setForeground(new Color(58, 50, 75));
+                btnReporte.setIcon(report);
+                break;
+        }
+    }
+
     /**
-     * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The content of this method is always regenerated by the Form Editor.
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -157,6 +249,8 @@ public class PanelCarnets extends javax.swing.JPanel {
         btnAgregar = new Controles_Personalizados.Botones.UWPButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
+        PanelDark = new javax.swing.JScrollPane();
+        tbCarnetsDark = new Controles_Personalizados.Tables.TableDark();
         jPanel7 = new javax.swing.JPanel();
         scrollBarCustom2 = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
         PanelTabla = new javax.swing.JScrollPane();
@@ -227,6 +321,30 @@ public class PanelCarnets extends javax.swing.JPanel {
 
         jPanel6.setBackground(new java.awt.Color(231, 234, 239));
         jPanel6.setLayout(new java.awt.BorderLayout());
+
+        tbCarnetsDark.setBackground(new java.awt.Color(47, 49, 54));
+        tbCarnetsDark.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tbCarnetsDark.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        tbCarnetsDark.setRowHeight(40);
+        tbCarnetsDark.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbCarnetsDarkMouseClicked(evt);
+            }
+        });
+        PanelDark.setViewportView(tbCarnetsDark);
+
+        jPanel6.add(PanelDark, java.awt.BorderLayout.PAGE_START);
+
         jPanel3.add(jPanel6, java.awt.BorderLayout.NORTH);
 
         jPanel7.setBackground(new java.awt.Color(231, 234, 239));
@@ -430,8 +548,46 @@ public class PanelCarnets extends javax.swing.JPanel {
         refresh();
     }//GEN-LAST:event_TbCarnetsMouseMoved
 
+    private void tbCarnetsDarkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbCarnetsDarkMouseClicked
+        // TODO add your handling code here:
+        int column = tbCarnetsDark.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / tbCarnetsDark.getRowHeight();
+        btnGenerar.setName("btnGenerar");
+        btnReporte.setName("btnReporte");
+        if (evt.getClickCount() == 1) {
+            JTable rcp = (JTable) evt.getSource();
+            ID = (int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 4);
+            Carnet = rcp.getModel().getValueAt(rcp.getSelectedRow(), 2).toString();
+        }
+        if (row < tbCarnetsDark.getRowCount() || row >= 0 || column < tbCarnetsDark.getColumnCount() || column >= 0) {
+            Object vals = tbCarnetsDark.getValueAt(row, column);
+            if (vals instanceof UWPButton) {
+                ((UWPButton) vals).doClick(); // aqui esta
+                UWPButton btns = (UWPButton) vals;
+                if (btns.getName().equals("btnGenerar")) {
+                    CrearCodigodeBarra();
+                    if (validarImagen() == true) {
+
+                        FrmAgg_Carnet frmc = new FrmAgg_Carnet(Carnet);
+                        if (frmc.isVisible()) {
+                            frmc.toFront();
+                        } else {
+                            frmc.setVisible(true);
+                        }
+                    }
+                } else if (btns.getName().equals("btnReporte")) {
+                    ID = 0;
+                    imagen = null;
+                    CargarDatos();
+                    ReportePar();
+                }
+            }
+        }
+    }//GEN-LAST:event_tbCarnetsDarkMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane PanelDark;
     private Controles_Personalizados.Paneles.PanelRound PanelFondo;
     private javax.swing.JScrollPane PanelTabla;
     private Controles_Personalizados.Tables.Table TbCarnets;
@@ -445,5 +601,6 @@ public class PanelCarnets extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JLabel lblCarnets;
     private Controles_Personalizados.ScrollBar.ScrollBarCustom scrollBarCustom2;
+    private Controles_Personalizados.Tables.TableDark tbCarnetsDark;
     // End of variables declaration//GEN-END:variables
 }

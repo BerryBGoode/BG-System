@@ -120,89 +120,101 @@ public class PanelProfesores extends javax.swing.JPanel {
     void mododash() {
         switch (ValidacionesSistema.ValidacionesBeep_Go.getModo()) {
             case 1:
-                TbProfesoresDark.setForeground(Color.white);
-                btnActualizar.setBackground(new Color(47, 49, 54));
-                btnActualizar.setFont(font);
-                btnReporteP.setBackground(new Color(47, 49, 54));
-                btnReporteP.setFont(font);
-                btnEliminar.setBackground(new Color(47, 49, 54));
-                btnEliminar.setFont(font);
-                btnEliminar.setIcon(Eliminardark);
-                btnActualizar.setIcon(Modificardark);
-                btnReporteP.setIcon(reportedark);
-                PanelFondo.setBackground(new Color(47, 49, 54));
-                btnAgregar.setBackground(new Color(32, 34, 37));
-                BtnInforme.setBackground(new Color(32, 34, 37));
-                btnFiltrar.setBackground(new Color(32, 34, 37));
-                TbProfesoresWhite.setVisible(false);
-                lblPersonal.setForeground(Color.WHITE);
                 PanelTabla.setVisible(false);
-                TbProfesoresDark.setVisible(true);
+                TbProfesoresWhite.setVisible(false);
                 PanelTablaDark.setVisible(true);
+                TbProfesoresDark.setVisible(true);
+                PanelFondo.setBackground(new Color(47, 49, 54));
+                lblPersonal.setForeground(Color.white);
+                jPanel5.setBackground(new Color(47, 49, 54));
+                jPanel4.setBackground(new Color(47, 49, 54));
+                jPanel3.setBackground(new Color(47, 49, 54));
+                jPanel7.setBackground(new Color(47, 49, 54));
+                jPanel6.setBackground(new Color(47, 49, 54));
+                jPanel1.setBackground(new Color(47, 49, 54));
+                btnAgregar.setBackground(new Color(32, 34, 37));
+                btnFiltrar.setBackground(new Color(32, 34, 37));
+                BtnInforme.setBackground(new Color(32, 34, 37));
+                btnActualizar.setBackground(new Color(32, 34, 37));
+                btnEliminar.setBackground(new Color(32, 34, 37));
+                btnReporteP.setBackground(new Color(32, 34, 37));
+                btnActualizar.setIcon(Modificardark);
+                btnEliminar.setIcon(Eliminardark);
+                btnReporteP.setIcon(reportedark);
+                TbProfesoresDark.setForeground(Color.WHITE);
                 break;
             case 2:
-                btnActualizar.setBackground(new Color(231, 234, 239));
-                btnActualizar.setFont(font);
-                btnReporteP.setBackground(new Color(231, 234, 239));
-                btnReporteP.setFont(font);
-                btnEliminar.setBackground(new Color(231, 234, 239));
-                btnEliminar.setFont(font);
-                btnEliminar.setIcon(eliminar);
-                btnActualizar.setIcon(modificar);
-                btnReporteP.setIcon(reporteimg);
+                PanelTabla.setVisible(true);
+                TbProfesoresWhite.setVisible(true);
+                PanelTablaDark.setVisible(false);
+                TbProfesoresDark.setVisible(false);
                 PanelFondo.setBackground(new Color(231, 234, 239));
+                lblPersonal.setForeground(new Color(58, 50, 75));
+                jPanel5.setBackground(new Color(231, 234, 239));
+                jPanel4.setBackground(new Color(231, 234, 239));
+                jPanel3.setBackground(new Color(231, 234, 239));
+                jPanel7.setBackground(new Color(231, 234, 239));
+                jPanel6.setBackground(new Color(231, 234, 239));
+                jPanel1.setBackground(new Color(231, 234, 239));
                 btnAgregar.setBackground(new Color(58, 50, 75));
                 btnFiltrar.setBackground(new Color(58, 50, 75));
                 BtnInforme.setBackground(new Color(58, 50, 75));
-                TbProfesoresWhite.setVisible(true);
-                PanelTabla.setVisible(true);
-                lblPersonal.setForeground(new Color(58, 50, 75));
-                TbProfesoresDark.setVisible(false);
-                PanelTablaDark.setVisible(false);
+                btnActualizar.setBackground(new Color(231, 234, 239));
+                btnEliminar.setBackground(new Color(231, 234, 239));
+                btnReporteP.setBackground(new Color(231, 234, 239));
+                btnActualizar.setIcon(modificar);
+                btnEliminar.setIcon(eliminar);
+                btnReporteP.setIcon(reporteimg);
                 break;
         }
     }
 
     void modo() {
         if (ValidacionesSistema.ValidacionesBeep_Go.Modo == 1) {
-            TbProfesoresDark.setForeground(Color.white);
-            btnActualizar.setBackground(new Color(47, 49, 54));
-            btnActualizar.setFont(font);
-            btnReporteP.setBackground(new Color(47, 49, 54));
-            btnReporteP.setFont(font);
-            btnEliminar.setBackground(new Color(47, 49, 54));
-            btnEliminar.setFont(font);
-            btnEliminar.setIcon(Eliminardark);
-            btnActualizar.setIcon(Modificardark);
-            btnReporteP.setIcon(reportedark);
-            PanelFondo.setBackground(new Color(47, 49, 54));
-            btnAgregar.setBackground(new Color(32, 34, 37));
-            BtnInforme.setBackground(new Color(32, 34, 37));
-            btnFiltrar.setBackground(new Color(32, 34, 37));
-            TbProfesoresWhite.setVisible(false);
-            lblPersonal.setForeground(Color.WHITE);
             PanelTabla.setVisible(false);
-            TbProfesoresDark.setVisible(true);
+            TbProfesoresWhite.setVisible(false);
             PanelTablaDark.setVisible(true);
+            TbProfesoresDark.setVisible(true);
+            PanelFondo.setBackground(new Color(47, 49, 54));
+            lblPersonal.setForeground(Color.white);
+            jPanel5.setBackground(new Color(47, 49, 54));
+            jPanel4.setBackground(new Color(47, 49, 54));
+            jPanel3.setBackground(new Color(47, 49, 54));
+            jPanel7.setBackground(new Color(47, 49, 54));
+            jPanel6.setBackground(new Color(47, 49, 54));
+            jPanel1.setBackground(new Color(47, 49, 54));
+            btnAgregar.setBackground(new Color(32, 34, 37));
+            btnFiltrar.setBackground(new Color(32, 34, 37));
+            BtnInforme.setBackground(new Color(32, 34, 37));
+            btnActualizar.setBackground(new Color(32, 34, 37));
+            btnEliminar.setBackground(new Color(32, 34, 37));
+            btnReporteP.setBackground(new Color(32, 34, 37));
+            btnActualizar.setIcon(Modificardark);
+            btnEliminar.setIcon(Eliminardark);
+            btnReporteP.setIcon(reportedark);
+            TbProfesoresDark.setForeground(Color.WHITE);
         } else {
-            btnActualizar.setBackground(new Color(231, 234, 239));
-            btnActualizar.setFont(font);
-            btnReporteP.setBackground(new Color(231, 234, 239));
-            btnReporteP.setFont(font);
-            btnEliminar.setBackground(new Color(231, 234, 239));
-            btnEliminar.setFont(font);
-            btnEliminar.setIcon(eliminar);
-            btnActualizar.setIcon(modificar);
-            btnReporteP.setIcon(reporteimg);
+            PanelTabla.setVisible(true);
+            TbProfesoresWhite.setVisible(true);
+            PanelTablaDark.setVisible(false);
+            TbProfesoresDark.setVisible(false);
             PanelFondo.setBackground(new Color(231, 234, 239));
+            lblPersonal.setForeground(new Color(58, 50, 75));
+            jPanel5.setBackground(new Color(231, 234, 239));
+            jPanel4.setBackground(new Color(231, 234, 239));
+            jPanel3.setBackground(new Color(231, 234, 239));
+            jPanel7.setBackground(new Color(231, 234, 239));
+            jPanel6.setBackground(new Color(231, 234, 239));
+            jPanel1.setBackground(new Color(231, 234, 239));
             btnAgregar.setBackground(new Color(58, 50, 75));
             btnFiltrar.setBackground(new Color(58, 50, 75));
             BtnInforme.setBackground(new Color(58, 50, 75));
-            TbProfesoresWhite.setVisible(true);
-            PanelTabla.setVisible(true);
-            lblPersonal.setForeground(new Color(58, 50, 75));
-            TbProfesoresDark.setVisible(false);
-            PanelTablaDark.setVisible(false);
+            btnActualizar.setBackground(new Color(231, 234, 239));
+            btnEliminar.setBackground(new Color(231, 234, 239));
+            btnReporteP.setBackground(new Color(231, 234, 239));
+            btnActualizar.setIcon(modificar);
+            btnEliminar.setIcon(eliminar);
+            btnReporteP.setIcon(reporteimg);
         }
     }
 
@@ -307,6 +319,12 @@ public class PanelProfesores extends javax.swing.JPanel {
             }
         ));
         TbProfesoresDark.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        TbProfesoresDark.setRowHeight(40);
+        TbProfesoresDark.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TbProfesoresDarkMouseClicked(evt);
+            }
+        });
         PanelTablaDark.setViewportView(TbProfesoresDark);
 
         jPanel6.add(PanelTablaDark, java.awt.BorderLayout.CENTER);
@@ -457,7 +475,7 @@ public class PanelProfesores extends javax.swing.JPanel {
     }//GEN-LAST:event_BtnInformeActionPerformed
 
     private void TbProfesoresWhiteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbProfesoresWhiteMouseClicked
-               // TODO add your handling code here:
+        // TODO add your handling code here:
         int column = TbProfesoresWhite.getColumnModel().getColumnIndexAtX(evt.getX());
         int row = evt.getY() / TbProfesoresWhite.getRowHeight();
         btnActualizar.setName("btnActualizar");
@@ -509,10 +527,64 @@ public class PanelProfesores extends javax.swing.JPanel {
                 }
             }
         }
- 
+
     }//GEN-LAST:event_TbProfesoresWhiteMouseClicked
 
+    private void TbProfesoresDarkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbProfesoresDarkMouseClicked
+        // TODO add your handling code here:
+        int column = TbProfesoresDark.getColumnModel().getColumnIndexAtX(evt.getX());
+        int row = evt.getY() / TbProfesoresDark.getRowHeight();
+        btnActualizar.setName("btnActualizar");
+        btnEliminar.setName("btnEliminar");
+        btnReporteP.setName("btnReporte");
+        if (evt.getClickCount() == 1) {
+            JTable rcp = (JTable) evt.getSource();
+            ID = (int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0);
+            ValidacionesSistema.Parametros_Personal.setIdPersonal((int) rcp.getModel().getValueAt(rcp.getSelectedRow(), 0));
+            ValidacionesSistema.Parametros_Personal.setnombre_personal(rcp.getModel().getValueAt(rcp.getSelectedRow(), 1).toString());
+            ValidacionesSistema.Parametros_Personal.setApellido_personal(rcp.getModel().getValueAt(rcp.getSelectedRow(), 2).toString());
+            ValidacionesSistema.Parametros_Personal.setFecha_nacimiento(rcp.getModel().getValueAt(rcp.getSelectedRow(), 3).toString());
+            ValidacionesSistema.Parametros_Personal.setCarnet(rcp.getModel().getValueAt(rcp.getSelectedRow(), 5).toString());
+            ValidacionesSistema.Parametros_Personal.setDocumento(rcp.getModel().getValueAt(rcp.getSelectedRow(), 4).toString());
+            ValidacionesSistema.Parametros_Personal.setTipoPersonal(rcp.getModel().getValueAt(rcp.getSelectedRow(), 6).toString());
+            ValidacionesSistema.Parametros_Personal.setGenero(rcp.getModel().getValueAt(rcp.getSelectedRow(), 9).toString());
+            ValidacionesSistema.Parametros_Personal.setTipoDocumento(rcp.getModel().getValueAt(rcp.getSelectedRow(), 11).toString());
+            ValidacionesSistema.Parametros_Personal.setDireccion(rcp.getModel().getValueAt(rcp.getSelectedRow(), 12).toString());
+            ValidacionesSistema.Parametros_Personal.setCorreo(rcp.getModel().getValueAt(rcp.getSelectedRow(), 13).toString());
+        }
 
+        if (row < TbProfesoresDark.getRowCount() || row >= 0 || column < TbProfesoresDark.getColumnCount() || column >= 0) {
+            Object vals = TbProfesoresDark.getValueAt(row, column);
+            if (vals instanceof UWPButton) {
+                ((UWPButton) vals).doClick(); // aqui esta
+                UWPButton btns = (UWPButton) vals;
+                if (btns.getName().equals("btnActualizar")) {
+                    FrmAgg_Personal frmAgg_Personal = null;
+                    frmAgg_Personal = new FrmAgg_Personal(ValidacionesSistema.Parametros_Personal.getIdPersonal());
+                    frmAgg_Personal.setVisible(true);
+                    frmstate = 1;
+
+                    //Actualizar Contacto metodo
+                }
+                if (btns.getName().equals("btnEliminar")) {
+                    int confirmar = JOptionPane.YES_NO_OPTION;
+                    int a = JOptionPane.showConfirmDialog(this, "¿Desea Eliminar el registro de: " + ValidacionesSistema.Parametros_Personal.getnombre_personal() + "?", "Proceso de Eliminar", confirmar);
+                    if (a == 0) {
+                        objControllerP.idpersonal = ValidacionesSistema.Parametros_Personal.getIdPersonal();
+                        if (objControllerP.EliminarRegistroController() == true) {
+                            JOptionPane.showMessageDialog(null, "Su registro a sido Eliminado", "Proceso Completado", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
+                    // Eliminar Contacto metodo
+
+                }
+                if (btns.getName().equals("btnReporte")) {
+                    ImprimironePersonal();
+                }
+            }
+        }
+
+    }//GEN-LAST:event_TbProfesoresDarkMouseClicked
 
     FrmAgg_Personal add = new FrmAgg_Personal();
 
