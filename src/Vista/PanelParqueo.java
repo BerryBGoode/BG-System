@@ -106,6 +106,11 @@ public class PanelParqueo extends javax.swing.JPanel {
         TbParqueosWhite = new Controles_Personalizados.Tables.Table();
 
         setBackground(new java.awt.Color(42, 36, 56));
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
+            }
+        });
         addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 formFocusGained(evt);
@@ -271,6 +276,7 @@ public class PanelParqueo extends javax.swing.JPanel {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         getdataPark();
+        refresh();
     }//GEN-LAST:event_formComponentShown
 
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
@@ -319,7 +325,7 @@ public class PanelParqueo extends javax.swing.JPanel {
                         }
                         //envio el station que en el q se registro, para que se habilite y pueda cambiar el parqueo                        
                         int IDAcceso = Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 3).toString());
-                        int IDVehiuclo = Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 6).toString());
+                        //int IDVehiuclo = Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 6).toString());
                         int IDstation = Integer.parseInt(tb.getModel().getValueAt(tb.getSelectedRow(), 8).toString());//numberpark
                         int ID = Integer.parseInt(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString());
                         int station = Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 9).toString());
@@ -329,7 +335,7 @@ public class PanelParqueo extends javax.swing.JPanel {
                         //setteo 
 
                         controllerParqueo.setIDAcceso(IDAcceso);
-                        controllerParqueo.setIDVehiculo(IDVehiuclo);
+                        //controllerParqueo.setIDVehiculo(IDVehiuclo);
                         controllerParqueo.setIDEstacionamiento(IDstation);
                         FrmSetPark.setIDDetail(ID);
                         ControllerParqueo.setNumberPark(IDPark);
@@ -355,6 +361,11 @@ public class PanelParqueo extends javax.swing.JPanel {
 
         }
     }//GEN-LAST:event_TbParqueosWhiteMouseClicked
+
+    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+        // TODO add your handling code here:
+        refresh();
+    }//GEN-LAST:event_formMouseMoved
 
     public void getdataPark() {
         String tablename = "vwDetalle_Estacionamientos";
