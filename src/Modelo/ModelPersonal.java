@@ -354,4 +354,23 @@ public class ModelPersonal {
                 return null;
             }
     }
+    
+    /**
+     * Sets the carnets to people who do not have one
+     * @param idpersonal referring the ID (idPersonal)
+     * @return 
+     */
+    public boolean GenerarCarnetsTodos(){
+        try {
+            con=ModelConexion.getConnection();
+            String query="EXEC carnettodos";
+            ps=con.prepareStatement(query);
+            ps.execute();
+            return true;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al llenar los carnets","Error al actualizar",JOptionPane.ERROR_MESSAGE);
+            System.out.println(e.toString());
+            return false;
+        }
+    }
 }
