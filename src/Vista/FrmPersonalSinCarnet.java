@@ -74,6 +74,7 @@ public class FrmPersonalSinCarnet extends javax.swing.JFrame {
         AWTUtilities.setWindowShape(this, forma);
         setIconImage(Logo());
         cargarTabla();
+        TbPersonalSC.setFont(font);
     }
 
     public Image Logo() {
@@ -124,16 +125,16 @@ public class FrmPersonalSinCarnet extends javax.swing.JFrame {
 
         panelRound1 = new Controles_Personalizados.Paneles.PanelRound();
         lblVehiculos = new javax.swing.JLabel();
-        PanelTabla = new javax.swing.JScrollPane();
-        TbPersonalSC = new Controles_Personalizados.Tables.Table();
-        ScrollTabla = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
         btnCerrar = new javax.swing.JLabel();
         btnMinimizar = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        scrollBarCustom1 = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
+        PanelTabla1 = new javax.swing.JScrollPane();
+        TbPersonalSC = new Controles_Personalizados.Tables.Table();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFocusable(false);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1099, 578));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelRound1.setBackground(new java.awt.Color(58, 50, 75));
@@ -143,66 +144,6 @@ public class FrmPersonalSinCarnet extends javax.swing.JFrame {
         lblVehiculos.setForeground(new java.awt.Color(253, 255, 254));
         lblVehiculos.setText("PERSONAL SIN CARNET");
         panelRound1.add(lblVehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
-
-        PanelTabla.setHorizontalScrollBar(null);
-        PanelTabla.setVerticalScrollBar(ScrollTabla);
-        PanelTabla.setWheelScrollingEnabled(false);
-
-        TbPersonalSC.setBackground(new java.awt.Color(231, 234, 239));
-        TbPersonalSC.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "NOMBRES", "APELLIDOS", "TIPO DE PERSONAL", "ACCIONES"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        TbPersonalSC.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        TbPersonalSC.setGridColor(new java.awt.Color(58, 50, 75));
-        TbPersonalSC.setName(""); // NOI18N
-        TbPersonalSC.setSelectionBackground(new java.awt.Color(58, 50, 75));
-        TbPersonalSC.setShowVerticalLines(false);
-        TbPersonalSC.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TbPersonalSCMouseClicked(evt);
-            }
-        });
-        PanelTabla.setViewportView(TbPersonalSC);
-
-        panelRound1.add(PanelTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 980, 460));
-
-        ScrollTabla.setBackground(new java.awt.Color(58, 50, 75));
-        ScrollTabla.setForeground(new java.awt.Color(58, 50, 75));
-        panelRound1.add(ScrollTabla, new org.netbeans.lib.awtextra.AbsoluteConstraints(1238, 177, 10, 40));
 
         btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/CerrarLogin.png"))); // NOI18N
         btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -221,6 +162,44 @@ public class FrmPersonalSinCarnet extends javax.swing.JFrame {
             }
         });
         panelRound1.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 10, -1, -1));
+
+        jPanel1.setBackground(new java.awt.Color(58, 50, 75));
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        scrollBarCustom1.setBackground(new java.awt.Color(58, 50, 75));
+        scrollBarCustom1.setForeground(new java.awt.Color(58, 50, 75));
+        jPanel1.add(scrollBarCustom1, java.awt.BorderLayout.EAST);
+
+        PanelTabla1.setVerticalScrollBar(scrollBarCustom1);
+
+        TbPersonalSC.setBackground(new java.awt.Color(231, 234, 239));
+        TbPersonalSC.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        TbPersonalSC.setGridColor(new java.awt.Color(58, 50, 75));
+        TbPersonalSC.setMaximumSize(new java.awt.Dimension(2147483647, 880));
+        TbPersonalSC.setMinimumSize(new java.awt.Dimension(90, 880));
+        TbPersonalSC.setPreferredSize(new java.awt.Dimension(450, 880));
+        TbPersonalSC.setSelectionBackground(new java.awt.Color(58, 50, 75));
+        TbPersonalSC.setShowVerticalLines(false);
+        TbPersonalSC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TbPersonalSCMouseClicked(evt);
+            }
+        });
+        PanelTabla1.setViewportView(TbPersonalSC);
+
+        jPanel1.add(PanelTabla1, java.awt.BorderLayout.CENTER);
+
+        panelRound1.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 1020, 460));
 
         getContentPane().add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 580));
 
@@ -271,7 +250,7 @@ public class FrmPersonalSinCarnet extends javax.swing.JFrame {
                 UWPButton btns = (UWPButton) vals;
                 if (btns.getName().equals("BtnCarnet")) {
                     int confirmacion = JOptionPane.YES_NO_OPTION;
-                    int a = JOptionPane.showConfirmDialog(null, "¿Desea generar el Carné de: " + capnom +" "+ capapelli+"?", "Generar Carné", confirmacion, JOptionPane.QUESTION_MESSAGE);
+                    int a = JOptionPane.showConfirmDialog(null, "¿Desea generar el Carné de: " + capnom + " " + capapelli + "?", "Generar Carné", confirmacion, JOptionPane.QUESTION_MESSAGE);
                     if (a == 0) {
                         carnet();
                     }
@@ -318,12 +297,13 @@ public class FrmPersonalSinCarnet extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane PanelTabla;
-    private Controles_Personalizados.ScrollBar.ScrollBarCustom ScrollTabla;
+    private javax.swing.JScrollPane PanelTabla1;
     private Controles_Personalizados.Tables.Table TbPersonalSC;
     private javax.swing.JLabel btnCerrar;
     private javax.swing.JLabel btnMinimizar;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblVehiculos;
     private Controles_Personalizados.Paneles.PanelRound panelRound1;
+    private Controles_Personalizados.ScrollBar.ScrollBarCustom scrollBarCustom1;
     // End of variables declaration//GEN-END:variables
 }
