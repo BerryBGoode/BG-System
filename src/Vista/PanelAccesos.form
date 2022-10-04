@@ -257,6 +257,9 @@
                             <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="TbAccesosWhite4MouseMoved"/>
                             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TbAccesosWhite4MouseClicked"/>
                           </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TbAccesosWhite4 = new Controles_Personalizados.Tables.Table(){&#xa;&#xa;                public boolean isCellEditable(int row, int column) { // aqui esta&#xa;                    return false;&#xa;                }&#xa;};"/>
+                          </AuxValues>
                         </Component>
                       </SubComponents>
                     </Container>
@@ -304,6 +307,9 @@
                           <Events>
                             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TbAcessoDarkMouseClicked"/>
                           </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TbAcessoDark = new Controles_Personalizados.Tables.TableDark(){&#xa;&#xa;                    public boolean isCellEditable(int row, int column) { // aqui esta&#xa;                    return false;&#xa;                }&#xa;};"/>
+                          </AuxValues>
                         </Component>
                       </SubComponents>
                     </Container>
