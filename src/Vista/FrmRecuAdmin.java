@@ -12,6 +12,7 @@ import java.awt.Image;
 import java.awt.Shape;
 import java.awt.Toolkit;
 import java.awt.event.ItemEvent;
+import java.awt.event.KeyEvent;
 import java.awt.geom.RoundRectangle2D;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -118,7 +119,7 @@ public class FrmRecuAdmin extends javax.swing.JFrame {
         panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Maximizar.png"))); // NOI18N
-        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMinimizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnMinimizarMouseClicked(evt);
@@ -127,7 +128,7 @@ public class FrmRecuAdmin extends javax.swing.JFrame {
         panelRound1.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 10, -1, -1));
 
         btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/CerrarLogin.png"))); // NOI18N
-        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnCerrarMousePressed(evt);
@@ -192,6 +193,9 @@ public class FrmRecuAdmin extends javax.swing.JFrame {
         txtDoc.setSelectedTextColor(new java.awt.Color(58, 50, 75));
         txtDoc.setSelectionColor(new java.awt.Color(253, 255, 254));
         txtDoc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDocKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtDocKeyTyped(evt);
             }
@@ -269,8 +273,7 @@ public class FrmRecuAdmin extends javax.swing.JFrame {
         PanelOpcionesPersonal.showinter = 0;
     }//GEN-LAST:event_btnCerrarMousePressed
 
-    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        // TODO add your handling code here:
+    void Proceso(){
         if (txtDoc.getText().equals("") || cmbTipo.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(this, "Campos vacios");
         } else {
@@ -292,6 +295,11 @@ public class FrmRecuAdmin extends javax.swing.JFrame {
             }
         }
         PanelOpcionesPersonal.showinter = 0;
+    }
+    
+    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
+        // TODO add your handling code here:
+        Proceso();
     }//GEN-LAST:event_btnContinuarActionPerformed
 
       void CargarIDT() { 
@@ -361,15 +369,33 @@ public class FrmRecuAdmin extends javax.swing.JFrame {
                     evt.consume();
                 }else if(txtDoc.getText().contains("-") && key == '-'){
                     evt.consume();
+                }else if(txtDoc.getText().length() < 8 && key == '-'){
+                    evt.consume();
                 }
+            } else if (tipodoc.equals("Pasaporte")) {
+                    if (txtDoc.getText().length() >= 9) {
+                        evt.consume();
+                    } else if (!Character.isDigit(key) && !Character.isUpperCase(key)) {
+                        evt.consume();
+                    }
             } else if (cmbTipo.getSelectedIndex() == 0) {
-                evt.consume();
+                    evt.consume();
             }
         } else {
             evt.consume();
         }
 
     }//GEN-LAST:event_txtDocKeyTyped
+
+    private void txtDocKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDocKeyPressed
+        // TODO add your handling code here:
+        if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }else if(evt.getKeyCode() == KeyEvent.VK_ENTER && txtDoc.getText() != ""){
+            Proceso();
+        }
+    }//GEN-LAST:event_txtDocKeyPressed
 
     /**
      * @param args the command line arguments

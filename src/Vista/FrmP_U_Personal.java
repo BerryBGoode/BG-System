@@ -972,7 +972,19 @@ public class FrmP_U_Personal extends javax.swing.JFrame {
                     evt.consume();
                 }else if(! Character.isDigit(key) && key != '-' ){
                     evt.consume();
+                }else if (txtDocumento.getText().contains("-") && key == '-') {
+                    evt.consume();
+                } else if(txtDocumento.getText().length() < 8 && key == '-'){
+                    evt.consume();
                 }
+            }else if (tipodoc.equals("Pasaporte")) {
+                if (txtDocumento.getText().length() >= 9) {
+                    evt.consume();
+                } else if (!Character.isDigit(key) && !Character.isUpperCase(key)) {
+                    evt.consume();
+                }
+            } else if (CmbTipoDocumento.getSelectedIndex() == 0) {
+                evt.consume();
             }
         }else{
             evt.consume();

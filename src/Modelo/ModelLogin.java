@@ -32,7 +32,7 @@ public class ModelLogin {
 
         try {
             con = ModelConexion.getConnection();
-            ps = con.prepareStatement("SELECT * FROM tbUsuarios WHERE nombre_usuario = ?");
+            ps = con.prepareStatement("SELECT *FROM tbUsuarios WHERE nombre_usuario = ? COLLATE SQL_Latin1_General_CP1_CS_AS");
             ps.setString(1, usuario);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {

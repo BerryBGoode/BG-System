@@ -125,15 +125,20 @@ public class FrmAgg_Contacto extends javax.swing.JFrame {
         if (txtContacto.getText().trim().isEmpty() || cmbtipoc.getSelectedItem() == "") {
             JOptionPane.showMessageDialog(null, "Existen campos vacios, favor llenar los campos", "Campos vacios", JOptionPane.WARNING_MESSAGE);
         } else {
-            ControllerContactos.contacto = txtContacto.getText();
-            ControllerContactos.idtipocontacto = tipocontacto;
-            ControllerContactos.idpersonal = Integer.parseInt(txtID.getText());
-            //            capIDPersonal_tbPersonal();
-            boolean a = ControllerContactos.RegistrarContactos_Controller();
-            if (a == true) {
-                JOptionPane.showMessageDialog(null, "Registrado con exito");
-            } else {
-                JOptionPane.showMessageDialog(null, "No pudo ser registrado");
+            if(txtContacto.getText().length() < 9){
+                JOptionPane.showMessageDialog(this, "El contacto ingresado no tiene el formato correcto", "Información erronea", JOptionPane.WARNING_MESSAGE);
+            }else{
+                ControllerContactos.contacto = txtContacto.getText();
+                ControllerContactos.idtipocontacto = tipocontacto;
+                ControllerContactos.idpersonal = Integer.parseInt(txtID.getText());
+                //            capIDPersonal_tbPersonal();
+                boolean a = ControllerContactos.RegistrarContactos_Controller();
+                if (a == true) {
+                    ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "Contacto ingresado correctamente", 1);
+                    this.dispose();
+                } else {
+                     ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso fallido", "Contacto no pudo ser ingresado", 3);
+                }
             }
         }
     }
@@ -190,6 +195,9 @@ public class FrmAgg_Contacto extends javax.swing.JFrame {
         txtContacto.setSelectedTextColor(new java.awt.Color(58, 50, 75));
         txtContacto.setSelectionColor(new java.awt.Color(253, 255, 254));
         txtContacto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtContactoKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtContactoKeyTyped(evt);
             }
@@ -264,7 +272,6 @@ public class FrmAgg_Contacto extends javax.swing.JFrame {
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
         ActualizarContacto();
-        this.dispose();
         PanelOpcionesPersonal.showinter = 0;
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
@@ -281,7 +288,6 @@ public class FrmAgg_Contacto extends javax.swing.JFrame {
     private void btnConfirmar_CActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmar_CActionPerformed
         // TODO add your handling code here:
         RegistrarContacto();
-        this.dispose();
     }//GEN-LAST:event_btnConfirmar_CActionPerformed
 
     private void cmbtipocItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbtipocItemStateChanged
@@ -305,27 +311,38 @@ public class FrmAgg_Contacto extends javax.swing.JFrame {
     private void txtContactoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContactoKeyTyped
         // TODO add your handling code here:
         char key = evt.getKeyChar();
-        if(tipocontacto == 1){
-            if(txtContacto.getText().length() >= 9){
-                evt.consume();
-            }else if(txtContacto.getText().length() == 4 && key != '-'){
-                evt.consume();
-            }
-            else if(txtContacto.getText().contains("-") && key == '-'){
-                evt.consume();
-            }else{
-                if(! Character.isDigit(key) && key != '-'){
+        if(cmbtipoc.getSelectedIndex() == 0){
+            evt.consume();
+        }else{
+            if(tipocontacto == 1){
+                if(txtContacto.getText().length() >= 9){
                     evt.consume();
+                }else if(txtContacto.getText().length() == 4 && key != '-'){
+                    evt.consume();
+                }else if(txtContacto.getText().contains("-") && key == '-'){
+                    evt.consume();
+                }else{
+                    if(! Character.isDigit(key) && key != '-'){
+                        evt.consume();
+                    }
                 }
-            }
-        }else if(tipocontacto == 2){
-            if(txtContacto.getText().length() >= 9){
-                evt.consume();
-            }else{
-                ValidacionesSistema.ValidacionesBeep_Go.SoloNumeros(evt);
+            }else if(tipocontacto == 2){
+                if(txtContacto.getText().length() >= 9){
+                    evt.consume();
+                }else{
+                    ValidacionesSistema.ValidacionesBeep_Go.SoloNumeros(evt);
+                }
             }
         }
     }//GEN-LAST:event_txtContactoKeyTyped
+
+    private void txtContactoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContactoKeyPressed
+        // TODO add your handling code here:
+        if (evt.isControlDown() || evt.isShiftDown())
+        {
+            evt.consume();
+        }   
+    }//GEN-LAST:event_txtContactoKeyPressed
 
     /**
      * @param args the command line arguments
