@@ -171,54 +171,6 @@ public class PanelDashboard extends javax.swing.JPanel {
         }
     }
 
-    public void mode() {
-        switch (ValidacionesSistema.ValidacionesBeep_Go.getModo()) {
-            case 1:
-                jPanel7.setBackground(new Color(47, 49, 54));
-                jPanel5.setBackground(new Color(47, 49, 54));
-                pnlWestNotifi.setBackground(new Color(47, 49, 54));
-                panelRound2.setBackground(new Color(47, 49, 54));
-                panelRound6.setBackground(new Color(47, 49, 54));
-                pnlNorthNotifi.setBackground(new Color(47, 49, 54));
-                jPanel1.setBackground(new Color(47, 49, 54));
-                jPanel4.setBackground(new Color(47, 49, 54));
-                jPanel11.setBackground(new Color(47, 49, 54));
-                PanelGrafica1.setBackground(new Color(47, 49, 54));
-                panelRound1.setBackground(new Color(47, 49, 54));
-                jPanel6.setBackground(new Color(47, 49, 54));
-                jPanel9.setBackground(new Color(47, 49, 54));
-                PanelGrafica3.setBackground(new Color(47, 49, 54));
-                lblNoti.setForeground(new Color(231, 234, 239));
-                PanelNotificaciones.setBackground(new Color(32, 34, 37));
-                panelRound.setBackground(new Color(47, 49, 54));
-                Grafica1.setBackground(new Color(32, 34, 37));
-                Grafica2.setBackground(new Color(32, 34, 37));
-                break;
-            case 2:
-                jPanel7.setBackground(new Color(231, 234, 239));
-                jPanel5.setBackground(new Color(231, 234, 239));
-                pnlWestNotifi.setBackground(new Color(231, 234, 239));
-                panelRound2.setBackground(new Color(231, 234, 239));
-                panelRound6.setBackground(new Color(231, 234, 239));
-                pnlNorthNotifi.setBackground(new Color(231, 234, 239));
-                jPanel1.setBackground(new Color(231, 234, 239));
-                jPanel4.setBackground(new Color(231, 234, 239));
-                jPanel11.setBackground(new Color(231, 234, 239));
-                PanelGrafica1.setBackground(new Color(231, 234, 239));
-                panelRound1.setBackground(new Color(231, 234, 239));
-                jPanel6.setBackground(new Color(231, 234, 239));
-                jPanel9.setBackground(new Color(231, 234, 239));
-                PanelGrafica3.setBackground(new Color(231, 234, 239));
-                lblNoti.setForeground(new Color(0, 0, 0));
-                PanelNotificaciones.setBackground(new Color(255, 255, 254));
-                panelRound.setBackground(new Color(231, 234, 239));
-                Grafica1.setBackground(new Color(231, 234, 239));
-                Grafica2.setBackground(new Color(231, 234, 239));
-                break;
-
-        }
-    }
-
     public void mod() {
         if (ValidacionesSistema.ValidacionesBeep_Go.getModo() == 1) {
                 jPanel7.setBackground(new Color(47, 49, 54));

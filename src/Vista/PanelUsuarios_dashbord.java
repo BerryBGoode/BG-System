@@ -300,60 +300,6 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
         }
     }
 
-    public final void darkmod() {
-        switch (ValidacionesSistema.ValidacionesBeep_Go.getModo()) {
-            case 1:
-                panelRound1.setBackground(new Color(47, 49, 54));
-                LblUsuario.setForeground(Color.WHITE);
-                jPanel5.setBackground(new Color(47, 49, 54));
-                jPanel4.setBackground(new Color(47, 49, 54));
-                jPanel3.setBackground(new Color(47, 49, 54));
-                jPanel2.setBackground(new Color(47, 49, 54));
-                jPanel1.setBackground(new Color(47, 49, 54));
-                btnAgregar.setBackground(new Color(32, 34, 37));
-                btnFiltrar.setBackground(new Color(32, 34, 37));
-                btnInforme.setBackground(new Color(32, 34, 37));
-                btnActualizar.setBackground(new Color(32, 34, 37));
-                btnEliminar.setBackground(new Color(32, 34, 37));
-                btnReporte.setBackground(new Color(32, 34, 37));
-                btnActualizar.setIcon(Modificardark);
-                btnEliminar.setIcon(Eliminardark);
-                btnReporte.setIcon(reportedark);
-                tbUsuarioDark.setForeground(Color.white);
-                tbUsuarios.setVisible(false);
-                jScrollPane1.setVisible(false);
-                ScrollTabla.setVisible(false);
-                tbUsuarioDark.setVisible(true);
-                Scroll.setVisible(true);
-                scrollBarCustom1.setVisible(true);
-                break;
-            case 2:
-                panelRound1.setBackground(new Color(231, 234, 239));
-                LblUsuario.setForeground(new Color(58, 50, 75));
-                jPanel5.setBackground(new Color(231, 234, 239));
-                jPanel4.setBackground(new Color(231, 234, 239));
-                jPanel3.setBackground(new Color(231, 234, 239));
-                jPanel2.setBackground(new Color(231, 234, 239));
-                jPanel1.setBackground(new Color(231, 234, 239));
-                btnAgregar.setBackground(new Color(58, 50, 75));
-                btnFiltrar.setBackground(new Color(58, 50, 75));
-                btnInforme.setBackground(new Color(58, 50, 75));
-                btnActualizar.setBackground(new Color(231, 234, 239));
-                btnEliminar.setBackground(new Color(231, 234, 239));
-                btnReporte.setBackground(new Color(231, 234, 239));
-                btnActualizar.setIcon(Modificar);
-                btnEliminar.setIcon(Eliminar);
-                btnReporte.setIcon(reporte);
-                tbUsuarios.setVisible(true);
-                jScrollPane1.setVisible(true);
-                ScrollTabla.setVisible(true);
-                tbUsuarioDark.setVisible(false);
-                Scroll.setVisible(false);
-                scrollBarCustom1.setVisible(false);
-                break;
-        }
-    }
-
     private void modo() {
         if (ValidacionesSistema.ValidacionesBeep_Go.Modo == 1) {
             panelRound1.setBackground(new Color(47, 49, 54));
