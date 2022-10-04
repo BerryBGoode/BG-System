@@ -65,6 +65,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     //PanelDashboard pld = new PanelDashboard();
     ControllerLogin clog = new ControllerLogin();
     private int iduser;
+    public static boolean frmMaximized;//para verificar si está maximizado el dashbord y hacer unos ajustes en el panel Ajustes
 
     /**
      * Creates new form Dashboard
@@ -358,7 +359,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
                 .addGroup(PanelMOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNormal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnMO, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelMOLayout.setVerticalGroup(
             PanelMOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1368,6 +1369,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     void Evaluador2() {
         this.setExtendedState(MAXIMIZED_BOTH);
         final java.awt.Point x = GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
+        frmMaximized =  true;
         new Thread(new Runnable() {
             @Override
             public void run() {
