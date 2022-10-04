@@ -526,6 +526,7 @@ public class PanelParqueo extends javax.swing.JPanel {
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
         // TODO add your handling code here:
         refresh();
+        getdataPark();
     }//GEN-LAST:event_formMouseMoved
 
     private void panelRound1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound1MouseMoved
