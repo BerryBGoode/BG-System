@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="612" pageHeight="260" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ee30c4ca-2b5a-4463-a8d0-c9f31421d2ea">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idContacto" class="java.lang.Integer"/>
+	<parameter name="Logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Footer" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT idContacto, contacto, Personal, tipo_contacto, idTipoContacto FROM vwContactos WHERE idContacto = $P{idContacto}]]>
+	</queryString>
+	<field name="idContacto" class="java.lang.Integer"/>
+	<field name="contacto" class="java.lang.String"/>
+	<field name="Personal" class="java.lang.String"/>
+	<field name="tipo_contacto" class="java.lang.String"/>
+	<field name="idTipoContacto" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="92" splitType="Stretch">
+			<staticText>
+				<reportElement x="226" y="27" width="118" height="37" forecolor="#17141D" uuid="4551c641-60bb-45a0-80f0-5785b574343e"/>
+				<textElement>
+					<font fontName="SansSerif" size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contacto]]></text>
+			</staticText>
+			<image>
+				<reportElement x="13" y="9" width="85" height="71" uuid="380e4f85-fecd-45a6-9063-f4ea28a6d16c"/>
+				<imageExpression><![CDATA[$P{Logo}.toString()]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="44" y="0" width="108" height="24" uuid="180fe919-c3fd-4219-a2fd-274f3dcd797d"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contacto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="164" y="0" width="98" height="24" uuid="1ffcc6f5-7f1b-4719-93c6-2ae9dbc8503e"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Personal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="418" y="0" width="136" height="24" uuid="0025f97d-6670-4bda-8763-6cee361abf8a"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo Contacto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="0" width="26" height="24" uuid="4159349a-02c1-431a-bccd-b3ee6866c458"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="38" splitType="Stretch">
+			<textField>
+				<reportElement x="44" y="0" width="108" height="27" forecolor="#333333" uuid="ba66b32a-2eb3-4275-931b-4555b8297c9e"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{contacto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="7" y="0" width="26" height="27" forecolor="#333333" uuid="2370af83-926d-49a7-9f4d-3beaf2f3595f"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{idContacto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="164" y="0" width="242" height="27" forecolor="#333333" uuid="90d380aa-7dd3-4f7f-8296-5945b900fc1e"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Personal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="418" y="0" width="136" height="27" forecolor="#333333" uuid="ee5593db-0753-46f1-b5dc-656467388cf6"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipo_contacto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="33" splitType="Stretch">
+			<image>
+				<reportElement x="492" y="0" width="80" height="30" uuid="87dc1ca7-4f37-46f3-9b1b-b873a53fd4d0"/>
+				<imageExpression><![CDATA[$P{Footer}.toString()]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

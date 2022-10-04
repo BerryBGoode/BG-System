@@ -111,4 +111,46 @@ public class ModelReportes {
                 return false;
             }
     }
+    
+    public boolean BuscarVehiculosPersonal(String par, Connection con){
+                ResultSet rs;
+        try{
+                String query = "SELECT vwVehiculos.idPersonal AS vwVehiculos_idPersonal, vwVehiculos.idVehiculo AS vwVehiculos_idVehiculo, vwVehiculos.Carnet AS vwVehiculos_Carnet, CONCAT(vwVehiculos.nombre_p, ' ', vwVehiculos.apellido_p) AS vwVehiculos_nombre_p, vwVehiculos.placa AS vwVehiculos_placa, vwVehiculos.color AS vwVehiculos_color FROM dbo.vwVehiculos vwVehiculos WHERE vwVehiculos.Carnet LIKE ? OR vwVehiculos.nombre_p LIKE ? OR vwVehiculos.apellido_p LIKE ?";
+                ps = con.prepareStatement(query);
+                ps.setString(1, par);
+                ps.setString(2, par);
+                ps.setString(3, par);
+                rs = ps.executeQuery();
+
+                if(rs.next()){
+                    return true;
+                }else{
+                    return false;
+                }
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e.toString());
+                return false;
+            }
+    }
+
+        public boolean BuscarContactosPersonal(String par, Connection con){
+                ResultSet rs;
+        try{
+                String query = "SELECT tbContactos.idContacto AS tbContactos_idContacto, tbContactos.contacto AS tbContactos_contacto, tbPersonal.nombre_p AS tbPersonal_nombre_p, tbPersonal.apellido_p AS tbPersonal_apellido_p, tbTipoContacto.tipo_contacto AS tbTipoContacto_tipo_contacto, tbPersonal.Carnet AS tbPersonal_Carnet FROM dbo.tbPersonal tbPersonal INNER JOIN dbo.tbContactos tbContactos ON tbPersonal.idPersonal = tbContactos.idPersonal INNER JOIN dbo.tbTipoContacto tbTipoContacto ON tbContactos.idTipoContacto = tbTipoContacto.idTipoContacto WHERE tbPersonal.nombre_p LIKE  ? OR tbPersonal.apellido_p LIKE ? OR tbPersonal.Carnet LIKE ?";
+                ps = con.prepareStatement(query);
+                ps.setString(1, par);
+                ps.setString(2, par);
+                ps.setString(3, par);
+                rs = ps.executeQuery();
+
+                if(rs.next()){
+                    return true;
+                }else{
+                    return false;
+                }
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, e.toString());
+                return false;
+            }
+    }
 }

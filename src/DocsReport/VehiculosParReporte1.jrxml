@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="af047b68-b3a9-4ac5-9e21-3ff8c3b7325d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TextoFooter" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Parametro" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     vwVehiculos."idPersonal" AS vwVehiculos_idPersonal,
+     vwVehiculos."idVehiculo" AS vwVehiculos_idVehiculo,
+     vwVehiculos."Carnet" AS vwVehiculos_Carnet,
+     CONCAT(vwVehiculos."nombre_p", ' ', vwVehiculos."apellido_p") AS vwVehiculos_nombre_p,
+     vwVehiculos."placa" AS vwVehiculos_placa,
+     vwVehiculos."color" AS vwVehiculos_color
+FROM
+     "dbo"."vwVehiculos" vwVehiculos
+WHERE vwVehiculos.Carnet LIKE $P{Parametro} OR vwVehiculos.nombre_p LIKE $P{Parametro} OR vwVehiculos.apellido_p LIKE $P{Parametro}]]>
+	</queryString>
+	<field name="vwVehiculos_idPersonal" class="java.lang.Integer"/>
+	<field name="vwVehiculos_idVehiculo" class="java.lang.Integer"/>
+	<field name="vwVehiculos_Carnet" class="java.lang.String"/>
+	<field name="vwVehiculos_nombre_p" class="java.lang.String"/>
+	<field name="vwVehiculos_placa" class="java.lang.String"/>
+	<field name="vwVehiculos_color" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="165" y="14" width="273" height="54" forecolor="#17141D" uuid="a447f5d9-f9d7-46cd-b724-30c500da7f88"/>
+				<textElement>
+					<font fontName="Arial" size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de vehiculos]]></text>
+			</staticText>
+			<image>
+				<reportElement x="9" y="3" width="85" height="71" uuid="33ad911e-3820-420e-89c7-ec663f148ba2"/>
+				<imageExpression><![CDATA[$P{Logo}.toString()]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="22" width="50" height="20" uuid="09962edb-bbe7-44ac-af6f-25052f9f7385"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="61" y="22" width="176" height="20" uuid="9ddb80a1-eea1-4600-8600-804d1e6ed33f"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Personal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="247" y="22" width="100" height="20" uuid="5c412a73-725e-46d3-a4dc-4b4f4c638fc5"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Carnet]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="359" y="22" width="100" height="20" uuid="d1ba3da7-2e60-43d8-9005-bd2a628d601a"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Placa]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="472" y="22" width="100" height="20" uuid="3aae407f-1d22-410d-bd21-384bc1b0b450"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Color]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="58" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="50" height="20" uuid="0160b99e-b72f-42d4-8605-86570871599e"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vwVehiculos_idVehiculo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="61" y="0" width="176" height="40" uuid="96aac317-1352-4eea-b3df-0606dfc3db05"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vwVehiculos_nombre_p}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="247" y="0" width="100" height="20" uuid="4e3cb016-9ae2-4d60-b3ff-668d87890828"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vwVehiculos_Carnet}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="359" y="0" width="100" height="20" uuid="997174f1-4e7f-4c85-a6bd-8227fe0426cb"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vwVehiculos_placa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="472" y="0" width="100" height="40" uuid="3e094248-b2d0-46b3-a335-19d1a4142f92"/>
+				<textElement>
+					<font size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vwVehiculos_color}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="96" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<image>
+				<reportElement x="492" y="0" width="80" height="30" uuid="fc94a058-f8fc-4d2f-b4a7-41c926a1f96c"/>
+				<imageExpression><![CDATA[$P{TextoFooter}.toString()]]></imageExpression>
+			</image>
+		</band>
+	</summary>
+</jasperReport>
