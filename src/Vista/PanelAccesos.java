@@ -531,7 +531,7 @@ public class PanelAccesos extends javax.swing.JPanel {
     }//GEN-LAST:event_TbAccesosWhite4MouseMoved
 
     private void TbAccesosWhite4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbAccesosWhite4MouseClicked
-        Table tb = (Table) evt.getSource();//para obtener los datos de la fila
+        JTable tb = (JTable) evt.getSource();//para obtener los datos de la fila
 
         int row = evt.getY() / TbAccesosWhite4.getRowHeight();
         int col = TbAccesosWhite4.getColumnModel().getColumnIndexAtX(evt.getX());
@@ -579,7 +579,7 @@ public class PanelAccesos extends javax.swing.JPanel {
 
     private void TbAcessoDarkMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TbAcessoDarkMouseClicked
         // TODO add your handling code here:
-        Table rc = (Table) evt.getSource();//para obtener los datos de la fila
+        JTable rc = (JTable) evt.getSource();//para obtener los datos de la fila
 
         int row = evt.getY() / TbAcessoDark.getRowHeight();
         int col = TbAcessoDark.getColumnModel().getColumnIndexAtX(evt.getX());
