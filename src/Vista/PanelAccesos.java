@@ -166,130 +166,81 @@ public class PanelAccesos extends javax.swing.JPanel {
 
     void modo() {
         if (ValidacionesSistema.ValidacionesBeep_Go.Modo == 1) {
-            jScrollPane1.setVisible(false);
-            TbAccesosWhite4.setVisible(false);
-            ScrollDark.setVisible(true);
-            jPanel7.setVisible(true);
-            TbAcessoDark.setVisible(true);
-            TbAcessoDark.setForeground(Color.white);
-            PanelFondo.setBackground(new Color(47, 49, 54));
-            jPanel4.setBackground(new Color(47, 49, 54));
-            jPanel5.setBackground(new Color(47, 49, 54));
-            jPanel2.setBackground(new Color(47, 49, 54));
-            jPanel1.setBackground(new Color(47, 49, 54));
-            jPanel7.setBackground(new Color(47, 49, 54));
-            jPanel6.setBackground(new Color(47, 49, 54));
-            lblAccesos.setForeground(Color.WHITE);
-            btnAgregar.setBackground(new Color(32, 34, 37));
-            btnFiltrar.setBackground(new Color(32, 34, 37));
-            btnupdate.setBackground(new Color(32, 34, 37));
-            btndelete.setBackground(new Color(32, 34, 37));
-            btnupdate.setIcon(Modificardark);
-            btndelete.setIcon(Eliminardark);
+            if (!tipouser.equals("Seguridad")) {
+                btnupdate.setBackground(new Color(32, 34, 37));
+                btndelete.setBackground(new Color(32, 34, 37));
+                btnupdate.setIcon(Modificardark);
+                btndelete.setIcon(Eliminardark);
+                jScrollPane1.setVisible(false);
+                TbAccesosWhite4.setVisible(false);
+                ScrollDark.setVisible(true);
+                jPanel7.setVisible(true);
+                TbAcessoDark.setVisible(true);
+                TbAcessoDark.setForeground(Color.white);
+                PanelFondo.setBackground(new Color(47, 49, 54));
+                jPanel4.setBackground(new Color(47, 49, 54));
+                jPanel5.setBackground(new Color(47, 49, 54));
+                jPanel2.setBackground(new Color(47, 49, 54));
+                jPanel1.setBackground(new Color(47, 49, 54));
+                jPanel7.setBackground(new Color(47, 49, 54));
+                jPanel6.setBackground(new Color(47, 49, 54));
+                lblAccesos.setForeground(Color.WHITE);
+                btnAgregar.setBackground(new Color(32, 34, 37));
+                btnFiltrar.setBackground(new Color(32, 34, 37));
+            } else {
+                jScrollPane1.setVisible(false);
+                TbAccesosWhite4.setVisible(false);
+                ScrollDark.setVisible(true);
+                jPanel7.setVisible(true);
+                TbAcessoDark.setVisible(true);
+                TbAcessoDark.setForeground(Color.white);
+                PanelFondo.setBackground(new Color(47, 49, 54));
+                jPanel4.setBackground(new Color(47, 49, 54));
+                jPanel5.setBackground(new Color(47, 49, 54));
+                jPanel2.setBackground(new Color(47, 49, 54));
+                jPanel1.setBackground(new Color(47, 49, 54));
+                jPanel7.setBackground(new Color(47, 49, 54));
+                jPanel6.setBackground(new Color(47, 49, 54));
+                lblAccesos.setForeground(Color.WHITE);
+                btnAgregar.setBackground(new Color(32, 34, 37));
+                btnFiltrar.setBackground(new Color(32, 34, 37));
+            }
         } else {
-            jScrollPane1.setVisible(true);
-            TbAccesosWhite4.setVisible(true);
-            ScrollDark.setVisible(false);
-            TbAcessoDark.setVisible(false);
-            PanelFondo.setBackground(new Color(231, 234, 239));
-            jPanel4.setBackground(new Color(231, 234, 239));
-            jPanel5.setBackground(new Color(231, 234, 239));
-            jPanel2.setBackground(new Color(231, 234, 239));
-            jPanel1.setBackground(new Color(231, 234, 239));
-            jPanel7.setBackground(new Color(231, 234, 239));
-            jPanel6.setBackground(new Color(231, 234, 239));
-            lblAccesos.setForeground(new Color(58, 50, 75));
-            btnAgregar.setBackground(new Color(58, 50, 75));
-            btnFiltrar.setBackground(new Color(58, 50, 75));
-            btnupdate.setBackground(new Color(231, 234, 239));
-            btndelete.setBackground(new Color(231, 234, 239));
-            btnupdate.setIcon(modifIcon);
-            btndelete.setIcon(deleteIcon);
-        }
-    }
-
-    public void mododash() {
-        switch (ValidacionesSistema.ValidacionesBeep_Go.getModo()) {
-            case 1:
-                if (!tipouser.equals("Seguridad")) {
-                    btnupdate.setBackground(new Color(32, 34, 37));
-                    btndelete.setBackground(new Color(32, 34, 37));
-                    btnupdate.setIcon(Modificardark);
-                    btndelete.setIcon(Eliminardark);
-                    jScrollPane1.setVisible(false);
-                    TbAccesosWhite4.setVisible(false);
-                    ScrollDark.setVisible(true);
-                    jPanel7.setVisible(true);
-                    TbAcessoDark.setVisible(true);
-                    TbAcessoDark.setForeground(Color.white);
-                    PanelFondo.setBackground(new Color(47, 49, 54));
-                    jPanel4.setBackground(new Color(47, 49, 54));
-                    jPanel5.setBackground(new Color(47, 49, 54));
-                    jPanel2.setBackground(new Color(47, 49, 54));
-                    jPanel1.setBackground(new Color(47, 49, 54));
-                    jPanel7.setBackground(new Color(47, 49, 54));
-                    jPanel6.setBackground(new Color(47, 49, 54));
-                    lblAccesos.setForeground(Color.WHITE);
-                    btnAgregar.setBackground(new Color(32, 34, 37));
-                    btnFiltrar.setBackground(new Color(32, 34, 37));
-                } else {
-                    jScrollPane1.setVisible(false);
-                    TbAccesosWhite4.setVisible(false);
-                    ScrollDark.setVisible(true);
-                    jPanel7.setVisible(true);
-                    TbAcessoDark.setVisible(true);
-                    TbAcessoDark.setForeground(Color.white);
-                    PanelFondo.setBackground(new Color(47, 49, 54));
-                    jPanel4.setBackground(new Color(47, 49, 54));
-                    jPanel5.setBackground(new Color(47, 49, 54));
-                    jPanel2.setBackground(new Color(47, 49, 54));
-                    jPanel1.setBackground(new Color(47, 49, 54));
-                    jPanel7.setBackground(new Color(47, 49, 54));
-                    jPanel6.setBackground(new Color(47, 49, 54));
-                    lblAccesos.setForeground(Color.WHITE);
-                    btnAgregar.setBackground(new Color(32, 34, 37));
-                    btnFiltrar.setBackground(new Color(32, 34, 37));
-                }
-
-                break;
-            case 2:
-                if (!tipouser.equals("Seguridad")) {
-                    jScrollPane1.setVisible(true);
-                    TbAccesosWhite4.setVisible(true);
-                    ScrollDark.setVisible(false);
-                    TbAcessoDark.setVisible(false);
-                    PanelFondo.setBackground(new Color(231, 234, 239));
-                    jPanel4.setBackground(new Color(231, 234, 239));
-                    jPanel5.setBackground(new Color(231, 234, 239));
-                    jPanel2.setBackground(new Color(231, 234, 239));
-                    jPanel1.setBackground(new Color(231, 234, 239));
-                    jPanel7.setBackground(new Color(231, 234, 239));
-                    jPanel6.setBackground(new Color(231, 234, 239));
-                    lblAccesos.setForeground(new Color(58, 50, 75));
-                    btnAgregar.setBackground(new Color(58, 50, 75));
-                    btnFiltrar.setBackground(new Color(58, 50, 75));
-                    btnupdate.setBackground(new Color(231, 234, 239));
-                    btndelete.setBackground(new Color(231, 234, 239));
-                    btnupdate.setIcon(modifIcon);
-                    btndelete.setIcon(deleteIcon);
-                } else {
-                    jScrollPane1.setVisible(true);
-                    TbAccesosWhite4.setVisible(true);
-                    ScrollDark.setVisible(false);
-                    TbAcessoDark.setVisible(false);
-                    PanelFondo.setBackground(new Color(231, 234, 239));
-                    jPanel4.setBackground(new Color(231, 234, 239));
-                    jPanel5.setBackground(new Color(231, 234, 239));
-                    jPanel2.setBackground(new Color(231, 234, 239));
-                    jPanel1.setBackground(new Color(231, 234, 239));
-                    jPanel7.setBackground(new Color(231, 234, 239));
-                    jPanel6.setBackground(new Color(231, 234, 239));
-                    lblAccesos.setForeground(new Color(58, 50, 75));
-                    btnAgregar.setBackground(new Color(58, 50, 75));
-                    btnFiltrar.setBackground(new Color(58, 50, 75));
-                }
-
-                break;
+            if (!tipouser.equals("Seguridad")) {
+                jScrollPane1.setVisible(true);
+                TbAccesosWhite4.setVisible(true);
+                ScrollDark.setVisible(false);
+                TbAcessoDark.setVisible(false);
+                PanelFondo.setBackground(new Color(231, 234, 239));
+                jPanel4.setBackground(new Color(231, 234, 239));
+                jPanel5.setBackground(new Color(231, 234, 239));
+                jPanel2.setBackground(new Color(231, 234, 239));
+                jPanel1.setBackground(new Color(231, 234, 239));
+                jPanel7.setBackground(new Color(231, 234, 239));
+                jPanel6.setBackground(new Color(231, 234, 239));
+                lblAccesos.setForeground(new Color(58, 50, 75));
+                btnAgregar.setBackground(new Color(58, 50, 75));
+                btnFiltrar.setBackground(new Color(58, 50, 75));
+                btnupdate.setBackground(new Color(231, 234, 239));
+                btndelete.setBackground(new Color(231, 234, 239));
+                btnupdate.setIcon(modifIcon);
+                btndelete.setIcon(deleteIcon);
+            } else {
+                jScrollPane1.setVisible(true);
+                TbAccesosWhite4.setVisible(true);
+                ScrollDark.setVisible(false);
+                TbAcessoDark.setVisible(false);
+                PanelFondo.setBackground(new Color(231, 234, 239));
+                jPanel4.setBackground(new Color(231, 234, 239));
+                jPanel5.setBackground(new Color(231, 234, 239));
+                jPanel2.setBackground(new Color(231, 234, 239));
+                jPanel1.setBackground(new Color(231, 234, 239));
+                jPanel7.setBackground(new Color(231, 234, 239));
+                jPanel6.setBackground(new Color(231, 234, 239));
+                lblAccesos.setForeground(new Color(58, 50, 75));
+                btnAgregar.setBackground(new Color(58, 50, 75));
+                btnFiltrar.setBackground(new Color(58, 50, 75));
+            }
         }
     }
 
@@ -513,6 +464,7 @@ public class PanelAccesos extends javax.swing.JPanel {
     private void PanelFondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseMoved
         // TODO add your handling code here:
         refresh();
+        modo();
     }//GEN-LAST:event_PanelFondoMouseMoved
 
     private void PanelFondoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseClicked

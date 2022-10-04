@@ -556,6 +556,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
     private void panelRound1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound1MouseMoved
         // TODO add your handling code here:
         refresh();
+        modo();
     }//GEN-LAST:event_panelRound1MouseMoved
 
     private void tbUsuariosMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbUsuariosMouseMoved

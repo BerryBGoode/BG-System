@@ -221,23 +221,25 @@ public class PanelDashboard extends javax.swing.JPanel {
 
     public void mod() {
         if (ValidacionesSistema.ValidacionesBeep_Go.getModo() == 1) {
-            jPanel7.setBackground(new Color(47, 49, 54));
-            jPanel5.setBackground(new Color(47, 49, 54));
-            pnlWestNotifi.setBackground(new Color(47, 49, 54));
-            panelRound2.setBackground(new Color(47, 49, 54));
-            panelRound6.setBackground(new Color(47, 49, 54));
-            pnlNorthNotifi.setBackground(new Color(47, 49, 54));
-            jPanel1.setBackground(new Color(47, 49, 54));
-            jPanel4.setBackground(new Color(47, 49, 54));
-            jPanel11.setBackground(new Color(47, 49, 54));
-            PanelGrafica1.setBackground(new Color(47, 49, 54));
-            panelRound1.setBackground(new Color(47, 49, 54));
-            jPanel6.setBackground(new Color(47, 49, 54));
-            jPanel9.setBackground(new Color(47, 49, 54));
-            PanelGrafica3.setBackground(new Color(47, 49, 54));
-            lblNoti.setForeground(new Color(231, 234, 239));
-            PanelNotificaciones.setBackground(new Color(32, 34, 37));
-            panelRound.setBackground(new Color(47, 49, 54));
+                jPanel7.setBackground(new Color(47, 49, 54));
+                jPanel5.setBackground(new Color(47, 49, 54));
+                pnlWestNotifi.setBackground(new Color(47, 49, 54));
+                panelRound2.setBackground(new Color(47, 49, 54));
+                panelRound6.setBackground(new Color(47, 49, 54));
+                pnlNorthNotifi.setBackground(new Color(47, 49, 54));
+                jPanel1.setBackground(new Color(47, 49, 54));
+                jPanel4.setBackground(new Color(47, 49, 54));
+                jPanel11.setBackground(new Color(47, 49, 54));
+                PanelGrafica1.setBackground(new Color(47, 49, 54));
+                panelRound1.setBackground(new Color(47, 49, 54));
+                jPanel6.setBackground(new Color(47, 49, 54));
+                jPanel9.setBackground(new Color(47, 49, 54));
+                PanelGrafica3.setBackground(new Color(47, 49, 54));
+                lblNoti.setForeground(new Color(231, 234, 239));
+                PanelNotificaciones.setBackground(new Color(32, 34, 37));
+                panelRound.setBackground(new Color(47, 49, 54));
+                Grafica1.setBackground(new Color(32, 34, 37));
+                Grafica2.setBackground(new Color(32, 34, 37));
 //            Grafica1.addLegend("Entradas", new Color(231, 234, 239));
 //            Grafica1.setBackground(new Color(32, 34, 37));
 //            Grafica1.addLegend("Salidas", new Color(231, 234, 239));
@@ -248,23 +250,25 @@ public class PanelDashboard extends javax.swing.JPanel {
 //            Grafica2.addLegend("Seguridad", new Color(231, 234, 239));
 
         } else if (ValidacionesSistema.ValidacionesBeep_Go.getModo() == 2) {
-            jPanel7.setBackground(new Color(231, 234, 239));
-            jPanel5.setBackground(new Color(231, 234, 239));
-            pnlWestNotifi.setBackground(new Color(231, 234, 239));
-            panelRound2.setBackground(new Color(231, 234, 239));
-            panelRound6.setBackground(new Color(231, 234, 239));
-            pnlNorthNotifi.setBackground(new Color(231, 234, 239));
-            jPanel1.setBackground(new Color(231, 234, 239));
-            jPanel4.setBackground(new Color(231, 234, 239));
-            jPanel11.setBackground(new Color(231, 234, 239));
-            PanelGrafica1.setBackground(new Color(231, 234, 239));
-            panelRound1.setBackground(new Color(231, 234, 239));
-            jPanel6.setBackground(new Color(231, 234, 239));
-            jPanel9.setBackground(new Color(231, 234, 239));
-            PanelGrafica3.setBackground(new Color(231, 234, 239));
-            lblNoti.setForeground(new Color(0, 0, 0));
-            PanelNotificaciones.setBackground(new Color(255, 255, 254));
-            panelRound.setBackground(new Color(231, 234, 239));
+                jPanel7.setBackground(new Color(231, 234, 239));
+                jPanel5.setBackground(new Color(231, 234, 239));
+                pnlWestNotifi.setBackground(new Color(231, 234, 239));
+                panelRound2.setBackground(new Color(231, 234, 239));
+                panelRound6.setBackground(new Color(231, 234, 239));
+                pnlNorthNotifi.setBackground(new Color(231, 234, 239));
+                jPanel1.setBackground(new Color(231, 234, 239));
+                jPanel4.setBackground(new Color(231, 234, 239));
+                jPanel11.setBackground(new Color(231, 234, 239));
+                PanelGrafica1.setBackground(new Color(231, 234, 239));
+                panelRound1.setBackground(new Color(231, 234, 239));
+                jPanel6.setBackground(new Color(231, 234, 239));
+                jPanel9.setBackground(new Color(231, 234, 239));
+                PanelGrafica3.setBackground(new Color(231, 234, 239));
+                lblNoti.setForeground(new Color(0, 0, 0));
+                PanelNotificaciones.setBackground(new Color(255, 255, 254));
+                panelRound.setBackground(new Color(231, 234, 239));
+                Grafica1.setBackground(new Color(231, 234, 239));
+                Grafica2.setBackground(new Color(231, 234, 239));
 //            Grafica1.addLegend("Entradas", new Color(58, 50, 75));
 //            Grafica1.setBackground(new Color(231, 234, 239));
 //            Grafica1.addLegend("Salidas", new Color(58, 50, 75));
@@ -278,7 +282,6 @@ public class PanelDashboard extends javax.swing.JPanel {
 
     final void GenerarComp() {
 
-        
         obj.id = itemCount;
 
         try {
@@ -340,10 +343,10 @@ public class PanelDashboard extends javax.swing.JPanel {
                             if (obj.Eliminacion() == true) {
                                 ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Eliminacion Exitosa", "La notificacion se elimino correctamente", 1);
                                 GenerarComp();
-                            }else{
+                            } else {
                                 ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Eliminacion Fallida", "La notificacion no se elimino correctamente", 2);
                             }
-                            
+
                         }
                     }
                 };
@@ -398,15 +401,15 @@ public class PanelDashboard extends javax.swing.JPanel {
                     public void run() {
                         itemCount++;
                         GenerarComp();
-                        
+
                         try {
-                            if (itemCount==1000) {
+                            if (itemCount == 1000) {
                                 tmr.cancel();
                             }
                         } catch (Exception e) {
                         }
                     }
-                   
+
                 };
                 tmr.scheduleAtFixedRate(timTas, 1, 1);
             }
@@ -452,11 +455,21 @@ public class PanelDashboard extends javax.swing.JPanel {
         Grafica2 = new Controles_Personalizados.Graficas.Chart();
 
         setBackground(new java.awt.Color(42, 36, 56));
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
+            }
+        });
         setLayout(new java.awt.BorderLayout());
 
         panelRound2.setBackground(new java.awt.Color(42, 36, 56));
         panelRound2.setRoundBottomLeft(30);
         panelRound2.setRoundBottomRight(30);
+        panelRound2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                panelRound2MouseMoved(evt);
+            }
+        });
         panelRound2.setLayout(new java.awt.BorderLayout());
 
         panelRound6.setPreferredSize(new java.awt.Dimension(250, 100));
@@ -464,6 +477,11 @@ public class PanelDashboard extends javax.swing.JPanel {
         panelRound6.setLayout(new java.awt.BorderLayout());
 
         pnlWestNotifi.setBackground(new java.awt.Color(231, 234, 239));
+        pnlWestNotifi.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                pnlWestNotifiMouseMoved(evt);
+            }
+        });
         panelRound6.add(pnlWestNotifi, java.awt.BorderLayout.WEST);
 
         pnlNorthNotifi.setBackground(new java.awt.Color(231, 234, 239));
@@ -599,6 +617,19 @@ public class PanelDashboard extends javax.swing.JPanel {
 
         add(panelRound2, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void pnlWestNotifiMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlWestNotifiMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pnlWestNotifiMouseMoved
+
+    private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formMouseMoved
+
+    private void panelRound2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelRound2MouseMoved
+        // TODO add your handling code here:
+      mod();
+    }//GEN-LAST:event_panelRound2MouseMoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

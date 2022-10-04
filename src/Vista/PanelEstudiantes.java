@@ -423,6 +423,7 @@ public class PanelEstudiantes extends javax.swing.JPanel {
     private void PanelFondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseMoved
         // TODO add your handling code here:
         refresh();
+        mood();
     }//GEN-LAST:event_PanelFondoMouseMoved
 
     private void BtnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReporteActionPerformed
