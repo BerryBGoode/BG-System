@@ -212,6 +212,11 @@ public class PanelVehiculos extends javax.swing.JPanel {
         btnFiltrar.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         btnFiltrar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         btnFiltrar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarActionPerformed(evt);
+            }
+        });
         jPanel5.add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 150, 40));
 
         btnAgregar.setBackground(new java.awt.Color(58, 50, 75));
@@ -484,7 +489,7 @@ public class PanelVehiculos extends javax.swing.JPanel {
     void ImprimirReporte() {
         Connection con = ControllerConexion.getConnectionModel();
         try {
-            String path = "src/DocsReport/VehiculosReporte.jasper";
+            String path = "src/DocsReport/VehiculosReporte1.jasper";
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(path);
             Map param = new HashMap();
             param.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
@@ -492,7 +497,6 @@ public class PanelVehiculos extends javax.swing.JPanel {
             JasperPrint jp = JasperFillManager.fillReport(jr, param, con);
             JasperViewer jv = new JasperViewer(jp, false);
             jv.setVisible(true);
-            System.out.println("si, se imprime");
         } catch (JRException e) {
             System.out.println("Error" + e.toString());
         }
@@ -501,17 +505,16 @@ public class PanelVehiculos extends javax.swing.JPanel {
     void Imprimir1() {
         Connection con = ControllerConexion.getConnectionModel();
         try {
-            String path = "src/DocsReport/VehiculosReportPar.jasper";
+            String path = "src/DocsReport/VehiculosReportPar1.jasper";
             JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(path);
             Map param = new HashMap<>();
-            param.put("idVehiculo", idvehiculo);
+            param.put("idvehiculo", idvehiculo);
             param.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
             param.put("Pie", "src\\Recursos_Proyecto\\TextoLogin.png");
             System.out.println(idvehiculo);
             JasperPrint jp = JasperFillManager.fillReport(jr, param, con);
             JasperViewer jv = new JasperViewer(jp, false);
             jv.setVisible(true);
-            System.out.println("si, se imprime");
         } catch (JRException e) {
             System.out.println("Error" + e.toString());
         }
