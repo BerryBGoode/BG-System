@@ -245,7 +245,7 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Revisar si ha ingresado correctamente, la informacion solicitada", "Verficar campos", JOptionPane.WARNING_MESSAGE);
         } else if (anios < 18) {
             JOptionPane.showMessageDialog(null, "No, se permiten registros menores a 18 años de edad", "Menor de edad", JOptionPane.WARNING_MESSAGE);
-        } else if ((tipodoc.equals("DUI") && txtDocumento.getText().length() < 10) || (tipodoc.equals("NIT") && txtDocumento.getText().length() < 17)) {
+        } else if ((tipodoc.equals("DUI") && txtDocumento.getText().length() < 10) || (tipodoc.equals("NIT") && txtDocumento.getText().length() < 17) || (tipodoc.equals("Pasaporte") && txtDocumento.getText().length() < 9)) {
             JOptionPane.showMessageDialog(null, "El documento ingresado no tiene el formato correcto", "Error de formato", JOptionPane.WARNING_MESSAGE);
         } else if (!txtCorreo.getText().contains(".") || !txtCorreo.getText().contains("@")) {
             JOptionPane.showMessageDialog(null, "El correo ingresado no tiene el formato correcto", "Error de formato", JOptionPane.WARNING_MESSAGE);
@@ -329,7 +329,7 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Revisar si ha ingresado correctamente, la informacion solicitada", "Verficar campos", JOptionPane.WARNING_MESSAGE);
         } else if (anios < 11) {
             JOptionPane.showMessageDialog(null, "La edad del estudiante, debe coincidir con las edades permitidas por el MINED", "Verficar Edad", JOptionPane.WARNING_MESSAGE);
-        } else if ((tipodoc.equals("DUI") && txtDocumento.getText().length() < 10) || (tipodoc.equals("NIT") && txtDocumento.getText().length() < 17)) {
+        } else if ((tipodoc.equals("DUI") && txtDocumento.getText().length() < 10) || (tipodoc.equals("NIT") && txtDocumento.getText().length() < 17) || (tipodoc.equals("Pasaporte") && txtDocumento.getText().length() < 9)) {
             JOptionPane.showMessageDialog(null, "El documento ingresado no tiene el formato correcto", "Error de formato", JOptionPane.WARNING_MESSAGE);
         } else if (!txtCorreo.getText().contains(".") || !txtCorreo.getText().contains("@")) {
             JOptionPane.showMessageDialog(null, "El correo ingresado no tiene el formato correcto", "Error de formato", JOptionPane.WARNING_MESSAGE);
@@ -821,6 +821,20 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
                 }
             } else if (tipodoc.equals("DUI")) {
                 if (txtDocumento.getText().length() >= 10) {
+                    evt.consume();
+                } else if (txtDocumento.getText().length() == 8 && key != '-') {
+                    evt.consume();
+                } else if (!Character.isDigit(key) && key != '-') {
+                    evt.consume();
+                } else if (txtDocumento.getText().contains("-") && key == '-') {
+                    evt.consume();
+                } else if (txtDocumento.getText().length() < 8 && key == '-') {
+                    evt.consume();
+                }
+            } else if (tipodoc.equals("Pasaporte")) {
+                if (txtDocumento.getText().length() >= 9) {
+                    evt.consume();
+                } else if (!Character.isDigit(key) && !Character.isUpperCase(key)) {
                     evt.consume();
                 } else if (txtDocumento.getText().length() == 8 && key != '-') {
                     evt.consume();
