@@ -273,4 +273,33 @@ public class ModelBuscador {
             return null;
         }
     }
+    
+    public ResultSet Notificaciones(int idBit) {
+        try {
+            con = ModelConexion.getConnection();
+            String cons = "SELECT * from tbBitacoras WHERE idRegistroBit = ?";
+            ps = con.prepareStatement(cons);
+            ps.setInt(1, idBit);
+            ResultSet res = ps.executeQuery();
+            return res;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Error al buscar los registros dentro de la base", "Verifique la clase ModelSearch - Metodo Notificaciones", 2);
+            return null;
+        }
+    }
+    
+    
+   public static boolean EliminarNoti(int id) {
+        try {
+            Connection con = ModelConexion.getConnection();
+            PreparedStatement ps =con.prepareStatement("DELETE FROM tbBitacoras WHERE idRegistroBit = '"+id+"'");
+            Boolean.parseBoolean(Integer.toString(ps.executeUpdate()));
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Error al buscar los registros dentro de la base", "Verifique la clase ModelSearch - Metodo Notificaciones", 2);
+            return false;
+        }
+    }
 }

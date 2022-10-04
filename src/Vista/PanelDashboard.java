@@ -8,7 +8,21 @@ package Vista;
 import Controlador.ControllerBuscador;
 import Controles_Personalizados.Graficas.ModelChart;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
+import java.util.Timer;
+import java.util.TimerTask;
+import javax.swing.BoxLayout;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,9 +36,10 @@ public class PanelDashboard extends javax.swing.JPanel {
      */
     public PanelDashboard() {
         initComponents();
+        GenerarT();
         System.out.println(ValidacionesSistema.ValidacionesBeep_Go.Modo);
         CargarGraficasGeneral();
-        System.out.println("PanelDashBoard modo: "+ValidacionesSistema.ValidacionesBeep_Go.Modo);
+        System.out.println("PanelDashBoard modo: " + ValidacionesSistema.ValidacionesBeep_Go.Modo);
         mod();
         //            Grafica1.addLegend("Entradas", new Color(58, 50, 75));
 //            Grafica1.setBackground(new Color(231, 234, 239));
@@ -57,6 +72,11 @@ public class PanelDashboard extends javax.swing.JPanel {
     int R_Profes;
     int R_Alumnos;
     int R_Seguridad;
+    public int itemCount = 0;
+    String fecha;
+    String mensaje;
+    String id;
+    public JPanel panel = new JPanel();
 
     void CargarGraficasGeneral() {
         CargarGrafAccesos();
@@ -256,6 +276,145 @@ public class PanelDashboard extends javax.swing.JPanel {
         }
     }
 
+    final void GenerarComp() {
+
+        
+        obj.id = itemCount;
+
+        try {
+            ResultSet rs = obj.CargarBitCont();
+            while (rs.next()) {
+                fecha = rs.getString("fecha");
+                mensaje = rs.getString("mensaje");
+                id = rs.getString("idRegistroBit");
+
+                panel.setBackground(new Color(229, 229, 229));
+                panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+                LineBorder line = new LineBorder(new Color(255, 255, 255), 1, true);
+                panel.setBorder(line);
+                panelNotificacion.add(panel);
+
+                JLabel separator = new JLabel();
+                separator.setText("-----------------------------------------");
+                separator.setMaximumSize(new Dimension(300, 15));
+                separator.setFont(new Font("Roboto", 1, 1));
+                separator.setMaximumSize(new Dimension(10, 1));
+                separator.setLocation(0, 0);
+                panel.add(separator);
+
+                JPanel Aviso = new JPanel();
+                Aviso.setBackground(new Color(255, 255, 255));
+                Aviso.setLayout(new BoxLayout(Aviso, BoxLayout.X_AXIS));
+                panel.add(Aviso);
+
+                Icon Img;
+                Img = new ImageIcon("src/Recursos/LogoB&GLogin.png");
+                JLabel icon = new JLabel();
+                icon.setIcon(Img);
+                icon.setSize(100, 40);
+                icon.setLocation(30, 60);
+                Aviso.add(icon);
+
+                JLabel text = new JLabel();
+                text.setText(mensaje);
+                text.setMaximumSize(new Dimension(230, 20));
+                text.setLocation(20, 20);
+                text.setFont(new Font("Roboto", 1, 13));
+                Aviso.add(text);
+
+                JLabel txt = new JLabel();
+                txt.setText(id);
+                txt.setMaximumSize(new Dimension(10, 10));
+                txt.setFont(new Font("Roboto", 0, 12));
+                txt.setForeground(new Color(184, 184, 184));
+                Aviso.add(txt);
+                txt.setVisible(true);
+
+                ActionListener action = new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String ID = txt.getText();
+                        int i = JOptionPane.showConfirmDialog(null, "Desea eliminar la notificacion");
+                        if (i == 0) {
+                            obj.id = Integer.parseInt(ID);
+                            if (obj.Eliminacion() == true) {
+                                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Eliminacion Exitosa", "La notificacion se elimino correctamente", 1);
+                                GenerarComp();
+                            }else{
+                                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Eliminacion Fallida", "La notificacion no se elimino correctamente", 2);
+                            }
+                            
+                        }
+                    }
+                };
+
+                Icon img;
+                img = new ImageIcon("src/Recursos_Proyecto/eliminar.png");
+                JButton btn = new JButton();
+                btn.setIcon(img);
+                btn.setOpaque(false);
+                btn.setBorderPainted(false);
+                btn.setContentAreaFilled(false);
+                btn.setSize(15, 35);
+                btn.setLocation(290, 30);
+                btn.addActionListener(action);
+                Aviso.add(btn);
+
+                JPanel Desc = new JPanel();
+                Desc.setBackground(new Color(255, 255, 255));
+                Desc.setLayout(new BoxLayout(Desc, BoxLayout.X_AXIS));
+                panel.add(Desc);
+
+                JLabel rellenoo = new JLabel();
+                rellenoo.setText("");
+                rellenoo.setMaximumSize(new Dimension(40, 30));
+                Desc.add(rellenoo);
+
+                JLabel description = new JLabel();
+                description.setText(fecha);
+                description.setMaximumSize(new Dimension(210, 10));
+                description.setFont(new Font("Roboto", 0, 12));
+                description.setForeground(new Color(184, 184, 184));
+                Desc.add(description);
+
+                JLabel relleno = new JLabel();
+                relleno.setText("");
+                relleno.setMaximumSize(new Dimension(210, 30));
+                Desc.add(relleno);
+
+                panel.updateUI();
+                this.validate();
+            }
+        } catch (Exception e) {
+        }
+    }
+
+    void GenerarT() {
+        try {
+            Timer tmr = new Timer();
+            {
+                TimerTask timTas = new TimerTask() {
+                    @Override
+                    public void run() {
+                        itemCount++;
+                        GenerarComp();
+                        
+                        try {
+                            if (itemCount==1000) {
+                                tmr.cancel();
+                            }
+                        } catch (Exception e) {
+                        }
+                    }
+                   
+                };
+                tmr.scheduleAtFixedRate(timTas, 1, 1);
+            }
+        } catch (Exception e) {
+            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Error", "Algo salio mal con el temporizador", 2);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -273,6 +432,8 @@ public class PanelDashboard extends javax.swing.JPanel {
         panelRound = new Controles_Personalizados.Paneles.PanelRound();
         PanelNotificaciones = new Controles_Personalizados.Paneles.PanelRound();
         lblNoti = new javax.swing.JLabel();
+        panelRound3 = new Controles_Personalizados.Paneles.PanelRound();
+        panelNotificacion = new Controles_Personalizados.Paneles.PanelRound();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -318,12 +479,19 @@ public class PanelDashboard extends javax.swing.JPanel {
         PanelNotificaciones.setRoundBottomRight(20);
         PanelNotificaciones.setRoundTopLeft(20);
         PanelNotificaciones.setRoundTopRight(20);
-        PanelNotificaciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        PanelNotificaciones.setLayout(new javax.swing.BoxLayout(PanelNotificaciones, javax.swing.BoxLayout.Y_AXIS));
 
         lblNoti.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         lblNoti.setForeground(new java.awt.Color(0, 0, 0));
         lblNoti.setText("Notificaciones");
-        PanelNotificaciones.add(lblNoti, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        PanelNotificaciones.add(lblNoti);
+
+        panelRound3.setLayout(new javax.swing.BoxLayout(panelRound3, javax.swing.BoxLayout.LINE_AXIS));
+
+        panelNotificacion.setLayout(new javax.swing.BoxLayout(panelNotificacion, javax.swing.BoxLayout.LINE_AXIS));
+        panelRound3.add(panelNotificacion);
+
+        PanelNotificaciones.add(panelRound3);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -450,9 +618,11 @@ public class PanelDashboard extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JLabel lblNoti;
+    private Controles_Personalizados.Paneles.PanelRound panelNotificacion;
     private Controles_Personalizados.Paneles.PanelRound panelRound;
     private Controles_Personalizados.Paneles.PanelRound panelRound1;
     private Controles_Personalizados.Paneles.PanelRound panelRound2;
+    private Controles_Personalizados.Paneles.PanelRound panelRound3;
     private Controles_Personalizados.Paneles.PanelRound panelRound6;
     private javax.swing.JPanel pnlNorthNotifi;
     private javax.swing.JPanel pnlNorthNotifi1;

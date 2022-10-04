@@ -114,8 +114,8 @@
                     </Constraint>
                   </Constraints>
 
-                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-                    <Property name="useNullLayout" type="boolean" value="false"/>
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                    <Property name="axis" type="int" value="1"/>
                   </Layout>
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="lblNoti">
@@ -128,12 +128,17 @@
                         </Property>
                         <Property name="text" type="java.lang.String" value="Notificaciones"/>
                       </Properties>
-                      <Constraints>
-                        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="10" y="10" width="-1" height="-1"/>
-                        </Constraint>
-                      </Constraints>
                     </Component>
+                    <Container class="Controles_Personalizados.Paneles.PanelRound" name="panelRound3">
+
+                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                      <SubComponents>
+                        <Container class="Controles_Personalizados.Paneles.PanelRound" name="panelNotificacion">
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+                        </Container>
+                      </SubComponents>
+                    </Container>
                   </SubComponents>
                 </Container>
               </SubComponents>

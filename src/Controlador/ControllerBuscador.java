@@ -24,6 +24,17 @@ public class ControllerBuscador {
     String cont;
     String Park;
     String Acc;
+    public int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
 
     /**
      * Gets the access parameter
@@ -232,7 +243,8 @@ public class ControllerBuscador {
     }
 
     /**
-     *ResultSet
+     * ResultSet
+     *
      * @return a ResultSet
      */
     public ResultSet cargarGraficaController() {
@@ -240,7 +252,8 @@ public class ControllerBuscador {
     }
 
     /**
-     *  ResultSet
+     * ResultSet
+     *
      * @param parq ResultSet parameter
      * @return a ResultSet
      */
@@ -249,7 +262,8 @@ public class ControllerBuscador {
     }
 
     /**
-     *  ResultSet
+     * ResultSet
+     *
      * @return a ResultSet
      */
     public ResultSet cargarSalidasController() {
@@ -257,7 +271,8 @@ public class ControllerBuscador {
     }
 
     /**
-     *  ResultSet
+     * ResultSet
+     *
      * @return a ResultSet
      */
     public ResultSet cargarAdminsController() {
@@ -265,7 +280,8 @@ public class ControllerBuscador {
     }
 
     /**
-     *  ResultSet
+     * ResultSet
+     *
      * @return a ResultSet
      */
     public ResultSet cargarProfesController() {
@@ -273,7 +289,8 @@ public class ControllerBuscador {
     }
 
     /**
-     *  ResultSet
+     * ResultSet
+     *
      * @return a ResultSet
      */
     public ResultSet cargarAlumnosController() {
@@ -281,10 +298,19 @@ public class ControllerBuscador {
     }
 
     /**
-     *  ResultSet
+     * ResultSet
+     *
      * @return a ResultSet
      */
     public ResultSet cargarSeguridadController() {
         return mdlS.CargarSeguridad();
+    }
+
+    public ResultSet CargarBitCont() {
+        return mdlS.Notificaciones(id);
+    }
+    
+    public boolean Eliminacion(){
+        return mdlS.EliminarNoti(id);
     }
 }
