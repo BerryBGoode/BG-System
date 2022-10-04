@@ -750,9 +750,6 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         btnCerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/CerrarLogin.png"))); // NOI18N
         btnCerrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnMinimizarMousePressed(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnCerrarMousePressed(evt);
             }
@@ -1359,6 +1356,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         int cal = JOptionPane.showConfirmDialog(null, "¿Desea cerrar sesion?", "Cerrar sesion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (cal == 0) {
             Logout();
+            ValidacionesSistema.ValidacionesBeep_Go.systemState = false;
         }
     }//GEN-LAST:event_btnLogOutMouseClicked
 
@@ -1409,6 +1407,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         if (clog.ActualizarEstado() == true) {
             System.out.println("Si se pudo y ahora esta inactivo");
             System.exit(0);
+            
         }
     }//GEN-LAST:event_btnCerrarMousePressed
 

@@ -399,6 +399,12 @@ public class PanelAccesos extends javax.swing.JPanel {
 
         jScrollPane1.setVerticalScrollBar(scrollBarCustom1);
 
+        TbAccesosWhite4 = new Controles_Personalizados.Tables.Table(){
+
+            public boolean isCellEditable(int row, int column) { // aqui esta
+                return false;
+            }
+        };
         TbAccesosWhite4.setBackground(new java.awt.Color(231, 234, 239));
         TbAccesosWhite4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -435,6 +441,12 @@ public class PanelAccesos extends javax.swing.JPanel {
 
         jPanel7.setLayout(new java.awt.BorderLayout());
 
+        TbAcessoDark = new Controles_Personalizados.Tables.TableDark(){
+
+            public boolean isCellEditable(int row, int column) { // aqui esta
+                return false;
+            }
+        };
         TbAcessoDark.setBackground(new java.awt.Color(47, 49, 54));
         TbAcessoDark.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -478,18 +490,21 @@ public class PanelAccesos extends javax.swing.JPanel {
 
 
     private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
+        add.setAction(1);
+        
         if (tipouser.equals("Seguridad")) {
             if (addop.isVisible()) {
                 addop.toFront();
             } else {
+                add.setTypeaccess(0);
                 addop.setVisible(true);
                 frmstate = 2;
             }
         } else {
             if (add.isVisible()) {
-                add.toFront();
+                add.toFront();                
             } else {
-                add.setAction(1);
+                add.setTypeaccess(0);
                 add.setVisible(true);
                 frmstate = 1;
             }
@@ -547,22 +562,30 @@ public class PanelAccesos extends javax.swing.JPanel {
                             add.setVisible(false);
                         }
                         add.setAction(2);
-                        String notification = tb.getModel().getValueAt(tb.getSelectedRow(), 7).toString();
-
-                        if ("".equals(notification)) {
-                            add.setNofitication("");
-                            System.out.println(notification + "ds");
-                            add.setVisible(true);
-                            frmstate = 1;
-                        } else {
+                        String notification;
+                        if (tb.getModel().getValueAt(tb.getSelectedRow(), 7).toString() == "Sin Justificar") {
+                            notification = tb.getModel().getValueAt(tb.getSelectedRow(), 7).toString();
+                            
+                        }else{
+                            notification = tb.getModel().getValueAt(tb.getSelectedRow(), 7).toString();
                             add.setNofitication(tb.getModel().getValueAt(tb.getSelectedRow(), 7).toString());
-                            System.out.println(notification + "f");
                         }
+                        
+                        
+//                       if (tb.getModel().getValueAt(tb.getSelectedRow(), 7).toString() == "") {
+//                            add.setNofitication("Sin justificar");
+//                            System.out.println(notification + "ds");
+
+//                            frmstate = 1;
+//                        } else {
+//                            add.setNofitication(tb.getModel().getValueAt(tb.getSelectedRow(), 7).toString());
+//                            System.out.println(notification + "f");
+//                        }
                         add.setID(Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 0).toString()));
                         add.setTypeaccess(Integer.valueOf(tb.getModel().getValueAt(tb.getSelectedRow(), 4).toString()));
 
+                        
                         add.setVisible(true);
-
                     }
                     if (btn.getName().equals("btnEliminar")) {
                         int msg = JOptionPane.showConfirmDialog(this, "¿Desea eliminar este dato?", "Confirmar acción", JOptionPane.YES_NO_OPTION);
