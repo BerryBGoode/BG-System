@@ -1214,6 +1214,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         plV.mododash();
         plpk.mododash();
         plA.mododash();
+        plCon.mododash();
         if (_pnldash.isShowing()) {
 
             _pnldash.hide();
@@ -1233,6 +1234,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         plV.mododash();
         plpk.mododash();
         plA.mododash();
+        plCon.mododash();
         _pnldash.hide();
         if (_pnldash.isVisible()) {
 
