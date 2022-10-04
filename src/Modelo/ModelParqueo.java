@@ -120,7 +120,8 @@ public class ModelParqueo {
             sql.setInt(2, idacces);
             sql.setInt(3, idcar);
             sql.setInt(4, avalible);
-
+            System.out.println(idcar);
+            
             sql.execute();
             busyStateStation(idstation);
             return true;
@@ -142,10 +143,15 @@ public class ModelParqueo {
      * @param iddetail referring to the detail ID
      * @return a Boolean
      */
-    public boolean updatePark(int idacces, int idcar, int idstation, int iddetail) {
+    public boolean updatePark(int idacces, int idcar, int idstation, int iddetail, int beforestation) {
         int busy = 1;
         boolean result;
         try {
+            System.out.println(beforestation);
+            if (idstation != beforestation) {
+                deleteStateStion(beforestation);
+                System.out.println("Son diferentes");
+            }
             con = ModelConexion.getConnection();
             sql = con.prepareStatement("UPDATE tbDetalle_Acceso SET  IDEstacionamiento =  ?, IDAcceso = ? , IDVehiculo = ?, IDEstado = ? WHERE IDDetalle  = ? ");
             System.out.println("Model: " + idstation + " " + idacces + " " + idcar + " " + iddetail);
@@ -153,9 +159,9 @@ public class ModelParqueo {
             sql.setInt(2, idacces);
             sql.setInt(3, idcar);
             sql.setInt(4, busy);
-            sql.setInt(5, iddetail);
-
+            sql.setInt(5, iddetail);            
             sql.execute();
+            busyStateStation(idstation);
             return result = true;
         } catch (SQLException e) {
             System.out.println("Error: " + e.toString());
@@ -284,7 +290,7 @@ public class ModelParqueo {
             sql.setInt(1, avalible);
             sql.setInt(2, idstation);
             sql.execute();
-            System.out.println(idstation);
+            System.out.println("cambia el estado del estacionamiento: "+idstation);
             return true;
         } catch (SQLException e) {
             System.out.println("Error Model: " + e.toString());
