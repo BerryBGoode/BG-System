@@ -58,7 +58,9 @@ public class PanelAjustes extends javax.swing.JPanel {
 
         PanelFondo = new Controles_Personalizados.Paneles.PanelRound();
         jPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         lblAjustes = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
         PanelContenedorCambioContra = new Controles_Personalizados.Paneles.PanelRound();
         txtUsuarioPIN = new Controles_Personalizados.textfields.TextField();
         lblCambioClave = new javax.swing.JLabel();
@@ -96,12 +98,20 @@ public class PanelAjustes extends javax.swing.JPanel {
         PanelFondo.setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setBackground(new java.awt.Color(231, 234, 239));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setLayout(new java.awt.BorderLayout());
+
+        jPanel3.setBackground(new java.awt.Color(231, 234, 239));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblAjustes.setFont(new java.awt.Font("Roboto Medium", 0, 40)); // NOI18N
         lblAjustes.setForeground(new java.awt.Color(58, 50, 75));
         lblAjustes.setText("Ajustes");
-        jPanel1.add(lblAjustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, -1, -1));
+        jPanel3.add(lblAjustes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 150, -1));
+
+        jPanel1.add(jPanel3, java.awt.BorderLayout.NORTH);
+
+        jPanel5.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel5.setLayout(new java.awt.GridBagLayout());
 
         PanelContenedorCambioContra.setBackground(new java.awt.Color(42, 36, 56));
         PanelContenedorCambioContra.setRoundBottomLeft(30);
@@ -188,7 +198,16 @@ public class PanelAjustes extends javax.swing.JPanel {
         });
         PanelContenedorCambioContra.add(txtPIN, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 180, 70));
 
-        jPanel1.add(PanelContenedorCambioContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, 460, 300));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 50;
+        gridBagConstraints.ipady = 50;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
+        gridBagConstraints.weighty = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(12, 15, 12, 15);
+        jPanel5.add(PanelContenedorCambioContra, gridBagConstraints);
 
         PanelContenedorIdiomas.setBackground(new java.awt.Color(42, 36, 56));
         PanelContenedorIdiomas.setRoundBottomLeft(30);
@@ -221,7 +240,16 @@ public class PanelAjustes extends javax.swing.JPanel {
 
         PanelContenedorIdiomas.add(panelRound5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 240, 240));
 
-        jPanel1.add(PanelContenedorIdiomas, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 320, 280, 300));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 75;
+        gridBagConstraints.ipady = 50;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.insets = new java.awt.Insets(15, 12, 15, 12);
+        jPanel5.add(PanelContenedorIdiomas, gridBagConstraints);
 
         PanelContenedorCambioContra1.setBackground(new java.awt.Color(42, 36, 56));
         PanelContenedorCambioContra1.setRoundBottomLeft(30);
@@ -302,9 +330,18 @@ public class PanelAjustes extends javax.swing.JPanel {
         });
         PanelContenedorCambioContra1.add(txtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 180, 70));
 
-        jPanel1.add(PanelContenedorCambioContra1, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 320, 460, 300));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 50;
+        gridBagConstraints.ipady = 15;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_END;
+        jPanel5.add(PanelContenedorCambioContra1, gridBagConstraints);
 
         PanelContenedorConfiguracion.setBackground(new java.awt.Color(42, 36, 56));
+        PanelContenedorConfiguracion.setMinimumSize(new java.awt.Dimension(404, 210));
+        PanelContenedorConfiguracion.setPreferredSize(new java.awt.Dimension(404, 210));
         PanelContenedorConfiguracion.setRoundBottomLeft(30);
         PanelContenedorConfiguracion.setRoundBottomRight(30);
         PanelContenedorConfiguracion.setRoundTopLeft(30);
@@ -312,7 +349,7 @@ public class PanelAjustes extends javax.swing.JPanel {
         PanelContenedorConfiguracion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         textoConfig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Indicacion Config.png"))); // NOI18N
-        PanelContenedorConfiguracion.add(textoConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
+        PanelContenedorConfiguracion.add(textoConfig, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
 
         VerificarTipo.setBackground(new java.awt.Color(42, 36, 56));
         VerificarTipo.setText("Verificar mi usuario");
@@ -322,9 +359,17 @@ public class PanelAjustes extends javax.swing.JPanel {
                 VerificarTipoActionPerformed(evt);
             }
         });
-        PanelContenedorConfiguracion.add(VerificarTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 170, 50));
+        PanelContenedorConfiguracion.add(VerificarTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 170, 50));
 
-        jPanel1.add(PanelContenedorConfiguracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 70, 460, 230));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 40;
+        gridBagConstraints.ipady = 35;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_END;
+        gridBagConstraints.insets = new java.awt.Insets(12, 5, 12, 15);
+        jPanel5.add(PanelContenedorConfiguracion, gridBagConstraints);
 
         PanelContenedorTemas.setBackground(new java.awt.Color(42, 36, 56));
         PanelContenedorTemas.setRoundBottomLeft(30);
@@ -365,7 +410,18 @@ public class PanelAjustes extends javax.swing.JPanel {
 
         PanelContenedorTemas.add(panelRound2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, 330, 160));
 
-        jPanel1.add(PanelContenedorTemas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 750, 230));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 200;
+        gridBagConstraints.ipady = 35;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(12, 15, 12, 15);
+        jPanel5.add(PanelContenedorTemas, gridBagConstraints);
+
+        jPanel1.add(jPanel5, java.awt.BorderLayout.CENTER);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -604,6 +660,8 @@ public class PanelAjustes extends javax.swing.JPanel {
     private javax.swing.JLabel imgCambio;
     private javax.swing.JLabel imgCambio1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel lblAjustes;
     private javax.swing.JLabel lblCambioClave;
     private javax.swing.JLabel lblCambioClave1;
