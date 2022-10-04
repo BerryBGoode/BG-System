@@ -260,6 +260,9 @@
                           <Events>
                             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TbParqueosDarkMouseClicked"/>
                           </Events>
+                          <AuxValues>
+                            <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="TbParqueosDark = new Controles_Personalizados.Tables.TableDark(){&#xa;&#xa;            public boolean isCellEditable(int row, int column) { // aqui esta&#xa;                return false;&#xa;            }&#xa;};"/>
+                          </AuxValues>
                         </Component>
                       </SubComponents>
                     </Container>
