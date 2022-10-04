@@ -151,11 +151,10 @@ public class FrmAgg_Contacto extends javax.swing.JFrame {
         System.out.println(personal);
         boolean a = ControllerContactos.ActualizarContactos_Controller();
         if (a == true) {
-            //            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso de actualizacion", "Contacto actualizado con exito", 1);
-            JOptionPane.showMessageDialog(null, "Actualizado con exito");
+            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso de actualizacion", "Contacto actualizado con exito", 1);
+            this.dispose();
         } else {
-            //            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso de actualizacion", "Contacto no fue actualizado", 2);
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar");
+            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso de actualizacion", "Contacto no fue actualizado", 3);
         }
     }
     /**

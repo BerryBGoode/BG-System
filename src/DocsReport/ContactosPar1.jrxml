@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="30281d8a-4e78-4fc9-968a-834b30359171">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Parametro" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TextoFooter" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tbContactos."idContacto" AS tbContactos_idContacto,
+     tbContactos."contacto" AS tbContactos_contacto,
+     CONCAT(tbPersonal."nombre_p", ' ', tbPersonal."apellido_p")AS tbPersonal_nombre_p,
+     tbTipoContacto."tipo_contacto" AS tbTipoContacto_tipo_contacto,
+     tbPersonal."Carnet" AS tbPersonal_Carnet
+FROM
+     "dbo"."tbPersonal" tbPersonal INNER JOIN "dbo"."tbContactos" tbContactos ON tbPersonal."idPersonal" = tbContactos."idPersonal"
+     INNER JOIN "dbo"."tbTipoContacto" tbTipoContacto ON tbContactos."idTipoContacto" = tbTipoContacto."idTipoContacto"
+WHERE tbPersonal.nombre_p LIKE  $P{Parametro} OR tbPersonal.apellido_p LIKE $P{Parametro} OR tbPersonal.Carnet LIKE $P{Parametro}]]>
+	</queryString>
+	<field name="tbContactos_idContacto" class="java.lang.Integer"/>
+	<field name="tbContactos_contacto" class="java.lang.String"/>
+	<field name="tbPersonal_nombre_p" class="java.lang.String"/>
+	<field name="tbTipoContacto_tipo_contacto" class="java.lang.String"/>
+	<field name="tbPersonal_Carnet" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="224" y="20" width="132" height="35" forecolor="#17141D" uuid="3599f225-9337-45f7-a6c3-c6410e996041"/>
+				<textElement>
+					<font size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contactos]]></text>
+			</staticText>
+			<image>
+				<reportElement x="7" y="5" width="85" height="71" uuid="e69f7b9e-d7b4-434a-861b-d7a63563ff2d"/>
+				<imageExpression><![CDATA[$P{Logo}.toString()]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="5" width="44" height="20" uuid="72198f08-5e6e-45fa-9a9e-55a1f7f4f5cd"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="5" width="100" height="20" uuid="d27df464-11ee-45e0-9a0f-e58cb81a4902"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contacto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="168" y="5" width="120" height="20" uuid="c7754826-179c-445d-9de5-245dff5f1fa0"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de contacto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="5" width="100" height="20" uuid="3b9ad06f-ae97-42ed-ae78-5c459d1dc1bb"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Personal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="463" y="2" width="92" height="20" uuid="4d963984-de31-4122-aa7f-402bd9cb3d6b"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Carné]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="65" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="44" height="20" uuid="e96b759b-3d2e-4c4b-97a3-4b800baa4703"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbContactos_idContacto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="56" y="0" width="100" height="20" uuid="69564650-1f00-499c-a41f-e15aa640e892"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbContactos_contacto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="168" y="0" width="120" height="20" uuid="2fae616a-3fb1-4f70-8b95-62e8c1aac5ce"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbTipoContacto_tipo_contacto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="152" height="42" uuid="0e95ca19-c703-42ae-9127-0597f22d0d57"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbPersonal_nombre_p}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="463" y="0" width="92" height="20" uuid="ecd21eb5-ecd6-40aa-8a71-1d3c7b2fa802"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbPersonal_Carnet}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="33" splitType="Stretch">
+			<image>
+				<reportElement x="475" y="0" width="80" height="30" uuid="ee16806f-2a27-4550-a5ad-a978594e65c0"/>
+				<imageExpression><![CDATA[$P{TextoFooter}.toString()]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

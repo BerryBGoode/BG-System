@@ -251,8 +251,11 @@ public class FrmReportesPar extends javax.swing.JFrame {
                 if(respuesta1U == true || respuesta2U == true){
                     reportedir = "src\\DocsReport\\UsuariosReportPar.jasper";
                     ReportePar(txtPar.getText());
+                    txtPar.setText("");
+                    this.dispose();
                 }else{
                     JOptionPane.showMessageDialog(this, "No existen registros para mostrar", "Parametro inválido", JOptionPane.WARNING_MESSAGE);
+                    txtPar.setText("");
                 }
         }else if(nombre.equals("Estudiantes")){
                 objcontroller.setParam(txtPar.getText());
@@ -260,24 +263,49 @@ public class FrmReportesPar extends javax.swing.JFrame {
                 if(respuesta == true){
                     reportedir = "src\\DocsReport\\EstudianteReportePar.jasper";
                     ReportePar(txtPar.getText());
+                    txtPar.setText("");
+                    this.dispose();
                 }else{
                     JOptionPane.showMessageDialog(this, "No existen registros para mostrar", "Parametro inválido", JOptionPane.WARNING_MESSAGE);
+                    txtPar.setText("");
                 }
         }else if(nombre.equals("Personal")){
                 objcontroller.setParam(txtPar.getText());
                 boolean respuesta1P = objcontroller.BuscarTipoPersonal();
                 boolean respuesta2P = objcontroller.BuscarGeneroP();
                 if(respuesta1P == true || respuesta2P == true){
-                     reportedir = "src\\DocsReport\\PersonalReportePar.jasper";
+                    reportedir = "src\\DocsReport\\PersonalReportePar.jasper";
                     ReportePar(txtPar.getText());
+                    txtPar.setText("");
+                    this.dispose();
                 }else{
                     JOptionPane.showMessageDialog(this, "No existen registros para mostrar", "Parametro inválido", JOptionPane.WARNING_MESSAGE);
+                    txtPar.setText("");
+                }}else if(nombre.equals("Vehiculos")){
+                objcontroller.setParam(txtPar.getText());
+                boolean respuestavh = objcontroller.BuscarVehiculosPersonal();
+                if(respuestavh == true){
+                    reportedir = "src\\DocsReport\\VehiculosParReporte1.jasper";
+                    ReportePar(txtPar.getText());
+                    txtPar.setText("");
+                    this.dispose();
+                }else{
+                    txtPar.setText("");
+                    JOptionPane.showMessageDialog(this, "No existen registros para mostrar", "Parametro inválido", JOptionPane.WARNING_MESSAGE);
                 }
-        }/**else if(nombre.equals("Vehiculos")){
-                reportedir = "src\\DocsReport\\VehiculosParReporte.jasper";
-                ReportePar(txtPar.getText());
-        }**/
-         this.dispose();
+        }else if(nombre.equals("Contactos")){
+                objcontroller.setParam(txtPar.getText());
+                boolean respuestact = objcontroller.BuscarContactosPersonal();
+                if(respuestact == true){
+                    reportedir = "src\\DocsReport\\ContactosPar1.jasper";
+                    ReportePar(txtPar.getText());
+                    txtPar.setText("");
+                    this.dispose();
+                }else{
+                    txtPar.setText("");
+                    JOptionPane.showMessageDialog(this, "No existen registros para mostrar", "Parametro inválido", JOptionPane.WARNING_MESSAGE);
+                }
+        }
     }
     
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
@@ -293,6 +321,10 @@ public class FrmReportesPar extends javax.swing.JFrame {
             Reporte("src\\DocsReport\\PersonalReporteGraph.jasper");
         }else if(nombre.equals("Estudiantes")){
             Reporte("src\\DocsReport\\EstudianteReporteGraph.jasper");
+        }else if(nombre.equals("Vehiculos")){
+            Reporte("src\\DocsReport\\VehiculosGraph1.jasper");
+        }else if(nombre.equals("Contactos")){
+            Reporte("src\\DocsReport\\ContactosGraph1.jasper");
         }
         this.dispose();
     }//GEN-LAST:event_btnGraficoActionPerformed
