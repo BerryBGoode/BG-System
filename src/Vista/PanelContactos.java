@@ -160,60 +160,6 @@ public class PanelContactos extends javax.swing.JPanel {
         }
     }
 
-    void mododash() {
-        switch (ValidacionesSistema.ValidacionesBeep_Go.getModo()) {
-            case 1:
-                tbContactos.setVisible(false);
-                PanelTabla.setVisible(false);
-                TbContactosDark.setVisible(true);
-                ScrollDark.setVisible(true);
-                jPanel5.setBackground(new Color(47, 49, 54));
-                jPanel4.setBackground(new Color(47, 49, 54));
-                jPanel2.setBackground(new Color(47, 49, 54));
-                jPanel1.setBackground(new Color(47, 49, 54));
-                PanelFondo.setBackground(new Color(47, 49, 54));
-                jPanel3.setBackground(new Color(47, 49, 54));
-                jPanel7.setBackground(new Color(47, 49, 54));
-                jPanel6.setBackground(new Color(47, 49, 54));
-                btnAgregar.setBackground(new Color(32, 34, 37));
-                btnFiltrar1.setBackground(new Color(32, 34, 37));
-                btnInforme.setBackground(new Color(32, 34, 37));
-                btnModificar.setBackground(new Color(32, 34, 37));
-                btnReporte.setBackground(new Color(32, 34, 37));
-                btnEliminar.setBackground(new Color(32, 34, 37));
-                TbContactosDark.setForeground(Color.WHITE);
-                lblContactos.setForeground(Color.WHITE);
-                btnModificar.setIcon(Modificardark);
-                btnEliminar.setIcon(Eliminardark);
-                btnReporte.setIcon(reportedark);
-                break;
-            case 2:
-                tbContactos.setVisible(true);
-                PanelTabla.setVisible(true);
-                TbContactosDark.setVisible(false);
-                ScrollDark.setVisible(false);
-                jPanel5.setBackground(new Color(231, 234, 239));
-                jPanel4.setBackground(new Color(231, 234, 239));
-                jPanel2.setBackground(new Color(231, 234, 239));
-                jPanel1.setBackground(new Color(231, 234, 239));
-                PanelFondo.setBackground(new Color(231, 234, 239));
-                jPanel3.setBackground(new Color(231, 234, 239));
-                jPanel7.setBackground(new Color(231, 234, 239));
-                jPanel6.setBackground(new Color(231, 234, 239));
-                btnAgregar.setBackground(new Color(58, 50, 75));
-                btnFiltrar1.setBackground(new Color(58, 50, 75));
-                btnInforme.setBackground(new Color(58, 50, 75));
-                btnModificar.setIcon(Modificar);
-                btnEliminar.setIcon(Eliminar);
-                btnReporte.setIcon(Reporte);
-                btnModificar.setBackground(new Color(231, 234, 239));
-                btnEliminar.setBackground(new Color(231, 234, 239));
-                btnReporte.setBackground(new Color(231, 234, 239));
-                lblContactos.setForeground(new Color(58, 50, 75));
-                break;
-        }
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -464,7 +410,7 @@ public class PanelContactos extends javax.swing.JPanel {
 
     private void PanelFondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseMoved
         // TODO add your handling code here:
-//        Refresh();
+        modo();
     }//GEN-LAST:event_PanelFondoMouseMoved
 
     private void btnInformeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInformeActionPerformed

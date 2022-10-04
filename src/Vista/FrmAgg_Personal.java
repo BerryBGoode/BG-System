@@ -75,6 +75,7 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
             setIconImage(Logo());
             cargarGenero();
             CargarTipoDoc();
+            System.out.println("Panel estudiante o personal " + identpanel);
             switch (identpanel) {
                 case 1:
                     CmbTipoPersonal.setVisible(false);
@@ -131,6 +132,7 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
         CbGenerarCarnet.setVisible(true);
         cargarGenero();
         CargarTipoDoc();
+        System.out.println("Panel estudiante o personal " + identpanel);
         switch (identpanel) {
             case 1:
                 CmbTipoPersonal.setVisible(false);
@@ -833,6 +835,10 @@ public class FrmAgg_Personal extends javax.swing.JFrame {
                 if (txtDocumento.getText().length() >= 9) {
                     evt.consume();
                 } else if (!Character.isDigit(key) && !Character.isUpperCase(key)) {
+                    evt.consume();
+                } else if (txtDocumento.getText().length() == 8 && key != '-') {
+                    evt.consume();
+                } else if (!Character.isDigit(key) && key != '-') {
                     evt.consume();
                 }
             } else if (CmbTipoDoc.getSelectedIndex() == 0) {

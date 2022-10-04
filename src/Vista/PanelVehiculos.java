@@ -142,58 +142,6 @@ public class PanelVehiculos extends javax.swing.JPanel {
         }
     }
 
-    public void mododash() {
-        switch (ValidacionesSistema.ValidacionesBeep_Go.getModo()) {
-            case 1:
-                jScrollPane1.setVisible(false);
-                TbVehiculos.setVisible(false);
-                ScrollDark.setVisible(true);
-                TbVehiculosDark.setVisible(true);
-                jPanel4.setBackground(new Color(47, 49, 54));
-                jPanel5.setBackground(new Color(47, 49, 54));
-                jPanel2.setBackground(new Color(47, 49, 54));
-                jPanel1.setBackground(new Color(47, 49, 54));
-                jPanel7.setBackground(new Color(47, 49, 54));
-                jPanel6.setBackground(new Color(47, 49, 54));
-                PanelFondo.setBackground(new Color(47, 49, 54));
-                lblVehiculos.setForeground(Color.WHITE);
-                btnAgregar.setBackground(new Color(32, 34, 37));
-                btnFiltrar.setBackground(new Color(32, 34, 37));
-                btnInforme.setBackground(new Color(32, 34, 37));
-                btnModificar.setBackground(new Color(32, 34, 37));
-                btnEliminar.setBackground(new Color(32, 34, 37));
-                btnReporte.setBackground(new Color(32, 34, 37));
-                btnModificar.setIcon(Modificardark);
-                btnEliminar.setIcon(Eliminardark);
-                ScrollDark.setBackground(new Color(47, 49, 54));
-                btnReporte.setIcon(reportedark);
-                TbVehiculosDark.setForeground(Color.WHITE);
-                break;
-            case 2:
-                jScrollPane1.setVisible(true);
-                TbVehiculos.setVisible(true);
-                ScrollDark.setVisible(false);
-                TbVehiculosDark.setVisible(false);
-                jPanel4.setBackground(new Color(231, 234, 239));
-                jPanel5.setBackground(new Color(231, 234, 239));
-                jPanel2.setBackground(new Color(231, 234, 239));
-                jPanel1.setBackground(new Color(231, 234, 239));
-                jPanel7.setBackground(new Color(231, 234, 239));
-                jPanel6.setBackground(new Color(231, 234, 239));
-                PanelFondo.setBackground(new Color(231, 234, 239));
-                lblVehiculos.setForeground(new Color(58, 50, 75));
-                btnAgregar.setBackground(new Color(58, 50, 75));
-                btnFiltrar.setBackground(new Color(58, 50, 75));
-                btnInforme.setBackground(new Color(58, 50, 75));
-                btnModificar.setIcon(modificar);
-                btnEliminar.setIcon(eliminar);
-                btnReporte.setIcon(reporte);
-                btnModificar.setBackground(new Color(231, 234, 239));
-                btnEliminar.setBackground(new Color(231, 234, 239));
-                btnReporte.setBackground(new Color(231, 234, 239));
-                break;
-        }
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -231,6 +179,11 @@ public class PanelVehiculos extends javax.swing.JPanel {
         PanelFondo.setPreferredSize(new java.awt.Dimension(1270, 620));
         PanelFondo.setRoundBottomLeft(20);
         PanelFondo.setRoundBottomRight(20);
+        PanelFondo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                PanelFondoMouseMoved(evt);
+            }
+        });
         PanelFondo.setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setLayout(new java.awt.BorderLayout());
@@ -522,6 +475,11 @@ public class PanelVehiculos extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_TbVehiculosDarkMouseClicked
+
+    private void PanelFondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseMoved
+        // TODO add your handling code here:
+        modo();
+    }//GEN-LAST:event_PanelFondoMouseMoved
 
     void ImprimirReporte() {
         Connection con = ControllerConexion.getConnectionModel();

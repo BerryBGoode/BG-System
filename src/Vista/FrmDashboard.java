@@ -52,19 +52,20 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     private static String tipousuario;
     String val = "0";
     private int ev;
-    PanelDashboard pld = new PanelDashboard();
-    PanelUsuarios_dashbord plU = new PanelUsuarios_dashbord();
-    PanelEstudiantes plE = new PanelEstudiantes();
-    PanelProfesores plP = new PanelProfesores();
-    PanelCarnets plC = new PanelCarnets();
+    PanelDashboard pld;
+    PanelUsuarios_dashbord plU ;
+    PanelCarnets plC;
     PanelAccesos plA;
-    PanelVehiculos plV = new PanelVehiculos();
-    PanelParqueo plpk = new PanelParqueo();
-    PanelContactos plCon = new PanelContactos();
+    PanelVehiculos plV ;
+    PanelParqueo plpk ;
+    PanelContactos plCon ;
     ControllerBuscador obj = new ControllerBuscador();
+    PanelEstudiantes plE;
+    PanelProfesores plP;
     //PanelDashboard pld = new PanelDashboard();
     ControllerLogin clog = new ControllerLogin();
     private int iduser;
+    public static boolean frmMaximized;//para verificar si está maximizado el dashbord y hacer unos ajustes en el panel Ajustes
 
     /**
      * Creates new form Dashboard
@@ -73,7 +74,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         initComponents();
         tipousuario = tipo;
         this.setTitle("Beep&Go");
-        plA=new PanelAccesos(tipousuario);
+        plA = new PanelAccesos(tipousuario);
         this.setLocationRelativeTo(null);
 //        Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
 //        AWTUtilities.setWindowShape(this, forma);
@@ -86,7 +87,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         lblVal.setVisible(false);
         lblNombre.setText(nombre);
         lblTipo.setText(tipo);
-
+        pld=new PanelDashboard();
         lblNormal.setVisible(false);
         lblUsuarioDark.setVisible(false);
         lblNight.setVisible(false);
@@ -101,7 +102,6 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionContactos.setVisible(false);
         panelSeleccionAjustes.setVisible(false);
         panelSeleccionLogout.setVisible(false);
-
         pld.setSize(1270, 620);
         pld.setLocation(0, 0);
 
@@ -358,7 +358,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
                 .addGroup(PanelMOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNormal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnMO, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelMOLayout.setVerticalGroup(
             PanelMOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -928,7 +928,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionLogout.setVisible(false);
         panelSeleccionContactos.setVisible(false);
         panelSeleccionAjustes.setVisible(false);
-
+//        pld=new PanelDashboard();
         pld.setSize(1270, 620);
         pld.setLocation(0, 0);
 
@@ -951,7 +951,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionAccesos.setVisible(false);
         panelSeleccionContactos.setVisible(false);
         panelSeleccionAjustes.setVisible(false);
-
+        plU= new PanelUsuarios_dashbord();
         plU.setSize(1270, 620);
         plU.setLocation(0, 0);
 
@@ -975,7 +975,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionAccesos.setVisible(false);
         panelSeleccionContactos.setVisible(false);
         panelSeleccionAjustes.setVisible(false);
-
+        plE = new PanelEstudiantes();
         plE.setSize(1270, 620);
         plE.setLocation(0, 0);
 
@@ -999,7 +999,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionAccesos.setVisible(false);
         panelSeleccionContactos.setVisible(false);
         panelSeleccionAjustes.setVisible(false);
-
+        plP = new PanelProfesores();
         plP.setSize(1270, 620);
         plP.setLocation(0, 0);
 
@@ -1022,7 +1022,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionContactos.setVisible(false);
         panelSeleccionAjustes.setVisible(false);
         panelSeleccionLogout.setVisible(false);
-
+        plC=new PanelCarnets();
         plC.setSize(1270, 620);
         plC.setLocation(0, 0);
 
@@ -1046,7 +1046,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionContactos.setVisible(false);
         panelSeleccionAjustes.setVisible(false);
         panelSeleccionLogout.setVisible(false);
-
+        plV=new PanelVehiculos();
         plV.setSize(1270, 620);
         plV.setLocation(0, 0);
 
@@ -1070,7 +1070,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionContactos.setVisible(false);
         panelSeleccionAjustes.setVisible(false);
         panelSeleccionLogout.setVisible(false);
-
+        plpk=new PanelParqueo();
         plpk.setSize(1270, 620);
         plpk.setLocation(0, 0);
 
@@ -1094,7 +1094,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionContactos.setVisible(true);
         panelSeleccionAjustes.setVisible(false);
         panelSeleccionLogout.setVisible(false);
-
+        plCon=new PanelContactos();
         plCon.setSize(1270, 620);
         plCon.setLocation(0, 0);
 
@@ -1140,7 +1140,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         panelSeleccionContactos.setVisible(false);
         panelSeleccionLogout.setVisible(false);
         panelSeleccionAjustes.setVisible(false);
-
+        plA=new PanelAccesos(tipousuario);
         plA.setSize(1270, 620);
         plA.setLocation(0, 0);
 
@@ -1206,15 +1206,14 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         // TODO add your handling code here:
         ValidacionesSistema.ValidacionesBeep_Go.Modo = 2;
         NormalMode();
-        pld.mode();
-        plU.darkmod();
-        plE.mododash();
-        plP.mododash();
-        plC.mooddash();
-        plV.mododash();
-        plpk.mododash();
-        plA.mododash();
-        plCon.mododash();
+//        pld.mode();
+//        plU.darkmod();
+////        plP.mododash();
+//        plC.mooddash();
+//        plV.mododash();
+//        plpk.mododash();
+//        plA.mododash();
+//        plCon.mododash();
         if (_pnldash.isShowing()) {
 
             _pnldash.hide();
@@ -1226,15 +1225,15 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         // TODO add your handling code here:
         ValidacionesSistema.ValidacionesBeep_Go.Modo = 1;
         DarkMode();
-        pld.mode();
-        plE.mododash();
-        plU.darkmod();
-        plP.mododash();
-        plC.mooddash();
-        plV.mododash();
-        plpk.mododash();
-        plA.mododash();
-        plCon.mododash();
+//        pld.mode();
+//        plE.mododash();
+//        plU.darkmod();
+//        plP.mododash();
+//        plC.mooddash();
+//        plV.mododash();
+//        plpk.mododash();
+//        plA.mododash();
+//        plCon.mododash();
         _pnldash.hide();
         if (_pnldash.isVisible()) {
 
@@ -1370,6 +1369,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     void Evaluador2() {
         this.setExtendedState(MAXIMIZED_BOTH);
         final java.awt.Point x = GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint();
+        frmMaximized =  true;
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -1423,6 +1423,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_txtBuscadorKeyPressed
 
     private void txtBuscadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscadorKeyReleased
+
         String rec = lblVal.getText();
         if (rec.equals("2")) {
             if (txtBuscador.getText().trim().isEmpty()) {
@@ -1483,7 +1484,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
                 try {
                     ResultSet rs = obj.CargarCarnetsController(txtBuscador.getText());
                     while (rs.next()) {
-                        Object[] Valores = {rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("Carnet"), rs.getString("tipo_personal"), rs.getInt("idPersonal"), plC.btnGenerar};
+                        Object[] Valores = {rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("Carnet"), rs.getString("tipo_personal"), rs.getInt("idPersonal"), plC.btnGenerar,plC.btnReporte};
                         plC.model.addRow(Valores);
                     }
                 } catch (Exception e) {

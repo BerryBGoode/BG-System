@@ -150,58 +150,6 @@ public class PanelEstudiantes extends javax.swing.JPanel {
         }
     }
 
-    public void mododash() {
-        switch (ValidacionesSistema.ValidacionesBeep_Go.getModo()) {
-            case 1:
-                lblPersonal.setForeground(Color.WHITE);
-                jPanel4.setBackground(new Color(47, 49, 54));
-                PanelFondo.setBackground(new Color(47, 49, 54));
-                jPanel5.setBackground(new Color(47, 49, 54));
-                jPanel2.setBackground(new Color(47, 49, 54));
-                btnAgregar.setBackground(new Color(32, 34, 37));
-                btnFiltrar.setBackground(new Color(32, 34, 37));
-                BtnReporte.setBackground(new Color(32, 34, 37));
-                jPanel6.setBackground(new Color(47, 49, 54));
-                jPanel7.setBackground(new Color(47, 49, 54));
-                btnActualizar.setBackground(new Color(32, 34, 37));
-                btnEliminar.setBackground(new Color(32, 34, 37));
-                btnReporteP.setBackground(new Color(32, 34, 37));
-                btnActualizar.setIcon(Modificardark);
-                btnEliminar.setIcon(Eliminardark);
-                btnReporteP.setIcon(reportedark);
-                TbAlumnosDark.setForeground(Color.WHITE);
-                TablaDark.setVisible(true);
-                TbAlumnosDark.setVisible(true);
-                scrollBarWhite.setVisible(false);
-                jScrollPane1.setVisible(false);
-                TbAlumnos.setVisible(false);
-                break;
-            case 2:
-                lblPersonal.setForeground(new Color(58, 50, 75));
-                jPanel4.setBackground(new Color(231, 234, 239));
-                PanelFondo.setBackground(new Color(231, 234, 239));
-                jPanel5.setBackground(new Color(231, 234, 239));
-                jPanel2.setBackground(new Color(231, 234, 239));
-                btnAgregar.setBackground(new Color(58, 50, 75));
-                btnFiltrar.setBackground(new Color(58, 50, 75));
-                BtnReporte.setBackground(new Color(58, 50, 75));
-                jPanel6.setBackground(new Color(231, 234, 239));
-                jPanel7.setBackground(new Color(231, 234, 239));
-                btnActualizar.setBackground(new Color(231, 234, 239));
-                btnEliminar.setBackground(new Color(231, 234, 239));
-                btnReporteP.setBackground(new Color(231, 234, 239));
-                btnActualizar.setIcon(modificar);
-                btnEliminar.setIcon(eliminar);
-                btnReporteP.setIcon(reporteimg);
-                TablaDark.setVisible(false);
-                TbAlumnosDark.setVisible(false);
-                scrollBarWhite.setVisible(true);
-                jScrollPane1.setVisible(true);
-                TbAlumnos.setVisible(true);
-                break;
-        }
-    }
-
     public void cargarTabla() {
         while (ModelAlumnos.getRowCount() > 0) {
             ModelAlumnos.removeRow(0);
@@ -423,6 +371,7 @@ public class PanelEstudiantes extends javax.swing.JPanel {
     private void PanelFondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseMoved
         // TODO add your handling code here:
         refresh();
+        mood();
     }//GEN-LAST:event_PanelFondoMouseMoved
 
     private void BtnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnReporteActionPerformed
