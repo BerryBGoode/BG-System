@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="470" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1f06385d-9877-4a09-9d73-a13d2a74ecbd">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TextoFooter" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tbTipoAccesos."tipo_acceso" AS tbTipoAccesos_tipo_acceso,
+     COUNT(tbAccesos."idTipoAcceso") AS tbAccesos_idTipoAcceso
+FROM
+     "dbo"."tbTipoAccesos" tbTipoAccesos INNER JOIN "dbo"."tbAccesos" tbAccesos ON tbTipoAccesos."idTipoAcceso" = tbAccesos."idTipoAcceso"
+GROUP BY tbTipoAccesos.tipo_acceso]]>
+	</queryString>
+	<field name="tbTipoAccesos_tipo_acceso" class="java.lang.String"/>
+	<field name="tbAccesos_idTipoAcceso" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="160" y="18" width="303" height="34" forecolor="#17141D" uuid="9bfa2ef7-1402-45f5-a1a5-35b6f38c5483"/>
+				<textElement>
+					<font size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Accesos según su tipo:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="4" y="4" width="85" height="71" uuid="ddd2b8de-dd87-4e92-a9d0-024359c6eae7"/>
+				<imageExpression><![CDATA[$P{Logo}.toString()]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="281" splitType="Stretch">
+			<barChart>
+				<chart>
+					<reportElement x="36" y="0" width="476" height="280" uuid="aadbb889-ce0d-4d06-94c5-9e5dae9658d0"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{tbTipoAccesos_tipo_acceso}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{tbTipoAccesos_tipo_acceso}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{tbAccesos_idTipoAcceso}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<image>
+				<reportElement x="475" y="0" width="80" height="30" uuid="0d04d75b-af07-4e65-b83d-8c6521211aae"/>
+				<imageExpression><![CDATA[$P{TextoFooter}.toString()]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

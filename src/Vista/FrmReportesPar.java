@@ -36,11 +36,11 @@ public class FrmReportesPar extends javax.swing.JFrame {
     String reportedir;
     String nombre;
     ControllerReportes objcontroller = new ControllerReportes();
-    
-    public FrmReportesPar(){
+
+    public FrmReportesPar() {
         initComponents();
     }
-    
+
     public FrmReportesPar(String form, String buscador) {
         initComponents();
         this.setTitle("Reporte - " + form);
@@ -57,7 +57,7 @@ public class FrmReportesPar extends javax.swing.JFrame {
         Image retvalue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
         return retvalue;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -180,20 +180,35 @@ public class FrmReportesPar extends javax.swing.JFrame {
 
     private void txtParKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtParKeyPressed
         // TODO add your handling code here:
-        if (evt.isControlDown() || evt.isShiftDown())
-        {
+        if (evt.isControlDown() || evt.isShiftDown()) {
             evt.consume();
         }
     }//GEN-LAST:event_txtParKeyPressed
 
     private void txtParKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtParKeyTyped
         // TODO add your handling code here:
-        if(nombre.equals("Usuarios")){
-            if(txtPar.getText().length() >= 15){
+        char key = evt.getKeyChar();
+        if (nombre.equals("Accesos")) {
+            if (txtPar.getText().length() >= 10) {
                 evt.consume();
-            }else{
-                ValidacionesSistema.ValidacionesBeep_Go.SoloLetras(evt);
-                ValidacionesSistema.ValidacionesBeep_Go.SinEspacios(evt);
+            } else if (txtPar.getText().length() != 4 && txtPar.getText().length() != 7 && key == '-') {
+                evt.consume();
+            } else if ((txtPar.getText().length() == 4 || txtPar.getText().length() == 7) && key != '-') {
+                evt.consume();
+            } else if (!Character.isDigit(key) && key != '-') {
+                evt.consume();
+            }
+        } else {
+            if (txtPar.getText().length() >= 30) {
+                evt.consume();
+            } else if (txtPar.getText().length() == 0 && Character.isWhitespace(key)) {
+                evt.consume();
+            } else if (txtPar.getText().length() > 0) {
+                String text = txtPar.getText();
+                String ultimo = text.substring(text.length() - 1);
+                if (ultimo != null && ultimo.equals(" ") && Character.isWhitespace(key)) {
+                    evt.consume();
+                }
             }
         }
     }//GEN-LAST:event_txtParKeyTyped
@@ -206,7 +221,7 @@ public class FrmReportesPar extends javax.swing.JFrame {
             String dir = reportedir;
             Map parametros = new HashMap();
             parametros.put("Logo", "src\\Recursos_Proyecto\\LogoB&GLogin.png");
-            if(!par.equals(null)){
+            if (!par.equals(null)) {
                 parametros.put("Parametro", par);
             }
             parametros.put("TextoFooter", "src\\Recursos_Proyecto\\TextoLogin.png");
@@ -221,8 +236,7 @@ public class FrmReportesPar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, e.toString());
         }
     }
-    
-    
+
     void Reporte(String dir) {
         try {
             Connection con = ControllerConexion.getConnectionModel();
@@ -242,72 +256,85 @@ public class FrmReportesPar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, e.toString());
         }
     }
-    
-    void HacerReporte(){
-        if(nombre.equals("Usuarios")){
-                objcontroller.setParam(txtPar.getText());
-                boolean respuesta1U = objcontroller.BuscarEstadoUsuario();
-                boolean respuesta2U = objcontroller.BuscarTipoUsuario();
-                if(respuesta1U == true || respuesta2U == true){
-                    reportedir = "src\\DocsReport\\UsuariosReportPar.jasper";
-                    ReportePar(txtPar.getText());
-                    txtPar.setText("");
-                    this.dispose();
-                }else{
-                    JOptionPane.showMessageDialog(this, "No existen registros para mostrar", "Parametro inválido", JOptionPane.WARNING_MESSAGE);
-                    txtPar.setText("");
-                }
-        }else if(nombre.equals("Estudiantes")){
-                objcontroller.setParam(txtPar.getText());
-                boolean respuesta = objcontroller.BuscarGenero();
-                if(respuesta == true){
-                    reportedir = "src\\DocsReport\\EstudianteReportePar.jasper";
-                    ReportePar(txtPar.getText());
-                    txtPar.setText("");
-                    this.dispose();
-                }else{
-                    JOptionPane.showMessageDialog(this, "No existen registros para mostrar", "Parametro inválido", JOptionPane.WARNING_MESSAGE);
-                    txtPar.setText("");
-                }
-        }else if(nombre.equals("Personal")){
-                objcontroller.setParam(txtPar.getText());
-                boolean respuesta1P = objcontroller.BuscarTipoPersonal();
-                boolean respuesta2P = objcontroller.BuscarGeneroP();
-                if(respuesta1P == true || respuesta2P == true){
-                    reportedir = "src\\DocsReport\\PersonalReportePar.jasper";
-                    ReportePar(txtPar.getText());
-                    txtPar.setText("");
-                    this.dispose();
-                }else{
-                    JOptionPane.showMessageDialog(this, "No existen registros para mostrar", "Parametro inválido", JOptionPane.WARNING_MESSAGE);
-                    txtPar.setText("");
-                }}else if(nombre.equals("Vehiculos")){
-                objcontroller.setParam(txtPar.getText());
-                boolean respuestavh = objcontroller.BuscarVehiculosPersonal();
-                if(respuestavh == true){
-                    reportedir = "src\\DocsReport\\VehiculosParReporte1.jasper";
-                    ReportePar(txtPar.getText());
-                    txtPar.setText("");
-                    this.dispose();
-                }else{
-                    txtPar.setText("");
-                    JOptionPane.showMessageDialog(this, "No existen registros para mostrar", "Parametro inválido", JOptionPane.WARNING_MESSAGE);
-                }
-        }else if(nombre.equals("Contactos")){
-                objcontroller.setParam(txtPar.getText());
-                boolean respuestact = objcontroller.BuscarContactosPersonal();
-                if(respuestact == true){
-                    reportedir = "src\\DocsReport\\ContactosPar1.jasper";
-                    ReportePar(txtPar.getText());
-                    txtPar.setText("");
-                    this.dispose();
-                }else{
-                    txtPar.setText("");
-                    JOptionPane.showMessageDialog(this, "No existen registros para mostrar", "Parametro inválido", JOptionPane.WARNING_MESSAGE);
-                }
+
+    void HacerReporte() {
+        if (nombre.equals("Usuarios")) {
+            objcontroller.setParam(txtPar.getText());
+            boolean respuesta1U = objcontroller.BuscarEstadoUsuario();
+            boolean respuesta2U = objcontroller.BuscarTipoUsuario();
+            if (respuesta1U == true || respuesta2U == true) {
+                reportedir = "src\\DocsReport\\UsuariosReportPar.jasper";
+                ReportePar(txtPar.getText());
+                txtPar.setText("");
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "No existen registros para mostrar", "Parametro inválido", JOptionPane.WARNING_MESSAGE);
+                txtPar.setText("");
+            }
+        } else if (nombre.equals("Estudiantes")) {
+            objcontroller.setParam(txtPar.getText());
+            boolean respuesta = objcontroller.BuscarGenero();
+            if (respuesta == true) {
+                reportedir = "src\\DocsReport\\EstudianteReportePar.jasper";
+                ReportePar(txtPar.getText());
+                txtPar.setText("");
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "No existen registros para mostrar", "Parametro inválido", JOptionPane.WARNING_MESSAGE);
+                txtPar.setText("");
+            }
+        } else if (nombre.equals("Personal")) {
+            objcontroller.setParam(txtPar.getText());
+            boolean respuesta1P = objcontroller.BuscarTipoPersonal();
+            boolean respuesta2P = objcontroller.BuscarGeneroP();
+            if (respuesta1P == true || respuesta2P == true) {
+                reportedir = "src\\DocsReport\\PersonalReportePar.jasper";
+                ReportePar(txtPar.getText());
+                txtPar.setText("");
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "No existen registros para mostrar", "Parametro inválido", JOptionPane.WARNING_MESSAGE);
+                txtPar.setText("");
+            }
+        } else if (nombre.equals("Vehiculos")) {
+            objcontroller.setParam(txtPar.getText());
+            boolean respuestavh = objcontroller.BuscarVehiculosPersonal();
+            if (respuestavh == true) {
+                reportedir = "src\\DocsReport\\VehiculosParReporte1.jasper";
+                ReportePar(txtPar.getText());
+                txtPar.setText("");
+                this.dispose();
+            } else {
+                txtPar.setText("");
+                JOptionPane.showMessageDialog(this, "No existen registros para mostrar", "Parametro inválido", JOptionPane.WARNING_MESSAGE);
+            }
+        } else if (nombre.equals("Contactos")) {
+            objcontroller.setParam(txtPar.getText());
+            boolean respuestact = objcontroller.BuscarContactosPersonal();
+            if (respuestact == true) {
+                reportedir = "src\\DocsReport\\ContactosPar1.jasper";
+                ReportePar(txtPar.getText());
+                txtPar.setText("");
+                this.dispose();
+            } else {
+                txtPar.setText("");
+                JOptionPane.showMessageDialog(this, "No existen registros para mostrar", "Parametro inválido", JOptionPane.WARNING_MESSAGE);
+            }
+        } else if (nombre.equals("Accesos")) {
+            objcontroller.setParam(txtPar.getText());
+            boolean respuestaacc = objcontroller.BuscarAccesos();
+            if (respuestaacc == true) {
+                reportedir = "src\\DocsReport\\AccesosPar.jasper";
+                ReportePar(txtPar.getText());
+                txtPar.setText("");
+                this.dispose();
+            } else {
+                txtPar.setText("");
+                JOptionPane.showMessageDialog(this, "No existen registros para mostrar", "Parametro inválido", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }
-    
+
     private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
         // TODO add your handling code here:
         HacerReporte();
@@ -315,16 +342,18 @@ public class FrmReportesPar extends javax.swing.JFrame {
 
     private void btnGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficoActionPerformed
         // TODO add your handling code here:
-        if(nombre.equals("Usuarios")){
+        if (nombre.equals("Usuarios")) {
             Reporte("src\\DocsReport\\ReporteUsuariosGraph.jasper");
-        }else if(nombre.equals("Personal")){
+        } else if (nombre.equals("Personal")) {
             Reporte("src\\DocsReport\\PersonalReporteGraph.jasper");
-        }else if(nombre.equals("Estudiantes")){
+        } else if (nombre.equals("Estudiantes")) {
             Reporte("src\\DocsReport\\EstudianteReporteGraph.jasper");
-        }else if(nombre.equals("Vehiculos")){
+        } else if (nombre.equals("Vehiculos")) {
             Reporte("src\\DocsReport\\VehiculosGraph1.jasper");
-        }else if(nombre.equals("Contactos")){
+        } else if (nombre.equals("Contactos")) {
             Reporte("src\\DocsReport\\ContactosGraph1.jasper");
+        } else if (nombre.equals("Accesos")) {
+            Reporte("src\\DocsReport\\AccesosGraph.jasper");
         }
         this.dispose();
     }//GEN-LAST:event_btnGraficoActionPerformed

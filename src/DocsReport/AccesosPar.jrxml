@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="910" pageHeight="842" columnWidth="870" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="caf289a2-e51b-49bf-9398-29fdb136be53">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Parametro" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="TextoFooter" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     CONCAT(tbPersonal."nombre_p",' ',tbPersonal."apellido_p") AS tbPersonal_nombre_p,
+     tbAccesos."idAcceso" AS tbAccesos_idAcceso,
+     tbAccesos."notificacion" AS tbAccesos_notificacion,
+     tbTipoAccesos."tipo_acceso" AS tbTipoAccesos_tipo_acceso,
+     tbPersonal."Carnet" AS tbPersonal_Carnet,
+     tbAccesos."fecha" AS tbAccesos_fecha,
+     tbAccesos."hora" AS tbAccesos_hora
+FROM
+     "dbo"."tbTipoAccesos" tbTipoAccesos INNER JOIN "dbo"."tbAccesos" tbAccesos ON tbTipoAccesos."idTipoAcceso" = tbAccesos."idTipoAcceso"
+     INNER JOIN "dbo"."tbPersonal" tbPersonal ON tbAccesos."idPersonal" = tbPersonal."idPersonal"
+WHERE
+     tbAccesos.fecha = $P{Parametro}]]>
+	</queryString>
+	<field name="tbPersonal_nombre_p" class="java.lang.String"/>
+	<field name="tbAccesos_idAcceso" class="java.lang.Integer"/>
+	<field name="tbAccesos_notificacion" class="java.lang.String"/>
+	<field name="tbTipoAccesos_tipo_acceso" class="java.lang.String"/>
+	<field name="tbPersonal_Carnet" class="java.lang.String"/>
+	<field name="tbAccesos_fecha" class="java.sql.Date"/>
+	<field name="tbAccesos_hora" class="java.sql.Time"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="75" splitType="Stretch">
+			<staticText>
+				<reportElement x="280" y="12" width="275" height="40" forecolor="#17141D" uuid="284e3241-cfd6-4905-8453-8248199bdddf"/>
+				<textElement>
+					<font size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de accesos:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="7" y="3" width="85" height="71" uuid="a966627b-8cbe-4b78-9122-a244b2aae1fc"/>
+				<imageExpression><![CDATA[$P{Logo}.toString()]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="0" width="43" height="20" uuid="504328f5-5700-4ae2-b183-39e34205a118"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="55" y="0" width="100" height="20" uuid="51867cb1-984e-4765-9405-88c6a902728c"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="166" y="0" width="70" height="20" uuid="28fb20a7-86f1-4296-8024-13a21ad9dcbc"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="246" y="0" width="159" height="20" uuid="c6319336-c56f-4772-878e-fd4473e52efc"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ Personal / estudiante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="0" width="100" height="20" uuid="fb0960bb-4aca-421e-a0be-fb07d81446ed"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Carné]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="563" y="1" width="114" height="20" uuid="9f086d02-0142-4db1-8a50-f07bbe04ef66"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de acceso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="690" y="0" width="100" height="20" uuid="c98894dd-b236-4710-b28c-65971802feeb"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Justificación]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="84" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="0" width="43" height="20" uuid="cbbb6cae-e27e-4095-b52e-db1bd0f6a233"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbAccesos_idAcceso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="246" y="0" width="200" height="44" uuid="272c700c-324c-4c95-b0fd-af302df169e4"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbPersonal_nombre_p}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="d67217fa-48fe-49d0-bf17-ec81fd525a65"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbPersonal_Carnet}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="563" y="0" width="115" height="20" uuid="420f4f31-b21c-4a74-a190-ae2682832448"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbTipoAccesos_tipo_acceso}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="690" y="0" width="179" height="73" uuid="c62c52e3-ae1c-450c-aab1-f1aad454492f"/>
+				<textElement>
+					<font size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbAccesos_notificacion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="55" y="0" width="100" height="20" uuid="9b93d577-5515-4fb7-bd71-a5f4cdf93932"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbAccesos_fecha}]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm a" isBlankWhenNull="false">
+				<reportElement x="166" y="0" width="70" height="20" uuid="cb84532c-4fbc-4e86-bc2c-81325be7d31c"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tbAccesos_hora}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<image>
+				<reportElement x="789" y="0" width="80" height="30" uuid="6e787095-5c37-4641-9cad-6e62d469209d"/>
+				<imageExpression><![CDATA[$P{TextoFooter}.toString()]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

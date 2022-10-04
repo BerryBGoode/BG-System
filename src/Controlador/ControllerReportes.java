@@ -53,4 +53,8 @@ public class ControllerReportes {
     public boolean BuscarContactosPersonal(){
         return objmodel.BuscarVehiculosPersonal(Param, con);
     }
+    
+    public boolean BuscarAccesos(){
+        return objmodel.BuscarAccesos(Param, con);
+    }
 }

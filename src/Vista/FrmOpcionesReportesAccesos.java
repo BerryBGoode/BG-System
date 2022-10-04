@@ -59,6 +59,7 @@ public class FrmOpcionesReportesAccesos extends javax.swing.JFrame {
         btnGeneralReport = new javax.swing.JLabel();
         btnTardeReport = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        btnReporte = new Controles_Personalizados.Botones.ButtonGradient();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -116,6 +117,19 @@ public class FrmOpcionesReportesAccesos extends javax.swing.JFrame {
         jLabel11.setText("Llegadas tardes");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 210, 180, 40));
 
+        btnReporte.setBackground(new java.awt.Color(253, 255, 254));
+        btnReporte.setForeground(new java.awt.Color(58, 50, 75));
+        btnReporte.setText("Más opciones");
+        btnReporte.setColor1(new java.awt.Color(253, 255, 254));
+        btnReporte.setColor2(new java.awt.Color(253, 255, 254));
+        btnReporte.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        btnReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReporteActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, 180, 50));
+
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -133,11 +147,20 @@ public class FrmOpcionesReportesAccesos extends javax.swing.JFrame {
 
     private void btnGeneralReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGeneralReportMouseClicked
         genereteGeneralReport("AcesosGeneralReporte");
+        this.dispose();
     }//GEN-LAST:event_btnGeneralReportMouseClicked
 
     private void btnTardeReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnTardeReportMouseClicked
-        genereteGeneralReport("AcesosTardeGeneral");
+        genereteGeneralReport("LlegadasTardeReport");
+        this.dispose();
     }//GEN-LAST:event_btnTardeReportMouseClicked
+
+    FrmReportesPar frmreporte = new FrmReportesPar("Accesos", "Ingrese fecha");
+    private void btnReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReporteActionPerformed
+        // TODO add your handling code here:
+            frmreporte.setVisible(true);
+            this.dispose();
+    }//GEN-LAST:event_btnReporteActionPerformed
 
     void genereteGeneralReport(String reportname){
         try {
@@ -198,6 +221,7 @@ public class FrmOpcionesReportesAccesos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnGeneralReport;
+    private Controles_Personalizados.Botones.ButtonGradient btnReporte;
     private javax.swing.JLabel btnTardeReport;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel5;
