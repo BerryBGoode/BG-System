@@ -21,6 +21,7 @@ public class ControllerCarnets {
      */
     private int idPersonal;
     private String carnet;
+    private String año;
 
     /**
      * Gets the id - card of the user 
@@ -54,6 +55,24 @@ public class ControllerCarnets {
         this.idPersonal = idPersonal;
     }
 
+    /**
+     * Get the actual year
+     * @return 
+     */
+    public String getAño() {
+        return año;
+    }
+
+    /**
+     * Set the actual year
+     * @param año 
+     */
+    public void setAño(String año) {
+        this.año = año;
+    }
+
+    
+    
     /**
      * Fill in the information table with the records that have an assigned id - card
      * @return a ResultSet 
@@ -92,5 +111,9 @@ public class ControllerCarnets {
     
     public ResultSet BuscarImagen(){
         return ObjModel.BuscarImagen(idPersonal);
+    }
+    
+    public boolean GenerarCarnetsTodos(){
+        return ObjModel.GenerarCarnetsTodos(año);
     }
 }

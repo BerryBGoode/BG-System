@@ -6,31 +6,23 @@
 package Vista;
 
 import Controlador.ControllerCarnets;
-import Controles_Personalizados.Botones.ButtonGradient;
 import Controles_Personalizados.Botones.UWPButton;
-import Controles_Personalizados.Paneles.PanelRound;
 import Controles_Personalizados.RenderTable;
-import Controles_Personalizados.ScrollBar.ScrollBarCustom;
-import Controles_Personalizados.Tables.Table;
-import static Vista.PanelCarnets.validarImagen;
 import com.sun.awt.AWTUtilities;
-import com.sun.prism.j2d.J2DPipeline;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GraphicsConfiguration;
-import java.awt.HeadlessException;
 import java.awt.Image;
 import java.awt.Shape;
 import java.awt.Toolkit;
 import java.awt.geom.RoundRectangle2D;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.YearMonth;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -123,26 +115,22 @@ public class FrmPersonalSinCarnet extends javax.swing.JFrame {
     private void initComponents() {
 
         panelRound1 = new Controles_Personalizados.Paneles.PanelRound();
-        lblVehiculos = new javax.swing.JLabel();
         PanelTabla = new javax.swing.JScrollPane();
         TbPersonalSC = new Controles_Personalizados.Tables.Table();
         ScrollTabla = new Controles_Personalizados.ScrollBar.ScrollBarCustom();
         btnCerrar = new javax.swing.JLabel();
         btnMinimizar = new javax.swing.JLabel();
+        lblVehiculos1 = new javax.swing.JLabel();
+        BtnGenerarTodos = new Controles_Personalizados.Botones.ButtonGradient();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFocusable(false);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1099, 578));
+        setPreferredSize(new java.awt.Dimension(1100, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelRound1.setBackground(new java.awt.Color(58, 50, 75));
         panelRound1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblVehiculos.setFont(new java.awt.Font("Roboto Medium", 0, 30)); // NOI18N
-        lblVehiculos.setForeground(new java.awt.Color(253, 255, 254));
-        lblVehiculos.setText("PERSONAL SIN CARNET");
-        panelRound1.add(lblVehiculos, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
 
         PanelTabla.setHorizontalScrollBar(null);
         PanelTabla.setVerticalScrollBar(ScrollTabla);
@@ -222,7 +210,25 @@ public class FrmPersonalSinCarnet extends javax.swing.JFrame {
         });
         panelRound1.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 10, -1, -1));
 
-        getContentPane().add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 580));
+        lblVehiculos1.setFont(new java.awt.Font("Roboto Medium", 0, 30)); // NOI18N
+        lblVehiculos1.setForeground(new java.awt.Color(253, 255, 254));
+        lblVehiculos1.setText("PERSONAL SIN CARNET");
+        panelRound1.add(lblVehiculos1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
+
+        BtnGenerarTodos.setBackground(new java.awt.Color(253, 255, 254));
+        BtnGenerarTodos.setForeground(new java.awt.Color(58, 50, 75));
+        BtnGenerarTodos.setText("Generar todos");
+        BtnGenerarTodos.setColor1(new java.awt.Color(253, 255, 254));
+        BtnGenerarTodos.setColor2(new java.awt.Color(253, 255, 254));
+        BtnGenerarTodos.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        BtnGenerarTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnGenerarTodosActionPerformed(evt);
+            }
+        });
+        panelRound1.add(BtnGenerarTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 540, 180, 40));
+
+        getContentPane().add(panelRound1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -271,7 +277,7 @@ public class FrmPersonalSinCarnet extends javax.swing.JFrame {
                 UWPButton btns = (UWPButton) vals;
                 if (btns.getName().equals("BtnCarnet")) {
                     int confirmacion = JOptionPane.YES_NO_OPTION;
-                    int a = JOptionPane.showConfirmDialog(null, "¿Desea generar el Carné de: " + capnom +" "+ capapelli+"?", "Generar Carné", confirmacion, JOptionPane.QUESTION_MESSAGE);
+                    int a = JOptionPane.showConfirmDialog(null, "¿Desea generar el Carné de: " + capnom + " " + capapelli + "?", "Generar Carné", confirmacion, JOptionPane.QUESTION_MESSAGE);
                     if (a == 0) {
                         carnet();
                     }
@@ -280,6 +286,27 @@ public class FrmPersonalSinCarnet extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_TbPersonalSCMouseClicked
+
+    private void BtnGenerarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGenerarTodosActionPerformed
+        // TODO add your handling code here:
+        int confirmacion = JOptionPane.YES_NO_OPTION;
+        int a = JOptionPane.showConfirmDialog(null, "¿Desea generar el carné de todo el personal que no tiene uno?", "Generar Carné", confirmacion, JOptionPane.QUESTION_MESSAGE);
+        if (a == 0) {
+            Date date = new Date();
+            SimpleDateFormat getYearFormat = new SimpleDateFormat("yyyy");
+            String currentYear = getYearFormat.format(date);
+            
+            objController.setAño(currentYear);
+            boolean respuesta = objController.GenerarCarnetsTodos();
+            if(respuesta == true){
+                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "Carnés generados exitosamente", 1);
+            }else{
+                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso fallido", "Los carnés no pudieron ser generados", 3);
+            }
+            cargarTabla();
+            this.dispose();
+        }
+    }//GEN-LAST:event_BtnGenerarTodosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -318,12 +345,13 @@ public class FrmPersonalSinCarnet extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private Controles_Personalizados.Botones.ButtonGradient BtnGenerarTodos;
     private javax.swing.JScrollPane PanelTabla;
     private Controles_Personalizados.ScrollBar.ScrollBarCustom ScrollTabla;
     private Controles_Personalizados.Tables.Table TbPersonalSC;
     private javax.swing.JLabel btnCerrar;
     private javax.swing.JLabel btnMinimizar;
-    private javax.swing.JLabel lblVehiculos;
+    private javax.swing.JLabel lblVehiculos1;
     private Controles_Personalizados.Paneles.PanelRound panelRound1;
     // End of variables declaration//GEN-END:variables
 }

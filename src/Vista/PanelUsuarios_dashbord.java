@@ -288,6 +288,7 @@ public class PanelUsuarios_dashbord extends javax.swing.JPanel {
             modelo.removeRow(0);
         }
         try {
+            obj.setNombre_usuario(FrmLogin.nombre);
             ResultSet rs = obj.CargarUsuarios_C();
             while (rs.next()) {
                 Object[] oValores = {rs.getInt("idUsuario"), rs.getInt("idPersonal"), rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("nombre_usuario"), rs.getInt("idTipoUsuario"), rs.getString("tipo_usuario"), rs.getInt("idEstadoUsuario"), rs.getString("estado_usuario"), rs.getBytes("imagen"), btnActualizar, btnEliminar, btnReporte};

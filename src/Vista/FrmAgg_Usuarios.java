@@ -138,7 +138,7 @@ public class FrmAgg_Usuarios extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Campos vacios");
         } else {
             String contraseña = ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra(txtUsuario.getText() + 123);
-            ControllerUsuarios obja = new ControllerUsuarios(personal, txtUsuario.getText(), contraseña, ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra("2353"), tipoUsu, estadoUsu, imagen, 5);
+            ControllerUsuarios obja = new ControllerUsuarios(personal, txtUsuario.getText(), contraseña, null, tipoUsu, estadoUsu, imagen, 5);
             boolean respuesta = obja.NuevoUsuario_C();
             if (respuesta == true) {
                 ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "Usuario agregado", 1);
