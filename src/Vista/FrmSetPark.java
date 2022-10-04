@@ -573,7 +573,7 @@ public class FrmSetPark extends javax.swing.JFrame {
             modeltablecars.removeRow(0);
         } else {
             try {
-                ResultSet rsAcsess = Controlador.ControllerAccesos.getdata("vwAccesos");
+                ResultSet rsAcsess = Controlador.ControllerAccesos.getdata("vwAccesos  WHERE tipo_acceso = 'Entrada'");
                 while (rsAcsess.next()) {
                     Object[] data = {rsAcsess.getInt("idAcceso"), rsAcsess.getString("Carnet"), rsAcsess.getDate("fecha"), rsAcsess.getInt("idTipoAcceso"), rsAcsess.getTime("hora"), rsAcsess.getString("tipo_acceso"), rsAcsess.getString("notificacion"), _btnAgregarAccs};
                     modeltableaccess.addRow(data);
@@ -597,8 +597,8 @@ public class FrmSetPark extends javax.swing.JFrame {
         //que los ids sean mayores a 0, para agregar dato
         if (park.getIDAcceso() >= 0 && park.getIDVehiculo() >= 0 && ControllerParqueo.getNumberPark() >= 0) {
             if (park.insertPark() == true) {
-                confir = true;
-                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "Se lograron ingresar los datos", 1);
+                confir = true;                
+                ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Proceso completado", "Se lograron ingresar los datos", 1);                
             } else {
                 confir = false;
                 ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Error  ", "No se lograron ingresar los datos", 2);
