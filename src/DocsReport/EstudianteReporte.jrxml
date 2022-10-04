@@ -2,11 +2,14 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="EstudianteReporte" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="791e777f-8229-439e-b65c-17359648da93">
 	<property name="ireport.zoom" value="1.4641000000000013"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="192"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="Nombre" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="idPersonal" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Logo" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
@@ -26,7 +29,7 @@
 		<band height="147" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="0" width="85" height="71" uuid="0c5b0abe-8dc2-4bf4-99b6-e728321e6919"/>
-				<imageExpression><![CDATA["C:\\Users\\hp\\Documents\\Proyectos\\Proyectos Escolares\\Expo 2022\\BG-System\\src\\Recursos_Proyecto\\LogoB&GLogin.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{Logo}.toString()]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="163" y="71" width="259" height="69" uuid="cdf6d306-e82e-41ee-8883-7ca277ec9697"/>
@@ -136,7 +139,7 @@
 		<band height="54" splitType="Stretch">
 			<image>
 				<reportElement x="492" y="24" width="80" height="30" uuid="d2968980-50a5-4a9c-beb6-0f19d0ae1ab4"/>
-				<imageExpression><![CDATA["C:\\Users\\hp\\Documents\\Proyectos\\Proyectos Escolares\\Expo 2022\\BG-System\\src\\Recursos_Proyecto\\TextoLogin.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{Nombre}.toString()]]></imageExpression>
 			</image>
 		</band>
 	</pageFooter>
