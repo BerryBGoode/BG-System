@@ -130,10 +130,10 @@ WHERE vwVehiculos.Carnet LIKE $P{Parametro} OR vwVehiculos.nombre_p LIKE $P{Para
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="96" splitType="Stretch"/>
+		<band splitType="Stretch"/>
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch">
