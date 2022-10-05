@@ -165,8 +165,7 @@ public class ControllerParqueo {
     /**
      * Set the Access ID
      *
-     * @param IDAccess
-     * @param IDDetail referring to the Access ID
+     * @param IDAccess referring to the Access ID
      */
     public static void setIDAccess(int IDAccess) {
         ControllerParqueo.IDAccess = IDAccess;

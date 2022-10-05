@@ -136,7 +136,6 @@ public class ModelParqueo {
 
     /**
      * This method save the registers of parking*
-     * @param idpark referring to the park ID
      * @param idacces referring to the access ID
      * @param idcar referring to the car ID
      * @param idstation referring to the spot ID
@@ -256,7 +255,7 @@ public class ModelParqueo {
     /**
      * With this method set update in tbestacionamientos, this method chage the state on this table on database, for checked state where the user wannna to enter a data
      *
-     * @param idpark
+     * @param idstation
      * @param idstation
      * @return
      */
