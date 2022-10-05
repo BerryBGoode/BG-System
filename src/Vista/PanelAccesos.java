@@ -442,7 +442,6 @@ public class PanelAccesos extends javax.swing.JPanel {
 
     private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
         add.setAction(1);
-        
         if (tipouser.equals("Seguridad")) {
             if (addop.isVisible()) {
                 addop.toFront();
