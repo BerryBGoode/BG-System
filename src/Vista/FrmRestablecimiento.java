@@ -181,21 +181,25 @@ public class FrmRestablecimiento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarMousePressed
     void CambiarClave() {
         if(! TxtPass.getText().equals("") || ! TxtConfir.getText().equals("")){
-            if (Objects.equals(TxtPass.getText(), TxtConfir.getText())) {
-                ControllerP_U_Usuarios cc = new ControllerP_U_Usuarios();
-                cc.setUsuario(user);
-                cc.setClave(ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra(TxtConfir.getText()));
-                if (cc.CambiandoClave() == true) {
-                    JOptionPane.showMessageDialog(null, "Su contraseña ha sido agregada");
-                    FrmLogin iniciar = new FrmLogin();
-                    iniciar.setVisible(true);
-                    this.dispose();
+            if(TxtPass.getText().length() >= 8){
+                if (Objects.equals(TxtPass.getText(), TxtConfir.getText())) {
+                    ControllerP_U_Usuarios cc = new ControllerP_U_Usuarios();
+                    cc.setUsuario(user);
+                    cc.setClave(ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra(TxtConfir.getText()));
+                    if (cc.CambiandoClave() == true) {
+                        JOptionPane.showMessageDialog(null, "Su contraseña ha sido agregada");
+                        FrmLogin iniciar = new FrmLogin();
+                        iniciar.setVisible(true);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "ERROR AL REALIZAR EL PROCESO");
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "ERROR AL REALIZAR EL PROCESO");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Las claves ingresadas deden de ser las mismas", "Contraseña incorrecta", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Las claves ingresadas deden de ser las mismas", "Contraseña incorrecta", JOptionPane.WARNING_MESSAGE);
 
+                }
+            }else{
+                JOptionPane.showMessageDialog(null, "La contraseña no tiene el formato correcto", "Error de formato", JOptionPane.WARNING_MESSAGE);
             }
         }else{
             JOptionPane.showMessageDialog(null, "Campos vacios", "Existen campos vacios", JOptionPane.WARNING_MESSAGE);

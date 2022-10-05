@@ -27,7 +27,7 @@ public class ModelQR {
     public  ResultSet ReucContraQR(String Usuario) {
         try {
             con = ModelConexion.getConnection();
-            String query = "SELECT a.idUsuario,a.nombre_usuario,b.Carnet FROM tbUsuarios a, tbPersonal b Where nombre_usuario=? AND a.idPersonal=b.idPersonal";
+            String query = "SELECT a.idUsuario,a.nombre_usuario,b.Carnet FROM tbUsuarios a, tbPersonal b Where nombre_usuario=? COLLATE SQL_Latin1_General_CP1_CS_AS AND a.idPersonal=b.idPersonal";
             ps = con.prepareStatement(query);
             ps.setString(1, Usuario);
             rs = ps.executeQuery();

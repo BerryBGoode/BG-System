@@ -30,7 +30,7 @@ public class ModelRecuperacionContra {
         
         try{
             con = ModelConexion.getConnection();
-            ps = con.prepareStatement("SELECT * FROM tbUsuarios WHERE nombre_usuario = ? AND PIN = ?");
+            ps = con.prepareStatement("SELECT * FROM tbUsuarios WHERE nombre_usuario = ? COLLATE SQL_Latin1_General_CP1_CS_AS AND PIN = ?");
             ps.setString(1, usuario);
             ps.setString(2, PIN);
             ResultSet rs = ps.executeQuery();
