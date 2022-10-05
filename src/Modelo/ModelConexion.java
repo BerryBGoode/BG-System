@@ -103,7 +103,7 @@ public class ModelConexion {
      * @return a Connection
      */
     public static Connection getConnection(){        
-        setDb("dbBGSA");
+        setDb("dbBG");
         String url = "jdbc:sqlserver://"+getIp()+":"+getHost()+";"
                 + "database= "+getDb()+";"
                 + "user= "+getUsername()+";"

@@ -291,10 +291,10 @@ public class FrmLogin extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "El usuario esta abierto en otro dispositivo");
                 } else if (estadouser == 3) {
                     JOptionPane.showMessageDialog(null, "Usuario bloqueado");
-                } else {
+                } 
+            }else {
                     JOptionPane.showMessageDialog(null, "Usuario inexistente");
-                }
-            }
+             }
         }
     }
 
