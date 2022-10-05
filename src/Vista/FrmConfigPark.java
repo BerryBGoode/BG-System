@@ -503,6 +503,12 @@ public class FrmConfigPark extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    void validParkBusy(PanelRound pnl){
+        if (pnl.getBackground().equals(Color.GRAY)) {
+            ValidacionesSistema.ValidacionesBeep_Go.Notificacion("Estacionamiento ocupado", "Ese estacionamiento de momento está ocupado", 2);
+        }
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="OPEN ADD FORM">      
     //PARA GUARDAR LOS ESTACIONAMIENTOS OCUPADOS, SE HARÁ POR MEDIO DE UNA CONSULTA    
     //En cada action del boton he puesto 1, q se refiere al estacionamiento
@@ -510,52 +516,59 @@ public class FrmConfigPark extends javax.swing.JFrame {
     //y 0, cuando venga de "agregar"
 
     private void btnPark1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark1MouseClicked
-        if (station == 1 || station == 0 || panelPark1.getBackground().equals(Color.white)) {
+        if (station == 1 || /*station == 0 ||*/ panelPark1.getBackground().equals(Color.white)) {
             modifPanelPark(panelPark1, 1);
         }
+        validParkBusy(panelPark1);
     }//GEN-LAST:event_btnPark1MouseClicked
 
     private void btnPark2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark2MouseClicked
-        if (station == 2 || station == 0 || panelPark2.getBackground().equals(Color.WHITE)) {
+        if (station == 2 || panelPark2.getBackground().equals(Color.WHITE)) {
             modifPanelPark(panelPark2, 2);
         }
+        validParkBusy(panelPark2);
     }//GEN-LAST:event_btnPark2MouseClicked
 
     private void btnPark3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark3MouseClicked
-        if (station == 3 || station == 0 || panelPark3.getBackground().equals(Color.white)) {
+        if (station == 3 || panelPark3.getBackground().equals(Color.white)) {
             modifPanelPark(panelPark3, 3);
         }
+        validParkBusy(panelPark3);
     }//GEN-LAST:event_btnPark3MouseClicked
 
     private void btnPark4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark4MouseClicked
-        if (station == 4 || station == 0 || panelPark4.getBackground().equals(Color.white)) {
+        if (station == 4 ||panelPark4.getBackground().equals(Color.white)) {
             modifPanelPark(panelPark4, 4);
         }
+        validParkBusy(panelPark4);
     }//GEN-LAST:event_btnPark4MouseClicked
 
     private void btnPark11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark11MouseClicked
-        if (station == 11 || station == 0 || panelPark11.getBackground().equals(Color.white)) {
+        if (station == 11 ||panelPark11.getBackground().equals(Color.white)) {
             modifPanelPark(panelPark11, 11);
         }
+        validParkBusy(panelPark11);
     }//GEN-LAST:event_btnPark11MouseClicked
 
     private void btnPark12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark12MouseClicked
-        if (station == 12 || station == 0 || panelPark12.getBackground().equals(Color.white)) {
+        if (station == 12 || panelPark12.getBackground().equals(Color.white)) {
             modifPanelPark(panelPark12, 12);
         }
+        validParkBusy(panelPark12);
     }//GEN-LAST:event_btnPark12MouseClicked
 
     private void btnPark10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark10MouseClicked
-        if (station == 10 || station == 0 || panelPark10.getBackground().equals(Color.WHITE)) {
+        if (station == 10 || panelPark10.getBackground().equals(Color.WHITE)) {
             modifPanelPark(panelPark10, 10);
         }
+        validParkBusy(panelPark10);
     }//GEN-LAST:event_btnPark10MouseClicked
 
     private void btnPark9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark9MouseClicked
-        if (station == 9 || station == 0 || panelPark9.getBackground().equals(Color.WHITE)) {
+        if (station == 9 || panelPark9.getBackground().equals(Color.WHITE)) {
             modifPanelPark(panelPark9, 9);
-
         }
+        validParkBusy(panelPark9);
     }//GEN-LAST:event_btnPark9MouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -722,47 +735,52 @@ public class FrmConfigPark extends javax.swing.JFrame {
     }
 
     private void btnPark8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark8MouseClicked
-        if (station == 8 || station == 0 || panelPark8.getBackground().equals(Color.white)) {
+        if (station == 8 ||  panelPark8.getBackground().equals(Color.white)) {
             modifPanelPark(panelPark8, 8);
         }
+        validParkBusy(panelPark8);
     }//GEN-LAST:event_btnPark8MouseClicked
 
     private void btnPark7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark7MouseClicked
-        if (station == 7 || station == 0 || panelPark7.getBackground().equals(Color.white)) {
+        if (station == 7 ||  panelPark7.getBackground().equals(Color.white)) {
             modifPanelPark(panelPark7, 7);
         }
+        validParkBusy(panelPark7);
     }//GEN-LAST:event_btnPark7MouseClicked
 
     private void btnPark6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark6MouseClicked
-        if (station == 6 || station == 0 || panelPark6.getBackground().equals(Color.WHITE)) {
+        if (station == 6 || panelPark6.getBackground().equals(Color.WHITE)) {
             modifPanelPark(panelPark6, 6);
         }
+        validParkBusy(panelPark6);
     }//GEN-LAST:event_btnPark6MouseClicked
 
     private void btnPark5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark5MouseClicked
-        if (station == 5 || station == 0 || panelPark5.getBackground().equals(Color.WHITE)) {
+        if (station == 5 || panelPark5.getBackground().equals(Color.WHITE)) {
             modifPanelPark(panelPark5, 5);
         }
+        validParkBusy(panelPark5);
     }//GEN-LAST:event_btnPark5MouseClicked
 
     private void btnPark15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark15MouseClicked
-        if (station == 15 || station == 0 || panelPark15.getBackground().equals(Color.WHITE)) {
+        if (station == 15 || panelPark15.getBackground().equals(Color.WHITE)) {
             modifPanelPark(panelPark15, 15);
         }
+        validParkBusy(panelPark15);
     }//GEN-LAST:event_btnPark15MouseClicked
 
     private void btnPark14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark14MouseClicked
-        if (station == 14 || station == 0 || panelPark14.getBackground().equals(Color.WHITE)) {
+        if (station == 14 ||panelPark14.getBackground().equals(Color.WHITE)) {
             modifPanelPark(panelPark14, 14);
         }
-
+        validParkBusy(panelPark14);
     }//GEN-LAST:event_btnPark14MouseClicked
 
     private void btnPark13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark13MouseClicked
-        if (station == 13 || station == 0 || panelPark13.getBackground().equals(Color.white)) {
+        if (station == 13 || panelPark13.getBackground().equals(Color.white)) {
             modifPanelPark(panelPark13, 13);
         }
-
+        validParkBusy(panelPark13);
     }//GEN-LAST:event_btnPark13MouseClicked
 
     private void btnCerrarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMousePressed
@@ -775,35 +793,39 @@ public class FrmConfigPark extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMinimizarMouseClicked
 
     private void btnPark16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark16MouseClicked
-        if (station == 16 || station == 0 || panelPark16.getBackground().equals(Color.white)) {
+        if (station == 16 || panelPark16.getBackground().equals(Color.white)) {
             modifPanelPark(panelPark16, 16);
         }
+        validParkBusy(panelPark16);
     }//GEN-LAST:event_btnPark16MouseClicked
 
     private void btnPark17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark17MouseClicked
-        if (station == 17 || station == 0 || panelPark17.getBackground().equals(Color.white)) {
+        if (station == 17 || panelPark17.getBackground().equals(Color.white)) {
             modifPanelPark(panelPark17, 17);
         }
+        validParkBusy(panelPark17);
     }//GEN-LAST:event_btnPark17MouseClicked
 
     private void btnPark18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark18MouseClicked
-        if (station == 18 || station == 0 || panelPark18.getBackground().equals(Color.white)) {
+        if (station == 18 || panelPark18.getBackground().equals(Color.white)) {
             modifPanelPark(panelPark18, 18);
         }
+        validParkBusy(panelPark18);
     }//GEN-LAST:event_btnPark18MouseClicked
 
     private void btnPark19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark19MouseClicked
-        if (station == 19 || station == 0 || panelPark19.getBackground().equals(Color.white)) {
+        if (station == 19 || panelPark19.getBackground().equals(Color.white)) {
             modifPanelPark(panelPark19, 19);
-
         }
+        validParkBusy(panelPark19);
     }//GEN-LAST:event_btnPark19MouseClicked
 
     private void btnPark20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPark20MouseClicked
-        if (station == 20 || station == 0 || panelPark20.getBackground().equals(Color.WHITE)) {
+        if (station == 20 || panelPark20.getBackground().equals(Color.WHITE)) {
             modifPanelPark(panelPark20, 20);
 
         }
+        validParkBusy(panelPark20);
     }//GEN-LAST:event_btnPark20MouseClicked
 // </editor-fold>  
 

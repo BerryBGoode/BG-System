@@ -30,6 +30,7 @@ public class ValidacionesBeep_Go {
     
     public static int Modo;
     public static final Font font = new Font("Roboto Black", Font.PLAIN, 18);
+    public static boolean systemState = true;//atributo para cerrar otros formularios independientes cuando esta cerrado el dashbord
     /**
      * Constructor
      */

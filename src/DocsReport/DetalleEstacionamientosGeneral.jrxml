@@ -1,29 +1,143 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE jasperReport PUBLIC "-//JasperReports//DTD JasperReport//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
-
-<jasperReport name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
-    <background>
-        <band/>
-    </background>
-    <title>
-        <band height="79"/>
-    </title>
-    <pageHeader>
-        <band height="35"/>
-    </pageHeader>
-    <columnHeader>
-        <band height="61"/>
-    </columnHeader>
-    <detail>
-        <band height="125"/>
-    </detail>
-    <columnFooter>
-        <band height="45"/>
-    </columnFooter>
-    <pageFooter>
-        <band height="54"/>
-    </pageFooter>
-    <summary>
-        <band height="42"/>
-    </summary>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="918" pageHeight="715" columnWidth="878" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6f6cdc47-9afe-46e5-9681-67b86496bf9b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="TextoFooter" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Logo" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT * FROM vwDetalle_Estacionamientos]]>
+	</queryString>
+	<field name="IDDetalle" class="java.lang.Integer"/>
+	<field name="idPersonal" class="java.lang.Integer"/>
+	<field name="Carnet" class="java.lang.String"/>
+	<field name="idAcceso" class="java.lang.Integer"/>
+	<field name="fecha" class="java.sql.Date"/>
+	<field name="hora" class="java.sql.Time"/>
+	<field name="idVehiculo" class="java.lang.Integer"/>
+	<field name="placa" class="java.lang.String"/>
+	<field name="idEstacionamiento" class="java.lang.Integer"/>
+	<field name="numero_estacionamiento" class="java.lang.Integer"/>
+	<field name="idParqueo" class="java.lang.Integer"/>
+	<field name="numero_parqueo" class="java.lang.String"/>
+	<field name="Ubicacion" class="java.lang.String"/>
+	<field name="IDEstado" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="95" splitType="Stretch">
+			<image>
+				<reportElement x="12" y="11" width="85" height="71" uuid="95fdd707-ddbf-4d41-b0e0-30d820bcd2eb"/>
+				<imageExpression><![CDATA[$P{Logo}.toString()]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="275" y="28" width="421" height="33" forecolor="#17141D" uuid="45fa2222-b9a9-44b7-abcd-a76b5683caa8"/>
+				<textElement>
+					<font size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de Estacionamientos ocuapdos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="116" height="20" uuid="3faba768-2cda-4111-9193-cdef67e24d52"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Carnet:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="216" y="0" width="100" height="20" uuid="3f8ee2f4-ea44-4f5d-adc2-5fe2308b705b"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[hora:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="0" width="100" height="20" uuid="9d11df55-1047-4b09-85ef-7dae6764702e"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[placa:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="0" width="127" height="20" uuid="efed9df2-feb8-4b11-8a3f-998c754bd33b"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estacionamiento:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="647" y="0" width="231" height="20" uuid="52703988-ce22-4160-bcdc-33b0f08e520e"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ubicacion:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="116" y="0" width="100" height="20" uuid="18ddddc8-a21f-43b1-9d40-91a49d2a6374"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="547" y="0" width="100" height="20" uuid="38c69ea2-ec89-4c42-aafc-ba213f53ef86"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Parqueo:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="116" height="20" uuid="495773d6-243b-4155-8700-1a509d884fac"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Carnet}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="316" y="0" width="104" height="20" uuid="e695ad71-35ac-4512-b2c5-f63103d17af5"/>
+				<textFieldExpression><![CDATA[$F{placa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="0" width="127" height="20" uuid="7035878a-21c4-44e2-8506-e8c979665ab1"/>
+				<textFieldExpression><![CDATA[$F{numero_estacionamiento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="547" y="0" width="100" height="20" uuid="8133a265-24c5-4bc9-aec9-f5599e26ed46"/>
+				<textFieldExpression><![CDATA[$F{numero_parqueo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="647" y="0" width="231" height="20" uuid="e3e75bfb-9de7-42c3-8768-5159a4f184a8"/>
+				<textFieldExpression><![CDATA[$F{Ubicacion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="h.mm a">
+				<reportElement x="216" y="2" width="100" height="20" uuid="9cd9ca70-934d-4578-b492-7bfc06db75bd"/>
+				<textFieldExpression><![CDATA[$F{hora}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="116" y="0" width="100" height="20" uuid="4885a7ee-5ddf-41cf-b7ba-1cdd0ae441e0"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="32" splitType="Stretch">
+			<image>
+				<reportElement x="778" y="0" width="100" height="31" uuid="3d398ccc-6ac0-48dc-9caa-38c442ab3406"/>
+				<imageExpression><![CDATA[$P{TextoFooter}.toString()]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
 </jasperReport>
