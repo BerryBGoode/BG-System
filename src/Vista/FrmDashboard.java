@@ -1373,6 +1373,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         int cal = JOptionPane.showConfirmDialog(null, "¿Desea cerrar sesion?", "Cerrar sesion", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (cal == 0) {
             Logout();
+            ValidacionesSistema.ValidacionesBeep_Go.Modo = 2;
             ValidacionesSistema.ValidacionesBeep_Go.systemState = false;
         }
     }//GEN-LAST:event_btnLogOutMouseClicked
@@ -1423,8 +1424,9 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         clog.setIdusuario(iduser);
         if (clog.ActualizarEstado() == true) {
             System.out.println("Si se pudo y ahora esta inactivo");
+            ValidacionesSistema.ValidacionesBeep_Go.Modo = 2;
             System.exit(0);
-            
+
         }
     }//GEN-LAST:event_btnCerrarMousePressed
 
@@ -1561,14 +1563,14 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
 
     private void txtBuscadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscadorMouseClicked
         // TODO add your handling code here:
-        if(txtBuscador.getText().equals("Buscar...") || txtBuscador.getText().equals("Buscar por carnet...") || txtBuscador.getText().equals("Buscar por documento...") || txtBuscador.getText().equals("Buscar por usuario...") || txtBuscador.getText().equals("Buscar por nombre de personal...") || txtBuscador.getText().equals("Buscar por placa del vehículo...") || txtBuscador.getText().equals("Buscar por contacto...")){
+        if (txtBuscador.getText().equals("Buscar...") || txtBuscador.getText().equals("Buscar por carnet...") || txtBuscador.getText().equals("Buscar por documento...") || txtBuscador.getText().equals("Buscar por usuario...") || txtBuscador.getText().equals("Buscar por nombre de personal...") || txtBuscador.getText().equals("Buscar por placa del vehículo...") || txtBuscador.getText().equals("Buscar por contacto...")) {
             txtBuscador.setText("");
         }
     }//GEN-LAST:event_txtBuscadorMouseClicked
 
     private void txtBuscadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscadorKeyTyped
         // TODO add your handling code here:
-        if(txtBuscador.getText().equals("Buscar...") || txtBuscador.getText().equals("Buscar por carnet...") || txtBuscador.getText().equals("Buscar por documento...") || txtBuscador.getText().equals("Buscar por usuario...") || txtBuscador.getText().equals("Buscar por nombre de personal...") || txtBuscador.getText().equals("Buscar por placa del vehículo...") || txtBuscador.getText().equals("Buscar por contacto...")){
+        if (txtBuscador.getText().equals("Buscar...") || txtBuscador.getText().equals("Buscar por carnet...") || txtBuscador.getText().equals("Buscar por documento...") || txtBuscador.getText().equals("Buscar por usuario...") || txtBuscador.getText().equals("Buscar por nombre de personal...") || txtBuscador.getText().equals("Buscar por placa del vehículo...") || txtBuscador.getText().equals("Buscar por contacto...")) {
             txtBuscador.setText("");
         }
     }//GEN-LAST:event_txtBuscadorKeyTyped
