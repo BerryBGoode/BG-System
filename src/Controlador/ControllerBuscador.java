@@ -198,8 +198,8 @@ public class ControllerBuscador {
      * @param nombreU ResultSet parameter
      * @return a ResultSet
      */
-    public ResultSet CargarUsuariosController(String nombreU) {
-        return mdlS.ResUsuarios(nombreU);
+    public ResultSet CargarUsuariosController(String nombreU, String usuarioactual) {
+        return mdlS.ResUsuarios(nombreU, usuarioactual);
     }
 
     /**

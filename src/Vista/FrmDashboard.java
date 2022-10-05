@@ -1433,7 +1433,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
                     plU.modelo.removeRow(0);
                 }
                 try {
-                    ResultSet rs = obj.CargarUsuariosController(txtBuscador.getText());
+                    ResultSet rs = obj.CargarUsuariosController(txtBuscador.getText(), FrmLogin.nombre);
                     while (rs.next()) {
                         Object[] oValores = {rs.getInt("idUsuario"), rs.getInt("idPersonal"), rs.getString("nombre_p"), rs.getString("apellido_p"), rs.getString("nombre_usuario"), rs.getInt("idTipoUsuario"), rs.getString("tipo_usuario"), rs.getInt("idEstadoUsuario"), rs.getString("estado_usuario"), rs.getBytes("imagen"), plU.btnActualizar, plU.btnEliminar, plU.btnReporte};
 

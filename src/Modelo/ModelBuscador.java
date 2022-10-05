@@ -51,12 +51,13 @@ public class ModelBuscador {
      * @param nombre referring to the parameter
      * @return a ResultSet
      */
-    public ResultSet ResUsuarios(String nombre) {
+    public ResultSet ResUsuarios(String nombre, String usuario) {
         try {
             con = ModelConexion.getConnection();
-            String cons = "SELECT * FROM vwUsuarios WHERE nombre_usuario LIKE ?";
+            String cons = "SELECT * FROM vwUsuarios WHERE nombre_usuario LIKE ? AND nombre_usuario NOT LIKE ?";
             ps = con.prepareStatement(cons);
             ps.setString(1, "%" + nombre + "%");
+            ps.setString(2, "%" + usuario + "%");
             ResultSet res = ps.executeQuery();
             return res;
         } catch (SQLException e) {
