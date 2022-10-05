@@ -328,6 +328,7 @@ public class PanelContactos extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        TbContactosDark.setRowHeight(40);
         TbContactosDark.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TbContactosDarkMouseClicked(evt);
@@ -397,12 +398,12 @@ public class PanelContactos extends javax.swing.JPanel {
         }
     }
 
-//    final void Refresh(){
-//        if (frmestate == 1 && !(frmAgg_Contacto.isActive())) {
-//            CargarTabla();
-//            frmestate = 0;
-//        }
-//    }
+    final void Refresh(){
+        if (frmestate == 1 && !(frmAgg_Contacto.isActive())) {
+            CargarTabla();
+            frmestate = 0;
+        }
+    }
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
 //        Refresh();
@@ -410,6 +411,7 @@ public class PanelContactos extends javax.swing.JPanel {
 
     private void PanelFondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseMoved
         // TODO add your handling code here:
+        Refresh();
         modo();
     }//GEN-LAST:event_PanelFondoMouseMoved
 

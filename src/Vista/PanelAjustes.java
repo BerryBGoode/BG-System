@@ -6,6 +6,7 @@
 package Vista;
 
 import Controlador.ControllerAjustes;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import javax.swing.JFrame;
@@ -37,6 +38,7 @@ public class PanelAjustes extends javax.swing.JPanel {
 
     public PanelAjustes(String usuario) {
         initComponents();
+        modo();
         txtPIN.setEchoChar('•');
         txtConfirmarPIN.setEchoChar('•');
         txtContraAntigua.setEchoChar('•');
@@ -44,6 +46,56 @@ public class PanelAjustes extends javax.swing.JPanel {
         txtConfirmarContra.setEchoChar('•');
         user = usuario;
         txtUsuarioPIN.setText(usuario);
+    }
+
+    void modo() {
+        if (ValidacionesSistema.ValidacionesBeep_Go.Modo == 1) {
+            lblAjustes.setForeground(Color.WHITE);
+            jPanel5.setBackground(new Color(47, 49, 54));
+            jPanel3.setBackground(new Color(47, 49, 54));
+            PanelFondo.setBackground(new Color(47, 49, 54));
+            PanelContenedorCambioContra.setBackground(new Color(32, 34, 37));
+            PanelContenedorTemas.setBackground(new Color(32, 34, 37));
+            PanelContenedorIdiomas.setBackground(new Color(32, 34, 37));
+            PanelContenedorConfiguracion.setBackground(new Color(32, 34, 37));
+            PanelContenedorCambioContra1.setBackground(new Color(32, 34, 37));
+            txtCambiarContra.setBackground(new Color(32, 34, 37));
+            txtConfirmarContra.setBackground(new Color(32, 34, 37));
+            txtContraAntigua.setBackground(new Color(32, 34, 37));
+            txtContra.setBackground(new Color(32, 34, 37));
+            VerificarTipo.setBackground(new Color(32, 34, 37));
+            txtUsuarioPIN.setBackground(new Color(32, 34, 37));
+            txtPIN.setBackground(new Color(32, 34, 37));
+            txtConfirmarPIN.setBackground(new Color(32, 34, 37));
+            btnCambiarPIN.setBackground(new Color(32, 34, 37));
+            panelRound1.setBackground(new Color(47, 49, 54));
+            panelRound2.setBackground(new Color(47, 49, 54));
+            panelRound3.setBackground(new Color(47, 49, 54));
+            panelRound5.setBackground(new Color(47, 49, 54));
+        } else {
+            lblAjustes.setForeground(new Color(58,50,75));
+            jPanel5.setBackground(new Color(231,234,239));
+            jPanel3.setBackground(new Color(231,234,239));
+            PanelFondo.setBackground(new Color(231,234,239));
+            PanelContenedorCambioContra.setBackground(new Color(42,36,56));
+            PanelContenedorTemas.setBackground(new Color(42,36,56));
+            PanelContenedorIdiomas.setBackground(new Color(42,36,56));
+            PanelContenedorConfiguracion.setBackground(new Color(42,36,56));
+            PanelContenedorCambioContra1.setBackground(new Color(42,36,56));
+            txtCambiarContra.setBackground(new Color(42,36,56));
+            txtConfirmarContra.setBackground(new Color(42,36,56));
+            txtContraAntigua.setBackground(new Color(42,36,56));
+            txtContra.setBackground(new Color(42,36,56));
+            VerificarTipo.setBackground(new Color(42,36,56));
+            txtUsuarioPIN.setBackground(new Color(42,36,56));
+            txtPIN.setBackground(new Color(42,36,56));
+            txtConfirmarPIN.setBackground(new Color(42,36,56));
+            btnCambiarPIN.setBackground(new Color(42,36,56));
+            panelRound1.setBackground(new Color(58,50,75));
+            panelRound2.setBackground(new Color(58,50,75));
+            panelRound3.setBackground(new Color(58,50,75));
+            panelRound5.setBackground(new Color(58,50,75));
+        }
     }
 
     /**
@@ -102,6 +154,11 @@ public class PanelAjustes extends javax.swing.JPanel {
         PanelFondo.setPreferredSize(new java.awt.Dimension(1270, 620));
         PanelFondo.setRoundBottomLeft(20);
         PanelFondo.setRoundBottomRight(20);
+        PanelFondo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                PanelFondoMouseMoved(evt);
+            }
+        });
         PanelFondo.setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setBackground(new java.awt.Color(231, 234, 239));
@@ -682,8 +739,13 @@ public class PanelAjustes extends javax.swing.JPanel {
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_formMouseMoved
+
+    private void PanelFondoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelFondoMouseMoved
+        // TODO add your handling code here:
+        modo();
+    }//GEN-LAST:event_PanelFondoMouseMoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

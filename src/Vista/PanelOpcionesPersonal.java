@@ -6,6 +6,7 @@
 package Vista;
 
 import com.sun.awt.AWTUtilities;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Shape;
 import java.awt.Toolkit;
@@ -15,21 +16,36 @@ import java.awt.geom.RoundRectangle2D;
  *
  * @author ferna
  */
-public class PanelOpcionesPersonal extends javax.swing.JFrame{
+public class PanelOpcionesPersonal extends javax.swing.JFrame {
 
     /**
      * Creates new form PanelOpcionesPersonal
      */
     public PanelOpcionesPersonal() {
         initComponents();
-        Shape forma= new RoundRectangle2D.Double(0,0, this.getBounds() .width, this.getBounds() .height,40,40);
-        AWTUtilities. setWindowShape(this, forma);
+        modo();
+        Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
+        AWTUtilities.setWindowShape(this, forma);
         setIconImage(Logo());
     }
-public Image Logo(){
-    Image retvalue=Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
-    return retvalue;
-}
+
+    public Image Logo() {
+        Image retvalue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos_Proyecto/B&G Morado 2.png"));
+        return retvalue;
+    }
+
+    void modo() {
+        if (ValidacionesSistema.ValidacionesBeep_Go.Modo == 1) {
+            panelSeleccionProfesores.setBackground(new Color(32, 34, 37));
+            panelSeleccionProfesores.setBackground(new Color(32, 34, 37));
+            panelOpcionesPersonal.setBackground(new Color(47, 49, 54));
+        } else {
+            panelSeleccionProfesores.setBackground(new Color(42,36,56));
+            panelSeleccionProfesores.setBackground(new Color(58,50,75));
+            panelOpcionesPersonal.setBackground(new Color(58,50,75));
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -99,27 +115,28 @@ public Image Logo(){
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public static int showinter=0;
+    public static int showinter = 0;
 
     public static int getShowinter() {
         return showinter;
-    }    
-    
+    }
+
     private void btnEstudiantesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEstudiantesMouseClicked
         PanelOpcionesPersonal.showinter = 1;
         this.dispose();
-        
+
     }//GEN-LAST:event_btnEstudiantesMouseClicked
 
     private void btnProfesoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProfesoresMouseClicked
         PanelOpcionesPersonal.showinter = 2;
         this.dispose();
-        
+
     }//GEN-LAST:event_btnProfesoresMouseClicked
-    void closePanel(){
+    void closePanel() {
         this.dispose();
         PanelOpcionesPersonal.showinter = 0;
     }
+
     /**
      * @param args the command line arguments
      */
@@ -162,6 +179,5 @@ public Image Logo(){
     private Controles_Personalizados.Paneles.PanelRound panelOpcionesPersonal;
     private Controles_Personalizados.Paneles.PanelRound panelSeleccionProfesores;
     // End of variables declaration//GEN-END:variables
-
 
 }
