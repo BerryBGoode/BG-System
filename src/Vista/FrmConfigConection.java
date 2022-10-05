@@ -362,6 +362,7 @@ public class FrmConfigConection extends javax.swing.JFrame {
                 createFile();
                 writeFile();
                 JOptionPane.showMessageDialog(null, "Se guardo un archivo con\nlos datos de la conexón", "Archivo guardado", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
                 if (verficarpu.checkEnterprise() == false) {
                     FrmP_U_Empresa cargarempresa = new FrmP_U_Empresa();
                     cargarempresa.setVisible(true);
