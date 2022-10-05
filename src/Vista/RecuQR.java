@@ -139,14 +139,6 @@ public class RecuQR extends javax.swing.JFrame {
 
         textoRest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/txtRecuQR.png"))); // NOI18N
         PanelContenedorCampos.add(textoRest, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
-        txtCorreo.setBackground(new java.awt.Color(254, 254, 254));
-        txtCorreo.setForeground(new java.awt.Color(42, 36, 56));
-        txtCorreo.setCaretColor(new java.awt.Color(42, 36, 56));
-        txtCorreo.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        txtCorreo.setLabelText("Usuario");
-        txtCorreo.setLineColor(new java.awt.Color(42, 36, 56));
-        txtCorreo.setSelectionColor(new java.awt.Color(58, 50, 75));
-        PanelContenedorCampos.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, 310, 70));
         TxtUsuario.setBackground(new java.awt.Color(254, 254, 254));
         TxtUsuario.setForeground(new java.awt.Color(42, 36, 56));
         TxtUsuario.setCaretColor(new java.awt.Color(42, 36, 56));
