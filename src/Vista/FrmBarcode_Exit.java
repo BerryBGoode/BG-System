@@ -85,7 +85,7 @@ public class FrmBarcode_Exit extends javax.swing.JFrame {
         ControllerAccesos.setHour(hour);
         ControllerAccesos.setID(idPersonal);
         ControllerAccesos.setTypeAccess(2);
-        ControllerAccesos.setJustification(null);
+        ControllerAccesos.setJustification("Sin justificar");
         if (ControllerAccesos.insertAccess() == true) {
             JOptionPane.showMessageDialog(null, "Su insercion se ha realizado");
         } else {
