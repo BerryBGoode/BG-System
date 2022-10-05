@@ -14,6 +14,7 @@ import java.awt.geom.RoundRectangle2D;
 import java.io.ByteArrayOutputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -29,6 +30,7 @@ public class RecuQR extends javax.swing.JFrame {
     private String usuario;
     private String Carne;
     ControllerQR objControllerQR = new ControllerQR();
+    String numero;
 
     /**
      * Creates new form RecuperacionQR
@@ -47,7 +49,7 @@ public class RecuQR extends javax.swing.JFrame {
     }
 
     void CapCarnet() {
-        objControllerQR.setUsuario(txtCorreo.getText());
+        objControllerQR.setUsuario(TxtUsuario.getText());
         ResultSet rs = objControllerQR.RecuperarContraQR();
         try {
             if (rs.next()) {
@@ -63,12 +65,18 @@ public class RecuQR extends javax.swing.JFrame {
         ImageIcon FondoQR = new ImageIcon(getClass().getResource("/Recursos_Proyecto/Rectangle 1.png"));
         LblQr.setIcon(FondoQR);
         CapCarnet();
-        System.out.println(Carne);
-        if (!usuario.equals(txtCorreo.getText())) {
+        System.out.println(usuario);
+        if (!TxtUsuario.getText().equals(usuario)) {
             JOptionPane.showMessageDialog(null, "Verificar, el usuario, no se encontro ningun usuario con ese nombre", "Usuario Inexistente", JOptionPane.WARNING_MESSAGE);
+            TxtUsuario.setText("");
         } else {
             try {
-                ByteArrayOutputStream out = QRCode.from(Carne).to(ImageType.PNG).stream();
+                int min = 1000;
+                int max = 9999;
+                Random random = new Random();
+                int valornum = random.nextInt(max + min) + min;
+                numero = String.valueOf(valornum);
+                ByteArrayOutputStream out = QRCode.from(numero).to(ImageType.PNG).stream();
                 ImageIcon imagenqr = new ImageIcon(out.toByteArray());
                 LblQr.setIcon(imagenqr);
             } catch (Exception e) {
@@ -91,10 +99,12 @@ public class RecuQR extends javax.swing.JFrame {
         PanelContenedorCampos = new Controles_Personalizados.Paneles.PanelRound();
         btnGoBack = new javax.swing.JLabel();
         textoRest = new javax.swing.JLabel();
-        txtCorreo = new Controles_Personalizados.textfields.TextField();
+        TxtUsuario = new Controles_Personalizados.textfields.TextField();
         btnGenerar = new Controles_Personalizados.Botones.ButtonGradient();
         ContenedorCodigoQR = new Controles_Personalizados.Paneles.PanelRound();
         LblQr = new rojerusan.RSLabelImage();
+        TxtNumeroCifrado = new Controles_Personalizados.textfields.TextField();
+        BtnValidarNum = new Controles_Personalizados.Botones.ButtonGradient();
         ImagenRecuQR = new javax.swing.JLabel();
         btnMinimizar = new javax.swing.JLabel();
         btnCerrar = new javax.swing.JLabel();
@@ -127,16 +137,16 @@ public class RecuQR extends javax.swing.JFrame {
         PanelContenedorCampos.add(btnGoBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         textoRest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/txtRecuQR.png"))); // NOI18N
-        PanelContenedorCampos.add(textoRest, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
+        PanelContenedorCampos.add(textoRest, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
 
-        txtCorreo.setBackground(new java.awt.Color(254, 254, 254));
-        txtCorreo.setForeground(new java.awt.Color(42, 36, 56));
-        txtCorreo.setCaretColor(new java.awt.Color(42, 36, 56));
-        txtCorreo.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
-        txtCorreo.setLabelText("Usuario");
-        txtCorreo.setLineColor(new java.awt.Color(42, 36, 56));
-        txtCorreo.setSelectionColor(new java.awt.Color(58, 50, 75));
-        PanelContenedorCampos.add(txtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, 310, 70));
+        TxtUsuario.setBackground(new java.awt.Color(254, 254, 254));
+        TxtUsuario.setForeground(new java.awt.Color(42, 36, 56));
+        TxtUsuario.setCaretColor(new java.awt.Color(42, 36, 56));
+        TxtUsuario.setFont(new java.awt.Font("Roboto Light", 0, 18)); // NOI18N
+        TxtUsuario.setLabelText("Usuario");
+        TxtUsuario.setLineColor(new java.awt.Color(42, 36, 56));
+        TxtUsuario.setSelectionColor(new java.awt.Color(58, 50, 75));
+        PanelContenedorCampos.add(TxtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 310, 70));
 
         btnGenerar.setText("Generar Código");
         btnGenerar.setToolTipText("");
@@ -148,7 +158,7 @@ public class RecuQR extends javax.swing.JFrame {
                 btnGenerarActionPerformed(evt);
             }
         });
-        PanelContenedorCampos.add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, 310, -1));
+        PanelContenedorCampos.add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 420, 310, -1));
 
         ContenedorCodigoQR.setBackground(new java.awt.Color(42, 36, 56));
         ContenedorCodigoQR.setPreferredSize(new java.awt.Dimension(259, 252));
@@ -159,9 +169,28 @@ public class RecuQR extends javax.swing.JFrame {
         ContenedorCodigoQR.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LblQr.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos_Proyecto/Rectangle 1.png"))); // NOI18N
-        ContenedorCodigoQR.add(LblQr, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 220, 210));
+        ContenedorCodigoQR.add(LblQr, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 180, 180));
 
-        PanelContenedorCampos.add(ContenedorCodigoQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 490, -1, -1));
+        PanelContenedorCampos.add(ContenedorCodigoQR, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 530, 220, 220));
+
+        TxtNumeroCifrado.setBackground(new java.awt.Color(254, 254, 254));
+        TxtNumeroCifrado.setCaretColor(new java.awt.Color(42, 36, 56));
+        TxtNumeroCifrado.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        TxtNumeroCifrado.setLabelText("Número Cifrado");
+        TxtNumeroCifrado.setLineColor(new java.awt.Color(42, 36, 56));
+        TxtNumeroCifrado.setSelectionColor(new java.awt.Color(58, 50, 75));
+        PanelContenedorCampos.add(TxtNumeroCifrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 330, 310, 70));
+
+        BtnValidarNum.setText("Validar Número");
+        BtnValidarNum.setColor1(new java.awt.Color(58, 50, 75));
+        BtnValidarNum.setColor2(new java.awt.Color(58, 50, 75));
+        BtnValidarNum.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        BtnValidarNum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnValidarNumActionPerformed(evt);
+            }
+        });
+        PanelContenedorCampos.add(BtnValidarNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 475, 310, 44));
 
         PanelContenedor.add(PanelContenedorCampos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -214,6 +243,24 @@ public class RecuQR extends javax.swing.JFrame {
         this.setExtendedState(JFrame.ICONIFIED);
     }//GEN-LAST:event_btnMinimizarMouseClicked
 
+    private void BtnValidarNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnValidarNumActionPerformed
+        // TODO add your handling code here:
+        if (TxtNumeroCifrado.getText().equals(numero)) {
+            String clave = TxtUsuario.getText() + "123";
+            objControllerQR.setClave(ValidacionesSistema.ValidacionesBeep_Go.EncriptarContra(clave));
+            objControllerQR.setUsuario(TxtUsuario.getText());
+            if (objControllerQR.ActualizarcontraQR()) {
+                JOptionPane.showMessageDialog(null, "Su usuario a sido reestablecido a su usuario + 123", "Contraseña Reestablecida", JOptionPane.INFORMATION_MESSAGE);
+                FrmLogin log=new FrmLogin();
+                log.setVisible(true);
+                this.dispose();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "El número ingresado, no es valido", "Números Incorrectos", JOptionPane.WARNING_MESSAGE);
+            TxtNumeroCifrado.setText("");
+        }
+    }//GEN-LAST:event_BtnValidarNumActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -251,16 +298,18 @@ public class RecuQR extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private Controles_Personalizados.Botones.ButtonGradient BtnValidarNum;
     private Controles_Personalizados.Paneles.PanelRound ContenedorCodigoQR;
     private javax.swing.JLabel ImagenRecuQR;
     private rojerusan.RSLabelImage LblQr;
     private Controles_Personalizados.Paneles.PanelRound PanelContenedor;
     private Controles_Personalizados.Paneles.PanelRound PanelContenedorCampos;
+    private Controles_Personalizados.textfields.TextField TxtNumeroCifrado;
+    private Controles_Personalizados.textfields.TextField TxtUsuario;
     private javax.swing.JLabel btnCerrar;
     private Controles_Personalizados.Botones.ButtonGradient btnGenerar;
     private javax.swing.JLabel btnGoBack;
     private javax.swing.JLabel btnMinimizar;
     private javax.swing.JLabel textoRest;
-    private Controles_Personalizados.textfields.TextField txtCorreo;
     // End of variables declaration//GEN-END:variables
 }
