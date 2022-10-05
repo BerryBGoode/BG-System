@@ -117,7 +117,7 @@ public class ModelLogin {
 
         try {
             con = ModelConexion.getConnection();
-            ps = con.prepareStatement("UPDATE tbUsuarios SET idEstadoUsuario = 3 intentos = 0 WHERE nombre_usuario = ?");
+            ps = con.prepareStatement("UPDATE tbUsuarios SET idEstadoUsuario = 3, intentos = 0 WHERE nombre_usuario = ?");
             ps.setString(1, usuario);
             ps.execute();
             return true;
