@@ -37,5 +37,18 @@ public class ModelQR {
             return null;
         }
     }
-
+    public boolean Actualizar(String clave, String usuario){
+        try {
+            con=ModelConexion.getConnection();
+            String query="UPDATE tbUsuarios SET contraseña=? WHERE nombre_usuario=?";
+            ps=con.prepareStatement(query);
+            ps.setString(1, clave);
+            ps.setString(2, usuario);
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        }
+    }
 }

@@ -15,7 +15,15 @@ import java.sql.ResultSet;
 public class ControllerQR {
     ModelQR modelQR=new ModelQR();
     private String usuario;
+    private String clave;
 
+    public String getClave() {
+        return clave;
+    }
+
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
     /**
      *  Gets the Username
      * @return a String
@@ -38,6 +46,9 @@ public class ControllerQR {
      */
     public ResultSet RecuperarContraQR(){
         return modelQR.ReucContraQR(getUsuario());
+    }
+    public boolean ActualizarcontraQR(){
+        return modelQR.Actualizar(clave, usuario);
     }
     
 }

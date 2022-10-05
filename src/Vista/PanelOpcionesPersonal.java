@@ -23,7 +23,7 @@ public class PanelOpcionesPersonal extends javax.swing.JFrame {
      */
     public PanelOpcionesPersonal() {
         initComponents();
-        modo();
+//        modo();
         Shape forma = new RoundRectangle2D.Double(0, 0, this.getBounds().width, this.getBounds().height, 40, 40);
         AWTUtilities.setWindowShape(this, forma);
         setIconImage(Logo());
@@ -34,17 +34,17 @@ public class PanelOpcionesPersonal extends javax.swing.JFrame {
         return retvalue;
     }
 
-    void modo() {
-        if (ValidacionesSistema.ValidacionesBeep_Go.Modo == 1) {
-            panelSeleccionProfesores.setBackground(new Color(32, 34, 37));
-            panelSeleccionProfesores.setBackground(new Color(32, 34, 37));
-            panelOpcionesPersonal.setBackground(new Color(47, 49, 54));
-        } else {
-            panelSeleccionProfesores.setBackground(new Color(42,36,56));
-            panelSeleccionProfesores.setBackground(new Color(58,50,75));
-            panelOpcionesPersonal.setBackground(new Color(58,50,75));
-        }
-    }
+//    void modo() {
+//        if (ValidacionesSistema.ValidacionesBeep_Go.Modo == 1) {
+//            panelSeleccionProfesores.setBackground(new Color(32, 34, 37));
+//            panelSeleccionProfesores.setBackground(new Color(32, 34, 37));
+//            panelOpcionesPersonal.setBackground(new Color(47, 49, 54));
+//        } else {
+//            panelSeleccionProfesores.setBackground(new Color(42,36,56));
+//            panelSeleccionProfesores.setBackground(new Color(58,50,75));
+//            panelOpcionesPersonal.setBackground(new Color(58,50,75));
+//        }
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
