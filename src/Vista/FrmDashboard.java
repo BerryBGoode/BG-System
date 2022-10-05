@@ -308,6 +308,11 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         txtBuscador.setDoubleBuffered(true);
         txtBuscador.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         txtBuscador.setPreferredSize(new java.awt.Dimension(800, 50));
+        txtBuscador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtBuscadorMouseClicked(evt);
+            }
+        });
         txtBuscador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBuscadorActionPerformed(evt);
@@ -319,6 +324,9 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtBuscadorKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscadorKeyTyped(evt);
             }
         });
 
@@ -965,6 +973,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     }
 
     public void showPanelStudents() {
+        txtBuscador.setText("Buscar por carnet...");
         PanelSeleccionDashboard.setVisible(false);
         PanelSeleccionUsuario.setVisible(false);
         panelSeleccionPersonal.setVisible(true);
@@ -989,6 +998,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     }
 
     public void showPanelTeachers() {
+        txtBuscador.setText("Buscar por documento...");
         PanelSeleccionDashboard.setVisible(false);
         PanelSeleccionUsuario.setVisible(false);
         panelSeleccionPersonal.setVisible(false);
@@ -1242,6 +1252,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_btnMOMouseClicked
 
     private void btnDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDashboardMouseClicked
+        txtBuscador.setText("Buscar...");
         this.showPanelDash();
         PanelOpcionesPersonal.showinter = 4;
         // valor = 1;
@@ -1249,6 +1260,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_btnDashboardMouseClicked
 
     private void btnUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuariosMouseClicked
+        txtBuscador.setText("Buscar por usuario...");
         this.showPanelUsers();
         PanelOpcionesPersonal.showinter = 3;
     }//GEN-LAST:event_btnUsuariosMouseClicked
@@ -1269,31 +1281,37 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_btnPersonalMouseClicked
 
     private void btnCarnetsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCarnetsMouseClicked
+        txtBuscador.setText("Buscar por nombre de personal...");
         this.showPanelCarn();
         PanelOpcionesPersonal.showinter = 5;
     }//GEN-LAST:event_btnCarnetsMouseClicked
 
     private void btnVehiculosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVehiculosMouseClicked
+        txtBuscador.setText("Buscar por placa del vehículo...");
         this.showPanelCars();
         PanelOpcionesPersonal.showinter = 6;
     }//GEN-LAST:event_btnVehiculosMouseClicked
 
     private void btnParqueoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnParqueoMouseClicked
+        txtBuscador.setText("Buscar por placa del vehículo...");
         this.showPanelPark();
         PanelOpcionesPersonal.showinter = 7;
     }//GEN-LAST:event_btnParqueoMouseClicked
 
     private void btnContactosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnContactosMouseClicked
+        txtBuscador.setText("Buscar por contacto...");
         this.showPanelConts();
         PanelOpcionesPersonal.showinter = 8;
     }//GEN-LAST:event_btnContactosMouseClicked
 
     private void btnAjustesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAjustesMouseClicked
+        txtBuscador.setText("Buscar...");
         this.showPanelSett();
         PanelOpcionesPersonal.showinter = 10;
     }//GEN-LAST:event_btnAjustesMouseClicked
 
     private void btnAccesosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccesosMouseClicked
+        txtBuscador.setText("Buscar...");
         this.showPanelAcces();
         PanelOpcionesPersonal.showinter = 9;
     }//GEN-LAST:event_btnAccesosMouseClicked
@@ -1541,6 +1559,20 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_txtBuscadorKeyReleased
 
+    private void txtBuscadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtBuscadorMouseClicked
+        // TODO add your handling code here:
+        if(txtBuscador.getText().equals("Buscar...") || txtBuscador.getText().equals("Buscar por carnet...") || txtBuscador.getText().equals("Buscar por documento...") || txtBuscador.getText().equals("Buscar por usuario...") || txtBuscador.getText().equals("Buscar por nombre de personal...") || txtBuscador.getText().equals("Buscar por placa del vehículo...") || txtBuscador.getText().equals("Buscar por contacto...")){
+            txtBuscador.setText("");
+        }
+    }//GEN-LAST:event_txtBuscadorMouseClicked
+
+    private void txtBuscadorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscadorKeyTyped
+        // TODO add your handling code here:
+        if(txtBuscador.getText().equals("Buscar...") || txtBuscador.getText().equals("Buscar por carnet...") || txtBuscador.getText().equals("Buscar por documento...") || txtBuscador.getText().equals("Buscar por usuario...") || txtBuscador.getText().equals("Buscar por nombre de personal...") || txtBuscador.getText().equals("Buscar por placa del vehículo...") || txtBuscador.getText().equals("Buscar por contacto...")){
+            txtBuscador.setText("");
+        }
+    }//GEN-LAST:event_txtBuscadorKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -1635,7 +1667,7 @@ public class FrmDashboard extends javax.swing.JFrame implements Runnable {
     private Controles_Personalizados.Paneles.PanelRound pnlNorthForm;
     private javax.swing.JPanel pnlSourth;
     private javax.swing.JPanel pnlWest;
-    private Controles_Personalizados.textfields.TextFieldSuggestion txtBuscador;
+    public Controles_Personalizados.textfields.TextFieldSuggestion txtBuscador;
     // End of variables declaration//GEN-END:variables
 
 }
